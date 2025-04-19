@@ -1,0 +1,3 @@
+from .passport_element_error_translation_file import PassportElementErrorTranslationFile
+
+__all__ = ["PassportElementErrorTranslationFile"]
