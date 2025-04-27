@@ -17,18 +17,34 @@ class AnimationsFactory(TypesFactory):
     """Factory for creating Animation instances."""
 
     ANIMATIONS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "animation"
 
     @classmethod
     def register_animation(cls, animation_cls: Type) -> None:
         """Register a new animation handler."""
         instance = animation_cls()
-        for name in instance.__names__:
-            cls.ANIMATIONS_REGISTRY[name] = animation_cls
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = animation_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.ANIMATIONS_REGISTRY[name] = animation_cls
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.animation
         trigger_value = obj.mime_type
-        return cls.ANIMATIONS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.ANIMATIONS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

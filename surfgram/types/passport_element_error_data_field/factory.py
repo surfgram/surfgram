@@ -19,6 +19,7 @@ class PassportElementErrorDataFieldsFactory(TypesFactory):
     """Factory for creating PassportElementErrorDataField instances."""
 
     PASSPORTELEMENTERRORDATAFIELDS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "passport_element_error_data_field"
 
     @classmethod
@@ -27,14 +28,29 @@ class PassportElementErrorDataFieldsFactory(TypesFactory):
     ) -> None:
         """Register a new passport_element_error_data_field handler."""
         instance = passport_element_error_data_field_cls()
-        for name in instance.__names__:
-            cls.PASSPORTELEMENTERRORDATAFIELDS_REGISTRY[name] = (
-                passport_element_error_data_field_cls
-            )
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = passport_element_error_data_field_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.PASSPORTELEMENTERRORDATAFIELDS_REGISTRY[name] = (
+                        passport_element_error_data_field_cls
+                    )
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.passport_element_error_data_field
         trigger_value = obj.data_hash
-        return cls.PASSPORTELEMENTERRORDATAFIELDS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.PASSPORTELEMENTERRORDATAFIELDS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

@@ -19,6 +19,7 @@ class StoryAreaTypeUniqueGiftsFactory(TypesFactory):
     """Factory for creating StoryAreaTypeUniqueGift instances."""
 
     STORYAREATYPEUNIQUEGIFTS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "story_area_type_unique_gift"
 
     @classmethod
@@ -27,14 +28,29 @@ class StoryAreaTypeUniqueGiftsFactory(TypesFactory):
     ) -> None:
         """Register a new story_area_type_unique_gift handler."""
         instance = story_area_type_unique_gift_cls()
-        for name in instance.__names__:
-            cls.STORYAREATYPEUNIQUEGIFTS_REGISTRY[name] = (
-                story_area_type_unique_gift_cls
-            )
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = story_area_type_unique_gift_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.STORYAREATYPEUNIQUEGIFTS_REGISTRY[name] = (
+                        story_area_type_unique_gift_cls
+                    )
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.story_area_type_unique_gift
         trigger_value = obj.type
-        return cls.STORYAREATYPEUNIQUEGIFTS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.STORYAREATYPEUNIQUEGIFTS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

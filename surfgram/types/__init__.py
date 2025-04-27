@@ -1,4 +1,3 @@
-# Auto-generated package imports
 from typing import Union, List
 from .base import TypesFactory
 
@@ -20,7 +19,6 @@ from .background_type_fill import BackgroundTypeFill
 from .background_type_pattern import BackgroundTypePattern
 from .background_type_wallpaper import BackgroundTypeWallpaper
 from .birthdate import Birthdate
-from .bot_command import BotCommand
 from .bot_command_scope_all_chat_administrators import (
     BotCommandScopeAllChatAdministrators,
 )
@@ -41,7 +39,6 @@ from .business_messages_deleted import BusinessMessagesDeleted
 from .business_opening_hours import BusinessOpeningHours
 from .business_opening_hours_interval import BusinessOpeningHoursInterval
 from .callback_query import CallbackQuery
-from .chat import Chat
 from .chat_administrator_rights import ChatAdministratorRights
 from .chat_background import ChatBackground
 from .chat_boost import ChatBoost
@@ -139,10 +136,8 @@ from .mask_position import MaskPosition
 from .menu_button_commands import MenuButtonCommands
 from .menu_button_default import MenuButtonDefault
 from .menu_button_web_app import MenuButtonWebApp
-from .message import Message
 from .message_auto_delete_timer_changed import MessageAutoDeleteTimerChanged
 from .message_entity import MessageEntity
-from .message_id import MessageId
 from .message_origin_channel import MessageOriginChannel
 from .message_origin_chat import MessageOriginChat
 from .message_origin_hidden_user import MessageOriginHiddenUser
@@ -240,3 +235,6 @@ from .web_app_data import WebAppData
 from .web_app_info import WebAppInfo
 from .webhook_info import WebhookInfo
 from .write_access_allowed import WriteAccessAllowed
+from .bot_command import BotCommand
+from .message import Message
+from .chat import Chat

@@ -32,13 +32,12 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 ## Development Roadmap
 
 - [x] Core framework implementation
-- [x] Basic command handlers
-- [x] Middleware support
-- [ ] Advanced state management
+- [x] All types support
+- [x] State management
+- [ ] Middleware support
 - [ ] Built-in rate limiting
 - [ ] Webhook support
 - [ ] i18n integration
-- [ ] Built-in admin panel
 - [ ] Plugin system
 
 ## Quick Start
@@ -78,8 +77,8 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 
 ## Documentation
 
-- 📖 [Full documentation](https://github.com/surfgram/surfgram-docs)
-- 📚 [Examples](https://github.com/surfgram/surfgram-examples)
+📖 [Full documentation](https://github.com/surfgram/surfgram-docs)  
+📚 [Examples](https://github.com/surfgram/surfgram-examples)
 
 ## Contributing
 
@@ -87,9 +86,9 @@ We welcome contributions! Please read our [Contributing Guidelines](https://gith
 
 ## Support
 
-- 🐞 Found a bug? Open an [Issue](https://github.com/surfgram/surfgram/issues)
-- 💡 Have an idea? Start a [Discussion](https://github.com/surfgram/surfgram/discussions)
-- 📮 Join our [Telegram Channel](https://t.me/the_surfgram)
+🐞 [Report a bug](https://github.com/surfgram/surfgram/issues)  
+💡 [Start a discussion](https://github.com/surfgram/surfgram/discussions)  
+📮 [Join our Telegram Channel](https://t.me/the_surfgram)
 
 ## License
 

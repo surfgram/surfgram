@@ -17,6 +17,7 @@ class KeyboardButtonPollTypesFactory(TypesFactory):
     """Factory for creating KeyboardButtonPollType instances."""
 
     KEYBOARDBUTTONPOLLTYPES_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "keyboard_button_poll_type"
 
     @classmethod
@@ -25,12 +26,29 @@ class KeyboardButtonPollTypesFactory(TypesFactory):
     ) -> None:
         """Register a new keyboard_button_poll_type handler."""
         instance = keyboard_button_poll_type_cls()
-        for name in instance.__names__:
-            cls.KEYBOARDBUTTONPOLLTYPES_REGISTRY[name] = keyboard_button_poll_type_cls
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = keyboard_button_poll_type_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.KEYBOARDBUTTONPOLLTYPES_REGISTRY[name] = (
+                        keyboard_button_poll_type_cls
+                    )
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.keyboard_button_poll_type
         trigger_value = obj.type
-        return cls.KEYBOARDBUTTONPOLLTYPES_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.KEYBOARDBUTTONPOLLTYPES_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None
