@@ -17,18 +17,34 @@ class ChatPhotosFactory(TypesFactory):
     """Factory for creating ChatPhoto instances."""
 
     CHATPHOTOS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "chat_photo"
 
     @classmethod
     def register_chat_photo(cls, chat_photo_cls: Type) -> None:
         """Register a new chat_photo handler."""
         instance = chat_photo_cls()
-        for name in instance.__names__:
-            cls.CHATPHOTOS_REGISTRY[name] = chat_photo_cls
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = chat_photo_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.CHATPHOTOS_REGISTRY[name] = chat_photo_cls
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.chat_photo
         trigger_value = obj.small_file_id
-        return cls.CHATPHOTOS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.CHATPHOTOS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

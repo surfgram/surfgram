@@ -19,6 +19,7 @@ class UniqueGiftBackdropColorsFactory(TypesFactory):
     """Factory for creating UniqueGiftBackdropColors instances."""
 
     UNIQUEGIFTBACKDROPCOLORS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "unique_gift_backdrop_colors"
 
     @classmethod
@@ -27,14 +28,29 @@ class UniqueGiftBackdropColorsFactory(TypesFactory):
     ) -> None:
         """Register a new unique_gift_backdrop_colors handler."""
         instance = unique_gift_backdrop_colors_cls()
-        for name in instance.__names__:
-            cls.UNIQUEGIFTBACKDROPCOLORS_REGISTRY[name] = (
-                unique_gift_backdrop_colors_cls
-            )
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = unique_gift_backdrop_colors_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.UNIQUEGIFTBACKDROPCOLORS_REGISTRY[name] = (
+                        unique_gift_backdrop_colors_cls
+                    )
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.unique_gift_backdrop_colors
         trigger_value = obj.text_color
-        return cls.UNIQUEGIFTBACKDROPCOLORS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.UNIQUEGIFTBACKDROPCOLORS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

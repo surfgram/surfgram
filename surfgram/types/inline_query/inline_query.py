@@ -9,14 +9,13 @@ class InlineQuery(metaclass=InlineQueryMeta):
     __is_active__: bool = True
 
     @property
-    @abstractmethod
     def __names__(self) -> List[str]:
         """Names/triggers that identify this handler.
 
         Returns:
             List of trigger names that activate this handler
         """
-        raise NotImplementedError
+        return []
 
     @property
     @abstractmethod

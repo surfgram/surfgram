@@ -29,7 +29,7 @@ class TestMarkdown:
         """Test the spoiler method."""
         assert Markdown.spoiler("text") == "||text||"
         assert Markdown.spoiler("spoiler") == "||spoiler||"
-    
+
     def test_inline_code(self):
         """Test the inline_code method."""
         assert Markdown.inline_code("text") == "`text`"
@@ -37,9 +37,18 @@ class TestMarkdown:
 
     def test_code_block(self):
         """Test the code_block method with and without language."""
-        assert Markdown.code_block("print('Hello, World!')") == "```\nprint('Hello, World!')\n```"
-        assert Markdown.code_block("print('Hello, World!')", "python") == "```python\nprint('Hello, World!')\n```"
+        assert (
+            Markdown.code_block("print('Hello, World!')")
+            == "```\nprint('Hello, World!')\n```"
+        )
+        assert (
+            Markdown.code_block("print('Hello, World!')", "python")
+            == "```python\nprint('Hello, World!')\n```"
+        )
 
     def test_link(self):
         """Test the link method."""
-        assert Markdown.link("Google", "http://www.google.com") == "[Google](http://www.google.com"
+        assert (
+            Markdown.link("Google", "http://www.google.com")
+            == "[Google](http://www.google.com"
+        )

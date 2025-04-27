@@ -17,18 +17,34 @@ class ChatBoostUpdatedsFactory(TypesFactory):
     """Factory for creating ChatBoostUpdated instances."""
 
     CHATBOOSTUPDATEDS_REGISTRY: Dict[str, Type] = {}
+    __fallback_handler__: Optional[Type] = None
     __type_name__ = "chat_boost_updated"
 
     @classmethod
     def register_chat_boost_updated(cls, chat_boost_updated_cls: Type) -> None:
         """Register a new chat_boost_updated handler."""
         instance = chat_boost_updated_cls()
-        for name in instance.__names__:
-            cls.CHATBOOSTUPDATEDS_REGISTRY[name] = chat_boost_updated_cls
+        names = instance.__names__
+
+        # Check if should be registered as fallback handler
+        if not names or None in names or "" in names:
+            cls.__fallback_handler__ = chat_boost_updated_cls
+        else:
+            for name in names:
+                if name:  # Skip empty/None names
+                    cls.CHATBOOSTUPDATEDS_REGISTRY[name] = chat_boost_updated_cls
 
     @classmethod
     async def create(cls, update: Any) -> Optional[Any]:
         """Create handler instance from update."""
         obj = update.chat_boost_updated
         trigger_value = obj.boost
-        return cls.CHATBOOSTUPDATEDS_REGISTRY.get(trigger_value)()
+
+        # Try to get specific handler first
+        handler_cls = cls.CHATBOOSTUPDATEDS_REGISTRY.get(trigger_value)
+
+        # If no specific handler found, use fallback if available
+        if handler_cls is None and cls.__fallback_handler__:
+            handler_cls = cls.__fallback_handler__
+
+        return handler_cls() if handler_cls else None

@@ -83,7 +83,7 @@ class Bot:
                             f"Received unexpected response with status code: {response.status}"
                         )
                     return {}
-                
+
                 response_json = await response.json()
 
                 if update is not None:

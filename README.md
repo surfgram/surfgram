@@ -1,17 +1,19 @@
-<div style="max-width: 100%; overflow-x: auto;">
-  <div style="text-align: center; padding: 0 10px;">
-    <h1 style="font-size: clamp(24px, 5vw, 36px);">Surfgram</h1>
+<div align="center" style="max-width: 100%; overflow-x: auto; margin: 0 auto;">
+  <div style="text-align: center; padding: 0 10px; width: 100%;">
+    <h1 style="font-size: clamp(24px, 5vw, 36px); margin: 0 auto;">Surfgram</h1>
   </div>
 
-  <div style="display: flex; justify-content: center; margin: 20px 0;">
-    <img src="./assets/surfgram_logo.svg" alt="Surfgram Logo" style="max-width: 100%; height: auto;">
+  <div style="display: flex; justify-content: center; margin: 20px auto; width: 100%;">
+    <img src="./assets/surfgram_logo.svg" alt="Surfgram Logo" style="max-width: 100%; height: auto; display: block;">
   </div>
 
-  <div style="text-align: center; margin: 20px 0; flex-wrap: wrap; display: flex; justify-content: center; gap: 8px;">
-    <img src="https://img.shields.io/pypi/v/surfgram?color=blue&label=Latest%20Version" alt="PyPI Version" style="display: inline-block; margin: 2px; max-width: 100%;">
-    <img src="https://img.shields.io/badge/Python-3.8%2B-blue" alt="Python 3.8+" style="display: inline-block; margin: 2px; max-width: 100%;">
-    <img src="https://img.shields.io/badge/Telegram%20Bot%20API-9.0+-blue" alt="Telegram Bot API 9.0+" style="display: inline-block; margin: 2px; max-width: 100%;">
-    <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" style="display: inline-block; margin: 2px; max-width: 100%;">
+  <div style="text-align: center; margin: 20px auto; width: 100%;">
+    <div style="display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+      <img src="https://img.shields.io/pypi/v/surfgram?color=blue&label=Latest%20Version" alt="PyPI Version">
+      <img src="https://img.shields.io/badge/Python-3.8%2B-blue" alt="Python 3.8+">
+      <img src="https://img.shields.io/badge/Telegram%20Bot%20API-9.0+-blue" alt="Telegram Bot API 9.0+">
+      <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
+    </div>
   </div>
 </div>
 
@@ -30,13 +32,12 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 ## Development Roadmap
 
 - [x] Core framework implementation
-- [x] Basic command handlers
-- [x] Middleware support
-- [ ] Advanced state management
+- [x] All types support
+- [x] State management
+- [ ] Middleware support
 - [ ] Built-in rate limiting
 - [ ] Webhook support
 - [ ] i18n integration
-- [ ] Built-in admin panel
 - [ ] Plugin system
 
 ## Quick Start
@@ -76,8 +77,8 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 
 ## Documentation
 
-- 📖 [Full documentation](https://github.com/surfgram/surfgram-docs)
-- 📚 [Examples](https://github.com/surfgram/surfgram-examples)
+📖 [Full documentation](https://github.com/surfgram/surfgram-docs)  
+📚 [Examples](https://github.com/surfgram/surfgram-examples)
 
 ## Contributing
 
@@ -85,9 +86,9 @@ We welcome contributions! Please read our [Contributing Guidelines](https://gith
 
 ## Support
 
-- 🐞 Found a bug? Open an [Issue](https://github.com/surfgram/surfgram/issues)
-- 💡 Have an idea? Start a [Discussion](https://github.com/surfgram/surfgram/discussions)
-- 📮 Join our [Telegram Channel](https://t.me/the_surfgram)
+🐞 [Report a bug](https://github.com/surfgram/surfgram/issues)  
+💡 [Start a discussion](https://github.com/surfgram/surfgram/discussions)  
+📮 [Join our Telegram Channel](https://t.me/the_surfgram)
 
 ## License
 
