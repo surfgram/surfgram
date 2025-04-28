@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "surfgram"
-version = "0.7.3"
+version = "0.7.4"
 description = "Modern asynchronous Telegram bot framework"
 authors = ["anybody <help.surfgram@gmail.com>"]
 license = "MIT"
@@ -39,7 +39,7 @@ aiohttp = "^3.8.1"
 uvloop = { version = "^0.18.0", optional = true }
 surfgram_cli = "^1.0.1"
 
-[tool.poetry.dev-dependencies]
+[poetry.group.dev.dependencies]
 pytest = "^7.0"
 pytest-asyncio = "^0.23.0"
 black = "^24.1.0"
