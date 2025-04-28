@@ -1,71 +1,80 @@
 from difflib import get_close_matches
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 
 class APIObject:
-    """
-    Represents a JSON as object.
+    """Represents a JSON response as a dynamic object with attribute access.
+
+    Provides dot notation access to dictionary keys and helpful error messages
+    with suggestions when an attribute doesn't exist.
     """
 
-    def __init__(self, data: Dict[str, Any]):
-        """
-        Initializes the APIObject.
+    def __init__(self, data: Dict[str, Any]) -> None:
+        """Initialize the APIObject with response data.
 
         Args:
-            data: A dictionary representing the API response.
+            data: Dictionary representing the API response.
         """
         self._data = data
 
-    def __getattr__(self, item: str) -> Any:
-        """
-        Dynamically retrieves a value from the API response.
-
-        When an attribute is accessed, this method checks if it exists in
-        the response data.  If it does, the associated value is returned.
-        If not, it attempts to suggest possible matches.
+    def __getattr__(self, attribute_name: str) -> Any:
+        """Dynamically retrieve a value from the API response.
 
         Args:
-            item: The name of the attribute being accessed.
+            attribute_name: The name of the attribute being accessed.
 
         Returns:
-            The value associated with the attribute, or an AttributeError
-            with suggested alternatives if the attribute does not exist.
+            The value associated with the attribute.
 
         Raises:
-            AttributeError: If the attribute is not found in the API response.
+            AttributeError: If the attribute is not found, with suggested alternatives.
         """
-        value = self._data.get(item)
+        if attribute_name in self._data:
+            return self._wrap_value(self._data[attribute_name])
 
-        if value is None:
-            available = dir(self) + list(self._data.keys())
-            similar = self._get_similar(item, available)
+        available_attrs = self._get_available_attributes()
+        suggestion = self._get_attribute_suggestion(attribute_name, available_attrs)
 
-            raise AttributeError(
-                f"'{self.__class__.__name__}' object has no attribute '{item}'. "
-                f"Did you mean: {''.join(similar)}?"
-            )
-
-        if isinstance(value, dict):
-            return APIObject(value)
-
-        return value
+        raise AttributeError(
+            f"'{self.__class__.__name__}' has no attribute '{attribute_name}'. "
+            f"{suggestion}"
+        )
 
     def __repr__(self) -> str:
-        """
-        Returns a string representation of the APIObject.
-        """
-        return f"{self.__class__.__name__}({self._data})"
+        """Return a developer-friendly string representation of the APIObject."""
+        return f"{self.__class__.__name__}({self._data!r})"
 
-    def _get_similar(self, item: str, available: List[str]) -> List[str]:
-        """
-        Finds the closest matching attribute or key in the available options.
+    @staticmethod
+    def _wrap_value(value: Any) -> Any:
+        """Recursively wrap dictionary values in APIObject for nested access.
 
         Args:
-            item: The name of the attribute being accessed.
-            available: A list of available attributes and keys.
+            value: The value to potentially wrap.
 
         Returns:
-            A list containing the single closest match, or an empty list
-            if no match was found.
+            The original value or an APIObject-wrapped dictionary.
         """
-        return get_close_matches(item, available, n=1)
+        return APIObject(value) if isinstance(value, dict) else value
+
+    def _get_available_attributes(self) -> List[str]:
+        """Get all available attributes for suggestion purposes.
+
+        Returns:
+            List of attribute names including both data keys and object attributes.
+        """
+        object_attrs = [attr for attr in dir(self) if not attr.startswith("_")]
+        return list(self._data.keys()) + object_attrs
+
+    @staticmethod
+    def _get_attribute_suggestion(name: str, available: List[str]) -> str:
+        """Get the best matching suggestion for a missing attribute.
+
+        Args:
+            name: The missing attribute name.
+            available: List of available attribute names.
+
+        Returns:
+            A formatted suggestion string or empty string if no good match found.
+        """
+        matches = get_close_matches(name, available, n=1, cutoff=0.6)
+        return f"Did you mean '{matches[0]}'?" if matches else ""

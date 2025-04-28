@@ -1,59 +1,134 @@
 import pytest
-
+from typing import Dict, Any
 from surfgram import APIObject
 
 
-class TestAPIObject:
+@pytest.fixture
+def sample_data() -> Dict[str, Any]:
+    """Fixture providing test data for APIObject instances.
 
-    def test_initialization(self):
-        """Tests if APIObject initializes correctly with data."""
-        data = {"key1": "value1", "key2": {"nested_key": "nested_value"}}
-        api_object = APIObject(data)
-        assert api_object._data == data
+    Returns:
+        Dict[str, Any]: Sample data structure with various value types
+        including primitives, nested dicts, lists, and None values.
+    """
+    return {
+        "name": "Test Object",
+        "value": 42,
+        "nested": {"key": "value", "number": 3.14},
+        "list_data": [1, 2, 3],
+        "none_value": None,
+    }
 
-    def test_dynamic_attribute_access(self):
-        """Tests dynamic attribute access of APIObject."""
-        data = {"key1": "value1", "key2": "value2"}
-        api_object = APIObject(data)
 
-        assert api_object.key1 == "value1"
-        assert api_object.key2 == "value2"
+@pytest.fixture
+def api_obj(sample_data: Dict[str, Any]) -> APIObject:
+    """Fixture providing initialized APIObject instance.
 
-    def test_nested_object_access(self):
-        """Tests access to nested objects."""
-        data = {"key1": {"nested_key": "nested_value"}}
-        api_object = APIObject(data)
+    Args:
+        sample_data: Test data from sample_data fixture
 
-        nested_obj = api_object.key1
-        assert isinstance(nested_obj, APIObject)
-        assert nested_obj.nested_key == "nested_value"
+    Returns:
+        APIObject: Preconfigured APIObject instance for testing
+    """
+    return APIObject(sample_data)
 
-    def test_access_non_existent_attribute(self):
-        """Tests error handling for non-existent attribute access."""
-        data = {"key1": "value1"}
-        api_object = APIObject(data)
 
-        with pytest.raises(AttributeError) as excinfo:
-            _ = api_object.non_existent_key
+class TestAPIObjectBasic:
+    """Test core functionality of APIObject class."""
 
-        assert (
-            str(excinfo.value)
-            == "'APIObject' object has no attribute 'non_existent_key'. Did you mean: ''?"
-        )
+    def test_attribute_access(self, api_obj: APIObject):
+        """Verify direct attribute access to top-level properties."""
+        assert api_obj.name == "Test Object"
+        assert api_obj.value == 42
+        assert api_obj.none_value is None
 
-    def test_access_non_existent_attribute_with_suggestion(self):
-        """Tests error handling with suggestions for non-existent attributes."""
-        data = {"key1": "value1"}
-        api_object = APIObject(data)
+    def test_nested_attribute_access(self, api_obj: APIObject):
+        """Verify nested dictionary access through chained attributes."""
+        assert api_obj.nested.key == "value"
+        assert api_obj.nested.number == 3.14
 
-        with pytest.raises(AttributeError) as excinfo:
-            _ = api_object.key
+    def test_missing_attribute_error(self, api_obj: APIObject):
+        """Verify proper AttributeError when accessing nonexistent attributes."""
+        with pytest.raises(AttributeError) as exc_info:
+            _ = api_obj.non_existent
 
-        # Test if suggestions include 'key1'
-        assert "Did you mean: 'key1'?" in str(excinfo.value)
+        assert "has no attribute 'non_existent'" in str(exc_info.value)
 
-    def test_representation(self):
-        """Tests the representation of the APIObject."""
-        data = {"key1": "value1", "key2": "value2"}
-        api_object = APIObject(data)
-        assert repr(api_object) == "APIObject({'key1': 'value1', 'key2': 'value2'})"
+    def test_repr(self, api_obj: APIObject, sample_data: Dict[str, Any]):
+        """Verify string representation contains original data."""
+        assert repr(api_obj) == f"APIObject({sample_data!r})"
+
+
+class TestAPIObjectEdgeCases:
+    """Test edge cases and special values handling."""
+
+    def test_empty_object(self):
+        """Verify behavior with empty dictionary input."""
+        empty_obj = APIObject({})
+        with pytest.raises(AttributeError):
+            _ = empty_obj.any_attribute
+
+    def test_list_values(self, api_obj: APIObject):
+        """Verify list values remain unchanged."""
+        assert api_obj.list_data == [1, 2, 3]
+        assert isinstance(api_obj.list_data, list)
+        assert not isinstance(api_obj.list_data, APIObject)
+
+    def test_none_values(self, api_obj: APIObject):
+        """Verify None values are handled correctly."""
+        assert api_obj.none_value is None
+
+
+class TestAPISuggestions:
+    """Test attribute suggestion system for misspelled names."""
+
+    @pytest.mark.parametrize(
+        "wrong_attr,expected_suggestion",
+        [
+            ("naem", "name"),
+            ("valve", "value"),
+            ("nsted", "nested"),
+            ("listdate", "list_data"),
+        ],
+        ids=["name typo", "value typo", "nested typo", "list_data typo"],
+    )
+    def test_attribute_suggestions(
+        self, api_obj: APIObject, wrong_attr: str, expected_suggestion: str
+    ):
+        """Parameterized test for various misspelling scenarios.
+
+        Args:
+            wrong_attr: Misspelled attribute name to test
+            expected_suggestion: Correct name that should be suggested
+        """
+        with pytest.raises(AttributeError) as exc_info:
+            _ = getattr(api_obj, wrong_attr)
+
+        assert f"Did you mean '{expected_suggestion}'?" in str(exc_info.value)
+
+    def test_no_suggestion_when_not_close_match(self, api_obj: APIObject):
+        """Verify absence of suggestions for completely wrong names."""
+        with pytest.raises(AttributeError) as exc_info:
+            _ = api_obj.xyz123abc
+
+        assert "Did you mean" not in str(exc_info.value)
+
+
+class TestAPIObjectWrapping:
+    """Test value wrapping behavior."""
+
+    def test_dict_wrapping(self, api_obj: APIObject):
+        """Verify dictionaries get wrapped in APIObject instances."""
+        assert isinstance(api_obj.nested, APIObject)
+
+    def test_non_dict_not_wrapped(self, api_obj: APIObject):
+        """Verify non-dict values remain unchanged."""
+        assert not isinstance(api_obj.name, APIObject)
+        assert not isinstance(api_obj.value, APIObject)
+        assert not isinstance(api_obj.list_data, APIObject)
+        assert not isinstance(api_obj.none_value, APIObject)
+
+
+def test_direct_dict_access(api_obj: APIObject, sample_data: Dict[str, Any]):
+    """Verify original data remains accessible via _data attribute."""
+    assert api_obj._data == sample_data

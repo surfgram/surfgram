@@ -2,39 +2,46 @@ import pytest
 from surfgram import fsm
 from typing import Any, Dict
 
+
 # Fixtures
 @pytest.fixture
 def clean_states():
     """Fixture to clean states storage before each test"""
+
     class TestStates(fsm.States):
         STATE_A = fsm.State()
         STATE_B = fsm.State()
         STATE_C = fsm.State()
-    
+
     yield TestStates
     # Cleanup after test
     for chat_id in list(TestStates._states_storage.keys()):
         TestStates.reset(chat_id)
+
 
 @pytest.fixture
 def state_instance():
     """Fixture providing clean State instance"""
     return fsm.State()
 
+
 class TestState:
     def test_initial_state_has_empty_attributes(self, state_instance):
         assert state_instance.attributes == {}
         assert len(state_instance.attributes) == 0
 
-    @pytest.mark.parametrize("name,value", [
-        ("string", "value"),
-        ("int", 42),
-        ("float", 3.14),
-        ("bool", True),
-        ("list", [1, 2, 3]),
-        ("dict", {"key": "value"}),
-        ("none", None),
-    ])
+    @pytest.mark.parametrize(
+        "name,value",
+        [
+            ("string", "value"),
+            ("int", 42),
+            ("float", 3.14),
+            ("bool", True),
+            ("list", [1, 2, 3]),
+            ("dict", {"key": "value"}),
+            ("none", None),
+        ],
+    )
     def test_set_get_attribute_types(self, state_instance, name: str, value: Any):
         state_instance.set_attribute(name, value)
         assert state_instance.get_attribute(name) == value
@@ -53,10 +60,11 @@ class TestState:
         data = {"a": 1, "b": 2, "c": 3}
         for k, v in data.items():
             state_instance.set_attribute(k, v)
-        
+
         assert len(state_instance.attributes) == 3
         for k, v in data.items():
             assert state_instance.get_attribute(k) == v
+
 
 class TestStates:
     def test_turn_state(self, clean_states):
@@ -66,7 +74,7 @@ class TestStates:
     def test_state_transitions(self, clean_states):
         chat_id = 123
         states = [clean_states.STATE_A, clean_states.STATE_B, clean_states.STATE_C]
-        
+
         for state in states:
             clean_states.turn(state, chat_id)
             assert clean_states.is_current(state, chat_id)
@@ -81,12 +89,12 @@ class TestStates:
         chat_data = {
             1: clean_states.STATE_A,
             2: clean_states.STATE_B,
-            3: clean_states.STATE_C
+            3: clean_states.STATE_C,
         }
-        
+
         for chat_id, state in chat_data.items():
             clean_states.turn(state, chat_id)
-        
+
         for chat_id, state in chat_data.items():
             assert clean_states.is_current(state, chat_id)
             assert clean_states.get_current(chat_id) is state
@@ -94,12 +102,12 @@ class TestStates:
     def test_state_attributes_persistence(self, clean_states):
         chat_id = 123
         clean_states.turn(clean_states.STATE_A, chat_id)
-        
+
         test_data = {"user": "John", "progress": 75, "settings": {"dark_mode": True}}
-        
+
         for key, value in test_data.items():
             clean_states.set_attribute(chat_id, key, value)
-        
+
         for key, value in test_data.items():
             assert clean_states.get_attribute(chat_id, key) == value
 
