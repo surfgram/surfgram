@@ -4,9 +4,10 @@ from surfgram.core.structures import APIObject
 from surfgram.core.validator import Token
 from surfgram.core.helpers import CamelCaseConverter
 from surfgram.exceptions import BotError
-import aiohttp
+from surfgram_internal import NativeClient
 import asyncio
 from typing import Dict, Optional, Any, Callable, Type
+from json import dumps, loads
 
 
 class Bot:
@@ -16,11 +17,6 @@ class Bot:
     This class handles communication with the Telegram Bot API,
     managing requests, and processing updates.  It uses a configuration
     object to obtain the bot's token and listener class.
-    """
-
-    BASE_URL = "https://api.telegram.org/bot{token}/"
-    """
-    The base URL for the Telegram Bot API.
     """
 
     def __init__(self, config: Type["BaseConfig"], debug_mode=False) -> None:
@@ -38,13 +34,8 @@ class Bot:
         listener_class = config.get_listener()
         self.listener = listener_class()
         self._converter = CamelCaseConverter()
-        self._session = None
+        self.client = NativeClient(token)
         debugger.log("Bot started!", LevelsEnum.INFO)
-
-    async def _ensure_session(self):
-        """Ensure we have a session"""
-        if self._session is None or self._session.closed:
-            self._session = aiohttp.ClientSession()
 
     async def _make_request(
         self,
@@ -69,28 +60,20 @@ class Bot:
             A dictionary containing the API response, or an empty dictionary
             if an error occurred.
         """
-        await self._ensure_session()
         converted_name = self._converter.convert(method_name)
-        url = self.BASE_URL.format(token=self.token) + converted_name
         debugger.log(f"Executing {converted_name}({params})...", LevelsEnum.API)
 
         try:
-            async with self._session.post(url, json=params) as response:
-                if response.status != 200:
-                    debugger.log(f"Error: {response.status} - {url}", LevelsEnum.ERROR)
-                    if not debugger.debug_level:
-                        raise BotError(
-                            f"Received unexpected response with status code: {response.status}"
-                        )
-                    return {}
-
-                response_json = await response.json()
-
-                if update is not None:
-                    api_object = APIObject(update)
-                    await self.listener.on_update(api_object)
-
-                return response_json
+            dumped_params = dumps(params)
+            
+            response_json = await self.client.send_request(converted_name, dumped_params)
+            
+            if update is not None:
+                api_object = APIObject(update)
+                await self.listener.on_update(api_object)
+            
+            return loads(response_json)
+            
         except Exception as e:
             debugger.log(f"Request failed: {str(e)}", LevelsEnum.ERROR)
             return {}
@@ -134,10 +117,4 @@ class Bot:
         try:
             loop.run_until_complete(self.listener.listen(self))
         finally:
-            loop.run_until_complete(self._close_session())
             loop.close()
-
-    async def _close_session(self):
-        """Close the aiohttp session"""
-        if self._session and not self._session.closed:
-            await self._session.close()
