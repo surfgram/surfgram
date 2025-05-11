@@ -8,7 +8,6 @@
 - **🐛 Report bugs** – Open an [Issue](https://github.com/surfgram/surfgram/issues).  
 - **💡 Suggest features** – Start a [Discussion](https://github.com/surfgram/surfgram/discussions).  
 - **📝 Improve docs** – Fix typos, clarify guides, or add examples.  
-- **🔧 Code contributions** – Fix bugs or add new features (check the [Roadmap](#development-roadmap)).  
 
 ---
 
