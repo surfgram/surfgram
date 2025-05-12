@@ -65,15 +65,17 @@ class Bot:
 
         try:
             dumped_params = dumps(params)
-            
-            response_json = await self.client.send_request(converted_name, dumped_params)
-            
+
+            response_json = await self.client.send_request(
+                converted_name, dumped_params
+            )
+
             if update is not None:
                 api_object = APIObject(update)
                 await self.listener.on_update(api_object)
-            
+
             return loads(response_json)
-            
+
         except Exception as e:
             debugger.log(f"Request failed: {str(e)}", LevelsEnum.ERROR)
             return {}

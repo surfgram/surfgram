@@ -79,4 +79,4 @@ class BaseListener(Listener):
             List[Dict[str, Any]]: A list of update dictionaries received from the bot.
         """
         response = await bot.get_updates(timeout=self.timeout, offset=self.offset)
-        return response.get('result', [])
+        return response.get("result", [])
