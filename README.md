@@ -29,17 +29,6 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 - ✅ Async-Ready – Built with asyncio for high performance
 - ✅ Full support for Telegram Bot API 9.0+
 
-## Development Roadmap
-
-- [x] Core framework implementation
-- [x] All types support
-- [x] State management
-- [ ] Middleware support
-- [ ] Built-in rate limiting
-- [ ] Webhook support
-- [ ] i18n integration
-- [ ] Plugin system
-
 ## Quick Start
 
 1. Install using PIP:
@@ -50,30 +39,37 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 
 2. Create your first bot:
 
-    ```python
-    from surfgram import APIObject, Bot
-    from surfgram.types import Command
-    from typing import Callable, List
-
-    class StartCommand(Command):
-        @property
-        def __names__(self) -> List[str]:
-            return ["start"]
-
-        @property
-        def __callback__(self) -> Callable:
-            return self.handle
-
-        async def handle(
-            self,
-            update: APIObject,
-            bot: Bot
-        ) -> None:
-            await bot.send_message(
-                chat_id=update.message.chat.id,
-                text="Hello, world!"
-            )
+    ```bash
+    surfgram new mybot
+    cd mybot
+    surfgram run
     ```
+
+## Example bot's handler
+```python
+from surfgram import APIObject, Bot
+from surfgram.types import BotCommand
+from typing import Callable, List
+
+class StartCommand(BotCommand):
+    @property
+    def __names__(self) -> List[str]:
+        return ["start"]
+
+    @property
+    def __callback__(self) -> Callable:
+        return self.handle
+
+    async def handle(
+        self,
+        update: APIObject,
+        bot: Bot
+    ) -> None:
+        await bot.send_message(
+            chat_id=update.message.chat.id,
+            text="Hello, world!"
+        )
+```
 
 ## Documentation
 
