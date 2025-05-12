@@ -1,115 +1,78 @@
-from typing import Type, TypeVar, Dict, Any, Optional, Callable
-from dataclasses import dataclass, field
+from typing import Type, TypeVar, Dict, Any, Optional
 from abc import ABC, abstractmethod
-from .meta import StatesMeta
+from .storage import BaseStorage, InMemoryStorage
 from .state import State
+from .meta import StatesMeta
 
 T = TypeVar("T", bound="States")
 
 
 class States(metaclass=StatesMeta):
     """
-    Base class for state management that tracks states per chat ID.
-
-    Class Attributes:
-        _states_storage: Dictionary mapping chat IDs to their current states.
+    Base class for state management with __provider__ configuration.
+    Defaults to InMemoryStorage if no provider is specified.
     """
 
-    _states_storage: Dict[int, State] = {}  # chat_id: State
+    __provider__: Type[BaseStorage] = InMemoryStorage
+    _storage_instances: Dict[type, BaseStorage] = {}
+
+    @classmethod
+    def _get_storage(cls) -> BaseStorage:
+        """Get or create the storage instance for this class."""
+        if cls not in cls._storage_instances:
+            cls._storage_instances[cls] = cls.__provider__()
+        return cls._storage_instances[cls]
 
     @classmethod
     def turn(cls: Type[T], state: State, chat_id: int) -> None:
-        """
-        Set the current state for a chat.
-
-        Args:
-            state: The state to set as current.
-            chat_id: The chat identifier.
-        """
-        cls._states_storage[chat_id] = state
+        """Set the current state for a chat."""
+        cls._get_storage().set_state(
+            chat_id, {"_current_state": state.name, **state.attributes}
+        )
 
     @classmethod
     def get_current(cls: Type[T], chat_id: int) -> Optional[State]:
-        """
-        Get the current state for a chat.
+        """Get the current state for a chat."""
+        state_data = cls._get_storage().get_state(chat_id)
+        if not state_data:
+            return None
 
-        Args:
-            chat_id: The chat identifier.
+        state_name = state_data.get("_current_state")
+        if not state_name:
+            return None
 
-        Returns:
-            The current state if exists, None otherwise.
-        """
-        return cls._states_storage.get(chat_id)
+        for name, value in cls.__dict__.items():
+            if isinstance(value, State) and value.name == state_name:
+                value.attributes = {
+                    k: v for k, v in state_data.items() if k != "_current_state"
+                }
+                return value
+        return None
 
     @classmethod
     def reset(cls: Type[T], chat_id: int) -> None:
-        """
-        Reset (remove) the current state for a chat.
-
-        Args:
-            chat_id: The chat identifier.
-        """
-        cls._states_storage.pop(chat_id, None)
+        """Reset (remove) the current state for a chat."""
+        cls._get_storage().delete_state(chat_id)
 
     @classmethod
     def is_current(cls: Type[T], state: State, chat_id: int) -> bool:
-        """
-        Check if a given state is the current state for a chat.
-
-        Args:
-            state: The state to check.
-            chat_id: The chat identifier.
-
-        Returns:
-            True if the state is current, False otherwise.
-        """
+        """Check if a given state is the current state for a chat."""
         current = cls.get_current(chat_id)
         return current is not None and current is state
 
     @classmethod
     def received(cls: Type[T], state: State, chat_id: int) -> bool:
-        """
-        Alias for is_current().
-
-        Args:
-            state: The state to check.
-            chat_id: The chat identifier.
-
-        Returns:
-            True if the state is current, False otherwise.
-        """
+        """Alias for is_current()."""
         return cls.is_current(state, chat_id)
 
     @classmethod
     def set_attribute(cls: Type[T], chat_id: int, name: str, value: Any) -> None:
-        """
-        Set an attribute in the current state of a chat.
-
-        Args:
-            chat_id: The chat identifier.
-            name: The attribute name.
-            value: The value to set.
-        """
-        current = cls.get_current(chat_id)
-        if current:
-            current.set_attribute(name, value)
+        """Set an attribute in the current state."""
+        cls._get_storage().set_attribute(chat_id, name, value)
 
     @classmethod
     def get_attribute(
         cls: Type[T], chat_id: int, name: str, default: Any = None
     ) -> Any:
-        """
-        Get an attribute from the current state of a chat.
-
-        Args:
-            chat_id: The chat identifier.
-            name: The attribute name.
-            default: Default value if attribute doesn't exist.
-
-        Returns:
-            The attribute value if found, otherwise the default value.
-        """
-        current = cls.get_current(chat_id)
-        if current:
-            return current.get_attribute(name, default)
-        return default
+        """Get an attribute from the current state."""
+        return cls._get_storage().get_attribute(chat_id, name, default)
