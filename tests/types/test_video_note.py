@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.video_note import VideoNote
 from surfgram.types.video_note.factory import VideoNotesFactory
 
@@ -18,13 +17,16 @@ class TestVideoNote:
 
         class ConcreteVideoNote(VideoNote):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteVideoNote()
+            async def __callback__(self):
+                return None
+
+        return ConcreteVideoNote
 
     def test_concrete_instantiation(self, concrete_video_note):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_video_note, VideoNote)
+        instance = concrete_video_note()
+        assert isinstance(instance, VideoNote)
 
 
 class TestVideoNotesFactory:
@@ -41,26 +43,28 @@ class TestVideoNotesFactory:
 
         class TestHandler(VideoNote):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         VideoNotesFactory.register_video_note(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.video_note = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_note = mocker.MagicMock()
         mock_update.video_note.file_id = "test_trigger"
 
         result = await VideoNotesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.video_note = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_note = mocker.MagicMock()
         mock_update.video_note.file_id = "unknown_trigger"
 
         assert await VideoNotesFactory.create(mock_update) is None

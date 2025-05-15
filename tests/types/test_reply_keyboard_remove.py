@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.reply_keyboard_remove import ReplyKeyboardRemove
 from surfgram.types.reply_keyboard_remove.factory import ReplyKeyboardRemovesFactory
 
@@ -18,13 +17,16 @@ class TestReplyKeyboardRemove:
 
         class ConcreteReplyKeyboardRemove(ReplyKeyboardRemove):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteReplyKeyboardRemove()
+            async def __callback__(self):
+                return None
+
+        return ConcreteReplyKeyboardRemove
 
     def test_concrete_instantiation(self, concrete_reply_keyboard_remove):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_reply_keyboard_remove, ReplyKeyboardRemove)
+        instance = concrete_reply_keyboard_remove()
+        assert isinstance(instance, ReplyKeyboardRemove)
 
 
 class TestReplyKeyboardRemovesFactory:
@@ -41,26 +43,28 @@ class TestReplyKeyboardRemovesFactory:
 
         class TestHandler(ReplyKeyboardRemove):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ReplyKeyboardRemovesFactory.register_reply_keyboard_remove(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.reply_keyboard_remove = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reply_keyboard_remove = mocker.MagicMock()
         mock_update.reply_keyboard_remove.remove_keyboard = "test_trigger"
 
         result = await ReplyKeyboardRemovesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.reply_keyboard_remove = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reply_keyboard_remove = mocker.MagicMock()
         mock_update.reply_keyboard_remove.remove_keyboard = "unknown_trigger"
 
         assert await ReplyKeyboardRemovesFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_member_updated import ChatMemberUpdated
 from surfgram.types.chat_member_updated.factory import ChatMemberUpdatedsFactory
 
@@ -18,13 +17,16 @@ class TestChatMemberUpdated:
 
         class ConcreteChatMemberUpdated(ChatMemberUpdated):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatMemberUpdated()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatMemberUpdated
 
     def test_concrete_instantiation(self, concrete_chat_member_updated):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_member_updated, ChatMemberUpdated)
+        instance = concrete_chat_member_updated()
+        assert isinstance(instance, ChatMemberUpdated)
 
 
 class TestChatMemberUpdatedsFactory:
@@ -41,26 +43,28 @@ class TestChatMemberUpdatedsFactory:
 
         class TestHandler(ChatMemberUpdated):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatMemberUpdatedsFactory.register_chat_member_updated(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_member_updated = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_member_updated = mocker.MagicMock()
         mock_update.chat_member_updated.old_chat_member = "test_trigger"
 
         result = await ChatMemberUpdatedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_member_updated = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_member_updated = mocker.MagicMock()
         mock_update.chat_member_updated.old_chat_member = "unknown_trigger"
 
         assert await ChatMemberUpdatedsFactory.create(mock_update) is None

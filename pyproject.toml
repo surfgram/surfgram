@@ -57,3 +57,6 @@ surfgram = "surfgram_cli:app"
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/surfgram/surfgram/issues"
 "Changelog" = "https://github.com/surfgram/surfgram/releases"
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"

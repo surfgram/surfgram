@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.poll_answer import PollAnswer
 from surfgram.types.poll_answer.factory import PollAnswersFactory
 
@@ -18,13 +17,16 @@ class TestPollAnswer:
 
         class ConcretePollAnswer(PollAnswer):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePollAnswer()
+            async def __callback__(self):
+                return None
+
+        return ConcretePollAnswer
 
     def test_concrete_instantiation(self, concrete_poll_answer):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_poll_answer, PollAnswer)
+        instance = concrete_poll_answer()
+        assert isinstance(instance, PollAnswer)
 
 
 class TestPollAnswersFactory:
@@ -41,26 +43,28 @@ class TestPollAnswersFactory:
 
         class TestHandler(PollAnswer):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PollAnswersFactory.register_poll_answer(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.poll_answer = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.poll_answer = mocker.MagicMock()
         mock_update.poll_answer.poll_id = "test_trigger"
 
         result = await PollAnswersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.poll_answer = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.poll_answer = mocker.MagicMock()
         mock_update.poll_answer.poll_id = "unknown_trigger"
 
         assert await PollAnswersFactory.create(mock_update) is None

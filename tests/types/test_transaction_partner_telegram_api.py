@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.transaction_partner_telegram_api import (
     TransactionPartnerTelegramApi,
 )
@@ -22,15 +21,16 @@ class TestTransactionPartnerTelegramApi:
 
         class ConcreteTransactionPartnerTelegramApi(TransactionPartnerTelegramApi):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteTransactionPartnerTelegramApi()
+            async def __callback__(self):
+                return None
+
+        return ConcreteTransactionPartnerTelegramApi
 
     def test_concrete_instantiation(self, concrete_transaction_partner_telegram_api):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_transaction_partner_telegram_api, TransactionPartnerTelegramApi
-        )
+        instance = concrete_transaction_partner_telegram_api()
+        assert isinstance(instance, TransactionPartnerTelegramApi)
 
 
 class TestTransactionPartnerTelegramApisFactory:
@@ -47,7 +47,9 @@ class TestTransactionPartnerTelegramApisFactory:
 
         class TestHandler(TransactionPartnerTelegramApi):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         TransactionPartnerTelegramApisFactory.register_transaction_partner_telegram_api(
             TestHandler
@@ -55,20 +57,20 @@ class TestTransactionPartnerTelegramApisFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.transaction_partner_telegram_api = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.transaction_partner_telegram_api = mocker.MagicMock()
         mock_update.transaction_partner_telegram_api.type = "test_trigger"
 
         result = await TransactionPartnerTelegramApisFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.transaction_partner_telegram_api = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.transaction_partner_telegram_api = mocker.MagicMock()
         mock_update.transaction_partner_telegram_api.type = "unknown_trigger"
 
         assert await TransactionPartnerTelegramApisFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.business_location import BusinessLocation
 from surfgram.types.business_location.factory import BusinessLocationsFactory
 
@@ -18,13 +17,16 @@ class TestBusinessLocation:
 
         class ConcreteBusinessLocation(BusinessLocation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBusinessLocation()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBusinessLocation
 
     def test_concrete_instantiation(self, concrete_business_location):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_business_location, BusinessLocation)
+        instance = concrete_business_location()
+        assert isinstance(instance, BusinessLocation)
 
 
 class TestBusinessLocationsFactory:
@@ -41,26 +43,28 @@ class TestBusinessLocationsFactory:
 
         class TestHandler(BusinessLocation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BusinessLocationsFactory.register_business_location(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.business_location = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.business_location = mocker.MagicMock()
         mock_update.business_location.address = "test_trigger"
 
         result = await BusinessLocationsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.business_location = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.business_location = mocker.MagicMock()
         mock_update.business_location.address = "unknown_trigger"
 
         assert await BusinessLocationsFactory.create(mock_update) is None

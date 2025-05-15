@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.paid_media_video import PaidMediaVideo
 from surfgram.types.paid_media_video.factory import PaidMediaVideosFactory
 
@@ -18,13 +17,16 @@ class TestPaidMediaVideo:
 
         class ConcretePaidMediaVideo(PaidMediaVideo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePaidMediaVideo()
+            async def __callback__(self):
+                return None
+
+        return ConcretePaidMediaVideo
 
     def test_concrete_instantiation(self, concrete_paid_media_video):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_paid_media_video, PaidMediaVideo)
+        instance = concrete_paid_media_video()
+        assert isinstance(instance, PaidMediaVideo)
 
 
 class TestPaidMediaVideosFactory:
@@ -41,26 +43,28 @@ class TestPaidMediaVideosFactory:
 
         class TestHandler(PaidMediaVideo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PaidMediaVideosFactory.register_paid_media_video(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.paid_media_video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.paid_media_video = mocker.MagicMock()
         mock_update.paid_media_video.video = "test_trigger"
 
         result = await PaidMediaVideosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.paid_media_video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.paid_media_video = mocker.MagicMock()
         mock_update.paid_media_video.video = "unknown_trigger"
 
         assert await PaidMediaVideosFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_profile_photo_animated import InputProfilePhotoAnimated
 from surfgram.types.input_profile_photo_animated.factory import (
     InputProfilePhotoAnimatedsFactory,
@@ -20,15 +19,16 @@ class TestInputProfilePhotoAnimated:
 
         class ConcreteInputProfilePhotoAnimated(InputProfilePhotoAnimated):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputProfilePhotoAnimated()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputProfilePhotoAnimated
 
     def test_concrete_instantiation(self, concrete_input_profile_photo_animated):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_input_profile_photo_animated, InputProfilePhotoAnimated
-        )
+        instance = concrete_input_profile_photo_animated()
+        assert isinstance(instance, InputProfilePhotoAnimated)
 
 
 class TestInputProfilePhotoAnimatedsFactory:
@@ -45,7 +45,9 @@ class TestInputProfilePhotoAnimatedsFactory:
 
         class TestHandler(InputProfilePhotoAnimated):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputProfilePhotoAnimatedsFactory.register_input_profile_photo_animated(
             TestHandler
@@ -53,20 +55,20 @@ class TestInputProfilePhotoAnimatedsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_profile_photo_animated = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_profile_photo_animated = mocker.MagicMock()
         mock_update.input_profile_photo_animated.type = "test_trigger"
 
         result = await InputProfilePhotoAnimatedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_profile_photo_animated = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_profile_photo_animated = mocker.MagicMock()
         mock_update.input_profile_photo_animated.type = "unknown_trigger"
 
         assert await InputProfilePhotoAnimatedsFactory.create(mock_update) is None

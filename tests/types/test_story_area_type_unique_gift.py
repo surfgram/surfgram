@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.story_area_type_unique_gift import StoryAreaTypeUniqueGift
 from surfgram.types.story_area_type_unique_gift.factory import (
     StoryAreaTypeUniqueGiftsFactory,
@@ -20,13 +19,16 @@ class TestStoryAreaTypeUniqueGift:
 
         class ConcreteStoryAreaTypeUniqueGift(StoryAreaTypeUniqueGift):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteStoryAreaTypeUniqueGift()
+            async def __callback__(self):
+                return None
+
+        return ConcreteStoryAreaTypeUniqueGift
 
     def test_concrete_instantiation(self, concrete_story_area_type_unique_gift):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_story_area_type_unique_gift, StoryAreaTypeUniqueGift)
+        instance = concrete_story_area_type_unique_gift()
+        assert isinstance(instance, StoryAreaTypeUniqueGift)
 
 
 class TestStoryAreaTypeUniqueGiftsFactory:
@@ -43,7 +45,9 @@ class TestStoryAreaTypeUniqueGiftsFactory:
 
         class TestHandler(StoryAreaTypeUniqueGift):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         StoryAreaTypeUniqueGiftsFactory.register_story_area_type_unique_gift(
             TestHandler
@@ -51,20 +55,20 @@ class TestStoryAreaTypeUniqueGiftsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.story_area_type_unique_gift = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story_area_type_unique_gift = mocker.MagicMock()
         mock_update.story_area_type_unique_gift.type = "test_trigger"
 
         result = await StoryAreaTypeUniqueGiftsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.story_area_type_unique_gift = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story_area_type_unique_gift = mocker.MagicMock()
         mock_update.story_area_type_unique_gift.type = "unknown_trigger"
 
         assert await StoryAreaTypeUniqueGiftsFactory.create(mock_update) is None

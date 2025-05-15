@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.text_quote import TextQuote
 from surfgram.types.text_quote.factory import TextQuotesFactory
 
@@ -18,13 +17,16 @@ class TestTextQuote:
 
         class ConcreteTextQuote(TextQuote):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteTextQuote()
+            async def __callback__(self):
+                return None
+
+        return ConcreteTextQuote
 
     def test_concrete_instantiation(self, concrete_text_quote):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_text_quote, TextQuote)
+        instance = concrete_text_quote()
+        assert isinstance(instance, TextQuote)
 
 
 class TestTextQuotesFactory:
@@ -41,26 +43,28 @@ class TestTextQuotesFactory:
 
         class TestHandler(TextQuote):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         TextQuotesFactory.register_text_quote(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.text_quote = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.text_quote = mocker.MagicMock()
         mock_update.text_quote.text = "test_trigger"
 
         result = await TextQuotesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.text_quote = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.text_quote = mocker.MagicMock()
         mock_update.text_quote.text = "unknown_trigger"
 
         assert await TextQuotesFactory.create(mock_update) is None

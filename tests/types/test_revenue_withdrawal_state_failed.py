@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.revenue_withdrawal_state_failed import RevenueWithdrawalStateFailed
 from surfgram.types.revenue_withdrawal_state_failed.factory import (
     RevenueWithdrawalStateFailedsFactory,
@@ -20,15 +19,16 @@ class TestRevenueWithdrawalStateFailed:
 
         class ConcreteRevenueWithdrawalStateFailed(RevenueWithdrawalStateFailed):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteRevenueWithdrawalStateFailed()
+            async def __callback__(self):
+                return None
+
+        return ConcreteRevenueWithdrawalStateFailed
 
     def test_concrete_instantiation(self, concrete_revenue_withdrawal_state_failed):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_revenue_withdrawal_state_failed, RevenueWithdrawalStateFailed
-        )
+        instance = concrete_revenue_withdrawal_state_failed()
+        assert isinstance(instance, RevenueWithdrawalStateFailed)
 
 
 class TestRevenueWithdrawalStateFailedsFactory:
@@ -45,7 +45,9 @@ class TestRevenueWithdrawalStateFailedsFactory:
 
         class TestHandler(RevenueWithdrawalStateFailed):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         RevenueWithdrawalStateFailedsFactory.register_revenue_withdrawal_state_failed(
             TestHandler
@@ -53,20 +55,20 @@ class TestRevenueWithdrawalStateFailedsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.revenue_withdrawal_state_failed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.revenue_withdrawal_state_failed = mocker.MagicMock()
         mock_update.revenue_withdrawal_state_failed.type = "test_trigger"
 
         result = await RevenueWithdrawalStateFailedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.revenue_withdrawal_state_failed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.revenue_withdrawal_state_failed = mocker.MagicMock()
         mock_update.revenue_withdrawal_state_failed.type = "unknown_trigger"
 
         assert await RevenueWithdrawalStateFailedsFactory.create(mock_update) is None

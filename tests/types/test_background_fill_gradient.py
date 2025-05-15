@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.background_fill_gradient import BackgroundFillGradient
 from surfgram.types.background_fill_gradient.factory import (
     BackgroundFillGradientsFactory,
@@ -20,13 +19,16 @@ class TestBackgroundFillGradient:
 
         class ConcreteBackgroundFillGradient(BackgroundFillGradient):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBackgroundFillGradient()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBackgroundFillGradient
 
     def test_concrete_instantiation(self, concrete_background_fill_gradient):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_background_fill_gradient, BackgroundFillGradient)
+        instance = concrete_background_fill_gradient()
+        assert isinstance(instance, BackgroundFillGradient)
 
 
 class TestBackgroundFillGradientsFactory:
@@ -43,26 +45,28 @@ class TestBackgroundFillGradientsFactory:
 
         class TestHandler(BackgroundFillGradient):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BackgroundFillGradientsFactory.register_background_fill_gradient(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.background_fill_gradient = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.background_fill_gradient = mocker.MagicMock()
         mock_update.background_fill_gradient.type = "test_trigger"
 
         result = await BackgroundFillGradientsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.background_fill_gradient = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.background_fill_gradient = mocker.MagicMock()
         mock_update.background_fill_gradient.type = "unknown_trigger"
 
         assert await BackgroundFillGradientsFactory.create(mock_update) is None

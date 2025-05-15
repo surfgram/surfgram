@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.update import Update
 from surfgram.types.update.factory import UpdatesFactory
 
@@ -18,13 +17,16 @@ class TestUpdate:
 
         class ConcreteUpdate(Update):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteUpdate()
+            async def __callback__(self):
+                return None
+
+        return ConcreteUpdate
 
     def test_concrete_instantiation(self, concrete_update):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_update, Update)
+        instance = concrete_update()
+        assert isinstance(instance, Update)
 
 
 class TestUpdatesFactory:
@@ -41,26 +43,28 @@ class TestUpdatesFactory:
 
         class TestHandler(Update):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         UpdatesFactory.register_update(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.update = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.update = mocker.MagicMock()
         mock_update.update.inline_query = "test_trigger"
 
         result = await UpdatesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.update = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.update = mocker.MagicMock()
         mock_update.update.inline_query = "unknown_trigger"
 
         assert await UpdatesFactory.create(mock_update) is None

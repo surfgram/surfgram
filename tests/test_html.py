@@ -1,68 +1,112 @@
 import pytest
-
-from surfgram.markup import HTML
+from surfgram.core.helpers.markup.html import HTML
 
 
 class TestHTML:
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "<b>hello</b>"),
+            ("123", "<b>123</b>"),
+            ("", "<b></b>"),
+        ],
+    )
+    def test_bold(self, text, expected):
+        assert HTML.bold(text) == expected
 
-    def test_bold(self):
-        """Test the bold method."""
-        assert HTML.bold("text") == "<b>text</b>"
-        assert HTML.bold("bold") == "<b>bold</b>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "<i>hello</i>"),
+            ("world", "<i>world</i>"),
+            ("", "<i></i>"),
+        ],
+    )
+    def test_italic(self, text, expected):
+        assert HTML.italic(text) == expected
 
-    def test_italic(self):
-        """Test the italic method."""
-        assert HTML.italic("text") == "<i>text</i>"
-        assert HTML.italic("italic") == "<i>italic</i>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "<u>hello</u>"),
+            ("text", "<u>text</u>"),
+            ("", "<u></u>"),
+        ],
+    )
+    def test_underline(self, text, expected):
+        assert HTML.underline(text) == expected
 
-    def test_underline(self):
-        """Test the underline method."""
-        assert HTML.underline("text") == "<u>text</u>"
-        assert HTML.underline("underline") == "<u>underline</u>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "<s>hello</s>"),
+            ("test", "<s>test</s>"),
+            ("", "<s></s>"),
+        ],
+    )
+    def test_strikethrough(self, text, expected):
+        assert HTML.strikethrough(text) == expected
 
-    def test_strikethrough(self):
-        """Test the strikethrough method."""
-        assert HTML.strikethrough("text") == "<s>text</s>"
-        assert HTML.strikethrough("strikethrough") == "<s>strikethrough</s>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("spoiler", "<tg-spoiler>spoiler</tg-spoiler>"),
+            ("secret", "<tg-spoiler>secret</tg-spoiler>"),
+            ("", "<tg-spoiler></tg-spoiler>"),
+        ],
+    )
+    def test_spoiler(self, text, expected):
+        assert HTML.spoiler(text) == expected
 
-    def test_spoiler(self):
-        """Test the spoiler method."""
-        assert HTML.spoiler("text") == "<tg-spoiler>text</tg-spoiler>"
-        assert HTML.spoiler("spoiler") == "<tg-spoiler>spoiler</tg-spoiler>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("code", "<code>code</code>"),
+            ("x = 1", "<code>x = 1</code>"),
+            ("", "<code></code>"),
+        ],
+    )
+    def test_inline_code(self, text, expected):
+        assert HTML.inline_code(text) == expected
 
-    def test_inline_code(self):
-        """Test the inline_code method."""
-        assert HTML.inline_code("text") == "<code>text</code>"
-        assert HTML.inline_code("inline code") == "<code>inline code</code>"
+    @pytest.mark.parametrize(
+        "text,language,expected",
+        [
+            ("print('hello')", "python", "<pre><code>print('hello')</code></pre>"),
+            ("function()", "", "<pre><code>function()</code></pre>"),
+            ("", "html", "<pre><code></code></pre>"),
+        ],
+    )
+    def test_code_block(self, text, language, expected):
+        assert HTML.code_block(text, language) == expected
 
-    def test_code_block(self):
-        """Test the code_block method with and without language."""
-        assert (
-            HTML.code_block("print('Hello, World!')")
-            == "<pre><code>print('Hello, World!')</code></pre>"
-        )
-        assert (
-            HTML.code_block("print('Hello, World!')", "python")
-            == "<pre><code>print('Hello, World!')</code></pre>"
-        )
+    @pytest.mark.parametrize(
+        "text,url,expected",
+        [
+            ("Google", "https://google.com", '<a href="https://google.com">Google</a>'),
+            ("", "https://empty.com", '<a href="https://empty.com"></a>'),
+        ],
+    )
+    def test_link(self, text, url, expected):
+        assert HTML.link(text, url) == expected
 
-    def test_link(self):
-        """Test the link method."""
-        assert (
-            HTML.link("Google", "http://www.google.com")
-            == '<a href="http://www.google.com">Google</a>'
-        )
-        assert (
-            HTML.link("Telegram", "https://telegram.org")
-            == '<a href="https://telegram.org">Telegram</a>'
-        )
+    @pytest.mark.parametrize(
+        "text,user_id,expected",
+        [
+            ("John", 123, '<a href="tg://user?id=123">John</a>'),
+            ("", 456, '<a href="tg://user?id=456"></a>'),
+        ],
+    )
+    def test_mention(self, text, user_id, expected):
+        assert HTML.mention(text, user_id) == expected
 
-    def test_mention(self):
-        """Test the mention method."""
-        assert HTML.mention("User", 12345) == '<a href="tg://user?id=12345">User</a>'
-        assert HTML.mention("Admin", 67890) == '<a href="tg://user?id=67890">Admin</a>'
-
-    def test_preformatted(self):
-        """Test the preformatted method."""
-        assert HTML.preformatted("text") == "<pre>text</pre>"
-        assert HTML.preformatted("preformatted text") == "<pre>preformatted text</pre>"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("preformatted", "<pre>preformatted</pre>"),
+            ("multi\nline", "<pre>multi\nline</pre>"),
+            ("", "<pre></pre>"),
+        ],
+    )
+    def test_preformatted(self, text, expected):
+        assert HTML.preformatted(text) == expected

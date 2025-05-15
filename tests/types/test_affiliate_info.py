@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.affiliate_info import AffiliateInfo
 from surfgram.types.affiliate_info.factory import AffiliateInfosFactory
 
@@ -18,13 +17,16 @@ class TestAffiliateInfo:
 
         class ConcreteAffiliateInfo(AffiliateInfo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteAffiliateInfo()
+            async def __callback__(self):
+                return None
+
+        return ConcreteAffiliateInfo
 
     def test_concrete_instantiation(self, concrete_affiliate_info):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_affiliate_info, AffiliateInfo)
+        instance = concrete_affiliate_info()
+        assert isinstance(instance, AffiliateInfo)
 
 
 class TestAffiliateInfosFactory:
@@ -41,26 +43,28 @@ class TestAffiliateInfosFactory:
 
         class TestHandler(AffiliateInfo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         AffiliateInfosFactory.register_affiliate_info(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.affiliate_info = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.affiliate_info = mocker.MagicMock()
         mock_update.affiliate_info.affiliate_user = "test_trigger"
 
         result = await AffiliateInfosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.affiliate_info = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.affiliate_info = mocker.MagicMock()
         mock_update.affiliate_info.affiliate_user = "unknown_trigger"
 
         assert await AffiliateInfosFactory.create(mock_update) is None

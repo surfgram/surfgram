@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.contact import Contact
 from surfgram.types.contact.factory import ContactsFactory
 
@@ -18,13 +17,16 @@ class TestContact:
 
         class ConcreteContact(Contact):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteContact()
+            async def __callback__(self):
+                return None
+
+        return ConcreteContact
 
     def test_concrete_instantiation(self, concrete_contact):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_contact, Contact)
+        instance = concrete_contact()
+        assert isinstance(instance, Contact)
 
 
 class TestContactsFactory:
@@ -41,26 +43,28 @@ class TestContactsFactory:
 
         class TestHandler(Contact):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ContactsFactory.register_contact(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.contact = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.contact = mocker.MagicMock()
         mock_update.contact.phone_number = "test_trigger"
 
         result = await ContactsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.contact = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.contact = mocker.MagicMock()
         mock_update.contact.phone_number = "unknown_trigger"
 
         assert await ContactsFactory.create(mock_update) is None

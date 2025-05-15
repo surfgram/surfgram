@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.reply_parameters import ReplyParameters
 from surfgram.types.reply_parameters.factory import ReplyParametersFactory
 
@@ -18,13 +17,16 @@ class TestReplyParameters:
 
         class ConcreteReplyParameters(ReplyParameters):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteReplyParameters()
+            async def __callback__(self):
+                return None
+
+        return ConcreteReplyParameters
 
     def test_concrete_instantiation(self, concrete_reply_parameters):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_reply_parameters, ReplyParameters)
+        instance = concrete_reply_parameters()
+        assert isinstance(instance, ReplyParameters)
 
 
 class TestReplyParametersFactory:
@@ -41,26 +43,28 @@ class TestReplyParametersFactory:
 
         class TestHandler(ReplyParameters):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ReplyParametersFactory.register_reply_parameters(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.reply_parameters = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reply_parameters = mocker.MagicMock()
         mock_update.reply_parameters.quote = "test_trigger"
 
         result = await ReplyParametersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.reply_parameters = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reply_parameters = mocker.MagicMock()
         mock_update.reply_parameters.quote = "unknown_trigger"
 
         assert await ReplyParametersFactory.create(mock_update) is None

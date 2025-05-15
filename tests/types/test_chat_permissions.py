@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_permissions import ChatPermissions
 from surfgram.types.chat_permissions.factory import ChatPermissionsFactory
 
@@ -18,13 +17,16 @@ class TestChatPermissions:
 
         class ConcreteChatPermissions(ChatPermissions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatPermissions()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatPermissions
 
     def test_concrete_instantiation(self, concrete_chat_permissions):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_permissions, ChatPermissions)
+        instance = concrete_chat_permissions()
+        assert isinstance(instance, ChatPermissions)
 
 
 class TestChatPermissionsFactory:
@@ -41,26 +43,28 @@ class TestChatPermissionsFactory:
 
         class TestHandler(ChatPermissions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatPermissionsFactory.register_chat_permissions(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_permissions = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_permissions = mocker.MagicMock()
         mock_update.chat_permissions.can_send_audios = "test_trigger"
 
         result = await ChatPermissionsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_permissions = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_permissions = mocker.MagicMock()
         mock_update.chat_permissions.can_send_audios = "unknown_trigger"
 
         assert await ChatPermissionsFactory.create(mock_update) is None

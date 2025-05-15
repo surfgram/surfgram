@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.owned_gifts import OwnedGifts
 from surfgram.types.owned_gifts.factory import OwnedGiftsFactory
 
@@ -18,13 +17,16 @@ class TestOwnedGifts:
 
         class ConcreteOwnedGifts(OwnedGifts):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteOwnedGifts()
+            async def __callback__(self):
+                return None
+
+        return ConcreteOwnedGifts
 
     def test_concrete_instantiation(self, concrete_owned_gifts):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_owned_gifts, OwnedGifts)
+        instance = concrete_owned_gifts()
+        assert isinstance(instance, OwnedGifts)
 
 
 class TestOwnedGiftsFactory:
@@ -41,26 +43,28 @@ class TestOwnedGiftsFactory:
 
         class TestHandler(OwnedGifts):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         OwnedGiftsFactory.register_owned_gifts(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.owned_gifts = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.owned_gifts = mocker.MagicMock()
         mock_update.owned_gifts.next_offset = "test_trigger"
 
         result = await OwnedGiftsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.owned_gifts = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.owned_gifts = mocker.MagicMock()
         mock_update.owned_gifts.next_offset = "unknown_trigger"
 
         assert await OwnedGiftsFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.shared_user import SharedUser
 from surfgram.types.shared_user.factory import SharedUsersFactory
 
@@ -18,13 +17,16 @@ class TestSharedUser:
 
         class ConcreteSharedUser(SharedUser):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteSharedUser()
+            async def __callback__(self):
+                return None
+
+        return ConcreteSharedUser
 
     def test_concrete_instantiation(self, concrete_shared_user):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_shared_user, SharedUser)
+        instance = concrete_shared_user()
+        assert isinstance(instance, SharedUser)
 
 
 class TestSharedUsersFactory:
@@ -41,26 +43,28 @@ class TestSharedUsersFactory:
 
         class TestHandler(SharedUser):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         SharedUsersFactory.register_shared_user(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.shared_user = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shared_user = mocker.MagicMock()
         mock_update.shared_user.photo = "test_trigger"
 
         result = await SharedUsersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.shared_user = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shared_user = mocker.MagicMock()
         mock_update.shared_user.photo = "unknown_trigger"
 
         assert await SharedUsersFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_shared import ChatShared
 from surfgram.types.chat_shared.factory import ChatSharedsFactory
 
@@ -18,13 +17,16 @@ class TestChatShared:
 
         class ConcreteChatShared(ChatShared):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatShared()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatShared
 
     def test_concrete_instantiation(self, concrete_chat_shared):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_shared, ChatShared)
+        instance = concrete_chat_shared()
+        assert isinstance(instance, ChatShared)
 
 
 class TestChatSharedsFactory:
@@ -41,26 +43,28 @@ class TestChatSharedsFactory:
 
         class TestHandler(ChatShared):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatSharedsFactory.register_chat_shared(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_shared = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_shared = mocker.MagicMock()
         mock_update.chat_shared.title = "test_trigger"
 
         result = await ChatSharedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_shared = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_shared = mocker.MagicMock()
         mock_update.chat_shared.title = "unknown_trigger"
 
         assert await ChatSharedsFactory.create(mock_update) is None

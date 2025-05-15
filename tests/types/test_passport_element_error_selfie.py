@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.passport_element_error_selfie import PassportElementErrorSelfie
 from surfgram.types.passport_element_error_selfie.factory import (
     PassportElementErrorSelfiesFactory,
@@ -20,15 +19,16 @@ class TestPassportElementErrorSelfie:
 
         class ConcretePassportElementErrorSelfie(PassportElementErrorSelfie):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePassportElementErrorSelfie()
+            async def __callback__(self):
+                return None
+
+        return ConcretePassportElementErrorSelfie
 
     def test_concrete_instantiation(self, concrete_passport_element_error_selfie):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_passport_element_error_selfie, PassportElementErrorSelfie
-        )
+        instance = concrete_passport_element_error_selfie()
+        assert isinstance(instance, PassportElementErrorSelfie)
 
 
 class TestPassportElementErrorSelfiesFactory:
@@ -45,7 +45,9 @@ class TestPassportElementErrorSelfiesFactory:
 
         class TestHandler(PassportElementErrorSelfie):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PassportElementErrorSelfiesFactory.register_passport_element_error_selfie(
             TestHandler
@@ -53,20 +55,20 @@ class TestPassportElementErrorSelfiesFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.passport_element_error_selfie = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.passport_element_error_selfie = mocker.MagicMock()
         mock_update.passport_element_error_selfie.source = "test_trigger"
 
         result = await PassportElementErrorSelfiesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.passport_element_error_selfie = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.passport_element_error_selfie = mocker.MagicMock()
         mock_update.passport_element_error_selfie.source = "unknown_trigger"
 
         assert await PassportElementErrorSelfiesFactory.create(mock_update) is None

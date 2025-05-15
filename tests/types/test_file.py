@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.file import File
 from surfgram.types.file.factory import FilesFactory
 
@@ -18,13 +17,16 @@ class TestFile:
 
         class ConcreteFile(File):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteFile()
+            async def __callback__(self):
+                return None
+
+        return ConcreteFile
 
     def test_concrete_instantiation(self, concrete_file):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_file, File)
+        instance = concrete_file()
+        assert isinstance(instance, File)
 
 
 class TestFilesFactory:
@@ -41,26 +43,28 @@ class TestFilesFactory:
 
         class TestHandler(File):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         FilesFactory.register_file(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.file = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.file = mocker.MagicMock()
         mock_update.file.file_id = "test_trigger"
 
         result = await FilesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.file = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.file = mocker.MagicMock()
         mock_update.file.file_id = "unknown_trigger"
 
         assert await FilesFactory.create(mock_update) is None

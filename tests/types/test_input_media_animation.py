@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_media_animation import InputMediaAnimation
 from surfgram.types.input_media_animation.factory import InputMediaAnimationsFactory
 
@@ -18,13 +17,16 @@ class TestInputMediaAnimation:
 
         class ConcreteInputMediaAnimation(InputMediaAnimation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputMediaAnimation()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputMediaAnimation
 
     def test_concrete_instantiation(self, concrete_input_media_animation):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_input_media_animation, InputMediaAnimation)
+        instance = concrete_input_media_animation()
+        assert isinstance(instance, InputMediaAnimation)
 
 
 class TestInputMediaAnimationsFactory:
@@ -41,26 +43,28 @@ class TestInputMediaAnimationsFactory:
 
         class TestHandler(InputMediaAnimation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputMediaAnimationsFactory.register_input_media_animation(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_animation = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_animation = mocker.MagicMock()
         mock_update.input_media_animation.caption = "test_trigger"
 
         result = await InputMediaAnimationsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_animation = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_animation = mocker.MagicMock()
         mock_update.input_media_animation.caption = "unknown_trigger"
 
         assert await InputMediaAnimationsFactory.create(mock_update) is None

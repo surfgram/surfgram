@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.photo_size import PhotoSize
 from surfgram.types.photo_size.factory import PhotoSizesFactory
 
@@ -18,13 +17,16 @@ class TestPhotoSize:
 
         class ConcretePhotoSize(PhotoSize):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePhotoSize()
+            async def __callback__(self):
+                return None
+
+        return ConcretePhotoSize
 
     def test_concrete_instantiation(self, concrete_photo_size):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_photo_size, PhotoSize)
+        instance = concrete_photo_size()
+        assert isinstance(instance, PhotoSize)
 
 
 class TestPhotoSizesFactory:
@@ -41,26 +43,28 @@ class TestPhotoSizesFactory:
 
         class TestHandler(PhotoSize):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PhotoSizesFactory.register_photo_size(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.photo_size = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.photo_size = mocker.MagicMock()
         mock_update.photo_size.file_id = "test_trigger"
 
         result = await PhotoSizesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.photo_size = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.photo_size = mocker.MagicMock()
         mock_update.photo_size.file_id = "unknown_trigger"
 
         assert await PhotoSizesFactory.create(mock_update) is None

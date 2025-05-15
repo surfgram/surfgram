@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_query import InlineQuery
 from surfgram.types.inline_query.factory import InlineQueriesFactory
 
@@ -18,13 +17,16 @@ class TestInlineQuery:
 
         class ConcreteInlineQuery(InlineQuery):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineQuery()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineQuery
 
     def test_concrete_instantiation(self, concrete_inline_query):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_inline_query, InlineQuery)
+        instance = concrete_inline_query()
+        assert isinstance(instance, InlineQuery)
 
 
 class TestInlineQueriesFactory:
@@ -41,26 +43,28 @@ class TestInlineQueriesFactory:
 
         class TestHandler(InlineQuery):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineQueriesFactory.register_inline_query(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query = mocker.MagicMock()
         mock_update.inline_query.query = "test_trigger"
 
         result = await InlineQueriesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query = mocker.MagicMock()
         mock_update.inline_query.query = "unknown_trigger"
 
         assert await InlineQueriesFactory.create(mock_update) is None

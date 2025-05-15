@@ -1,54 +1,102 @@
 import pytest
-
-from surfgram.markup import Markdown
+from surfgram.core.helpers.markup.markdown import Markdown
 
 
 class TestMarkdown:
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "**hello**"),
+            ("123", "**123**"),
+            ("", "****"),
+        ],
+    )
+    def test_bold(self, text, expected):
+        assert Markdown.bold(text) == expected
 
-    def test_bold(self):
-        """Test the bold method."""
-        assert Markdown.bold("text") == "**text**"
-        assert Markdown.bold("bold") == "**bold**"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "__hello__"),
+            ("test", "__test__"),
+            ("", "____"),
+        ],
+    )
+    def test_italic(self, text, expected):
+        assert Markdown.italic(text) == expected
 
-    def test_italic(self):
-        """Test the italic method."""
-        assert Markdown.italic("text") == "__text__"
-        assert Markdown.italic("italic") == "__italic__"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "~~hello~~"),
+            ("text", "~~text~~"),
+            ("", "~~~~"),
+        ],
+    )
+    def test_underline(self, text, expected):
+        assert Markdown.underline(text) == expected
 
-    def test_underline(self):
-        """Test the underline method."""
-        assert Markdown.underline("text") == "~~text~~"
-        assert Markdown.underline("underline") == "~~underline~~"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("hello", "~~hello~~"),
+            ("test", "~~test~~"),
+            ("", "~~~~"),
+        ],
+    )
+    def test_strikethrough(self, text, expected):
+        assert Markdown.strikethrough(text) == expected
 
-    def test_strikethrough(self):
-        """Test the strikethrough method."""
-        assert Markdown.strikethrough("text") == "~~text~~"
-        assert Markdown.strikethrough("strikethrough") == "~~strikethrough~~"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("spoiler", "||spoiler||"),
+            ("secret", "||secret||"),
+            ("", "||||"),
+        ],
+    )
+    def test_spoiler(self, text, expected):
+        assert Markdown.spoiler(text) == expected
 
-    def test_spoiler(self):
-        """Test the spoiler method."""
-        assert Markdown.spoiler("text") == "||text||"
-        assert Markdown.spoiler("spoiler") == "||spoiler||"
+    @pytest.mark.parametrize(
+        "text,expected",
+        [
+            ("code", "`code`"),
+            ("x = 1", "`x = 1`"),
+            ("", "``"),
+        ],
+    )
+    def test_inline_code(self, text, expected):
+        assert Markdown.inline_code(text) == expected
 
-    def test_inline_code(self):
-        """Test the inline_code method."""
-        assert Markdown.inline_code("text") == "`text`"
-        assert Markdown.inline_code("inline code") == "`inline code`"
+    @pytest.mark.parametrize(
+        "text,language,expected",
+        [
+            ("print('hello')", "python", "```python\nprint('hello')\n```"),
+            ("x = 1", "", "```\nx = 1\n```"),
+            ("", "js", "```js\n\n```"),
+            ("", "", "```\n\n```"),
+        ],
+    )
+    def test_code_block(self, text, language, expected):
+        assert Markdown.code_block(text, language) == expected
 
-    def test_code_block(self):
-        """Test the code_block method with and without language."""
-        assert (
-            Markdown.code_block("print('Hello, World!')")
-            == "```\nprint('Hello, World!')\n```"
-        )
-        assert (
-            Markdown.code_block("print('Hello, World!')", "python")
-            == "```python\nprint('Hello, World!')\n```"
-        )
+    @pytest.mark.parametrize(
+        "text,url,expected",
+        [
+            ("Google", "https://google.com", "[Google](https://google.com)"),
+            ("", "https://empty.com", "[](https://empty.com)"),
+        ],
+    )
+    def test_link(self, text, url, expected):
+        assert Markdown.link(text, url) == expected
 
-    def test_link(self):
-        """Test the link method."""
-        assert (
-            Markdown.link("Google", "http://www.google.com")
-            == "[Google](http://www.google.com"
-        )
+    @pytest.mark.parametrize(
+        "text,user_id,expected",
+        [
+            ("John", 123, "[John](tg://user?id=123)"),
+            ("", 456, "[](tg://user?id=456)"),
+        ],
+    )
+    def test_mention(self, text, user_id, expected):
+        assert Markdown.mention(text, user_id) == expected

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.prepared_inline_message import PreparedInlineMessage
 from surfgram.types.prepared_inline_message.factory import PreparedInlineMessagesFactory
 
@@ -18,13 +17,16 @@ class TestPreparedInlineMessage:
 
         class ConcretePreparedInlineMessage(PreparedInlineMessage):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePreparedInlineMessage()
+            async def __callback__(self):
+                return None
+
+        return ConcretePreparedInlineMessage
 
     def test_concrete_instantiation(self, concrete_prepared_inline_message):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_prepared_inline_message, PreparedInlineMessage)
+        instance = concrete_prepared_inline_message()
+        assert isinstance(instance, PreparedInlineMessage)
 
 
 class TestPreparedInlineMessagesFactory:
@@ -41,26 +43,28 @@ class TestPreparedInlineMessagesFactory:
 
         class TestHandler(PreparedInlineMessage):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PreparedInlineMessagesFactory.register_prepared_inline_message(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.prepared_inline_message = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.prepared_inline_message = mocker.MagicMock()
         mock_update.prepared_inline_message.expiration_date = "test_trigger"
 
         result = await PreparedInlineMessagesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.prepared_inline_message = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.prepared_inline_message = mocker.MagicMock()
         mock_update.prepared_inline_message.expiration_date = "unknown_trigger"
 
         assert await PreparedInlineMessagesFactory.create(mock_update) is None

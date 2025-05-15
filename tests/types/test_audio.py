@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.audio import Audio
 from surfgram.types.audio.factory import AudioFactory
 
@@ -18,13 +17,16 @@ class TestAudio:
 
         class ConcreteAudio(Audio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteAudio()
+            async def __callback__(self):
+                return None
+
+        return ConcreteAudio
 
     def test_concrete_instantiation(self, concrete_audio):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_audio, Audio)
+        instance = concrete_audio()
+        assert isinstance(instance, Audio)
 
 
 class TestAudioFactory:
@@ -41,26 +43,28 @@ class TestAudioFactory:
 
         class TestHandler(Audio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         AudioFactory.register_audio(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.audio = mocker.MagicMock()
         mock_update.audio.title = "test_trigger"
 
         result = await AudioFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.audio = mocker.MagicMock()
         mock_update.audio.title = "unknown_trigger"
 
         assert await AudioFactory.create(mock_update) is None

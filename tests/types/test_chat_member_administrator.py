@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_member_administrator import ChatMemberAdministrator
 from surfgram.types.chat_member_administrator.factory import (
     ChatMemberAdministratorsFactory,
@@ -20,13 +19,16 @@ class TestChatMemberAdministrator:
 
         class ConcreteChatMemberAdministrator(ChatMemberAdministrator):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatMemberAdministrator()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatMemberAdministrator
 
     def test_concrete_instantiation(self, concrete_chat_member_administrator):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_member_administrator, ChatMemberAdministrator)
+        instance = concrete_chat_member_administrator()
+        assert isinstance(instance, ChatMemberAdministrator)
 
 
 class TestChatMemberAdministratorsFactory:
@@ -43,26 +45,28 @@ class TestChatMemberAdministratorsFactory:
 
         class TestHandler(ChatMemberAdministrator):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatMemberAdministratorsFactory.register_chat_member_administrator(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_member_administrator = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_member_administrator = mocker.MagicMock()
         mock_update.chat_member_administrator.can_manage_video_chats = "test_trigger"
 
         result = await ChatMemberAdministratorsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_member_administrator = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_member_administrator = mocker.MagicMock()
         mock_update.chat_member_administrator.can_manage_video_chats = "unknown_trigger"
 
         assert await ChatMemberAdministratorsFactory.create(mock_update) is None

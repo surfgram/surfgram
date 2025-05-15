@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.paid_media_preview import PaidMediaPreview
 from surfgram.types.paid_media_preview.factory import PaidMediaPreviewsFactory
 
@@ -18,13 +17,16 @@ class TestPaidMediaPreview:
 
         class ConcretePaidMediaPreview(PaidMediaPreview):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePaidMediaPreview()
+            async def __callback__(self):
+                return None
+
+        return ConcretePaidMediaPreview
 
     def test_concrete_instantiation(self, concrete_paid_media_preview):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_paid_media_preview, PaidMediaPreview)
+        instance = concrete_paid_media_preview()
+        assert isinstance(instance, PaidMediaPreview)
 
 
 class TestPaidMediaPreviewsFactory:
@@ -41,26 +43,28 @@ class TestPaidMediaPreviewsFactory:
 
         class TestHandler(PaidMediaPreview):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PaidMediaPreviewsFactory.register_paid_media_preview(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.paid_media_preview = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.paid_media_preview = mocker.MagicMock()
         mock_update.paid_media_preview.type = "test_trigger"
 
         result = await PaidMediaPreviewsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.paid_media_preview = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.paid_media_preview = mocker.MagicMock()
         mock_update.paid_media_preview.type = "unknown_trigger"
 
         assert await PaidMediaPreviewsFactory.create(mock_update) is None

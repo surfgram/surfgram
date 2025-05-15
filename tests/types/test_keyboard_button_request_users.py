@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.keyboard_button_request_users import KeyboardButtonRequestUsers
 from surfgram.types.keyboard_button_request_users.factory import (
     KeyboardButtonRequestUsersFactory,
@@ -20,15 +19,16 @@ class TestKeyboardButtonRequestUsers:
 
         class ConcreteKeyboardButtonRequestUsers(KeyboardButtonRequestUsers):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteKeyboardButtonRequestUsers()
+            async def __callback__(self):
+                return None
+
+        return ConcreteKeyboardButtonRequestUsers
 
     def test_concrete_instantiation(self, concrete_keyboard_button_request_users):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_keyboard_button_request_users, KeyboardButtonRequestUsers
-        )
+        instance = concrete_keyboard_button_request_users()
+        assert isinstance(instance, KeyboardButtonRequestUsers)
 
 
 class TestKeyboardButtonRequestUsersFactory:
@@ -45,7 +45,9 @@ class TestKeyboardButtonRequestUsersFactory:
 
         class TestHandler(KeyboardButtonRequestUsers):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         KeyboardButtonRequestUsersFactory.register_keyboard_button_request_users(
             TestHandler
@@ -53,20 +55,20 @@ class TestKeyboardButtonRequestUsersFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.keyboard_button_request_users = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.keyboard_button_request_users = mocker.MagicMock()
         mock_update.keyboard_button_request_users.request_photo = "test_trigger"
 
         result = await KeyboardButtonRequestUsersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.keyboard_button_request_users = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.keyboard_button_request_users = mocker.MagicMock()
         mock_update.keyboard_button_request_users.request_photo = "unknown_trigger"
 
         assert await KeyboardButtonRequestUsersFactory.create(mock_update) is None

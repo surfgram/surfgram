@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.user_profile_photos import UserProfilePhotos
 from surfgram.types.user_profile_photos.factory import UserProfilePhotosFactory
 
@@ -18,13 +17,16 @@ class TestUserProfilePhotos:
 
         class ConcreteUserProfilePhotos(UserProfilePhotos):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteUserProfilePhotos()
+            async def __callback__(self):
+                return None
+
+        return ConcreteUserProfilePhotos
 
     def test_concrete_instantiation(self, concrete_user_profile_photos):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_user_profile_photos, UserProfilePhotos)
+        instance = concrete_user_profile_photos()
+        assert isinstance(instance, UserProfilePhotos)
 
 
 class TestUserProfilePhotosFactory:
@@ -41,26 +43,28 @@ class TestUserProfilePhotosFactory:
 
         class TestHandler(UserProfilePhotos):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         UserProfilePhotosFactory.register_user_profile_photos(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.user_profile_photos = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.user_profile_photos = mocker.MagicMock()
         mock_update.user_profile_photos.photos = "test_trigger"
 
         result = await UserProfilePhotosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.user_profile_photos = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.user_profile_photos = mocker.MagicMock()
         mock_update.user_profile_photos.photos = "unknown_trigger"
 
         assert await UserProfilePhotosFactory.create(mock_update) is None

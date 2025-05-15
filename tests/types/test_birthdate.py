@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.birthdate import Birthdate
 from surfgram.types.birthdate.factory import BirthdatesFactory
 
@@ -18,13 +17,16 @@ class TestBirthdate:
 
         class ConcreteBirthdate(Birthdate):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBirthdate()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBirthdate
 
     def test_concrete_instantiation(self, concrete_birthdate):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_birthdate, Birthdate)
+        instance = concrete_birthdate()
+        assert isinstance(instance, Birthdate)
 
 
 class TestBirthdatesFactory:
@@ -41,26 +43,28 @@ class TestBirthdatesFactory:
 
         class TestHandler(Birthdate):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BirthdatesFactory.register_birthdate(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.birthdate = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.birthdate = mocker.MagicMock()
         mock_update.birthdate.day = "test_trigger"
 
         result = await BirthdatesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.birthdate = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.birthdate = mocker.MagicMock()
         mock_update.birthdate.day = "unknown_trigger"
 
         assert await BirthdatesFactory.create(mock_update) is None

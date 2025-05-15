@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.background_type_fill import BackgroundTypeFill
 from surfgram.types.background_type_fill.factory import BackgroundTypeFillsFactory
 
@@ -18,13 +17,16 @@ class TestBackgroundTypeFill:
 
         class ConcreteBackgroundTypeFill(BackgroundTypeFill):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBackgroundTypeFill()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBackgroundTypeFill
 
     def test_concrete_instantiation(self, concrete_background_type_fill):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_background_type_fill, BackgroundTypeFill)
+        instance = concrete_background_type_fill()
+        assert isinstance(instance, BackgroundTypeFill)
 
 
 class TestBackgroundTypeFillsFactory:
@@ -41,26 +43,28 @@ class TestBackgroundTypeFillsFactory:
 
         class TestHandler(BackgroundTypeFill):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BackgroundTypeFillsFactory.register_background_type_fill(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.background_type_fill = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.background_type_fill = mocker.MagicMock()
         mock_update.background_type_fill.type = "test_trigger"
 
         result = await BackgroundTypeFillsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.background_type_fill = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.background_type_fill = mocker.MagicMock()
         mock_update.background_type_fill.type = "unknown_trigger"
 
         assert await BackgroundTypeFillsFactory.create(mock_update) is None

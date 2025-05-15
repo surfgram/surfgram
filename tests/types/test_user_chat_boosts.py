@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.user_chat_boosts import UserChatBoosts
 from surfgram.types.user_chat_boosts.factory import UserChatBoostsFactory
 
@@ -18,13 +17,16 @@ class TestUserChatBoosts:
 
         class ConcreteUserChatBoosts(UserChatBoosts):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteUserChatBoosts()
+            async def __callback__(self):
+                return None
+
+        return ConcreteUserChatBoosts
 
     def test_concrete_instantiation(self, concrete_user_chat_boosts):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_user_chat_boosts, UserChatBoosts)
+        instance = concrete_user_chat_boosts()
+        assert isinstance(instance, UserChatBoosts)
 
 
 class TestUserChatBoostsFactory:
@@ -41,26 +43,28 @@ class TestUserChatBoostsFactory:
 
         class TestHandler(UserChatBoosts):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         UserChatBoostsFactory.register_user_chat_boosts(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.user_chat_boosts = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.user_chat_boosts = mocker.MagicMock()
         mock_update.user_chat_boosts.boosts = "test_trigger"
 
         result = await UserChatBoostsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.user_chat_boosts = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.user_chat_boosts = mocker.MagicMock()
         mock_update.user_chat_boosts.boosts = "unknown_trigger"
 
         assert await UserChatBoostsFactory.create(mock_update) is None

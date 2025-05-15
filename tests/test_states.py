@@ -1,129 +1,130 @@
 import pytest
-from surfgram import fsm
-from typing import Any, Dict
-
-
-# Fixtures
-@pytest.fixture
-def clean_states():
-    """Fixture to clean states storage before each test"""
-
-    class TestStates(fsm.States):
-        STATE_A = fsm.State()
-        STATE_B = fsm.State()
-        STATE_C = fsm.State()
-
-    yield TestStates
-    # Cleanup after test
-    for chat_id in list(TestStates._states_storage.keys()):
-        TestStates.reset(chat_id)
-
-
-@pytest.fixture
-def state_instance():
-    """Fixture providing clean State instance"""
-    return fsm.State()
-
-
-class TestState:
-    def test_initial_state_has_empty_attributes(self, state_instance):
-        assert state_instance.attributes == {}
-        assert len(state_instance.attributes) == 0
-
-    @pytest.mark.parametrize(
-        "name,value",
-        [
-            ("string", "value"),
-            ("int", 42),
-            ("float", 3.14),
-            ("bool", True),
-            ("list", [1, 2, 3]),
-            ("dict", {"key": "value"}),
-            ("none", None),
-        ],
-    )
-    def test_set_get_attribute_types(self, state_instance, name: str, value: Any):
-        state_instance.set_attribute(name, value)
-        assert state_instance.get_attribute(name) == value
-        assert state_instance.attributes[name] == value
-
-    def test_get_nonexistent_attribute_returns_default(self, state_instance):
-        assert state_instance.get_attribute("missing") is None
-        assert state_instance.get_attribute("missing", "default") == "default"
-
-    def test_attribute_overwrite(self, state_instance):
-        state_instance.set_attribute("test", "initial")
-        state_instance.set_attribute("test", "updated")
-        assert state_instance.get_attribute("test") == "updated"
-
-    def test_multiple_attributes(self, state_instance):
-        data = {"a": 1, "b": 2, "c": 3}
-        for k, v in data.items():
-            state_instance.set_attribute(k, v)
-
-        assert len(state_instance.attributes) == 3
-        for k, v in data.items():
-            assert state_instance.get_attribute(k) == v
+from surfgram.core.fsm import BaseStorage
+from surfgram.core.fsm import State
+from surfgram.core.fsm import States
 
 
 class TestStates:
-    def test_turn_state(self, clean_states):
-        clean_states.turn(clean_states.STATE_A, 123)
-        assert clean_states.get_current(123) is clean_states.STATE_A
+    @pytest.fixture
+    def mock_storage(self, mocker):
+        mock = mocker.MagicMock(spec=BaseStorage)
+        mock.return_value = mock
+        return mock
 
-    def test_state_transitions(self, clean_states):
-        chat_id = 123
-        states = [clean_states.STATE_A, clean_states.STATE_B, clean_states.STATE_C]
+    @pytest.fixture
+    def test_state(self):
+        return State(name="test_state", attributes={})
 
-        for state in states:
-            clean_states.turn(state, chat_id)
-            assert clean_states.is_current(state, chat_id)
+    @pytest.fixture
+    def states_class(self, mocker, mock_storage):
+        class TestStates(States):
+            __provider__ = mock_storage
+            state1 = State(name="state1", attributes={})
+            state2 = State(name="state2", attributes={})
 
-    def test_reset_state(self, clean_states):
-        chat_id = 123
-        clean_states.turn(clean_states.STATE_A, chat_id)
-        clean_states.reset(chat_id)
-        assert clean_states.get_current(chat_id) is None
+        if hasattr(TestStates, "_storage_instances"):
+            TestStates._storage_instances.clear()
+        return TestStates
 
-    def test_multiple_chats_independent(self, clean_states):
-        chat_data = {
-            1: clean_states.STATE_A,
-            2: clean_states.STATE_B,
-            3: clean_states.STATE_C,
+    def test_get_storage_creates_new_instance(self, states_class, mock_storage):
+        storage = states_class._get_storage()
+        assert storage == mock_storage.return_value
+        assert states_class._storage_instances[states_class] == storage
+
+    def test_get_storage_returns_existing_instance(self, states_class, mock_storage):
+        existing_storage = mock_storage.return_value
+        states_class._storage_instances[states_class] = existing_storage
+        storage = states_class._get_storage()
+        assert storage == existing_storage
+
+    def test_turn_sets_state_with_attributes(
+        self, states_class, mock_storage, test_state
+    ):
+        test_state.attributes = {"key": "value"}
+        states_class.turn(test_state, 123)
+        mock_storage.return_value.set_state.assert_called_once_with(
+            123, {"_current_state": "test_state", "key": "value"}
+        )
+
+    def test_get_current_returns_none_for_no_state(self, states_class, mock_storage):
+        mock_storage.return_value.get_state.return_value = None
+        assert states_class.get_current(123) is None
+
+    def test_get_current_returns_none_for_missing_state_name(
+        self, states_class, mock_storage
+    ):
+        mock_storage.return_value.get_state.return_value = {"some_key": "value"}
+        assert states_class.get_current(123) is None
+
+    def test_get_current_returns_state_with_attributes(
+        self, states_class, mock_storage
+    ):
+        state_data = {
+            "_current_state": "TestStates.state1",
+            "attr1": "value1",
+            "attr2": "value2",
         }
+        mock_storage.return_value.get_state.return_value = state_data
 
-        for chat_id, state in chat_data.items():
-            clean_states.turn(state, chat_id)
+        result = states_class.get_current(123)
+        assert result is not None
+        assert result.name == "TestStates.state1"
+        assert result.attributes == {"attr1": "value1", "attr2": "value2"}
 
-        for chat_id, state in chat_data.items():
-            assert clean_states.is_current(state, chat_id)
-            assert clean_states.get_current(chat_id) is state
+    def test_get_current_returns_none_for_unknown_state(
+        self, states_class, mock_storage
+    ):
+        mock_storage.return_value.get_state.return_value = {
+            "_current_state": "unknown_state"
+        }
+        assert states_class.get_current(123) is None
 
-    def test_state_attributes_persistence(self, clean_states):
-        chat_id = 123
-        clean_states.turn(clean_states.STATE_A, chat_id)
+    def test_reset_deletes_state(self, states_class, mock_storage):
+        states_class.reset(123)
+        mock_storage.return_value.delete_state.assert_called_once_with(123)
 
-        test_data = {"user": "John", "progress": 75, "settings": {"dark_mode": True}}
+    def test_is_current_true_when_matches(self, states_class, mock_storage):
+        mock_storage.return_value.get_state.return_value = {
+            "_current_state": "TestStates.state1"
+        }
+        assert states_class.is_current(states_class.state1, 123) is True
 
-        for key, value in test_data.items():
-            clean_states.set_attribute(chat_id, key, value)
+    def test_is_current_false_when_different(self, states_class, mock_storage):
+        mock_storage.return_value.get_state.return_value = {
+            "_current_state": "TestStates.state2"
+        }
+        assert states_class.is_current(states_class.state1, 123) is False
 
-        for key, value in test_data.items():
-            assert clean_states.get_attribute(chat_id, key) == value
+    def test_is_current_false_when_no_state(self, states_class, mock_storage):
+        mock_storage.return_value.get_state.return_value = None
+        assert states_class.is_current(states_class.state1, 123) is False
 
-    def test_nonexistent_chat_handling(self, clean_states):
-        assert clean_states.get_current(999) is None
-        assert clean_states.get_attribute(999, "any") is None
-        assert clean_states.is_current(clean_states.STATE_A, 999) is False
+    def test_received_alias_for_is_current(self, states_class, mock_storage):
+        mock_storage.return_value.get_state.return_value = {
+            "_current_state": "TestStates.state1"
+        }
+        assert states_class.received(states_class.state1, 123) is True
+        assert states_class.received(states_class.state2, 123) is False
 
-    def test_received_alias(self, clean_states):
-        chat_id = 123
-        clean_states.turn(clean_states.STATE_A, chat_id)
-        assert clean_states.received(clean_states.STATE_A, chat_id)
-        assert not clean_states.received(clean_states.STATE_B, chat_id)
+    def test_set_attribute(self, states_class, mock_storage):
+        states_class.set_attribute(123, "test_attr", "test_value")
+        mock_storage.return_value.set_attribute.assert_called_once_with(
+            123, "test_attr", "test_value"
+        )
 
-    def test_attribute_manipulation_without_state(self, clean_states):
-        """Tests that attribute methods don't fail when no state is set"""
-        chat_id = 999  # No state set for this chat
-        clean_states.set_attribute(chat_id, "test", "value")  # Should not raise
-        assert clean_states.get_attribute(chat_id, "test") is None
+    def test_get_attribute(self, states_class, mock_storage):
+        mock_storage.return_value.get_attribute.return_value = "test_value"
+        result = states_class.get_attribute(123, "test_attr", "default")
+        assert result == "test_value"
+        mock_storage.return_value.get_attribute.assert_called_once_with(
+            123, "test_attr", "default"
+        )
+
+    def test_get_attribute_with_default(self, states_class, mock_storage):
+        def get_attribute_side_effect(chat_id, name, default):
+            return default
+
+        mock_storage.return_value.get_attribute.side_effect = get_attribute_side_effect
+
+        result = states_class.get_attribute(123, "test_attr", "default")
+        assert result == "default"

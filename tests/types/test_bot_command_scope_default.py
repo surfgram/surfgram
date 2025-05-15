@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.bot_command_scope_default import BotCommandScopeDefault
 from surfgram.types.bot_command_scope_default.factory import (
     BotCommandScopeDefaultsFactory,
@@ -20,13 +19,16 @@ class TestBotCommandScopeDefault:
 
         class ConcreteBotCommandScopeDefault(BotCommandScopeDefault):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBotCommandScopeDefault()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBotCommandScopeDefault
 
     def test_concrete_instantiation(self, concrete_bot_command_scope_default):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_bot_command_scope_default, BotCommandScopeDefault)
+        instance = concrete_bot_command_scope_default()
+        assert isinstance(instance, BotCommandScopeDefault)
 
 
 class TestBotCommandScopeDefaultsFactory:
@@ -43,26 +45,28 @@ class TestBotCommandScopeDefaultsFactory:
 
         class TestHandler(BotCommandScopeDefault):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BotCommandScopeDefaultsFactory.register_bot_command_scope_default(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.bot_command_scope_default = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.bot_command_scope_default = mocker.MagicMock()
         mock_update.bot_command_scope_default.type = "test_trigger"
 
         result = await BotCommandScopeDefaultsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.bot_command_scope_default = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.bot_command_scope_default = mocker.MagicMock()
         mock_update.bot_command_scope_default.type = "unknown_trigger"
 
         assert await BotCommandScopeDefaultsFactory.create(mock_update) is None

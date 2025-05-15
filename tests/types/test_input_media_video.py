@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_media_video import InputMediaVideo
 from surfgram.types.input_media_video.factory import InputMediaVideosFactory
 
@@ -18,13 +17,16 @@ class TestInputMediaVideo:
 
         class ConcreteInputMediaVideo(InputMediaVideo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputMediaVideo()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputMediaVideo
 
     def test_concrete_instantiation(self, concrete_input_media_video):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_input_media_video, InputMediaVideo)
+        instance = concrete_input_media_video()
+        assert isinstance(instance, InputMediaVideo)
 
 
 class TestInputMediaVideosFactory:
@@ -41,26 +43,28 @@ class TestInputMediaVideosFactory:
 
         class TestHandler(InputMediaVideo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputMediaVideosFactory.register_input_media_video(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_video = mocker.MagicMock()
         mock_update.input_media_video.caption = "test_trigger"
 
         result = await InputMediaVideosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_video = mocker.MagicMock()
         mock_update.input_media_video.caption = "unknown_trigger"
 
         assert await InputMediaVideosFactory.create(mock_update) is None

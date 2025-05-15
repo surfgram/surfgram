@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_photo import ChatPhoto
 from surfgram.types.chat_photo.factory import ChatPhotosFactory
 
@@ -18,13 +17,16 @@ class TestChatPhoto:
 
         class ConcreteChatPhoto(ChatPhoto):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatPhoto()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatPhoto
 
     def test_concrete_instantiation(self, concrete_chat_photo):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_photo, ChatPhoto)
+        instance = concrete_chat_photo()
+        assert isinstance(instance, ChatPhoto)
 
 
 class TestChatPhotosFactory:
@@ -41,26 +43,28 @@ class TestChatPhotosFactory:
 
         class TestHandler(ChatPhoto):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatPhotosFactory.register_chat_photo(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_photo = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_photo = mocker.MagicMock()
         mock_update.chat_photo.small_file_id = "test_trigger"
 
         result = await ChatPhotosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_photo = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_photo = mocker.MagicMock()
         mock_update.chat_photo.small_file_id = "unknown_trigger"
 
         assert await ChatPhotosFactory.create(mock_update) is None

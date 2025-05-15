@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_query_result_cached_document import (
     InlineQueryResultCachedDocument,
 )
@@ -22,16 +21,16 @@ class TestInlineQueryResultCachedDocument:
 
         class ConcreteInlineQueryResultCachedDocument(InlineQueryResultCachedDocument):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineQueryResultCachedDocument()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineQueryResultCachedDocument
 
     def test_concrete_instantiation(self, concrete_inline_query_result_cached_document):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_inline_query_result_cached_document,
-            InlineQueryResultCachedDocument,
-        )
+        instance = concrete_inline_query_result_cached_document()
+        assert isinstance(instance, InlineQueryResultCachedDocument)
 
 
 class TestInlineQueryResultCachedDocumentsFactory:
@@ -48,7 +47,9 @@ class TestInlineQueryResultCachedDocumentsFactory:
 
         class TestHandler(InlineQueryResultCachedDocument):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineQueryResultCachedDocumentsFactory.register_inline_query_result_cached_document(
             TestHandler
@@ -56,20 +57,20 @@ class TestInlineQueryResultCachedDocumentsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_document = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_document = mocker.MagicMock()
         mock_update.inline_query_result_cached_document.title = "test_trigger"
 
         result = await InlineQueryResultCachedDocumentsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_document = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_document = mocker.MagicMock()
         mock_update.inline_query_result_cached_document.title = "unknown_trigger"
 
         assert await InlineQueryResultCachedDocumentsFactory.create(mock_update) is None

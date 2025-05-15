@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.unique_gift import UniqueGift
 from surfgram.types.unique_gift.factory import UniqueGiftsFactory
 
@@ -18,13 +17,16 @@ class TestUniqueGift:
 
         class ConcreteUniqueGift(UniqueGift):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteUniqueGift()
+            async def __callback__(self):
+                return None
+
+        return ConcreteUniqueGift
 
     def test_concrete_instantiation(self, concrete_unique_gift):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_unique_gift, UniqueGift)
+        instance = concrete_unique_gift()
+        assert isinstance(instance, UniqueGift)
 
 
 class TestUniqueGiftsFactory:
@@ -41,26 +43,28 @@ class TestUniqueGiftsFactory:
 
         class TestHandler(UniqueGift):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         UniqueGiftsFactory.register_unique_gift(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.unique_gift = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.unique_gift = mocker.MagicMock()
         mock_update.unique_gift.base_name = "test_trigger"
 
         result = await UniqueGiftsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.unique_gift = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.unique_gift = mocker.MagicMock()
         mock_update.unique_gift.base_name = "unknown_trigger"
 
         assert await UniqueGiftsFactory.create(mock_update) is None

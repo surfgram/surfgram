@@ -1,88 +1,125 @@
-from unittest.mock import AsyncMock, patch
-
 import pytest
+from surfgram.core.bot import Bot
+from surfgram.core.structures import APIObject
 from surfgram_cli.enums import LevelsEnum
-from surfgram_cli.utils import debugger
-
-from surfgram import Bot
-from surfgram.core.validator import Token
-from surfgram.exceptions import BotError
+from surfgram.exceptions import TokenError
+import asyncio
+import json
+import inspect
 
 
 class TestBot:
+    @pytest.fixture
+    def mock_config(self, mocker):
+        config = mocker.MagicMock()
+        config.get_token.return_value = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+        # Return a mock class that will be instantiated
+        listener_class = mocker.MagicMock()
+        listener_instance = mocker.AsyncMock()
+        listener_class.return_value = listener_instance
+        config.get_listener.return_value = listener_class
+        return config
 
     @pytest.fixture
-    def bot(self, mocker):
-        """Fixture to create a Bot instance with mocked configuration."""
-        # Mock the configuration object
-        mock_config = mocker.Mock()
-        mock_config.get_token.return_value = "dummy_token"
-        mock_listener = mocker.Mock()
-        mock_config.get_listener.return_value = mock_listener
+    def mock_client(self, mocker):
+        client = mocker.MagicMock()
+        client.send_request = mocker.AsyncMock(return_value=json.dumps({"ok": True}))
+        return client
 
+    @pytest.fixture
+    def mock_token(self, mocker):
+        token = mocker.MagicMock()
+        token.value = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+        return token
+
+    @pytest.fixture
+    def bot(self, mocker, mock_config, mock_client, mock_token):
+        mocker.patch("surfgram.core.bot.NativeClient", return_value=mock_client)
+        mocker.patch("surfgram.core.bot.debugger.log")
+        mocker.patch("surfgram.core.bot.Token", return_value=mock_token)
         return Bot(mock_config)
 
     @pytest.mark.asyncio
-    async def test_make_request_success(self, bot, mocker):
-        """Tests successful API request handling."""
-        mocker.patch("aiohttp.ClientSession.post", new_callable=AsyncMock)
-        bot.session.post.return_value.__aenter__.return_value.status = 200
-        bot.session.post.return_value.__aenter__.return_value.json = AsyncMock(
-            return_value={"ok": True}
-        )
-
-        response = await bot._make_request(
-            "sendMessage", {"chat_id": 123, "text": "Hello"}
-        )
-
-        assert response == {"ok": True}
-        bot.session.post.assert_called_once()
+    async def test_initialization(self, bot, mock_config):
+        """Test bot initializes with correct token and listener"""
+        assert bot.token.value == mock_config.get_token.return_value
+        mock_config.get_token.assert_called_once()
+        mock_config.get_listener.assert_called_once()
 
     @pytest.mark.asyncio
-    async def test_make_request_error(self, bot, mocker):
-        """Tests error handling in case of a failed request."""
-        mocker.patch("aiohttp.ClientSession.post", new_callable=AsyncMock)
-        bot.session.post.return_value.__aenter__.return_value.status = 400
+    async def test_make_request_success(self, bot):
+        """Test successful API request"""
+        test_response = {"ok": True, "result": "success"}
+        bot.client.send_request.return_value = json.dumps(test_response)
 
-        with pytest.raises(BotError, match="API request failed: 400"):
-            await bot._make_request("sendMessage", {"chat_id": 123, "text": "Hello"})
-
-    @pytest.mark.asyncio
-    async def test_dynamic_method_generation(self, bot):
-        """Tests if dynamic method generation works correctly."""
-        # Mock the request method for 'sendMessage'
-        bot._make_request = AsyncMock(return_value={"ok": True})
-
-        response = await bot.sendMessage(chat_id=123, text="Hello World")
-
-        assert response == {"ok": True}
-        bot._make_request.assert_called_once_with(
-            "sendMessage", {"chat_id": 123, "text": "Hello World"}
-        )
+        result = await bot._make_request("testMethod", {"param": "value"})
+        assert result == test_response
+        bot.client.send_request.assert_awaited_once()
 
     @pytest.mark.asyncio
-    async def test_close(self, bot):
-        """Tests cleanup of resources."""
-        await bot.close()
-        assert bot.session.closed
-        assert bot.connector._closed  # Check if connector is closed
+    async def test_make_request_with_update(self, bot):
+        """Test request with update triggers listener"""
+        test_response = {"ok": True}
+        test_update = {"update_id": 1}
+        bot.client.send_request.return_value = json.dumps(test_response)
+
+        result = await bot._make_request("testMethod", {"param": "value"}, test_update)
+        assert result == test_response
+        bot.listener.on_update.assert_awaited_once()
+        assert isinstance(bot.listener.on_update.call_args[0][0], APIObject)
 
     @pytest.mark.asyncio
-    async def test_listen(self, mocker, bot):
-        """Tests the listen method."""
-        mock_listener = bot.listener
-        mock_listener.listen = AsyncMock()
+    async def test_make_request_failure(self, bot):
+        """Test failed API request returns empty dict"""
+        bot.client.send_request.side_effect = Exception("Test error")
 
-        bot.listen()  # Call the method to test
+        result = await bot._make_request("testMethod", {"param": "value"})
+        assert result == {}
+        bot.listener.on_update.assert_not_awaited()
 
-        await asyncio.sleep(0.1)  # Give some time for the async call
+    @pytest.mark.asyncio
+    async def test_dynamic_method_calls(self, bot):
+        """Test dynamic method calls via __getattr__"""
+        test_response = {"ok": True}
+        bot.client.send_request.return_value = json.dumps(test_response)
 
-        mock_listener.listen.assert_called_once_with(bot)
+        result = await bot.testMethod(param="value")
+        assert result == test_response
+        bot.client.send_request.assert_awaited_once()
 
-    def test_initialization_fail_invalid_token(self):
-        """Tests failing initialization with an invalid token."""
-        mock_config = mocker.Mock()
-        mock_config.get_token.return_value = "invalid_token"
+    @pytest.mark.asyncio
+    async def test_listen(self, bot, mocker):
+        """Test listen method sets up event loop correctly"""
+        # Create a mock loop
+        mock_loop = mocker.MagicMock()
 
-        with pytest.raises(ValueError):
-            Bot(mock_config)
+        # Create a simple coroutine function
+        async def mock_listen_coro(bot_instance):
+            pass
+
+        # Configure the mock loop
+        mock_loop.run_until_complete.return_value = None
+
+        # Patch the asyncio functions
+        mocker.patch("asyncio.new_event_loop", return_value=mock_loop)
+        mocker.patch("asyncio.set_event_loop")
+
+        # Replace the listener's listen with our coroutine function
+        bot.listener.listen = mock_listen_coro
+
+        # Run the test
+        bot.listen()
+
+        # Verify the calls
+        asyncio.new_event_loop.assert_called_once()
+        asyncio.set_event_loop.assert_called_once_with(mock_loop)
+
+        # Get the actual coroutine that was called
+        called_coro = mock_loop.run_until_complete.call_args[0][0]
+
+        # Verify it's our coroutine function being called with the bot instance
+        assert inspect.iscoroutine(called_coro)
+        assert called_coro.cr_code == mock_listen_coro.__code__
+        assert called_coro.cr_frame.f_locals["bot_instance"] is bot
+
+        mock_loop.close.assert_called_once()

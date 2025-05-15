@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.video_chat_scheduled import VideoChatScheduled
 from surfgram.types.video_chat_scheduled.factory import VideoChatScheduledsFactory
 
@@ -18,13 +17,16 @@ class TestVideoChatScheduled:
 
         class ConcreteVideoChatScheduled(VideoChatScheduled):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteVideoChatScheduled()
+            async def __callback__(self):
+                return None
+
+        return ConcreteVideoChatScheduled
 
     def test_concrete_instantiation(self, concrete_video_chat_scheduled):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_video_chat_scheduled, VideoChatScheduled)
+        instance = concrete_video_chat_scheduled()
+        assert isinstance(instance, VideoChatScheduled)
 
 
 class TestVideoChatScheduledsFactory:
@@ -41,26 +43,28 @@ class TestVideoChatScheduledsFactory:
 
         class TestHandler(VideoChatScheduled):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         VideoChatScheduledsFactory.register_video_chat_scheduled(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.video_chat_scheduled = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_chat_scheduled = mocker.MagicMock()
         mock_update.video_chat_scheduled.start_date = "test_trigger"
 
         result = await VideoChatScheduledsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.video_chat_scheduled = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_chat_scheduled = mocker.MagicMock()
         mock_update.video_chat_scheduled.start_date = "unknown_trigger"
 
         assert await VideoChatScheduledsFactory.create(mock_update) is None

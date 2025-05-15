@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.star_transactions import StarTransactions
 from surfgram.types.star_transactions.factory import StarTransactionsFactory
 
@@ -18,13 +17,16 @@ class TestStarTransactions:
 
         class ConcreteStarTransactions(StarTransactions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteStarTransactions()
+            async def __callback__(self):
+                return None
+
+        return ConcreteStarTransactions
 
     def test_concrete_instantiation(self, concrete_star_transactions):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_star_transactions, StarTransactions)
+        instance = concrete_star_transactions()
+        assert isinstance(instance, StarTransactions)
 
 
 class TestStarTransactionsFactory:
@@ -41,26 +43,28 @@ class TestStarTransactionsFactory:
 
         class TestHandler(StarTransactions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         StarTransactionsFactory.register_star_transactions(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.star_transactions = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.star_transactions = mocker.MagicMock()
         mock_update.star_transactions.transactions = "test_trigger"
 
         result = await StarTransactionsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.star_transactions = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.star_transactions = mocker.MagicMock()
         mock_update.star_transactions.transactions = "unknown_trigger"
 
         assert await StarTransactionsFactory.create(mock_update) is None

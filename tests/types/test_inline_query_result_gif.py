@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_query_result_gif import InlineQueryResultGif
 from surfgram.types.inline_query_result_gif.factory import InlineQueryResultGifsFactory
 
@@ -18,13 +17,16 @@ class TestInlineQueryResultGif:
 
         class ConcreteInlineQueryResultGif(InlineQueryResultGif):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineQueryResultGif()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineQueryResultGif
 
     def test_concrete_instantiation(self, concrete_inline_query_result_gif):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_inline_query_result_gif, InlineQueryResultGif)
+        instance = concrete_inline_query_result_gif()
+        assert isinstance(instance, InlineQueryResultGif)
 
 
 class TestInlineQueryResultGifsFactory:
@@ -41,26 +43,28 @@ class TestInlineQueryResultGifsFactory:
 
         class TestHandler(InlineQueryResultGif):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineQueryResultGifsFactory.register_inline_query_result_gif(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_gif = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_gif = mocker.MagicMock()
         mock_update.inline_query_result_gif.title = "test_trigger"
 
         result = await InlineQueryResultGifsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_gif = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_gif = mocker.MagicMock()
         mock_update.inline_query_result_gif.title = "unknown_trigger"
 
         assert await InlineQueryResultGifsFactory.create(mock_update) is None

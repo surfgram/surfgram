@@ -7,7 +7,7 @@ class BaseConfig:
 
     This class holds the configuration settings required
     for initializing the Telegram bot, including the bot token
-    and any listener settings for handling incoming updates.
+    and listener settings for handling incoming updates ans also webhook.
     """
 
     __bot_token__ = None

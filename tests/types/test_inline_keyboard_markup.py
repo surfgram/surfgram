@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_keyboard_markup import InlineKeyboardMarkup
 from surfgram.types.inline_keyboard_markup.factory import InlineKeyboardMarkupsFactory
 
@@ -18,13 +17,16 @@ class TestInlineKeyboardMarkup:
 
         class ConcreteInlineKeyboardMarkup(InlineKeyboardMarkup):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineKeyboardMarkup()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineKeyboardMarkup
 
     def test_concrete_instantiation(self, concrete_inline_keyboard_markup):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_inline_keyboard_markup, InlineKeyboardMarkup)
+        instance = concrete_inline_keyboard_markup()
+        assert isinstance(instance, InlineKeyboardMarkup)
 
 
 class TestInlineKeyboardMarkupsFactory:
@@ -41,26 +43,28 @@ class TestInlineKeyboardMarkupsFactory:
 
         class TestHandler(InlineKeyboardMarkup):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineKeyboardMarkupsFactory.register_inline_keyboard_markup(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_keyboard_markup = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_keyboard_markup = mocker.MagicMock()
         mock_update.inline_keyboard_markup.inline_keyboard = "test_trigger"
 
         result = await InlineKeyboardMarkupsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_keyboard_markup = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_keyboard_markup = mocker.MagicMock()
         mock_update.inline_keyboard_markup.inline_keyboard = "unknown_trigger"
 
         assert await InlineKeyboardMarkupsFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.passport_element_error_translation_file import (
     PassportElementErrorTranslationFile,
 )
@@ -24,18 +23,18 @@ class TestPassportElementErrorTranslationFile:
             PassportElementErrorTranslationFile
         ):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcretePassportElementErrorTranslationFile()
+            async def __callback__(self):
+                return None
+
+        return ConcretePassportElementErrorTranslationFile
 
     def test_concrete_instantiation(
         self, concrete_passport_element_error_translation_file
     ):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_passport_element_error_translation_file,
-            PassportElementErrorTranslationFile,
-        )
+        instance = concrete_passport_element_error_translation_file()
+        assert isinstance(instance, PassportElementErrorTranslationFile)
 
 
 class TestPassportElementErrorTranslationFilesFactory:
@@ -52,7 +51,9 @@ class TestPassportElementErrorTranslationFilesFactory:
 
         class TestHandler(PassportElementErrorTranslationFile):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         PassportElementErrorTranslationFilesFactory.register_passport_element_error_translation_file(
             TestHandler
@@ -60,20 +61,20 @@ class TestPassportElementErrorTranslationFilesFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.passport_element_error_translation_file = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.passport_element_error_translation_file = mocker.MagicMock()
         mock_update.passport_element_error_translation_file.source = "test_trigger"
 
         result = await PassportElementErrorTranslationFilesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.passport_element_error_translation_file = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.passport_element_error_translation_file = mocker.MagicMock()
         mock_update.passport_element_error_translation_file.source = "unknown_trigger"
 
         assert (
