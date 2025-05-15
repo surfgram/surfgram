@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_story_content_photo import InputStoryContentPhoto
 from surfgram.types.input_story_content_photo.factory import (
     InputStoryContentPhotosFactory,
@@ -20,13 +19,16 @@ class TestInputStoryContentPhoto:
 
         class ConcreteInputStoryContentPhoto(InputStoryContentPhoto):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputStoryContentPhoto()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputStoryContentPhoto
 
     def test_concrete_instantiation(self, concrete_input_story_content_photo):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_input_story_content_photo, InputStoryContentPhoto)
+        instance = concrete_input_story_content_photo()
+        assert isinstance(instance, InputStoryContentPhoto)
 
 
 class TestInputStoryContentPhotosFactory:
@@ -43,26 +45,28 @@ class TestInputStoryContentPhotosFactory:
 
         class TestHandler(InputStoryContentPhoto):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputStoryContentPhotosFactory.register_input_story_content_photo(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_story_content_photo = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_story_content_photo = mocker.MagicMock()
         mock_update.input_story_content_photo.photo = "test_trigger"
 
         result = await InputStoryContentPhotosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_story_content_photo = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_story_content_photo = mocker.MagicMock()
         mock_update.input_story_content_photo.photo = "unknown_trigger"
 
         assert await InputStoryContentPhotosFactory.create(mock_update) is None

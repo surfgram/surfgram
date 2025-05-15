@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.giveaway import Giveaway
 from surfgram.types.giveaway.factory import GiveawaysFactory
 
@@ -18,13 +17,16 @@ class TestGiveaway:
 
         class ConcreteGiveaway(Giveaway):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteGiveaway()
+            async def __callback__(self):
+                return None
+
+        return ConcreteGiveaway
 
     def test_concrete_instantiation(self, concrete_giveaway):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_giveaway, Giveaway)
+        instance = concrete_giveaway()
+        assert isinstance(instance, Giveaway)
 
 
 class TestGiveawaysFactory:
@@ -41,26 +43,28 @@ class TestGiveawaysFactory:
 
         class TestHandler(Giveaway):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         GiveawaysFactory.register_giveaway(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.giveaway = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.giveaway = mocker.MagicMock()
         mock_update.giveaway.prize_description = "test_trigger"
 
         result = await GiveawaysFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.giveaway = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.giveaway = mocker.MagicMock()
         mock_update.giveaway.prize_description = "unknown_trigger"
 
         assert await GiveawaysFactory.create(mock_update) is None

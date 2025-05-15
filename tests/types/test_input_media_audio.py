@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_media_audio import InputMediaAudio
 from surfgram.types.input_media_audio.factory import InputMediaAudiosFactory
 
@@ -18,13 +17,16 @@ class TestInputMediaAudio:
 
         class ConcreteInputMediaAudio(InputMediaAudio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputMediaAudio()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputMediaAudio
 
     def test_concrete_instantiation(self, concrete_input_media_audio):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_input_media_audio, InputMediaAudio)
+        instance = concrete_input_media_audio()
+        assert isinstance(instance, InputMediaAudio)
 
 
 class TestInputMediaAudiosFactory:
@@ -41,26 +43,28 @@ class TestInputMediaAudiosFactory:
 
         class TestHandler(InputMediaAudio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputMediaAudiosFactory.register_input_media_audio(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_audio = mocker.MagicMock()
         mock_update.input_media_audio.caption = "test_trigger"
 
         result = await InputMediaAudiosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_media_audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_media_audio = mocker.MagicMock()
         mock_update.input_media_audio.caption = "unknown_trigger"
 
         assert await InputMediaAudiosFactory.create(mock_update) is None

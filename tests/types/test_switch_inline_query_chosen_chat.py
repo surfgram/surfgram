@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.switch_inline_query_chosen_chat import SwitchInlineQueryChosenChat
 from surfgram.types.switch_inline_query_chosen_chat.factory import (
     SwitchInlineQueryChosenChatsFactory,
@@ -20,15 +19,16 @@ class TestSwitchInlineQueryChosenChat:
 
         class ConcreteSwitchInlineQueryChosenChat(SwitchInlineQueryChosenChat):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteSwitchInlineQueryChosenChat()
+            async def __callback__(self):
+                return None
+
+        return ConcreteSwitchInlineQueryChosenChat
 
     def test_concrete_instantiation(self, concrete_switch_inline_query_chosen_chat):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_switch_inline_query_chosen_chat, SwitchInlineQueryChosenChat
-        )
+        instance = concrete_switch_inline_query_chosen_chat()
+        assert isinstance(instance, SwitchInlineQueryChosenChat)
 
 
 class TestSwitchInlineQueryChosenChatsFactory:
@@ -45,7 +45,9 @@ class TestSwitchInlineQueryChosenChatsFactory:
 
         class TestHandler(SwitchInlineQueryChosenChat):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         SwitchInlineQueryChosenChatsFactory.register_switch_inline_query_chosen_chat(
             TestHandler
@@ -53,20 +55,20 @@ class TestSwitchInlineQueryChosenChatsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.switch_inline_query_chosen_chat = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.switch_inline_query_chosen_chat = mocker.MagicMock()
         mock_update.switch_inline_query_chosen_chat.query = "test_trigger"
 
         result = await SwitchInlineQueryChosenChatsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.switch_inline_query_chosen_chat = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.switch_inline_query_chosen_chat = mocker.MagicMock()
         mock_update.switch_inline_query_chosen_chat.query = "unknown_trigger"
 
         assert await SwitchInlineQueryChosenChatsFactory.create(mock_update) is None

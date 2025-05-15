@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.video import Video
 from surfgram.types.video.factory import VideosFactory
 
@@ -18,13 +17,16 @@ class TestVideo:
 
         class ConcreteVideo(Video):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteVideo()
+            async def __callback__(self):
+                return None
+
+        return ConcreteVideo
 
     def test_concrete_instantiation(self, concrete_video):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_video, Video)
+        instance = concrete_video()
+        assert isinstance(instance, Video)
 
 
 class TestVideosFactory:
@@ -41,26 +43,28 @@ class TestVideosFactory:
 
         class TestHandler(Video):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         VideosFactory.register_video(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video = mocker.MagicMock()
         mock_update.video.mime_type = "test_trigger"
 
         result = await VideosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.video = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video = mocker.MagicMock()
         mock_update.video.mime_type = "unknown_trigger"
 
         assert await VideosFactory.create(mock_update) is None

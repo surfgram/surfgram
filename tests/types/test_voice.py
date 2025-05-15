@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.voice import Voice
 from surfgram.types.voice.factory import VoicesFactory
 
@@ -18,13 +17,16 @@ class TestVoice:
 
         class ConcreteVoice(Voice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteVoice()
+            async def __callback__(self):
+                return None
+
+        return ConcreteVoice
 
     def test_concrete_instantiation(self, concrete_voice):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_voice, Voice)
+        instance = concrete_voice()
+        assert isinstance(instance, Voice)
 
 
 class TestVoicesFactory:
@@ -41,26 +43,28 @@ class TestVoicesFactory:
 
         class TestHandler(Voice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         VoicesFactory.register_voice(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.voice = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.voice = mocker.MagicMock()
         mock_update.voice.mime_type = "test_trigger"
 
         result = await VoicesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.voice = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.voice = mocker.MagicMock()
         mock_update.voice.mime_type = "unknown_trigger"
 
         assert await VoicesFactory.create(mock_update) is None

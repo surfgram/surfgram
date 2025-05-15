@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.game_high_score import GameHighScore
 from surfgram.types.game_high_score.factory import GameHighScoresFactory
 
@@ -18,13 +17,16 @@ class TestGameHighScore:
 
         class ConcreteGameHighScore(GameHighScore):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteGameHighScore()
+            async def __callback__(self):
+                return None
+
+        return ConcreteGameHighScore
 
     def test_concrete_instantiation(self, concrete_game_high_score):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_game_high_score, GameHighScore)
+        instance = concrete_game_high_score()
+        assert isinstance(instance, GameHighScore)
 
 
 class TestGameHighScoresFactory:
@@ -41,26 +43,28 @@ class TestGameHighScoresFactory:
 
         class TestHandler(GameHighScore):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         GameHighScoresFactory.register_game_high_score(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.game_high_score = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.game_high_score = mocker.MagicMock()
         mock_update.game_high_score.position = "test_trigger"
 
         result = await GameHighScoresFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.game_high_score = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.game_high_score = mocker.MagicMock()
         mock_update.game_high_score.position = "unknown_trigger"
 
         assert await GameHighScoresFactory.create(mock_update) is None

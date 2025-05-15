@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.accepted_gift_types import AcceptedGiftTypes
 from surfgram.types.accepted_gift_types.factory import AcceptedGiftTypesFactory
 
@@ -18,13 +17,16 @@ class TestAcceptedGiftTypes:
 
         class ConcreteAcceptedGiftTypes(AcceptedGiftTypes):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteAcceptedGiftTypes()
+            async def __callback__(self):
+                return None
+
+        return ConcreteAcceptedGiftTypes
 
     def test_concrete_instantiation(self, concrete_accepted_gift_types):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_accepted_gift_types, AcceptedGiftTypes)
+        instance = concrete_accepted_gift_types()
+        assert isinstance(instance, AcceptedGiftTypes)
 
 
 class TestAcceptedGiftTypesFactory:
@@ -41,26 +43,28 @@ class TestAcceptedGiftTypesFactory:
 
         class TestHandler(AcceptedGiftTypes):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         AcceptedGiftTypesFactory.register_accepted_gift_types(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.accepted_gift_types = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.accepted_gift_types = mocker.MagicMock()
         mock_update.accepted_gift_types.unlimited_gifts = "test_trigger"
 
         result = await AcceptedGiftTypesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.accepted_gift_types = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.accepted_gift_types = mocker.MagicMock()
         mock_update.accepted_gift_types.unlimited_gifts = "unknown_trigger"
 
         assert await AcceptedGiftTypesFactory.create(mock_update) is None

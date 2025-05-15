@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.link_preview_options import LinkPreviewOptions
 from surfgram.types.link_preview_options.factory import LinkPreviewOptionsFactory
 
@@ -18,13 +17,16 @@ class TestLinkPreviewOptions:
 
         class ConcreteLinkPreviewOptions(LinkPreviewOptions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteLinkPreviewOptions()
+            async def __callback__(self):
+                return None
+
+        return ConcreteLinkPreviewOptions
 
     def test_concrete_instantiation(self, concrete_link_preview_options):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_link_preview_options, LinkPreviewOptions)
+        instance = concrete_link_preview_options()
+        assert isinstance(instance, LinkPreviewOptions)
 
 
 class TestLinkPreviewOptionsFactory:
@@ -41,26 +43,28 @@ class TestLinkPreviewOptionsFactory:
 
         class TestHandler(LinkPreviewOptions):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         LinkPreviewOptionsFactory.register_link_preview_options(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.link_preview_options = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.link_preview_options = mocker.MagicMock()
         mock_update.link_preview_options.show_above_text = "test_trigger"
 
         result = await LinkPreviewOptionsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.link_preview_options = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.link_preview_options = mocker.MagicMock()
         mock_update.link_preview_options.show_above_text = "unknown_trigger"
 
         assert await LinkPreviewOptionsFactory.create(mock_update) is None

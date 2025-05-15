@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.force_reply import ForceReply
 from surfgram.types.force_reply.factory import ForceRepliesFactory
 
@@ -18,13 +17,16 @@ class TestForceReply:
 
         class ConcreteForceReply(ForceReply):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteForceReply()
+            async def __callback__(self):
+                return None
+
+        return ConcreteForceReply
 
     def test_concrete_instantiation(self, concrete_force_reply):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_force_reply, ForceReply)
+        instance = concrete_force_reply()
+        assert isinstance(instance, ForceReply)
 
 
 class TestForceRepliesFactory:
@@ -41,26 +43,28 @@ class TestForceRepliesFactory:
 
         class TestHandler(ForceReply):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ForceRepliesFactory.register_force_reply(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.force_reply = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.force_reply = mocker.MagicMock()
         mock_update.force_reply.input_field_placeholder = "test_trigger"
 
         result = await ForceRepliesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.force_reply = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.force_reply = mocker.MagicMock()
         mock_update.force_reply.input_field_placeholder = "unknown_trigger"
 
         assert await ForceRepliesFactory.create(mock_update) is None

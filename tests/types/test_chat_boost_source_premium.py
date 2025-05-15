@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.chat_boost_source_premium import ChatBoostSourcePremium
 from surfgram.types.chat_boost_source_premium.factory import (
     ChatBoostSourcePremiumsFactory,
@@ -20,13 +19,16 @@ class TestChatBoostSourcePremium:
 
         class ConcreteChatBoostSourcePremium(ChatBoostSourcePremium):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteChatBoostSourcePremium()
+            async def __callback__(self):
+                return None
+
+        return ConcreteChatBoostSourcePremium
 
     def test_concrete_instantiation(self, concrete_chat_boost_source_premium):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_chat_boost_source_premium, ChatBoostSourcePremium)
+        instance = concrete_chat_boost_source_premium()
+        assert isinstance(instance, ChatBoostSourcePremium)
 
 
 class TestChatBoostSourcePremiumsFactory:
@@ -43,26 +45,28 @@ class TestChatBoostSourcePremiumsFactory:
 
         class TestHandler(ChatBoostSourcePremium):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ChatBoostSourcePremiumsFactory.register_chat_boost_source_premium(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.chat_boost_source_premium = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_boost_source_premium = mocker.MagicMock()
         mock_update.chat_boost_source_premium.source = "test_trigger"
 
         result = await ChatBoostSourcePremiumsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.chat_boost_source_premium = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.chat_boost_source_premium = mocker.MagicMock()
         mock_update.chat_boost_source_premium.source = "unknown_trigger"
 
         assert await ChatBoostSourcePremiumsFactory.create(mock_update) is None

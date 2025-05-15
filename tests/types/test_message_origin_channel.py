@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.message_origin_channel import MessageOriginChannel
 from surfgram.types.message_origin_channel.factory import MessageOriginChannelsFactory
 
@@ -18,13 +17,16 @@ class TestMessageOriginChannel:
 
         class ConcreteMessageOriginChannel(MessageOriginChannel):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteMessageOriginChannel()
+            async def __callback__(self):
+                return None
+
+        return ConcreteMessageOriginChannel
 
     def test_concrete_instantiation(self, concrete_message_origin_channel):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_message_origin_channel, MessageOriginChannel)
+        instance = concrete_message_origin_channel()
+        assert isinstance(instance, MessageOriginChannel)
 
 
 class TestMessageOriginChannelsFactory:
@@ -41,26 +43,28 @@ class TestMessageOriginChannelsFactory:
 
         class TestHandler(MessageOriginChannel):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         MessageOriginChannelsFactory.register_message_origin_channel(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.message_origin_channel = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.message_origin_channel = mocker.MagicMock()
         mock_update.message_origin_channel.type = "test_trigger"
 
         result = await MessageOriginChannelsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.message_origin_channel = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.message_origin_channel = mocker.MagicMock()
         mock_update.message_origin_channel.type = "unknown_trigger"
 
         assert await MessageOriginChannelsFactory.create(mock_update) is None

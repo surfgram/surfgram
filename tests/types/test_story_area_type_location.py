@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.story_area_type_location import StoryAreaTypeLocation
 from surfgram.types.story_area_type_location.factory import (
     StoryAreaTypeLocationsFactory,
@@ -20,13 +19,16 @@ class TestStoryAreaTypeLocation:
 
         class ConcreteStoryAreaTypeLocation(StoryAreaTypeLocation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteStoryAreaTypeLocation()
+            async def __callback__(self):
+                return None
+
+        return ConcreteStoryAreaTypeLocation
 
     def test_concrete_instantiation(self, concrete_story_area_type_location):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_story_area_type_location, StoryAreaTypeLocation)
+        instance = concrete_story_area_type_location()
+        assert isinstance(instance, StoryAreaTypeLocation)
 
 
 class TestStoryAreaTypeLocationsFactory:
@@ -43,26 +45,28 @@ class TestStoryAreaTypeLocationsFactory:
 
         class TestHandler(StoryAreaTypeLocation):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         StoryAreaTypeLocationsFactory.register_story_area_type_location(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.story_area_type_location = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story_area_type_location = mocker.MagicMock()
         mock_update.story_area_type_location.address = "test_trigger"
 
         result = await StoryAreaTypeLocationsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.story_area_type_location = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story_area_type_location = mocker.MagicMock()
         mock_update.story_area_type_location.address = "unknown_trigger"
 
         assert await StoryAreaTypeLocationsFactory.create(mock_update) is None

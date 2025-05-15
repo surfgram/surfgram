@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.input_contact_message_content import InputContactMessageContent
 from surfgram.types.input_contact_message_content.factory import (
     InputContactMessageContentsFactory,
@@ -20,15 +19,16 @@ class TestInputContactMessageContent:
 
         class ConcreteInputContactMessageContent(InputContactMessageContent):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInputContactMessageContent()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInputContactMessageContent
 
     def test_concrete_instantiation(self, concrete_input_contact_message_content):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_input_contact_message_content, InputContactMessageContent
-        )
+        instance = concrete_input_contact_message_content()
+        assert isinstance(instance, InputContactMessageContent)
 
 
 class TestInputContactMessageContentsFactory:
@@ -45,7 +45,9 @@ class TestInputContactMessageContentsFactory:
 
         class TestHandler(InputContactMessageContent):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InputContactMessageContentsFactory.register_input_contact_message_content(
             TestHandler
@@ -53,20 +55,20 @@ class TestInputContactMessageContentsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.input_contact_message_content = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_contact_message_content = mocker.MagicMock()
         mock_update.input_contact_message_content.phone_number = "test_trigger"
 
         result = await InputContactMessageContentsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.input_contact_message_content = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.input_contact_message_content = mocker.MagicMock()
         mock_update.input_contact_message_content.phone_number = "unknown_trigger"
 
         assert await InputContactMessageContentsFactory.create(mock_update) is None

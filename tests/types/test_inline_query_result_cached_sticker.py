@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_query_result_cached_sticker import (
     InlineQueryResultCachedSticker,
 )
@@ -22,15 +21,16 @@ class TestInlineQueryResultCachedSticker:
 
         class ConcreteInlineQueryResultCachedSticker(InlineQueryResultCachedSticker):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineQueryResultCachedSticker()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineQueryResultCachedSticker
 
     def test_concrete_instantiation(self, concrete_inline_query_result_cached_sticker):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_inline_query_result_cached_sticker, InlineQueryResultCachedSticker
-        )
+        instance = concrete_inline_query_result_cached_sticker()
+        assert isinstance(instance, InlineQueryResultCachedSticker)
 
 
 class TestInlineQueryResultCachedStickersFactory:
@@ -47,7 +47,9 @@ class TestInlineQueryResultCachedStickersFactory:
 
         class TestHandler(InlineQueryResultCachedSticker):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineQueryResultCachedStickersFactory.register_inline_query_result_cached_sticker(
             TestHandler
@@ -55,20 +57,20 @@ class TestInlineQueryResultCachedStickersFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_sticker = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_sticker = mocker.MagicMock()
         mock_update.inline_query_result_cached_sticker.sticker_file_id = "test_trigger"
 
         result = await InlineQueryResultCachedStickersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_sticker = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_sticker = mocker.MagicMock()
         mock_update.inline_query_result_cached_sticker.sticker_file_id = (
             "unknown_trigger"
         )

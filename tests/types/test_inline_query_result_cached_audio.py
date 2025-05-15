@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.inline_query_result_cached_audio import InlineQueryResultCachedAudio
 from surfgram.types.inline_query_result_cached_audio.factory import (
     InlineQueryResultCachedAudiosFactory,
@@ -20,15 +19,16 @@ class TestInlineQueryResultCachedAudio:
 
         class ConcreteInlineQueryResultCachedAudio(InlineQueryResultCachedAudio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInlineQueryResultCachedAudio()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInlineQueryResultCachedAudio
 
     def test_concrete_instantiation(self, concrete_inline_query_result_cached_audio):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_inline_query_result_cached_audio, InlineQueryResultCachedAudio
-        )
+        instance = concrete_inline_query_result_cached_audio()
+        assert isinstance(instance, InlineQueryResultCachedAudio)
 
 
 class TestInlineQueryResultCachedAudiosFactory:
@@ -45,7 +45,9 @@ class TestInlineQueryResultCachedAudiosFactory:
 
         class TestHandler(InlineQueryResultCachedAudio):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InlineQueryResultCachedAudiosFactory.register_inline_query_result_cached_audio(
             TestHandler
@@ -53,20 +55,20 @@ class TestInlineQueryResultCachedAudiosFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_audio = mocker.MagicMock()
         mock_update.inline_query_result_cached_audio.caption = "test_trigger"
 
         result = await InlineQueryResultCachedAudiosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.inline_query_result_cached_audio = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.inline_query_result_cached_audio = mocker.MagicMock()
         mock_update.inline_query_result_cached_audio.caption = "unknown_trigger"
 
         assert await InlineQueryResultCachedAudiosFactory.create(mock_update) is None

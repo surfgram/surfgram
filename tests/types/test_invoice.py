@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.invoice import Invoice
 from surfgram.types.invoice.factory import InvoicesFactory
 
@@ -18,13 +17,16 @@ class TestInvoice:
 
         class ConcreteInvoice(Invoice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteInvoice()
+            async def __callback__(self):
+                return None
+
+        return ConcreteInvoice
 
     def test_concrete_instantiation(self, concrete_invoice):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_invoice, Invoice)
+        instance = concrete_invoice()
+        assert isinstance(instance, Invoice)
 
 
 class TestInvoicesFactory:
@@ -41,26 +43,28 @@ class TestInvoicesFactory:
 
         class TestHandler(Invoice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         InvoicesFactory.register_invoice(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.invoice = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.invoice = mocker.MagicMock()
         mock_update.invoice.title = "test_trigger"
 
         result = await InvoicesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.invoice = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.invoice = mocker.MagicMock()
         mock_update.invoice.title = "unknown_trigger"
 
         assert await InvoicesFactory.create(mock_update) is None

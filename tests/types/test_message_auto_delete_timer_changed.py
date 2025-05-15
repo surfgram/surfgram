@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.message_auto_delete_timer_changed import (
     MessageAutoDeleteTimerChanged,
 )
@@ -22,15 +21,16 @@ class TestMessageAutoDeleteTimerChanged:
 
         class ConcreteMessageAutoDeleteTimerChanged(MessageAutoDeleteTimerChanged):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteMessageAutoDeleteTimerChanged()
+            async def __callback__(self):
+                return None
+
+        return ConcreteMessageAutoDeleteTimerChanged
 
     def test_concrete_instantiation(self, concrete_message_auto_delete_timer_changed):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(
-            concrete_message_auto_delete_timer_changed, MessageAutoDeleteTimerChanged
-        )
+        instance = concrete_message_auto_delete_timer_changed()
+        assert isinstance(instance, MessageAutoDeleteTimerChanged)
 
 
 class TestMessageAutoDeleteTimerChangedsFactory:
@@ -47,7 +47,9 @@ class TestMessageAutoDeleteTimerChangedsFactory:
 
         class TestHandler(MessageAutoDeleteTimerChanged):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         MessageAutoDeleteTimerChangedsFactory.register_message_auto_delete_timer_changed(
             TestHandler
@@ -55,10 +57,10 @@ class TestMessageAutoDeleteTimerChangedsFactory:
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.message_auto_delete_timer_changed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.message_auto_delete_timer_changed = mocker.MagicMock()
         mock_update.message_auto_delete_timer_changed.message_auto_delete_time = (
             "test_trigger"
         )
@@ -67,10 +69,10 @@ class TestMessageAutoDeleteTimerChangedsFactory:
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.message_auto_delete_timer_changed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.message_auto_delete_timer_changed = mocker.MagicMock()
         mock_update.message_auto_delete_timer_changed.message_auto_delete_time = (
             "unknown_trigger"
         )

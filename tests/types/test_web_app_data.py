@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.web_app_data import WebAppData
 from surfgram.types.web_app_data.factory import WebAppDataFactory
 
@@ -18,13 +17,16 @@ class TestWebAppData:
 
         class ConcreteWebAppData(WebAppData):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteWebAppData()
+            async def __callback__(self):
+                return None
+
+        return ConcreteWebAppData
 
     def test_concrete_instantiation(self, concrete_web_app_data):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_web_app_data, WebAppData)
+        instance = concrete_web_app_data()
+        assert isinstance(instance, WebAppData)
 
 
 class TestWebAppDataFactory:
@@ -41,26 +43,28 @@ class TestWebAppDataFactory:
 
         class TestHandler(WebAppData):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         WebAppDataFactory.register_web_app_data(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.web_app_data = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.web_app_data = mocker.MagicMock()
         mock_update.web_app_data.data = "test_trigger"
 
         result = await WebAppDataFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.web_app_data = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.web_app_data = mocker.MagicMock()
         mock_update.web_app_data.data = "unknown_trigger"
 
         assert await WebAppDataFactory.create(mock_update) is None

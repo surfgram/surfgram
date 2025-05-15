@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.video_chat_ended import VideoChatEnded
 from surfgram.types.video_chat_ended.factory import VideoChatEndedsFactory
 
@@ -18,13 +17,16 @@ class TestVideoChatEnded:
 
         class ConcreteVideoChatEnded(VideoChatEnded):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteVideoChatEnded()
+            async def __callback__(self):
+                return None
+
+        return ConcreteVideoChatEnded
 
     def test_concrete_instantiation(self, concrete_video_chat_ended):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_video_chat_ended, VideoChatEnded)
+        instance = concrete_video_chat_ended()
+        assert isinstance(instance, VideoChatEnded)
 
 
 class TestVideoChatEndedsFactory:
@@ -41,26 +43,28 @@ class TestVideoChatEndedsFactory:
 
         class TestHandler(VideoChatEnded):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         VideoChatEndedsFactory.register_video_chat_ended(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.video_chat_ended = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_chat_ended = mocker.MagicMock()
         mock_update.video_chat_ended.duration = "test_trigger"
 
         result = await VideoChatEndedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.video_chat_ended = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.video_chat_ended = mocker.MagicMock()
         mock_update.video_chat_ended.duration = "unknown_trigger"
 
         assert await VideoChatEndedsFactory.create(mock_update) is None

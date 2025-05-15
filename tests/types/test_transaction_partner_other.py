@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.transaction_partner_other import TransactionPartnerOther
 from surfgram.types.transaction_partner_other.factory import (
     TransactionPartnerOthersFactory,
@@ -20,13 +19,16 @@ class TestTransactionPartnerOther:
 
         class ConcreteTransactionPartnerOther(TransactionPartnerOther):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteTransactionPartnerOther()
+            async def __callback__(self):
+                return None
+
+        return ConcreteTransactionPartnerOther
 
     def test_concrete_instantiation(self, concrete_transaction_partner_other):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_transaction_partner_other, TransactionPartnerOther)
+        instance = concrete_transaction_partner_other()
+        assert isinstance(instance, TransactionPartnerOther)
 
 
 class TestTransactionPartnerOthersFactory:
@@ -43,26 +45,28 @@ class TestTransactionPartnerOthersFactory:
 
         class TestHandler(TransactionPartnerOther):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         TransactionPartnerOthersFactory.register_transaction_partner_other(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.transaction_partner_other = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.transaction_partner_other = mocker.MagicMock()
         mock_update.transaction_partner_other.type = "test_trigger"
 
         result = await TransactionPartnerOthersFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.transaction_partner_other = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.transaction_partner_other = mocker.MagicMock()
         mock_update.transaction_partner_other.type = "unknown_trigger"
 
         assert await TransactionPartnerOthersFactory.create(mock_update) is None

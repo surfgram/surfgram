@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.labeled_price import LabeledPrice
 from surfgram.types.labeled_price.factory import LabeledPricesFactory
 
@@ -18,13 +17,16 @@ class TestLabeledPrice:
 
         class ConcreteLabeledPrice(LabeledPrice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteLabeledPrice()
+            async def __callback__(self):
+                return None
+
+        return ConcreteLabeledPrice
 
     def test_concrete_instantiation(self, concrete_labeled_price):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_labeled_price, LabeledPrice)
+        instance = concrete_labeled_price()
+        assert isinstance(instance, LabeledPrice)
 
 
 class TestLabeledPricesFactory:
@@ -41,26 +43,28 @@ class TestLabeledPricesFactory:
 
         class TestHandler(LabeledPrice):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         LabeledPricesFactory.register_labeled_price(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.labeled_price = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.labeled_price = mocker.MagicMock()
         mock_update.labeled_price.label = "test_trigger"
 
         result = await LabeledPricesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.labeled_price = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.labeled_price = mocker.MagicMock()
         mock_update.labeled_price.label = "unknown_trigger"
 
         assert await LabeledPricesFactory.create(mock_update) is None

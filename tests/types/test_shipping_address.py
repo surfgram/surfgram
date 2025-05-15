@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.shipping_address import ShippingAddress
 from surfgram.types.shipping_address.factory import ShippingAddressesFactory
 
@@ -18,13 +17,16 @@ class TestShippingAddress:
 
         class ConcreteShippingAddress(ShippingAddress):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteShippingAddress()
+            async def __callback__(self):
+                return None
+
+        return ConcreteShippingAddress
 
     def test_concrete_instantiation(self, concrete_shipping_address):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_shipping_address, ShippingAddress)
+        instance = concrete_shipping_address()
+        assert isinstance(instance, ShippingAddress)
 
 
 class TestShippingAddressesFactory:
@@ -41,26 +43,28 @@ class TestShippingAddressesFactory:
 
         class TestHandler(ShippingAddress):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ShippingAddressesFactory.register_shipping_address(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.shipping_address = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shipping_address = mocker.MagicMock()
         mock_update.shipping_address.country_code = "test_trigger"
 
         result = await ShippingAddressesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.shipping_address = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shipping_address = mocker.MagicMock()
         mock_update.shipping_address.country_code = "unknown_trigger"
 
         assert await ShippingAddressesFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.web_app_info import WebAppInfo
 from surfgram.types.web_app_info.factory import WebAppInfosFactory
 
@@ -18,13 +17,16 @@ class TestWebAppInfo:
 
         class ConcreteWebAppInfo(WebAppInfo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteWebAppInfo()
+            async def __callback__(self):
+                return None
+
+        return ConcreteWebAppInfo
 
     def test_concrete_instantiation(self, concrete_web_app_info):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_web_app_info, WebAppInfo)
+        instance = concrete_web_app_info()
+        assert isinstance(instance, WebAppInfo)
 
 
 class TestWebAppInfosFactory:
@@ -41,26 +43,28 @@ class TestWebAppInfosFactory:
 
         class TestHandler(WebAppInfo):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         WebAppInfosFactory.register_web_app_info(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.web_app_info = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.web_app_info = mocker.MagicMock()
         mock_update.web_app_info.url = "test_trigger"
 
         result = await WebAppInfosFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.web_app_info = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.web_app_info = mocker.MagicMock()
         mock_update.web_app_info.url = "unknown_trigger"
 
         assert await WebAppInfosFactory.create(mock_update) is None

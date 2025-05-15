@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.story import Story
 from surfgram.types.story.factory import StoriesFactory
 
@@ -18,13 +17,16 @@ class TestStory:
 
         class ConcreteStory(Story):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteStory()
+            async def __callback__(self):
+                return None
+
+        return ConcreteStory
 
     def test_concrete_instantiation(self, concrete_story):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_story, Story)
+        instance = concrete_story()
+        assert isinstance(instance, Story)
 
 
 class TestStoriesFactory:
@@ -41,26 +43,28 @@ class TestStoriesFactory:
 
         class TestHandler(Story):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         StoriesFactory.register_story(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.story = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story = mocker.MagicMock()
         mock_update.story.chat = "test_trigger"
 
         result = await StoriesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.story = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.story = mocker.MagicMock()
         mock_update.story.chat = "unknown_trigger"
 
         assert await StoriesFactory.create(mock_update) is None

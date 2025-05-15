@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.reaction_type_custom_emoji import ReactionTypeCustomEmoji
 from surfgram.types.reaction_type_custom_emoji.factory import (
     ReactionTypeCustomEmojisFactory,
@@ -20,13 +19,16 @@ class TestReactionTypeCustomEmoji:
 
         class ConcreteReactionTypeCustomEmoji(ReactionTypeCustomEmoji):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteReactionTypeCustomEmoji()
+            async def __callback__(self):
+                return None
+
+        return ConcreteReactionTypeCustomEmoji
 
     def test_concrete_instantiation(self, concrete_reaction_type_custom_emoji):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_reaction_type_custom_emoji, ReactionTypeCustomEmoji)
+        instance = concrete_reaction_type_custom_emoji()
+        assert isinstance(instance, ReactionTypeCustomEmoji)
 
 
 class TestReactionTypeCustomEmojisFactory:
@@ -43,26 +45,28 @@ class TestReactionTypeCustomEmojisFactory:
 
         class TestHandler(ReactionTypeCustomEmoji):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ReactionTypeCustomEmojisFactory.register_reaction_type_custom_emoji(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.reaction_type_custom_emoji = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reaction_type_custom_emoji = mocker.MagicMock()
         mock_update.reaction_type_custom_emoji.type = "test_trigger"
 
         result = await ReactionTypeCustomEmojisFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.reaction_type_custom_emoji = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.reaction_type_custom_emoji = mocker.MagicMock()
         mock_update.reaction_type_custom_emoji.type = "unknown_trigger"
 
         assert await ReactionTypeCustomEmojisFactory.create(mock_update) is None

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.business_opening_hours import BusinessOpeningHours
 from surfgram.types.business_opening_hours.factory import BusinessOpeningHoursFactory
 
@@ -18,13 +17,16 @@ class TestBusinessOpeningHours:
 
         class ConcreteBusinessOpeningHours(BusinessOpeningHours):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteBusinessOpeningHours()
+            async def __callback__(self):
+                return None
+
+        return ConcreteBusinessOpeningHours
 
     def test_concrete_instantiation(self, concrete_business_opening_hours):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_business_opening_hours, BusinessOpeningHours)
+        instance = concrete_business_opening_hours()
+        assert isinstance(instance, BusinessOpeningHours)
 
 
 class TestBusinessOpeningHoursFactory:
@@ -41,26 +43,28 @@ class TestBusinessOpeningHoursFactory:
 
         class TestHandler(BusinessOpeningHours):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         BusinessOpeningHoursFactory.register_business_opening_hours(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.business_opening_hours = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.business_opening_hours = mocker.MagicMock()
         mock_update.business_opening_hours.time_zone_name = "test_trigger"
 
         result = await BusinessOpeningHoursFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.business_opening_hours = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.business_opening_hours = mocker.MagicMock()
         mock_update.business_opening_hours.time_zone_name = "unknown_trigger"
 
         assert await BusinessOpeningHoursFactory.create(mock_update) is None

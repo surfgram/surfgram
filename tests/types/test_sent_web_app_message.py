@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.sent_web_app_message import SentWebAppMessage
 from surfgram.types.sent_web_app_message.factory import SentWebAppMessagesFactory
 
@@ -18,13 +17,16 @@ class TestSentWebAppMessage:
 
         class ConcreteSentWebAppMessage(SentWebAppMessage):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteSentWebAppMessage()
+            async def __callback__(self):
+                return None
+
+        return ConcreteSentWebAppMessage
 
     def test_concrete_instantiation(self, concrete_sent_web_app_message):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_sent_web_app_message, SentWebAppMessage)
+        instance = concrete_sent_web_app_message()
+        assert isinstance(instance, SentWebAppMessage)
 
 
 class TestSentWebAppMessagesFactory:
@@ -41,26 +43,28 @@ class TestSentWebAppMessagesFactory:
 
         class TestHandler(SentWebAppMessage):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         SentWebAppMessagesFactory.register_sent_web_app_message(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.sent_web_app_message = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.sent_web_app_message = mocker.MagicMock()
         mock_update.sent_web_app_message.inline_message_id = "test_trigger"
 
         result = await SentWebAppMessagesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.sent_web_app_message = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.sent_web_app_message = mocker.MagicMock()
         mock_update.sent_web_app_message.inline_message_id = "unknown_trigger"
 
         assert await SentWebAppMessagesFactory.create(mock_update) is None

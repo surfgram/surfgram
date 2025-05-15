@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.shipping_option import ShippingOption
 from surfgram.types.shipping_option.factory import ShippingOptionsFactory
 
@@ -18,13 +17,16 @@ class TestShippingOption:
 
         class ConcreteShippingOption(ShippingOption):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteShippingOption()
+            async def __callback__(self):
+                return None
+
+        return ConcreteShippingOption
 
     def test_concrete_instantiation(self, concrete_shipping_option):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_shipping_option, ShippingOption)
+        instance = concrete_shipping_option()
+        assert isinstance(instance, ShippingOption)
 
 
 class TestShippingOptionsFactory:
@@ -41,26 +43,28 @@ class TestShippingOptionsFactory:
 
         class TestHandler(ShippingOption):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ShippingOptionsFactory.register_shipping_option(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.shipping_option = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shipping_option = mocker.MagicMock()
         mock_update.shipping_option.title = "test_trigger"
 
         result = await ShippingOptionsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.shipping_option = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.shipping_option = mocker.MagicMock()
         mock_update.shipping_option.title = "unknown_trigger"
 
         assert await ShippingOptionsFactory.create(mock_update) is None

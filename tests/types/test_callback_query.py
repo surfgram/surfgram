@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.callback_query import CallbackQuery
 from surfgram.types.callback_query.factory import CallbackQueriesFactory
 
@@ -18,13 +17,16 @@ class TestCallbackQuery:
 
         class ConcreteCallbackQuery(CallbackQuery):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteCallbackQuery()
+            async def __callback__(self):
+                return None
+
+        return ConcreteCallbackQuery
 
     def test_concrete_instantiation(self, concrete_callback_query):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_callback_query, CallbackQuery)
+        instance = concrete_callback_query()
+        assert isinstance(instance, CallbackQuery)
 
 
 class TestCallbackQueriesFactory:
@@ -41,26 +43,28 @@ class TestCallbackQueriesFactory:
 
         class TestHandler(CallbackQuery):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         CallbackQueriesFactory.register_callback_query(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.callback_query = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.callback_query = mocker.MagicMock()
         mock_update.callback_query.data = "test_trigger"
 
         result = await CallbackQueriesFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.callback_query = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.callback_query = mocker.MagicMock()
         mock_update.callback_query.data = "unknown_trigger"
 
         assert await CallbackQueriesFactory.create(mock_update) is None

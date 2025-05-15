@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.write_access_allowed import WriteAccessAllowed
 from surfgram.types.write_access_allowed.factory import WriteAccessAllowedsFactory
 
@@ -18,13 +17,16 @@ class TestWriteAccessAllowed:
 
         class ConcreteWriteAccessAllowed(WriteAccessAllowed):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteWriteAccessAllowed()
+            async def __callback__(self):
+                return None
+
+        return ConcreteWriteAccessAllowed
 
     def test_concrete_instantiation(self, concrete_write_access_allowed):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_write_access_allowed, WriteAccessAllowed)
+        instance = concrete_write_access_allowed()
+        assert isinstance(instance, WriteAccessAllowed)
 
 
 class TestWriteAccessAllowedsFactory:
@@ -41,26 +43,28 @@ class TestWriteAccessAllowedsFactory:
 
         class TestHandler(WriteAccessAllowed):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         WriteAccessAllowedsFactory.register_write_access_allowed(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.write_access_allowed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.write_access_allowed = mocker.MagicMock()
         mock_update.write_access_allowed.web_app_name = "test_trigger"
 
         result = await WriteAccessAllowedsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.write_access_allowed = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.write_access_allowed = mocker.MagicMock()
         mock_update.write_access_allowed.web_app_name = "unknown_trigger"
 
         assert await WriteAccessAllowedsFactory.create(mock_update) is None

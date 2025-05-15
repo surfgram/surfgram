@@ -1,29 +1,27 @@
 import pytest
-
-from surfgram.helpers import CamelCaseConverter
+from surfgram.core.helpers import CamelCaseConverter
 
 
 class TestCamelCaseConverter:
+    @pytest.fixture
+    def converter(self):
+        return CamelCaseConverter()
 
-    def test_convert(self):
-        """Test the conversion to CamelCase."""
-        converter = CamelCaseConverter()
-
-        assert converter.convert("this_is_a_test") == "thisIsATest"
-        assert converter.convert("another_example_case") == "anotherExampleCase"
-        assert (
-            converter.convert("singleword") == "singleword"
-        )  # No change for single word
-        assert converter.convert("") == ""  # Edge case: empty string
-        assert converter.convert("leading_underscore") == "leadingUnderscore"
-        assert (
-            converter.convert("_trailing_underscore_") == "trailingUnderscore"
-        )  # Handles leading and trailing underscores
-
-    def test_convert_with_special_characters(self):
-        """Test the conversion for strings with special characters."""
-        converter = CamelCaseConverter()
-        assert converter.convert("test_string!@#") == "testString!@#"
-        assert (
-            converter.convert("another-test_string") == "another-testString"
-        )  # This won't convert the "-" character correctly
+    @pytest.mark.parametrize(
+        "input_str, expected",
+        [
+            ("hello_world", "helloWorld"),
+            ("foo_bar_baz", "fooBarBaz"),
+            ("simple", "simple"),
+            ("", ""),
+            ("_", ""),
+            ("__", ""),
+            ("hello__world", "helloWorld"),
+            ("user_id_123", "userId123"),
+            ("123_test", "123Test"),
+            ("hello_world!", "helloWorld!"),
+            ("test$value", "test$value"),
+        ],
+    )
+    def test_convert(self, converter, input_str, expected):
+        assert converter.convert(input_str) == expected

@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.forum_topic import ForumTopic
 from surfgram.types.forum_topic.factory import ForumTopicsFactory
 
@@ -18,13 +17,16 @@ class TestForumTopic:
 
         class ConcreteForumTopic(ForumTopic):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteForumTopic()
+            async def __callback__(self):
+                return None
+
+        return ConcreteForumTopic
 
     def test_concrete_instantiation(self, concrete_forum_topic):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_forum_topic, ForumTopic)
+        instance = concrete_forum_topic()
+        assert isinstance(instance, ForumTopic)
 
 
 class TestForumTopicsFactory:
@@ -41,26 +43,28 @@ class TestForumTopicsFactory:
 
         class TestHandler(ForumTopic):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         ForumTopicsFactory.register_forum_topic(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.forum_topic = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.forum_topic = mocker.MagicMock()
         mock_update.forum_topic.name = "test_trigger"
 
         result = await ForumTopicsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.forum_topic = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.forum_topic = mocker.MagicMock()
         mock_update.forum_topic.name = "unknown_trigger"
 
         assert await ForumTopicsFactory.create(mock_update) is None

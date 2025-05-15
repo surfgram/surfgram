@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
 from surfgram.types.menu_button_commands import MenuButtonCommands
 from surfgram.types.menu_button_commands.factory import MenuButtonCommandsFactory
 
@@ -18,13 +17,16 @@ class TestMenuButtonCommands:
 
         class ConcreteMenuButtonCommands(MenuButtonCommands):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
 
-        return ConcreteMenuButtonCommands()
+            async def __callback__(self):
+                return None
+
+        return ConcreteMenuButtonCommands
 
     def test_concrete_instantiation(self, concrete_menu_button_commands):
         """Should allow instantiation of concrete subclasses."""
-        assert isinstance(concrete_menu_button_commands, MenuButtonCommands)
+        instance = concrete_menu_button_commands()
+        assert isinstance(instance, MenuButtonCommands)
 
 
 class TestMenuButtonCommandsFactory:
@@ -41,26 +43,28 @@ class TestMenuButtonCommandsFactory:
 
         class TestHandler(MenuButtonCommands):
             __names__ = ["test_trigger"]
-            __callback__ = AsyncMock()
+
+            async def __callback__(self):
+                return None
 
         MenuButtonCommandsFactory.register_menu_button_commands(TestHandler)
         return TestHandler
 
     @pytest.mark.asyncio
-    async def test_create_with_valid_trigger(self, registered_handler):
+    async def test_create_with_valid_trigger(self, registered_handler, mocker):
         """Should return handler instance when trigger matches."""
-        mock_update = MagicMock()
-        mock_update.menu_button_commands = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.menu_button_commands = mocker.MagicMock()
         mock_update.menu_button_commands.type = "test_trigger"
 
         result = await MenuButtonCommandsFactory.create(mock_update)
         assert isinstance(result, registered_handler)
 
     @pytest.mark.asyncio
-    async def test_create_with_invalid_trigger(self):
+    async def test_create_with_invalid_trigger(self, mocker):
         """Should return None when no handler matches."""
-        mock_update = MagicMock()
-        mock_update.menu_button_commands = MagicMock()
+        mock_update = mocker.MagicMock()
+        mock_update.menu_button_commands = mocker.MagicMock()
         mock_update.menu_button_commands.type = "unknown_trigger"
 
         assert await MenuButtonCommandsFactory.create(mock_update) is None
