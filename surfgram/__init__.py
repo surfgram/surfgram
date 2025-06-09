@@ -24,7 +24,7 @@ __all__: List[str] = [
     "fsm",
 ]
 
-__version__: str = "0.7.3"
+__version__: str = "1.0.1"
 __author__: str = "anybody"
 __email__: str = "help.surfgram@gmail.com"
 __license__: str = "MIT"

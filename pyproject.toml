@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "surfgram"
-version = "1.0.0"
+version = "1.0.1"
 description = "Modern asynchronous Telegram bot framework"
 authors = ["anybody <help.surfgram@gmail.com>"]
 license = "MIT"
