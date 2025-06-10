@@ -24,8 +24,8 @@ Surfgram is a high-level, object-oriented framework for building scalable Telegr
 ## Key Features
 
 - ✅ Pure OOP – Classes and dependency injection
-- ✅ Fast Setup – Get a bot running in under 20 lines of code
-- ✅ Extensible – Add custom handlers, filters, and database integrations
+- ✅ Fast Setup – Get a bot running in 1 command in terminal
+- ✅ Extensible – Add custom handlers, filters, and integrations
 - ✅ Async-Ready – Built with asyncio for high performance
 - ✅ Full support for Telegram Bot API 9.0+
 
