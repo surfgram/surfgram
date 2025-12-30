@@ -3,7 +3,7 @@ import { LongPolling } from '../src/core/bot/longPolling';
 import { Bot } from '../src/core/bot/bot';
 
 const createMockBot = () => ({
-  token: 'test-token',
+  token: '1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkl',
   apiUrl: 'https://api.telegram.org/bot',
   dispatch: jest.fn<() => Promise<void>>().mockResolvedValue(undefined),
 });

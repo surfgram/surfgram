@@ -36,7 +36,7 @@ const mockFetch = jest.fn<typeof fetch>();
 
 describe('Bot', () => {
   let bot: Bot;
-  const mockToken = 'test-token-123';
+  const mockToken = '1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkl';
   const mockApiUrl = `https://api.telegram.org/bot${mockToken}`;
 
   const clearMocks = () => {

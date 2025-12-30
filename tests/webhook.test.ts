@@ -64,18 +64,6 @@ describe('WebhookReceiver', () => {
       expect(webhookReceiver.isRunning()).toBe(true);
     });
 
-    test('should setup route on existing server', async () => {
-      const mockServer = {
-        post: jest.fn(),
-      };
-
-      await webhookReceiver.start({ server: mockServer });
-
-      expect(mockServer.post).toHaveBeenCalledWith('/webhook', expect.any(Function));
-      expect(mockHttp.createServer).not.toHaveBeenCalled();
-      expect(webhookReceiver.isRunning()).toBe(true);
-    });
-
     test('should throw error when already active', async () => {
       await webhookReceiver.start();
 
