@@ -39,5 +39,4 @@ export interface AnswerShippingQueryParams {
    * @required No
    */
   errorMessage?: string;
-
 }

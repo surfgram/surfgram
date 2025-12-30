@@ -25,7 +25,10 @@ import { ChatPermissions } from '../types/chatPermissions';
  * // ... params
  * });
  */
-export async function restrictChatMember(this: Bot, params: RestrictChatMemberParams): Promise<any> {
+export async function restrictChatMember(
+  this: Bot,
+  params: RestrictChatMemberParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('restrictChatMember', snakeParams);
   return response;

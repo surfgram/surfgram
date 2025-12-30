@@ -4,13 +4,12 @@ Describes a story area pointing to a suggested reaction. Currently, a story can 
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the area, always “suggested\_reaction” |
-| reactionType | `ReactionType` | Yes | Type of the reaction |
-| isDark | `boolean` | No | Optional. Pass True if the reaction area has a dark background |
-| isFlipped | `boolean` | No | Optional. Pass True if reaction area corner is flipped |
-
+| Name         | Type           | Required | Description                                                    |
+| :----------- | :------------- | :------: | :------------------------------------------------------------- |
+| type         | `string`       |   Yes    | Type of the area, always “suggested_reaction”                  |
+| reactionType | `ReactionType` |   Yes    | Type of the reaction                                           |
+| isDark       | `boolean`      |    No    | Optional. Pass True if the reaction area has a dark background |
+| isFlipped    | `boolean`      |    No    | Optional. Pass True if reaction area corner is flipped         |
 
 ## Event Handlers
 
@@ -18,9 +17,11 @@ You can listen for StoryAreaTypeSuggestedReaction events using:
 
 ```typescript
 // Type-specific handler
-bot.onStoryAreaTypeSuggestedReaction(async (storyareatypesuggestedreaction: StoryAreaTypeSuggestedReaction) => {
-  console.log('Received:', storyareatypesuggestedreaction);
-});
+bot.onStoryAreaTypeSuggestedReaction(
+  async (storyareatypesuggestedreaction: StoryAreaTypeSuggestedReaction) => {
+    console.log('Received:', storyareatypesuggestedreaction);
+  }
+);
 
 // Generic handler
 bot.on('storyareatypesuggestedreaction', async (data: StoryAreaTypeSuggestedReaction) => {

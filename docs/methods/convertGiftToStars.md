@@ -1,6 +1,6 @@
 # convertGiftToStars
 
-Converts a given regular gift to Telegram Stars. Requires the can\_convert\_gifts\_to\_stars business bot right. Returns True on success.
+Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -14,14 +14,12 @@ This method is available as a fluent method on the following types:
 
 [View Gift documentation with fluent methods](../types/Gift.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `ownedGiftId` | `string` | Yes | Unique identifier of the regular gift that should be converted to Telegram Stars |
-
+| Parameter              | Type     | Required | Description                                                                      |
+| :--------------------- | :------- | :------: | :------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection                                     |
+| `ownedGiftId`          | `string` |   Yes    | Unique identifier of the regular gift that should be converted to Telegram Stars |
 
 ## Usage Example
 
@@ -32,9 +30,12 @@ bot.onGift(async (gift: Gift) => {
 });
 
 // With filtering
-bot.onGift((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onGift(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

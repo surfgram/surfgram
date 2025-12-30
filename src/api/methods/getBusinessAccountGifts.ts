@@ -24,7 +24,10 @@ import { GetBusinessAccountGiftsParams } from '../interfaces/getBusinessAccountG
  * // ... params
  * });
  */
-export async function getBusinessAccountGifts(this: Bot, params: GetBusinessAccountGiftsParams): Promise<any> {
+export async function getBusinessAccountGifts(
+  this: Bot,
+  params: GetBusinessAccountGiftsParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('getBusinessAccountGifts', snakeParams);
   return response;

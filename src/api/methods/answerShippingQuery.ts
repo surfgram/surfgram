@@ -25,7 +25,10 @@ import { ShippingOption } from '../types/shippingOption';
  * // ... params
  * });
  */
-export async function answerShippingQuery(this: Bot, params: AnswerShippingQueryParams): Promise<any> {
+export async function answerShippingQuery(
+  this: Bot,
+  params: AnswerShippingQueryParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('answerShippingQuery', snakeParams);
   return response;

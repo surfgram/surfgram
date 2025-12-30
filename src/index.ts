@@ -10,9 +10,9 @@
  * @see {@link https://github.com/user-with-username/surfgram GitHub Repository}
  */
 
-export * from "./core/bot";
-export * from "./core/plugin";
-export * from "./core/utils";
+export * from './core/bot';
+export * from './core/plugin';
+export * from './core/utils';
 export * from './api/interfaces';
 export * from './api/methods';
 export * from './api/types';

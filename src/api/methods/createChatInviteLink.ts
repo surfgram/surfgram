@@ -24,7 +24,10 @@ import { CreateChatInviteLinkParams } from '../interfaces/createChatInviteLinkPa
  * // ... params
  * });
  */
-export async function createChatInviteLink(this: Bot, params: CreateChatInviteLinkParams): Promise<any> {
+export async function createChatInviteLink(
+  this: Bot,
+  params: CreateChatInviteLinkParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('createChatInviteLink', snakeParams);
   return response;

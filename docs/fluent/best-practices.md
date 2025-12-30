@@ -3,14 +3,16 @@
 ## 1. Use Fluent Methods When Possible
 
 **Instead of:**
+
 ```typescript
 await bot.sendMessage({
   chat_id: message.chat.id,
-  text: 'Hello'
+  text: 'Hello',
 });
 ```
 
 **Use:**
+
 ```typescript
 await message.sendMessage({ text: 'Hello' });
 // chatId is auto-filled!
@@ -38,6 +40,6 @@ Always use TypeScript for full type checking:
 ```typescript
 // This will show TypeScript error if parameters are wrong
 await message.sendMessage({
-  texxt: 'Hello' // ERROR: typo in 'text'
+  texxt: 'Hello', // ERROR: typo in 'text'
 });
 ```

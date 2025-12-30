@@ -19,7 +19,7 @@ describe('KeyboardButtonRequestUsers', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.requestId ?? instance.raw?.request_id).toEqual(123);
     expect(instance.userIsBot ?? instance.raw?.user_is_bot).toEqual(true);
     expect(instance.userIsPremium ?? instance.raw?.user_is_premium).toEqual(true);

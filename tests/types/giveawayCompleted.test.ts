@@ -16,7 +16,7 @@ describe('GiveawayCompleted', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.winnerCount ?? instance.raw?.winner_count).toEqual(123);
     expect(instance.unclaimedPrizeCount ?? instance.raw?.unclaimed_prize_count).toEqual(123);
     expect(instance.giveawayMessage ?? instance.raw?.giveaway_message).toEqual({} as any);

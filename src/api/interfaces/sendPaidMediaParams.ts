@@ -150,5 +150,4 @@ export interface SendPaidMediaParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
-
 }

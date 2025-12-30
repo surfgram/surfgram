@@ -4,13 +4,12 @@ This object represents information about an order.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| name | `string` | No | Optional. User name |
-| phoneNumber | `string` | No | Optional. User's phone number |
-| email | `string` | No | Optional. User email |
-| shippingAddress | `ShippingAddress` | No | Optional. User shipping address |
-
+| Name            | Type              | Required | Description                     |
+| :-------------- | :---------------- | :------: | :------------------------------ |
+| name            | `string`          |    No    | Optional. User name             |
+| phoneNumber     | `string`          |    No    | Optional. User's phone number   |
+| email           | `string`          |    No    | Optional. User email            |
+| shippingAddress | `ShippingAddress` |    No    | Optional. User shipping address |
 
 ## Event Handlers
 

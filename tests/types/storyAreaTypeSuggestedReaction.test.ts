@@ -6,7 +6,7 @@ describe('StoryAreaTypeSuggestedReaction', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: "example text",
+      type: 'example text',
       reaction_type: {} as any,
       is_dark: true,
       is_flipped: true,
@@ -16,8 +16,8 @@ describe('StoryAreaTypeSuggestedReaction', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+
+    expect(instance.type ?? instance.raw?.type).toEqual('example text');
     expect(instance.reactionType ?? instance.raw?.reaction_type).toEqual({} as any);
     expect(instance.isDark ?? instance.raw?.is_dark).toEqual(true);
     expect(instance.isFlipped ?? instance.raw?.is_flipped).toEqual(true);

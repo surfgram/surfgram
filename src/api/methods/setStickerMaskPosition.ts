@@ -23,7 +23,11 @@ import { MaskPosition } from '../types/maskPosition';
  * // Direct parameters
  * await bot.setStickerMaskPosition(...);
  */
-export async function setStickerMaskPosition(this: Bot, sticker: string, maskPosition?: MaskPosition): Promise<any> {
+export async function setStickerMaskPosition(
+  this: Bot,
+  sticker: string,
+  maskPosition?: MaskPosition
+): Promise<any> {
   const apiParams = {
     sticker: sticker,
     maskPosition: maskPosition,
