@@ -1,7 +1,7 @@
 import { Bot, ReplyKeyboardMarkup } from 'surfgram';
 import { SurfgramFSM } from './pluginExample';
 
-const bot = new Bot('7346601222:AAEVT62iD1m2uLRIIyRv6gjxzo0IdeYRz64');
+const bot = new Bot('TOKEN');
 
 bot.use(new SurfgramFSM());
 
