@@ -6,16 +6,16 @@ describe('BackgroundTypeChatTheme', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      theme_name: 'example text',
+      type: "example text",
+      theme_name: "example text",
     };
 
     const instance = new BackgroundTypeChatTheme(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.themeName ?? instance.raw?.theme_name).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.themeName ?? instance.raw?.theme_name).toEqual("example text");
   });
 });

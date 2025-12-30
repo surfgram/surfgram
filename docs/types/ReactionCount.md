@@ -4,10 +4,11 @@ Represents a reaction added to a message along with the number of times it was a
 
 ## Fields
 
-| Name       | Type           | Required | Description                            |
-| :--------- | :------------- | :------: | :------------------------------------- |
-| type       | `ReactionType` |   Yes    | Type of the reaction                   |
-| totalCount | `number`       |   Yes    | Number of times the reaction was added |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `ReactionType` | Yes | Type of the reaction |
+| totalCount | `number` | Yes | Number of times the reaction was added |
+
 
 ## Event Handlers
 

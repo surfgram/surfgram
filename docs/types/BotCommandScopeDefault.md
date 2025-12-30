@@ -4,9 +4,10 @@ Represents the default scope of bot commands. Default commands are used if no co
 
 ## Fields
 
-| Name | Type     | Required | Description                 |
-| :--- | :------- | :------: | :-------------------------- |
-| type | `string` |   Yes    | Scope type, must be default |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Scope type, must be default |
+
 
 ## Event Handlers
 

@@ -14,7 +14,7 @@ describe('ReactionCount', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.type ?? instance.raw?.type).toEqual({} as any);
     expect(instance.totalCount ?? instance.raw?.total_count).toEqual(123);
   });

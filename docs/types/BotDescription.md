@@ -4,9 +4,10 @@ This object represents the bot&#39;s description.
 
 ## Fields
 
-| Name        | Type     | Required | Description           |
-| :---------- | :------- | :------: | :-------------------- |
-| description | `string` |   Yes    | The bot's description |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| description | `string` | Yes | The bot's description |
+
 
 ## Event Handlers
 

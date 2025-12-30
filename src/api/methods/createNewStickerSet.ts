@@ -25,10 +25,7 @@ import { InputSticker } from '../types/inputSticker';
  * // ... params
  * });
  */
-export async function createNewStickerSet(
-  this: Bot,
-  params: CreateNewStickerSetParams
-): Promise<any> {
+export async function createNewStickerSet(this: Bot, params: CreateNewStickerSetParams): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('createNewStickerSet', snakeParams);
   return response;

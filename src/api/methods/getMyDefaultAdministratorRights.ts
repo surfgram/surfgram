@@ -21,10 +21,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getMyDefaultAdministratorRights(...);
  */
-export async function getMyDefaultAdministratorRights(
-  this: Bot,
-  forChannels?: boolean
-): Promise<any> {
+export async function getMyDefaultAdministratorRights(this: Bot, forChannels?: boolean): Promise<any> {
   const apiParams = {
     forChannels: forChannels,
   };

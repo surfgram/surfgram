@@ -10,20 +10,24 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setPassportDataErrors`
 
+
 [View PassportData documentation with fluent methods](../types/PassportData.md)
 
 ### PassportElementError (1 methods)
 
 **Available methods:** `setPassportDataErrors`
 
+
 [View PassportElementError documentation with fluent methods](../types/PassportElementError.md)
+
 
 ## Parameters
 
-| Parameter | Type                     | Required | Description                                   |
-| :-------- | :----------------------- | :------: | :-------------------------------------------- |
-| `userId`  | `number`                 |   Yes    | User identifier                               |
-| `errors`  | `PassportElementError[]` |   Yes    | A JSON-serialized array describing the errors |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | User identifier |
+| `errors` | `PassportElementError[]` | Yes | A JSON-serialized array describing the errors |
+
 
 ## Usage Example
 
@@ -34,12 +38,9 @@ bot.onPassportData(async (passportdata: PassportData) => {
 });
 
 // With filtering
-bot.onPassportData(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onPassportData((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

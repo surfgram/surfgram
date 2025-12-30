@@ -6,7 +6,7 @@ describe('StarTransaction', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      id: 'example text',
+      id: "example text",
       amount: 123,
       nanostar_amount: 123,
       date: 123,
@@ -18,8 +18,8 @@ describe('StarTransaction', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.id ?? instance.raw?.id).toEqual('example text');
+    
+    expect(instance.id ?? instance.raw?.id).toEqual("example text");
     expect(instance.amount ?? instance.raw?.amount).toEqual(123);
     expect(instance.nanostarAmount ?? instance.raw?.nanostar_amount).toEqual(123);
     expect(instance.date ?? instance.raw?.date).toEqual(123);

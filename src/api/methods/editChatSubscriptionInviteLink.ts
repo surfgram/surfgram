@@ -23,12 +23,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.editChatSubscriptionInviteLink(...);
  */
-export async function editChatSubscriptionInviteLink(
-  this: Bot,
-  chatId: number | string,
-  inviteLink: string,
-  name?: string
-): Promise<any> {
+export async function editChatSubscriptionInviteLink(this: Bot, chatId: number | string, inviteLink: string, name?: string): Promise<any> {
   const apiParams = {
     chatId: chatId,
     inviteLink: inviteLink,

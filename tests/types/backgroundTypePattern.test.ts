@@ -6,7 +6,7 @@ describe('BackgroundTypePattern', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       document: {} as any,
       fill: {} as any,
       intensity: 123,
@@ -18,8 +18,8 @@ describe('BackgroundTypePattern', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.document ?? instance.raw?.document).toEqual({} as any);
     expect(instance.fill ?? instance.raw?.fill).toEqual({} as any);
     expect(instance.intensity ?? instance.raw?.intensity).toEqual(123);
