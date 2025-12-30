@@ -5,6 +5,7 @@ import { Validator } from '../utils/validator';
 import { TypeNormalizer } from '../utils/typeNormalizer';
 import { SortUtility } from '../utils/sortUtility';
 import { MappingUtility } from '../utils/mappingUtility';
+import { CaseConverter } from '../utils/caseConverter';
 
 export class FluentGenerator extends BaseGenerator {
   generate() {
@@ -20,7 +21,6 @@ export class FluentGenerator extends BaseGenerator {
     this.writeFile(resolve(fluentOut, 'events.ts'), this.renderFluentEvents());
     this.writeFile(resolve(fluentOut, 'index.ts'), this.renderTemplate('fluent_index.ts.njk', {}));
   }
-
   private renderBotTypes(): string {
     const methodData = Object.values(this.methods).map((method) => {
       const useParamsObject = Validator.shouldUseParamsObject(method);
@@ -57,16 +57,12 @@ export class FluentGenerator extends BaseGenerator {
           fileName: type.fileName.replace('.ts', ''),
           methods: compatibleMethods.map((method) => {
             const mappings = MappingUtility.findContextualMappings(type, method);
-
             const autoMappings = mappings.filter((m) => m.similarityScore > 0.5);
             let autoMappedParams = autoMappings.map((m) => m.parameterName);
-
             const typeNameLower = type.name.toLowerCase();
-            const snakeTypeName = this.toSnakeCase(type.name);
-
+            const snakeTypeName = CaseConverter.camelToSnake(type.name);
             for (const param of method.parameters) {
               const paramNameLower = param.name.toLowerCase();
-
               if (
                 this.isIdParam(paramNameLower) &&
                 (paramNameLower === `${typeNameLower}_id` ||
@@ -85,14 +81,10 @@ export class FluentGenerator extends BaseGenerator {
                 }
               }
             }
-
             const useParamsObject = Validator.shouldUseParamsObject(method);
             const sortedParams = SortUtility.sortParameters(method.parameters);
-
             const explicitParams = sortedParams.filter((p) => !autoMappedParams.includes(p.name));
-
             const interfaceName = `${method.name.charAt(0).toUpperCase()}${method.name.slice(1)}Params`;
-
             let paramsSignature: string;
             if (useParamsObject) {
               const excludedParamsString =
@@ -108,7 +100,6 @@ export class FluentGenerator extends BaseGenerator {
                 )
                 .join(', ');
             }
-
             return {
               ...method,
               useParamsObject,
@@ -135,7 +126,6 @@ export class FluentGenerator extends BaseGenerator {
       typeExtensions,
     });
   }
-
   private renderFluentEvents(): string {
     const typeExtensions = Object.values(this.types)
       .filter((type) => Validator.isValidTypeName(type.name))
@@ -148,16 +138,12 @@ export class FluentGenerator extends BaseGenerator {
           name: type.name,
           methods: compatibleMethods.map((method) => {
             const mappings = MappingUtility.findContextualMappings(type, method);
-
             const autoMappings = mappings.filter((m) => m.similarityScore > 0.5);
             let autoMappedParams = autoMappings.map((m) => m.parameterName);
-
             const typeNameLower = type.name.toLowerCase();
-            const snakeTypeName = this.toSnakeCase(type.name);
-
+            const snakeTypeName = CaseConverter.camelToSnake(type.name);
             for (const param of method.parameters) {
               const paramNameLower = param.name.toLowerCase();
-
               if (
                 this.isIdParam(paramNameLower) &&
                 (paramNameLower === `${typeNameLower}_id` ||
@@ -176,12 +162,9 @@ export class FluentGenerator extends BaseGenerator {
                 }
               }
             }
-
             const useParamsObject = Validator.shouldUseParamsObject(method);
             const sortedParams = SortUtility.sortParameters(method.parameters);
-
             const explicitParams = sortedParams.filter((p) => !autoMappedParams.includes(p.name));
-
             const paramsSignature = explicitParams
               .map(
                 (p) => `${p.name}${p.required ? '' : '?'}: ${TypeNormalizer.resolveTsType(p.types)}`
@@ -192,7 +175,6 @@ export class FluentGenerator extends BaseGenerator {
               ...p,
               tsType: TypeNormalizer.resolveTsType(p.types),
             }));
-
             return {
               ...method,
               useParamsObject,
@@ -218,14 +200,8 @@ export class FluentGenerator extends BaseGenerator {
       resolveTsType: (types: string[]) => TypeNormalizer.resolveTsType(types),
     });
   }
-
-  private toSnakeCase(str: string): string {
-    return str.replace(/([A-Z])/g, '_$1').toLowerCase();
-  }
-
   private isIdParam(paramName: string): boolean {
     const idPatterns = [/id$/i, /_id$/i, /Id$/, /^id$/, /^_id$/];
-
     return idPatterns.some((pattern) => pattern.test(paramName.toLowerCase()));
   }
 }

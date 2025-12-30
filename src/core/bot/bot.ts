@@ -17,9 +17,9 @@ import { TelegramApiResponse } from './apiResponse';
  * Main bot class for interacting with Telegram Bot API
  * @class Bot
  * @example
- * const bot = new Bot('YOUR_BOT_TOKEN');
+ * const bot = new Bot('TOKEN');
  * bot.onMessage(async (message) => {
- *   await message.reply('Hello!');
+ *   await message.sendMessage({ text: 'Hello!'} );
  * });
  * bot.startPolling();
  */
