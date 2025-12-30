@@ -6,16 +6,16 @@ describe('ReactionTypeCustomEmoji', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      custom_emoji_id: 'example text',
+      type: "example text",
+      custom_emoji_id: "example text",
     };
 
     const instance = new ReactionTypeCustomEmoji(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.customEmojiId ?? instance.raw?.custom_emoji_id).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.customEmojiId ?? instance.raw?.custom_emoji_id).toEqual("example text");
   });
 });

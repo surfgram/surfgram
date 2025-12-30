@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.removeBusinessAccountProfilePhoto(...);
  */
-export async function removeBusinessAccountProfilePhoto(
-  this: Bot,
-  businessConnectionId: string,
-  isPublic?: boolean
-): Promise<any> {
+export async function removeBusinessAccountProfilePhoto(this: Bot, businessConnectionId: string, isPublic?: boolean): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     isPublic: isPublic,

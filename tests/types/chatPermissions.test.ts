@@ -26,7 +26,7 @@ describe('ChatPermissions', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.canSendMessages ?? instance.raw?.can_send_messages).toEqual(true);
     expect(instance.canSendAudios ?? instance.raw?.can_send_audios).toEqual(true);
     expect(instance.canSendDocuments ?? instance.raw?.can_send_documents).toEqual(true);

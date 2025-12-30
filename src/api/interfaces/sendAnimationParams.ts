@@ -182,4 +182,5 @@ export interface SendAnimationParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }

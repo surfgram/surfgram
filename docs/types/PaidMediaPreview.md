@@ -4,12 +4,13 @@ The paid media isn&#39;t available before the payment.
 
 ## Fields
 
-| Name     | Type     | Required | Description                                                         |
-| :------- | :------- | :------: | :------------------------------------------------------------------ |
-| type     | `string` |   Yes    | Type of the paid media, always “preview”                            |
-| width    | `number` |    No    | Optional. Media width as defined by the sender                      |
-| height   | `number` |    No    | Optional. Media height as defined by the sender                     |
-| duration | `number` |    No    | Optional. Duration of the media in seconds as defined by the sender |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the paid media, always “preview” |
+| width | `number` | No | Optional. Media width as defined by the sender |
+| height | `number` | No | Optional. Media height as defined by the sender |
+| duration | `number` | No | Optional. Duration of the media in seconds as defined by the sender |
+
 
 ## Event Handlers
 

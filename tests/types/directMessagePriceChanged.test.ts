@@ -14,10 +14,8 @@ describe('DirectMessagePriceChanged', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.areDirectMessagesEnabled ?? instance.raw?.are_direct_messages_enabled).toEqual(
-      true
-    );
+    
+    expect(instance.areDirectMessagesEnabled ?? instance.raw?.are_direct_messages_enabled).toEqual(true);
     expect(instance.directMessageStarCount ?? instance.raw?.direct_message_star_count).toEqual(123);
   });
 });

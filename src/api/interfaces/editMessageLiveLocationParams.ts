@@ -95,4 +95,5 @@ export interface EditMessageLiveLocationParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
+
 }

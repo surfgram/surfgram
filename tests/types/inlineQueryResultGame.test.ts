@@ -6,9 +6,9 @@ describe('InlineQueryResultGame', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      id: 'example text',
-      game_short_name: 'example text',
+      type: "example text",
+      id: "example text",
+      game_short_name: "example text",
       reply_markup: {} as any,
     };
 
@@ -16,10 +16,10 @@ describe('InlineQueryResultGame', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.id ?? instance.raw?.id).toEqual('example text');
-    expect(instance.gameShortName ?? instance.raw?.game_short_name).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.id ?? instance.raw?.id).toEqual("example text");
+    expect(instance.gameShortName ?? instance.raw?.game_short_name).toEqual("example text");
     expect(instance.replyMarkup ?? instance.raw?.reply_markup).toEqual({} as any);
   });
 });
