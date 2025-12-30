@@ -1,6 +1,7 @@
 # API Documentation
 
 ## Core
+
 - [Bot](bot.md)
 - [Core Concepts](core-concepts.md)
 - [Plugins](plugins.md)
@@ -291,7 +292,6 @@
 - [CallbackGame](types/CallbackGame.md)
 
 ## API Methods
-
 
 ## Fluent API Overview
 

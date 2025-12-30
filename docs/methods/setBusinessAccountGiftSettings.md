@@ -1,6 +1,6 @@
 # setBusinessAccountGiftSettings
 
-Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can\_change\_gift\_settings business bot right. Returns True on success.
+Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can_change_gift_settings business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -10,13 +10,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getAvailableGifts`, `sendGift`, `giftPremiumSubscription`, `setBusinessAccountGiftSettings`, `getBusinessAccountGifts`, `convertGiftToStars`, `upgradeGift`, `transferGift`
 
-
 [View Gift documentation with fluent methods](../types/Gift.md)
 
 ### Gifts (3 methods)
 
 **Available methods:** `getAvailableGifts`, `setBusinessAccountGiftSettings`, `getBusinessAccountGifts`
-
 
 [View Gifts documentation with fluent methods](../types/Gifts.md)
 
@@ -24,18 +22,15 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setBusinessAccountGiftSettings`
 
-
 [View AcceptedGiftTypes documentation with fluent methods](../types/AcceptedGiftTypes.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `showGiftButton` | `boolean` | Yes | Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field |
-| `acceptedGiftTypes` | `AcceptedGiftTypes` | Yes | Types of gifts accepted by the business account |
-
+| Parameter              | Type                | Required | Description                                                                                                              |
+| :--------------------- | :------------------ | :------: | :----------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`            |   Yes    | Unique identifier of the business connection                                                                             |
+| `showGiftButton`       | `boolean`           |   Yes    | Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field |
+| `acceptedGiftTypes`    | `AcceptedGiftTypes` |   Yes    | Types of gifts accepted by the business account                                                                          |
 
 ## Usage Example
 
@@ -46,9 +41,12 @@ bot.onGift(async (gift: Gift) => {
 });
 
 // With filtering
-bot.onGift((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onGift(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

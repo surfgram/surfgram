@@ -4,11 +4,10 @@ This object contains information about the users whose identifiers were shared w
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| requestId | `number` | Yes | Identifier of the request |
-| users | `SharedUser[]` | Yes | Information about users shared with the bot. |
-
+| Name      | Type           | Required | Description                                  |
+| :-------- | :------------- | :------: | :------------------------------------------- |
+| requestId | `number`       |   Yes    | Identifier of the request                    |
+| users     | `SharedUser[]` |   Yes    | Information about users shared with the bot. |
 
 ## Event Handlers
 

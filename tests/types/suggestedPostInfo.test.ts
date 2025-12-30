@@ -6,7 +6,7 @@ describe('SuggestedPostInfo', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      state: "example text",
+      state: 'example text',
       price: {} as any,
       send_date: 123,
     };
@@ -15,8 +15,8 @@ describe('SuggestedPostInfo', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.state ?? instance.raw?.state).toEqual("example text");
+
+    expect(instance.state ?? instance.raw?.state).toEqual('example text');
     expect(instance.price ?? instance.raw?.price).toEqual({} as any);
     expect(instance.sendDate ?? instance.raw?.send_date).toEqual(123);
   });

@@ -5,7 +5,6 @@
  * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram API Documentation}
  */
 
-
 export interface AnswerPreCheckoutQueryParams {
   /**
    * Unique identifier for the query to be answered
@@ -30,5 +29,4 @@ export interface AnswerPreCheckoutQueryParams {
    * @required No
    */
   errorMessage?: string;
-
 }

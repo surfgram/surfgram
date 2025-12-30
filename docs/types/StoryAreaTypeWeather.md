@@ -4,13 +4,12 @@ Describes a story area containing weather information. Currently, a story can ha
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the area, always “weather” |
-| temperature | `number` | Yes | Temperature, in degree Celsius |
-| emoji | `string` | Yes | Emoji representing the weather |
-| backgroundColor | `number` | Yes | A color of the area background in the ARGB format |
-
+| Name            | Type     | Required | Description                                       |
+| :-------------- | :------- | :------: | :------------------------------------------------ |
+| type            | `string` |   Yes    | Type of the area, always “weather”                |
+| temperature     | `number` |   Yes    | Temperature, in degree Celsius                    |
+| emoji           | `string` |   Yes    | Emoji representing the weather                    |
+| backgroundColor | `number` |   Yes    | A color of the area background in the ARGB format |
 
 ## Event Handlers
 

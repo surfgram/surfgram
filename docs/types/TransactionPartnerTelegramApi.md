@@ -4,11 +4,10 @@ Describes a transaction with payment for paid broadcasting.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the transaction partner, always “telegram\_api” |
-| requestCount | `number` | Yes | The number of successful requests that exceeded regular limits and were therefore billed |
-
+| Name         | Type     | Required | Description                                                                              |
+| :----------- | :------- | :------: | :--------------------------------------------------------------------------------------- |
+| type         | `string` |   Yes    | Type of the transaction partner, always “telegram_api”                                   |
+| requestCount | `number` |   Yes    | The number of successful requests that exceeded regular limits and were therefore billed |
 
 ## Event Handlers
 
@@ -16,9 +15,11 @@ You can listen for TransactionPartnerTelegramApi events using:
 
 ```typescript
 // Type-specific handler
-bot.onTransactionPartnerTelegramApi(async (transactionpartnertelegramapi: TransactionPartnerTelegramApi) => {
-  console.log('Received:', transactionpartnertelegramapi);
-});
+bot.onTransactionPartnerTelegramApi(
+  async (transactionpartnertelegramapi: TransactionPartnerTelegramApi) => {
+    console.log('Received:', transactionpartnertelegramapi);
+  }
+);
 
 // Generic handler
 bot.on('transactionpartnertelegramapi', async (data: TransactionPartnerTelegramApi) => {

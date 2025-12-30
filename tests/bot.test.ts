@@ -77,7 +77,7 @@ describe('Bot', () => {
   describe('constructor', () => {
     test('should create bot with valid token', () => {
       bot = new Bot(mockToken);
-      
+
       expect(bot.token).toBe(mockToken);
       expect(bot.apiUrl).toBe(mockApiUrl);
       expect(bot.handlers).toBeInstanceOf(Map);

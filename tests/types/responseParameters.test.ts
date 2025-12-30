@@ -14,7 +14,7 @@ describe('ResponseParameters', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.migrateToChatId ?? instance.raw?.migrate_to_chat_id).toEqual(123);
     expect(instance.retryAfter ?? instance.raw?.retry_after).toEqual(123);
   });

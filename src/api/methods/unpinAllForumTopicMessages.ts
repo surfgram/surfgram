@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.unpinAllForumTopicMessages(...);
  */
-export async function unpinAllForumTopicMessages(this: Bot, chatId: number | string, messageThreadId: number): Promise<any> {
+export async function unpinAllForumTopicMessages(
+  this: Bot,
+  chatId: number | string,
+  messageThreadId: number
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageThreadId: messageThreadId,
