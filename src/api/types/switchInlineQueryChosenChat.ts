@@ -6,6 +6,7 @@
  * @class SwitchInlineQueryChosenChat
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class SwitchInlineQueryChosenChat {
    * @public
    */
   query?: string;
+
   /**
    * Optional. True, if private chats with users can be chosen
    * @type { boolean }
@@ -31,6 +33,7 @@ export class SwitchInlineQueryChosenChat {
    * @public
    */
   allowUserChats?: boolean;
+
   /**
    * Optional. True, if private chats with bots can be chosen
    * @type { boolean }
@@ -39,6 +42,7 @@ export class SwitchInlineQueryChosenChat {
    * @public
    */
   allowBotChats?: boolean;
+
   /**
    * Optional. True, if group and supergroup chats can be chosen
    * @type { boolean }
@@ -47,6 +51,7 @@ export class SwitchInlineQueryChosenChat {
    * @public
    */
   allowGroupChats?: boolean;
+
   /**
    * Optional. True, if channel chats can be chosen
    * @type { boolean }
@@ -88,15 +93,7 @@ export class SwitchInlineQueryChosenChat {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.query = data.query;
-      this.allowUserChats = data.allowUserChats;
-      this.allowBotChats = data.allowBotChats;
-      this.allowGroupChats = data.allowGroupChats;
-      this.allowChannelChats = data.allowChannelChats;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

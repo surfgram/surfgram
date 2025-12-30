@@ -6,6 +6,7 @@
  * @class ChatShared
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatShared {
    * @public
    */
   requestId!: number;
+
   /**
    * Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.
    * @type { number }
@@ -32,6 +34,7 @@ export class ChatShared {
    * @public
    */
   chatId!: number;
+
   /**
    * Optional. Title of the chat, if the title was requested by the bot.
    * @type { string }
@@ -40,6 +43,7 @@ export class ChatShared {
    * @public
    */
   title?: string;
+
   /**
    * Optional. Username of the chat, if the username was requested by the bot and available.
    * @type { string }
@@ -48,6 +52,7 @@ export class ChatShared {
    * @public
    */
   username?: string;
+
   /**
    * Optional. Available sizes of the chat photo, if the photo was requested by the bot
    * @type { PhotoSize[] }
@@ -89,15 +94,7 @@ export class ChatShared {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.requestId = data.requestId;
-      this.chatId = data.chatId;
-      this.title = data.title;
-      this.username = data.username;
-      this.photo = data.photo;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

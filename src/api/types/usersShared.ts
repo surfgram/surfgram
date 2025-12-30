@@ -6,6 +6,7 @@
  * @class UsersShared
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class UsersShared {
    * @public
    */
   requestId!: number;
+
   /**
    * Information about users shared with the bot.
    * @type { SharedUser[] }
@@ -65,12 +67,7 @@ export class UsersShared {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.requestId = data.requestId;
-      this.users = data.users;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

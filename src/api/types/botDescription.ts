@@ -6,6 +6,7 @@
  * @class BotDescription
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -56,11 +57,7 @@ export class BotDescription {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.description = data.description;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class ShippingOption
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ShippingOption {
    * @public
    */
   id!: string;
+
   /**
    * Option title
    * @type { string }
@@ -32,6 +34,7 @@ export class ShippingOption {
    * @public
    */
   title!: string;
+
   /**
    * List of price portions
    * @type { LabeledPrice[] }
@@ -73,13 +76,7 @@ export class ShippingOption {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.title = data.title;
-      this.prices = data.prices;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

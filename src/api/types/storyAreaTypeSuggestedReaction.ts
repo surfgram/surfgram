@@ -6,6 +6,7 @@
  * @class StoryAreaTypeSuggestedReaction
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class StoryAreaTypeSuggestedReaction {
    * @public
    */
   type!: string;
+
   /**
    * Type of the reaction
    * @type { ReactionType }
@@ -32,6 +34,7 @@ export class StoryAreaTypeSuggestedReaction {
    * @public
    */
   reactionType!: ReactionType;
+
   /**
    * Optional. Pass True if the reaction area has a dark background
    * @type { boolean }
@@ -40,6 +43,7 @@ export class StoryAreaTypeSuggestedReaction {
    * @public
    */
   isDark?: boolean;
+
   /**
    * Optional. Pass True if reaction area corner is flipped
    * @type { boolean }
@@ -81,14 +85,7 @@ export class StoryAreaTypeSuggestedReaction {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.reactionType = data.reactionType;
-      this.isDark = data.isDark;
-      this.isFlipped = data.isFlipped;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

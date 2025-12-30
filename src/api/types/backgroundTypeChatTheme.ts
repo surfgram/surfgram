@@ -6,6 +6,7 @@
  * @class BackgroundTypeChatTheme
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class BackgroundTypeChatTheme {
    * @public
    */
   type!: string;
+
   /**
    * Name of the chat theme, which is usually an emoji
    * @type { string }
@@ -64,12 +66,7 @@ export class BackgroundTypeChatTheme {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.themeName = data.themeName;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

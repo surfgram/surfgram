@@ -6,6 +6,7 @@
  * @class VideoNote
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class VideoNote {
    * @public
    */
   fileId!: string;
+
   /**
    * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -32,6 +34,7 @@ export class VideoNote {
    * @public
    */
   fileUniqueId!: string;
+
   /**
    * Video width and height \(diameter of the video message\) as defined by the sender
    * @type { number }
@@ -40,6 +43,7 @@ export class VideoNote {
    * @public
    */
   length!: number;
+
   /**
    * Duration of the video in seconds as defined by the sender
    * @type { number }
@@ -48,6 +52,7 @@ export class VideoNote {
    * @public
    */
   duration!: number;
+
   /**
    * Optional. Video thumbnail
    * @type { PhotoSize }
@@ -56,6 +61,7 @@ export class VideoNote {
    * @public
    */
   thumbnail?: PhotoSize;
+
   /**
    * Optional. File size in bytes
    * @type { number }
@@ -97,16 +103,7 @@ export class VideoNote {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.fileId = data.fileId;
-      this.fileUniqueId = data.fileUniqueId;
-      this.length = data.length;
-      this.duration = data.duration;
-      this.thumbnail = data.thumbnail;
-      this.fileSize = data.fileSize;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class InputChecklistTask
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class InputChecklistTask {
    * @public
    */
   id!: number;
+
   /**
    * Text of the task; 1-100 characters after entities parsing
    * @type { string }
@@ -32,6 +34,7 @@ export class InputChecklistTask {
    * @public
    */
   text!: string;
+
   /**
    * Optional. Mode for parsing entities in the text. See formatting options for more details.
    * @type { string }
@@ -40,6 +43,7 @@ export class InputChecklistTask {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the text, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are allowed.
    * @type { MessageEntity[] }
@@ -81,14 +85,7 @@ export class InputChecklistTask {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.text = data.text;
-      this.parseMode = data.parseMode;
-      this.textEntities = data.textEntities;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

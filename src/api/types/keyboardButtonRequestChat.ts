@@ -6,6 +6,7 @@
  * @class KeyboardButtonRequestChat
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   requestId!: number;
+
   /**
    * Pass True to request a channel chat, pass False to request a group or a supergroup chat.
    * @type { boolean }
@@ -32,6 +34,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   chatIsChannel!: boolean;
+
   /**
    * Optional. Pass True to request a forum supergroup, pass False to request a non-forum chat. If not specified, no additional restrictions are applied.
    * @type { boolean }
@@ -40,6 +43,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   chatIsForum?: boolean;
+
   /**
    * Optional. Pass True to request a supergroup or a channel with a username, pass False to request a chat without a username. If not specified, no additional restrictions are applied.
    * @type { boolean }
@@ -48,6 +52,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   chatHasUsername?: boolean;
+
   /**
    * Optional. Pass True to request a chat owned by the user. Otherwise, no additional restrictions are applied.
    * @type { boolean }
@@ -56,6 +61,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   chatIsCreated?: boolean;
+
   /**
    * Optional. A JSON-serialized object listing the required administrator rights of the user in the chat. The rights must be a superset of bot\_administrator\_rights. If not specified, no additional restrictions are applied.
    * @type { ChatAdministratorRights }
@@ -64,6 +70,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   userAdministratorRights?: ChatAdministratorRights;
+
   /**
    * Optional. A JSON-serialized object listing the required administrator rights of the bot in the chat. The rights must be a subset of user\_administrator\_rights. If not specified, no additional restrictions are applied.
    * @type { ChatAdministratorRights }
@@ -72,6 +79,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   botAdministratorRights?: ChatAdministratorRights;
+
   /**
    * Optional. Pass True to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
    * @type { boolean }
@@ -80,6 +88,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   botIsMember?: boolean;
+
   /**
    * Optional. Pass True to request the chat's title
    * @type { boolean }
@@ -88,6 +97,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   requestTitle?: boolean;
+
   /**
    * Optional. Pass True to request the chat's username
    * @type { boolean }
@@ -96,6 +106,7 @@ export class KeyboardButtonRequestChat {
    * @public
    */
   requestUsername?: boolean;
+
   /**
    * Optional. Pass True to request the chat's photo
    * @type { boolean }
@@ -137,21 +148,7 @@ export class KeyboardButtonRequestChat {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.requestId = data.requestId;
-      this.chatIsChannel = data.chatIsChannel;
-      this.chatIsForum = data.chatIsForum;
-      this.chatHasUsername = data.chatHasUsername;
-      this.chatIsCreated = data.chatIsCreated;
-      this.userAdministratorRights = data.userAdministratorRights;
-      this.botAdministratorRights = data.botAdministratorRights;
-      this.botIsMember = data.botIsMember;
-      this.requestTitle = data.requestTitle;
-      this.requestUsername = data.requestUsername;
-      this.requestPhoto = data.requestPhoto;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

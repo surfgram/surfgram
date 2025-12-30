@@ -6,6 +6,7 @@
  * @class InputInvoiceMessageContent
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   title!: string;
+
   /**
    * Product description, 1-255 characters
    * @type { string }
@@ -32,6 +34,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   description!: string;
+
   /**
    * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
    * @type { string }
@@ -40,6 +43,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   payload!: string;
+
   /**
    * Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
    * @type { string }
@@ -48,6 +52,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   providerToken?: string;
+
   /**
    * Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
    * @type { string }
@@ -56,6 +61,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   currency!: string;
+
   /**
    * Price breakdown, a JSON-serialized list of components \(e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.\). Must contain exactly one item for payments in Telegram Stars.
    * @type { LabeledPrice[] }
@@ -64,6 +70,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   prices!: LabeledPrice[];
+
   /**
    * Optional. The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max\_tip\_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars.
    * @type { number }
@@ -72,6 +79,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   maxTipAmount?: number;
+
   /**
    * Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount.
    * @type { number[] }
@@ -80,6 +88,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   suggestedTipAmounts?: number[];
+
   /**
    * Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.
    * @type { string }
@@ -88,6 +97,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   providerData?: string;
+
   /**
    * Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
    * @type { string }
@@ -96,6 +106,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   photoUrl?: string;
+
   /**
    * Optional. Photo size in bytes
    * @type { number }
@@ -104,6 +115,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   photoSize?: number;
+
   /**
    * Optional. Photo width
    * @type { number }
@@ -112,6 +124,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   photoWidth?: number;
+
   /**
    * Optional. Photo height
    * @type { number }
@@ -120,6 +133,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   photoHeight?: number;
+
   /**
    * Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -128,6 +142,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   needName?: boolean;
+
   /**
    * Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -136,6 +151,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   needPhoneNumber?: boolean;
+
   /**
    * Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -144,6 +160,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   needEmail?: boolean;
+
   /**
    * Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -152,6 +169,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   needShippingAddress?: boolean;
+
   /**
    * Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -160,6 +178,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   sendPhoneNumberToProvider?: boolean;
+
   /**
    * Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -168,6 +187,7 @@ export class InputInvoiceMessageContent {
    * @public
    */
   sendEmailToProvider?: boolean;
+
   /**
    * Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
    * @type { boolean }
@@ -209,30 +229,7 @@ export class InputInvoiceMessageContent {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.title = data.title;
-      this.description = data.description;
-      this.payload = data.payload;
-      this.providerToken = data.providerToken;
-      this.currency = data.currency;
-      this.prices = data.prices;
-      this.maxTipAmount = data.maxTipAmount;
-      this.suggestedTipAmounts = data.suggestedTipAmounts;
-      this.providerData = data.providerData;
-      this.photoUrl = data.photoUrl;
-      this.photoSize = data.photoSize;
-      this.photoWidth = data.photoWidth;
-      this.photoHeight = data.photoHeight;
-      this.needName = data.needName;
-      this.needPhoneNumber = data.needPhoneNumber;
-      this.needEmail = data.needEmail;
-      this.needShippingAddress = data.needShippingAddress;
-      this.sendPhoneNumberToProvider = data.sendPhoneNumberToProvider;
-      this.sendEmailToProvider = data.sendEmailToProvider;
-      this.isFlexible = data.isFlexible;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class InlineQueryResultCachedGif
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -34,6 +36,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   id!: string;
+
   /**
    * A valid file identifier for the GIF file
    * @type { string }
@@ -42,6 +45,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   gifFileId!: string;
+
   /**
    * Optional. Title for the result
    * @type { string }
@@ -50,6 +54,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   title?: string;
+
   /**
    * Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -58,6 +63,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. Mode for parsing entities in the caption. See formatting options for more details.
    * @type { string }
@@ -66,6 +72,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -74,6 +81,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. Pass True, if the caption must be shown above the message media
    * @type { boolean }
@@ -82,6 +90,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   showCaptionAboveMedia?: boolean;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -90,6 +99,7 @@ export class InlineQueryResultCachedGif {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. Content of the message to be sent instead of the GIF animation
    * @type { InputMessageContent }
@@ -131,20 +141,7 @@ export class InlineQueryResultCachedGif {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.gifFileId = data.gifFileId;
-      this.title = data.title;
-      this.caption = data.caption;
-      this.parseMode = data.parseMode;
-      this.captionEntities = data.captionEntities;
-      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
-      this.replyMarkup = data.replyMarkup;
-      this.inputMessageContent = data.inputMessageContent;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

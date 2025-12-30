@@ -6,6 +6,7 @@
  * @class Message
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -88,6 +89,7 @@ export class Message {
    * @public
    */
   messageId!: number;
+
   /**
    * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
    * @type { number }
@@ -96,6 +98,7 @@ export class Message {
    * @public
    */
   messageThreadId?: number;
+
   /**
    * Optional. Information about the direct messages chat topic that contains the message
    * @type { DirectMessagesTopic }
@@ -104,6 +107,7 @@ export class Message {
    * @public
    */
   directMessagesTopic?: DirectMessagesTopic;
+
   /**
    * Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
    * @type { User }
@@ -112,6 +116,7 @@ export class Message {
    * @public
    */
   from?: User;
+
   /**
    * Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats.
    * @type { Chat }
@@ -120,6 +125,7 @@ export class Message {
    * @public
    */
   senderChat?: Chat;
+
   /**
    * Optional. If the sender of the message boosted the chat, the number of boosts added by the user
    * @type { number }
@@ -128,6 +134,7 @@ export class Message {
    * @public
    */
   senderBoostCount?: number;
+
   /**
    * Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
    * @type { User }
@@ -136,6 +143,7 @@ export class Message {
    * @public
    */
   senderBusinessBot?: User;
+
   /**
    * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
    * @type { number }
@@ -144,6 +152,7 @@ export class Message {
    * @public
    */
   date!: number;
+
   /**
    * Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
    * @type { string }
@@ -152,6 +161,7 @@ export class Message {
    * @public
    */
   businessConnectionId?: string;
+
   /**
    * Chat the message belongs to
    * @type { Chat }
@@ -160,6 +170,7 @@ export class Message {
    * @public
    */
   chat!: Chat;
+
   /**
    * Optional. Information about the original message for forwarded messages
    * @type { MessageOrigin }
@@ -168,6 +179,7 @@ export class Message {
    * @public
    */
   forwardOrigin?: MessageOrigin;
+
   /**
    * Optional. True, if the message is sent to a forum topic
    * @type { boolean }
@@ -176,6 +188,7 @@ export class Message {
    * @public
    */
   isTopicMessage?: boolean;
+
   /**
    * Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
    * @type { boolean }
@@ -184,6 +197,7 @@ export class Message {
    * @public
    */
   isAutomaticForward?: boolean;
+
   /**
    * Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply\_to\_message fields even if it itself is a reply.
    * @type { Message }
@@ -192,6 +206,7 @@ export class Message {
    * @public
    */
   replyToMessage?: Message;
+
   /**
    * Optional. Information about the message that is being replied to, which may come from another chat or forum topic
    * @type { ExternalReplyInfo }
@@ -200,6 +215,7 @@ export class Message {
    * @public
    */
   externalReply?: ExternalReplyInfo;
+
   /**
    * Optional. For replies that quote part of the original message, the quoted part of the message
    * @type { TextQuote }
@@ -208,6 +224,7 @@ export class Message {
    * @public
    */
   quote?: TextQuote;
+
   /**
    * Optional. For replies to a story, the original story
    * @type { Story }
@@ -216,6 +233,7 @@ export class Message {
    * @public
    */
   replyToStory?: Story;
+
   /**
    * Optional. Identifier of the specific checklist task that is being replied to
    * @type { number }
@@ -224,6 +242,7 @@ export class Message {
    * @public
    */
   replyToChecklistTaskId?: number;
+
   /**
    * Optional. Bot through which the message was sent
    * @type { User }
@@ -232,6 +251,7 @@ export class Message {
    * @public
    */
   viaBot?: User;
+
   /**
    * Optional. Date the message was last edited in Unix time
    * @type { number }
@@ -240,6 +260,7 @@ export class Message {
    * @public
    */
   editDate?: number;
+
   /**
    * Optional. True, if the message can't be forwarded
    * @type { boolean }
@@ -248,6 +269,7 @@ export class Message {
    * @public
    */
   hasProtectedContent?: boolean;
+
   /**
    * Optional. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
    * @type { boolean }
@@ -256,6 +278,7 @@ export class Message {
    * @public
    */
   isFromOffline?: boolean;
+
   /**
    * Optional. True, if the message is a paid post. Note that such posts must not be deleted for 24 hours to receive the payment and can't be edited.
    * @type { boolean }
@@ -264,6 +287,7 @@ export class Message {
    * @public
    */
   isPaidPost?: boolean;
+
   /**
    * Optional. The unique identifier of a media message group this message belongs to
    * @type { string }
@@ -272,6 +296,7 @@ export class Message {
    * @public
    */
   mediaGroupId?: string;
+
   /**
    * Optional. Signature of the post author for messages in channels, or the custom title of an anonymous group administrator
    * @type { string }
@@ -280,6 +305,7 @@ export class Message {
    * @public
    */
   authorSignature?: string;
+
   /**
    * Optional. The number of Telegram Stars that were paid by the sender of the message to send it
    * @type { number }
@@ -288,6 +314,7 @@ export class Message {
    * @public
    */
   paidStarCount?: number;
+
   /**
    * Optional. For text messages, the actual UTF-8 text of the message
    * @type { string }
@@ -296,6 +323,7 @@ export class Message {
    * @public
    */
   text?: string;
+
   /**
    * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
    * @type { MessageEntity[] }
@@ -304,6 +332,7 @@ export class Message {
    * @public
    */
   entities?: MessageEntity[];
+
   /**
    * Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed
    * @type { LinkPreviewOptions }
@@ -312,6 +341,7 @@ export class Message {
    * @public
    */
   linkPreviewOptions?: LinkPreviewOptions;
+
   /**
    * Optional. Information about suggested post parameters if the message is a suggested post in a channel direct messages chat. If the message is an approved or declined suggested post, then it can't be edited.
    * @type { SuggestedPostInfo }
@@ -320,6 +350,7 @@ export class Message {
    * @public
    */
   suggestedPostInfo?: SuggestedPostInfo;
+
   /**
    * Optional. Unique identifier of the message effect added to the message
    * @type { string }
@@ -328,6 +359,7 @@ export class Message {
    * @public
    */
   effectId?: string;
+
   /**
    * Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
    * @type { Animation }
@@ -336,6 +368,7 @@ export class Message {
    * @public
    */
   animation?: Animation;
+
   /**
    * Optional. Message is an audio file, information about the file
    * @type { Audio }
@@ -344,6 +377,7 @@ export class Message {
    * @public
    */
   audio?: Audio;
+
   /**
    * Optional. Message is a general file, information about the file
    * @type { Document }
@@ -352,6 +386,7 @@ export class Message {
    * @public
    */
   document?: Document;
+
   /**
    * Optional. Message contains paid media; information about the paid media
    * @type { PaidMediaInfo }
@@ -360,6 +395,7 @@ export class Message {
    * @public
    */
   paidMedia?: PaidMediaInfo;
+
   /**
    * Optional. Message is a photo, available sizes of the photo
    * @type { PhotoSize[] }
@@ -368,6 +404,7 @@ export class Message {
    * @public
    */
   photo?: PhotoSize[];
+
   /**
    * Optional. Message is a sticker, information about the sticker
    * @type { Sticker }
@@ -376,6 +413,7 @@ export class Message {
    * @public
    */
   sticker?: Sticker;
+
   /**
    * Optional. Message is a forwarded story
    * @type { Story }
@@ -384,6 +422,7 @@ export class Message {
    * @public
    */
   story?: Story;
+
   /**
    * Optional. Message is a video, information about the video
    * @type { Video }
@@ -392,6 +431,7 @@ export class Message {
    * @public
    */
   video?: Video;
+
   /**
    * Optional. Message is a video note, information about the video message
    * @type { VideoNote }
@@ -400,6 +440,7 @@ export class Message {
    * @public
    */
   videoNote?: VideoNote;
+
   /**
    * Optional. Message is a voice message, information about the file
    * @type { Voice }
@@ -408,6 +449,7 @@ export class Message {
    * @public
    */
   voice?: Voice;
+
   /**
    * Optional. Caption for the animation, audio, document, paid media, photo, video or voice
    * @type { string }
@@ -416,6 +458,7 @@ export class Message {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
    * @type { MessageEntity[] }
@@ -424,6 +467,7 @@ export class Message {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. True, if the caption must be shown above the message media
    * @type { boolean }
@@ -432,6 +476,7 @@ export class Message {
    * @public
    */
   showCaptionAboveMedia?: boolean;
+
   /**
    * Optional. True, if the message media is covered by a spoiler animation
    * @type { boolean }
@@ -440,6 +485,7 @@ export class Message {
    * @public
    */
   hasMediaSpoiler?: boolean;
+
   /**
    * Optional. Message is a checklist
    * @type { Checklist }
@@ -448,6 +494,7 @@ export class Message {
    * @public
    */
   checklist?: Checklist;
+
   /**
    * Optional. Message is a shared contact, information about the contact
    * @type { Contact }
@@ -456,6 +503,7 @@ export class Message {
    * @public
    */
   contact?: Contact;
+
   /**
    * Optional. Message is a dice with random value
    * @type { Dice }
@@ -464,6 +512,7 @@ export class Message {
    * @public
    */
   dice?: Dice;
+
   /**
    * Optional. Message is a game, information about the game. More about games »
    * @type { Game }
@@ -472,6 +521,7 @@ export class Message {
    * @public
    */
   game?: Game;
+
   /**
    * Optional. Message is a native poll, information about the poll
    * @type { Poll }
@@ -480,6 +530,7 @@ export class Message {
    * @public
    */
   poll?: Poll;
+
   /**
    * Optional. Message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
    * @type { Venue }
@@ -488,6 +539,7 @@ export class Message {
    * @public
    */
   venue?: Venue;
+
   /**
    * Optional. Message is a shared location, information about the location
    * @type { Location }
@@ -496,6 +548,7 @@ export class Message {
    * @public
    */
   location?: Location;
+
   /**
    * Optional. New members that were added to the group or supergroup and information about them \(the bot itself may be one of these members\)
    * @type { User[] }
@@ -504,6 +557,7 @@ export class Message {
    * @public
    */
   newChatMembers?: User[];
+
   /**
    * Optional. A member was removed from the group, information about them \(this member may be the bot itself\)
    * @type { User }
@@ -512,6 +566,7 @@ export class Message {
    * @public
    */
   leftChatMember?: User;
+
   /**
    * Optional. A chat title was changed to this value
    * @type { string }
@@ -520,6 +575,7 @@ export class Message {
    * @public
    */
   newChatTitle?: string;
+
   /**
    * Optional. A chat photo was change to this value
    * @type { PhotoSize[] }
@@ -528,6 +584,7 @@ export class Message {
    * @public
    */
   newChatPhoto?: PhotoSize[];
+
   /**
    * Optional. Service message: the chat photo was deleted
    * @type { boolean }
@@ -536,6 +593,7 @@ export class Message {
    * @public
    */
   deleteChatPhoto?: boolean;
+
   /**
    * Optional. Service message: the group has been created
    * @type { boolean }
@@ -544,6 +602,7 @@ export class Message {
    * @public
    */
   groupChatCreated?: boolean;
+
   /**
    * Optional. Service message: the supergroup has been created. This field can't be received in a message coming through updates, because bot can't be a member of a supergroup when it is created. It can only be found in reply\_to\_message if someone replies to a very first message in a directly created supergroup.
    * @type { boolean }
@@ -552,6 +611,7 @@ export class Message {
    * @public
    */
   supergroupChatCreated?: boolean;
+
   /**
    * Optional. Service message: the channel has been created. This field can't be received in a message coming through updates, because bot can't be a member of a channel when it is created. It can only be found in reply\_to\_message if someone replies to a very first message in a channel.
    * @type { boolean }
@@ -560,6 +620,7 @@ export class Message {
    * @public
    */
   channelChatCreated?: boolean;
+
   /**
    * Optional. Service message: auto-delete timer settings changed in the chat
    * @type { MessageAutoDeleteTimerChanged }
@@ -568,6 +629,7 @@ export class Message {
    * @public
    */
   messageAutoDeleteTimerChanged?: MessageAutoDeleteTimerChanged;
+
   /**
    * Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
    * @type { number }
@@ -576,6 +638,7 @@ export class Message {
    * @public
    */
   migrateToChatId?: number;
+
   /**
    * Optional. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
    * @type { number }
@@ -584,6 +647,7 @@ export class Message {
    * @public
    */
   migrateFromChatId?: number;
+
   /**
    * Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply\_to\_message fields even if it itself is a reply.
    * @type { MaybeInaccessibleMessage }
@@ -592,6 +656,7 @@ export class Message {
    * @public
    */
   pinnedMessage?: MaybeInaccessibleMessage;
+
   /**
    * Optional. Message is an invoice for a payment, information about the invoice. More about payments »
    * @type { Invoice }
@@ -600,6 +665,7 @@ export class Message {
    * @public
    */
   invoice?: Invoice;
+
   /**
    * Optional. Message is a service message about a successful payment, information about the payment. More about payments »
    * @type { SuccessfulPayment }
@@ -608,6 +674,7 @@ export class Message {
    * @public
    */
   successfulPayment?: SuccessfulPayment;
+
   /**
    * Optional. Message is a service message about a refunded payment, information about the payment. More about payments »
    * @type { RefundedPayment }
@@ -616,6 +683,7 @@ export class Message {
    * @public
    */
   refundedPayment?: RefundedPayment;
+
   /**
    * Optional. Service message: users were shared with the bot
    * @type { UsersShared }
@@ -624,6 +692,7 @@ export class Message {
    * @public
    */
   usersShared?: UsersShared;
+
   /**
    * Optional. Service message: a chat was shared with the bot
    * @type { ChatShared }
@@ -632,6 +701,7 @@ export class Message {
    * @public
    */
   chatShared?: ChatShared;
+
   /**
    * Optional. Service message: a regular gift was sent or received
    * @type { GiftInfo }
@@ -640,6 +710,7 @@ export class Message {
    * @public
    */
   gift?: GiftInfo;
+
   /**
    * Optional. Service message: a unique gift was sent or received
    * @type { UniqueGiftInfo }
@@ -648,6 +719,7 @@ export class Message {
    * @public
    */
   uniqueGift?: UniqueGiftInfo;
+
   /**
    * Optional. The domain name of the website on which the user has logged in. More about Telegram Login »
    * @type { string }
@@ -656,6 +728,7 @@ export class Message {
    * @public
    */
   connectedWebsite?: string;
+
   /**
    * Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess
    * @type { WriteAccessAllowed }
@@ -664,6 +737,7 @@ export class Message {
    * @public
    */
   writeAccessAllowed?: WriteAccessAllowed;
+
   /**
    * Optional. Telegram Passport data
    * @type { PassportData }
@@ -672,6 +746,7 @@ export class Message {
    * @public
    */
   passportData?: PassportData;
+
   /**
    * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
    * @type { ProximityAlertTriggered }
@@ -680,6 +755,7 @@ export class Message {
    * @public
    */
   proximityAlertTriggered?: ProximityAlertTriggered;
+
   /**
    * Optional. Service message: user boosted the chat
    * @type { ChatBoostAdded }
@@ -688,6 +764,7 @@ export class Message {
    * @public
    */
   boostAdded?: ChatBoostAdded;
+
   /**
    * Optional. Service message: chat background set
    * @type { ChatBackground }
@@ -696,6 +773,7 @@ export class Message {
    * @public
    */
   chatBackgroundSet?: ChatBackground;
+
   /**
    * Optional. Service message: some tasks in a checklist were marked as done or not done
    * @type { ChecklistTasksDone }
@@ -704,6 +782,7 @@ export class Message {
    * @public
    */
   checklistTasksDone?: ChecklistTasksDone;
+
   /**
    * Optional. Service message: tasks were added to a checklist
    * @type { ChecklistTasksAdded }
@@ -712,6 +791,7 @@ export class Message {
    * @public
    */
   checklistTasksAdded?: ChecklistTasksAdded;
+
   /**
    * Optional. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
    * @type { DirectMessagePriceChanged }
@@ -720,6 +800,7 @@ export class Message {
    * @public
    */
   directMessagePriceChanged?: DirectMessagePriceChanged;
+
   /**
    * Optional. Service message: forum topic created
    * @type { ForumTopicCreated }
@@ -728,6 +809,7 @@ export class Message {
    * @public
    */
   forumTopicCreated?: ForumTopicCreated;
+
   /**
    * Optional. Service message: forum topic edited
    * @type { ForumTopicEdited }
@@ -736,6 +818,7 @@ export class Message {
    * @public
    */
   forumTopicEdited?: ForumTopicEdited;
+
   /**
    * Optional. Service message: forum topic closed
    * @type { ForumTopicClosed }
@@ -744,6 +827,7 @@ export class Message {
    * @public
    */
   forumTopicClosed?: ForumTopicClosed;
+
   /**
    * Optional. Service message: forum topic reopened
    * @type { ForumTopicReopened }
@@ -752,6 +836,7 @@ export class Message {
    * @public
    */
   forumTopicReopened?: ForumTopicReopened;
+
   /**
    * Optional. Service message: the 'General' forum topic hidden
    * @type { GeneralForumTopicHidden }
@@ -760,6 +845,7 @@ export class Message {
    * @public
    */
   generalForumTopicHidden?: GeneralForumTopicHidden;
+
   /**
    * Optional. Service message: the 'General' forum topic unhidden
    * @type { GeneralForumTopicUnhidden }
@@ -768,6 +854,7 @@ export class Message {
    * @public
    */
   generalForumTopicUnhidden?: GeneralForumTopicUnhidden;
+
   /**
    * Optional. Service message: a scheduled giveaway was created
    * @type { GiveawayCreated }
@@ -776,6 +863,7 @@ export class Message {
    * @public
    */
   giveawayCreated?: GiveawayCreated;
+
   /**
    * Optional. The message is a scheduled giveaway message
    * @type { Giveaway }
@@ -784,6 +872,7 @@ export class Message {
    * @public
    */
   giveaway?: Giveaway;
+
   /**
    * Optional. A giveaway with public winners was completed
    * @type { GiveawayWinners }
@@ -792,6 +881,7 @@ export class Message {
    * @public
    */
   giveawayWinners?: GiveawayWinners;
+
   /**
    * Optional. Service message: a giveaway without public winners was completed
    * @type { GiveawayCompleted }
@@ -800,6 +890,7 @@ export class Message {
    * @public
    */
   giveawayCompleted?: GiveawayCompleted;
+
   /**
    * Optional. Service message: the price for paid messages has changed in the chat
    * @type { PaidMessagePriceChanged }
@@ -808,6 +899,7 @@ export class Message {
    * @public
    */
   paidMessagePriceChanged?: PaidMessagePriceChanged;
+
   /**
    * Optional. Service message: a suggested post was approved
    * @type { SuggestedPostApproved }
@@ -816,6 +908,7 @@ export class Message {
    * @public
    */
   suggestedPostApproved?: SuggestedPostApproved;
+
   /**
    * Optional. Service message: approval of a suggested post has failed
    * @type { SuggestedPostApprovalFailed }
@@ -824,6 +917,7 @@ export class Message {
    * @public
    */
   suggestedPostApprovalFailed?: SuggestedPostApprovalFailed;
+
   /**
    * Optional. Service message: a suggested post was declined
    * @type { SuggestedPostDeclined }
@@ -832,6 +926,7 @@ export class Message {
    * @public
    */
   suggestedPostDeclined?: SuggestedPostDeclined;
+
   /**
    * Optional. Service message: payment for a suggested post was received
    * @type { SuggestedPostPaid }
@@ -840,6 +935,7 @@ export class Message {
    * @public
    */
   suggestedPostPaid?: SuggestedPostPaid;
+
   /**
    * Optional. Service message: payment for a suggested post was refunded
    * @type { SuggestedPostRefunded }
@@ -848,6 +944,7 @@ export class Message {
    * @public
    */
   suggestedPostRefunded?: SuggestedPostRefunded;
+
   /**
    * Optional. Service message: video chat scheduled
    * @type { VideoChatScheduled }
@@ -856,6 +953,7 @@ export class Message {
    * @public
    */
   videoChatScheduled?: VideoChatScheduled;
+
   /**
    * Optional. Service message: video chat started
    * @type { VideoChatStarted }
@@ -864,6 +962,7 @@ export class Message {
    * @public
    */
   videoChatStarted?: VideoChatStarted;
+
   /**
    * Optional. Service message: video chat ended
    * @type { VideoChatEnded }
@@ -872,6 +971,7 @@ export class Message {
    * @public
    */
   videoChatEnded?: VideoChatEnded;
+
   /**
    * Optional. Service message: new participants invited to a video chat
    * @type { VideoChatParticipantsInvited }
@@ -880,6 +980,7 @@ export class Message {
    * @public
    */
   videoChatParticipantsInvited?: VideoChatParticipantsInvited;
+
   /**
    * Optional. Service message: data sent by a Web App
    * @type { WebAppData }
@@ -888,6 +989,7 @@ export class Message {
    * @public
    */
   webAppData?: WebAppData;
+
   /**
    * Optional. Inline keyboard attached to the message. login\_url buttons are represented as ordinary url buttons.
    * @type { InlineKeyboardMarkup }
@@ -929,112 +1031,7 @@ export class Message {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.messageId = data.messageId;
-      this.messageThreadId = data.messageThreadId;
-      this.directMessagesTopic = data.directMessagesTopic;
-      this.from = data.from;
-      this.senderChat = data.senderChat;
-      this.senderBoostCount = data.senderBoostCount;
-      this.senderBusinessBot = data.senderBusinessBot;
-      this.date = data.date;
-      this.businessConnectionId = data.businessConnectionId;
-      this.chat = data.chat;
-      this.forwardOrigin = data.forwardOrigin;
-      this.isTopicMessage = data.isTopicMessage;
-      this.isAutomaticForward = data.isAutomaticForward;
-      this.replyToMessage = data.replyToMessage;
-      this.externalReply = data.externalReply;
-      this.quote = data.quote;
-      this.replyToStory = data.replyToStory;
-      this.replyToChecklistTaskId = data.replyToChecklistTaskId;
-      this.viaBot = data.viaBot;
-      this.editDate = data.editDate;
-      this.hasProtectedContent = data.hasProtectedContent;
-      this.isFromOffline = data.isFromOffline;
-      this.isPaidPost = data.isPaidPost;
-      this.mediaGroupId = data.mediaGroupId;
-      this.authorSignature = data.authorSignature;
-      this.paidStarCount = data.paidStarCount;
-      this.text = data.text;
-      this.entities = data.entities;
-      this.linkPreviewOptions = data.linkPreviewOptions;
-      this.suggestedPostInfo = data.suggestedPostInfo;
-      this.effectId = data.effectId;
-      this.animation = data.animation;
-      this.audio = data.audio;
-      this.document = data.document;
-      this.paidMedia = data.paidMedia;
-      this.photo = data.photo;
-      this.sticker = data.sticker;
-      this.story = data.story;
-      this.video = data.video;
-      this.videoNote = data.videoNote;
-      this.voice = data.voice;
-      this.caption = data.caption;
-      this.captionEntities = data.captionEntities;
-      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
-      this.hasMediaSpoiler = data.hasMediaSpoiler;
-      this.checklist = data.checklist;
-      this.contact = data.contact;
-      this.dice = data.dice;
-      this.game = data.game;
-      this.poll = data.poll;
-      this.venue = data.venue;
-      this.location = data.location;
-      this.newChatMembers = data.newChatMembers;
-      this.leftChatMember = data.leftChatMember;
-      this.newChatTitle = data.newChatTitle;
-      this.newChatPhoto = data.newChatPhoto;
-      this.deleteChatPhoto = data.deleteChatPhoto;
-      this.groupChatCreated = data.groupChatCreated;
-      this.supergroupChatCreated = data.supergroupChatCreated;
-      this.channelChatCreated = data.channelChatCreated;
-      this.messageAutoDeleteTimerChanged = data.messageAutoDeleteTimerChanged;
-      this.migrateToChatId = data.migrateToChatId;
-      this.migrateFromChatId = data.migrateFromChatId;
-      this.pinnedMessage = data.pinnedMessage;
-      this.invoice = data.invoice;
-      this.successfulPayment = data.successfulPayment;
-      this.refundedPayment = data.refundedPayment;
-      this.usersShared = data.usersShared;
-      this.chatShared = data.chatShared;
-      this.gift = data.gift;
-      this.uniqueGift = data.uniqueGift;
-      this.connectedWebsite = data.connectedWebsite;
-      this.writeAccessAllowed = data.writeAccessAllowed;
-      this.passportData = data.passportData;
-      this.proximityAlertTriggered = data.proximityAlertTriggered;
-      this.boostAdded = data.boostAdded;
-      this.chatBackgroundSet = data.chatBackgroundSet;
-      this.checklistTasksDone = data.checklistTasksDone;
-      this.checklistTasksAdded = data.checklistTasksAdded;
-      this.directMessagePriceChanged = data.directMessagePriceChanged;
-      this.forumTopicCreated = data.forumTopicCreated;
-      this.forumTopicEdited = data.forumTopicEdited;
-      this.forumTopicClosed = data.forumTopicClosed;
-      this.forumTopicReopened = data.forumTopicReopened;
-      this.generalForumTopicHidden = data.generalForumTopicHidden;
-      this.generalForumTopicUnhidden = data.generalForumTopicUnhidden;
-      this.giveawayCreated = data.giveawayCreated;
-      this.giveaway = data.giveaway;
-      this.giveawayWinners = data.giveawayWinners;
-      this.giveawayCompleted = data.giveawayCompleted;
-      this.paidMessagePriceChanged = data.paidMessagePriceChanged;
-      this.suggestedPostApproved = data.suggestedPostApproved;
-      this.suggestedPostApprovalFailed = data.suggestedPostApprovalFailed;
-      this.suggestedPostDeclined = data.suggestedPostDeclined;
-      this.suggestedPostPaid = data.suggestedPostPaid;
-      this.suggestedPostRefunded = data.suggestedPostRefunded;
-      this.videoChatScheduled = data.videoChatScheduled;
-      this.videoChatStarted = data.videoChatStarted;
-      this.videoChatEnded = data.videoChatEnded;
-      this.videoChatParticipantsInvited = data.videoChatParticipantsInvited;
-      this.webAppData = data.webAppData;
-      this.replyMarkup = data.replyMarkup;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

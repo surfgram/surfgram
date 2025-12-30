@@ -6,6 +6,7 @@
  * @class ReplyKeyboardRemove
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ReplyKeyboardRemove {
    * @public
    */
   removeKeyboard!: boolean;
+
   /**
    * Optional. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1\) users that are @mentioned in the text of the Message object; 2\) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.Example: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.
    * @type { boolean }
@@ -64,12 +66,7 @@ export class ReplyKeyboardRemove {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.removeKeyboard = data.removeKeyboard;
-      this.selective = data.selective;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

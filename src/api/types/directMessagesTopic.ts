@@ -6,6 +6,7 @@
  * @class DirectMessagesTopic
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class DirectMessagesTopic {
    * @public
    */
   topicId!: number;
+
   /**
    * Optional. Information about the user that created the topic. Currently, it is always present
    * @type { User }
@@ -65,12 +67,7 @@ export class DirectMessagesTopic {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.topicId = data.topicId;
-      this.user = data.user;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

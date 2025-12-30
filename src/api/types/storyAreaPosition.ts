@@ -6,6 +6,7 @@
  * @class StoryAreaPosition
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class StoryAreaPosition {
    * @public
    */
   xPercentage!: number;
+
   /**
    * The ordinate of the area's center, as a percentage of the media height
    * @type { number }
@@ -31,6 +33,7 @@ export class StoryAreaPosition {
    * @public
    */
   yPercentage!: number;
+
   /**
    * The width of the area's rectangle, as a percentage of the media width
    * @type { number }
@@ -39,6 +42,7 @@ export class StoryAreaPosition {
    * @public
    */
   widthPercentage!: number;
+
   /**
    * The height of the area's rectangle, as a percentage of the media height
    * @type { number }
@@ -47,6 +51,7 @@ export class StoryAreaPosition {
    * @public
    */
   heightPercentage!: number;
+
   /**
    * The clockwise rotation angle of the rectangle, in degrees; 0-360
    * @type { number }
@@ -55,6 +60,7 @@ export class StoryAreaPosition {
    * @public
    */
   rotationAngle!: number;
+
   /**
    * The radius of the rectangle corner rounding, as a percentage of the media width
    * @type { number }
@@ -96,16 +102,7 @@ export class StoryAreaPosition {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.xPercentage = data.xPercentage;
-      this.yPercentage = data.yPercentage;
-      this.widthPercentage = data.widthPercentage;
-      this.heightPercentage = data.heightPercentage;
-      this.rotationAngle = data.rotationAngle;
-      this.cornerRadiusPercentage = data.cornerRadiusPercentage;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

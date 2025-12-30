@@ -6,6 +6,7 @@
  * @class InputSticker
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class InputSticker {
    * @public
    */
   sticker!: string;
+
   /**
    * Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a .WEBM video
    * @type { string }
@@ -32,6 +34,7 @@ export class InputSticker {
    * @public
    */
   format!: string;
+
   /**
    * List of 1-20 emoji associated with the sticker
    * @type { string[] }
@@ -40,6 +43,7 @@ export class InputSticker {
    * @public
    */
   emojiList!: string[];
+
   /**
    * Optional. Position where the mask should be placed on faces. For “mask” stickers only.
    * @type { MaskPosition }
@@ -48,6 +52,7 @@ export class InputSticker {
    * @public
    */
   maskPosition?: MaskPosition;
+
   /**
    * Optional. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For “regular” and “custom\_emoji” stickers only.
    * @type { string[] }
@@ -89,15 +94,7 @@ export class InputSticker {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.sticker = data.sticker;
-      this.format = data.format;
-      this.emojiList = data.emojiList;
-      this.maskPosition = data.maskPosition;
-      this.keywords = data.keywords;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

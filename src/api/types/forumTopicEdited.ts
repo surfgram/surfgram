@@ -6,6 +6,7 @@
  * @class ForumTopicEdited
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ForumTopicEdited {
    * @public
    */
   name?: string;
+
   /**
    * Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed
    * @type { string }
@@ -64,12 +66,7 @@ export class ForumTopicEdited {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.name = data.name;
-      this.iconCustomEmojiId = data.iconCustomEmojiId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

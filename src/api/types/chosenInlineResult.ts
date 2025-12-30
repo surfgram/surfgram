@@ -6,6 +6,7 @@
  * @class ChosenInlineResult
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class ChosenInlineResult {
    * @public
    */
   resultId!: string;
+
   /**
    * The user that chose the result
    * @type { User }
@@ -33,6 +35,7 @@ export class ChosenInlineResult {
    * @public
    */
   from!: User;
+
   /**
    * Optional. Sender location, only for bots that require user location
    * @type { Location }
@@ -41,6 +44,7 @@ export class ChosenInlineResult {
    * @public
    */
   location?: Location;
+
   /**
    * Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
    * @type { string }
@@ -49,6 +53,7 @@ export class ChosenInlineResult {
    * @public
    */
   inlineMessageId?: string;
+
   /**
    * The query that was used to obtain the result
    * @type { string }
@@ -90,15 +95,7 @@ export class ChosenInlineResult {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.resultId = data.resultId;
-      this.from = data.from;
-      this.location = data.location;
-      this.inlineMessageId = data.inlineMessageId;
-      this.query = data.query;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

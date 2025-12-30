@@ -6,6 +6,7 @@
  * @class SuggestedPostDeclined
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class SuggestedPostDeclined {
    * @public
    */
   suggestedPostMessage?: Message;
+
   /**
    * Optional. Comment with which the post was declined
    * @type { string }
@@ -65,12 +67,7 @@ export class SuggestedPostDeclined {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.suggestedPostMessage = data.suggestedPostMessage;
-      this.comment = data.comment;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

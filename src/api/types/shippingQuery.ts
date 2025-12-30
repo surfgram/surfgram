@@ -6,6 +6,7 @@
  * @class ShippingQuery
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class ShippingQuery {
    * @public
    */
   id!: string;
+
   /**
    * User who sent the query
    * @type { User }
@@ -33,6 +35,7 @@ export class ShippingQuery {
    * @public
    */
   from!: User;
+
   /**
    * Bot-specified invoice payload
    * @type { string }
@@ -41,6 +44,7 @@ export class ShippingQuery {
    * @public
    */
   invoicePayload!: string;
+
   /**
    * User specified shipping address
    * @type { ShippingAddress }
@@ -82,14 +86,7 @@ export class ShippingQuery {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.from = data.from;
-      this.invoicePayload = data.invoicePayload;
-      this.shippingAddress = data.shippingAddress;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

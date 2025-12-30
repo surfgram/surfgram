@@ -6,6 +6,7 @@
  * @class ChatBoostSourcePremium
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatBoostSourcePremium {
    * @public
    */
   source!: string;
+
   /**
    * User that boosted the chat
    * @type { User }
@@ -65,12 +67,7 @@ export class ChatBoostSourcePremium {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.source = data.source;
-      this.user = data.user;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

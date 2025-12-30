@@ -6,6 +6,7 @@
  * @class ChatBoost
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatBoost {
    * @public
    */
   boostId!: string;
+
   /**
    * Point in time \(Unix timestamp\) when the chat was boosted
    * @type { number }
@@ -32,6 +34,7 @@ export class ChatBoost {
    * @public
    */
   addDate!: number;
+
   /**
    * Point in time \(Unix timestamp\) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
    * @type { number }
@@ -40,6 +43,7 @@ export class ChatBoost {
    * @public
    */
   expirationDate!: number;
+
   /**
    * Source of the added boost
    * @type { ChatBoostSource }
@@ -81,14 +85,7 @@ export class ChatBoost {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.boostId = data.boostId;
-      this.addDate = data.addDate;
-      this.expirationDate = data.expirationDate;
-      this.source = data.source;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

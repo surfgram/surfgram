@@ -6,6 +6,7 @@
  * @class MessageReactionUpdated
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class MessageReactionUpdated {
    * @public
    */
   chat!: Chat;
+
   /**
    * Unique identifier of the message inside the chat
    * @type { number }
@@ -34,6 +36,7 @@ export class MessageReactionUpdated {
    * @public
    */
   messageId!: number;
+
   /**
    * Optional. The user that changed the reaction, if the user isn't anonymous
    * @type { User }
@@ -42,6 +45,7 @@ export class MessageReactionUpdated {
    * @public
    */
   user?: User;
+
   /**
    * Optional. The chat on behalf of which the reaction was changed, if the user is anonymous
    * @type { Chat }
@@ -50,6 +54,7 @@ export class MessageReactionUpdated {
    * @public
    */
   actorChat?: Chat;
+
   /**
    * Date of the change in Unix time
    * @type { number }
@@ -58,6 +63,7 @@ export class MessageReactionUpdated {
    * @public
    */
   date!: number;
+
   /**
    * Previous list of reaction types that were set by the user
    * @type { ReactionType[] }
@@ -66,6 +72,7 @@ export class MessageReactionUpdated {
    * @public
    */
   oldReaction!: ReactionType[];
+
   /**
    * New list of reaction types that have been set by the user
    * @type { ReactionType[] }
@@ -107,17 +114,7 @@ export class MessageReactionUpdated {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.chat = data.chat;
-      this.messageId = data.messageId;
-      this.user = data.user;
-      this.actorChat = data.actorChat;
-      this.date = data.date;
-      this.oldReaction = data.oldReaction;
-      this.newReaction = data.newReaction;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

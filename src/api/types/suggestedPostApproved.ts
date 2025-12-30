@@ -6,6 +6,7 @@
  * @class SuggestedPostApproved
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class SuggestedPostApproved {
    * @public
    */
   suggestedPostMessage?: Message;
+
   /**
    * Optional. Amount paid for the post
    * @type { SuggestedPostPrice }
@@ -33,6 +35,7 @@ export class SuggestedPostApproved {
    * @public
    */
   price?: SuggestedPostPrice;
+
   /**
    * Date when the post will be published
    * @type { number }
@@ -74,13 +77,7 @@ export class SuggestedPostApproved {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.suggestedPostMessage = data.suggestedPostMessage;
-      this.price = data.price;
-      this.sendDate = data.sendDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class GeneralForumTopicHidden
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class GeneralForumTopicHidden {
    * @public
    */
   userId!: number;
+
   /**
    * Optional. First name of the user, if the name was requested by the bot
    * @type { string }
@@ -32,6 +34,7 @@ export class GeneralForumTopicHidden {
    * @public
    */
   firstName?: string;
+
   /**
    * Optional. Last name of the user, if the name was requested by the bot
    * @type { string }
@@ -40,6 +43,7 @@ export class GeneralForumTopicHidden {
    * @public
    */
   lastName?: string;
+
   /**
    * Optional. Username of the user, if the username was requested by the bot
    * @type { string }
@@ -48,6 +52,7 @@ export class GeneralForumTopicHidden {
    * @public
    */
   username?: string;
+
   /**
    * Optional. Available sizes of the chat photo, if the photo was requested by the bot
    * @type { PhotoSize[] }
@@ -89,15 +94,7 @@ export class GeneralForumTopicHidden {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.userId = data.userId;
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.username = data.username;
-      this.photo = data.photo;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

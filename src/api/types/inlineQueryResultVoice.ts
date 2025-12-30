@@ -6,6 +6,7 @@
  * @class InlineQueryResultVoice
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -34,6 +36,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   id!: string;
+
   /**
    * A valid URL for the voice recording
    * @type { string }
@@ -42,6 +45,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   voiceUrl!: string;
+
   /**
    * Recording title
    * @type { string }
@@ -50,6 +54,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   title!: string;
+
   /**
    * Optional. Caption, 0-1024 characters after entities parsing
    * @type { string }
@@ -58,6 +63,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. Mode for parsing entities in the voice message caption. See formatting options for more details.
    * @type { string }
@@ -66,6 +72,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -74,6 +81,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. Recording duration in seconds
    * @type { number }
@@ -82,6 +90,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   voiceDuration?: number;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -90,6 +99,7 @@ export class InlineQueryResultVoice {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. Content of the message to be sent instead of the voice recording
    * @type { InputMessageContent }
@@ -131,20 +141,7 @@ export class InlineQueryResultVoice {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.voiceUrl = data.voiceUrl;
-      this.title = data.title;
-      this.caption = data.caption;
-      this.parseMode = data.parseMode;
-      this.captionEntities = data.captionEntities;
-      this.voiceDuration = data.voiceDuration;
-      this.replyMarkup = data.replyMarkup;
-      this.inputMessageContent = data.inputMessageContent;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

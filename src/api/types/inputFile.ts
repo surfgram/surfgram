@@ -6,6 +6,7 @@
  * @class InputFile
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class InputFile {
    * @public
    */
   type!: string;
+
   /**
    * File to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files »
    * @type { string }
@@ -64,12 +66,7 @@ export class InputFile {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.media = data.media;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

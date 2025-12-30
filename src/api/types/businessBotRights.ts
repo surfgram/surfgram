@@ -6,6 +6,7 @@
  * @class BusinessBotRights
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class BusinessBotRights {
    * @public
    */
   canReply?: boolean;
+
   /**
    * Optional. True, if the bot can mark incoming private messages as read
    * @type { boolean }
@@ -31,6 +33,7 @@ export class BusinessBotRights {
    * @public
    */
   canReadMessages?: boolean;
+
   /**
    * Optional. True, if the bot can delete messages sent by the bot
    * @type { boolean }
@@ -39,6 +42,7 @@ export class BusinessBotRights {
    * @public
    */
   canDeleteSentMessages?: boolean;
+
   /**
    * Optional. True, if the bot can delete all private messages in managed chats
    * @type { boolean }
@@ -47,6 +51,7 @@ export class BusinessBotRights {
    * @public
    */
   canDeleteAllMessages?: boolean;
+
   /**
    * Optional. True, if the bot can edit the first and last name of the business account
    * @type { boolean }
@@ -55,6 +60,7 @@ export class BusinessBotRights {
    * @public
    */
   canEditName?: boolean;
+
   /**
    * Optional. True, if the bot can edit the bio of the business account
    * @type { boolean }
@@ -63,6 +69,7 @@ export class BusinessBotRights {
    * @public
    */
   canEditBio?: boolean;
+
   /**
    * Optional. True, if the bot can edit the profile photo of the business account
    * @type { boolean }
@@ -71,6 +78,7 @@ export class BusinessBotRights {
    * @public
    */
   canEditProfilePhoto?: boolean;
+
   /**
    * Optional. True, if the bot can edit the username of the business account
    * @type { boolean }
@@ -79,6 +87,7 @@ export class BusinessBotRights {
    * @public
    */
   canEditUsername?: boolean;
+
   /**
    * Optional. True, if the bot can change the privacy settings pertaining to gifts for the business account
    * @type { boolean }
@@ -87,6 +96,7 @@ export class BusinessBotRights {
    * @public
    */
   canChangeGiftSettings?: boolean;
+
   /**
    * Optional. True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
    * @type { boolean }
@@ -95,6 +105,7 @@ export class BusinessBotRights {
    * @public
    */
   canViewGiftsAndStars?: boolean;
+
   /**
    * Optional. True, if the bot can convert regular gifts owned by the business account to Telegram Stars
    * @type { boolean }
@@ -103,6 +114,7 @@ export class BusinessBotRights {
    * @public
    */
   canConvertGiftsToStars?: boolean;
+
   /**
    * Optional. True, if the bot can transfer and upgrade gifts owned by the business account
    * @type { boolean }
@@ -111,6 +123,7 @@ export class BusinessBotRights {
    * @public
    */
   canTransferAndUpgradeGifts?: boolean;
+
   /**
    * Optional. True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
    * @type { boolean }
@@ -119,6 +132,7 @@ export class BusinessBotRights {
    * @public
    */
   canTransferStars?: boolean;
+
   /**
    * Optional. True, if the bot can post, edit and delete stories on behalf of the business account
    * @type { boolean }
@@ -160,24 +174,7 @@ export class BusinessBotRights {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.canReply = data.canReply;
-      this.canReadMessages = data.canReadMessages;
-      this.canDeleteSentMessages = data.canDeleteSentMessages;
-      this.canDeleteAllMessages = data.canDeleteAllMessages;
-      this.canEditName = data.canEditName;
-      this.canEditBio = data.canEditBio;
-      this.canEditProfilePhoto = data.canEditProfilePhoto;
-      this.canEditUsername = data.canEditUsername;
-      this.canChangeGiftSettings = data.canChangeGiftSettings;
-      this.canViewGiftsAndStars = data.canViewGiftsAndStars;
-      this.canConvertGiftsToStars = data.canConvertGiftsToStars;
-      this.canTransferAndUpgradeGifts = data.canTransferAndUpgradeGifts;
-      this.canTransferStars = data.canTransferStars;
-      this.canManageStories = data.canManageStories;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

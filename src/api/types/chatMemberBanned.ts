@@ -6,6 +6,7 @@
  * @class ChatMemberBanned
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatMemberBanned {
    * @public
    */
   status!: string;
+
   /**
    * Information about the user
    * @type { User }
@@ -32,6 +34,7 @@ export class ChatMemberBanned {
    * @public
    */
   user!: User;
+
   /**
    * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever
    * @type { number }
@@ -73,13 +76,7 @@ export class ChatMemberBanned {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.status = data.status;
-      this.user = data.user;
-      this.untilDate = data.untilDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

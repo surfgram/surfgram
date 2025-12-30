@@ -6,6 +6,7 @@
  * @class BotCommandScopeChatAdministrators
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class BotCommandScopeChatAdministrators {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel direct messages chats and channel chats aren't supported.
    * @type { number | string }
@@ -64,12 +66,7 @@ export class BotCommandScopeChatAdministrators {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.chatId = data.chatId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

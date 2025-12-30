@@ -6,6 +6,7 @@
  * @class InlineQuery
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class InlineQuery {
    * @public
    */
   id!: string;
+
   /**
    * Sender
    * @type { User }
@@ -33,6 +35,7 @@ export class InlineQuery {
    * @public
    */
   from!: User;
+
   /**
    * Text of the query \(up to 256 characters\)
    * @type { string }
@@ -41,6 +44,7 @@ export class InlineQuery {
    * @public
    */
   query!: string;
+
   /**
    * Offset of the results to be returned, can be controlled by the bot
    * @type { string }
@@ -49,6 +53,7 @@ export class InlineQuery {
    * @public
    */
   offset!: string;
+
   /**
    * Optional. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat
    * @type { string }
@@ -57,6 +62,7 @@ export class InlineQuery {
    * @public
    */
   chatType?: string;
+
   /**
    * Optional. Sender location, only for bots that request user location
    * @type { Location }
@@ -98,16 +104,7 @@ export class InlineQuery {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.from = data.from;
-      this.query = data.query;
-      this.offset = data.offset;
-      this.chatType = data.chatType;
-      this.location = data.location;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class PhotoSize
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class PhotoSize {
    * @public
    */
   fileId!: string;
+
   /**
    * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -31,6 +33,7 @@ export class PhotoSize {
    * @public
    */
   fileUniqueId!: string;
+
   /**
    * Photo width
    * @type { number }
@@ -39,6 +42,7 @@ export class PhotoSize {
    * @public
    */
   width!: number;
+
   /**
    * Photo height
    * @type { number }
@@ -47,6 +51,7 @@ export class PhotoSize {
    * @public
    */
   height!: number;
+
   /**
    * Optional. File size in bytes
    * @type { number }
@@ -88,15 +93,7 @@ export class PhotoSize {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.fileId = data.fileId;
-      this.fileUniqueId = data.fileUniqueId;
-      this.width = data.width;
-      this.height = data.height;
-      this.fileSize = data.fileSize;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

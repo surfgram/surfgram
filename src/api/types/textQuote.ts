@@ -6,6 +6,7 @@
  * @class TextQuote
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class TextQuote {
    * @public
    */
   text!: string;
+
   /**
    * Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are kept in quotes.
    * @type { MessageEntity[] }
@@ -32,6 +34,7 @@ export class TextQuote {
    * @public
    */
   entities?: MessageEntity[];
+
   /**
    * Approximate quote position in the original message in UTF-16 code units as specified by the sender
    * @type { number }
@@ -40,6 +43,7 @@ export class TextQuote {
    * @public
    */
   position!: number;
+
   /**
    * Optional. True, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server.
    * @type { boolean }
@@ -81,14 +85,7 @@ export class TextQuote {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.text = data.text;
-      this.entities = data.entities;
-      this.position = data.position;
-      this.isManual = data.isManual;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

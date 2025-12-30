@@ -6,6 +6,7 @@
  * @class TransactionPartnerTelegramApi
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class TransactionPartnerTelegramApi {
    * @public
    */
   type!: string;
+
   /**
    * The number of successful requests that exceeded regular limits and were therefore billed
    * @type { number }
@@ -64,12 +66,7 @@ export class TransactionPartnerTelegramApi {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.requestCount = data.requestCount;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

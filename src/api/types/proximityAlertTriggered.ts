@@ -6,6 +6,7 @@
  * @class ProximityAlertTriggered
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ProximityAlertTriggered {
    * @public
    */
   traveler!: User;
+
   /**
    * User that set the alert
    * @type { User }
@@ -32,6 +34,7 @@ export class ProximityAlertTriggered {
    * @public
    */
   watcher!: User;
+
   /**
    * The distance between the users
    * @type { number }
@@ -73,13 +76,7 @@ export class ProximityAlertTriggered {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.traveler = data.traveler;
-      this.watcher = data.watcher;
-      this.distance = data.distance;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

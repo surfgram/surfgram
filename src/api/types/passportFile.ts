@@ -6,6 +6,7 @@
  * @class PassportFile
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class PassportFile {
    * @public
    */
   fileId!: string;
+
   /**
    * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -31,6 +33,7 @@ export class PassportFile {
    * @public
    */
   fileUniqueId!: string;
+
   /**
    * File size in bytes
    * @type { number }
@@ -39,6 +42,7 @@ export class PassportFile {
    * @public
    */
   fileSize!: number;
+
   /**
    * Unix time when the file was uploaded
    * @type { number }
@@ -80,14 +84,7 @@ export class PassportFile {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.fileId = data.fileId;
-      this.fileUniqueId = data.fileUniqueId;
-      this.fileSize = data.fileSize;
-      this.fileDate = data.fileDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

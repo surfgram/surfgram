@@ -6,6 +6,7 @@
  * @class ChatBackground
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -57,11 +58,7 @@ export class ChatBackground {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

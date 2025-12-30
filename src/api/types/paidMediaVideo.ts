@@ -6,6 +6,7 @@
  * @class PaidMediaVideo
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class PaidMediaVideo {
    * @public
    */
   type!: string;
+
   /**
    * The video
    * @type { Video }
@@ -65,12 +67,7 @@ export class PaidMediaVideo {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.video = data.video;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

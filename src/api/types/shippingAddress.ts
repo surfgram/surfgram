@@ -6,6 +6,7 @@
  * @class ShippingAddress
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ShippingAddress {
    * @public
    */
   countryCode!: string;
+
   /**
    * State, if applicable
    * @type { string }
@@ -31,6 +33,7 @@ export class ShippingAddress {
    * @public
    */
   state!: string;
+
   /**
    * City
    * @type { string }
@@ -39,6 +42,7 @@ export class ShippingAddress {
    * @public
    */
   city!: string;
+
   /**
    * First line for the address
    * @type { string }
@@ -47,6 +51,7 @@ export class ShippingAddress {
    * @public
    */
   streetLine1!: string;
+
   /**
    * Second line for the address
    * @type { string }
@@ -55,6 +60,7 @@ export class ShippingAddress {
    * @public
    */
   streetLine2!: string;
+
   /**
    * Address post code
    * @type { string }
@@ -96,16 +102,7 @@ export class ShippingAddress {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.countryCode = data.countryCode;
-      this.state = data.state;
-      this.city = data.city;
-      this.streetLine1 = data.streetLine1;
-      this.streetLine2 = data.streetLine2;
-      this.postCode = data.postCode;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

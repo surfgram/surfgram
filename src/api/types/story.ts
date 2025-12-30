@@ -6,6 +6,7 @@
  * @class Story
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class Story {
    * @public
    */
   chat!: Chat;
+
   /**
    * Unique identifier for the story in the chat
    * @type { number }
@@ -65,12 +67,7 @@ export class Story {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.chat = data.chat;
-      this.id = data.id;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

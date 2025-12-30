@@ -6,6 +6,7 @@
  * @class CallbackGame
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class CallbackGame {
    * @public
    */
   userId!: number;
+
   /**
    * New score, must be non-negative
    * @type { number }
@@ -31,6 +33,7 @@ export class CallbackGame {
    * @public
    */
   score!: number;
+
   /**
    * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
    * @type { boolean }
@@ -39,6 +42,7 @@ export class CallbackGame {
    * @public
    */
   force?: boolean;
+
   /**
    * Pass True if the game message should not be automatically edited to include the current scoreboard
    * @type { boolean }
@@ -47,6 +51,7 @@ export class CallbackGame {
    * @public
    */
   disableEditMessage?: boolean;
+
   /**
    * Required if inline\_message\_id is not specified. Unique identifier for the target chat
    * @type { number }
@@ -55,6 +60,7 @@ export class CallbackGame {
    * @public
    */
   chatId?: number;
+
   /**
    * Required if inline\_message\_id is not specified. Identifier of the sent message
    * @type { number }
@@ -63,6 +69,7 @@ export class CallbackGame {
    * @public
    */
   messageId?: number;
+
   /**
    * Required if chat\_id and message\_id are not specified. Identifier of the inline message
    * @type { string }
@@ -104,17 +111,7 @@ export class CallbackGame {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.userId = data.userId;
-      this.score = data.score;
-      this.force = data.force;
-      this.disableEditMessage = data.disableEditMessage;
-      this.chatId = data.chatId;
-      this.messageId = data.messageId;
-      this.inlineMessageId = data.inlineMessageId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

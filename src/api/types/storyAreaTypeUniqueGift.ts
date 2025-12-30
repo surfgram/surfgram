@@ -6,6 +6,7 @@
  * @class StoryAreaTypeUniqueGift
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class StoryAreaTypeUniqueGift {
    * @public
    */
   type!: string;
+
   /**
    * Unique name of the gift
    * @type { string }
@@ -64,12 +66,7 @@ export class StoryAreaTypeUniqueGift {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.name = data.name;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

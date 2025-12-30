@@ -6,6 +6,7 @@
  * @class MessageOriginHiddenUser
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class MessageOriginHiddenUser {
    * @public
    */
   type!: string;
+
   /**
    * Date the message was sent originally in Unix time
    * @type { number }
@@ -31,6 +33,7 @@ export class MessageOriginHiddenUser {
    * @public
    */
   date!: number;
+
   /**
    * Name of the user that sent the message originally
    * @type { string }
@@ -72,13 +75,7 @@ export class MessageOriginHiddenUser {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.date = data.date;
-      this.senderUserName = data.senderUserName;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

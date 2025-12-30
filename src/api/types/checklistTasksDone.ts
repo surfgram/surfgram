@@ -6,6 +6,7 @@
  * @class ChecklistTasksDone
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChecklistTasksDone {
    * @public
    */
   checklistMessage?: Message;
+
   /**
    * Optional. Identifiers of the tasks that were marked as done
    * @type { number[] }
@@ -32,6 +34,7 @@ export class ChecklistTasksDone {
    * @public
    */
   markedAsDoneTaskIds?: number[];
+
   /**
    * Optional. Identifiers of the tasks that were marked as not done
    * @type { number[] }
@@ -73,13 +76,7 @@ export class ChecklistTasksDone {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.checklistMessage = data.checklistMessage;
-      this.markedAsDoneTaskIds = data.markedAsDoneTaskIds;
-      this.markedAsNotDoneTaskIds = data.markedAsNotDoneTaskIds;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

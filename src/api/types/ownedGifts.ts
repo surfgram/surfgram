@@ -6,6 +6,7 @@
  * @class OwnedGifts
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class OwnedGifts {
    * @public
    */
   totalCount!: number;
+
   /**
    * The list of gifts
    * @type { OwnedGift[] }
@@ -32,6 +34,7 @@ export class OwnedGifts {
    * @public
    */
   gifts!: OwnedGift[];
+
   /**
    * Optional. Offset for the next request. If empty, then there are no more results
    * @type { string }
@@ -73,13 +76,7 @@ export class OwnedGifts {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.totalCount = data.totalCount;
-      this.gifts = data.gifts;
-      this.nextOffset = data.nextOffset;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

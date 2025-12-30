@@ -6,6 +6,7 @@
  * @class EncryptedCredentials
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class EncryptedCredentials {
    * @public
    */
   data!: string;
+
   /**
    * Base64-encoded data hash for data authentication
    * @type { string }
@@ -31,6 +33,7 @@ export class EncryptedCredentials {
    * @public
    */
   hash!: string;
+
   /**
    * Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption
    * @type { string }
@@ -72,13 +75,7 @@ export class EncryptedCredentials {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.data = data.data;
-      this.hash = data.hash;
-      this.secret = data.secret;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

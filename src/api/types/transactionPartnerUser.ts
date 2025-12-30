@@ -6,6 +6,7 @@
  * @class TransactionPartnerUser
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,6 +28,7 @@ export class TransactionPartnerUser {
    * @public
    */
   type!: string;
+
   /**
    * Type of the transaction, currently one of “invoice\_payment” for payments via invoices, “paid\_media\_payment” for payments for paid media, “gift\_purchase” for gifts sent by the bot, “premium\_purchase” for Telegram Premium subscriptions gifted by the bot, “business\_account\_transfer” for direct transfers from managed business accounts
    * @type { string }
@@ -35,6 +37,7 @@ export class TransactionPartnerUser {
    * @public
    */
   transactionType!: string;
+
   /**
    * Information about the user
    * @type { User }
@@ -43,6 +46,7 @@ export class TransactionPartnerUser {
    * @public
    */
   user!: User;
+
   /**
    * Optional. Information about the affiliate that received a commission via this transaction. Can be available only for “invoice\_payment” and “paid\_media\_payment” transactions.
    * @type { AffiliateInfo }
@@ -51,6 +55,7 @@ export class TransactionPartnerUser {
    * @public
    */
   affiliate?: AffiliateInfo;
+
   /**
    * Optional. Bot-specified invoice payload. Can be available only for “invoice\_payment” transactions.
    * @type { string }
@@ -59,6 +64,7 @@ export class TransactionPartnerUser {
    * @public
    */
   invoicePayload?: string;
+
   /**
    * Optional. The duration of the paid subscription. Can be available only for “invoice\_payment” transactions.
    * @type { number }
@@ -67,6 +73,7 @@ export class TransactionPartnerUser {
    * @public
    */
   subscriptionPeriod?: number;
+
   /**
    * Optional. Information about the paid media bought by the user; for “paid\_media\_payment” transactions only
    * @type { PaidMedia[] }
@@ -75,6 +82,7 @@ export class TransactionPartnerUser {
    * @public
    */
   paidMedia?: PaidMedia[];
+
   /**
    * Optional. Bot-specified paid media payload. Can be available only for “paid\_media\_payment” transactions.
    * @type { string }
@@ -83,6 +91,7 @@ export class TransactionPartnerUser {
    * @public
    */
   paidMediaPayload?: string;
+
   /**
    * Optional. The gift sent to the user by the bot; for “gift\_purchase” transactions only
    * @type { Gift }
@@ -91,6 +100,7 @@ export class TransactionPartnerUser {
    * @public
    */
   gift?: Gift;
+
   /**
    * Optional. Number of months the gifted Telegram Premium subscription will be active for; for “premium\_purchase” transactions only
    * @type { number }
@@ -132,20 +142,7 @@ export class TransactionPartnerUser {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.transactionType = data.transactionType;
-      this.user = data.user;
-      this.affiliate = data.affiliate;
-      this.invoicePayload = data.invoicePayload;
-      this.subscriptionPeriod = data.subscriptionPeriod;
-      this.paidMedia = data.paidMedia;
-      this.paidMediaPayload = data.paidMediaPayload;
-      this.gift = data.gift;
-      this.premiumSubscriptionDuration = data.premiumSubscriptionDuration;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

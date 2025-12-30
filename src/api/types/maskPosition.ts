@@ -6,6 +6,7 @@
  * @class MaskPosition
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class MaskPosition {
    * @public
    */
   point!: string;
+
   /**
    * Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position.
    * @type { number }
@@ -31,6 +33,7 @@ export class MaskPosition {
    * @public
    */
   xShift!: number;
+
   /**
    * Shift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position.
    * @type { number }
@@ -39,6 +42,7 @@ export class MaskPosition {
    * @public
    */
   yShift!: number;
+
   /**
    * Mask scaling coefficient. For example, 2.0 means double size.
    * @type { number }
@@ -80,14 +84,7 @@ export class MaskPosition {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.point = data.point;
-      this.xShift = data.xShift;
-      this.yShift = data.yShift;
-      this.scale = data.scale;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

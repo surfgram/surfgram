@@ -6,6 +6,7 @@
  * @class PaidMedia
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class PaidMedia {
    * @public
    */
   type!: string;
+
   /**
    * Optional. Media width as defined by the sender
    * @type { number }
@@ -31,6 +33,7 @@ export class PaidMedia {
    * @public
    */
   width?: number;
+
   /**
    * Optional. Media height as defined by the sender
    * @type { number }
@@ -39,6 +42,7 @@ export class PaidMedia {
    * @public
    */
   height?: number;
+
   /**
    * Optional. Duration of the media in seconds as defined by the sender
    * @type { number }
@@ -80,14 +84,7 @@ export class PaidMedia {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.width = data.width;
-      this.height = data.height;
-      this.duration = data.duration;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

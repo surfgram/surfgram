@@ -6,6 +6,7 @@
  * @class InputMessageContent
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class InputMessageContent {
    * @public
    */
   messageText!: string;
+
   /**
    * Optional. Mode for parsing entities in the message text. See formatting options for more details.
    * @type { string }
@@ -33,6 +35,7 @@ export class InputMessageContent {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in message text, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -41,6 +44,7 @@ export class InputMessageContent {
    * @public
    */
   entities?: MessageEntity[];
+
   /**
    * Optional. Link preview generation options for the message
    * @type { LinkPreviewOptions }
@@ -82,14 +86,7 @@ export class InputMessageContent {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.messageText = data.messageText;
-      this.parseMode = data.parseMode;
-      this.entities = data.entities;
-      this.linkPreviewOptions = data.linkPreviewOptions;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

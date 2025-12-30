@@ -6,6 +6,7 @@
  * @class InputStoryContent
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class InputStoryContent {
    * @public
    */
   type!: string;
+
   /**
    * The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the photo was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
    * @type { string }
@@ -64,12 +66,7 @@ export class InputStoryContent {
   ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.photo = data.photo;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }
