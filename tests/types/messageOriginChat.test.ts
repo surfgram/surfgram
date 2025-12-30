@@ -6,20 +6,20 @@ describe('MessageOriginChat', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: "example text",
+      type: 'example text',
       date: 123,
       sender_chat: {} as any,
-      author_signature: "example text",
+      author_signature: 'example text',
     };
 
     const instance = new MessageOriginChat(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+
+    expect(instance.type ?? instance.raw?.type).toEqual('example text');
     expect(instance.date ?? instance.raw?.date).toEqual(123);
     expect(instance.senderChat ?? instance.raw?.sender_chat).toEqual({} as any);
-    expect(instance.authorSignature ?? instance.raw?.author_signature).toEqual("example text");
+    expect(instance.authorSignature ?? instance.raw?.author_signature).toEqual('example text');
   });
 });

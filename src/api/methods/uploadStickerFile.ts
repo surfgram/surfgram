@@ -24,7 +24,12 @@ import { InputFile } from '../types/inputFile';
  * // Direct parameters
  * await bot.uploadStickerFile(...);
  */
-export async function uploadStickerFile(this: Bot, userId: number, sticker: InputFile, stickerFormat: string): Promise<any> {
+export async function uploadStickerFile(
+  this: Bot,
+  userId: number,
+  sticker: InputFile,
+  stickerFormat: string
+): Promise<any> {
   const apiParams = {
     userId: userId,
     sticker: sticker,

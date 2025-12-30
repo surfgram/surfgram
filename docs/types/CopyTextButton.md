@@ -4,10 +4,9 @@ This object represents an inline keyboard button that copies specified text to t
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| text | `string` | Yes | The text to be copied to the clipboard; 1-256 characters |
-
+| Name | Type     | Required | Description                                              |
+| :--- | :------- | :------: | :------------------------------------------------------- |
+| text | `string` |   Yes    | The text to be copied to the clipboard; 1-256 characters |
 
 ## Event Handlers
 

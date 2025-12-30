@@ -23,7 +23,12 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getUserProfilePhotos(...);
  */
-export async function getUserProfilePhotos(this: Bot, userId: number, offset?: number, limit?: number): Promise<any> {
+export async function getUserProfilePhotos(
+  this: Bot,
+  userId: number,
+  offset?: number,
+  limit?: number
+): Promise<any> {
   const apiParams = {
     userId: userId,
     offset: offset,

@@ -4,10 +4,9 @@ This object represents a service message about the creation of a scheduled givea
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| prizeStarCount | `number` | No | Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only |
-
+| Name           | Type     | Required | Description                                                                                                   |
+| :------------- | :------- | :------: | :------------------------------------------------------------------------------------------------------------ |
+| prizeStarCount | `number` |    No    | Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only |
 
 ## Event Handlers
 

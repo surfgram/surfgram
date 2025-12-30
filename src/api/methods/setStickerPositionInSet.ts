@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setStickerPositionInSet(...);
  */
-export async function setStickerPositionInSet(this: Bot, sticker: string, position: number): Promise<any> {
+export async function setStickerPositionInSet(
+  this: Bot,
+  sticker: string,
+  position: number
+): Promise<any> {
   const apiParams = {
     sticker: sticker,
     position: position,

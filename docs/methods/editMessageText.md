@@ -114,7 +114,6 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getMe`, `logOut`, `close`, `sendMessage`, `editMessageText`
 
-
 [View LinkPreviewOptions documentation with fluent methods](../types/LinkPreviewOptions.md)
 
 ### DirectMessagesTopic (35 methods)
@@ -128,7 +127,6 @@ This method is available as a fluent method on the following types:
 ### InlineKeyboardMarkup (30 methods)
 
 **Available methods:** `getMe`, `logOut`, `close`, `sendMessage`, `copyMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `stopMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `stopPoll`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InlineKeyboardMarkup documentation with fluent methods](../types/InlineKeyboardMarkup.md)
 
@@ -220,21 +218,19 @@ This method is available as a fluent method on the following types:
 
 [View PreparedInlineMessage documentation with fluent methods](../types/PreparedInlineMessage.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the message to edit |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
-| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
-| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
-
+| Parameter              | Type                   | Required | Description                                                                                                                                                |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                 | `string`               |   Yes    | New text of the message, 1-4096 characters after entities parsing                                                                                          |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                          |
+| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `messageId`            | `number`               |    No    | Required if inline_message_id is not specified. Identifier of the message to edit                                                                          |
+| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                     |
+| `parseMode`            | `string`               |    No    | Mode for parsing entities in the message text. See formatting options for more details.                                                                    |
+| `entities`             | `MessageEntity[]`      |    No    | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode                                       |
+| `linkPreviewOptions`   | `LinkPreviewOptions`   |    No    | Link preview generation options for the message                                                                                                            |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard.                                                                                                           |
 
 ## Usage Example
 
@@ -245,9 +241,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

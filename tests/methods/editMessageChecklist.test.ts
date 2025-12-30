@@ -6,7 +6,7 @@ describe('editMessageChecklist', () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
     const params = {
-      businessConnectionId: "example text",
+      businessConnectionId: 'example text',
       chatId: 123,
       messageId: 123,
       checklist: {} as any,
@@ -16,7 +16,7 @@ describe('editMessageChecklist', () => {
     await editMessageChecklist.call(mockBot, params);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('editMessageChecklist', {
-      business_connection_id: "example text",
+      business_connection_id: 'example text',
       chat_id: 123,
       message_id: 123,
       checklist: {} as any,

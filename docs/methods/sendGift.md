@@ -18,7 +18,6 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View MessageId documentation with fluent methods](../types/MessageId.md)
 
 ### InaccessibleMessage (35 methods)
@@ -89,13 +88,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View PhotoSize documentation with fluent methods](../types/PhotoSize.md)
 
 ### Document (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View Document documentation with fluent methods](../types/Document.md)
 
@@ -103,13 +100,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View Video documentation with fluent methods](../types/Video.md)
 
 ### VideoNote (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View VideoNote documentation with fluent methods](../types/VideoNote.md)
 
@@ -117,20 +112,17 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View PaidMediaPhoto documentation with fluent methods](../types/PaidMediaPhoto.md)
 
 ### PaidMediaVideo (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View PaidMediaVideo documentation with fluent methods](../types/PaidMediaVideo.md)
 
 ### MessageAutoDeleteTimerChanged (35 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
-
 
 [View MessageAutoDeleteTimerChanged documentation with fluent methods](../types/MessageAutoDeleteTimerChanged.md)
 
@@ -170,13 +162,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View PaidMessagePriceChanged documentation with fluent methods](../types/PaidMessagePriceChanged.md)
 
 ### DirectMessagePriceChanged (35 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
-
 
 [View DirectMessagePriceChanged documentation with fluent methods](../types/DirectMessagePriceChanged.md)
 
@@ -240,13 +230,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InputMediaPhoto documentation with fluent methods](../types/InputMediaPhoto.md)
 
 ### InputMediaVideo (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InputMediaVideo documentation with fluent methods](../types/InputMediaVideo.md)
 
@@ -254,13 +242,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InputMediaDocument documentation with fluent methods](../types/InputMediaDocument.md)
 
 ### InputPaidMediaPhoto (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InputPaidMediaPhoto documentation with fluent methods](../types/InputPaidMediaPhoto.md)
 
@@ -268,13 +254,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InputPaidMediaVideo documentation with fluent methods](../types/InputPaidMediaVideo.md)
 
 ### InputProfilePhoto (22 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `setBusinessAccountProfilePhoto`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InputProfilePhoto documentation with fluent methods](../types/InputProfilePhoto.md)
 
@@ -282,13 +266,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InputProfilePhotoStatic documentation with fluent methods](../types/InputProfilePhotoStatic.md)
 
 ### InputProfilePhotoAnimated (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InputProfilePhotoAnimated documentation with fluent methods](../types/InputProfilePhotoAnimated.md)
 
@@ -296,13 +278,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InputStoryContentPhoto documentation with fluent methods](../types/InputStoryContentPhoto.md)
 
 ### InputStoryContentVideo (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InputStoryContentVideo documentation with fluent methods](../types/InputStoryContentVideo.md)
 
@@ -310,13 +290,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InlineQueryResultPhoto documentation with fluent methods](../types/InlineQueryResultPhoto.md)
 
 ### InlineQueryResultVideo (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InlineQueryResultVideo documentation with fluent methods](../types/InlineQueryResultVideo.md)
 
@@ -324,13 +302,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InlineQueryResultDocument documentation with fluent methods](../types/InlineQueryResultDocument.md)
 
 ### InlineQueryResultCachedPhoto (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InlineQueryResultCachedPhoto documentation with fluent methods](../types/InlineQueryResultCachedPhoto.md)
 
@@ -338,13 +314,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
 
-
 [View InlineQueryResultCachedDocument documentation with fluent methods](../types/InlineQueryResultCachedDocument.md)
 
 ### InlineQueryResultCachedVideo (21 methods)
 
 **Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `sendSticker`, `sendInvoice`, `sendGame`
-
 
 [View InlineQueryResultCachedVideo documentation with fluent methods](../types/InlineQueryResultCachedVideo.md)
 
@@ -352,13 +326,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View InputMessageContent documentation with fluent methods](../types/InputMessageContent.md)
 
 ### InputTextMessageContent (35 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
-
 
 [View InputTextMessageContent documentation with fluent methods](../types/InputTextMessageContent.md)
 
@@ -366,13 +338,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View InputLocationMessageContent documentation with fluent methods](../types/InputLocationMessageContent.md)
 
 ### InputVenueMessageContent (35 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
-
 
 [View InputVenueMessageContent documentation with fluent methods](../types/InputVenueMessageContent.md)
 
@@ -380,13 +350,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View InputContactMessageContent documentation with fluent methods](../types/InputContactMessageContent.md)
 
 ### InputInvoiceMessageContent (35 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
-
 
 [View InputInvoiceMessageContent documentation with fluent methods](../types/InputInvoiceMessageContent.md)
 
@@ -394,29 +362,25 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View SentWebAppMessage documentation with fluent methods](../types/SentWebAppMessage.md)
 
 ### PreparedInlineMessage (36 methods)
 
 **Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `editForumTopic`, `editGeneralForumTopic`, `sendGift`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `sendSticker`, `savePreparedInlineMessage`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
-
 [View PreparedInlineMessage documentation with fluent methods](../types/PreparedInlineMessage.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `giftId` | `string` | Yes | Identifier of the gift |
-| `userId` | `number` | No | Required if chat\_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `number` \| `string` | No | Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift. |
-| `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
-| `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-
+| Parameter       | Type                 | Required | Description                                                                                                                                                                                                                             |
+| :-------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `giftId`        | `string`             |   Yes    | Identifier of the gift                                                                                                                                                                                                                  |
+| `userId`        | `number`             |    No    | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.                                                                                                                                   |
+| `chatId`        | `number` \| `string` |    No    | Required if user_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift.                                                                          |
+| `payForUpgrade` | `boolean`            |    No    | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver                                                                                                                          |
+| `text`          | `string`             |    No    | Text that will be shown along with the gift; 0-128 characters                                                                                                                                                                           |
+| `textParseMode` | `string`             |    No    | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.                                          |
+| `textEntities`  | `MessageEntity[]`    |    No    | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored. |
 
 ## Usage Example
 
@@ -427,9 +391,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getStarTransactions(...);
  */
-export async function getStarTransactions(this: Bot, offset?: number, limit?: number): Promise<any> {
+export async function getStarTransactions(
+  this: Bot,
+  offset?: number,
+  limit?: number
+): Promise<any> {
   const apiParams = {
     offset: offset,
     limit: limit,

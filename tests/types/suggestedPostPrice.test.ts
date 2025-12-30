@@ -6,7 +6,7 @@ describe('SuggestedPostPrice', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      currency: "example text",
+      currency: 'example text',
       amount: 123,
     };
 
@@ -14,8 +14,8 @@ describe('SuggestedPostPrice', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.currency ?? instance.raw?.currency).toEqual("example text");
+
+    expect(instance.currency ?? instance.raw?.currency).toEqual('example text');
     expect(instance.amount ?? instance.raw?.amount).toEqual(123);
   });
 });

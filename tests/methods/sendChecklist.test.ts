@@ -6,12 +6,12 @@ describe('sendChecklist', () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
     const params = {
-      businessConnectionId: "example text",
+      businessConnectionId: 'example text',
       chatId: 123,
       checklist: {} as any,
       disableNotification: true,
       protectContent: true,
-      messageEffectId: "example text",
+      messageEffectId: 'example text',
       replyParameters: {} as any,
       replyMarkup: {} as any,
     };
@@ -19,12 +19,12 @@ describe('sendChecklist', () => {
     await sendChecklist.call(mockBot, params);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('sendChecklist', {
-      business_connection_id: "example text",
+      business_connection_id: 'example text',
       chat_id: 123,
       checklist: {} as any,
       disable_notification: true,
       protect_content: true,
-      message_effect_id: "example text",
+      message_effect_id: 'example text',
       reply_parameters: {} as any,
       reply_markup: {} as any,
     });

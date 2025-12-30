@@ -25,7 +25,13 @@ import { InputFile } from '../types/inputFile';
  * // Direct parameters
  * await bot.setStickerSetThumbnail(...);
  */
-export async function setStickerSetThumbnail(this: Bot, name: string, userId: number, format: string, thumbnail?: InputFile | string): Promise<any> {
+export async function setStickerSetThumbnail(
+  this: Bot,
+  name: string,
+  userId: number,
+  format: string,
+  thumbnail?: InputFile | string
+): Promise<any> {
   const apiParams = {
     name: name,
     userId: userId,

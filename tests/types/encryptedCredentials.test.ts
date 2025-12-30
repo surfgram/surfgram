@@ -6,18 +6,18 @@ describe('EncryptedCredentials', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      data: "example text",
-      hash: "example text",
-      secret: "example text",
+      data: 'example text',
+      hash: 'example text',
+      secret: 'example text',
     };
 
     const instance = new EncryptedCredentials(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.data ?? instance.raw?.data).toEqual("example text");
-    expect(instance.hash ?? instance.raw?.hash).toEqual("example text");
-    expect(instance.secret ?? instance.raw?.secret).toEqual("example text");
+
+    expect(instance.data ?? instance.raw?.data).toEqual('example text');
+    expect(instance.hash ?? instance.raw?.hash).toEqual('example text');
+    expect(instance.secret ?? instance.raw?.secret).toEqual('example text');
   });
 });

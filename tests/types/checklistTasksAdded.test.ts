@@ -14,7 +14,7 @@ describe('ChecklistTasksAdded', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.checklistMessage ?? instance.raw?.checklist_message).toEqual({} as any);
     expect(instance.tasks ?? instance.raw?.tasks).toEqual([{} as any]);
   });

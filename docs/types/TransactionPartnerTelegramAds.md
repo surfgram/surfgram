@@ -4,10 +4,9 @@ Describes a withdrawal transaction to the Telegram Ads platform.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the transaction partner, always “telegram\_ads” |
-
+| Name | Type     | Required | Description                                            |
+| :--- | :------- | :------: | :----------------------------------------------------- |
+| type | `string` |   Yes    | Type of the transaction partner, always “telegram_ads” |
 
 ## Event Handlers
 
@@ -15,9 +14,11 @@ You can listen for TransactionPartnerTelegramAds events using:
 
 ```typescript
 // Type-specific handler
-bot.onTransactionPartnerTelegramAds(async (transactionpartnertelegramads: TransactionPartnerTelegramAds) => {
-  console.log('Received:', transactionpartnertelegramads);
-});
+bot.onTransactionPartnerTelegramAds(
+  async (transactionpartnertelegramads: TransactionPartnerTelegramAds) => {
+    console.log('Received:', transactionpartnertelegramads);
+  }
+);
 
 // Generic handler
 bot.on('transactionpartnertelegramads', async (data: TransactionPartnerTelegramAds) => {

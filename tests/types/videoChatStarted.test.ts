@@ -13,7 +13,7 @@ describe('VideoChatStarted', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.duration ?? instance.raw?.duration).toEqual(123);
   });
 });

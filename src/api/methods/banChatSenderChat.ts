@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.banChatSenderChat(...);
  */
-export async function banChatSenderChat(this: Bot, chatId: number | string, senderChatId: number): Promise<any> {
+export async function banChatSenderChat(
+  this: Bot,
+  chatId: number | string,
+  senderChatId: number
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     senderChatId: senderChatId,

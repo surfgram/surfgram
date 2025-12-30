@@ -1,6 +1,6 @@
 # approveChatJoinRequest
 
-Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can\_invite\_users administrator right. Returns True on success.
+Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
 
 ## Fluent Usage
 
@@ -22,14 +22,12 @@ This method is available as a fluent method on the following types:
 
 [View ChatJoinRequest documentation with fluent methods](../types/ChatJoinRequest.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `userId` | `number` | Yes | Unique identifier of the target user |
-
+| Parameter | Type                 | Required | Description                                                                                                |
+| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `userId`  | `number`             |   Yes    | Unique identifier of the target user                                                                       |
 
 ## Usage Example
 
@@ -40,9 +38,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

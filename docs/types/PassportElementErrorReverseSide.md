@@ -4,13 +4,12 @@ Represents an issue with the reverse side of a document. The error is considered
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| source | `string` | Yes | Error source, must be reverse\_side |
-| type | `string` | Yes | The section of the user's Telegram Passport which has the issue, one of “driver\_license”, “identity\_card” |
-| fileHash | `string` | Yes | Base64-encoded hash of the file with the reverse side of the document |
-| message | `string` | Yes | Error message |
-
+| Name     | Type     | Required | Description                                                                                               |
+| :------- | :------- | :------: | :-------------------------------------------------------------------------------------------------------- |
+| source   | `string` |   Yes    | Error source, must be reverse_side                                                                        |
+| type     | `string` |   Yes    | The section of the user's Telegram Passport which has the issue, one of “driver_license”, “identity_card” |
+| fileHash | `string` |   Yes    | Base64-encoded hash of the file with the reverse side of the document                                     |
+| message  | `string` |   Yes    | Error message                                                                                             |
 
 ## Event Handlers
 
@@ -18,9 +17,11 @@ You can listen for PassportElementErrorReverseSide events using:
 
 ```typescript
 // Type-specific handler
-bot.onPassportElementErrorReverseSide(async (passportelementerrorreverseside: PassportElementErrorReverseSide) => {
-  console.log('Received:', passportelementerrorreverseside);
-});
+bot.onPassportElementErrorReverseSide(
+  async (passportelementerrorreverseside: PassportElementErrorReverseSide) => {
+    console.log('Received:', passportelementerrorreverseside);
+  }
+);
 
 // Generic handler
 bot.on('passportelementerrorreverseside', async (data: PassportElementErrorReverseSide) => {
