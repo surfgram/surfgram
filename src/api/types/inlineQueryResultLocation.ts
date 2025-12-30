@@ -6,7 +6,6 @@
  * @class InlineQueryResultLocation
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 Bytes
    * @type { string }
@@ -35,7 +33,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   id!: string;
-
   /**
    * Location latitude in degrees
    * @type { number }
@@ -44,7 +41,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   latitude!: number;
-
   /**
    * Location longitude in degrees
    * @type { number }
@@ -53,7 +49,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   longitude!: number;
-
   /**
    * Location title
    * @type { string }
@@ -62,7 +57,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   title!: string;
-
   /**
    * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
    * @type { number }
@@ -71,7 +65,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   horizontalAccuracy?: number;
-
   /**
    * Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
    * @type { number }
@@ -80,7 +73,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   livePeriod?: number;
-
   /**
    * Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
    * @type { number }
@@ -89,7 +81,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   heading?: number;
-
   /**
    * Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
    * @type { number }
@@ -98,7 +89,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   proximityAlertRadius?: number;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -107,7 +97,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the location
    * @type { InputMessageContent }
@@ -116,7 +105,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   inputMessageContent?: InputMessageContent;
-
   /**
    * Optional. Url of the thumbnail for the result
    * @type { string }
@@ -125,7 +113,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   thumbnailUrl?: string;
-
   /**
    * Optional. Thumbnail width
    * @type { number }
@@ -134,7 +121,6 @@ export class InlineQueryResultLocation {
    * @public
    */
   thumbnailWidth?: number;
-
   /**
    * Optional. Thumbnail height
    * @type { number }
@@ -173,7 +159,24 @@ export class InlineQueryResultLocation {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.latitude = data.latitude;
+      this.longitude = data.longitude;
+      this.title = data.title;
+      this.horizontalAccuracy = data.horizontalAccuracy;
+      this.livePeriod = data.livePeriod;
+      this.heading = data.heading;
+      this.proximityAlertRadius = data.proximityAlertRadius;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.thumbnailWidth = data.thumbnailWidth;
+      this.thumbnailHeight = data.thumbnailHeight;
+    }
   }
 }

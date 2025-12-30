@@ -6,7 +6,6 @@
  * @class OrderInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class OrderInfo {
    * @public
    */
   name?: string;
-
   /**
    * Optional. User's phone number
    * @type { string }
@@ -34,7 +32,6 @@ export class OrderInfo {
    * @public
    */
   phoneNumber?: string;
-
   /**
    * Optional. User email
    * @type { string }
@@ -43,7 +40,6 @@ export class OrderInfo {
    * @public
    */
   email?: string;
-
   /**
    * Optional. User shipping address
    * @type { ShippingAddress }
@@ -82,7 +78,14 @@ export class OrderInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.name = data.name;
+      this.phoneNumber = data.phoneNumber;
+      this.email = data.email;
+      this.shippingAddress = data.shippingAddress;
+    }
   }
 }

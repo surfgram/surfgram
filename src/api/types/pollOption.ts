@@ -6,7 +6,6 @@
  * @class PollOption
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class PollOption {
    * @public
    */
   text!: string;
-
   /**
    * Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts
    * @type { MessageEntity[] }
@@ -34,7 +32,6 @@ export class PollOption {
    * @public
    */
   textEntities?: MessageEntity[];
-
   /**
    * Number of users that voted for this option
    * @type { number }
@@ -73,7 +70,13 @@ export class PollOption {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.text = data.text;
+      this.textEntities = data.textEntities;
+      this.voterCount = data.voterCount;
+    }
   }
 }

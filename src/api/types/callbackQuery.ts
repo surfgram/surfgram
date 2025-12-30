@@ -6,7 +6,6 @@
  * @class CallbackQuery
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class CallbackQuery {
    * @public
    */
   id!: string;
-
   /**
    * Sender
    * @type { User }
@@ -35,7 +33,6 @@ export class CallbackQuery {
    * @public
    */
   from!: User;
-
   /**
    * Optional. Message sent by the bot with the callback button that originated the query
    * @type { MaybeInaccessibleMessage }
@@ -44,7 +41,6 @@ export class CallbackQuery {
    * @public
    */
   message?: MaybeInaccessibleMessage;
-
   /**
    * Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
    * @type { string }
@@ -53,7 +49,6 @@ export class CallbackQuery {
    * @public
    */
   inlineMessageId?: string;
-
   /**
    * Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
    * @type { string }
@@ -62,7 +57,6 @@ export class CallbackQuery {
    * @public
    */
   chatInstance!: string;
-
   /**
    * Optional. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.
    * @type { string }
@@ -71,7 +65,6 @@ export class CallbackQuery {
    * @public
    */
   data?: string;
-
   /**
    * Optional. Short name of a Game to be returned, serves as the unique identifier for the game
    * @type { string }
@@ -110,7 +103,17 @@ export class CallbackQuery {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.from = data.from;
+      this.message = data.message;
+      this.inlineMessageId = data.inlineMessageId;
+      this.chatInstance = data.chatInstance;
+      this.data = data.data;
+      this.gameShortName = data.gameShortName;
+    }
   }
 }

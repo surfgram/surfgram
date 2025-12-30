@@ -6,7 +6,6 @@
  * @class BackgroundFillGradient
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class BackgroundFillGradient {
    * @public
    */
   type!: string;
-
   /**
    * Top color of the gradient in the RGB24 format
    * @type { number }
@@ -33,7 +31,6 @@ export class BackgroundFillGradient {
    * @public
    */
   topColor!: number;
-
   /**
    * Bottom color of the gradient in the RGB24 format
    * @type { number }
@@ -42,7 +39,6 @@ export class BackgroundFillGradient {
    * @public
    */
   bottomColor!: number;
-
   /**
    * Clockwise rotation angle of the background fill in degrees; 0-359
    * @type { number }
@@ -81,7 +77,14 @@ export class BackgroundFillGradient {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.topColor = data.topColor;
+      this.bottomColor = data.bottomColor;
+      this.rotationAngle = data.rotationAngle;
+    }
   }
 }

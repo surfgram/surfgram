@@ -6,7 +6,6 @@
  * @class OwnedGift
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class OwnedGift {
    * @public
    */
   type!: string;
-
   /**
    * Information about the regular gift
    * @type { Gift }
@@ -36,7 +34,6 @@ export class OwnedGift {
    * @public
    */
   gift!: Gift;
-
   /**
    * Optional. Unique identifier of the gift for the bot; for gifts received on behalf of business accounts only
    * @type { string }
@@ -45,7 +42,6 @@ export class OwnedGift {
    * @public
    */
   ownedGiftId?: string;
-
   /**
    * Optional. Sender of the gift if it is a known user
    * @type { User }
@@ -54,7 +50,6 @@ export class OwnedGift {
    * @public
    */
   senderUser?: User;
-
   /**
    * Date the gift was sent in Unix time
    * @type { number }
@@ -63,7 +58,6 @@ export class OwnedGift {
    * @public
    */
   sendDate!: number;
-
   /**
    * Optional. Text of the message that was added to the gift
    * @type { string }
@@ -72,7 +66,6 @@ export class OwnedGift {
    * @public
    */
   text?: string;
-
   /**
    * Optional. Special entities that appear in the text
    * @type { MessageEntity[] }
@@ -81,7 +74,6 @@ export class OwnedGift {
    * @public
    */
   entities?: MessageEntity[];
-
   /**
    * Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
    * @type { boolean }
@@ -90,7 +82,6 @@ export class OwnedGift {
    * @public
    */
   isPrivate?: boolean;
-
   /**
    * Optional. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
    * @type { boolean }
@@ -99,7 +90,6 @@ export class OwnedGift {
    * @public
    */
   isSaved?: boolean;
-
   /**
    * Optional. True, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only
    * @type { boolean }
@@ -108,7 +98,6 @@ export class OwnedGift {
    * @public
    */
   canBeUpgraded?: boolean;
-
   /**
    * Optional. True, if the gift was refunded and isn't available anymore
    * @type { boolean }
@@ -117,7 +106,6 @@ export class OwnedGift {
    * @public
    */
   wasRefunded?: boolean;
-
   /**
    * Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
    * @type { number }
@@ -126,7 +114,6 @@ export class OwnedGift {
    * @public
    */
   convertStarCount?: number;
-
   /**
    * Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
    * @type { number }
@@ -165,7 +152,23 @@ export class OwnedGift {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.gift = data.gift;
+      this.ownedGiftId = data.ownedGiftId;
+      this.senderUser = data.senderUser;
+      this.sendDate = data.sendDate;
+      this.text = data.text;
+      this.entities = data.entities;
+      this.isPrivate = data.isPrivate;
+      this.isSaved = data.isSaved;
+      this.canBeUpgraded = data.canBeUpgraded;
+      this.wasRefunded = data.wasRefunded;
+      this.convertStarCount = data.convertStarCount;
+      this.prepaidUpgradeStarCount = data.prepaidUpgradeStarCount;
+    }
   }
 }

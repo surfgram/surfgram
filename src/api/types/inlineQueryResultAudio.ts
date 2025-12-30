@@ -6,7 +6,6 @@
  * @class InlineQueryResultAudio
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -36,7 +34,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   id!: string;
-
   /**
    * A valid URL for the audio file
    * @type { string }
@@ -45,7 +42,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   audioUrl!: string;
-
   /**
    * Title
    * @type { string }
@@ -54,7 +50,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   title!: string;
-
   /**
    * Optional. Caption, 0-1024 characters after entities parsing
    * @type { string }
@@ -63,7 +58,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   caption?: string;
-
   /**
    * Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
    * @type { string }
@@ -72,7 +66,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   parseMode?: string;
-
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -81,7 +74,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   captionEntities?: MessageEntity[];
-
   /**
    * Optional. Performer
    * @type { string }
@@ -90,7 +82,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   performer?: string;
-
   /**
    * Optional. Audio duration in seconds
    * @type { number }
@@ -99,7 +90,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   audioDuration?: number;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -108,7 +98,6 @@ export class InlineQueryResultAudio {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the audio
    * @type { InputMessageContent }
@@ -147,7 +136,21 @@ export class InlineQueryResultAudio {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.audioUrl = data.audioUrl;
+      this.title = data.title;
+      this.caption = data.caption;
+      this.parseMode = data.parseMode;
+      this.captionEntities = data.captionEntities;
+      this.performer = data.performer;
+      this.audioDuration = data.audioDuration;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class PassportElementErrorReverseSide
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class PassportElementErrorReverseSide {
    * @public
    */
   source!: string;
-
   /**
    * The section of the user's Telegram Passport which has the issue, one of “driver\_license”, “identity\_card”
    * @type { string }
@@ -33,7 +31,6 @@ export class PassportElementErrorReverseSide {
    * @public
    */
   type!: string;
-
   /**
    * Base64-encoded hash of the file with the reverse side of the document
    * @type { string }
@@ -42,7 +39,6 @@ export class PassportElementErrorReverseSide {
    * @public
    */
   fileHash!: string;
-
   /**
    * Error message
    * @type { string }
@@ -81,7 +77,14 @@ export class PassportElementErrorReverseSide {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.source = data.source;
+      this.type = data.type;
+      this.fileHash = data.fileHash;
+      this.message = data.message;
+    }
   }
 }

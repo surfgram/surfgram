@@ -148,21 +148,13 @@ export class Bot {
 
       if (Array.isArray(obj)) {
         for (let i = 0; i < obj.length; i++) {
-          const item = obj[i];
-          const path = prefix ? `${prefix}[${i}]` : `[${i}]`;
-
-          if (item && typeof item === 'object') {
-            buildPathCache(item, path);
-          }
+          buildPathCache(obj[i], prefix ? `${prefix}[${i}]` : `[${i}]`);
         }
       } else {
         for (const [key, value] of Object.entries(obj)) {
           const path = prefix ? `${prefix}.${key.toLowerCase()}` : key.toLowerCase();
           pathCache.set(path, value);
-
-          if (value && typeof value === 'object') {
-            buildPathCache(value, path);
-          }
+          buildPathCache(value, path);
         }
       }
     };
@@ -172,28 +164,36 @@ export class Bot {
     for (const [eventPath, handlers] of this.handlers) {
       if (handlers.length === 0) continue;
 
-      let shouldDispatch = false;
       let dispatchData: any = null;
 
       const exactValue = pathCache.get(eventPath);
       if (exactValue !== undefined && exactValue !== null) {
-        shouldDispatch = true;
         dispatchData = exactValue;
-      } else if (keyExists(update, eventPath)) {
-        shouldDispatch = true;
-        dispatchData = update;
-      } else if (valueExists(update, eventPath)) {
-        shouldDispatch = true;
-        dispatchData = update;
+      } else {
+        for (const [cachedPath, value] of pathCache) {
+          if (cachedPath.endsWith(`.${eventPath}`) || cachedPath === eventPath) {
+            if (value && typeof value === 'object') {
+              dispatchData = value;
+              break;
+            }
+          }
+        }
       }
 
-      if (shouldDispatch) {
+      if (
+        dispatchData === null &&
+        (keyExists(update, eventPath) || valueExists(update, eventPath))
+      ) {
+        continue;
+      }
+
+      if (dispatchData !== null) {
         for (const { handler, filter } of handlers) {
+          let shouldRun = true;
           if (filter) {
-            if (filter(dispatchData)) {
-              promises.push(Promise.resolve(handler(dispatchData)));
-            }
-          } else {
+            shouldRun = filter(dispatchData);
+          }
+          if (shouldRun) {
             promises.push(Promise.resolve(handler(dispatchData)));
           }
         }
@@ -204,7 +204,6 @@ export class Bot {
       await Promise.allSettled(promises);
     }
   }
-
   /**
    * Gets LongPolling instance (creates if not exists)
    * @returns {LongPolling} LongPolling instance

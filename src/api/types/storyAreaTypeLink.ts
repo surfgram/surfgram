@@ -6,7 +6,6 @@
  * @class StoryAreaTypeLink
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class StoryAreaTypeLink {
    * @public
    */
   type!: string;
-
   /**
    * HTTP or tg:// URL to be opened when the area is clicked
    * @type { string }
@@ -63,7 +61,12 @@ export class StoryAreaTypeLink {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.url = data.url;
+    }
   }
 }

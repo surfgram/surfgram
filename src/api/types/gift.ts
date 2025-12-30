@@ -6,7 +6,6 @@
  * @class Gift
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class Gift {
    * @public
    */
   id!: string;
-
   /**
    * The sticker that represents the gift
    * @type { Sticker }
@@ -35,7 +33,6 @@ export class Gift {
    * @public
    */
   sticker!: Sticker;
-
   /**
    * The number of Telegram Stars that must be paid to send the sticker
    * @type { number }
@@ -44,7 +41,6 @@ export class Gift {
    * @public
    */
   starCount!: number;
-
   /**
    * Optional. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
    * @type { number }
@@ -53,7 +49,6 @@ export class Gift {
    * @public
    */
   upgradeStarCount?: number;
-
   /**
    * Optional. The total number of the gifts of this type that can be sent; for limited gifts only
    * @type { number }
@@ -62,7 +57,6 @@ export class Gift {
    * @public
    */
   totalCount?: number;
-
   /**
    * Optional. The number of remaining gifts of this type that can be sent; for limited gifts only
    * @type { number }
@@ -71,7 +65,6 @@ export class Gift {
    * @public
    */
   remainingCount?: number;
-
   /**
    * Optional. Information about the chat that published the gift
    * @type { Chat }
@@ -110,7 +103,17 @@ export class Gift {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.sticker = data.sticker;
+      this.starCount = data.starCount;
+      this.upgradeStarCount = data.upgradeStarCount;
+      this.totalCount = data.totalCount;
+      this.remainingCount = data.remainingCount;
+      this.publisherChat = data.publisherChat;
+    }
   }
 }

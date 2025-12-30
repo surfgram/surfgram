@@ -6,7 +6,6 @@
  * @class GiftInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class GiftInfo {
    * @public
    */
   gift!: Gift;
-
   /**
    * Optional. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
    * @type { string }
@@ -35,7 +33,6 @@ export class GiftInfo {
    * @public
    */
   ownedGiftId?: string;
-
   /**
    * Optional. Number of Telegram Stars that can be claimed by the receiver by converting the gift; omitted if conversion to Telegram Stars is impossible
    * @type { number }
@@ -44,7 +41,6 @@ export class GiftInfo {
    * @public
    */
   convertStarCount?: number;
-
   /**
    * Optional. Number of Telegram Stars that were prepaid by the sender for the ability to upgrade the gift
    * @type { number }
@@ -53,7 +49,6 @@ export class GiftInfo {
    * @public
    */
   prepaidUpgradeStarCount?: number;
-
   /**
    * Optional. True, if the gift can be upgraded to a unique gift
    * @type { boolean }
@@ -62,7 +57,6 @@ export class GiftInfo {
    * @public
    */
   canBeUpgraded?: boolean;
-
   /**
    * Optional. Text of the message that was added to the gift
    * @type { string }
@@ -71,7 +65,6 @@ export class GiftInfo {
    * @public
    */
   text?: string;
-
   /**
    * Optional. Special entities that appear in the text
    * @type { MessageEntity[] }
@@ -80,7 +73,6 @@ export class GiftInfo {
    * @public
    */
   entities?: MessageEntity[];
-
   /**
    * Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
    * @type { boolean }
@@ -119,7 +111,18 @@ export class GiftInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.gift = data.gift;
+      this.ownedGiftId = data.ownedGiftId;
+      this.convertStarCount = data.convertStarCount;
+      this.prepaidUpgradeStarCount = data.prepaidUpgradeStarCount;
+      this.canBeUpgraded = data.canBeUpgraded;
+      this.text = data.text;
+      this.entities = data.entities;
+      this.isPrivate = data.isPrivate;
+    }
   }
 }

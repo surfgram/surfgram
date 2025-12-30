@@ -6,7 +6,6 @@
  * @class UniqueGift
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -28,7 +27,6 @@ export class UniqueGift {
    * @public
    */
   baseName!: string;
-
   /**
    * Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas
    * @type { string }
@@ -37,7 +35,6 @@ export class UniqueGift {
    * @public
    */
   name!: string;
-
   /**
    * Unique number of the upgraded gift among gifts upgraded from the same regular gift
    * @type { number }
@@ -46,7 +43,6 @@ export class UniqueGift {
    * @public
    */
   number!: number;
-
   /**
    * Model of the gift
    * @type { UniqueGiftModel }
@@ -55,7 +51,6 @@ export class UniqueGift {
    * @public
    */
   model!: UniqueGiftModel;
-
   /**
    * Symbol of the gift
    * @type { UniqueGiftSymbol }
@@ -64,7 +59,6 @@ export class UniqueGift {
    * @public
    */
   symbol!: UniqueGiftSymbol;
-
   /**
    * Backdrop of the gift
    * @type { UniqueGiftBackdrop }
@@ -73,7 +67,6 @@ export class UniqueGift {
    * @public
    */
   backdrop!: UniqueGiftBackdrop;
-
   /**
    * Optional. Information about the chat that published the gift
    * @type { Chat }
@@ -112,7 +105,17 @@ export class UniqueGift {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.baseName = data.baseName;
+      this.name = data.name;
+      this.number = data.number;
+      this.model = data.model;
+      this.symbol = data.symbol;
+      this.backdrop = data.backdrop;
+      this.publisherChat = data.publisherChat;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class InputStoryContentVideo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class InputStoryContentVideo {
    * @public
    */
   type!: string;
-
   /**
    * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the video was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
    * @type { string }
@@ -33,7 +31,6 @@ export class InputStoryContentVideo {
    * @public
    */
   video!: string;
-
   /**
    * Optional. Precise duration of the video in seconds; 0-60
    * @type { number }
@@ -42,7 +39,6 @@ export class InputStoryContentVideo {
    * @public
    */
   duration?: number;
-
   /**
    * Optional. Timestamp in seconds of the frame that will be used as the static cover for the story. Defaults to 0.0.
    * @type { number }
@@ -51,7 +47,6 @@ export class InputStoryContentVideo {
    * @public
    */
   coverFrameTimestamp?: number;
-
   /**
    * Optional. Pass True if the video has no sound
    * @type { boolean }
@@ -90,7 +85,15 @@ export class InputStoryContentVideo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.video = data.video;
+      this.duration = data.duration;
+      this.coverFrameTimestamp = data.coverFrameTimestamp;
+      this.isAnimation = data.isAnimation;
+    }
   }
 }

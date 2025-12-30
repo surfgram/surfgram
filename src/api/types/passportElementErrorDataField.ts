@@ -6,7 +6,6 @@
  * @class PassportElementErrorDataField
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class PassportElementErrorDataField {
    * @public
    */
   source!: string;
-
   /**
    * The section of the user's Telegram Passport which has the error, one of “personal\_details”, “passport”, “driver\_license”, “identity\_card”, “internal\_passport”, “address”
    * @type { string }
@@ -33,7 +31,6 @@ export class PassportElementErrorDataField {
    * @public
    */
   type!: string;
-
   /**
    * Name of the data field which has the error
    * @type { string }
@@ -42,7 +39,6 @@ export class PassportElementErrorDataField {
    * @public
    */
   fieldName!: string;
-
   /**
    * Base64-encoded data hash
    * @type { string }
@@ -51,7 +47,6 @@ export class PassportElementErrorDataField {
    * @public
    */
   dataHash!: string;
-
   /**
    * Error message
    * @type { string }
@@ -90,7 +85,15 @@ export class PassportElementErrorDataField {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.source = data.source;
+      this.type = data.type;
+      this.fieldName = data.fieldName;
+      this.dataHash = data.dataHash;
+      this.message = data.message;
+    }
   }
 }

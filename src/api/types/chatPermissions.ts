@@ -6,7 +6,6 @@
  * @class ChatPermissions
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class ChatPermissions {
    * @public
    */
   canSendMessages?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send audios
    * @type { boolean }
@@ -33,7 +31,6 @@ export class ChatPermissions {
    * @public
    */
   canSendAudios?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send documents
    * @type { boolean }
@@ -42,7 +39,6 @@ export class ChatPermissions {
    * @public
    */
   canSendDocuments?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send photos
    * @type { boolean }
@@ -51,7 +47,6 @@ export class ChatPermissions {
    * @public
    */
   canSendPhotos?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send videos
    * @type { boolean }
@@ -60,7 +55,6 @@ export class ChatPermissions {
    * @public
    */
   canSendVideos?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send video notes
    * @type { boolean }
@@ -69,7 +63,6 @@ export class ChatPermissions {
    * @public
    */
   canSendVideoNotes?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send voice notes
    * @type { boolean }
@@ -78,7 +71,6 @@ export class ChatPermissions {
    * @public
    */
   canSendVoiceNotes?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send polls and checklists
    * @type { boolean }
@@ -87,7 +79,6 @@ export class ChatPermissions {
    * @public
    */
   canSendPolls?: boolean;
-
   /**
    * Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
    * @type { boolean }
@@ -96,7 +87,6 @@ export class ChatPermissions {
    * @public
    */
   canSendOtherMessages?: boolean;
-
   /**
    * Optional. True, if the user is allowed to add web page previews to their messages
    * @type { boolean }
@@ -105,7 +95,6 @@ export class ChatPermissions {
    * @public
    */
   canAddWebPagePreviews?: boolean;
-
   /**
    * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
    * @type { boolean }
@@ -114,7 +103,6 @@ export class ChatPermissions {
    * @public
    */
   canChangeInfo?: boolean;
-
   /**
    * Optional. True, if the user is allowed to invite new users to the chat
    * @type { boolean }
@@ -123,7 +111,6 @@ export class ChatPermissions {
    * @public
    */
   canInviteUsers?: boolean;
-
   /**
    * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
    * @type { boolean }
@@ -132,7 +119,6 @@ export class ChatPermissions {
    * @public
    */
   canPinMessages?: boolean;
-
   /**
    * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages
    * @type { boolean }
@@ -171,7 +157,24 @@ export class ChatPermissions {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.canSendMessages = data.canSendMessages;
+      this.canSendAudios = data.canSendAudios;
+      this.canSendDocuments = data.canSendDocuments;
+      this.canSendPhotos = data.canSendPhotos;
+      this.canSendVideos = data.canSendVideos;
+      this.canSendVideoNotes = data.canSendVideoNotes;
+      this.canSendVoiceNotes = data.canSendVoiceNotes;
+      this.canSendPolls = data.canSendPolls;
+      this.canSendOtherMessages = data.canSendOtherMessages;
+      this.canAddWebPagePreviews = data.canAddWebPagePreviews;
+      this.canChangeInfo = data.canChangeInfo;
+      this.canInviteUsers = data.canInviteUsers;
+      this.canPinMessages = data.canPinMessages;
+      this.canManageTopics = data.canManageTopics;
+    }
   }
 }

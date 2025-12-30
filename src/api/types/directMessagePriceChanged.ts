@@ -6,7 +6,6 @@
  * @class DirectMessagePriceChanged
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class DirectMessagePriceChanged {
    * @public
    */
   areDirectMessagesEnabled!: boolean;
-
   /**
    * Optional. The new number of Telegram Stars that must be paid by users for each direct message sent to the channel. Does not apply to users who have been exempted by administrators. Defaults to 0.
    * @type { number }
@@ -63,7 +61,12 @@ export class DirectMessagePriceChanged {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.areDirectMessagesEnabled = data.areDirectMessagesEnabled;
+      this.directMessageStarCount = data.directMessageStarCount;
+    }
   }
 }

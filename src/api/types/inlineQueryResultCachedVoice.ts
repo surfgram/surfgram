@@ -6,7 +6,6 @@
  * @class InlineQueryResultCachedVoice
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -36,7 +34,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   id!: string;
-
   /**
    * A valid file identifier for the voice message
    * @type { string }
@@ -45,7 +42,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   voiceFileId!: string;
-
   /**
    * Voice message title
    * @type { string }
@@ -54,7 +50,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   title!: string;
-
   /**
    * Optional. Caption, 0-1024 characters after entities parsing
    * @type { string }
@@ -63,7 +58,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   caption?: string;
-
   /**
    * Optional. Mode for parsing entities in the voice message caption. See formatting options for more details.
    * @type { string }
@@ -72,7 +66,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   parseMode?: string;
-
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -81,7 +74,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   captionEntities?: MessageEntity[];
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -90,7 +82,6 @@ export class InlineQueryResultCachedVoice {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the voice message
    * @type { InputMessageContent }
@@ -129,7 +120,19 @@ export class InlineQueryResultCachedVoice {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.voiceFileId = data.voiceFileId;
+      this.title = data.title;
+      this.caption = data.caption;
+      this.parseMode = data.parseMode;
+      this.captionEntities = data.captionEntities;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+    }
   }
 }

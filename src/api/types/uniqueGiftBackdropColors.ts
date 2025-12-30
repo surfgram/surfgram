@@ -6,7 +6,6 @@
  * @class UniqueGiftBackdropColors
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class UniqueGiftBackdropColors {
    * @public
    */
   centerColor!: number;
-
   /**
    * The color on the edges of the backdrop in RGB format
    * @type { number }
@@ -33,7 +31,6 @@ export class UniqueGiftBackdropColors {
    * @public
    */
   edgeColor!: number;
-
   /**
    * The color to be applied to the symbol in RGB format
    * @type { number }
@@ -42,7 +39,6 @@ export class UniqueGiftBackdropColors {
    * @public
    */
   symbolColor!: number;
-
   /**
    * The color for the text on the backdrop in RGB format
    * @type { number }
@@ -81,7 +77,14 @@ export class UniqueGiftBackdropColors {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.centerColor = data.centerColor;
+      this.edgeColor = data.edgeColor;
+      this.symbolColor = data.symbolColor;
+      this.textColor = data.textColor;
+    }
   }
 }

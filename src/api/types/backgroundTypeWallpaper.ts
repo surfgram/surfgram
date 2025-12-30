@@ -6,7 +6,6 @@
  * @class BackgroundTypeWallpaper
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class BackgroundTypeWallpaper {
    * @public
    */
   type!: string;
-
   /**
    * Document with the wallpaper
    * @type { Document }
@@ -34,7 +32,6 @@ export class BackgroundTypeWallpaper {
    * @public
    */
   document!: Document;
-
   /**
    * Dimming of the background in dark themes, as a percentage; 0-100
    * @type { number }
@@ -43,7 +40,6 @@ export class BackgroundTypeWallpaper {
    * @public
    */
   darkThemeDimming!: number;
-
   /**
    * Optional. True, if the wallpaper is downscaled to fit in a 450x450 square and then box-blurred with radius 12
    * @type { boolean }
@@ -52,7 +48,6 @@ export class BackgroundTypeWallpaper {
    * @public
    */
   isBlurred?: boolean;
-
   /**
    * Optional. True, if the background moves slightly when the device is tilted
    * @type { boolean }
@@ -91,7 +86,15 @@ export class BackgroundTypeWallpaper {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.document = data.document;
+      this.darkThemeDimming = data.darkThemeDimming;
+      this.isBlurred = data.isBlurred;
+      this.isMoving = data.isMoving;
+    }
   }
 }

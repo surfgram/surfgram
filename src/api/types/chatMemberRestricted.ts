@@ -6,7 +6,6 @@
  * @class ChatMemberRestricted
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class ChatMemberRestricted {
    * @public
    */
   status!: string;
-
   /**
    * Information about the user
    * @type { User }
@@ -34,7 +32,6 @@ export class ChatMemberRestricted {
    * @public
    */
   user!: User;
-
   /**
    * True, if the user is a member of the chat at the moment of the request
    * @type { boolean }
@@ -43,7 +40,6 @@ export class ChatMemberRestricted {
    * @public
    */
   isMember!: boolean;
-
   /**
    * True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
    * @type { boolean }
@@ -52,7 +48,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendMessages!: boolean;
-
   /**
    * True, if the user is allowed to send audios
    * @type { boolean }
@@ -61,7 +56,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendAudios!: boolean;
-
   /**
    * True, if the user is allowed to send documents
    * @type { boolean }
@@ -70,7 +64,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendDocuments!: boolean;
-
   /**
    * True, if the user is allowed to send photos
    * @type { boolean }
@@ -79,7 +72,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendPhotos!: boolean;
-
   /**
    * True, if the user is allowed to send videos
    * @type { boolean }
@@ -88,7 +80,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendVideos!: boolean;
-
   /**
    * True, if the user is allowed to send video notes
    * @type { boolean }
@@ -97,7 +88,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendVideoNotes!: boolean;
-
   /**
    * True, if the user is allowed to send voice notes
    * @type { boolean }
@@ -106,7 +96,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendVoiceNotes!: boolean;
-
   /**
    * True, if the user is allowed to send polls and checklists
    * @type { boolean }
@@ -115,7 +104,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendPolls!: boolean;
-
   /**
    * True, if the user is allowed to send animations, games, stickers and use inline bots
    * @type { boolean }
@@ -124,7 +112,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canSendOtherMessages!: boolean;
-
   /**
    * True, if the user is allowed to add web page previews to their messages
    * @type { boolean }
@@ -133,7 +120,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canAddWebPagePreviews!: boolean;
-
   /**
    * True, if the user is allowed to change the chat title, photo and other settings
    * @type { boolean }
@@ -142,7 +128,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canChangeInfo!: boolean;
-
   /**
    * True, if the user is allowed to invite new users to the chat
    * @type { boolean }
@@ -151,7 +136,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canInviteUsers!: boolean;
-
   /**
    * True, if the user is allowed to pin messages
    * @type { boolean }
@@ -160,7 +144,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canPinMessages!: boolean;
-
   /**
    * True, if the user is allowed to create forum topics
    * @type { boolean }
@@ -169,7 +152,6 @@ export class ChatMemberRestricted {
    * @public
    */
   canManageTopics!: boolean;
-
   /**
    * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
    * @type { number }
@@ -208,7 +190,28 @@ export class ChatMemberRestricted {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.status = data.status;
+      this.user = data.user;
+      this.isMember = data.isMember;
+      this.canSendMessages = data.canSendMessages;
+      this.canSendAudios = data.canSendAudios;
+      this.canSendDocuments = data.canSendDocuments;
+      this.canSendPhotos = data.canSendPhotos;
+      this.canSendVideos = data.canSendVideos;
+      this.canSendVideoNotes = data.canSendVideoNotes;
+      this.canSendVoiceNotes = data.canSendVoiceNotes;
+      this.canSendPolls = data.canSendPolls;
+      this.canSendOtherMessages = data.canSendOtherMessages;
+      this.canAddWebPagePreviews = data.canAddWebPagePreviews;
+      this.canChangeInfo = data.canChangeInfo;
+      this.canInviteUsers = data.canInviteUsers;
+      this.canPinMessages = data.canPinMessages;
+      this.canManageTopics = data.canManageTopics;
+      this.untilDate = data.untilDate;
+    }
   }
 }

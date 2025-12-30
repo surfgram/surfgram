@@ -6,7 +6,6 @@
  * @class RevenueWithdrawalStateSucceeded
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class RevenueWithdrawalStateSucceeded {
    * @public
    */
   type!: string;
-
   /**
    * Date the withdrawal was completed in Unix time
    * @type { number }
@@ -33,7 +31,6 @@ export class RevenueWithdrawalStateSucceeded {
    * @public
    */
   date!: number;
-
   /**
    * An HTTPS URL that can be used to see transaction details
    * @type { string }
@@ -72,7 +69,13 @@ export class RevenueWithdrawalStateSucceeded {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.date = data.date;
+      this.url = data.url;
+    }
   }
 }

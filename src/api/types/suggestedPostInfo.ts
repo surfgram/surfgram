@@ -6,7 +6,6 @@
  * @class SuggestedPostInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class SuggestedPostInfo {
    * @public
    */
   state!: string;
-
   /**
    * Optional. Proposed price of the post. If the field is omitted, then the post is unpaid.
    * @type { SuggestedPostPrice }
@@ -34,7 +32,6 @@ export class SuggestedPostInfo {
    * @public
    */
   price?: SuggestedPostPrice;
-
   /**
    * Optional. Proposed send date of the post. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user or administrator who approves it.
    * @type { number }
@@ -73,7 +70,13 @@ export class SuggestedPostInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.state = data.state;
+      this.price = data.price;
+      this.sendDate = data.sendDate;
+    }
   }
 }

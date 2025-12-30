@@ -6,7 +6,6 @@
  * @class GiveawayCompleted
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class GiveawayCompleted {
    * @public
    */
   winnerCount!: number;
-
   /**
    * Optional. Number of undistributed prizes
    * @type { number }
@@ -34,7 +32,6 @@ export class GiveawayCompleted {
    * @public
    */
   unclaimedPrizeCount?: number;
-
   /**
    * Optional. Message with the giveaway that was completed, if it wasn't deleted
    * @type { Message }
@@ -43,7 +40,6 @@ export class GiveawayCompleted {
    * @public
    */
   giveawayMessage?: Message;
-
   /**
    * Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.
    * @type { boolean }
@@ -82,7 +78,14 @@ export class GiveawayCompleted {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.winnerCount = data.winnerCount;
+      this.unclaimedPrizeCount = data.unclaimedPrizeCount;
+      this.giveawayMessage = data.giveawayMessage;
+      this.isStarGiveaway = data.isStarGiveaway;
+    }
   }
 }

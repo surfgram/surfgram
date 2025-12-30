@@ -6,7 +6,6 @@
  * @class InlineQueryResultContact
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class InlineQueryResultContact {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 Bytes
    * @type { string }
@@ -35,7 +33,6 @@ export class InlineQueryResultContact {
    * @public
    */
   id!: string;
-
   /**
    * Contact's phone number
    * @type { string }
@@ -44,7 +41,6 @@ export class InlineQueryResultContact {
    * @public
    */
   phoneNumber!: string;
-
   /**
    * Contact's first name
    * @type { string }
@@ -53,7 +49,6 @@ export class InlineQueryResultContact {
    * @public
    */
   firstName!: string;
-
   /**
    * Optional. Contact's last name
    * @type { string }
@@ -62,7 +57,6 @@ export class InlineQueryResultContact {
    * @public
    */
   lastName?: string;
-
   /**
    * Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
    * @type { string }
@@ -71,7 +65,6 @@ export class InlineQueryResultContact {
    * @public
    */
   vcard?: string;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -80,7 +73,6 @@ export class InlineQueryResultContact {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the contact
    * @type { InputMessageContent }
@@ -89,7 +81,6 @@ export class InlineQueryResultContact {
    * @public
    */
   inputMessageContent?: InputMessageContent;
-
   /**
    * Optional. Url of the thumbnail for the result
    * @type { string }
@@ -98,7 +89,6 @@ export class InlineQueryResultContact {
    * @public
    */
   thumbnailUrl?: string;
-
   /**
    * Optional. Thumbnail width
    * @type { number }
@@ -107,7 +97,6 @@ export class InlineQueryResultContact {
    * @public
    */
   thumbnailWidth?: number;
-
   /**
    * Optional. Thumbnail height
    * @type { number }
@@ -146,7 +135,21 @@ export class InlineQueryResultContact {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.phoneNumber = data.phoneNumber;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.vcard = data.vcard;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.thumbnailWidth = data.thumbnailWidth;
+      this.thumbnailHeight = data.thumbnailHeight;
+    }
   }
 }

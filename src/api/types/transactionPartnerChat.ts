@@ -6,7 +6,6 @@
  * @class TransactionPartnerChat
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class TransactionPartnerChat {
    * @public
    */
   type!: string;
-
   /**
    * Information about the chat
    * @type { Chat }
@@ -35,7 +33,6 @@ export class TransactionPartnerChat {
    * @public
    */
   chat!: Chat;
-
   /**
    * Optional. The gift sent to the chat by the bot
    * @type { Gift }
@@ -74,7 +71,13 @@ export class TransactionPartnerChat {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.chat = data.chat;
+      this.gift = data.gift;
+    }
   }
 }

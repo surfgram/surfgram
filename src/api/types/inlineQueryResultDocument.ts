@@ -6,7 +6,6 @@
  * @class InlineQueryResultDocument
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -36,7 +34,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   id!: string;
-
   /**
    * Title for the result
    * @type { string }
@@ -45,7 +42,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   title!: string;
-
   /**
    * Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -54,7 +50,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   caption?: string;
-
   /**
    * Optional. Mode for parsing entities in the document caption. See formatting options for more details.
    * @type { string }
@@ -63,7 +58,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   parseMode?: string;
-
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -72,7 +66,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   captionEntities?: MessageEntity[];
-
   /**
    * A valid URL for the file
    * @type { string }
@@ -81,7 +74,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   documentUrl!: string;
-
   /**
    * MIME type of the content of the file, either “application/pdf” or “application/zip”
    * @type { string }
@@ -90,7 +82,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   mimeType!: string;
-
   /**
    * Optional. Short description of the result
    * @type { string }
@@ -99,7 +90,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   description?: string;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -108,7 +98,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the file
    * @type { InputMessageContent }
@@ -117,7 +106,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   inputMessageContent?: InputMessageContent;
-
   /**
    * Optional. URL of the thumbnail \(JPEG only\) for the file
    * @type { string }
@@ -126,7 +114,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   thumbnailUrl?: string;
-
   /**
    * Optional. Thumbnail width
    * @type { number }
@@ -135,7 +122,6 @@ export class InlineQueryResultDocument {
    * @public
    */
   thumbnailWidth?: number;
-
   /**
    * Optional. Thumbnail height
    * @type { number }
@@ -174,7 +160,24 @@ export class InlineQueryResultDocument {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.title = data.title;
+      this.caption = data.caption;
+      this.parseMode = data.parseMode;
+      this.captionEntities = data.captionEntities;
+      this.documentUrl = data.documentUrl;
+      this.mimeType = data.mimeType;
+      this.description = data.description;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.thumbnailWidth = data.thumbnailWidth;
+      this.thumbnailHeight = data.thumbnailHeight;
+    }
   }
 }

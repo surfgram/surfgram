@@ -6,7 +6,6 @@
  * @class ChatBoostRemoved
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class ChatBoostRemoved {
    * @public
    */
   chat!: Chat;
-
   /**
    * Unique identifier of the boost
    * @type { string }
@@ -35,7 +33,6 @@ export class ChatBoostRemoved {
    * @public
    */
   boostId!: string;
-
   /**
    * Point in time \(Unix timestamp\) when the boost was removed
    * @type { number }
@@ -44,7 +41,6 @@ export class ChatBoostRemoved {
    * @public
    */
   removeDate!: number;
-
   /**
    * Source of the removed boost
    * @type { ChatBoostSource }
@@ -83,7 +79,14 @@ export class ChatBoostRemoved {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.chat = data.chat;
+      this.boostId = data.boostId;
+      this.removeDate = data.removeDate;
+      this.source = data.source;
+    }
   }
 }

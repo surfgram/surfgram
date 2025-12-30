@@ -6,7 +6,6 @@
  * @class ChatFullInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -35,7 +34,6 @@ export class ChatFullInfo {
    * @public
    */
   id!: number;
-
   /**
    * Type of the chat, can be either “private”, “group”, “supergroup” or “channel”
    * @type { string }
@@ -44,7 +42,6 @@ export class ChatFullInfo {
    * @public
    */
   type!: string;
-
   /**
    * Optional. Title, for supergroups, channels and group chats
    * @type { string }
@@ -53,7 +50,6 @@ export class ChatFullInfo {
    * @public
    */
   title?: string;
-
   /**
    * Optional. Username, for private chats, supergroups and channels if available
    * @type { string }
@@ -62,7 +58,6 @@ export class ChatFullInfo {
    * @public
    */
   username?: string;
-
   /**
    * Optional. First name of the other party in a private chat
    * @type { string }
@@ -71,7 +66,6 @@ export class ChatFullInfo {
    * @public
    */
   firstName?: string;
-
   /**
    * Optional. Last name of the other party in a private chat
    * @type { string }
@@ -80,7 +74,6 @@ export class ChatFullInfo {
    * @public
    */
   lastName?: string;
-
   /**
    * Optional. True, if the supergroup chat is a forum \(has topics enabled\)
    * @type { boolean }
@@ -89,7 +82,6 @@ export class ChatFullInfo {
    * @public
    */
   isForum?: boolean;
-
   /**
    * Optional. True, if the chat is the direct messages chat of a channel
    * @type { boolean }
@@ -98,7 +90,6 @@ export class ChatFullInfo {
    * @public
    */
   isDirectMessages?: boolean;
-
   /**
    * Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See accent colors for more details.
    * @type { number }
@@ -107,7 +98,6 @@ export class ChatFullInfo {
    * @public
    */
   accentColorId!: number;
-
   /**
    * The maximum number of reactions that can be set on a message in the chat
    * @type { number }
@@ -116,7 +106,6 @@ export class ChatFullInfo {
    * @public
    */
   maxReactionCount!: number;
-
   /**
    * Optional. Chat photo
    * @type { ChatPhoto }
@@ -125,7 +114,6 @@ export class ChatFullInfo {
    * @public
    */
   photo?: ChatPhoto;
-
   /**
    * Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels
    * @type { string[] }
@@ -134,7 +122,6 @@ export class ChatFullInfo {
    * @public
    */
   activeUsernames?: string[];
-
   /**
    * Optional. For private chats, the date of birth of the user
    * @type { Birthdate }
@@ -143,7 +130,6 @@ export class ChatFullInfo {
    * @public
    */
   birthdate?: Birthdate;
-
   /**
    * Optional. For private chats with business accounts, the intro of the business
    * @type { BusinessIntro }
@@ -152,7 +138,6 @@ export class ChatFullInfo {
    * @public
    */
   businessIntro?: BusinessIntro;
-
   /**
    * Optional. For private chats with business accounts, the location of the business
    * @type { BusinessLocation }
@@ -161,7 +146,6 @@ export class ChatFullInfo {
    * @public
    */
   businessLocation?: BusinessLocation;
-
   /**
    * Optional. For private chats with business accounts, the opening hours of the business
    * @type { BusinessOpeningHours }
@@ -170,7 +154,6 @@ export class ChatFullInfo {
    * @public
    */
   businessOpeningHours?: BusinessOpeningHours;
-
   /**
    * Optional. For private chats, the personal channel of the user
    * @type { Chat }
@@ -179,7 +162,6 @@ export class ChatFullInfo {
    * @public
    */
   personalChat?: Chat;
-
   /**
    * Optional. Information about the corresponding channel chat; for direct messages chats only
    * @type { Chat }
@@ -188,7 +170,6 @@ export class ChatFullInfo {
    * @public
    */
   parentChat?: Chat;
-
   /**
    * Optional. List of available reactions allowed in the chat. If omitted, then all emoji reactions are allowed.
    * @type { ReactionType[] }
@@ -197,7 +178,6 @@ export class ChatFullInfo {
    * @public
    */
   availableReactions?: ReactionType[];
-
   /**
    * Optional. Custom emoji identifier of the emoji chosen by the chat for the reply header and link preview background
    * @type { string }
@@ -206,7 +186,6 @@ export class ChatFullInfo {
    * @public
    */
   backgroundCustomEmojiId?: string;
-
   /**
    * Optional. Identifier of the accent color for the chat's profile background. See profile accent colors for more details.
    * @type { number }
@@ -215,7 +194,6 @@ export class ChatFullInfo {
    * @public
    */
   profileAccentColorId?: number;
-
   /**
    * Optional. Custom emoji identifier of the emoji chosen by the chat for its profile background
    * @type { string }
@@ -224,7 +202,6 @@ export class ChatFullInfo {
    * @public
    */
   profileBackgroundCustomEmojiId?: string;
-
   /**
    * Optional. Custom emoji identifier of the emoji status of the chat or the other party in a private chat
    * @type { string }
@@ -233,7 +210,6 @@ export class ChatFullInfo {
    * @public
    */
   emojiStatusCustomEmojiId?: string;
-
   /**
    * Optional. Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any
    * @type { number }
@@ -242,7 +218,6 @@ export class ChatFullInfo {
    * @public
    */
   emojiStatusExpirationDate?: number;
-
   /**
    * Optional. Bio of the other party in a private chat
    * @type { string }
@@ -251,7 +226,6 @@ export class ChatFullInfo {
    * @public
    */
   bio?: string;
-
   /**
    * Optional. True, if privacy settings of the other party in the private chat allows to use tg://user?id=&lt;user\_id&gt; links only in chats with the user
    * @type { boolean }
@@ -260,7 +234,6 @@ export class ChatFullInfo {
    * @public
    */
   hasPrivateForwards?: boolean;
-
   /**
    * Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat
    * @type { boolean }
@@ -269,7 +242,6 @@ export class ChatFullInfo {
    * @public
    */
   hasRestrictedVoiceAndVideoMessages?: boolean;
-
   /**
    * Optional. True, if users need to join the supergroup before they can send messages
    * @type { boolean }
@@ -278,7 +250,6 @@ export class ChatFullInfo {
    * @public
    */
   joinToSendMessages?: boolean;
-
   /**
    * Optional. True, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators
    * @type { boolean }
@@ -287,7 +258,6 @@ export class ChatFullInfo {
    * @public
    */
   joinByRequest?: boolean;
-
   /**
    * Optional. Description, for groups, supergroups and channel chats
    * @type { string }
@@ -296,7 +266,6 @@ export class ChatFullInfo {
    * @public
    */
   description?: string;
-
   /**
    * Optional. Primary invite link, for groups, supergroups and channel chats
    * @type { string }
@@ -305,7 +274,6 @@ export class ChatFullInfo {
    * @public
    */
   inviteLink?: string;
-
   /**
    * Optional. The most recent pinned message \(by sending date\)
    * @type { Message }
@@ -314,7 +282,6 @@ export class ChatFullInfo {
    * @public
    */
   pinnedMessage?: Message;
-
   /**
    * Optional. Default chat member permissions, for groups and supergroups
    * @type { ChatPermissions }
@@ -323,7 +290,6 @@ export class ChatFullInfo {
    * @public
    */
   permissions?: ChatPermissions;
-
   /**
    * Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
    * @type { AcceptedGiftTypes }
@@ -332,7 +298,6 @@ export class ChatFullInfo {
    * @public
    */
   acceptedGiftTypes!: AcceptedGiftTypes;
-
   /**
    * Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
    * @type { boolean }
@@ -341,7 +306,6 @@ export class ChatFullInfo {
    * @public
    */
   canSendPaidMedia?: boolean;
-
   /**
    * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
    * @type { number }
@@ -350,7 +314,6 @@ export class ChatFullInfo {
    * @public
    */
   slowModeDelay?: number;
-
   /**
    * Optional. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
    * @type { number }
@@ -359,7 +322,6 @@ export class ChatFullInfo {
    * @public
    */
   unrestrictBoostCount?: number;
-
   /**
    * Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds
    * @type { number }
@@ -368,7 +330,6 @@ export class ChatFullInfo {
    * @public
    */
   messageAutoDeleteTime?: number;
-
   /**
    * Optional. True, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators.
    * @type { boolean }
@@ -377,7 +338,6 @@ export class ChatFullInfo {
    * @public
    */
   hasAggressiveAntiSpamEnabled?: boolean;
-
   /**
    * Optional. True, if non-administrators can only get the list of bots and administrators in the chat
    * @type { boolean }
@@ -386,7 +346,6 @@ export class ChatFullInfo {
    * @public
    */
   hasHiddenMembers?: boolean;
-
   /**
    * Optional. True, if messages from the chat can't be forwarded to other chats
    * @type { boolean }
@@ -395,7 +354,6 @@ export class ChatFullInfo {
    * @public
    */
   hasProtectedContent?: boolean;
-
   /**
    * Optional. True, if new chat members will have access to old messages; available only to chat administrators
    * @type { boolean }
@@ -404,7 +362,6 @@ export class ChatFullInfo {
    * @public
    */
   hasVisibleHistory?: boolean;
-
   /**
    * Optional. For supergroups, name of the group sticker set
    * @type { string }
@@ -413,7 +370,6 @@ export class ChatFullInfo {
    * @public
    */
   stickerSetName?: string;
-
   /**
    * Optional. True, if the bot can change the group sticker set
    * @type { boolean }
@@ -422,7 +378,6 @@ export class ChatFullInfo {
    * @public
    */
   canSetStickerSet?: boolean;
-
   /**
    * Optional. For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group.
    * @type { string }
@@ -431,7 +386,6 @@ export class ChatFullInfo {
    * @public
    */
   customEmojiStickerSetName?: string;
-
   /**
    * Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
    * @type { number }
@@ -440,7 +394,6 @@ export class ChatFullInfo {
    * @public
    */
   linkedChatId?: number;
-
   /**
    * Optional. For supergroups, the location to which the supergroup is connected
    * @type { ChatLocation }
@@ -479,7 +432,57 @@ export class ChatFullInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.type = data.type;
+      this.title = data.title;
+      this.username = data.username;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.isForum = data.isForum;
+      this.isDirectMessages = data.isDirectMessages;
+      this.accentColorId = data.accentColorId;
+      this.maxReactionCount = data.maxReactionCount;
+      this.photo = data.photo;
+      this.activeUsernames = data.activeUsernames;
+      this.birthdate = data.birthdate;
+      this.businessIntro = data.businessIntro;
+      this.businessLocation = data.businessLocation;
+      this.businessOpeningHours = data.businessOpeningHours;
+      this.personalChat = data.personalChat;
+      this.parentChat = data.parentChat;
+      this.availableReactions = data.availableReactions;
+      this.backgroundCustomEmojiId = data.backgroundCustomEmojiId;
+      this.profileAccentColorId = data.profileAccentColorId;
+      this.profileBackgroundCustomEmojiId = data.profileBackgroundCustomEmojiId;
+      this.emojiStatusCustomEmojiId = data.emojiStatusCustomEmojiId;
+      this.emojiStatusExpirationDate = data.emojiStatusExpirationDate;
+      this.bio = data.bio;
+      this.hasPrivateForwards = data.hasPrivateForwards;
+      this.hasRestrictedVoiceAndVideoMessages = data.hasRestrictedVoiceAndVideoMessages;
+      this.joinToSendMessages = data.joinToSendMessages;
+      this.joinByRequest = data.joinByRequest;
+      this.description = data.description;
+      this.inviteLink = data.inviteLink;
+      this.pinnedMessage = data.pinnedMessage;
+      this.permissions = data.permissions;
+      this.acceptedGiftTypes = data.acceptedGiftTypes;
+      this.canSendPaidMedia = data.canSendPaidMedia;
+      this.slowModeDelay = data.slowModeDelay;
+      this.unrestrictBoostCount = data.unrestrictBoostCount;
+      this.messageAutoDeleteTime = data.messageAutoDeleteTime;
+      this.hasAggressiveAntiSpamEnabled = data.hasAggressiveAntiSpamEnabled;
+      this.hasHiddenMembers = data.hasHiddenMembers;
+      this.hasProtectedContent = data.hasProtectedContent;
+      this.hasVisibleHistory = data.hasVisibleHistory;
+      this.stickerSetName = data.stickerSetName;
+      this.canSetStickerSet = data.canSetStickerSet;
+      this.customEmojiStickerSetName = data.customEmojiStickerSetName;
+      this.linkedChatId = data.linkedChatId;
+      this.location = data.location;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class InputContactMessageContent
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class InputContactMessageContent {
    * @public
    */
   phoneNumber!: string;
-
   /**
    * Contact's first name
    * @type { string }
@@ -33,7 +31,6 @@ export class InputContactMessageContent {
    * @public
    */
   firstName!: string;
-
   /**
    * Optional. Contact's last name
    * @type { string }
@@ -42,7 +39,6 @@ export class InputContactMessageContent {
    * @public
    */
   lastName?: string;
-
   /**
    * Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
    * @type { string }
@@ -81,7 +77,14 @@ export class InputContactMessageContent {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.phoneNumber = data.phoneNumber;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.vcard = data.vcard;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class ChecklistTask
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class ChecklistTask {
    * @public
    */
   id!: number;
-
   /**
    * Text of the task
    * @type { string }
@@ -35,7 +33,6 @@ export class ChecklistTask {
    * @public
    */
   text!: string;
-
   /**
    * Optional. Special entities that appear in the task text
    * @type { MessageEntity[] }
@@ -44,7 +41,6 @@ export class ChecklistTask {
    * @public
    */
   textEntities?: MessageEntity[];
-
   /**
    * Optional. User that completed the task; omitted if the task wasn't completed
    * @type { User }
@@ -53,7 +49,6 @@ export class ChecklistTask {
    * @public
    */
   completedByUser?: User;
-
   /**
    * Optional. Point in time \(Unix timestamp\) when the task was completed; 0 if the task wasn't completed
    * @type { number }
@@ -92,7 +87,15 @@ export class ChecklistTask {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.text = data.text;
+      this.textEntities = data.textEntities;
+      this.completedByUser = data.completedByUser;
+      this.completionDate = data.completionDate;
+    }
   }
 }

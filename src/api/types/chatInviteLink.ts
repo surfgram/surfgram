@@ -6,7 +6,6 @@
  * @class ChatInviteLink
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class ChatInviteLink {
    * @public
    */
   inviteLink!: string;
-
   /**
    * Creator of the link
    * @type { User }
@@ -34,7 +32,6 @@ export class ChatInviteLink {
    * @public
    */
   creator!: User;
-
   /**
    * True, if users joining the chat via the link need to be approved by chat administrators
    * @type { boolean }
@@ -43,7 +40,6 @@ export class ChatInviteLink {
    * @public
    */
   createsJoinRequest!: boolean;
-
   /**
    * True, if the link is primary
    * @type { boolean }
@@ -52,7 +48,6 @@ export class ChatInviteLink {
    * @public
    */
   isPrimary!: boolean;
-
   /**
    * True, if the link is revoked
    * @type { boolean }
@@ -61,7 +56,6 @@ export class ChatInviteLink {
    * @public
    */
   isRevoked!: boolean;
-
   /**
    * Optional. Invite link name
    * @type { string }
@@ -70,7 +64,6 @@ export class ChatInviteLink {
    * @public
    */
   name?: string;
-
   /**
    * Optional. Point in time \(Unix timestamp\) when the link will expire or has been expired
    * @type { number }
@@ -79,7 +72,6 @@ export class ChatInviteLink {
    * @public
    */
   expireDate?: number;
-
   /**
    * Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
    * @type { number }
@@ -88,7 +80,6 @@ export class ChatInviteLink {
    * @public
    */
   memberLimit?: number;
-
   /**
    * Optional. Number of pending join requests created using this link
    * @type { number }
@@ -97,7 +88,6 @@ export class ChatInviteLink {
    * @public
    */
   pendingJoinRequestCount?: number;
-
   /**
    * Optional. The number of seconds the subscription will be active for before the next payment
    * @type { number }
@@ -106,7 +96,6 @@ export class ChatInviteLink {
    * @public
    */
   subscriptionPeriod?: number;
-
   /**
    * Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
    * @type { number }
@@ -145,7 +134,21 @@ export class ChatInviteLink {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.inviteLink = data.inviteLink;
+      this.creator = data.creator;
+      this.createsJoinRequest = data.createsJoinRequest;
+      this.isPrimary = data.isPrimary;
+      this.isRevoked = data.isRevoked;
+      this.name = data.name;
+      this.expireDate = data.expireDate;
+      this.memberLimit = data.memberLimit;
+      this.pendingJoinRequestCount = data.pendingJoinRequestCount;
+      this.subscriptionPeriod = data.subscriptionPeriod;
+      this.subscriptionPrice = data.subscriptionPrice;
+    }
   }
 }

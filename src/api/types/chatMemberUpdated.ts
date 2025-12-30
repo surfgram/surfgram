@@ -6,7 +6,6 @@
  * @class ChatMemberUpdated
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -28,7 +27,6 @@ export class ChatMemberUpdated {
    * @public
    */
   chat!: Chat;
-
   /**
    * Performer of the action, which resulted in the change
    * @type { User }
@@ -37,7 +35,6 @@ export class ChatMemberUpdated {
    * @public
    */
   from!: User;
-
   /**
    * Date the change was done in Unix time
    * @type { number }
@@ -46,7 +43,6 @@ export class ChatMemberUpdated {
    * @public
    */
   date!: number;
-
   /**
    * Previous information about the chat member
    * @type { ChatMember }
@@ -55,7 +51,6 @@ export class ChatMemberUpdated {
    * @public
    */
   oldChatMember!: ChatMember;
-
   /**
    * New information about the chat member
    * @type { ChatMember }
@@ -64,7 +59,6 @@ export class ChatMemberUpdated {
    * @public
    */
   newChatMember!: ChatMember;
-
   /**
    * Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
    * @type { ChatInviteLink }
@@ -73,7 +67,6 @@ export class ChatMemberUpdated {
    * @public
    */
   inviteLink?: ChatInviteLink;
-
   /**
    * Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
    * @type { boolean }
@@ -82,7 +75,6 @@ export class ChatMemberUpdated {
    * @public
    */
   viaJoinRequest?: boolean;
-
   /**
    * Optional. True, if the user joined the chat via a chat folder invite link
    * @type { boolean }
@@ -121,7 +113,18 @@ export class ChatMemberUpdated {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.chat = data.chat;
+      this.from = data.from;
+      this.date = data.date;
+      this.oldChatMember = data.oldChatMember;
+      this.newChatMember = data.newChatMember;
+      this.inviteLink = data.inviteLink;
+      this.viaJoinRequest = data.viaJoinRequest;
+      this.viaChatFolderInviteLink = data.viaChatFolderInviteLink;
+    }
   }
 }

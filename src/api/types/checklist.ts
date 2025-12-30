@@ -6,7 +6,6 @@
  * @class Checklist
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class Checklist {
    * @public
    */
   title!: string;
-
   /**
    * Optional. Special entities that appear in the checklist title
    * @type { MessageEntity[] }
@@ -35,7 +33,6 @@ export class Checklist {
    * @public
    */
   titleEntities?: MessageEntity[];
-
   /**
    * List of tasks in the checklist
    * @type { ChecklistTask[] }
@@ -44,7 +41,6 @@ export class Checklist {
    * @public
    */
   tasks!: ChecklistTask[];
-
   /**
    * Optional. True, if users other than the creator of the list can add tasks to the list
    * @type { boolean }
@@ -53,7 +49,6 @@ export class Checklist {
    * @public
    */
   othersCanAddTasks?: boolean;
-
   /**
    * Optional. True, if users other than the creator of the list can mark tasks as done or not done
    * @type { boolean }
@@ -92,7 +87,15 @@ export class Checklist {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.title = data.title;
+      this.titleEntities = data.titleEntities;
+      this.tasks = data.tasks;
+      this.othersCanAddTasks = data.othersCanAddTasks;
+      this.othersCanMarkTasksAsDone = data.othersCanMarkTasksAsDone;
+    }
   }
 }

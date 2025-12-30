@@ -6,7 +6,6 @@
  * @class PreCheckoutQuery
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class PreCheckoutQuery {
    * @public
    */
   id!: string;
-
   /**
    * User who sent the query
    * @type { User }
@@ -35,7 +33,6 @@ export class PreCheckoutQuery {
    * @public
    */
   from!: User;
-
   /**
    * Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
    * @type { string }
@@ -44,7 +41,6 @@ export class PreCheckoutQuery {
    * @public
    */
   currency!: string;
-
   /**
    * Total price in the smallest units of the currency \(integer, not float/double\). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\).
    * @type { number }
@@ -53,7 +49,6 @@ export class PreCheckoutQuery {
    * @public
    */
   totalAmount!: number;
-
   /**
    * Bot-specified invoice payload
    * @type { string }
@@ -62,7 +57,6 @@ export class PreCheckoutQuery {
    * @public
    */
   invoicePayload!: string;
-
   /**
    * Optional. Identifier of the shipping option chosen by the user
    * @type { string }
@@ -71,7 +65,6 @@ export class PreCheckoutQuery {
    * @public
    */
   shippingOptionId?: string;
-
   /**
    * Optional. Order information provided by the user
    * @type { OrderInfo }
@@ -110,7 +103,17 @@ export class PreCheckoutQuery {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.from = data.from;
+      this.currency = data.currency;
+      this.totalAmount = data.totalAmount;
+      this.invoicePayload = data.invoicePayload;
+      this.shippingOptionId = data.shippingOptionId;
+      this.orderInfo = data.orderInfo;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class ChatMemberMember
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class ChatMemberMember {
    * @public
    */
   status!: string;
-
   /**
    * Information about the user
    * @type { User }
@@ -34,7 +32,6 @@ export class ChatMemberMember {
    * @public
    */
   user!: User;
-
   /**
    * Optional. Date when the user's subscription will expire; Unix time
    * @type { number }
@@ -73,7 +70,13 @@ export class ChatMemberMember {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.status = data.status;
+      this.user = data.user;
+      this.untilDate = data.untilDate;
+    }
   }
 }

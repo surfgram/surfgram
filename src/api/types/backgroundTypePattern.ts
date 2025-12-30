@@ -6,7 +6,6 @@
  * @class BackgroundTypePattern
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class BackgroundTypePattern {
    * @public
    */
   type!: string;
-
   /**
    * Document with the pattern
    * @type { Document }
@@ -35,7 +33,6 @@ export class BackgroundTypePattern {
    * @public
    */
   document!: Document;
-
   /**
    * The background fill that is combined with the pattern
    * @type { BackgroundFill }
@@ -44,7 +41,6 @@ export class BackgroundTypePattern {
    * @public
    */
   fill!: BackgroundFill;
-
   /**
    * Intensity of the pattern when it is shown above the filled background; 0-100
    * @type { number }
@@ -53,7 +49,6 @@ export class BackgroundTypePattern {
    * @public
    */
   intensity!: number;
-
   /**
    * Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only
    * @type { boolean }
@@ -62,7 +57,6 @@ export class BackgroundTypePattern {
    * @public
    */
   isInverted?: boolean;
-
   /**
    * Optional. True, if the background moves slightly when the device is tilted
    * @type { boolean }
@@ -101,7 +95,16 @@ export class BackgroundTypePattern {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.document = data.document;
+      this.fill = data.fill;
+      this.intensity = data.intensity;
+      this.isInverted = data.isInverted;
+      this.isMoving = data.isMoving;
+    }
   }
 }

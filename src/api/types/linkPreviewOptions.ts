@@ -6,7 +6,6 @@
  * @class LinkPreviewOptions
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class LinkPreviewOptions {
    * @public
    */
   isDisabled?: boolean;
-
   /**
    * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
    * @type { string }
@@ -33,7 +31,6 @@ export class LinkPreviewOptions {
    * @public
    */
   url?: string;
-
   /**
    * Optional. True, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
    * @type { boolean }
@@ -42,7 +39,6 @@ export class LinkPreviewOptions {
    * @public
    */
   preferSmallMedia?: boolean;
-
   /**
    * Optional. True, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
    * @type { boolean }
@@ -51,7 +47,6 @@ export class LinkPreviewOptions {
    * @public
    */
   preferLargeMedia?: boolean;
-
   /**
    * Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text
    * @type { boolean }
@@ -90,7 +85,15 @@ export class LinkPreviewOptions {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.isDisabled = data.isDisabled;
+      this.url = data.url;
+      this.preferSmallMedia = data.preferSmallMedia;
+      this.preferLargeMedia = data.preferLargeMedia;
+      this.showAboveText = data.showAboveText;
+    }
   }
 }

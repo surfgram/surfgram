@@ -6,7 +6,6 @@
  * @class StarTransaction
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class StarTransaction {
    * @public
    */
   id!: string;
-
   /**
    * Integer amount of Telegram Stars transferred by the transaction
    * @type { number }
@@ -34,7 +32,6 @@ export class StarTransaction {
    * @public
    */
   amount!: number;
-
   /**
    * Optional. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999
    * @type { number }
@@ -43,7 +40,6 @@ export class StarTransaction {
    * @public
    */
   nanostarAmount?: number;
-
   /**
    * Date the transaction was created in Unix time
    * @type { number }
@@ -52,7 +48,6 @@ export class StarTransaction {
    * @public
    */
   date!: number;
-
   /**
    * Optional. Source of an incoming transaction \(e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal\). Only for incoming transactions
    * @type { TransactionPartner }
@@ -61,7 +56,6 @@ export class StarTransaction {
    * @public
    */
   source?: TransactionPartner;
-
   /**
    * Optional. Receiver of an outgoing transaction \(e.g., a user for a purchase refund, Fragment for a withdrawal\). Only for outgoing transactions
    * @type { TransactionPartner }
@@ -100,7 +94,16 @@ export class StarTransaction {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.amount = data.amount;
+      this.nanostarAmount = data.nanostarAmount;
+      this.date = data.date;
+      this.source = data.source;
+      this.receiver = data.receiver;
+    }
   }
 }

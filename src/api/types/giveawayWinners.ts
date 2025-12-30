@@ -6,7 +6,6 @@
  * @class GiveawayWinners
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class GiveawayWinners {
    * @public
    */
   chat!: Chat;
-
   /**
    * Identifier of the message with the giveaway in the chat
    * @type { number }
@@ -35,7 +33,6 @@ export class GiveawayWinners {
    * @public
    */
   giveawayMessageId!: number;
-
   /**
    * Point in time \(Unix timestamp\) when winners of the giveaway were selected
    * @type { number }
@@ -44,7 +41,6 @@ export class GiveawayWinners {
    * @public
    */
   winnersSelectionDate!: number;
-
   /**
    * Total number of winners in the giveaway
    * @type { number }
@@ -53,7 +49,6 @@ export class GiveawayWinners {
    * @public
    */
   winnerCount!: number;
-
   /**
    * List of up to 100 winners of the giveaway
    * @type { User[] }
@@ -62,7 +57,6 @@ export class GiveawayWinners {
    * @public
    */
   winners!: User[];
-
   /**
    * Optional. The number of other chats the user had to join in order to be eligible for the giveaway
    * @type { number }
@@ -71,7 +65,6 @@ export class GiveawayWinners {
    * @public
    */
   additionalChatCount?: number;
-
   /**
    * Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only
    * @type { number }
@@ -80,7 +73,6 @@ export class GiveawayWinners {
    * @public
    */
   prizeStarCount?: number;
-
   /**
    * Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
    * @type { number }
@@ -89,7 +81,6 @@ export class GiveawayWinners {
    * @public
    */
   premiumSubscriptionMonthCount?: number;
-
   /**
    * Optional. Number of undistributed prizes
    * @type { number }
@@ -98,7 +89,6 @@ export class GiveawayWinners {
    * @public
    */
   unclaimedPrizeCount?: number;
-
   /**
    * Optional. True, if only users who had joined the chats after the giveaway started were eligible to win
    * @type { boolean }
@@ -107,7 +97,6 @@ export class GiveawayWinners {
    * @public
    */
   onlyNewMembers?: boolean;
-
   /**
    * Optional. True, if the giveaway was canceled because the payment for it was refunded
    * @type { boolean }
@@ -116,7 +105,6 @@ export class GiveawayWinners {
    * @public
    */
   wasRefunded?: boolean;
-
   /**
    * Optional. Description of additional giveaway prize
    * @type { string }
@@ -155,7 +143,22 @@ export class GiveawayWinners {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.chat = data.chat;
+      this.giveawayMessageId = data.giveawayMessageId;
+      this.winnersSelectionDate = data.winnersSelectionDate;
+      this.winnerCount = data.winnerCount;
+      this.winners = data.winners;
+      this.additionalChatCount = data.additionalChatCount;
+      this.prizeStarCount = data.prizeStarCount;
+      this.premiumSubscriptionMonthCount = data.premiumSubscriptionMonthCount;
+      this.unclaimedPrizeCount = data.unclaimedPrizeCount;
+      this.onlyNewMembers = data.onlyNewMembers;
+      this.wasRefunded = data.wasRefunded;
+      this.prizeDescription = data.prizeDescription;
+    }
   }
 }

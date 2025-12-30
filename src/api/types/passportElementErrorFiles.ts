@@ -6,7 +6,6 @@
  * @class PassportElementErrorFiles
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class PassportElementErrorFiles {
    * @public
    */
   source!: string;
-
   /**
    * The section of the user's Telegram Passport which has the issue, one of “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration”, “temporary\_registration”
    * @type { string }
@@ -33,7 +31,6 @@ export class PassportElementErrorFiles {
    * @public
    */
   type!: string;
-
   /**
    * List of base64-encoded file hashes
    * @type { string[] }
@@ -42,7 +39,6 @@ export class PassportElementErrorFiles {
    * @public
    */
   fileHashes!: string[];
-
   /**
    * Error message
    * @type { string }
@@ -81,7 +77,14 @@ export class PassportElementErrorFiles {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.source = data.source;
+      this.type = data.type;
+      this.fileHashes = data.fileHashes;
+      this.message = data.message;
+    }
   }
 }

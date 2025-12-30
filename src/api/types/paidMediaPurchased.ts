@@ -6,7 +6,6 @@
  * @class PaidMediaPurchased
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class PaidMediaPurchased {
    * @public
    */
   from!: User;
-
   /**
    * Bot-specified paid media payload
    * @type { string }
@@ -64,7 +62,12 @@ export class PaidMediaPurchased {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.from = data.from;
+      this.paidMediaPayload = data.paidMediaPayload;
+    }
   }
 }

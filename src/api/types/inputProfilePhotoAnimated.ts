@@ -6,7 +6,6 @@
  * @class InputProfilePhotoAnimated
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class InputProfilePhotoAnimated {
    * @public
    */
   type!: string;
-
   /**
    * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the photo was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
    * @type { string }
@@ -33,7 +31,6 @@ export class InputProfilePhotoAnimated {
    * @public
    */
   animation!: string;
-
   /**
    * Optional. Timestamp in seconds of the frame that will be used as the static profile photo. Defaults to 0.0.
    * @type { number }
@@ -72,7 +69,13 @@ export class InputProfilePhotoAnimated {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.animation = data.animation;
+      this.mainFrameTimestamp = data.mainFrameTimestamp;
+    }
   }
 }

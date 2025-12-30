@@ -6,7 +6,6 @@
  * @class ExternalReplyInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -47,7 +46,6 @@ export class ExternalReplyInfo {
    * @public
    */
   origin!: MessageOrigin;
-
   /**
    * Optional. Chat the original message belongs to. Available only if the chat is a supergroup or a channel.
    * @type { Chat }
@@ -56,7 +54,6 @@ export class ExternalReplyInfo {
    * @public
    */
   chat?: Chat;
-
   /**
    * Optional. Unique message identifier inside the original chat. Available only if the original chat is a supergroup or a channel.
    * @type { number }
@@ -65,7 +62,6 @@ export class ExternalReplyInfo {
    * @public
    */
   messageId?: number;
-
   /**
    * Optional. Options used for link preview generation for the original message, if it is a text message
    * @type { LinkPreviewOptions }
@@ -74,7 +70,6 @@ export class ExternalReplyInfo {
    * @public
    */
   linkPreviewOptions?: LinkPreviewOptions;
-
   /**
    * Optional. Message is an animation, information about the animation
    * @type { Animation }
@@ -83,7 +78,6 @@ export class ExternalReplyInfo {
    * @public
    */
   animation?: Animation;
-
   /**
    * Optional. Message is an audio file, information about the file
    * @type { Audio }
@@ -92,7 +86,6 @@ export class ExternalReplyInfo {
    * @public
    */
   audio?: Audio;
-
   /**
    * Optional. Message is a general file, information about the file
    * @type { Document }
@@ -101,7 +94,6 @@ export class ExternalReplyInfo {
    * @public
    */
   document?: Document;
-
   /**
    * Optional. Message contains paid media; information about the paid media
    * @type { PaidMediaInfo }
@@ -110,7 +102,6 @@ export class ExternalReplyInfo {
    * @public
    */
   paidMedia?: PaidMediaInfo;
-
   /**
    * Optional. Message is a photo, available sizes of the photo
    * @type { PhotoSize[] }
@@ -119,7 +110,6 @@ export class ExternalReplyInfo {
    * @public
    */
   photo?: PhotoSize[];
-
   /**
    * Optional. Message is a sticker, information about the sticker
    * @type { Sticker }
@@ -128,7 +118,6 @@ export class ExternalReplyInfo {
    * @public
    */
   sticker?: Sticker;
-
   /**
    * Optional. Message is a forwarded story
    * @type { Story }
@@ -137,7 +126,6 @@ export class ExternalReplyInfo {
    * @public
    */
   story?: Story;
-
   /**
    * Optional. Message is a video, information about the video
    * @type { Video }
@@ -146,7 +134,6 @@ export class ExternalReplyInfo {
    * @public
    */
   video?: Video;
-
   /**
    * Optional. Message is a video note, information about the video message
    * @type { VideoNote }
@@ -155,7 +142,6 @@ export class ExternalReplyInfo {
    * @public
    */
   videoNote?: VideoNote;
-
   /**
    * Optional. Message is a voice message, information about the file
    * @type { Voice }
@@ -164,7 +150,6 @@ export class ExternalReplyInfo {
    * @public
    */
   voice?: Voice;
-
   /**
    * Optional. True, if the message media is covered by a spoiler animation
    * @type { boolean }
@@ -173,7 +158,6 @@ export class ExternalReplyInfo {
    * @public
    */
   hasMediaSpoiler?: boolean;
-
   /**
    * Optional. Message is a checklist
    * @type { Checklist }
@@ -182,7 +166,6 @@ export class ExternalReplyInfo {
    * @public
    */
   checklist?: Checklist;
-
   /**
    * Optional. Message is a shared contact, information about the contact
    * @type { Contact }
@@ -191,7 +174,6 @@ export class ExternalReplyInfo {
    * @public
    */
   contact?: Contact;
-
   /**
    * Optional. Message is a dice with random value
    * @type { Dice }
@@ -200,7 +182,6 @@ export class ExternalReplyInfo {
    * @public
    */
   dice?: Dice;
-
   /**
    * Optional. Message is a game, information about the game. More about games »
    * @type { Game }
@@ -209,7 +190,6 @@ export class ExternalReplyInfo {
    * @public
    */
   game?: Game;
-
   /**
    * Optional. Message is a scheduled giveaway, information about the giveaway
    * @type { Giveaway }
@@ -218,7 +198,6 @@ export class ExternalReplyInfo {
    * @public
    */
   giveaway?: Giveaway;
-
   /**
    * Optional. A giveaway with public winners was completed
    * @type { GiveawayWinners }
@@ -227,7 +206,6 @@ export class ExternalReplyInfo {
    * @public
    */
   giveawayWinners?: GiveawayWinners;
-
   /**
    * Optional. Message is an invoice for a payment, information about the invoice. More about payments »
    * @type { Invoice }
@@ -236,7 +214,6 @@ export class ExternalReplyInfo {
    * @public
    */
   invoice?: Invoice;
-
   /**
    * Optional. Message is a shared location, information about the location
    * @type { Location }
@@ -245,7 +222,6 @@ export class ExternalReplyInfo {
    * @public
    */
   location?: Location;
-
   /**
    * Optional. Message is a native poll, information about the poll
    * @type { Poll }
@@ -254,7 +230,6 @@ export class ExternalReplyInfo {
    * @public
    */
   poll?: Poll;
-
   /**
    * Optional. Message is a venue, information about the venue
    * @type { Venue }
@@ -293,7 +268,35 @@ export class ExternalReplyInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.origin = data.origin;
+      this.chat = data.chat;
+      this.messageId = data.messageId;
+      this.linkPreviewOptions = data.linkPreviewOptions;
+      this.animation = data.animation;
+      this.audio = data.audio;
+      this.document = data.document;
+      this.paidMedia = data.paidMedia;
+      this.photo = data.photo;
+      this.sticker = data.sticker;
+      this.story = data.story;
+      this.video = data.video;
+      this.videoNote = data.videoNote;
+      this.voice = data.voice;
+      this.hasMediaSpoiler = data.hasMediaSpoiler;
+      this.checklist = data.checklist;
+      this.contact = data.contact;
+      this.dice = data.dice;
+      this.game = data.game;
+      this.giveaway = data.giveaway;
+      this.giveawayWinners = data.giveawayWinners;
+      this.invoice = data.invoice;
+      this.location = data.location;
+      this.poll = data.poll;
+      this.venue = data.venue;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class InlineQueryResultPhoto
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -36,7 +34,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   id!: string;
-
   /**
    * A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB
    * @type { string }
@@ -45,7 +42,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   photoUrl!: string;
-
   /**
    * URL of the thumbnail for the photo
    * @type { string }
@@ -54,7 +50,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   thumbnailUrl!: string;
-
   /**
    * Optional. Width of the photo
    * @type { number }
@@ -63,7 +58,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   photoWidth?: number;
-
   /**
    * Optional. Height of the photo
    * @type { number }
@@ -72,7 +66,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   photoHeight?: number;
-
   /**
    * Optional. Title for the result
    * @type { string }
@@ -81,7 +74,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   title?: string;
-
   /**
    * Optional. Short description of the result
    * @type { string }
@@ -90,7 +82,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   description?: string;
-
   /**
    * Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -99,7 +90,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   caption?: string;
-
   /**
    * Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
    * @type { string }
@@ -108,7 +98,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   parseMode?: string;
-
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -117,7 +106,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   captionEntities?: MessageEntity[];
-
   /**
    * Optional. Pass True, if the caption must be shown above the message media
    * @type { boolean }
@@ -126,7 +114,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   showCaptionAboveMedia?: boolean;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -135,7 +122,6 @@ export class InlineQueryResultPhoto {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the photo
    * @type { InputMessageContent }
@@ -174,7 +160,24 @@ export class InlineQueryResultPhoto {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.photoUrl = data.photoUrl;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.photoWidth = data.photoWidth;
+      this.photoHeight = data.photoHeight;
+      this.title = data.title;
+      this.description = data.description;
+      this.caption = data.caption;
+      this.parseMode = data.parseMode;
+      this.captionEntities = data.captionEntities;
+      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+    }
   }
 }

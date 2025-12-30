@@ -6,7 +6,6 @@
  * @class InputLocationMessageContent
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class InputLocationMessageContent {
    * @public
    */
   latitude!: number;
-
   /**
    * Longitude of the location in degrees
    * @type { number }
@@ -33,7 +31,6 @@ export class InputLocationMessageContent {
    * @public
    */
   longitude!: number;
-
   /**
    * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
    * @type { number }
@@ -42,7 +39,6 @@ export class InputLocationMessageContent {
    * @public
    */
   horizontalAccuracy?: number;
-
   /**
    * Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
    * @type { number }
@@ -51,7 +47,6 @@ export class InputLocationMessageContent {
    * @public
    */
   livePeriod?: number;
-
   /**
    * Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
    * @type { number }
@@ -60,7 +55,6 @@ export class InputLocationMessageContent {
    * @public
    */
   heading?: number;
-
   /**
    * Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
    * @type { number }
@@ -99,7 +93,16 @@ export class InputLocationMessageContent {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.latitude = data.latitude;
+      this.longitude = data.longitude;
+      this.horizontalAccuracy = data.horizontalAccuracy;
+      this.livePeriod = data.livePeriod;
+      this.heading = data.heading;
+      this.proximityAlertRadius = data.proximityAlertRadius;
+    }
   }
 }

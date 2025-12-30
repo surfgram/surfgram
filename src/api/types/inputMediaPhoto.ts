@@ -6,7 +6,6 @@
  * @class InputMediaPhoto
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class InputMediaPhoto {
    * @public
    */
   type!: string;
-
   /**
    * File to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files »
    * @type { string }
@@ -34,7 +32,6 @@ export class InputMediaPhoto {
    * @public
    */
   media!: string;
-
   /**
    * Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -43,7 +40,6 @@ export class InputMediaPhoto {
    * @public
    */
   caption?: string;
-
   /**
    * Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
    * @type { string }
@@ -52,7 +48,6 @@ export class InputMediaPhoto {
    * @public
    */
   parseMode?: string;
-
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -61,7 +56,6 @@ export class InputMediaPhoto {
    * @public
    */
   captionEntities?: MessageEntity[];
-
   /**
    * Optional. Pass True, if the caption must be shown above the message media
    * @type { boolean }
@@ -70,7 +64,6 @@ export class InputMediaPhoto {
    * @public
    */
   showCaptionAboveMedia?: boolean;
-
   /**
    * Optional. Pass True if the photo needs to be covered with a spoiler animation
    * @type { boolean }
@@ -109,7 +102,17 @@ export class InputMediaPhoto {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.media = data.media;
+      this.caption = data.caption;
+      this.parseMode = data.parseMode;
+      this.captionEntities = data.captionEntities;
+      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
+      this.hasSpoiler = data.hasSpoiler;
+    }
   }
 }

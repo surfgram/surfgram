@@ -6,7 +6,6 @@
  * @class Contact
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class Contact {
    * @public
    */
   phoneNumber!: string;
-
   /**
    * Contact's first name
    * @type { string }
@@ -33,7 +31,6 @@ export class Contact {
    * @public
    */
   firstName!: string;
-
   /**
    * Optional. Contact's last name
    * @type { string }
@@ -42,7 +39,6 @@ export class Contact {
    * @public
    */
   lastName?: string;
-
   /**
    * Optional. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
    * @type { number }
@@ -51,7 +47,6 @@ export class Contact {
    * @public
    */
   userId?: number;
-
   /**
    * Optional. Additional data about the contact in the form of a vCard
    * @type { string }
@@ -90,7 +85,15 @@ export class Contact {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.phoneNumber = data.phoneNumber;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.userId = data.userId;
+      this.vcard = data.vcard;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class Sticker
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,7 +26,6 @@ export class Sticker {
    * @public
    */
   fileId!: string;
-
   /**
    * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -36,7 +34,6 @@ export class Sticker {
    * @public
    */
   fileUniqueId!: string;
-
   /**
    * Type of the sticker, currently one of “regular”, “mask”, “custom\_emoji”. The type of the sticker is independent from its format, which is determined by the fields is\_animated and is\_video.
    * @type { string }
@@ -45,7 +42,6 @@ export class Sticker {
    * @public
    */
   type!: string;
-
   /**
    * Sticker width
    * @type { number }
@@ -54,7 +50,6 @@ export class Sticker {
    * @public
    */
   width!: number;
-
   /**
    * Sticker height
    * @type { number }
@@ -63,7 +58,6 @@ export class Sticker {
    * @public
    */
   height!: number;
-
   /**
    * True, if the sticker is animated
    * @type { boolean }
@@ -72,7 +66,6 @@ export class Sticker {
    * @public
    */
   isAnimated!: boolean;
-
   /**
    * True, if the sticker is a video sticker
    * @type { boolean }
@@ -81,7 +74,6 @@ export class Sticker {
    * @public
    */
   isVideo!: boolean;
-
   /**
    * Optional. Sticker thumbnail in the .WEBP or .JPG format
    * @type { PhotoSize }
@@ -90,7 +82,6 @@ export class Sticker {
    * @public
    */
   thumbnail?: PhotoSize;
-
   /**
    * Optional. Emoji associated with the sticker
    * @type { string }
@@ -99,7 +90,6 @@ export class Sticker {
    * @public
    */
   emoji?: string;
-
   /**
    * Optional. Name of the sticker set to which the sticker belongs
    * @type { string }
@@ -108,7 +98,6 @@ export class Sticker {
    * @public
    */
   setName?: string;
-
   /**
    * Optional. For premium regular stickers, premium animation for the sticker
    * @type { File }
@@ -117,7 +106,6 @@ export class Sticker {
    * @public
    */
   premiumAnimation?: File;
-
   /**
    * Optional. For mask stickers, the position where the mask should be placed
    * @type { MaskPosition }
@@ -126,7 +114,6 @@ export class Sticker {
    * @public
    */
   maskPosition?: MaskPosition;
-
   /**
    * Optional. For custom emoji stickers, unique identifier of the custom emoji
    * @type { string }
@@ -135,7 +122,6 @@ export class Sticker {
    * @public
    */
   customEmojiId?: string;
-
   /**
    * Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places
    * @type { boolean }
@@ -144,7 +130,6 @@ export class Sticker {
    * @public
    */
   needsRepainting?: boolean;
-
   /**
    * Optional. File size in bytes
    * @type { number }
@@ -183,7 +168,25 @@ export class Sticker {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.fileId = data.fileId;
+      this.fileUniqueId = data.fileUniqueId;
+      this.type = data.type;
+      this.width = data.width;
+      this.height = data.height;
+      this.isAnimated = data.isAnimated;
+      this.isVideo = data.isVideo;
+      this.thumbnail = data.thumbnail;
+      this.emoji = data.emoji;
+      this.setName = data.setName;
+      this.premiumAnimation = data.premiumAnimation;
+      this.maskPosition = data.maskPosition;
+      this.customEmojiId = data.customEmojiId;
+      this.needsRepainting = data.needsRepainting;
+      this.fileSize = data.fileSize;
+    }
   }
 }

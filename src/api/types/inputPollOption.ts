@@ -6,7 +6,6 @@
  * @class InputPollOption
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class InputPollOption {
    * @public
    */
   text!: string;
-
   /**
    * Optional. Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed
    * @type { string }
@@ -34,7 +32,6 @@ export class InputPollOption {
    * @public
    */
   textParseMode?: string;
-
   /**
    * Optional. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of text\_parse\_mode
    * @type { MessageEntity[] }
@@ -73,7 +70,13 @@ export class InputPollOption {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.text = data.text;
+      this.textParseMode = data.textParseMode;
+      this.textEntities = data.textEntities;
+    }
   }
 }

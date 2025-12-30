@@ -6,7 +6,6 @@
  * @class TransactionPartnerAffiliateProgram
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class TransactionPartnerAffiliateProgram {
    * @public
    */
   type!: string;
-
   /**
    * Optional. Information about the bot that sponsored the affiliate program
    * @type { User }
@@ -34,7 +32,6 @@ export class TransactionPartnerAffiliateProgram {
    * @public
    */
   sponsorUser?: User;
-
   /**
    * The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
    * @type { number }
@@ -73,7 +70,13 @@ export class TransactionPartnerAffiliateProgram {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.sponsorUser = data.sponsorUser;
+      this.commissionPerMille = data.commissionPerMille;
+    }
   }
 }

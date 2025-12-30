@@ -6,7 +6,6 @@
  * @class ChatBoostSourceGiftCode
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class ChatBoostSourceGiftCode {
    * @public
    */
   source!: string;
-
   /**
    * User for which the gift code was created
    * @type { User }
@@ -64,7 +62,12 @@ export class ChatBoostSourceGiftCode {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.source = data.source;
+      this.user = data.user;
+    }
   }
 }

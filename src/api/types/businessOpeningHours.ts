@@ -6,7 +6,6 @@
  * @class BusinessOpeningHours
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class BusinessOpeningHours {
    * @public
    */
   timeZoneName!: string;
-
   /**
    * List of time intervals describing business opening hours
    * @type { BusinessOpeningHoursInterval[] }
@@ -64,7 +62,12 @@ export class BusinessOpeningHours {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.timeZoneName = data.timeZoneName;
+      this.openingHours = data.openingHours;
+    }
   }
 }

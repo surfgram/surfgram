@@ -6,7 +6,6 @@
  * @class StarAmount
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class StarAmount {
    * @public
    */
   amount!: number;
-
   /**
    * Optional. The number of 1/1000000000 shares of Telegram Stars; from -999999999 to 999999999; can be negative if and only if amount is non-positive
    * @type { number }
@@ -63,7 +61,12 @@ export class StarAmount {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.amount = data.amount;
+      this.nanostarAmount = data.nanostarAmount;
+    }
   }
 }

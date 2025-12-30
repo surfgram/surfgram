@@ -6,7 +6,6 @@
  * @class StoryAreaType
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class StoryAreaType {
    * @public
    */
   type!: string;
-
   /**
    * Location latitude in degrees
    * @type { number }
@@ -34,7 +32,6 @@ export class StoryAreaType {
    * @public
    */
   latitude!: number;
-
   /**
    * Location longitude in degrees
    * @type { number }
@@ -43,7 +40,6 @@ export class StoryAreaType {
    * @public
    */
   longitude!: number;
-
   /**
    * Optional. Address of the location
    * @type { LocationAddress }
@@ -82,7 +78,14 @@ export class StoryAreaType {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.latitude = data.latitude;
+      this.longitude = data.longitude;
+      this.address = data.address;
+    }
   }
 }

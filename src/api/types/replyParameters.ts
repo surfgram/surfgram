@@ -6,7 +6,6 @@
  * @class ReplyParameters
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class ReplyParameters {
    * @public
    */
   messageId!: number;
-
   /**
    * Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel \(in the format @channelusername\). Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.
    * @type { number | string }
@@ -34,7 +32,6 @@ export class ReplyParameters {
    * @public
    */
   chatId?: number | string;
-
   /**
    * Optional. Pass True if the message should be sent even if the specified message to be replied to is not found. Always False for replies in another chat or forum topic. Always True for messages sent on behalf of a business account.
    * @type { boolean }
@@ -43,7 +40,6 @@ export class ReplyParameters {
    * @public
    */
   allowSendingWithoutReply?: boolean;
-
   /**
    * Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities. The message will fail to send if the quote isn't found in the original message.
    * @type { string }
@@ -52,7 +48,6 @@ export class ReplyParameters {
    * @public
    */
   quote?: string;
-
   /**
    * Optional. Mode for parsing entities in the quote. See formatting options for more details.
    * @type { string }
@@ -61,7 +56,6 @@ export class ReplyParameters {
    * @public
    */
   quoteParseMode?: string;
-
   /**
    * Optional. A JSON-serialized list of special entities that appear in the quote. It can be specified instead of quote\_parse\_mode.
    * @type { MessageEntity[] }
@@ -70,7 +64,6 @@ export class ReplyParameters {
    * @public
    */
   quoteEntities?: MessageEntity[];
-
   /**
    * Optional. Position of the quote in the original message in UTF-16 code units
    * @type { number }
@@ -79,7 +72,6 @@ export class ReplyParameters {
    * @public
    */
   quotePosition?: number;
-
   /**
    * Optional. Identifier of the specific checklist task to be replied to
    * @type { number }
@@ -118,7 +110,18 @@ export class ReplyParameters {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.messageId = data.messageId;
+      this.chatId = data.chatId;
+      this.allowSendingWithoutReply = data.allowSendingWithoutReply;
+      this.quote = data.quote;
+      this.quoteParseMode = data.quoteParseMode;
+      this.quoteEntities = data.quoteEntities;
+      this.quotePosition = data.quotePosition;
+      this.checklistTaskId = data.checklistTaskId;
+    }
   }
 }

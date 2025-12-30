@@ -6,7 +6,6 @@
  * @class SuggestedPostPaid
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class SuggestedPostPaid {
    * @public
    */
   suggestedPostMessage?: Message;
-
   /**
    * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins
    * @type { string }
@@ -35,7 +33,6 @@ export class SuggestedPostPaid {
    * @public
    */
   currency!: string;
-
   /**
    * Optional. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only
    * @type { number }
@@ -44,7 +41,6 @@ export class SuggestedPostPaid {
    * @public
    */
   amount?: number;
-
   /**
    * Optional. The amount of Telegram Stars that was received by the channel; for payments in Telegram Stars only
    * @type { StarAmount }
@@ -83,7 +79,14 @@ export class SuggestedPostPaid {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.suggestedPostMessage = data.suggestedPostMessage;
+      this.currency = data.currency;
+      this.amount = data.amount;
+      this.starAmount = data.starAmount;
+    }
   }
 }

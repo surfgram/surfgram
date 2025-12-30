@@ -6,7 +6,6 @@
  * @class InlineQueryResultVenue
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 Bytes
    * @type { string }
@@ -35,7 +33,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   id!: string;
-
   /**
    * Latitude of the venue location in degrees
    * @type { number }
@@ -44,7 +41,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   latitude!: number;
-
   /**
    * Longitude of the venue location in degrees
    * @type { number }
@@ -53,7 +49,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   longitude!: number;
-
   /**
    * Title of the venue
    * @type { string }
@@ -62,7 +57,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   title!: string;
-
   /**
    * Address of the venue
    * @type { string }
@@ -71,7 +65,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   address!: string;
-
   /**
    * Optional. Foursquare identifier of the venue if known
    * @type { string }
@@ -80,7 +73,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   foursquareId?: string;
-
   /**
    * Optional. Foursquare type of the venue, if known. \(For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.\)
    * @type { string }
@@ -89,7 +81,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   foursquareType?: string;
-
   /**
    * Optional. Google Places identifier of the venue
    * @type { string }
@@ -98,7 +89,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   googlePlaceId?: string;
-
   /**
    * Optional. Google Places type of the venue. \(See supported types.\)
    * @type { string }
@@ -107,7 +97,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   googlePlaceType?: string;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -116,7 +105,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the venue
    * @type { InputMessageContent }
@@ -125,7 +113,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   inputMessageContent?: InputMessageContent;
-
   /**
    * Optional. Url of the thumbnail for the result
    * @type { string }
@@ -134,7 +121,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   thumbnailUrl?: string;
-
   /**
    * Optional. Thumbnail width
    * @type { number }
@@ -143,7 +129,6 @@ export class InlineQueryResultVenue {
    * @public
    */
   thumbnailWidth?: number;
-
   /**
    * Optional. Thumbnail height
    * @type { number }
@@ -182,7 +167,25 @@ export class InlineQueryResultVenue {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.latitude = data.latitude;
+      this.longitude = data.longitude;
+      this.title = data.title;
+      this.address = data.address;
+      this.foursquareId = data.foursquareId;
+      this.foursquareType = data.foursquareType;
+      this.googlePlaceId = data.googlePlaceId;
+      this.googlePlaceType = data.googlePlaceType;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+      this.thumbnailUrl = data.thumbnailUrl;
+      this.thumbnailWidth = data.thumbnailWidth;
+      this.thumbnailHeight = data.thumbnailHeight;
+    }
   }
 }

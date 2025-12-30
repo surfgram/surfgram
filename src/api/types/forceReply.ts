@@ -6,7 +6,6 @@
  * @class ForceReply
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class ForceReply {
    * @public
    */
   forceReply!: boolean;
-
   /**
    * Optional. The placeholder to be shown in the input field when the reply is active; 1-64 characters
    * @type { string }
@@ -33,7 +31,6 @@ export class ForceReply {
    * @public
    */
   inputFieldPlaceholder?: string;
-
   /**
    * Optional. Use this parameter if you want to force reply from specific users only. Targets: 1\) users that are @mentioned in the text of the Message object; 2\) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
    * @type { boolean }
@@ -72,7 +69,13 @@ export class ForceReply {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.forceReply = data.forceReply;
+      this.inputFieldPlaceholder = data.inputFieldPlaceholder;
+      this.selective = data.selective;
+    }
   }
 }

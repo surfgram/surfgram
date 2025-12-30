@@ -6,7 +6,6 @@
  * @class Birthdate
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class Birthdate {
    * @public
    */
   day!: number;
-
   /**
    * Month of the user's birth; 1-12
    * @type { number }
@@ -33,7 +31,6 @@ export class Birthdate {
    * @public
    */
   month!: number;
-
   /**
    * Optional. Year of the user's birth
    * @type { number }
@@ -72,7 +69,13 @@ export class Birthdate {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.day = data.day;
+      this.month = data.month;
+      this.year = data.year;
+    }
   }
 }

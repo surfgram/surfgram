@@ -6,7 +6,6 @@
  * @class InlineQueryResultCachedSticker
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,7 +25,6 @@ export class InlineQueryResultCachedSticker {
    * @public
    */
   type!: string;
-
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -35,7 +33,6 @@ export class InlineQueryResultCachedSticker {
    * @public
    */
   id!: string;
-
   /**
    * A valid file identifier of the sticker
    * @type { string }
@@ -44,7 +41,6 @@ export class InlineQueryResultCachedSticker {
    * @public
    */
   stickerFileId!: string;
-
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -53,7 +49,6 @@ export class InlineQueryResultCachedSticker {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
-
   /**
    * Optional. Content of the message to be sent instead of the sticker
    * @type { InputMessageContent }
@@ -92,7 +87,15 @@ export class InlineQueryResultCachedSticker {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.type = data.type;
+      this.id = data.id;
+      this.stickerFileId = data.stickerFileId;
+      this.replyMarkup = data.replyMarkup;
+      this.inputMessageContent = data.inputMessageContent;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class PaidMediaInfo
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class PaidMediaInfo {
    * @public
    */
   starCount!: number;
-
   /**
    * Information about the paid media
    * @type { PaidMedia[] }
@@ -64,7 +62,12 @@ export class PaidMediaInfo {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.starCount = data.starCount;
+      this.paidMedia = data.paidMedia;
+    }
   }
 }

@@ -6,7 +6,6 @@
  * @class Chat
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class Chat {
    * @public
    */
   id!: number;
-
   /**
    * Type of the chat, can be either “private”, “group”, “supergroup” or “channel”
    * @type { string }
@@ -33,7 +31,6 @@ export class Chat {
    * @public
    */
   type!: string;
-
   /**
    * Optional. Title, for supergroups, channels and group chats
    * @type { string }
@@ -42,7 +39,6 @@ export class Chat {
    * @public
    */
   title?: string;
-
   /**
    * Optional. Username, for private chats, supergroups and channels if available
    * @type { string }
@@ -51,7 +47,6 @@ export class Chat {
    * @public
    */
   username?: string;
-
   /**
    * Optional. First name of the other party in a private chat
    * @type { string }
@@ -60,7 +55,6 @@ export class Chat {
    * @public
    */
   firstName?: string;
-
   /**
    * Optional. Last name of the other party in a private chat
    * @type { string }
@@ -69,7 +63,6 @@ export class Chat {
    * @public
    */
   lastName?: string;
-
   /**
    * Optional. True, if the supergroup chat is a forum \(has topics enabled\)
    * @type { boolean }
@@ -78,7 +71,6 @@ export class Chat {
    * @public
    */
   isForum?: boolean;
-
   /**
    * Optional. True, if the chat is the direct messages chat of a channel
    * @type { boolean }
@@ -117,7 +109,18 @@ export class Chat {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.id = data.id;
+      this.type = data.type;
+      this.title = data.title;
+      this.username = data.username;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.isForum = data.isForum;
+      this.isDirectMessages = data.isDirectMessages;
+    }
   }
 }

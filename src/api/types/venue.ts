@@ -6,7 +6,6 @@
  * @class Venue
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class Venue {
    * @public
    */
   location!: Location;
-
   /**
    * Name of the venue
    * @type { string }
@@ -34,7 +32,6 @@ export class Venue {
    * @public
    */
   title!: string;
-
   /**
    * Address of the venue
    * @type { string }
@@ -43,7 +40,6 @@ export class Venue {
    * @public
    */
   address!: string;
-
   /**
    * Optional. Foursquare identifier of the venue
    * @type { string }
@@ -52,7 +48,6 @@ export class Venue {
    * @public
    */
   foursquareId?: string;
-
   /**
    * Optional. Foursquare type of the venue. \(For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.\)
    * @type { string }
@@ -61,7 +56,6 @@ export class Venue {
    * @public
    */
   foursquareType?: string;
-
   /**
    * Optional. Google Places identifier of the venue
    * @type { string }
@@ -70,7 +64,6 @@ export class Venue {
    * @public
    */
   googlePlaceId?: string;
-
   /**
    * Optional. Google Places type of the venue. \(See supported types.\)
    * @type { string }
@@ -109,7 +102,17 @@ export class Venue {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.location = data.location;
+      this.title = data.title;
+      this.address = data.address;
+      this.foursquareId = data.foursquareId;
+      this.foursquareType = data.foursquareType;
+      this.googlePlaceId = data.googlePlaceId;
+      this.googlePlaceType = data.googlePlaceType;
+    }
   }
 }

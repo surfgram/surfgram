@@ -6,7 +6,6 @@
  * @class RefundedPayment
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,7 +23,6 @@ export class RefundedPayment {
    * @public
    */
   currency!: string;
-
   /**
    * Total refunded price in the smallest units of the currency \(integer, not float/double\). For example, for a price of US$ 1.45, total\_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\).
    * @type { number }
@@ -33,7 +31,6 @@ export class RefundedPayment {
    * @public
    */
   totalAmount!: number;
-
   /**
    * Bot-specified invoice payload
    * @type { string }
@@ -42,7 +39,6 @@ export class RefundedPayment {
    * @public
    */
   invoicePayload!: string;
-
   /**
    * Telegram payment identifier
    * @type { string }
@@ -51,7 +47,6 @@ export class RefundedPayment {
    * @public
    */
   telegramPaymentChargeId!: string;
-
   /**
    * Optional. Provider payment identifier
    * @type { string }
@@ -90,7 +85,15 @@ export class RefundedPayment {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.currency = data.currency;
+      this.totalAmount = data.totalAmount;
+      this.invoicePayload = data.invoicePayload;
+      this.telegramPaymentChargeId = data.telegramPaymentChargeId;
+      this.providerPaymentChargeId = data.providerPaymentChargeId;
+    }
   }
 }

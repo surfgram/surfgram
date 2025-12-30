@@ -6,7 +6,6 @@
  * @class SuggestedPostParameters
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,7 +24,6 @@ export class SuggestedPostParameters {
    * @public
    */
   price?: SuggestedPostPrice;
-
   /**
    * Optional. Proposed send date of the post. If specified, then the date must be between 300 second and 2678400 seconds \(30 days\) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.
    * @type { number }
@@ -64,7 +62,12 @@ export class SuggestedPostParameters {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.price = data.price;
+      this.sendDate = data.sendDate;
+    }
   }
 }

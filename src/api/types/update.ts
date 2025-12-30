@@ -6,7 +6,6 @@
  * @class Update
  * @extends TelegramObject
  */
-
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -41,7 +40,6 @@ export class Update {
    * @public
    */
   updateId!: number;
-
   /**
    * Optional. New incoming message of any kind - text, photo, sticker, etc.
    * @type { Message }
@@ -50,7 +48,6 @@ export class Update {
    * @public
    */
   message?: Message;
-
   /**
    * Optional. New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
    * @type { Message }
@@ -59,7 +56,6 @@ export class Update {
    * @public
    */
   editedMessage?: Message;
-
   /**
    * Optional. New incoming channel post of any kind - text, photo, sticker, etc.
    * @type { Message }
@@ -68,7 +64,6 @@ export class Update {
    * @public
    */
   channelPost?: Message;
-
   /**
    * Optional. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
    * @type { Message }
@@ -77,7 +72,6 @@ export class Update {
    * @public
    */
   editedChannelPost?: Message;
-
   /**
    * Optional. The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot
    * @type { BusinessConnection }
@@ -86,7 +80,6 @@ export class Update {
    * @public
    */
   businessConnection?: BusinessConnection;
-
   /**
    * Optional. New message from a connected business account
    * @type { Message }
@@ -95,7 +88,6 @@ export class Update {
    * @public
    */
   businessMessage?: Message;
-
   /**
    * Optional. New version of a message from a connected business account
    * @type { Message }
@@ -104,7 +96,6 @@ export class Update {
    * @public
    */
   editedBusinessMessage?: Message;
-
   /**
    * Optional. Messages were deleted from a connected business account
    * @type { BusinessMessagesDeleted }
@@ -113,7 +104,6 @@ export class Update {
    * @public
    */
   deletedBusinessMessages?: BusinessMessagesDeleted;
-
   /**
    * Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message\_reaction" in the list of allowed\_updates to receive these updates. The update isn't received for reactions set by bots.
    * @type { MessageReactionUpdated }
@@ -122,7 +112,6 @@ export class Update {
    * @public
    */
   messageReaction?: MessageReactionUpdated;
-
   /**
    * Optional. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify "message\_reaction\_count" in the list of allowed\_updates to receive these updates. The updates are grouped and can be sent with delay up to a few minutes.
    * @type { MessageReactionCountUpdated }
@@ -131,7 +120,6 @@ export class Update {
    * @public
    */
   messageReactionCount?: MessageReactionCountUpdated;
-
   /**
    * Optional. New incoming inline query
    * @type { InlineQuery }
@@ -140,7 +128,6 @@ export class Update {
    * @public
    */
   inlineQuery?: InlineQuery;
-
   /**
    * Optional. The result of an inline query that was chosen by a user and sent to their chat partner. Please see our documentation on the feedback collecting for details on how to enable these updates for your bot.
    * @type { ChosenInlineResult }
@@ -149,7 +136,6 @@ export class Update {
    * @public
    */
   chosenInlineResult?: ChosenInlineResult;
-
   /**
    * Optional. New incoming callback query
    * @type { CallbackQuery }
@@ -158,7 +144,6 @@ export class Update {
    * @public
    */
   callbackQuery?: CallbackQuery;
-
   /**
    * Optional. New incoming shipping query. Only for invoices with flexible price
    * @type { ShippingQuery }
@@ -167,7 +152,6 @@ export class Update {
    * @public
    */
   shippingQuery?: ShippingQuery;
-
   /**
    * Optional. New incoming pre-checkout query. Contains full information about checkout
    * @type { PreCheckoutQuery }
@@ -176,7 +160,6 @@ export class Update {
    * @public
    */
   preCheckoutQuery?: PreCheckoutQuery;
-
   /**
    * Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat
    * @type { PaidMediaPurchased }
@@ -185,7 +168,6 @@ export class Update {
    * @public
    */
   purchasedPaidMedia?: PaidMediaPurchased;
-
   /**
    * Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
    * @type { Poll }
@@ -194,7 +176,6 @@ export class Update {
    * @public
    */
   poll?: Poll;
-
   /**
    * Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
    * @type { PollAnswer }
@@ -203,7 +184,6 @@ export class Update {
    * @public
    */
   pollAnswer?: PollAnswer;
-
   /**
    * Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user.
    * @type { ChatMemberUpdated }
@@ -212,7 +192,6 @@ export class Update {
    * @public
    */
   myChatMember?: ChatMemberUpdated;
-
   /**
    * Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify "chat\_member" in the list of allowed\_updates to receive these updates.
    * @type { ChatMemberUpdated }
@@ -221,7 +200,6 @@ export class Update {
    * @public
    */
   chatMember?: ChatMemberUpdated;
-
   /**
    * Optional. A request to join the chat has been sent. The bot must have the can\_invite\_users administrator right in the chat to receive these updates.
    * @type { ChatJoinRequest }
@@ -230,7 +208,6 @@ export class Update {
    * @public
    */
   chatJoinRequest?: ChatJoinRequest;
-
   /**
    * Optional. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates.
    * @type { ChatBoostUpdated }
@@ -239,7 +216,6 @@ export class Update {
    * @public
    */
   chatBoost?: ChatBoostUpdated;
-
   /**
    * Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.
    * @type { ChatBoostRemoved }
@@ -278,7 +254,34 @@ export class Update {
   constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
+
+    if (raw) {
+      const data = snakeToCamel(raw) as any;
+
+      this.updateId = data.updateId;
+      this.message = data.message;
+      this.editedMessage = data.editedMessage;
+      this.channelPost = data.channelPost;
+      this.editedChannelPost = data.editedChannelPost;
+      this.businessConnection = data.businessConnection;
+      this.businessMessage = data.businessMessage;
+      this.editedBusinessMessage = data.editedBusinessMessage;
+      this.deletedBusinessMessages = data.deletedBusinessMessages;
+      this.messageReaction = data.messageReaction;
+      this.messageReactionCount = data.messageReactionCount;
+      this.inlineQuery = data.inlineQuery;
+      this.chosenInlineResult = data.chosenInlineResult;
+      this.callbackQuery = data.callbackQuery;
+      this.shippingQuery = data.shippingQuery;
+      this.preCheckoutQuery = data.preCheckoutQuery;
+      this.purchasedPaidMedia = data.purchasedPaidMedia;
+      this.poll = data.poll;
+      this.pollAnswer = data.pollAnswer;
+      this.myChatMember = data.myChatMember;
+      this.chatMember = data.chatMember;
+      this.chatJoinRequest = data.chatJoinRequest;
+      this.chatBoost = data.chatBoost;
+      this.removedChatBoost = data.removedChatBoost;
+    }
   }
 }
