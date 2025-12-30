@@ -1,0 +1,23 @@
+/**
+ * Surfgram - TypeScript SDK for Telegram Bot API
+ * @module surfgram
+ * @description High-performance, fully typed SDK for Telegram Bot API with fluent interface.
+ * Provides comprehensive type safety, automatic serialization, and seamless integration.
+ *
+ * @version 1.0.0
+ * @license MIT
+ * @see {@link https://core.telegram.org/bots/api Official Telegram Bot API Documentation}
+ * @see {@link https://github.com/user-with-username/surfgram GitHub Repository}
+ */
+
+export * from "./core/bot";
+export * from "./core/plugin";
+export * from "./core/utils";
+export * from './api/interfaces';
+export * from './api/methods';
+export * from './api/types';
+export * from './api/fluent';
+export * from './api/types/telegramObject';
+{% for type in types %}
+export * from './api/types/{{ type.fileName | replace(".ts", "") }}';
+{% endfor %}

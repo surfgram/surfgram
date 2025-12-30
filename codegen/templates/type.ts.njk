@@ -1,0 +1,68 @@
+/**
+ * {{ type.name }} class for Surfgram Telegram Bot SDK
+ * @module types/{{ fileName }}
+ * @description {{ type.description | docsafe }}
+ * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram API Documentation}
+ * @class {{ type.name }}
+ * @extends TelegramObject
+ */
+
+import { Bot } from '../../core/bot';
+import { snakeToCamel } from '../../core/utils';
+import { TelegramObject } from './telegramObject';
+{% for imp in imports %}
+import { {{ imp.name }} } from './{{ imp.file }}';
+{% endfor %}
+
+/**
+ * Represents a {{ type.name }} object from the Telegram Bot API
+ * @class {{ type.name }}
+ */
+export class {{ type.name }} {
+{% for field in fields %}
+  /**
+   * {{ field.description | docsafe }}
+   * @type { {{ field.tsType }} }
+   * @memberof {{ type.name }}
+   * @instance
+   * @public
+   */
+  {{ field.name }}{{ field.requiredMark }}: {{ field.tsType }};
+
+{% endfor %}
+  /**
+   * Raw data from Telegram API in snake_case format
+   * @type {TelegramObject}
+   * @memberof {{ type.name }}
+   * @instance
+   * @public
+   */
+  public raw?: TelegramObject;
+
+  /**
+   * Bot instance associated with this object
+   * @type {Bot}
+   * @memberof {{ type.name }}
+   * @instance
+   * @public
+   */
+  public bot?: Bot;
+
+  /**
+   * Creates a new {{ type.name }} instance from raw Telegram API data
+   * @constructor
+   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+   * @param {Bot} bot - Bot instance for executing methods
+   * @example
+   * const message = new Message(rawData, botInstance);
+   */
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
+    this.raw = raw;
+    this.bot = bot;
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
+  }
+}

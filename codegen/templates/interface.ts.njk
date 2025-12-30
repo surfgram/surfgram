@@ -1,0 +1,23 @@
+/**
+ * Parameters interface for the {{ method.name }} method
+ * @interface {{ interfaceName }}
+ * @description {{ method.description | docsafe }}
+ * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram API Documentation}
+ */
+
+{% for imp in imports %}
+import { {{ imp.name }} } from '../types/{{ imp.file }}';
+{% endfor %}
+
+export interface {{ interfaceName }} {
+{% for param in params %}
+  /**
+   * {{ param.description | docsafe }}
+   * @type { {{ param.tsType }} }
+   * @originalType {{ param.originalType }}
+   * @required {{ param.requiredText }}
+   */
+  {{ param.name }}{{ param.requiredMark }}: {{ param.tsType }};
+
+{% endfor %}
+}

@@ -1,0 +1,65 @@
+/**
+ * {{ method.name }} method implementation for Surfgram Telegram Bot SDK
+ * @module methods/{{ method.name }}
+ * @description {{ method.description | docsafe }}
+ * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram API Documentation}
+ */
+
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+{% for imp in imports %}
+{% if imp.isInterface %}
+import { {{ imp.name }} } from '../interfaces/{{ imp.file }}';
+{% else %}
+import { {{ imp.name }} } from '../types/{{ imp.file }}';
+{% endif %}
+{% endfor %}
+
+{% if useParamsObject %}
+/**
+ * {{ method.description | docsafe }}
+ * @memberof methods
+ * @async
+ * @function {{ method.name }}
+ * @this {Bot} Bot instance
+ * @param { {{ interfaceName }} } params - Method parameters object
+ * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+ * @throws {Error} If API call fails or returns error
+ * @example
+ * // Using params object
+ * await bot.{{ method.name }}({
+ * // ... params
+ * });
+ */
+export async function {{ method.name }}(this: Bot, params: {{ interfaceName }}): Promise<{{ method.returnType }}> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<{{ method.returnType }}>('{{ method.name }}', snakeParams);
+  return response;
+}
+{% else %}
+/**
+ * {{ method.description | docsafe }}
+ * @memberof methods
+ * @async
+ * @function {{ method.name }}
+ * @this {Bot} Bot instance
+ * {% for param in sortedParams %}
+ * @param { {{ param.tsType }} } {{ param.name }}{{ param.requiredMark }} - {{ param.description | docsafe }}
+ * {% endfor %}
+ * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+ * @throws {Error} If API call fails or returns error
+ * @example
+ * // Direct parameters
+ * await bot.{{ method.name }}(...);
+ */
+export async function {{ method.name }}(this: Bot, {{ paramsSignature }}): Promise<{{ method.returnType }}> {
+  const apiParams = {
+    {% for param in sortedParams %}
+    {{ param.name }}: {{ param.name }},
+    {% endfor %}
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<{{ method.returnType }}>('{{ method.name }}', snakeParams);
+  return response;
+}
+{% endif %}

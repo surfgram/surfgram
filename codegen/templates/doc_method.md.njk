@@ -1,0 +1,133 @@
+# {{ method.name }}
+
+{{ method.description | docsafe }}
+
+{% if fluentTypes.length > 0 %}
+## Fluent Usage
+
+This method is available as a fluent method on the following types:
+
+{% for fType in fluentTypes %}
+### {{ fType.name }} ({{ fType.methodCount }} methods)
+
+{% if fType.allMethods %}
+**Available methods:** {{ fType.allMethods }}
+{% elif fType.keyMethods %}
+**Key methods:** {{ fType.keyMethods }}
+{% endif %}
+
+{% if fType.autoParams %}
+**Auto-filled parameters:** {{ fType.autoParams }}
+{% endif %}
+
+[View {{ fType.name }} documentation with fluent methods](../types/{{ fType.name }}.md)
+
+{% endfor %}
+{% endif %}
+
+## Parameters
+
+{% if method.parameters.length == 0 %}
+This method has no parameters.
+{% else %}
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+{% for param in method.parameters %}
+| `{{ param.name }}` | {{ param.typeStr | safe }} | {{ param.requiredText }} | {{ param.description | docsafe | replace("
+", " ") }} |
+{% endfor %}
+{% endif %}
+
+{% if method.name and method.name[0] == 'o' and method.name[1] == 'n' %}
+## Event Filtering
+
+This event supports advanced filtering capabilities. You can filter incoming updates using:
+
+### String Filter
+The event will be triggered only if the specified string exists anywhere in the update data:
+
+```typescript
+bot.{{ method.name }}("start", async (data) => {
+  // Triggered when "start" exists anywhere in the data
+});
+```
+
+### Function Filter
+The event will be triggered only if the filter function returns true:
+
+```typescript
+// Simple filter
+bot.{{ method.name }}((data) => data.someProperty === "value", async (data) => {
+  // Handle event when property matches
+});
+
+// Async filter
+bot.{{ method.name }}(async (data) => {
+  const result = await checkSomeCondition(data);
+  return result;
+}, async (data) => {
+  // Handle event based on async condition
+});
+
+// Regex filter
+bot.{{ method.name }}((data) => /pattern/.test(data.someProperty || ""), 
+  async (data) => {
+    // Handle event when property matches regex
+  }
+);
+```
+
+### Filter Examples
+
+```typescript
+// Filter by property value
+bot.{{ method.name }}((data) => data.someProperty === "expected", async (data) => {
+  // Handle filtered event
+});
+
+// Filter by property existence
+bot.{{ method.name }}((data) => data.someProperty !== undefined, async (data) => {
+  // Handle event when property exists
+});
+
+// Filter by multiple conditions
+bot.{{ method.name }}((data) => data.property1 === "value1" && data.property2 > 10, async (data) => {
+  // Handle complex filtered event
+});
+
+// Filter with regex pattern
+bot.{{ method.name }}((data) => /^prefix_/.test(data.someProperty || ""), async (data) => {
+  // Handle event when property starts with "prefix_"
+});
+
+// Filter by nested property
+bot.{{ method.name }}((data) => data.nested?.property === "value", async (data) => {
+  // Handle event with nested property check
+});
+```
+
+### Filter Performance Notes
+- String filters use optimized recursive search without creating objects
+- Function filters create the typed object once for both filtering and handling
+- Multiple filters can be combined by registering multiple handlers
+{% endif %}
+
+{% if fluentTypes.length > 0 %}
+## Usage Example
+
+```typescript
+// When you already have a {{ fluentTypes[0].name }} instance
+bot.on{{ fluentTypes[0].name }}(async ({{ fluentTypes[0].name | lower }}: {{ fluentTypes[0].name }}) => {
+  {{ fluentTypes[0].eventCall | safe }}
+});
+
+// With filtering
+bot.on{{ fluentTypes[0].name }}((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
+```
+{% endif %}
+
+## API Documentation
+
+For more details, see the official [Telegram Bot API documentation](https://core.telegram.org/bots/api#{{ method.name}}).

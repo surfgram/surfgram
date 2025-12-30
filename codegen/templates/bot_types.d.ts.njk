@@ -1,0 +1,177 @@
+/**
+ * Type declarations module for Surfgram Telegram Bot SDK
+ * @module types
+ * @description This module contains type declarations that extend the Bot class
+ * and Telegram API types with fluent API methods.
+ * @see {@link https://core.telegram.org/bots/api Telegram Bot API Documentation}
+ */
+
+import { Bot } from '../core/bot';
+import * as Interfaces from './interfaces';
+{% for type in types %}
+import { {{ type.name }} } from './types/{{ type.fileName | replace(".ts", "") }}';
+{% endfor %}
+
+/**
+ * Declaration merging for Bot class
+ * @namespace BotExtensions
+ * @see {@link https://core.telegram.org/bots/api Telegram Bot API Documentation}
+ */
+declare module '../core/bot' {
+  interface Bot {
+{% for method in methods %}
+{% if method.useParamsObject %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param params - Method parameters object
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link Interfaces.{{ method.interfaceName }}} for parameter details
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}(params: Interfaces.{{ method.interfaceName }}): Promise<{{ method.returnType }}>;
+    {% if method.simpleParamsSig %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param {{ method.simpleParamsDoc }} - Required parameters
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}({{ method.simpleParamsSig }}): Promise<{{ method.returnType }}>;
+    {% endif %}
+{% else %}
+    /**
+     * {{ method.description | docsafe }}
+     * {% for p in method.sortedParams %}
+     * @param {{ p.name }} - {{ p.description | docsafe }}
+     * {% endfor %}
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}({{ method.paramsSignature }}): Promise<{{ method.returnType }}>;
+{% endif %}
+{% endfor %}
+
+    // Strongly typed event handlers with filtering
+{% for type in types %}
+    /**
+     * Registers a handler for {{ type.name }} updates
+     * @overload
+     * @param handler - Async function to handle {{ type.name }} updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram Bot API}
+     */
+    on{{ type.name }}(handler: (data: {{ type.name }}) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for {{ type.name }} updates with filtering
+     * @overload
+     * @param filter - String or function to filter {{ type.name }} data
+     * @param handler - Async function to handle filtered {{ type.name }} updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram Bot API}
+     */
+    on{{ type.name }}(filter: string | ((data: any) => boolean), handler: (data: {{ type.name }}) => void | Promise<void>): this;
+{% endfor %}
+
+    // Generic handlers
+{% for type in types %}
+    /**
+     * Generic handler for '{{ type.name | lower }}' event (strongly typed)
+     * @param event - Event name: '{{ type.name | lower }}'
+     * @param handler - Async function to handle {{ type.name | lower }} events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram Bot API}
+     */
+    on(event: '{{ type.name | lower }}', handler: (data: {{ type.name }}) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for '{{ type.name | lower }}' event with filtering
+     * @param event - Event name: '{{ type.name | lower }}'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered {{ type.name | lower }} events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram Bot API}
+     */
+    on(event: '{{ type.name | lower }}', filter: string | ((data: any) => boolean), handler: (data: {{ type.name }}) => void | Promise<void>): this;
+{% endfor %}
+
+    /**
+     * Generic handler for any event (weakly typed)
+     * @param event - Event name as string
+     * @param handler - Async function to handle the event
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#getting-updates Telegram Bot API}
+     */
+    on(event: string, handler: (data: any) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for any event with filtering
+     * @param event - Event name as string
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#getting-updates Telegram Bot API}
+     */
+    on(event: string, filter: string | ((data: any) => boolean), handler: (data: any) => void | Promise<void>): this;
+  }
+}
+
+// Fluent Extensions for Types
+{% for typeExt in typeExtensions %}
+/**
+ * Declaration merging for {{ typeExt.name }} class
+ * @namespace {{ typeExt.name }}Extensions
+ */
+declare module './types/{{ typeExt.fileName }}' {
+  interface {{ typeExt.name }} {
+{% for method in typeExt.methods %}
+{% if method.useParamsObject %}
+{% if method.autoMappedParams | length > 0 %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters ({{ method.autoMappedParams | join(", ") }}) are automatically filled from this {{ typeExt.name }} instance
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}(params: Omit<Interfaces.{{ method.interfaceName }}, {{ method.excludedParamsString }}>): Promise<{{ method.returnType }}>;
+{% else %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param params - Method parameters object
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}(params: Interfaces.{{ method.interfaceName }}): Promise<{{ method.returnType }}>;
+{% endif %}
+{% else %}
+{% if method.autoMappedParams | length > 0 %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param {{ method.paramsSignature }} - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters ({{ method.autoMappedParams | join(", ") }}) are automatically filled from this {{ typeExt.name }} instance
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}({{ method.paramsSignature }}): Promise<{{ method.returnType }}>;
+{% else %}
+    /**
+     * {{ method.description | docsafe }}
+     * @param {{ method.paramsSignature }} - Method parameters
+     * @returns {Promise<{{ method.returnType }}>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+     */
+    {{ method.name }}({{ method.paramsSignature }}): Promise<{{ method.returnType }}>;
+{% endif %}
+{% endif %}
+{% endfor %}
+  }
+}
+{% endfor %}

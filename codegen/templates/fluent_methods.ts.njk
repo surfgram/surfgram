@@ -1,0 +1,22 @@
+/**
+ * Fluent API methods module for Surfgram Telegram Bot SDK
+ * @module fluent/methods
+ * @description Attaches all API methods to Bot prototype for fluent API access
+ */
+
+import { Bot } from '../../core/bot';
+import * as methods from '../methods';
+
+{% for method in methods %}
+/**
+ * {{ method.description | docsafe }}
+ * @memberof Bot.prototype
+ * @instance
+ * @function {{ method.name }}
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).{{ method.name }} = function(...args: any[]) {
+  return (methods as any).{{ method.name }}.apply(this, args);
+};
+
+{% endfor %}

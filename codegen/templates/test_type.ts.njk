@@ -1,0 +1,28 @@
+import { {{ type.name }} } from '../../src/api';
+import { Bot } from '../../src/core/bot';
+
+describe('{{ type.name }}', () => {
+  const mockBot = { callApi: jest.fn() } as unknown as Bot;
+
+  it('should correctly instantiate from raw data', () => {
+    const raw = {
+{% for field in fields %}
+      {{ field.snakeName }}: {{ field.mockValue }},
+{% endfor %}
+    };
+
+    const instance = new {{ type.name }}(raw, mockBot);
+
+    expect(instance.raw).toEqual(raw);
+    expect(instance.bot).toBe(mockBot);
+    
+{% for field in fields %}
+    {% set expectedValue = field.mockValue %}
+    {% if field.types[0] and field.types[0].endsWith('[]') %}
+    expect(Array.isArray(instance.{{ field.name }}) || Array.isArray(instance.raw.{{ field.snakeName }})).toBeTruthy();
+    {% else %}
+    expect(instance.{{ field.name }} ?? instance.raw?.{{ field.snakeName }}).toEqual({{ expectedValue }});
+    {% endif %}
+{% endfor %}
+  });
+});

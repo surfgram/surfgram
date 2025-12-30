@@ -1,0 +1,94 @@
+# {{ type.name }}
+
+{{ type.description | docsafe }}
+
+## Fields
+
+{% if type.fields and type.fields.length > 0 %}
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+{% for field in type.fields %}
+| {{ field.name }} | {{ field.tsTypeFormatted | safe }} | {{ field.requiredText }} | {{ field.description | docsafe | replace("
+", " ") }} |
+{% endfor %}
+{% else %}
+This type has no fields.
+{% endif %}
+
+{% if compatibleMethods.length > 0 %}
+## Fluent Methods
+
+The `{{ type.name }}` class has the following fluent methods that automatically inject contextual parameters:
+
+{% for method in compatibleMethods %}
+### {{ method.name }}
+
+{{ method.description | docsafe }}
+
+{% if method.autoMappings.length > 0 %}
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+{% for mapping in method.autoMappings %}
+| `{{ mapping.parameterName }}` | `{{ mapping.fieldPath }}` | {{ mapping.description }} |
+{% endfor %}
+{% endif %}
+
+{% if method.nonAutoParams.length > 0 %}
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+{% for param in method.nonAutoParams %}
+| `{{ param.name }}` | {{ param.typeStr | safe }} | {{ param.requiredText }} | {{ param.description | docsafe | replace("
+", " ") }} |
+{% endfor %}
+{% endif %}
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const {{ type.name | lower }} = new {{ type.name }}(rawData, bot);
+{{ method.exampleCall | safe }}
+```
+
+2. In an event handler:
+
+```typescript
+bot.on{{ type.name }}(async ({{ type.name | lower }}: {{ type.name }}) => {
+  // Auto-fills parameters from the {{ type.name | lower }} instance
+  {{ method.eventExampleCall | safe }}
+});
+```
+
+**See also:** [{{ method.name }} API method](../methods/{{ method.name }}.md)
+
+{% endfor %}
+{% endif %}
+
+## Event Handlers
+
+You can listen for {{ type.name }} events using:
+
+```typescript
+// Type-specific handler
+bot.on{{ type.name }}(async ({{ type.name | lower }}: {{ type.name }}) => {
+  console.log('Received:', {{ type.name | lower }});
+  {% if compatibleMethods.length > 0 %}
+  // Use fluent methods
+  await {{ type.name | lower }}.{{ compatibleMethods[0].name }}(...);
+  {% endif %}
+});
+
+// Generic handler
+bot.on('{{ type.name | lower }}', async (data: {{ type.name }}) => {
+  // Same as above
+});
+```
+
+## API Documentation
+
+For more details, see the official [Telegram Bot API documentation](https://core.telegram.org/bots/api#{{ type.name }}).

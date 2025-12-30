@@ -1,0 +1,26 @@
+import { {{ method.name }} } from '../../src/api';
+import { Bot } from '../../src/core/bot';
+
+describe('{{ method.name }}', () => {
+  it('should call callApi with correct parameters', async () => {
+    const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
+
+{% if useParamsObject %}
+    const params = {
+{% for param in params %}
+      {{ param.name }}: {{ param.mockValue }},
+{% endfor %}
+    };
+
+    await {{ method.name }}.call(mockBot, params);
+{% else %}
+    await {{ method.name }}.call(mockBot{% for param in params %}, {{ param.mockValue }}{% endfor %});
+{% endif %}
+
+    expect(mockBot.callApi).toHaveBeenCalledWith('{{ method.name }}', {
+{% for param in params %}
+      {{ param.snakeName }}: {{ param.mockValue }},
+{% endfor %}
+    });
+  });
+});

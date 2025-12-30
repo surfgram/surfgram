@@ -1,0 +1,62 @@
+{
+  "name": "surfgram",
+  "version": "1.0.0",
+  "description": "High-performance, fully typed SDK for Telegram Bot API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "generate": "cd codegen && npm run start",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "npm run generate && npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "format": "prettier --write .",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "sdk",
+    "typescript",
+    "api",
+    "fluent",
+    "generator"
+  ],
+  "author": {
+    "name": "Anybodyy"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surfgram/surfgram.git"
+  },
+  "bugs": {
+    "url": "https://github.com/surfgram/surfgram/issues"
+  },
+  "homepage": "https://github.com/surfgram/surfgram#readme",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "jest": "^29.0.0",
+    "nodemon": "^3.0.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.5.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  }
+}

@@ -1,0 +1,37 @@
+# API Documentation
+
+## Core
+- [Bot](bot.md)
+- [Core Concepts](core-concepts.md)
+- [Plugins](plugins.md)
+- [Webhooks](webhooks.md)
+
+## Types
+
+{% if typesWithFluent.length > 0 %}
+### Types with fluent methods:
+
+{% for type in typesWithFluent %}
+- [{{ type.name }}](types/{{ type.name }}.md)
+{% endfor %}
+{% endif %}
+
+{% if typesWithoutFluent.length > 0 %}
+### Other types:
+
+{% for type in typesWithoutFluent %}
+- [{{ type.name }}](types/{{ type.name }}.md)
+{% endfor %}
+{% endif %}
+
+## API Methods
+
+{% for method in methods %}
+- [{{ method.name }}](methods/{{ method.name }}.md)
+{% endfor %}
+
+## Fluent API Overview
+
+- [Quick Start Guide](fluent/quick-start.md)
+- [Event Handling](fluent/event-handling.md)
+- [Best Practices](fluent/best-practices.md)

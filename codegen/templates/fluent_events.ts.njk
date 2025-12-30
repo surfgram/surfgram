@@ -1,0 +1,178 @@
+/**
+ * Fluent API events module for Surfgram Telegram Bot SDK
+ * @module fluent/events
+ * @description Provides event handling and type method implementations
+ * for the fluent API system.
+ * @see {@link https://core.telegram.org/bots/api Telegram Bot API Documentation}
+ */
+
+import { Bot } from '../../core/bot';
+import * as Interfaces from '../interfaces';
+import { keyExists, valueExists } from '../../core/utils';
+{% for type in types %}
+import { {{ type.name }} } from '../types/{{ type.fileName | replace(".ts", "") }}';
+{% endfor %}
+
+(Bot.prototype as any).on = function(
+  event: string,
+  ...args: any[]
+): any {
+  if (args.length === 1) {
+    // on(event, handler)
+    const handler = args[0];
+    this.register(event, async (raw: any) => {
+      await handler(raw);
+    });
+    return this;
+  } else if (args.length === 2) {
+    // on(event, filter, handler)
+    const [filter, handler] = args;
+    
+    if (typeof filter === 'string') {
+      this.register(event, {
+        filter: (raw: any) => valueExists(raw, filter),
+        handler: async (raw: any) => {
+          await handler(raw);
+        }
+      });
+    } else if (typeof filter === 'function') {
+      this.register(event, async (raw: any) => {
+        if (filter(raw)) {
+          await handler(raw);
+        }
+      });
+    }
+    return this;
+  }
+  
+  throw new Error('Invalid arguments for on() method');
+};
+
+{% for type in types %}
+/**
+ * Registers a handler for {{ type.name }} updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function on{{ type.name }}
+ * @param {string | ((data: {{ type.name }}) => boolean) | ((data: {{ type.name }}) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: {{ type.name }}) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#{{ type.name | lower }} Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.on{{ type.name }}(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.on{{ type.name }}("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.on{{ type.name }}((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).on{{ type.name }} = function(
+  filterOrHandler: string | ((data: {{ type.name }}) => boolean) | ((data: {{ type.name }}) => void | Promise<void>),
+  handler?: (data: {{ type.name }}) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: {{ type.name }}) => void | Promise<void>;
+    this.register('{{ type.name | lower }}', async (raw: any) => {
+      const data = new {{ type.name }}(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: {{ type.name }}) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('{{ type.name | lower }}', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new {{ type.name }}(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('{{ type.name | lower }}', async (raw: any) => {
+      const data = new {{ type.name }}(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+{% endfor %}
+
+{% for typeExt in typeExtensions %}
+{% for method in typeExt.methods %}
+{% if method.useParamsObject %}
+/**
+ * {{ method.description | docsafe }}
+ * @memberof {{ typeExt.name }}.prototype
+ * @instance
+ * @function {{ method.name }}
+ * @param {Omit<Interfaces.{{ method.interfaceName }}, {{ method.excludedParamsString }}>} params - Method parameters
+ * @returns {Promise<{{ method.returnTypeTs }}>} Promise resolving to method result
+ * @description Contextual parameters ({{ method.autoMappedParams | join(", ") }}) are automatically filled from this {{ typeExt.name }} instance
+ * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+ */
+({{ typeExt.name }}.prototype as any).{{ method.name }} = function(params: Omit<Interfaces.{{ method.interfaceName }}, {{ method.excludedParamsString }}>): Promise<{{ method.returnTypeTs }}> {
+  const fullParams: any = { ...params };
+  {% for mapping in method.autoMappings %}
+  try {
+    const value = {{ mapping.fieldPath }};
+    if (value !== undefined && value !== null) {
+      fullParams.{{ mapping.parameterName }} = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill {{ mapping.parameterName }} from {{ mapping.fieldPath }}:', e);
+  }
+  {% endfor %}
+  return this.bot.{{ method.name }}(fullParams as Interfaces.{{ method.interfaceName }});
+};
+
+{% else %}
+/**
+ * {{ method.description | docsafe }}
+ * @memberof {{ typeExt.name }}.prototype
+ * @instance
+ * @function {{ method.name }}
+ * {% for param in method.explicitParams %}
+ * @param { {{ param.tsType }} } {{ param.name }}{% if not param.required %}?{% endif %} - {{ param.description | docsafe }}
+{% endfor %}
+ * @returns {Promise<{{ method.returnTypeTs }}>} Promise resolving to method result
+ * @description Contextual parameters ({{ method.autoMappedParams | join(", ") }}) are automatically filled from this {{ typeExt.name }} instance
+ * @see {@link https://core.telegram.org/bots/api#{{ method.name }} Telegram Bot API}
+ */
+({{ typeExt.name }}.prototype as any).{{ method.name }} = function(
+  {% for param in method.explicitParams %}
+  {{ param.name }}{% if not param.required %}?{% endif %}: {{ param.tsType }}{% if not loop.last %}, {% endif %}
+  {% endfor %}
+): Promise<{{ method.returnTypeTs }}> {
+  const params: any = {};
+  {% for p in method.explicitParams %}
+  if ({{ p.name }} !== undefined) {
+    params.{{ p.name }} = {{ p.name }};
+  }
+  {% endfor %}
+
+  {% for mapping in method.autoMappings %}
+  try {
+    const value = {{ mapping.fieldPath }};
+    if (value !== undefined && value !== null) {
+      params.{{ mapping.parameterName }} = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill {{ mapping.parameterName }} from {{ mapping.fieldPath }}:', e);
+  }
+  {% endfor %}
+
+  return this.bot.{{ method.name }}(params);
+};
+
+{% endif %}
+{% endfor %}
+{% endfor %}

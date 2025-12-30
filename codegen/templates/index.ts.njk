@@ -1,0 +1,8 @@
+export * from './interfaces';
+export * from './methods';
+export * from './types';
+export * from './fluent';
+export * from './types/telegramObject';
+{% for type in types %}
+export * from './types/{{ type.fileName | replace(".ts", "") }}';
+{% endfor %}
