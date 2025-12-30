@@ -6,7 +6,7 @@ describe('StoryAreaType', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       latitude: 123,
       longitude: 123,
       address: {} as any,
@@ -16,8 +16,8 @@ describe('StoryAreaType', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.latitude ?? instance.raw?.latitude).toEqual(123);
     expect(instance.longitude ?? instance.raw?.longitude).toEqual(123);
     expect(instance.address ?? instance.raw?.address).toEqual({} as any);

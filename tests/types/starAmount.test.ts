@@ -14,7 +14,7 @@ describe('StarAmount', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.amount ?? instance.raw?.amount).toEqual(123);
     expect(instance.nanostarAmount ?? instance.raw?.nanostar_amount).toEqual(123);
   });

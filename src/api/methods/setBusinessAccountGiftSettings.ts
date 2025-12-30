@@ -24,12 +24,7 @@ import { AcceptedGiftTypes } from '../types/acceptedGiftTypes';
  * // Direct parameters
  * await bot.setBusinessAccountGiftSettings(...);
  */
-export async function setBusinessAccountGiftSettings(
-  this: Bot,
-  businessConnectionId: string,
-  showGiftButton: boolean,
-  acceptedGiftTypes: AcceptedGiftTypes
-): Promise<any> {
+export async function setBusinessAccountGiftSettings(this: Bot, businessConnectionId: string, showGiftButton: boolean, acceptedGiftTypes: AcceptedGiftTypes): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     showGiftButton: showGiftButton,

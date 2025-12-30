@@ -4,12 +4,13 @@ The background is a gradient fill.
 
 ## Fields
 
-| Name          | Type     | Required | Description                                                       |
-| :------------ | :------- | :------: | :---------------------------------------------------------------- |
-| type          | `string` |   Yes    | Type of the background fill, always “gradient”                    |
-| topColor      | `number` |   Yes    | Top color of the gradient in the RGB24 format                     |
-| bottomColor   | `number` |   Yes    | Bottom color of the gradient in the RGB24 format                  |
-| rotationAngle | `number` |   Yes    | Clockwise rotation angle of the background fill in degrees; 0-359 |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the background fill, always “gradient” |
+| topColor | `number` | Yes | Top color of the gradient in the RGB24 format |
+| bottomColor | `number` | Yes | Bottom color of the gradient in the RGB24 format |
+| rotationAngle | `number` | Yes | Clockwise rotation angle of the background fill in degrees; 0-359 |
+
 
 ## Event Handlers
 

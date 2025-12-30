@@ -18,14 +18,17 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatMenuButton`, `getChatMenuButton`
 
+
 [View MenuButton documentation with fluent methods](../types/MenuButton.md)
+
 
 ## Parameters
 
-| Parameter    | Type         | Required | Description                                                                                                |
-| :----------- | :----------- | :------: | :--------------------------------------------------------------------------------------------------------- |
-| `chatId`     | `number`     |    No    | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
-| `menuButton` | `MenuButton` |    No    | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault                      |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+
 
 ## Usage Example
 
@@ -36,12 +39,9 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onChat((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

@@ -6,7 +6,7 @@ describe('PollAnswer', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      poll_id: 'example text',
+      poll_id: "example text",
       voter_chat: {} as any,
       user: {} as any,
       option_ids: [123],
@@ -16,8 +16,8 @@ describe('PollAnswer', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.pollId ?? instance.raw?.poll_id).toEqual('example text');
+    
+    expect(instance.pollId ?? instance.raw?.poll_id).toEqual("example text");
     expect(instance.voterChat ?? instance.raw?.voter_chat).toEqual({} as any);
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.optionIds ?? instance.raw?.option_ids).toEqual([123]);

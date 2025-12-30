@@ -23,11 +23,7 @@ import { MenuButton } from '../types/menuButton';
  * // Direct parameters
  * await bot.setChatMenuButton(...);
  */
-export async function setChatMenuButton(
-  this: Bot,
-  chatId?: number,
-  menuButton?: MenuButton
-): Promise<any> {
+export async function setChatMenuButton(this: Bot, chatId?: number, menuButton?: MenuButton): Promise<any> {
   const apiParams = {
     chatId: chatId,
     menuButton: menuButton,

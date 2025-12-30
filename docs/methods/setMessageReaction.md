@@ -18,16 +18,19 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setMessageReaction`
 
+
 [View ReactionType documentation with fluent methods](../types/ReactionType.md)
+
 
 ## Parameters
 
-| Parameter   | Type                 | Required | Description                                                                                                                                                                                                                                                                                                          |
-| :---------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`    | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                           |
-| `messageId` | `number`             |   Yes    | Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.                                                                                                                                                                |
-| `reaction`  | `ReactionType[]`     |    No    | A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots. |
-| `isBig`     | `boolean`            |    No    | Pass True to set the reaction with a big animation                                                                                                                                                                                                                                                                   |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `messageId` | `number` | Yes | Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead. |
+| `reaction` | `ReactionType[]` | No | A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots. |
+| `isBig` | `boolean` | No | Pass True to set the reaction with a big animation |
+
 
 ## Usage Example
 
@@ -38,12 +41,9 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onMessage((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

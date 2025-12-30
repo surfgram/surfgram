@@ -7,7 +7,6 @@
 
 import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
-import { AnswerShippingQueryParams } from '../interfaces/answerShippingQueryParams';
 import { ShippingOption } from '../types/shippingOption';
 
 /**
@@ -16,20 +15,24 @@ import { ShippingOption } from '../types/shippingOption';
  * @async
  * @function answerShippingQuery
  * @this {Bot} Bot instance
- * @param { AnswerShippingQueryParams } params - Method parameters object
- * @returns {Promise<any>} Promise resolving to method result
+ *  * @param { string } shippingQueryId - Unique identifier for the query to be answered
+ *  * @param { boolean } ok - Pass True if delivery to the specified address is possible and False if there are any problems \(for example, if delivery to the specified address is not possible\)
+ *  * @param { ShippingOption[] } shippingOptions? - Required if ok is True. A JSON-serialized array of available shipping options.
+ *  * @param { string } errorMessage? - Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order \(e.g. “Sorry, delivery to your desired address is unavailable”\). Telegram will display this message to the user.
+ *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example
- * // Using params object
- * await bot.answerShippingQuery({
- * // ... params
- * });
+ * // Direct parameters
+ * await bot.answerShippingQuery(...);
  */
-export async function answerShippingQuery(
-  this: Bot,
-  params: AnswerShippingQueryParams
-): Promise<any> {
-  const snakeParams = camelToSnake(params);
+export async function answerShippingQuery(this: Bot, shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any> {
+  const apiParams = {
+    shippingQueryId: shippingQueryId,
+    ok: ok,
+    shippingOptions: shippingOptions,
+    errorMessage: errorMessage,
+  };
+  const snakeParams = camelToSnake(apiParams);
   const response = await this.callApi<any>('answerShippingQuery', snakeParams);
   return response;
 }

@@ -6,7 +6,7 @@ describe('Dice', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      emoji: 'example text',
+      emoji: "example text",
       value: 123,
     };
 
@@ -14,8 +14,8 @@ describe('Dice', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.emoji ?? instance.raw?.emoji).toEqual('example text');
+    
+    expect(instance.emoji ?? instance.raw?.emoji).toEqual("example text");
     expect(instance.value ?? instance.raw?.value).toEqual(123);
   });
 });

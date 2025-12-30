@@ -6,7 +6,7 @@ describe('TextQuote', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      text: 'example text',
+      text: "example text",
       entities: [{} as any],
       position: 123,
       is_manual: true,
@@ -16,8 +16,8 @@ describe('TextQuote', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.text ?? instance.raw?.text).toEqual('example text');
+    
+    expect(instance.text ?? instance.raw?.text).toEqual("example text");
     expect(instance.entities ?? instance.raw?.entities).toEqual([{} as any]);
     expect(instance.position ?? instance.raw?.position).toEqual(123);
     expect(instance.isManual ?? instance.raw?.is_manual).toEqual(true);

@@ -22,28 +22,30 @@ This method is available as a fluent method on the following types:
 
 [View ChatMember documentation with fluent methods](../types/ChatMember.md)
 
+
 ## Parameters
 
-| Parameter                 | Type                 | Required | Description                                                                                                                                                                                                                                                                 |
-| :------------------------ | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`                  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                  |
-| `userId`                  | `number`             |   Yes    | Unique identifier of the target user                                                                                                                                                                                                                                        |
-| `isAnonymous`             | `boolean`            |    No    | Pass True if the administrator's presence in the chat is hidden                                                                                                                                                                                                             |
-| `canManageChat`           | `boolean`            |    No    | Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege. |
-| `canDeleteMessages`       | `boolean`            |    No    | Pass True if the administrator can delete messages of other users                                                                                                                                                                                                           |
-| `canManageVideoChats`     | `boolean`            |    No    | Pass True if the administrator can manage video chats                                                                                                                                                                                                                       |
-| `canRestrictMembers`      | `boolean`            |    No    | Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics                                                                                                                                                                     |
-| `canPromoteMembers`       | `boolean`            |    No    | Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly \(promoted by administrators that were appointed by him\)                                          |
-| `canChangeInfo`           | `boolean`            |    No    | Pass True if the administrator can change chat title, photo and other settings                                                                                                                                                                                              |
-| `canInviteUsers`          | `boolean`            |    No    | Pass True if the administrator can invite new users to the chat                                                                                                                                                                                                             |
-| `canPostStories`          | `boolean`            |    No    | Pass True if the administrator can post stories to the chat                                                                                                                                                                                                                 |
-| `canEditStories`          | `boolean`            |    No    | Pass True if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive                                                                                                                 |
-| `canDeleteStories`        | `boolean`            |    No    | Pass True if the administrator can delete stories posted by other users                                                                                                                                                                                                     |
-| `canPostMessages`         | `boolean`            |    No    | Pass True if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only                                                                                                                                   |
-| `canEditMessages`         | `boolean`            |    No    | Pass True if the administrator can edit messages of other users and can pin messages; for channels only                                                                                                                                                                     |
-| `canPinMessages`          | `boolean`            |    No    | Pass True if the administrator can pin messages; for supergroups only                                                                                                                                                                                                       |
-| `canManageTopics`         | `boolean`            |    No    | Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only                                                                                                                                                                    |
-| `canManageDirectMessages` | `boolean`            |    No    | Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only                                                                                                                                                 |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `isAnonymous` | `boolean` | No | Pass True if the administrator's presence in the chat is hidden |
+| `canManageChat` | `boolean` | No | Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege. |
+| `canDeleteMessages` | `boolean` | No | Pass True if the administrator can delete messages of other users |
+| `canManageVideoChats` | `boolean` | No | Pass True if the administrator can manage video chats |
+| `canRestrictMembers` | `boolean` | No | Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics |
+| `canPromoteMembers` | `boolean` | No | Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly \(promoted by administrators that were appointed by him\) |
+| `canChangeInfo` | `boolean` | No | Pass True if the administrator can change chat title, photo and other settings |
+| `canInviteUsers` | `boolean` | No | Pass True if the administrator can invite new users to the chat |
+| `canPostStories` | `boolean` | No | Pass True if the administrator can post stories to the chat |
+| `canEditStories` | `boolean` | No | Pass True if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive |
+| `canDeleteStories` | `boolean` | No | Pass True if the administrator can delete stories posted by other users |
+| `canPostMessages` | `boolean` | No | Pass True if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only |
+| `canEditMessages` | `boolean` | No | Pass True if the administrator can edit messages of other users and can pin messages; for channels only |
+| `canPinMessages` | `boolean` | No | Pass True if the administrator can pin messages; for supergroups only |
+| `canManageTopics` | `boolean` | No | Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
+| `canManageDirectMessages` | `boolean` | No | Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only |
+
 
 ## Usage Example
 
@@ -54,12 +56,9 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onChat((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

@@ -7,7 +7,6 @@
 
 import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
-import { AnswerWebAppQueryParams } from '../interfaces/answerWebAppQueryParams';
 import { InlineQueryResult } from '../types/inlineQueryResult';
 
 /**
@@ -16,17 +15,20 @@ import { InlineQueryResult } from '../types/inlineQueryResult';
  * @async
  * @function answerWebAppQuery
  * @this {Bot} Bot instance
- * @param { AnswerWebAppQueryParams } params - Method parameters object
- * @returns {Promise<any>} Promise resolving to method result
+ *  * @param { string } webAppQueryId - Unique identifier for the query to be answered
+ *  * @param { InlineQueryResult } result - A JSON-serialized object describing the message to be sent
+ *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example
- * // Using params object
- * await bot.answerWebAppQuery({
- * // ... params
- * });
+ * // Direct parameters
+ * await bot.answerWebAppQuery(...);
  */
-export async function answerWebAppQuery(this: Bot, params: AnswerWebAppQueryParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
+export async function answerWebAppQuery(this: Bot, webAppQueryId: string, result: InlineQueryResult): Promise<any> {
+  const apiParams = {
+    webAppQueryId: webAppQueryId,
+    result: result,
+  };
+  const snakeParams = camelToSnake(apiParams);
   const response = await this.callApi<any>('answerWebAppQuery', snakeParams);
   return response;
 }

@@ -6,16 +6,16 @@ describe('InputStoryContentPhoto', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      photo: 'example text',
+      type: "example text",
+      photo: "example text",
     };
 
     const instance = new InputStoryContentPhoto(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.photo ?? instance.raw?.photo).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.photo ?? instance.raw?.photo).toEqual("example text");
   });
 });

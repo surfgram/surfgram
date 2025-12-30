@@ -36,7 +36,7 @@ describe('Update', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.updateId ?? instance.raw?.update_id).toEqual(123);
     expect(instance.message ?? instance.raw?.message).toEqual({} as any);
     expect(instance.editedMessage ?? instance.raw?.edited_message).toEqual({} as any);
@@ -44,16 +44,10 @@ describe('Update', () => {
     expect(instance.editedChannelPost ?? instance.raw?.edited_channel_post).toEqual({} as any);
     expect(instance.businessConnection ?? instance.raw?.business_connection).toEqual({} as any);
     expect(instance.businessMessage ?? instance.raw?.business_message).toEqual({} as any);
-    expect(instance.editedBusinessMessage ?? instance.raw?.edited_business_message).toEqual(
-      {} as any
-    );
-    expect(instance.deletedBusinessMessages ?? instance.raw?.deleted_business_messages).toEqual(
-      {} as any
-    );
+    expect(instance.editedBusinessMessage ?? instance.raw?.edited_business_message).toEqual({} as any);
+    expect(instance.deletedBusinessMessages ?? instance.raw?.deleted_business_messages).toEqual({} as any);
     expect(instance.messageReaction ?? instance.raw?.message_reaction).toEqual({} as any);
-    expect(instance.messageReactionCount ?? instance.raw?.message_reaction_count).toEqual(
-      {} as any
-    );
+    expect(instance.messageReactionCount ?? instance.raw?.message_reaction_count).toEqual({} as any);
     expect(instance.inlineQuery ?? instance.raw?.inline_query).toEqual({} as any);
     expect(instance.chosenInlineResult ?? instance.raw?.chosen_inline_result).toEqual({} as any);
     expect(instance.callbackQuery ?? instance.raw?.callback_query).toEqual({} as any);

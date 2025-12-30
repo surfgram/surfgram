@@ -114,6 +114,7 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getMe`, `logOut`, `close`, `sendMessage`, `forwardMessage`, `copyMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendLocation`, `sendVenue`, `sendContact`, `sendDice`, `sendSticker`, `sendInvoice`
 
+
 [View SuggestedPostParameters documentation with fluent methods](../types/SuggestedPostParameters.md)
 
 ### DirectMessagesTopic (35 methods)
@@ -212,19 +213,21 @@ This method is available as a fluent method on the following types:
 
 [View PreparedInlineMessage documentation with fluent methods](../types/PreparedInlineMessage.md)
 
+
 ## Parameters
 
-| Parameter                 | Type                      | Required | Description                                                                                                                                    |
-| :------------------------ | :------------------------ | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`                  | `number` \| `string`      |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                     |
-| `fromChatId`              | `number` \| `string`      |   Yes    | Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\)                      |
-| `messageId`               | `number`                  |   Yes    | Message identifier in the chat specified in from_chat_id                                                                                       |
-| `messageThreadId`         | `number`                  |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                             |
-| `directMessagesTopicId`   | `number`                  |    No    | Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat |
-| `videoStartTimestamp`     | `number`                  |    No    | New start timestamp for the forwarded video in the message                                                                                     |
-| `disableNotification`     | `boolean`                 |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                   |
-| `protectContent`          | `boolean`                 |    No    | Protects the contents of the forwarded message from forwarding and saving                                                                      |
-| `suggestedPostParameters` | `SuggestedPostParameters` |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only                               |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `fromChatId` | `number` \| `string` | Yes | Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\) |
+| `messageId` | `number` | Yes | Message identifier in the chat specified in from\_chat\_id |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat |
+| `videoStartTimestamp` | `number` | No | New start timestamp for the forwarded video in the message |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the forwarded message from forwarding and saving |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only |
+
 
 ## Usage Example
 
@@ -235,12 +238,9 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onMessage((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

@@ -6,16 +6,16 @@ describe('StoryAreaTypeLink', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      url: 'example text',
+      type: "example text",
+      url: "example text",
     };
 
     const instance = new StoryAreaTypeLink(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.url ?? instance.raw?.url).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.url ?? instance.raw?.url).toEqual("example text");
   });
 });
