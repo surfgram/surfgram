@@ -1,4 +1,4 @@
-import { describe, expect, test, jest } from '@jest/globals';
+import { describe, expect, test, jest, beforeEach, afterEach } from '@jest/globals';
 import { Bot } from '../src/core/bot/bot';
 
 const mockLongPollingInstance = {
@@ -36,7 +36,7 @@ const mockFetch = jest.fn<typeof fetch>();
 
 describe('Bot', () => {
   let bot: Bot;
-  const mockToken = '1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkl';
+  const mockToken = '12345678901:Aa0Bb1Cc2Dd3Ee4Ff5Gg6Hh7Ii8Jj9KkW0_';
   const mockApiUrl = `https://api.telegram.org/bot${mockToken}`;
 
   const clearMocks = () => {
@@ -66,20 +66,18 @@ describe('Bot', () => {
   beforeEach(() => {
     clearMocks();
     setupMocks();
-    bot = new Bot(mockToken);
-
-    // Мокаем методы, которые добавляются плагинами
-    // Они вызываются в startPolling() и startWebhook()
-    (bot as any).deleteWebhook = jest.fn<() => Promise<void>>().mockResolvedValue(undefined);
-    (bot as any).setWebhook = jest.fn<() => Promise<void>>().mockResolvedValue(undefined);
   });
 
   afterEach(async () => {
-    await bot.cleanup();
+    if (bot) {
+      await bot.cleanup();
+    }
   });
 
   describe('constructor', () => {
     test('should create bot with valid token', () => {
+      bot = new Bot(mockToken);
+      
       expect(bot.token).toBe(mockToken);
       expect(bot.apiUrl).toBe(mockApiUrl);
       expect(bot.handlers).toBeInstanceOf(Map);
@@ -91,9 +89,20 @@ describe('Bot', () => {
     });
   });
 
+  const createBot = () => {
+    bot = new Bot(mockToken);
+    (bot as any).deleteWebhook = jest.fn<() => Promise<void>>().mockResolvedValue(undefined);
+    (bot as any).setWebhook = jest.fn<() => Promise<void>>().mockResolvedValue(undefined);
+    return bot;
+  };
+
   describe('callApi', () => {
     const mockMethod = 'getChat';
     const mockParams = { chatId: 123456789 };
+
+    beforeEach(() => {
+      createBot();
+    });
 
     test('should call API successfully', async () => {
       const mockResponseData = {
@@ -151,6 +160,10 @@ describe('Bot', () => {
   });
 
   describe('dispatch', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should call handlers for matching events', async () => {
       const mockMessage = { text: 'Hello', chat: { id: 123 } };
       const mockCallbackQuery = { data: 'test', from: { id: 456 } };
@@ -203,6 +216,10 @@ describe('Bot', () => {
   });
 
   describe('polling', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should start polling', async () => {
       await bot.startPolling();
 
@@ -232,9 +249,7 @@ describe('Bot', () => {
         'Cannot start polling while webhook is active'
       );
 
-      // deleteWebhook вызывается перед проверкой вебхука
       expect((bot as any).deleteWebhook).toHaveBeenCalled();
-      // Но polling не запускается
       expect(mockLongPollingInstance.start).not.toHaveBeenCalled();
     });
 
@@ -259,6 +274,10 @@ describe('Bot', () => {
   });
 
   describe('webhook', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should start webhook without calling setWebhook via API', async () => {
       await bot.startWebhook();
 
@@ -333,6 +352,10 @@ describe('Bot', () => {
   });
 
   describe('register', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should register handler for event', () => {
       const handler = jest.fn();
       const event = 'message';
@@ -371,6 +394,10 @@ describe('Bot', () => {
   });
 
   describe('use', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should use plugin', () => {
       const mockPlugin = {} as any;
       const options = { option: 'value' };
@@ -383,6 +410,10 @@ describe('Bot', () => {
   });
 
   describe('cleanup', () => {
+    beforeEach(() => {
+      createBot();
+    });
+
     test('should cleanup all resources', async () => {
       (bot as any).longPolling = mockLongPollingInstance;
       (bot as any).webhookReceiver = mockWebhookReceiverInstance;
