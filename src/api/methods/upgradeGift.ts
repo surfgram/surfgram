@@ -24,7 +24,13 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.upgradeGift(...);
  */
-export async function upgradeGift(this: Bot, businessConnectionId: string, ownedGiftId: string, keepOriginalDetails?: boolean, starCount?: number): Promise<any> {
+export async function upgradeGift(
+  this: Bot,
+  businessConnectionId: string,
+  ownedGiftId: string,
+  keepOriginalDetails?: boolean,
+  starCount?: number
+): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     ownedGiftId: ownedGiftId,

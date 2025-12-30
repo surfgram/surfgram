@@ -4,13 +4,12 @@ This object describes the colors of the backdrop of a unique gift.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| centerColor | `number` | Yes | The color in the center of the backdrop in RGB format |
-| edgeColor | `number` | Yes | The color on the edges of the backdrop in RGB format |
-| symbolColor | `number` | Yes | The color to be applied to the symbol in RGB format |
-| textColor | `number` | Yes | The color for the text on the backdrop in RGB format |
-
+| Name        | Type     | Required | Description                                           |
+| :---------- | :------- | :------: | :---------------------------------------------------- |
+| centerColor | `number` |   Yes    | The color in the center of the backdrop in RGB format |
+| edgeColor   | `number` |   Yes    | The color on the edges of the backdrop in RGB format  |
+| symbolColor | `number` |   Yes    | The color to be applied to the symbol in RGB format   |
+| textColor   | `number` |   Yes    | The color for the text on the backdrop in RGB format  |
 
 ## Event Handlers
 

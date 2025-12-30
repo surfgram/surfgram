@@ -4,13 +4,13 @@ This object represents an error in the Telegram Passport element which was submi
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| source | `string` | Yes | Error source, must be data |
-| type | `string` | Yes | The section of the user's Telegram Passport which has the error, one of “personal\_details”, “passport”, “driver\_license”, “identity\_card”, “internal\_passport”, “address” |
-| fieldName | `string` | Yes | Name of the data field which has the error |
-| dataHash | `string` | Yes | Base64-encoded data hash |
-| message | `string` | Yes | Error message |
+| Name      | Type     | Required | Description                                                                                                                                                               |
+| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| source    | `string` |   Yes    | Error source, must be data                                                                                                                                                |
+| type      | `string` |   Yes    | The section of the user's Telegram Passport which has the error, one of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address” |
+| fieldName | `string` |   Yes    | Name of the data field which has the error                                                                                                                                |
+| dataHash  | `string` |   Yes    | Base64-encoded data hash                                                                                                                                                  |
+| message   | `string` |   Yes    | Error message                                                                                                                                                             |
 
 ## Fluent Methods
 
@@ -20,13 +20,12 @@ The `PassportElementError` class has the following fluent methods that automatic
 
 Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed \(the contents of the field for which you returned the error must change\). Returns True on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `userId` | `number` | Yes | User identifier |
-| `errors` | `PassportElementError[]` | Yes | A JSON-serialized array describing the errors |
+| Parameter | Type                     | Required | Description                                   |
+| :-------- | :----------------------- | :------: | :-------------------------------------------- |
+| `userId`  | `number`                 |   Yes    | User identifier                               |
+| `errors`  | `PassportElementError[]` |   Yes    | A JSON-serialized array describing the errors |
 
 **Usage examples:**
 
@@ -34,10 +33,7 @@ Informs a user that some of the Telegram Passport elements they provided contain
 
 ```typescript
 const passportelementerror = new PassportElementError(rawData, bot);
-await passportelementerror.setPassportDataErrors(
-  123,
-  [{} as any],
-);
+await passportelementerror.setPassportDataErrors(123, [{} as any]);
 ```
 
 2. In an event handler:
@@ -50,7 +46,6 @@ bot.onPassportElementError(async (passportelementerror: PassportElementError) =>
 ```
 
 **See also:** [setPassportDataErrors API method](../methods/setPassportDataErrors.md)
-
 
 ## Event Handlers
 

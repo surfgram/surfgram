@@ -4,12 +4,11 @@ Contains information about the start page settings of a Telegram Business accoun
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| title | `string` | No | Optional. Title text of the business intro |
-| message | `string` | No | Optional. Message text of the business intro |
-| sticker | `Sticker` | No | Optional. Sticker of the business intro |
-
+| Name    | Type      | Required | Description                                  |
+| :------ | :-------- | :------: | :------------------------------------------- |
+| title   | `string`  |    No    | Optional. Title text of the business intro   |
+| message | `string`  |    No    | Optional. Message text of the business intro |
+| sticker | `Sticker` |    No    | Optional. Sticker of the business intro      |
 
 ## Event Handlers
 

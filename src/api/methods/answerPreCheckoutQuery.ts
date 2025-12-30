@@ -24,7 +24,10 @@ import { AnswerPreCheckoutQueryParams } from '../interfaces/answerPreCheckoutQue
  * // ... params
  * });
  */
-export async function answerPreCheckoutQuery(this: Bot, params: AnswerPreCheckoutQueryParams): Promise<any> {
+export async function answerPreCheckoutQuery(
+  this: Bot,
+  params: AnswerPreCheckoutQueryParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('answerPreCheckoutQuery', snakeParams);
   return response;

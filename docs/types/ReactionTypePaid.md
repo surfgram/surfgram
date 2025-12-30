@@ -4,10 +4,9 @@ The reaction is paid.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the reaction, always “paid” |
-
+| Name | Type     | Required | Description                         |
+| :--- | :------- | :------: | :---------------------------------- |
+| type | `string` |   Yes    | Type of the reaction, always “paid” |
 
 ## Event Handlers
 

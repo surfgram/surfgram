@@ -6,7 +6,7 @@ describe('KeyboardButton', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      text: "example text",
+      text: 'example text',
       request_users: {} as any,
       request_chat: {} as any,
       request_contact: true,
@@ -19,8 +19,8 @@ describe('KeyboardButton', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.text ?? instance.raw?.text).toEqual("example text");
+
+    expect(instance.text ?? instance.raw?.text).toEqual('example text');
     expect(instance.requestUsers ?? instance.raw?.request_users).toEqual({} as any);
     expect(instance.requestChat ?? instance.raw?.request_chat).toEqual({} as any);
     expect(instance.requestContact ?? instance.raw?.request_contact).toEqual(true);

@@ -13,7 +13,7 @@ describe('GiveawayCreated', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.prizeStarCount ?? instance.raw?.prize_star_count).toEqual(123);
   });
 });

@@ -4,12 +4,11 @@ This object represents a service message about a new forum topic created in the 
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| name | `string` | Yes | Name of the topic |
-| iconColor | `number` | Yes | Color of the topic icon in RGB format |
-| iconCustomEmojiId | `string` | No | Optional. Unique identifier of the custom emoji shown as the topic icon |
-
+| Name              | Type     | Required | Description                                                             |
+| :---------------- | :------- | :------: | :---------------------------------------------------------------------- |
+| name              | `string` |   Yes    | Name of the topic                                                       |
+| iconColor         | `number` |   Yes    | Color of the topic icon in RGB format                                   |
+| iconCustomEmojiId | `string` |    No    | Optional. Unique identifier of the custom emoji shown as the topic icon |
 
 ## Event Handlers
 
