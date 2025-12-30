@@ -1,6 +1,6 @@
 # deleteStory
 
-Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns True on success.
+Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -14,14 +14,12 @@ This method is available as a fluent method on the following types:
 
 [View Story documentation with fluent methods](../types/Story.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `storyId` | `number` | Yes | Unique identifier of the story to delete |
-
+| Parameter              | Type     | Required | Description                                  |
+| :--------------------- | :------- | :------: | :------------------------------------------- |
+| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection |
+| `storyId`              | `number` |   Yes    | Unique identifier of the story to delete     |
 
 ## Usage Example
 
@@ -32,9 +30,12 @@ bot.onStory(async (story: Story) => {
 });
 
 // With filtering
-bot.onStory((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onStory(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

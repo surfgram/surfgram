@@ -4,12 +4,11 @@ This object represents the content of a service message, sent whenever a user in
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| traveler | `User` | Yes | User that triggered the alert |
-| watcher | `User` | Yes | User that set the alert |
-| distance | `number` | Yes | The distance between the users |
-
+| Name     | Type     | Required | Description                    |
+| :------- | :------- | :------: | :----------------------------- |
+| traveler | `User`   |   Yes    | User that triggered the alert  |
+| watcher  | `User`   |   Yes    | User that set the alert        |
+| distance | `number` |   Yes    | The distance between the users |
 
 ## Event Handlers
 

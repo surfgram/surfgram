@@ -4,13 +4,12 @@ Represents an issue with the selfie with a document. The error is considered res
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| source | `string` | Yes | Error source, must be selfie |
-| type | `string` | Yes | The section of the user's Telegram Passport which has the issue, one of “passport”, “driver\_license”, “identity\_card”, “internal\_passport” |
-| fileHash | `string` | Yes | Base64-encoded hash of the file with the selfie |
-| message | `string` | Yes | Error message |
-
+| Name     | Type     | Required | Description                                                                                                                                |
+| :------- | :------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| source   | `string` |   Yes    | Error source, must be selfie                                                                                                               |
+| type     | `string` |   Yes    | The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport” |
+| fileHash | `string` |   Yes    | Base64-encoded hash of the file with the selfie                                                                                            |
+| message  | `string` |   Yes    | Error message                                                                                                                              |
 
 ## Event Handlers
 

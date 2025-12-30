@@ -22,16 +22,14 @@ This method is available as a fluent method on the following types:
 
 [View ChatMember documentation with fluent methods](../types/ChatMember.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\) |
-| `userId` | `number` | Yes | Unique identifier of the target user |
-| `untilDate` | `number` | No | Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only. |
-| `revokeMessages` | `boolean` | No | Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels. |
-
+| Parameter        | Type                 | Required | Description                                                                                                                                                                                                                           |
+| :--------------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chatId`         | `number` \| `string` |   Yes    | Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\)                                                                                                             |
+| `userId`         | `number`             |   Yes    | Unique identifier of the target user                                                                                                                                                                                                  |
+| `untilDate`      | `number`             |    No    | Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.           |
+| `revokeMessages` | `boolean`            |    No    | Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels. |
 
 ## Usage Example
 
@@ -42,9 +40,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

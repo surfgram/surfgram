@@ -10,16 +10,13 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `sendSticker`, `getStickerSet`, `getCustomEmojiStickers`, `uploadStickerFile`, `createNewStickerSet`, `addStickerToSet`, `setStickerPositionInSet`, `deleteStickerFromSet`, `replaceStickerInSet`, `setStickerEmojiList`, `setStickerKeywords`, `setStickerMaskPosition`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
-
 [View Sticker documentation with fluent methods](../types/Sticker.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `sticker` | `string` | Yes | File identifier of the sticker |
-
+| Parameter | Type     | Required | Description                    |
+| :-------- | :------- | :------: | :----------------------------- |
+| `sticker` | `string` |   Yes    | File identifier of the sticker |
 
 ## Usage Example
 
@@ -30,9 +27,12 @@ bot.onSticker(async (sticker: Sticker) => {
 });
 
 // With filtering
-bot.onSticker((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onSticker(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

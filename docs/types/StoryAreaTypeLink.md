@@ -4,11 +4,10 @@ Describes a story area pointing to an HTTP or tg:// link. Currently, a story can
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the area, always “link” |
-| url | `string` | Yes | HTTP or tg:// URL to be opened when the area is clicked |
-
+| Name | Type     | Required | Description                                             |
+| :--- | :------- | :------: | :------------------------------------------------------ |
+| type | `string` |   Yes    | Type of the area, always “link”                         |
+| url  | `string` |   Yes    | HTTP or tg:// URL to be opened when the area is clicked |
 
 ## Event Handlers
 

@@ -87,10 +87,7 @@ export class InputStoryContentVideo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(
-    raw?: TelegramObject,
-    bot?: Bot
-  ) {
+  constructor(raw?: TelegramObject, bot?: Bot) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

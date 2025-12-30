@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.verifyUser(...);
  */
-export async function verifyUser(this: Bot, userId: number, customDescription?: string): Promise<any> {
+export async function verifyUser(
+  this: Bot,
+  userId: number,
+  customDescription?: string
+): Promise<any> {
   const apiParams = {
     userId: userId,
     customDescription: customDescription,

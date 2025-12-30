@@ -81,5 +81,4 @@ export interface PostStoryParams {
    * @required No
    */
   protectContent?: boolean;
-
 }

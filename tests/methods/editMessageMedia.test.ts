@@ -7,10 +7,10 @@ describe('editMessageMedia', () => {
 
     const params = {
       media: {} as any,
-      businessConnectionId: "example text",
+      businessConnectionId: 'example text',
       chatId: 123,
       messageId: 123,
-      inlineMessageId: "example text",
+      inlineMessageId: 'example text',
       replyMarkup: {} as any,
     };
 
@@ -18,10 +18,10 @@ describe('editMessageMedia', () => {
 
     expect(mockBot.callApi).toHaveBeenCalledWith('editMessageMedia', {
       media: {} as any,
-      business_connection_id: "example text",
+      business_connection_id: 'example text',
       chat_id: 123,
       message_id: 123,
-      inline_message_id: "example text",
+      inline_message_id: 'example text',
       reply_markup: {} as any,
     });
   });

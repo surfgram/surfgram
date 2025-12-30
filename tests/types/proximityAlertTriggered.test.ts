@@ -15,7 +15,7 @@ describe('ProximityAlertTriggered', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.traveler ?? instance.raw?.traveler).toEqual({} as any);
     expect(instance.watcher ?? instance.raw?.watcher).toEqual({} as any);
     expect(instance.distance ?? instance.raw?.distance).toEqual(123);

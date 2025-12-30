@@ -9,7 +9,7 @@ describe('getUpdates', () => {
       offset: 123,
       limit: 123,
       timeout: 123,
-      allowedUpdates: ["example text"],
+      allowedUpdates: ['example text'],
     };
 
     await getUpdates.call(mockBot, params);
@@ -18,7 +18,7 @@ describe('getUpdates', () => {
       offset: 123,
       limit: 123,
       timeout: 123,
-      allowed_updates: ["example text"],
+      allowed_updates: ['example text'],
     });
   });
 });

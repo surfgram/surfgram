@@ -4,12 +4,11 @@ Describes a service message about checklist tasks marked as done or not done.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| checklistMessage | `Message` | No | Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply\_to\_message field even if it itself is a reply. |
-| markedAsDoneTaskIds | `number[]` | No | Optional. Identifiers of the tasks that were marked as done |
-| markedAsNotDoneTaskIds | `number[]` | No | Optional. Identifiers of the tasks that were marked as not done |
-
+| Name                   | Type       | Required | Description                                                                                                                                                                                                  |
+| :--------------------- | :--------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| checklistMessage       | `Message`  |    No    | Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply. |
+| markedAsDoneTaskIds    | `number[]` |    No    | Optional. Identifiers of the tasks that were marked as done                                                                                                                                                  |
+| markedAsNotDoneTaskIds | `number[]` |    No    | Optional. Identifiers of the tasks that were marked as not done                                                                                                                                              |
 
 ## Event Handlers
 

@@ -15,7 +15,7 @@ describe('GameHighScore', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.position ?? instance.raw?.position).toEqual(123);
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.score ?? instance.raw?.score).toEqual(123);

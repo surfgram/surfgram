@@ -14,7 +14,7 @@ describe('UserProfilePhotos', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.totalCount ?? instance.raw?.total_count).toEqual(123);
     expect(instance.photos ?? instance.raw?.photos).toEqual([[{} as any]]);
   });

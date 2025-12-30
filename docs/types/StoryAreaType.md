@@ -4,13 +4,12 @@ Describes the type of a clickable area on a story. Currently, it can be one of
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the area, always “location” |
-| latitude | `number` | Yes | Location latitude in degrees |
-| longitude | `number` | Yes | Location longitude in degrees |
-| address | `LocationAddress` | No | Optional. Address of the location |
-
+| Name      | Type              | Required | Description                         |
+| :-------- | :---------------- | :------: | :---------------------------------- |
+| type      | `string`          |   Yes    | Type of the area, always “location” |
+| latitude  | `number`          |   Yes    | Location latitude in degrees        |
+| longitude | `number`          |   Yes    | Location longitude in degrees       |
+| address   | `LocationAddress` |    No    | Optional. Address of the location   |
 
 ## Event Handlers
 
