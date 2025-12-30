@@ -1,0 +1,74 @@
+name: Generate
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Generate
+      run: npm run generate
+    
+    - name: Check if anything changed
+      id: check
+      run: |
+        if git diff --quiet; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Bump patch version if changed
+      if: steps.check.outputs.changed == 'true'
+      run: |
+        # Тупо увеличиваем patch версию на 1
+        npm version patch --no-git-tag-version
+        NEW_VERSION=$(node -p "require('./package.json').version")
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+    
+    - name: Commit if changed
+      if: steps.check.outputs.changed == 'true'
+      run: |
+        git config user.email "github-actions@github.com"
+        git config user.name "GitHub Actions"
+        git add .
+        git commit -m "chore: auto-generate types (v${{ steps.check.outputs.new_version }})"
+    
+    - name: Create tag if changed
+      if: steps.check.outputs.changed == 'true'
+      run: |
+        git tag v${{ steps.check.outputs.new_version }}
+    
+    - name: Push everything if changed
+      if: steps.check.outputs.changed == 'true'
+      run: |
+        git push
+        git push --tags
+    
+    - name: Create release if changed
+      if: steps.check.outputs.changed == 'true'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ steps.check.outputs.new_version }}
+        name: Release v${{ steps.check.outputs.new_version }}
+        body: ""
+        draft: false
+        prerelease: false
+        generate_release_notes: true
