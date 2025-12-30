@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.verifyChat(...);
  */
-export async function verifyChat(
-  this: Bot,
-  chatId: number | string,
-  customDescription?: string
-): Promise<any> {
+export async function verifyChat(this: Bot, chatId: number | string, customDescription?: string): Promise<any> {
   const apiParams = {
     chatId: chatId,
     customDescription: customDescription,

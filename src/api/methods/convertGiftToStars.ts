@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.convertGiftToStars(...);
  */
-export async function convertGiftToStars(
-  this: Bot,
-  businessConnectionId: string,
-  ownedGiftId: string
-): Promise<any> {
+export async function convertGiftToStars(this: Bot, businessConnectionId: string, ownedGiftId: string): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     ownedGiftId: ownedGiftId,

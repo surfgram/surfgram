@@ -10,19 +10,22 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setWebhook`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
 
+
 [View InputFile documentation with fluent methods](../types/InputFile.md)
+
 
 ## Parameters
 
-| Parameter            | Type        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :------------------- | :---------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`                | `string`    |   Yes    | HTTPS URL to send updates to. Use an empty string to remove webhook integration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `certificate`        | `InputFile` |    No    | Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `ipAddress`          | `string`    |    No    | The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `maxConnections`     | `number`    |    No    | The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.                                                                                                                                                                                                                                                                                                                                                                        |
-| `allowedUpdates`     | `string[]`  |    No    | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited_channel_post", "callback_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time. |
-| `dropPendingUpdates` | `boolean`   |    No    | Pass True to drop all pending updates                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `secretToken`        | `string`    |    No    | A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters. Only characters A-Z, a-z, 0-9, \_ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you.                                                                                                                                                                                                                                                                                                                                                    |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `url` | `string` | Yes | HTTPS URL to send updates to. Use an empty string to remove webhook integration |
+| `certificate` | `InputFile` | No | Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details. |
+| `ipAddress` | `string` | No | The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS |
+| `maxConnections` | `number` | No | The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput. |
+| `allowedUpdates` | `string[]` | No | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited\_channel\_post", "callback\_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat\_member, message\_reaction, and message\_reaction\_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time. |
+| `dropPendingUpdates` | `boolean` | No | Pass True to drop all pending updates |
+| `secretToken` | `string` | No | A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters. Only characters A-Z, a-z, 0-9, \_ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you. |
+
 
 ## Usage Example
 
@@ -33,12 +36,9 @@ bot.onInputFile(async (inputfile: InputFile) => {
 });
 
 // With filtering
-bot.onInputFile(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onInputFile((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

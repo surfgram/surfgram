@@ -18,7 +18,7 @@ describe('InputLocationMessageContent', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.latitude ?? instance.raw?.latitude).toEqual(123);
     expect(instance.longitude ?? instance.raw?.longitude).toEqual(123);
     expect(instance.horizontalAccuracy ?? instance.raw?.horizontal_accuracy).toEqual(123);

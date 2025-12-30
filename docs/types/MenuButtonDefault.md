@@ -4,9 +4,10 @@ Describes that no specific value for the menu button was set.
 
 ## Fields
 
-| Name | Type     | Required | Description                         |
-| :--- | :------- | :------: | :---------------------------------- |
-| type | `string` |   Yes    | Type of the button, must be default |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the button, must be default |
+
 
 ## Event Handlers
 

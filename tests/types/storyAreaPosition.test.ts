@@ -18,7 +18,7 @@ describe('StoryAreaPosition', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.xPercentage ?? instance.raw?.x_percentage).toEqual(123);
     expect(instance.yPercentage ?? instance.raw?.y_percentage).toEqual(123);
     expect(instance.widthPercentage ?? instance.raw?.width_percentage).toEqual(123);

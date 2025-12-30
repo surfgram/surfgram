@@ -47,4 +47,5 @@ export interface RestrictChatMemberParams {
    * @required No
    */
   untilDate?: number;
+
 }

@@ -63,4 +63,5 @@ export interface GetAvailableGiftsParams {
    * @required No
    */
   textEntities?: MessageEntity[];
+
 }

@@ -4,10 +4,11 @@ Describes data sent from a Web App to the bot.
 
 ## Fields
 
-| Name       | Type     | Required | Description                                                                                                                              |
-| :--------- | :------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| data       | `string` |   Yes    | The data. Be aware that a bad client can send arbitrary data in this field.                                                              |
-| buttonText | `string` |   Yes    | Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field. |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| data | `string` | Yes | The data. Be aware that a bad client can send arbitrary data in this field. |
+| buttonText | `string` | Yes | Text of the web\_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field. |
+
 
 ## Event Handlers
 

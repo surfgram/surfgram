@@ -6,8 +6,8 @@ describe('BusinessIntro', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      title: 'example text',
-      message: 'example text',
+      title: "example text",
+      message: "example text",
       sticker: {} as any,
     };
 
@@ -15,9 +15,9 @@ describe('BusinessIntro', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.title ?? instance.raw?.title).toEqual('example text');
-    expect(instance.message ?? instance.raw?.message).toEqual('example text');
+    
+    expect(instance.title ?? instance.raw?.title).toEqual("example text");
+    expect(instance.message ?? instance.raw?.message).toEqual("example text");
     expect(instance.sticker ?? instance.raw?.sticker).toEqual({} as any);
   });
 });

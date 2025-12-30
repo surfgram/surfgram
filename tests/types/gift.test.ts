@@ -6,7 +6,7 @@ describe('Gift', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      id: 'example text',
+      id: "example text",
       sticker: {} as any,
       star_count: 123,
       upgrade_star_count: 123,
@@ -19,8 +19,8 @@ describe('Gift', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.id ?? instance.raw?.id).toEqual('example text');
+    
+    expect(instance.id ?? instance.raw?.id).toEqual("example text");
     expect(instance.sticker ?? instance.raw?.sticker).toEqual({} as any);
     expect(instance.starCount ?? instance.raw?.star_count).toEqual(123);
     expect(instance.upgradeStarCount ?? instance.raw?.upgrade_star_count).toEqual(123);

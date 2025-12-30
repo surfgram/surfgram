@@ -4,13 +4,14 @@ Represents an issue in one of the data fields that was provided by the user. The
 
 ## Fields
 
-| Name      | Type     | Required | Description                                                                                                                                                               |
-| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| source    | `string` |   Yes    | Error source, must be data                                                                                                                                                |
-| type      | `string` |   Yes    | The section of the user's Telegram Passport which has the error, one of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address” |
-| fieldName | `string` |   Yes    | Name of the data field which has the error                                                                                                                                |
-| dataHash  | `string` |   Yes    | Base64-encoded data hash                                                                                                                                                  |
-| message   | `string` |   Yes    | Error message                                                                                                                                                             |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| source | `string` | Yes | Error source, must be data |
+| type | `string` | Yes | The section of the user's Telegram Passport which has the error, one of “personal\_details”, “passport”, “driver\_license”, “identity\_card”, “internal\_passport”, “address” |
+| fieldName | `string` | Yes | Name of the data field which has the error |
+| dataHash | `string` | Yes | Base64-encoded data hash |
+| message | `string` | Yes | Error message |
+
 
 ## Event Handlers
 
@@ -18,11 +19,9 @@ You can listen for PassportElementErrorDataField events using:
 
 ```typescript
 // Type-specific handler
-bot.onPassportElementErrorDataField(
-  async (passportelementerrordatafield: PassportElementErrorDataField) => {
-    console.log('Received:', passportelementerrordatafield);
-  }
-);
+bot.onPassportElementErrorDataField(async (passportelementerrordatafield: PassportElementErrorDataField) => {
+  console.log('Received:', passportelementerrordatafield);
+});
 
 // Generic handler
 bot.on('passportelementerrordatafield', async (data: PassportElementErrorDataField) => {

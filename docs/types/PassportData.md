@@ -4,10 +4,10 @@ Describes Telegram Passport data shared with the bot by the user.
 
 ## Fields
 
-| Name        | Type                         | Required | Description                                                                                              |
-| :---------- | :--------------------------- | :------: | :------------------------------------------------------------------------------------------------------- |
-| data        | `EncryptedPassportElement[]` |   Yes    | Array with information about documents and other Telegram Passport elements that was shared with the bot |
-| credentials | `EncryptedCredentials`       |   Yes    | Encrypted credentials required to decrypt the data                                                       |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| data | `EncryptedPassportElement[]` | Yes | Array with information about documents and other Telegram Passport elements that was shared with the bot |
+| credentials | `EncryptedCredentials` | Yes | Encrypted credentials required to decrypt the data |
 
 ## Fluent Methods
 
@@ -17,12 +17,13 @@ The `PassportData` class has the following fluent methods that automatically inj
 
 Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed \(the contents of the field for which you returned the error must change\). Returns True on success.
 
+
 **Required parameters:**
 
-| Parameter | Type                     | Required | Description                                   |
-| :-------- | :----------------------- | :------: | :-------------------------------------------- |
-| `userId`  | `number`                 |   Yes    | User identifier                               |
-| `errors`  | `PassportElementError[]` |   Yes    | A JSON-serialized array describing the errors |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | User identifier |
+| `errors` | `PassportElementError[]` | Yes | A JSON-serialized array describing the errors |
 
 **Usage examples:**
 
@@ -30,7 +31,10 @@ Informs a user that some of the Telegram Passport elements they provided contain
 
 ```typescript
 const passportdata = new PassportData(rawData, bot);
-await passportdata.setPassportDataErrors(123, [{} as any]);
+await passportdata.setPassportDataErrors(
+  123,
+  [{} as any],
+);
 ```
 
 2. In an event handler:
@@ -43,6 +47,7 @@ bot.onPassportData(async (passportdata: PassportData) => {
 ```
 
 **See also:** [setPassportDataErrors API method](../methods/setPassportDataErrors.md)
+
 
 ## Event Handlers
 

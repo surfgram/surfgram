@@ -23,12 +23,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.unpinChatMessage(...);
  */
-export async function unpinChatMessage(
-  this: Bot,
-  chatId: number | string,
-  businessConnectionId?: string,
-  messageId?: number
-): Promise<any> {
+export async function unpinChatMessage(this: Bot, chatId: number | string, businessConnectionId?: string, messageId?: number): Promise<any> {
   const apiParams = {
     chatId: chatId,
     businessConnectionId: businessConnectionId,

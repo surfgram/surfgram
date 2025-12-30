@@ -14,13 +14,15 @@ This method is available as a fluent method on the following types:
 
 [View User documentation with fluent methods](../types/User.md)
 
+
 ## Parameters
 
-| Parameter                   | Type     | Required | Description                                                                                    |
-| :-------------------------- | :------- | :------: | :--------------------------------------------------------------------------------------------- |
-| `userId`                    | `number` |   Yes    | Unique identifier of the target user                                                           |
-| `emojiStatusCustomEmojiId`  | `string` |    No    | Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status. |
-| `emojiStatusExpirationDate` | `number` |    No    | Expiration date of the emoji status, if any                                                    |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `emojiStatusCustomEmojiId` | `string` | No | Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status. |
+| `emojiStatusExpirationDate` | `number` | No | Expiration date of the emoji status, if any |
+
 
 ## Usage Example
 
@@ -31,12 +33,9 @@ bot.onUser(async (user: User) => {
 });
 
 // With filtering
-bot.onUser(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onUser((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

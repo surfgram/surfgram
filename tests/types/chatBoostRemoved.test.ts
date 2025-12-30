@@ -7,7 +7,7 @@ describe('ChatBoostRemoved', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       chat: {} as any,
-      boost_id: 'example text',
+      boost_id: "example text",
       remove_date: 123,
       source: {} as any,
     };
@@ -16,9 +16,9 @@ describe('ChatBoostRemoved', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
-    expect(instance.boostId ?? instance.raw?.boost_id).toEqual('example text');
+    expect(instance.boostId ?? instance.raw?.boost_id).toEqual("example text");
     expect(instance.removeDate ?? instance.raw?.remove_date).toEqual(123);
     expect(instance.source ?? instance.raw?.source).toEqual({} as any);
   });

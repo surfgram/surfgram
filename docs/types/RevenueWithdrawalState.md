@@ -4,9 +4,10 @@ This object describes the state of a revenue withdrawal operation. Currently, it
 
 ## Fields
 
-| Name | Type     | Required | Description                         |
-| :--- | :------- | :------: | :---------------------------------- |
-| type | `string` |   Yes    | Type of the state, always “pending” |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the state, always “pending” |
+
 
 ## Event Handlers
 

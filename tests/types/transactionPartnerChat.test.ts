@@ -6,7 +6,7 @@ describe('TransactionPartnerChat', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       chat: {} as any,
       gift: {} as any,
     };
@@ -15,8 +15,8 @@ describe('TransactionPartnerChat', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
     expect(instance.gift ?? instance.raw?.gift).toEqual({} as any);
   });

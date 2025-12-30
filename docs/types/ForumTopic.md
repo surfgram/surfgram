@@ -4,12 +4,12 @@ This object represents a forum topic.
 
 ## Fields
 
-| Name              | Type     | Required | Description                                                             |
-| :---------------- | :------- | :------: | :---------------------------------------------------------------------- |
-| messageThreadId   | `number` |   Yes    | Unique identifier of the forum topic                                    |
-| name              | `string` |   Yes    | Name of the topic                                                       |
-| iconColor         | `number` |   Yes    | Color of the topic icon in RGB format                                   |
-| iconCustomEmojiId | `string` |    No    | Optional. Unique identifier of the custom emoji shown as the topic icon |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| messageThreadId | `number` | Yes | Unique identifier of the forum topic |
+| name | `string` | Yes | Name of the topic |
+| iconColor | `number` | Yes | Color of the topic icon in RGB format |
+| iconCustomEmojiId | `string` | No | Optional. Unique identifier of the custom emoji shown as the topic icon |
 
 ## Fluent Methods
 
@@ -21,17 +21,17 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 **Auto-filled parameters:**
 
-| Parameter           | Source                   | Description                                                                                                                               |
-| :------------------ | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `iconCustomEmojiId` | `this.iconCustomEmojiId` | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Required parameters:**
 
-| Parameter   | Type                 | Required | Description                                                                                                                                                                                                |
-| :---------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`    | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)                                                                                           |
-| `name`      | `string`             |   Yes    | Topic name, 1-128 characters                                                                                                                                                                               |
-| `iconColor` | `number`             |    No    | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `name` | `string` | Yes | Topic name, 1-128 characters |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
 
 **Usage examples:**
 
@@ -39,7 +39,10 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.getForumTopicIconStickers(123, 'example text');
+await forumtopic.getForumTopicIconStickers(
+  123,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -55,21 +58,21 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### createForumTopic
 
-Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
 
 **Auto-filled parameters:**
 
-| Parameter           | Source                   | Description                                                                                                                               |
-| :------------------ | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `iconCustomEmojiId` | `this.iconCustomEmojiId` | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Required parameters:**
 
-| Parameter   | Type                 | Required | Description                                                                                                                                                                                                |
-| :---------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`    | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)                                                                                           |
-| `name`      | `string`             |   Yes    | Topic name, 1-128 characters                                                                                                                                                                               |
-| `iconColor` | `number`             |    No    | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `name` | `string` | Yes | Topic name, 1-128 characters |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
 
 **Usage examples:**
 
@@ -77,7 +80,10 @@ Use this method to create a topic in a forum supergroup chat. The bot must be an
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.createForumTopic(123, 'example text');
+await forumtopic.createForumTopic(
+  123,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -93,21 +99,21 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### editForumTopic
 
-Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter           | Source                   | Description                                                                                                                                                                                                                            |
-| :------------------ | :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `messageThreadId`   | `this.messageThreadId`   | Unique identifier for the target message thread of the forum topic                                                                                                                                                                     |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
 | `iconCustomEmojiId` | `this.iconCustomEmojiId` | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept |
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `name`    | `string`             |    No    | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept          |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept |
 
 **Usage examples:**
 
@@ -115,7 +121,10 @@ Use this method to edit name and icon of a topic in a forum supergroup chat. The
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.editForumTopic(123, 'example text');
+await forumtopic.editForumTopic(
+  123,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -131,19 +140,19 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### closeForumTopic
 
-Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter         | Source                 | Description                                                        |
-| :---------------- | :--------------------- | :----------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -151,7 +160,9 @@ Use this method to close an open topic in a forum supergroup chat. The bot must 
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.closeForumTopic(123);
+await forumtopic.closeForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -167,19 +178,19 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### reopenForumTopic
 
-Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter         | Source                 | Description                                                        |
-| :---------------- | :--------------------- | :----------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -187,7 +198,9 @@ Use this method to reopen a closed topic in a forum supergroup chat. The bot mus
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.reopenForumTopic(123);
+await forumtopic.reopenForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -203,19 +216,19 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### deleteForumTopic
 
-Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.
+Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_delete\_messages administrator rights. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter         | Source                 | Description                                                        |
-| :---------------- | :--------------------- | :----------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -223,7 +236,9 @@ Use this method to delete a forum topic along with all its messages in a forum s
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.deleteForumTopic(123);
+await forumtopic.deleteForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -239,19 +254,19 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### unpinAllForumTopicMessages
 
-Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.
+Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter         | Source                 | Description                                                        |
-| :---------------- | :--------------------- | :----------------------------------------------------------------- |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -259,7 +274,9 @@ Use this method to clear the list of pinned messages in a forum topic. The bot m
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.unpinAllForumTopicMessages(123);
+await forumtopic.unpinAllForumTopicMessages(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -275,14 +292,15 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### editGeneralForumTopic
 
-Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `name`    | `string`             |   Yes    | New topic name, 1-128 characters                                                                                 |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `name` | `string` | Yes | New topic name, 1-128 characters |
 
 **Usage examples:**
 
@@ -290,7 +308,10 @@ Use this method to edit the name of the &#39;General&#39; topic in a forum super
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.editGeneralForumTopic(123, 'example text');
+await forumtopic.editGeneralForumTopic(
+  123,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -306,13 +327,14 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### closeGeneralForumTopic
 
-Use this method to close an open &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+Use this method to close an open &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -320,7 +342,9 @@ Use this method to close an open &#39;General&#39; topic in a forum supergroup c
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.closeGeneralForumTopic(123);
+await forumtopic.closeGeneralForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -336,13 +360,14 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### reopenGeneralForumTopic
 
-Use this method to reopen a closed &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
+Use this method to reopen a closed &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -350,7 +375,9 @@ Use this method to reopen a closed &#39;General&#39; topic in a forum supergroup
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.reopenGeneralForumTopic(123);
+await forumtopic.reopenGeneralForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -366,13 +393,14 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### hideGeneralForumTopic
 
-Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.
+Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -380,7 +408,9 @@ Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. 
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.hideGeneralForumTopic(123);
+await forumtopic.hideGeneralForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -396,13 +426,14 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### unhideGeneralForumTopic
 
-Use this method to unhide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+Use this method to unhide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -410,7 +441,9 @@ Use this method to unhide the &#39;General&#39; topic in a forum supergroup chat
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.unhideGeneralForumTopic(123);
+await forumtopic.unhideGeneralForumTopic(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -426,13 +459,14 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 
 ### unpinAllGeneralForumTopicMessages
 
-Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.
+Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
+
 
 **Required parameters:**
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
 
 **Usage examples:**
 
@@ -440,7 +474,9 @@ Use this method to clear the list of pinned messages in a General forum topic. T
 
 ```typescript
 const forumtopic = new ForumTopic(rawData, bot);
-await forumtopic.unpinAllGeneralForumTopicMessages(123);
+await forumtopic.unpinAllGeneralForumTopicMessages(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -453,6 +489,7 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 ```
 
 **See also:** [unpinAllGeneralForumTopicMessages API method](../methods/unpinAllGeneralForumTopicMessages.md)
+
 
 ## Event Handlers
 

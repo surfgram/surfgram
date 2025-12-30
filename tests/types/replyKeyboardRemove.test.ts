@@ -14,7 +14,7 @@ describe('ReplyKeyboardRemove', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.removeKeyboard ?? instance.raw?.remove_keyboard).toEqual(true);
     expect(instance.selective ?? instance.raw?.selective).toEqual(true);
   });
