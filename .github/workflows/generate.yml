@@ -67,7 +67,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v${{ steps.bump_version.outputs.new_version }}
-        name: Release v${{ steps.bump_version.outputs.new_version }}
+        name: v${{ steps.bump_version.outputs.new_version }}
         body: ""
         draft: false
         prerelease: false
