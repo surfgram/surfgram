@@ -23,11 +23,7 @@ import { InputFile } from '../types/inputFile';
  * // Direct parameters
  * await bot.setChatPhoto(...);
  */
-export async function setChatPhoto(
-  this: Bot,
-  chatId: number | string,
-  photo: InputFile
-): Promise<any> {
+export async function setChatPhoto(this: Bot, chatId: number | string, photo: InputFile): Promise<any> {
   const apiParams = {
     chatId: chatId,
     photo: photo,

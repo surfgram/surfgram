@@ -24,13 +24,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.createForumTopic(...);
  */
-export async function createForumTopic(
-  this: Bot,
-  chatId: number | string,
-  name: string,
-  iconColor?: number,
-  iconCustomEmojiId?: string
-): Promise<any> {
+export async function createForumTopic(this: Bot, chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any> {
   const apiParams = {
     chatId: chatId,
     name: name,

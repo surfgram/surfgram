@@ -14,10 +14,8 @@ describe('SuggestedPostApprovalFailed', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.suggestedPostMessage ?? instance.raw?.suggested_post_message).toEqual(
-      {} as any
-    );
+    
+    expect(instance.suggestedPostMessage ?? instance.raw?.suggested_post_message).toEqual({} as any);
     expect(instance.price ?? instance.raw?.price).toEqual({} as any);
   });
 });

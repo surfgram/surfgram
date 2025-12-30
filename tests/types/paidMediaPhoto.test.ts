@@ -6,7 +6,7 @@ describe('PaidMediaPhoto', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       photo: [{} as any],
     };
 
@@ -14,8 +14,8 @@ describe('PaidMediaPhoto', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.photo ?? instance.raw?.photo).toEqual([{} as any]);
   });
 });

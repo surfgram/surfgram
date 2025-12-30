@@ -24,10 +24,7 @@ import { AnswerCallbackQueryParams } from '../interfaces/answerCallbackQueryPara
  * // ... params
  * });
  */
-export async function answerCallbackQuery(
-  this: Bot,
-  params: AnswerCallbackQueryParams
-): Promise<any> {
+export async function answerCallbackQuery(this: Bot, params: AnswerCallbackQueryParams): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('answerCallbackQuery', snakeParams);
   return response;

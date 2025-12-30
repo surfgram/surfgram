@@ -14,7 +14,7 @@ describe('DirectMessagesTopic', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.topicId ?? instance.raw?.topic_id).toEqual(123);
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
   });

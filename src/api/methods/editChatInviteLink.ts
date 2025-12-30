@@ -24,10 +24,7 @@ import { EditChatInviteLinkParams } from '../interfaces/editChatInviteLinkParams
  * // ... params
  * });
  */
-export async function editChatInviteLink(
-  this: Bot,
-  params: EditChatInviteLinkParams
-): Promise<any> {
+export async function editChatInviteLink(this: Bot, params: EditChatInviteLinkParams): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('editChatInviteLink', snakeParams);
   return response;

@@ -15,11 +15,9 @@ describe('ChecklistTasksDone', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.checklistMessage ?? instance.raw?.checklist_message).toEqual({} as any);
     expect(instance.markedAsDoneTaskIds ?? instance.raw?.marked_as_done_task_ids).toEqual([123]);
-    expect(instance.markedAsNotDoneTaskIds ?? instance.raw?.marked_as_not_done_task_ids).toEqual([
-      123,
-    ]);
+    expect(instance.markedAsNotDoneTaskIds ?? instance.raw?.marked_as_not_done_task_ids).toEqual([123]);
   });
 });

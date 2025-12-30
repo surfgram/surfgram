@@ -15,7 +15,7 @@ describe('Birthdate', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.day ?? instance.raw?.day).toEqual(123);
     expect(instance.month ?? instance.raw?.month).toEqual(123);
     expect(instance.year ?? instance.raw?.year).toEqual(123);

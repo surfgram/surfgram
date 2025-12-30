@@ -6,7 +6,7 @@ describe('UniqueGiftSymbol', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      name: 'example text',
+      name: "example text",
       sticker: {} as any,
       rarity_per_mille: 123,
     };
@@ -15,8 +15,8 @@ describe('UniqueGiftSymbol', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.name ?? instance.raw?.name).toEqual('example text');
+    
+    expect(instance.name ?? instance.raw?.name).toEqual("example text");
     expect(instance.sticker ?? instance.raw?.sticker).toEqual({} as any);
     expect(instance.rarityPerMille ?? instance.raw?.rarity_per_mille).toEqual(123);
   });

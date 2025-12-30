@@ -350,12 +350,14 @@ This method is available as a fluent method on the following types:
 
 [View TransactionPartnerChat documentation with fluent methods](../types/TransactionPartnerChat.md)
 
+
 ## Parameters
 
-| Parameter | Type                 | Required | Description                                                                                  |
-| :-------- | :------------------- | :------: | :------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the chat or username of the channel \(in the format @channelusername\) |
-| `userId`  | `number`             |   Yes    | Unique identifier of the target user                                                         |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the chat or username of the channel \(in the format @channelusername\) |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+
 
 ## Usage Example
 
@@ -366,12 +368,9 @@ bot.onUser(async (user: User) => {
 });
 
 // With filtering
-bot.onUser(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onUser((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

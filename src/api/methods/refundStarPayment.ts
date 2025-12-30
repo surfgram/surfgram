@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.refundStarPayment(...);
  */
-export async function refundStarPayment(
-  this: Bot,
-  userId: number,
-  telegramPaymentChargeId: string
-): Promise<any> {
+export async function refundStarPayment(this: Bot, userId: number, telegramPaymentChargeId: string): Promise<any> {
   const apiParams = {
     userId: userId,
     telegramPaymentChargeId: telegramPaymentChargeId,

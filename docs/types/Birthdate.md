@@ -4,11 +4,12 @@ Describes the birthdate of a user.
 
 ## Fields
 
-| Name  | Type     | Required | Description                        |
-| :---- | :------- | :------: | :--------------------------------- |
-| day   | `number` |   Yes    | Day of the user's birth; 1-31      |
-| month | `number` |   Yes    | Month of the user's birth; 1-12    |
-| year  | `number` |    No    | Optional. Year of the user's birth |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| day | `number` | Yes | Day of the user's birth; 1-31 |
+| month | `number` | Yes | Month of the user's birth; 1-12 |
+| year | `number` | No | Optional. Year of the user's birth |
+
 
 ## Event Handlers
 
