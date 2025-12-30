@@ -36,6 +36,7 @@ jobs:
         fi
     
     - name: Bump patch version if changed
+      id: bump_version
       if: steps.check.outputs.changed == 'true'
       run: |
         npm version patch --no-git-tag-version
@@ -53,7 +54,7 @@ jobs:
     - name: Create tag if changed
       if: steps.check.outputs.changed == 'true'
       run: |
-        git tag v${{ steps.check.outputs.new_version }}
+        git tag v${{ steps.bump_version.outputs.new_version }}
     
     - name: Push everything if changed
       if: steps.check.outputs.changed == 'true'
@@ -65,8 +66,8 @@ jobs:
       if: steps.check.outputs.changed == 'true'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ steps.check.outputs.new_version }}
-        name: Release v${{ steps.check.outputs.new_version }}
+        tag_name: v${{ steps.bump_version.outputs.new_version }}
+        name: Release v${{ steps.bump_version.outputs.new_version }}
         body: ""
         draft: false
         prerelease: false
