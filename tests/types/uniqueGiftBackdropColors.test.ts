@@ -16,7 +16,7 @@ describe('UniqueGiftBackdropColors', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.centerColor ?? instance.raw?.center_color).toEqual(123);
     expect(instance.edgeColor ?? instance.raw?.edge_color).toEqual(123);
     expect(instance.symbolColor ?? instance.raw?.symbol_color).toEqual(123);

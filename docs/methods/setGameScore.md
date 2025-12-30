@@ -10,22 +10,19 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendGame`, `setGameScore`, `getGameHighScores`
 
-
 [View Game documentation with fluent methods](../types/Game.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `userId` | `number` | Yes | User identifier |
-| `score` | `number` | Yes | New score, must be non-negative |
-| `force` | `boolean` | No | Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters |
-| `disableEditMessage` | `boolean` | No | Pass True if the game message should not be automatically edited to include the current scoreboard |
-| `chatId` | `number` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat |
-| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-
+| Parameter            | Type      | Required | Description                                                                                                     |
+| :------------------- | :-------- | :------: | :-------------------------------------------------------------------------------------------------------------- |
+| `userId`             | `number`  |   Yes    | User identifier                                                                                                 |
+| `score`              | `number`  |   Yes    | New score, must be non-negative                                                                                 |
+| `force`              | `boolean` |    No    | Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters |
+| `disableEditMessage` | `boolean` |    No    | Pass True if the game message should not be automatically edited to include the current scoreboard              |
+| `chatId`             | `number`  |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat                           |
+| `messageId`          | `number`  |    No    | Required if inline_message_id is not specified. Identifier of the sent message                                  |
+| `inlineMessageId`    | `string`  |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                          |
 
 ## Usage Example
 
@@ -36,9 +33,12 @@ bot.onGame(async (game: Game) => {
 });
 
 // With filtering
-bot.onGame((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onGame(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

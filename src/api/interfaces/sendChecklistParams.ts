@@ -73,5 +73,4 @@ export interface SendChecklistParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
-
 }

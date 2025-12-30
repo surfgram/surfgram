@@ -4,13 +4,12 @@ Represents an issue with the front side of a document. The error is considered r
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| source | `string` | Yes | Error source, must be front\_side |
-| type | `string` | Yes | The section of the user's Telegram Passport which has the issue, one of “passport”, “driver\_license”, “identity\_card”, “internal\_passport” |
-| fileHash | `string` | Yes | Base64-encoded hash of the file with the front side of the document |
-| message | `string` | Yes | Error message |
-
+| Name     | Type     | Required | Description                                                                                                                                |
+| :------- | :------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| source   | `string` |   Yes    | Error source, must be front_side                                                                                                           |
+| type     | `string` |   Yes    | The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport” |
+| fileHash | `string` |   Yes    | Base64-encoded hash of the file with the front side of the document                                                                        |
+| message  | `string` |   Yes    | Error message                                                                                                                              |
 
 ## Event Handlers
 
@@ -18,9 +17,11 @@ You can listen for PassportElementErrorFrontSide events using:
 
 ```typescript
 // Type-specific handler
-bot.onPassportElementErrorFrontSide(async (passportelementerrorfrontside: PassportElementErrorFrontSide) => {
-  console.log('Received:', passportelementerrorfrontside);
-});
+bot.onPassportElementErrorFrontSide(
+  async (passportelementerrorfrontside: PassportElementErrorFrontSide) => {
+    console.log('Received:', passportelementerrorfrontside);
+  }
+);
 
 // Generic handler
 bot.on('passportelementerrorfrontside', async (data: PassportElementErrorFrontSide) => {

@@ -4,11 +4,10 @@ This object contains information about a paid media purchase.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| from | `User` | Yes | User who purchased the media |
-| paidMediaPayload | `string` | Yes | Bot-specified paid media payload |
-
+| Name             | Type     | Required | Description                      |
+| :--------------- | :------- | :------: | :------------------------------- |
+| from             | `User`   |   Yes    | User who purchased the media     |
+| paidMediaPayload | `string` |   Yes    | Bot-specified paid media payload |
 
 ## Event Handlers
 

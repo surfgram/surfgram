@@ -1,6 +1,6 @@
 # unpinAllForumTopicMessages
 
-Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
+Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.
 
 ## Fluent Usage
 
@@ -22,14 +22,12 @@ This method is available as a fluent method on the following types:
 
 [View ForumTopic documentation with fluent methods](../types/ForumTopic.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `messageThreadId` | `number` | Yes | Unique identifier for the target message thread of the forum topic |
-
+| Parameter         | Type                 | Required | Description                                                                                                      |
+| :---------------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
+| `chatId`          | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `messageThreadId` | `number`             |   Yes    | Unique identifier for the target message thread of the forum topic                                               |
 
 ## Usage Example
 
@@ -40,9 +38,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

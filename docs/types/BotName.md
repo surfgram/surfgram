@@ -4,10 +4,9 @@ This object represents the bot&#39;s name.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| name | `string` | Yes | The bot's name |
-
+| Name | Type     | Required | Description    |
+| :--- | :------- | :------: | :------------- |
+| name | `string` |   Yes    | The bot's name |
 
 ## Event Handlers
 

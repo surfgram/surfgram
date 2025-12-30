@@ -6,7 +6,7 @@ describe('BackgroundTypeFill', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: "example text",
+      type: 'example text',
       fill: {} as any,
       dark_theme_dimming: 123,
     };
@@ -15,8 +15,8 @@ describe('BackgroundTypeFill', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+
+    expect(instance.type ?? instance.raw?.type).toEqual('example text');
     expect(instance.fill ?? instance.raw?.fill).toEqual({} as any);
     expect(instance.darkThemeDimming ?? instance.raw?.dark_theme_dimming).toEqual(123);
   });

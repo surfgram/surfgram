@@ -22,17 +22,15 @@ This method is available as a fluent method on the following types:
 
 [View ChatInviteLink documentation with fluent methods](../types/ChatInviteLink.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `name` | `string` | No | Invite link name; 0-32 characters |
-| `expireDate` | `number` | No | Point in time \(Unix timestamp\) when the link will expire |
-| `memberLimit` | `number` | No | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
-| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified |
-
+| Parameter            | Type                 | Required | Description                                                                                                                       |
+| :------------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`             | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                        |
+| `name`               | `string`             |    No    | Invite link name; 0-32 characters                                                                                                 |
+| `expireDate`         | `number`             |    No    | Point in time \(Unix timestamp\) when the link will expire                                                                        |
+| `memberLimit`        | `number`             |    No    | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999   |
+| `createsJoinRequest` | `boolean`            |    No    | True, if users joining the chat via the link need to be approved by chat administrators. If True, member_limit can't be specified |
 
 ## Usage Example
 
@@ -43,9 +41,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

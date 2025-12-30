@@ -4,17 +4,17 @@ Describes the current status of a webhook.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| url | `string` | Yes | Webhook URL, may be empty if webhook is not set up |
-| hasCustomCertificate | `boolean` | Yes | True, if a custom certificate was provided for webhook certificate checks |
-| pendingUpdateCount | `number` | Yes | Number of updates awaiting delivery |
-| ipAddress | `string` | No | Optional. Currently used webhook IP address |
-| lastErrorDate | `number` | No | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook |
-| lastErrorMessage | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
-| lastSynchronizationErrorDate | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
-| maxConnections | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| allowedUpdates | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| Name                         | Type       | Required | Description                                                                                                                           |
+| :--------------------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------ |
+| url                          | `string`   |   Yes    | Webhook URL, may be empty if webhook is not set up                                                                                    |
+| hasCustomCertificate         | `boolean`  |   Yes    | True, if a custom certificate was provided for webhook certificate checks                                                             |
+| pendingUpdateCount           | `number`   |   Yes    | Number of updates awaiting delivery                                                                                                   |
+| ipAddress                    | `string`   |    No    | Optional. Currently used webhook IP address                                                                                           |
+| lastErrorDate                | `number`   |    No    | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook                              |
+| lastErrorMessage             | `string`   |    No    | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
+| lastSynchronizationErrorDate | `number`   |    No    | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters     |
+| maxConnections               | `number`   |    No    | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery                             |
+| allowedUpdates               | `string[]` |    No    | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member                            |
 
 ## Fluent Methods
 
@@ -24,20 +24,19 @@ The `WebhookInfo` class has the following fluent methods that automatically inje
 
 Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `url` | `string` | Yes | Webhook URL, may be empty if webhook is not set up |
-| `hasCustomCertificate` | `boolean` | Yes | True, if a custom certificate was provided for webhook certificate checks |
-| `pendingUpdateCount` | `number` | Yes | Number of updates awaiting delivery |
-| `ipAddress` | `string` | No | Optional. Currently used webhook IP address |
-| `lastErrorDate` | `number` | No | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook |
-| `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
-| `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
-| `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| Parameter                      | Type       | Required | Description                                                                                                                           |
+| :----------------------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`                          | `string`   |   Yes    | Webhook URL, may be empty if webhook is not set up                                                                                    |
+| `hasCustomCertificate`         | `boolean`  |   Yes    | True, if a custom certificate was provided for webhook certificate checks                                                             |
+| `pendingUpdateCount`           | `number`   |   Yes    | Number of updates awaiting delivery                                                                                                   |
+| `ipAddress`                    | `string`   |    No    | Optional. Currently used webhook IP address                                                                                           |
+| `lastErrorDate`                | `number`   |    No    | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook                              |
+| `lastErrorMessage`             | `string`   |    No    | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
+| `lastSynchronizationErrorDate` | `number`   |    No    | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters     |
+| `maxConnections`               | `number`   |    No    | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery                             |
+| `allowedUpdates`               | `string[]` |    No    | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member                            |
 
 **Usage examples:**
 
@@ -46,7 +45,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 ```typescript
 const webhookinfo = new WebhookInfo(rawData, bot);
 await webhookinfo.getWebhookInfo({
-  url: "example text",
+  url: 'example text',
   hasCustomCertificate: true,
 });
 ```
@@ -56,12 +55,11 @@ await webhookinfo.getWebhookInfo({
 ```typescript
 bot.onWebhookInfo(async (webhookinfo: WebhookInfo) => {
   // Auto-fills parameters from the webhookinfo instance
-  await webhookinfo.getWebhookInfo({ url: "Response" });
+  await webhookinfo.getWebhookInfo({ url: 'Response' });
 });
 ```
 
 **See also:** [getWebhookInfo API method](../methods/getWebhookInfo.md)
-
 
 ## Event Handlers
 

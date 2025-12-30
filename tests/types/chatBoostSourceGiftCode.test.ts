@@ -6,7 +6,7 @@ describe('ChatBoostSourceGiftCode', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      source: "example text",
+      source: 'example text',
       user: {} as any,
     };
 
@@ -14,8 +14,8 @@ describe('ChatBoostSourceGiftCode', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.source ?? instance.raw?.source).toEqual("example text");
+
+    expect(instance.source ?? instance.raw?.source).toEqual('example text');
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
   });
 });

@@ -4,12 +4,11 @@ This object describes the backdrop of a unique gift.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| name | `string` | Yes | Name of the backdrop |
-| colors | `UniqueGiftBackdropColors` | Yes | Colors of the backdrop |
-| rarityPerMille | `number` | Yes | The number of unique gifts that receive this backdrop for every 1000 gifts upgraded |
-
+| Name           | Type                       | Required | Description                                                                         |
+| :------------- | :------------------------- | :------: | :---------------------------------------------------------------------------------- |
+| name           | `string`                   |   Yes    | Name of the backdrop                                                                |
+| colors         | `UniqueGiftBackdropColors` |   Yes    | Colors of the backdrop                                                              |
+| rarityPerMille | `number`                   |   Yes    | The number of unique gifts that receive this backdrop for every 1000 gifts upgraded |
 
 ## Event Handlers
 

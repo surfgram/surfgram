@@ -4,11 +4,11 @@ Represents a chat member that has no additional privileges or restrictions.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| status | `string` | Yes | The member's status in the chat, always “member” |
-| user | `User` | Yes | Information about the user |
-| untilDate | `number` | No | Optional. Date when the user's subscription will expire; Unix time |
+| Name      | Type     | Required | Description                                                        |
+| :-------- | :------- | :------: | :----------------------------------------------------------------- |
+| status    | `string` |   Yes    | The member's status in the chat, always “member”                   |
+| user      | `User`   |   Yes    | Information about the user                                         |
+| untilDate | `number` |    No    | Optional. Date when the user's subscription will expire; Unix time |
 
 ## Fluent Methods
 
@@ -18,15 +18,14 @@ The `ChatMemberMember` class has the following fluent methods that automatically
 
 Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `offset` | `number` | No | Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update\_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten. |
-| `limit` | `number` | No | Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
-| `timeout` | `number` | No | Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only. |
-| `allowedUpdates` | `string[]` | No | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited\_channel\_post", "callback\_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat\_member, message\_reaction, and message\_reaction\_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time. |
+| Parameter        | Type       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :--------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `offset`         | `number`   |    No    | Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.                                                                                                |
+| `limit`          | `number`   |    No    | Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `timeout`        | `number`   |    No    | Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `allowedUpdates` | `string[]` |    No    | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited_channel_post", "callback_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time. |
 
 **Usage examples:**
 
@@ -55,20 +54,19 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `url` | `string` | Yes | Webhook URL, may be empty if webhook is not set up |
-| `hasCustomCertificate` | `boolean` | Yes | True, if a custom certificate was provided for webhook certificate checks |
-| `pendingUpdateCount` | `number` | Yes | Number of updates awaiting delivery |
-| `ipAddress` | `string` | No | Optional. Currently used webhook IP address |
-| `lastErrorDate` | `number` | No | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook |
-| `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
-| `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
-| `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| Parameter                      | Type       | Required | Description                                                                                                                           |
+| :----------------------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`                          | `string`   |   Yes    | Webhook URL, may be empty if webhook is not set up                                                                                    |
+| `hasCustomCertificate`         | `boolean`  |   Yes    | True, if a custom certificate was provided for webhook certificate checks                                                             |
+| `pendingUpdateCount`           | `number`   |   Yes    | Number of updates awaiting delivery                                                                                                   |
+| `ipAddress`                    | `string`   |    No    | Optional. Currently used webhook IP address                                                                                           |
+| `lastErrorDate`                | `number`   |    No    | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook                              |
+| `lastErrorMessage`             | `string`   |    No    | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
+| `lastSynchronizationErrorDate` | `number`   |    No    | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters     |
+| `maxConnections`               | `number`   |    No    | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery                             |
+| `allowedUpdates`               | `string[]` |    No    | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member                            |
 
 **Usage examples:**
 
@@ -77,7 +75,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
 await chatmembermember.getWebhookInfo({
-  url: "example text",
+  url: 'example text',
   hasCustomCertificate: true,
 });
 ```
@@ -87,7 +85,7 @@ await chatmembermember.getWebhookInfo({
 ```typescript
 bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
   // Auto-fills parameters from the chatmembermember instance
-  await chatmembermember.getWebhookInfo({ url: "Response" });
+  await chatmembermember.getWebhookInfo({ url: 'Response' });
 });
 ```
 
@@ -99,28 +97,28 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| Parameter | Source     | Description                                                                                              |
+| :-------- | :--------- | :------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
-| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
-| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                    | `string`                                                                                 |   Yes    | Text of the message to be sent, 1-4096 characters after entities parsing                                                                                                                                                           |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the message text. See formatting options for more details.                                                                                                                                            |
+| `entities`                | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode                                                                                                               |
+| `linkPreviewOptions`      | `LinkPreviewOptions`                                                                     |    No    | Link preview generation options for the message                                                                                                                                                                                    |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -129,8 +127,8 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
 await chatmembermember.getMe({
-  text: "example text",
-  businessConnectionId: "example text",
+  text: 'example text',
+  businessConnectionId: 'example text',
 });
 ```
 
@@ -139,7 +137,7 @@ await chatmembermember.getMe({
 ```typescript
 bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
   // Auto-fills parameters from the chatmembermember instance
-  await chatmembermember.getMe({ text: "Response" });
+  await chatmembermember.getMe({ text: 'Response' });
 });
 ```
 
@@ -151,16 +149,16 @@ Use this method to get a list of profile pictures for a user. Returns a UserProf
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Unique identifier of the target user |
+| Parameter | Source          | Description                          |
+| :-------- | :-------------- | :----------------------------------- |
+| `userId`  | `this.user?.id` | Unique identifier of the target user |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `offset` | `number` | No | Sequential number of the first photo to be returned. By default, all photos are returned. |
-| `limit` | `number` | No | Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type     | Required | Description                                                                                      |
+| :-------- | :------- | :------: | :----------------------------------------------------------------------------------------------- |
+| `offset`  | `number` |    No    | Sequential number of the first photo to be returned. By default, all photos are returned.        |
+| `limit`   | `number` |    No    | Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -168,10 +166,7 @@ Use this method to get a list of profile pictures for a user. Returns a UserProf
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getUserProfilePhotos(
-  123,
-  123,
-);
+await chatmembermember.getUserProfilePhotos(123, 123);
 ```
 
 2. In an event handler:
@@ -187,14 +182,13 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 ### getFile
 
-Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
-
+Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `fileId` | `string` | Yes | File identifier to get information about |
+| Parameter | Type     | Required | Description                              |
+| :-------- | :------- | :------: | :--------------------------------------- |
+| `fileId`  | `string` |   Yes    | File identifier to get information about |
 
 **Usage examples:**
 
@@ -202,9 +196,7 @@ Use this method to get basic information about a file and prepare it for downloa
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getFile(
-  "example text",
-);
+await chatmembermember.getFile('example text');
 ```
 
 2. In an event handler:
@@ -224,10 +216,9 @@ Use this method to get up-to-date information about the chat. Returns a ChatFull
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
-
+| Parameter | Source     | Description                                                                                                            |
+| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
 
 **Usage examples:**
 
@@ -255,10 +246,9 @@ Use this method to get a list of administrators in a chat, which aren&#39;t bots
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
-
+| Parameter | Source     | Description                                                                                                            |
+| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
 
 **Usage examples:**
 
@@ -286,10 +276,9 @@ Use this method to get the number of members in a chat. Returns Int on success.
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
-
+| Parameter | Source     | Description                                                                                                            |
+| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
 
 **Usage examples:**
 
@@ -317,11 +306,10 @@ Use this method to get information about a member of a chat. The method is only 
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Unique identifier of the target user |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
-
+| Parameter | Source          | Description                                                                                                            |
+| :-------- | :-------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `userId`  | `this.user?.id` | Unique identifier of the target user                                                                                   |
+| `chatId`  | `this?.id`      | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
 
 **Usage examples:**
 
@@ -349,17 +337,17 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| Parameter | Source     | Description                                                                                                    |
+| :-------- | :--------- | :------------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
-| `iconCustomEmojiId` | `string` | No | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
+| Parameter           | Type     | Required | Description                                                                                                                                                                                                |
+| :------------------ | :------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`              | `string` |   Yes    | Topic name, 1-128 characters                                                                                                                                                                               |
+| `iconColor`         | `number` |    No    | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconCustomEmojiId` | `string` |    No    | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.                                                                  |
 
 **Usage examples:**
 
@@ -367,10 +355,7 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getForumTopicIconStickers(
-  "example text",
-  123,
-);
+await chatmembermember.getForumTopicIconStickers('example text', 123);
 ```
 
 2. In an event handler:
@@ -390,11 +375,10 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Unique identifier of the target user |
-| `chatId` | `this?.id` | Unique identifier for the chat or username of the channel (in the format @channelusername) |
-
+| Parameter | Source          | Description                                                                                |
+| :-------- | :-------------- | :----------------------------------------------------------------------------------------- |
+| `userId`  | `this.user?.id` | Unique identifier of the target user                                                       |
+| `chatId`  | `this?.id`      | Unique identifier for the chat or username of the channel (in the format @channelusername) |
 
 **Usage examples:**
 
@@ -420,12 +404,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
+| Parameter              | Type     | Required | Description                                  |
+| :--------------------- | :------- | :------: | :------------------------------------------- |
+| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection |
 
 **Usage examples:**
 
@@ -433,9 +416,7 @@ Use this method to get information about the connection of the bot with a busine
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getBusinessConnection(
-  "example text",
-);
+await chatmembermember.getBusinessConnection('example text');
 ```
 
 2. In an event handler:
@@ -453,13 +434,12 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `scope` | `BotCommandScope` | No | A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault. |
-| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
+| Parameter      | Type              | Required | Description                                                                              |
+| :------------- | :---------------- | :------: | :--------------------------------------------------------------------------------------- |
+| `scope`        | `BotCommandScope` |    No    | A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault. |
+| `languageCode` | `string`          |    No    | A two-letter ISO 639-1 language code or an empty string                                  |
 
 **Usage examples:**
 
@@ -467,10 +447,7 @@ Use this method to get the current list of the bot&#39;s commands for the given 
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyCommands(
-  {} as any,
-  "example text",
-);
+await chatmembermember.getMyCommands({} as any, 'example text');
 ```
 
 2. In an event handler:
@@ -488,12 +465,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get the current bot name for the given user language. Returns BotName on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
+| Parameter      | Type     | Required | Description                                             |
+| :------------- | :------- | :------: | :------------------------------------------------------ |
+| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -501,9 +477,7 @@ Use this method to get the current bot name for the given user language. Returns
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyName(
-  "example text",
-);
+await chatmembermember.getMyName('example text');
 ```
 
 2. In an event handler:
@@ -521,12 +495,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get the current bot description for the given user language. Returns BotDescription on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
+| Parameter      | Type     | Required | Description                                             |
+| :------------- | :------- | :------: | :------------------------------------------------------ |
+| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -534,9 +507,7 @@ Use this method to get the current bot description for the given user language. 
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyDescription(
-  "example text",
-);
+await chatmembermember.getMyDescription('example text');
 ```
 
 2. In an event handler:
@@ -554,12 +525,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
+| Parameter      | Type     | Required | Description                                             |
+| :------------- | :------- | :------: | :------------------------------------------------------ |
+| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -567,9 +537,7 @@ Use this method to get the current bot short description for the given user lang
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyShortDescription(
-  "example text",
-);
+await chatmembermember.getMyShortDescription('example text');
 ```
 
 2. In an event handler:
@@ -589,10 +557,9 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `chatId` | `this?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
-
+| Parameter | Source     | Description                                                                                                 |
+| :-------- | :--------- | :---------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `this?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
 
 **Usage examples:**
 
@@ -618,12 +585,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `forChannels` | `boolean` | No | Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned. |
+| Parameter     | Type      | Required | Description                                                                                                                                                           |
+| :------------ | :-------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `forChannels` | `boolean` |    No    | Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned. |
 
 **Usage examples:**
 
@@ -631,9 +597,7 @@ Use this method to get the current default administrator rights of the bot. Retu
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyDefaultAdministratorRights(
-  true,
-);
+await chatmembermember.getMyDefaultAdministratorRights(true);
 ```
 
 2. In an event handler:
@@ -653,20 +617,20 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `this?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| Parameter | Source          | Description                                                                                                                                                  |
+| :-------- | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `userId`  | `this.user?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.                                                        |
+| `chatId`  | `this?.id`      | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `giftId` | `string` | Yes | Identifier of the gift |
-| `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
-| `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
+| Parameter       | Type              | Required | Description                                                                                                                                                                                                                             |
+| :-------------- | :---------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `giftId`        | `string`          |   Yes    | Identifier of the gift                                                                                                                                                                                                                  |
+| `payForUpgrade` | `boolean`         |    No    | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver                                                                                                                          |
+| `text`          | `string`          |    No    | Text that will be shown along with the gift; 0-128 characters                                                                                                                                                                           |
+| `textParseMode` | `string`          |    No    | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.                                          |
+| `textEntities`  | `MessageEntity[]` |    No    | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored. |
 
 **Usage examples:**
 
@@ -675,7 +639,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
 await chatmembermember.getAvailableGifts({
-  giftId: "example text",
+  giftId: 'example text',
   payForUpgrade: true,
 });
 ```
@@ -685,7 +649,7 @@ await chatmembermember.getAvailableGifts({
 ```typescript
 bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
   // Auto-fills parameters from the chatmembermember instance
-  await chatmembermember.getAvailableGifts({ giftId: "Response" });
+  await chatmembermember.getAvailableGifts({ giftId: 'Response' });
 });
 ```
 
@@ -693,14 +657,13 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 ### getBusinessAccountStarBalance
 
-Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
-
+Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns StarAmount on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
+| Parameter              | Type     | Required | Description                                  |
+| :--------------------- | :------- | :------: | :------------------------------------------- |
+| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection |
 
 **Usage examples:**
 
@@ -708,9 +671,7 @@ Returns the amount of Telegram Stars owned by a managed business account. Requir
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getBusinessAccountStarBalance(
-  "example text",
-);
+await chatmembermember.getBusinessAccountStarBalance('example text');
 ```
 
 2. In an event handler:
@@ -726,22 +687,21 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 ### getBusinessAccountGifts
 
-Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
-
+Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `excludeUnsaved` | `boolean` | No | Pass True to exclude gifts that aren't saved to the account's profile page |
-| `excludeSaved` | `boolean` | No | Pass True to exclude gifts that are saved to the account's profile page |
-| `excludeUnlimited` | `boolean` | No | Pass True to exclude gifts that can be purchased an unlimited number of times |
-| `excludeLimited` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times |
-| `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
-| `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
-| `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| Parameter              | Type      | Required | Description                                                                                                                   |
+| :--------------------- | :-------- | :------: | :---------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`  |   Yes    | Unique identifier of the business connection                                                                                  |
+| `excludeUnsaved`       | `boolean` |    No    | Pass True to exclude gifts that aren't saved to the account's profile page                                                    |
+| `excludeSaved`         | `boolean` |    No    | Pass True to exclude gifts that are saved to the account's profile page                                                       |
+| `excludeUnlimited`     | `boolean` |    No    | Pass True to exclude gifts that can be purchased an unlimited number of times                                                 |
+| `excludeLimited`       | `boolean` |    No    | Pass True to exclude gifts that can be purchased a limited number of times                                                    |
+| `excludeUnique`        | `boolean` |    No    | Pass True to exclude unique gifts                                                                                             |
+| `sortByPrice`          | `boolean` |    No    | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.                           |
+| `offset`               | `string`  |    No    | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
+| `limit`                | `number`  |    No    | The maximum number of gifts to be returned; 1-100. Defaults to 100                                                            |
 
 **Usage examples:**
 
@@ -750,7 +710,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
 await chatmembermember.getBusinessAccountGifts({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   excludeUnsaved: true,
 });
 ```
@@ -760,7 +720,7 @@ await chatmembermember.getBusinessAccountGifts({
 ```typescript
 bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
   // Auto-fills parameters from the chatmembermember instance
-  await chatmembermember.getBusinessAccountGifts({ businessConnectionId: "Response" });
+  await chatmembermember.getBusinessAccountGifts({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -770,12 +730,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get a sticker set. On success, a StickerSet object is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `name` | `string` | Yes | Name of the sticker set |
+| Parameter | Type     | Required | Description             |
+| :-------- | :------- | :------: | :---------------------- |
+| `name`    | `string` |   Yes    | Name of the sticker set |
 
 **Usage examples:**
 
@@ -783,9 +742,7 @@ Use this method to get a sticker set. On success, a StickerSet object is returne
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getStickerSet(
-  "example text",
-);
+await chatmembermember.getStickerSet('example text');
 ```
 
 2. In an event handler:
@@ -803,12 +760,11 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `customEmojiIds` | `string[]` | Yes | A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified. |
+| Parameter        | Type       | Required | Description                                                                                                |
+| :--------------- | :--------- | :------: | :--------------------------------------------------------------------------------------------------------- |
+| `customEmojiIds` | `string[]` |   Yes    | A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified. |
 
 **Usage examples:**
 
@@ -816,9 +772,7 @@ Use this method to get information about custom emoji stickers by their identifi
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getCustomEmojiStickers(
-  ["example text"],
-);
+await chatmembermember.getCustomEmojiStickers(['example text']);
 ```
 
 2. In an event handler:
@@ -836,13 +790,12 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `offset` | `number` | No | Number of transactions to skip in the response |
-| `limit` | `number` | No | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type     | Required | Description                                                                                             |
+| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------ |
+| `offset`  | `number` |    No    | Number of transactions to skip in the response                                                          |
+| `limit`   | `number` |    No    | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -850,10 +803,7 @@ A method to get the current Telegram Stars balance of the bot. Requires no param
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getMyStarBalance(
-  123,
-  123,
-);
+await chatmembermember.getMyStarBalance(123, 123);
 ```
 
 2. In an event handler:
@@ -871,13 +821,12 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 
 Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `offset` | `number` | No | Number of transactions to skip in the response |
-| `limit` | `number` | No | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type     | Required | Description                                                                                             |
+| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------ |
+| `offset`  | `number` |    No    | Number of transactions to skip in the response                                                          |
+| `limit`   | `number` |    No    | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -885,10 +834,7 @@ Returns the bot&#39;s Telegram Star transactions in chronological order. On succ
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getStarTransactions(
-  123,
-  123,
-);
+await chatmembermember.getStarTransactions(123, 123);
 ```
 
 2. In an event handler:
@@ -908,17 +854,17 @@ Use this method to get data for high score tables. Will return the score of the 
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Target user id |
-| `chatId` | `this?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat |
+| Parameter | Source          | Description                                                                           |
+| :-------- | :-------------- | :------------------------------------------------------------------------------------ |
+| `userId`  | `this.user?.id` | Target user id                                                                        |
+| `chatId`  | `this?.id`      | Required if inline_message_id is not specified. Unique identifier for the target chat |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| Parameter         | Type     | Required | Description                                                                            |
+| :---------------- | :------- | :------: | :------------------------------------------------------------------------------------- |
+| `messageId`       | `number` |    No    | Required if inline_message_id is not specified. Identifier of the sent message         |
+| `inlineMessageId` | `string` |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Usage examples:**
 
@@ -926,10 +872,7 @@ Use this method to get data for high score tables. Will return the score of the 
 
 ```typescript
 const chatmembermember = new ChatMemberMember(rawData, bot);
-await chatmembermember.getGameHighScores(
-  123,
-  "example text",
-);
+await chatmembermember.getGameHighScores(123, 'example text');
 ```
 
 2. In an event handler:
@@ -942,7 +885,6 @@ bot.onChatMemberMember(async (chatmembermember: ChatMemberMember) => {
 ```
 
 **See also:** [getGameHighScores API method](../methods/getGameHighScores.md)
-
 
 ## Event Handlers
 

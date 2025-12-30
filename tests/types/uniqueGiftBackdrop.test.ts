@@ -6,7 +6,7 @@ describe('UniqueGiftBackdrop', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      name: "example text",
+      name: 'example text',
       colors: {} as any,
       rarity_per_mille: 123,
     };
@@ -15,8 +15,8 @@ describe('UniqueGiftBackdrop', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.name ?? instance.raw?.name).toEqual("example text");
+
+    expect(instance.name ?? instance.raw?.name).toEqual('example text');
     expect(instance.colors ?? instance.raw?.colors).toEqual({} as any);
     expect(instance.rarityPerMille ?? instance.raw?.rarity_per_mille).toEqual(123);
   });

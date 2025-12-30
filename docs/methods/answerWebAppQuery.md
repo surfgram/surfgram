@@ -10,17 +10,14 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `answerInlineQuery`, `answerWebAppQuery`, `savePreparedInlineMessage`
 
-
 [View InlineQueryResult documentation with fluent methods](../types/InlineQueryResult.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `webAppQueryId` | `string` | Yes | Unique identifier for the query to be answered |
-| `result` | `InlineQueryResult` | Yes | A JSON-serialized object describing the message to be sent |
-
+| Parameter       | Type                | Required | Description                                                |
+| :-------------- | :------------------ | :------: | :--------------------------------------------------------- |
+| `webAppQueryId` | `string`            |   Yes    | Unique identifier for the query to be answered             |
+| `result`        | `InlineQueryResult` |   Yes    | A JSON-serialized object describing the message to be sent |
 
 ## Usage Example
 
@@ -31,9 +28,12 @@ bot.onInlineQueryResult(async (inlinequeryresult: InlineQueryResult) => {
 });
 
 // With filtering
-bot.onInlineQueryResult((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onInlineQueryResult(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

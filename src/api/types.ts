@@ -342,7 +342,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
      */
-    getWebhookInfo(url: string, hasCustomCertificate: boolean, pendingUpdateCount: number): Promise<any>;
+    getWebhookInfo(
+      url: string,
+      hasCustomCertificate: boolean,
+      pendingUpdateCount: number
+    ): Promise<any>;
     /**
      * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
      * @param params - Method parameters object
@@ -427,7 +431,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(chatId: number | string, fromChatId: number | string, messageId: number): Promise<any>;
+    forwardMessage(
+      chatId: number | string,
+      fromChatId: number | string,
+      messageId: number
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object
@@ -444,7 +452,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(chatId: number | string, fromChatId: number | string, messageIds: number[]): Promise<any>;
+    forwardMessages(
+      chatId: number | string,
+      fromChatId: number | string,
+      messageIds: number[]
+    ): Promise<any>;
     /**
      * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
@@ -461,7 +473,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#copyMessage Telegram Bot API}
      */
-    copyMessage(chatId: number | string, fromChatId: number | string, messageId: number): Promise<any>;
+    copyMessage(
+      chatId: number | string,
+      fromChatId: number | string,
+      messageId: number
+    ): Promise<any>;
     /**
      * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object
@@ -478,7 +494,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#copyMessages Telegram Bot API}
      */
-    copyMessages(chatId: number | string, fromChatId: number | string, messageIds: number[]): Promise<any>;
+    copyMessages(
+      chatId: number | string,
+      fromChatId: number | string,
+      messageIds: number[]
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -614,7 +634,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
      */
-    sendPaidMedia(chatId: number | string, starCount: number, media: InputPaidMedia[]): Promise<any>;
+    sendPaidMedia(
+      chatId: number | string,
+      starCount: number,
+      media: InputPaidMedia[]
+    ): Promise<any>;
     /**
      * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
@@ -716,7 +740,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
      */
-    sendChecklist(businessConnectionId: string, chatId: number, checklist: InputChecklist): Promise<any>;
+    sendChecklist(
+      businessConnectionId: string,
+      chatId: number,
+      checklist: InputChecklist
+    ): Promise<any>;
     /**
      * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -744,7 +772,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to change the chosen reactions on a message. Service messages of some types can&#39;t be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can&#39;t use paid reactions. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -755,7 +788,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMessageReaction Telegram Bot API}
      */
-    setMessageReaction(chatId: number | string, messageId: number, reaction?: ReactionType[], isBig?: boolean): Promise<any>;
+    setMessageReaction(
+      chatId: number | string,
+      messageId: number,
+      reaction?: ReactionType[],
+      isBig?: boolean
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      *      * @param userId - Unique identifier of the target user
@@ -775,7 +813,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setUserEmojiStatus Telegram Bot API}
      */
-    setUserEmojiStatus(userId: number, emojiStatusCustomEmojiId?: string, emojiStatusExpirationDate?: number): Promise<any>;
+    setUserEmojiStatus(
+      userId: number,
+      emojiStatusCustomEmojiId?: string,
+      emojiStatusExpirationDate?: number
+    ): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      *      * @param fileId - File identifier to get information about
@@ -794,7 +836,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#banChatMember Telegram Bot API}
      */
-    banChatMember(chatId: number | string, userId: number, untilDate?: number, revokeMessages?: boolean): Promise<any>;
+    banChatMember(
+      chatId: number | string,
+      userId: number,
+      untilDate?: number,
+      revokeMessages?: boolean
+    ): Promise<any>;
     /**
      * Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don&#39;t want this, use the parameter only\_if\_banned. Returns True on success.
      *      * @param chatId - Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\)
@@ -821,7 +868,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#restrictChatMember Telegram Bot API}
      */
-    restrictChatMember(chatId: number | string, userId: number, permissions: ChatPermissions): Promise<any>;
+    restrictChatMember(
+      chatId: number | string,
+      userId: number,
+      permissions: ChatPermissions
+    ): Promise<any>;
     /**
      * Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.
      * @param params - Method parameters object
@@ -848,7 +899,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setChatAdministratorCustomTitle Telegram Bot API}
      */
-    setChatAdministratorCustomTitle(chatId: number | string, userId: number, customTitle: string): Promise<any>;
+    setChatAdministratorCustomTitle(
+      chatId: number | string,
+      userId: number,
+      customTitle: string
+    ): Promise<any>;
     /**
      * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -876,7 +931,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setChatPermissions Telegram Bot API}
      */
-    setChatPermissions(chatId: number | string, permissions: ChatPermissions, useIndependentChatPermissions?: boolean): Promise<any>;
+    setChatPermissions(
+      chatId: number | string,
+      permissions: ChatPermissions,
+      useIndependentChatPermissions?: boolean
+    ): Promise<any>;
     /**
      * Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -929,7 +988,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#createChatSubscriptionInviteLink Telegram Bot API}
      */
-    createChatSubscriptionInviteLink(chatId: number | string, subscriptionPeriod: number, subscriptionPrice: number, name?: string): Promise<any>;
+    createChatSubscriptionInviteLink(
+      chatId: number | string,
+      subscriptionPeriod: number,
+      subscriptionPrice: number,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -939,7 +1003,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
      *      * @param chatId - Unique identifier of the target chat or username of the target channel \(in the format @channelusername\)
@@ -1012,7 +1080,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#pinChatMessage Telegram Bot API}
      */
-    pinChatMessage(chatId: number | string, messageId: number, businessConnectionId?: string, disableNotification?: boolean): Promise<any>;
+    pinChatMessage(
+      chatId: number | string,
+      messageId: number,
+      businessConnectionId?: string,
+      disableNotification?: boolean
+    ): Promise<any>;
     /**
      * Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin messages in groups and channels respectively. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -1022,7 +1095,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#unpinChatMessage Telegram Bot API}
      */
-    unpinChatMessage(chatId: number | string, businessConnectionId?: string, messageId?: number): Promise<any>;
+    unpinChatMessage(
+      chatId: number | string,
+      businessConnectionId?: string,
+      messageId?: number
+    ): Promise<any>;
     /**
      * Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin all pinned messages in groups and channels respectively. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -1099,7 +1176,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      chatId: number | string,
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
      *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
@@ -1110,7 +1192,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#createForumTopic Telegram Bot API}
      */
-    createForumTopic(chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    createForumTopic(
+      chatId: number | string,
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
@@ -1121,7 +1208,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
@@ -1250,7 +1342,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyCommands Telegram Bot API}
      */
-    setMyCommands(commands: BotCommand[], scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    setMyCommands(
+      commands: BotCommand[],
+      scope?: BotCommandScope,
+      languageCode?: string
+    ): Promise<any>;
     /**
      * Use this method to delete the list of the bot&#39;s commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
      *      * @param scope - A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
@@ -1345,7 +1441,10 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyDefaultAdministratorRights Telegram Bot API}
      */
-    setMyDefaultAdministratorRights(rights?: ChatAdministratorRights, forChannels?: boolean): Promise<any>;
+    setMyDefaultAdministratorRights(
+      rights?: ChatAdministratorRights,
+      forChannels?: boolean
+    ): Promise<any>;
     /**
      * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
      *      * @param forChannels - Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
@@ -1448,7 +1547,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#readBusinessMessage Telegram Bot API}
      */
-    readBusinessMessage(businessConnectionId: string, chatId: number, messageId: number): Promise<any>;
+    readBusinessMessage(
+      businessConnectionId: string,
+      chatId: number,
+      messageId: number
+    ): Promise<any>;
     /**
      * Delete messages on behalf of a business account. Requires the can\_delete\_sent\_messages business bot right to delete messages sent by the bot itself, or the can\_delete\_all\_messages business bot right to delete any message. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which to delete the messages
@@ -1467,7 +1570,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountName Telegram Bot API}
      */
-    setBusinessAccountName(businessConnectionId: string, firstName: string, lastName?: string): Promise<any>;
+    setBusinessAccountName(
+      businessConnectionId: string,
+      firstName: string,
+      lastName?: string
+    ): Promise<any>;
     /**
      * Changes the username of a managed business account. Requires the can\_change\_username business bot right. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1495,7 +1602,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountProfilePhoto Telegram Bot API}
      */
-    setBusinessAccountProfilePhoto(businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean): Promise<any>;
+    setBusinessAccountProfilePhoto(
+      businessConnectionId: string,
+      photo: InputProfilePhoto,
+      isPublic?: boolean
+    ): Promise<any>;
     /**
      * Removes the current profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1504,7 +1615,10 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#removeBusinessAccountProfilePhoto Telegram Bot API}
      */
-    removeBusinessAccountProfilePhoto(businessConnectionId: string, isPublic?: boolean): Promise<any>;
+    removeBusinessAccountProfilePhoto(
+      businessConnectionId: string,
+      isPublic?: boolean
+    ): Promise<any>;
     /**
      * Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can\_change\_gift\_settings business bot right. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1514,7 +1628,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountGiftSettings Telegram Bot API}
      */
-    setBusinessAccountGiftSettings(businessConnectionId: string, showGiftButton: boolean, acceptedGiftTypes: AcceptedGiftTypes): Promise<any>;
+    setBusinessAccountGiftSettings(
+      businessConnectionId: string,
+      showGiftButton: boolean,
+      acceptedGiftTypes: AcceptedGiftTypes
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1568,7 +1686,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#upgradeGift Telegram Bot API}
      */
-    upgradeGift(businessConnectionId: string, ownedGiftId: string, keepOriginalDetails?: boolean, starCount?: number): Promise<any>;
+    upgradeGift(
+      businessConnectionId: string,
+      ownedGiftId: string,
+      keepOriginalDetails?: boolean,
+      starCount?: number
+    ): Promise<any>;
     /**
      * Transfers an owned unique gift to another user. Requires the can\_transfer\_and\_upgrade\_gifts business bot right. Requires can\_transfer\_stars business bot right if the transfer is paid. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1579,7 +1702,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#transferGift Telegram Bot API}
      */
-    transferGift(businessConnectionId: string, ownedGiftId: string, newOwnerChatId: number, starCount?: number): Promise<any>;
+    transferGift(
+      businessConnectionId: string,
+      ownedGiftId: string,
+      newOwnerChatId: number,
+      starCount?: number
+    ): Promise<any>;
     /**
      * Posts a story on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
      * @param params - Method parameters object
@@ -1596,7 +1724,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#postStory Telegram Bot API}
      */
-    postStory(businessConnectionId: string, content: InputStoryContent, activePeriod: number): Promise<any>;
+    postStory(
+      businessConnectionId: string,
+      content: InputStoryContent,
+      activePeriod: number
+    ): Promise<any>;
     /**
      * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
      * @param params - Method parameters object
@@ -1613,7 +1745,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
      */
-    editStory(businessConnectionId: string, storyId: number, content: InputStoryContent): Promise<any>;
+    editStory(
+      businessConnectionId: string,
+      storyId: number,
+      content: InputStoryContent
+    ): Promise<any>;
     /**
      * Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection
@@ -1708,7 +1844,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(businessConnectionId: string, chatId: number, messageId: number): Promise<any>;
+    editMessageChecklist(
+      businessConnectionId: string,
+      chatId: number,
+      messageId: number
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
@@ -1728,7 +1868,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#stopPoll Telegram Bot API}
      */
-    stopPoll(chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    stopPoll(
+      chatId: number | string,
+      messageId: number,
+      businessConnectionId?: string,
+      replyMarkup?: InlineKeyboardMarkup
+    ): Promise<any>;
     /**
      * Use this method to approve a suggested post in a direct messages chat. The bot must have the &#39;can\_post\_messages&#39; administrator right in the corresponding channel chat. Returns True on success.
      *      * @param chatId - Unique identifier for the target direct messages chat
@@ -1917,7 +2062,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setStickerSetThumbnail Telegram Bot API}
      */
-    setStickerSetThumbnail(name: string, userId: number, format: string, thumbnail?: InputFile | string): Promise<any>;
+    setStickerSetThumbnail(
+      name: string,
+      userId: number,
+      format: string,
+      thumbnail?: InputFile | string
+    ): Promise<any>;
     /**
      * Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
      *      * @param name - Sticker set name
@@ -2090,7 +2240,11 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed \(the contents of the field for which you returned the error must change\). Returns True on success.
      *      * @param userId - User identifier
@@ -2144,7 +2298,12 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
      */
-    getGameHighScores(userId: number, chatId?: number, messageId?: number, inlineMessageId?: string): Promise<any>;
+    getGameHighScores(
+      userId: number,
+      chatId?: number,
+      messageId?: number,
+      inlineMessageId?: string
+    ): Promise<any>;
 
     // Strongly typed event handlers with filtering
     /**
@@ -2155,7 +2314,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#update Telegram Bot API}
      */
     onUpdate(handler: (data: Update) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Update updates with filtering
      * @overload
@@ -2164,7 +2323,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#update Telegram Bot API}
      */
-    onUpdate(filter: string | ((data: any) => boolean), handler: (data: Update) => void | Promise<void>): this;
+    onUpdate(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Update) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for WebhookInfo updates
      * @overload
@@ -2173,7 +2335,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webhookinfo Telegram Bot API}
      */
     onWebhookInfo(handler: (data: WebhookInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for WebhookInfo updates with filtering
      * @overload
@@ -2182,7 +2344,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webhookinfo Telegram Bot API}
      */
-    onWebhookInfo(filter: string | ((data: any) => boolean), handler: (data: WebhookInfo) => void | Promise<void>): this;
+    onWebhookInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebhookInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for User updates
      * @overload
@@ -2191,7 +2356,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#user Telegram Bot API}
      */
     onUser(handler: (data: User) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for User updates with filtering
      * @overload
@@ -2200,7 +2365,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#user Telegram Bot API}
      */
-    onUser(filter: string | ((data: any) => boolean), handler: (data: User) => void | Promise<void>): this;
+    onUser(
+      filter: string | ((data: any) => boolean),
+      handler: (data: User) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Chat updates
      * @overload
@@ -2209,7 +2377,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chat Telegram Bot API}
      */
     onChat(handler: (data: Chat) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Chat updates with filtering
      * @overload
@@ -2218,7 +2386,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chat Telegram Bot API}
      */
-    onChat(filter: string | ((data: any) => boolean), handler: (data: Chat) => void | Promise<void>): this;
+    onChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Chat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatFullInfo updates
      * @overload
@@ -2227,7 +2398,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatfullinfo Telegram Bot API}
      */
     onChatFullInfo(handler: (data: ChatFullInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatFullInfo updates with filtering
      * @overload
@@ -2236,7 +2407,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatfullinfo Telegram Bot API}
      */
-    onChatFullInfo(filter: string | ((data: any) => boolean), handler: (data: ChatFullInfo) => void | Promise<void>): this;
+    onChatFullInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatFullInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Message updates
      * @overload
@@ -2245,7 +2419,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#message Telegram Bot API}
      */
     onMessage(handler: (data: Message) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Message updates with filtering
      * @overload
@@ -2254,7 +2428,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#message Telegram Bot API}
      */
-    onMessage(filter: string | ((data: any) => boolean), handler: (data: Message) => void | Promise<void>): this;
+    onMessage(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Message) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageId updates
      * @overload
@@ -2263,7 +2440,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageid Telegram Bot API}
      */
     onMessageId(handler: (data: MessageId) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageId updates with filtering
      * @overload
@@ -2272,7 +2449,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageid Telegram Bot API}
      */
-    onMessageId(filter: string | ((data: any) => boolean), handler: (data: MessageId) => void | Promise<void>): this;
+    onMessageId(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageId) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InaccessibleMessage updates
      * @overload
@@ -2281,7 +2461,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inaccessiblemessage Telegram Bot API}
      */
     onInaccessibleMessage(handler: (data: InaccessibleMessage) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InaccessibleMessage updates with filtering
      * @overload
@@ -2290,7 +2470,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inaccessiblemessage Telegram Bot API}
      */
-    onInaccessibleMessage(filter: string | ((data: any) => boolean), handler: (data: InaccessibleMessage) => void | Promise<void>): this;
+    onInaccessibleMessage(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InaccessibleMessage) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MaybeInaccessibleMessage updates
      * @overload
@@ -2298,8 +2481,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maybeinaccessiblemessage Telegram Bot API}
      */
-    onMaybeInaccessibleMessage(handler: (data: MaybeInaccessibleMessage) => void | Promise<void>): this;
-    
+    onMaybeInaccessibleMessage(
+      handler: (data: MaybeInaccessibleMessage) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for MaybeInaccessibleMessage updates with filtering
      * @overload
@@ -2308,7 +2493,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maybeinaccessiblemessage Telegram Bot API}
      */
-    onMaybeInaccessibleMessage(filter: string | ((data: any) => boolean), handler: (data: MaybeInaccessibleMessage) => void | Promise<void>): this;
+    onMaybeInaccessibleMessage(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MaybeInaccessibleMessage) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageEntity updates
      * @overload
@@ -2317,7 +2505,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageentity Telegram Bot API}
      */
     onMessageEntity(handler: (data: MessageEntity) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageEntity updates with filtering
      * @overload
@@ -2326,7 +2514,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageentity Telegram Bot API}
      */
-    onMessageEntity(filter: string | ((data: any) => boolean), handler: (data: MessageEntity) => void | Promise<void>): this;
+    onMessageEntity(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageEntity) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TextQuote updates
      * @overload
@@ -2335,7 +2526,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#textquote Telegram Bot API}
      */
     onTextQuote(handler: (data: TextQuote) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for TextQuote updates with filtering
      * @overload
@@ -2344,7 +2535,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#textquote Telegram Bot API}
      */
-    onTextQuote(filter: string | ((data: any) => boolean), handler: (data: TextQuote) => void | Promise<void>): this;
+    onTextQuote(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TextQuote) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ExternalReplyInfo updates
      * @overload
@@ -2353,7 +2547,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#externalreplyinfo Telegram Bot API}
      */
     onExternalReplyInfo(handler: (data: ExternalReplyInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ExternalReplyInfo updates with filtering
      * @overload
@@ -2362,7 +2556,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#externalreplyinfo Telegram Bot API}
      */
-    onExternalReplyInfo(filter: string | ((data: any) => boolean), handler: (data: ExternalReplyInfo) => void | Promise<void>): this;
+    onExternalReplyInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ExternalReplyInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReplyParameters updates
      * @overload
@@ -2371,7 +2568,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#replyparameters Telegram Bot API}
      */
     onReplyParameters(handler: (data: ReplyParameters) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReplyParameters updates with filtering
      * @overload
@@ -2380,7 +2577,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replyparameters Telegram Bot API}
      */
-    onReplyParameters(filter: string | ((data: any) => boolean), handler: (data: ReplyParameters) => void | Promise<void>): this;
+    onReplyParameters(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyParameters) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageOrigin updates
      * @overload
@@ -2389,7 +2589,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageorigin Telegram Bot API}
      */
     onMessageOrigin(handler: (data: MessageOrigin) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageOrigin updates with filtering
      * @overload
@@ -2398,7 +2598,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageorigin Telegram Bot API}
      */
-    onMessageOrigin(filter: string | ((data: any) => boolean), handler: (data: MessageOrigin) => void | Promise<void>): this;
+    onMessageOrigin(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOrigin) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageOriginUser updates
      * @overload
@@ -2407,7 +2610,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageoriginuser Telegram Bot API}
      */
     onMessageOriginUser(handler: (data: MessageOriginUser) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageOriginUser updates with filtering
      * @overload
@@ -2416,7 +2619,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginuser Telegram Bot API}
      */
-    onMessageOriginUser(filter: string | ((data: any) => boolean), handler: (data: MessageOriginUser) => void | Promise<void>): this;
+    onMessageOriginUser(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginUser) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageOriginHiddenUser updates
      * @overload
@@ -2424,8 +2630,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginhiddenuser Telegram Bot API}
      */
-    onMessageOriginHiddenUser(handler: (data: MessageOriginHiddenUser) => void | Promise<void>): this;
-    
+    onMessageOriginHiddenUser(
+      handler: (data: MessageOriginHiddenUser) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for MessageOriginHiddenUser updates with filtering
      * @overload
@@ -2434,7 +2642,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginhiddenuser Telegram Bot API}
      */
-    onMessageOriginHiddenUser(filter: string | ((data: any) => boolean), handler: (data: MessageOriginHiddenUser) => void | Promise<void>): this;
+    onMessageOriginHiddenUser(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginHiddenUser) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageOriginChat updates
      * @overload
@@ -2443,7 +2654,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageoriginchat Telegram Bot API}
      */
     onMessageOriginChat(handler: (data: MessageOriginChat) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageOriginChat updates with filtering
      * @overload
@@ -2452,7 +2663,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchat Telegram Bot API}
      */
-    onMessageOriginChat(filter: string | ((data: any) => boolean), handler: (data: MessageOriginChat) => void | Promise<void>): this;
+    onMessageOriginChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginChat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageOriginChannel updates
      * @overload
@@ -2461,7 +2675,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageoriginchannel Telegram Bot API}
      */
     onMessageOriginChannel(handler: (data: MessageOriginChannel) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageOriginChannel updates with filtering
      * @overload
@@ -2470,7 +2684,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchannel Telegram Bot API}
      */
-    onMessageOriginChannel(filter: string | ((data: any) => boolean), handler: (data: MessageOriginChannel) => void | Promise<void>): this;
+    onMessageOriginChannel(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginChannel) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PhotoSize updates
      * @overload
@@ -2479,7 +2696,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#photosize Telegram Bot API}
      */
     onPhotoSize(handler: (data: PhotoSize) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PhotoSize updates with filtering
      * @overload
@@ -2488,7 +2705,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#photosize Telegram Bot API}
      */
-    onPhotoSize(filter: string | ((data: any) => boolean), handler: (data: PhotoSize) => void | Promise<void>): this;
+    onPhotoSize(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PhotoSize) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Animation updates
      * @overload
@@ -2497,7 +2717,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#animation Telegram Bot API}
      */
     onAnimation(handler: (data: Animation) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Animation updates with filtering
      * @overload
@@ -2506,7 +2726,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#animation Telegram Bot API}
      */
-    onAnimation(filter: string | ((data: any) => boolean), handler: (data: Animation) => void | Promise<void>): this;
+    onAnimation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Animation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Audio updates
      * @overload
@@ -2515,7 +2738,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#audio Telegram Bot API}
      */
     onAudio(handler: (data: Audio) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Audio updates with filtering
      * @overload
@@ -2524,7 +2747,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#audio Telegram Bot API}
      */
-    onAudio(filter: string | ((data: any) => boolean), handler: (data: Audio) => void | Promise<void>): this;
+    onAudio(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Audio) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Document updates
      * @overload
@@ -2533,7 +2759,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#document Telegram Bot API}
      */
     onDocument(handler: (data: Document) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Document updates with filtering
      * @overload
@@ -2542,7 +2768,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#document Telegram Bot API}
      */
-    onDocument(filter: string | ((data: any) => boolean), handler: (data: Document) => void | Promise<void>): this;
+    onDocument(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Document) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Story updates
      * @overload
@@ -2551,7 +2780,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#story Telegram Bot API}
      */
     onStory(handler: (data: Story) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Story updates with filtering
      * @overload
@@ -2560,7 +2789,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#story Telegram Bot API}
      */
-    onStory(filter: string | ((data: any) => boolean), handler: (data: Story) => void | Promise<void>): this;
+    onStory(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Story) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Video updates
      * @overload
@@ -2569,7 +2801,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#video Telegram Bot API}
      */
     onVideo(handler: (data: Video) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Video updates with filtering
      * @overload
@@ -2578,7 +2810,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#video Telegram Bot API}
      */
-    onVideo(filter: string | ((data: any) => boolean), handler: (data: Video) => void | Promise<void>): this;
+    onVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Video) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for VideoNote updates
      * @overload
@@ -2587,7 +2822,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videonote Telegram Bot API}
      */
     onVideoNote(handler: (data: VideoNote) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for VideoNote updates with filtering
      * @overload
@@ -2596,7 +2831,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videonote Telegram Bot API}
      */
-    onVideoNote(filter: string | ((data: any) => boolean), handler: (data: VideoNote) => void | Promise<void>): this;
+    onVideoNote(
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoNote) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Voice updates
      * @overload
@@ -2605,7 +2843,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#voice Telegram Bot API}
      */
     onVoice(handler: (data: Voice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Voice updates with filtering
      * @overload
@@ -2614,7 +2852,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#voice Telegram Bot API}
      */
-    onVoice(filter: string | ((data: any) => boolean), handler: (data: Voice) => void | Promise<void>): this;
+    onVoice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Voice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMediaInfo updates
      * @overload
@@ -2623,7 +2864,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediainfo Telegram Bot API}
      */
     onPaidMediaInfo(handler: (data: PaidMediaInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMediaInfo updates with filtering
      * @overload
@@ -2632,7 +2873,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediainfo Telegram Bot API}
      */
-    onPaidMediaInfo(filter: string | ((data: any) => boolean), handler: (data: PaidMediaInfo) => void | Promise<void>): this;
+    onPaidMediaInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMedia updates
      * @overload
@@ -2641,7 +2885,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmedia Telegram Bot API}
      */
     onPaidMedia(handler: (data: PaidMedia) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMedia updates with filtering
      * @overload
@@ -2650,7 +2894,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmedia Telegram Bot API}
      */
-    onPaidMedia(filter: string | ((data: any) => boolean), handler: (data: PaidMedia) => void | Promise<void>): this;
+    onPaidMedia(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMedia) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMediaPreview updates
      * @overload
@@ -2659,7 +2906,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
      */
     onPaidMediaPreview(handler: (data: PaidMediaPreview) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMediaPreview updates with filtering
      * @overload
@@ -2668,7 +2915,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
      */
-    onPaidMediaPreview(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    onPaidMediaPreview(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPreview) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMediaPhoto updates
      * @overload
@@ -2677,7 +2927,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
     onPaidMediaPhoto(handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMediaPhoto updates with filtering
      * @overload
@@ -2686,7 +2936,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
-    onPaidMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
+    onPaidMediaPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMediaVideo updates
      * @overload
@@ -2695,7 +2948,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediavideo Telegram Bot API}
      */
     onPaidMediaVideo(handler: (data: PaidMediaVideo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMediaVideo updates with filtering
      * @overload
@@ -2704,7 +2957,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediavideo Telegram Bot API}
      */
-    onPaidMediaVideo(filter: string | ((data: any) => boolean), handler: (data: PaidMediaVideo) => void | Promise<void>): this;
+    onPaidMediaVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Contact updates
      * @overload
@@ -2713,7 +2969,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#contact Telegram Bot API}
      */
     onContact(handler: (data: Contact) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Contact updates with filtering
      * @overload
@@ -2722,7 +2978,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#contact Telegram Bot API}
      */
-    onContact(filter: string | ((data: any) => boolean), handler: (data: Contact) => void | Promise<void>): this;
+    onContact(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Contact) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Dice updates
      * @overload
@@ -2731,7 +2990,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
     onDice(handler: (data: Dice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Dice updates with filtering
      * @overload
@@ -2740,7 +2999,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
-    onDice(filter: string | ((data: any) => boolean), handler: (data: Dice) => void | Promise<void>): this;
+    onDice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Dice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PollOption updates
      * @overload
@@ -2749,7 +3011,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#polloption Telegram Bot API}
      */
     onPollOption(handler: (data: PollOption) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PollOption updates with filtering
      * @overload
@@ -2758,7 +3020,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#polloption Telegram Bot API}
      */
-    onPollOption(filter: string | ((data: any) => boolean), handler: (data: PollOption) => void | Promise<void>): this;
+    onPollOption(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PollOption) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputPollOption updates
      * @overload
@@ -2767,7 +3032,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpolloption Telegram Bot API}
      */
     onInputPollOption(handler: (data: InputPollOption) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputPollOption updates with filtering
      * @overload
@@ -2776,7 +3041,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpolloption Telegram Bot API}
      */
-    onInputPollOption(filter: string | ((data: any) => boolean), handler: (data: InputPollOption) => void | Promise<void>): this;
+    onInputPollOption(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPollOption) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PollAnswer updates
      * @overload
@@ -2785,7 +3053,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#pollanswer Telegram Bot API}
      */
     onPollAnswer(handler: (data: PollAnswer) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PollAnswer updates with filtering
      * @overload
@@ -2794,7 +3062,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#pollanswer Telegram Bot API}
      */
-    onPollAnswer(filter: string | ((data: any) => boolean), handler: (data: PollAnswer) => void | Promise<void>): this;
+    onPollAnswer(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PollAnswer) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Poll updates
      * @overload
@@ -2803,7 +3074,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#poll Telegram Bot API}
      */
     onPoll(handler: (data: Poll) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Poll updates with filtering
      * @overload
@@ -2812,7 +3083,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#poll Telegram Bot API}
      */
-    onPoll(filter: string | ((data: any) => boolean), handler: (data: Poll) => void | Promise<void>): this;
+    onPoll(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Poll) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChecklistTask updates
      * @overload
@@ -2821,7 +3095,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklisttask Telegram Bot API}
      */
     onChecklistTask(handler: (data: ChecklistTask) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChecklistTask updates with filtering
      * @overload
@@ -2830,7 +3104,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttask Telegram Bot API}
      */
-    onChecklistTask(filter: string | ((data: any) => boolean), handler: (data: ChecklistTask) => void | Promise<void>): this;
+    onChecklistTask(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTask) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Checklist updates
      * @overload
@@ -2839,7 +3116,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklist Telegram Bot API}
      */
     onChecklist(handler: (data: Checklist) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Checklist updates with filtering
      * @overload
@@ -2848,7 +3125,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklist Telegram Bot API}
      */
-    onChecklist(filter: string | ((data: any) => boolean), handler: (data: Checklist) => void | Promise<void>): this;
+    onChecklist(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Checklist) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputChecklistTask updates
      * @overload
@@ -2857,7 +3137,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputchecklisttask Telegram Bot API}
      */
     onInputChecklistTask(handler: (data: InputChecklistTask) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputChecklistTask updates with filtering
      * @overload
@@ -2866,7 +3146,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputchecklisttask Telegram Bot API}
      */
-    onInputChecklistTask(filter: string | ((data: any) => boolean), handler: (data: InputChecklistTask) => void | Promise<void>): this;
+    onInputChecklistTask(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputChecklistTask) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputChecklist updates
      * @overload
@@ -2875,7 +3158,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputchecklist Telegram Bot API}
      */
     onInputChecklist(handler: (data: InputChecklist) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputChecklist updates with filtering
      * @overload
@@ -2884,7 +3167,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputchecklist Telegram Bot API}
      */
-    onInputChecklist(filter: string | ((data: any) => boolean), handler: (data: InputChecklist) => void | Promise<void>): this;
+    onInputChecklist(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputChecklist) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChecklistTasksDone updates
      * @overload
@@ -2893,7 +3179,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklisttasksdone Telegram Bot API}
      */
     onChecklistTasksDone(handler: (data: ChecklistTasksDone) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChecklistTasksDone updates with filtering
      * @overload
@@ -2902,7 +3188,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksdone Telegram Bot API}
      */
-    onChecklistTasksDone(filter: string | ((data: any) => boolean), handler: (data: ChecklistTasksDone) => void | Promise<void>): this;
+    onChecklistTasksDone(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTasksDone) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChecklistTasksAdded updates
      * @overload
@@ -2911,7 +3200,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklisttasksadded Telegram Bot API}
      */
     onChecklistTasksAdded(handler: (data: ChecklistTasksAdded) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChecklistTasksAdded updates with filtering
      * @overload
@@ -2920,7 +3209,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksadded Telegram Bot API}
      */
-    onChecklistTasksAdded(filter: string | ((data: any) => boolean), handler: (data: ChecklistTasksAdded) => void | Promise<void>): this;
+    onChecklistTasksAdded(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTasksAdded) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Location updates
      * @overload
@@ -2929,7 +3221,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#location Telegram Bot API}
      */
     onLocation(handler: (data: Location) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Location updates with filtering
      * @overload
@@ -2938,7 +3230,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#location Telegram Bot API}
      */
-    onLocation(filter: string | ((data: any) => boolean), handler: (data: Location) => void | Promise<void>): this;
+    onLocation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Location) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Venue updates
      * @overload
@@ -2947,7 +3242,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#venue Telegram Bot API}
      */
     onVenue(handler: (data: Venue) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Venue updates with filtering
      * @overload
@@ -2956,7 +3251,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#venue Telegram Bot API}
      */
-    onVenue(filter: string | ((data: any) => boolean), handler: (data: Venue) => void | Promise<void>): this;
+    onVenue(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Venue) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for WebAppData updates
      * @overload
@@ -2965,7 +3263,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webappdata Telegram Bot API}
      */
     onWebAppData(handler: (data: WebAppData) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for WebAppData updates with filtering
      * @overload
@@ -2974,7 +3272,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webappdata Telegram Bot API}
      */
-    onWebAppData(filter: string | ((data: any) => boolean), handler: (data: WebAppData) => void | Promise<void>): this;
+    onWebAppData(
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebAppData) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ProximityAlertTriggered updates
      * @overload
@@ -2982,8 +3283,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#proximityalerttriggered Telegram Bot API}
      */
-    onProximityAlertTriggered(handler: (data: ProximityAlertTriggered) => void | Promise<void>): this;
-    
+    onProximityAlertTriggered(
+      handler: (data: ProximityAlertTriggered) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ProximityAlertTriggered updates with filtering
      * @overload
@@ -2992,7 +3295,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#proximityalerttriggered Telegram Bot API}
      */
-    onProximityAlertTriggered(filter: string | ((data: any) => boolean), handler: (data: ProximityAlertTriggered) => void | Promise<void>): this;
+    onProximityAlertTriggered(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ProximityAlertTriggered) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageAutoDeleteTimerChanged updates
      * @overload
@@ -3000,8 +3306,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageautodeletetimerchanged Telegram Bot API}
      */
-    onMessageAutoDeleteTimerChanged(handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
-    
+    onMessageAutoDeleteTimerChanged(
+      handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for MessageAutoDeleteTimerChanged updates with filtering
      * @overload
@@ -3010,7 +3318,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageautodeletetimerchanged Telegram Bot API}
      */
-    onMessageAutoDeleteTimerChanged(filter: string | ((data: any) => boolean), handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
+    onMessageAutoDeleteTimerChanged(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostAdded updates
      * @overload
@@ -3019,7 +3330,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostadded Telegram Bot API}
      */
     onChatBoostAdded(handler: (data: ChatBoostAdded) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoostAdded updates with filtering
      * @overload
@@ -3028,7 +3339,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostadded Telegram Bot API}
      */
-    onChatBoostAdded(filter: string | ((data: any) => boolean), handler: (data: ChatBoostAdded) => void | Promise<void>): this;
+    onChatBoostAdded(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostAdded) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundFill updates
      * @overload
@@ -3037,7 +3351,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundfill Telegram Bot API}
      */
     onBackgroundFill(handler: (data: BackgroundFill) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundFill updates with filtering
      * @overload
@@ -3046,7 +3360,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfill Telegram Bot API}
      */
-    onBackgroundFill(filter: string | ((data: any) => boolean), handler: (data: BackgroundFill) => void | Promise<void>): this;
+    onBackgroundFill(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFill) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundFillSolid updates
      * @overload
@@ -3055,7 +3372,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundfillsolid Telegram Bot API}
      */
     onBackgroundFillSolid(handler: (data: BackgroundFillSolid) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundFillSolid updates with filtering
      * @overload
@@ -3064,7 +3381,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillsolid Telegram Bot API}
      */
-    onBackgroundFillSolid(filter: string | ((data: any) => boolean), handler: (data: BackgroundFillSolid) => void | Promise<void>): this;
+    onBackgroundFillSolid(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillSolid) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundFillGradient updates
      * @overload
@@ -3073,7 +3393,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundfillgradient Telegram Bot API}
      */
     onBackgroundFillGradient(handler: (data: BackgroundFillGradient) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundFillGradient updates with filtering
      * @overload
@@ -3082,7 +3402,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillgradient Telegram Bot API}
      */
-    onBackgroundFillGradient(filter: string | ((data: any) => boolean), handler: (data: BackgroundFillGradient) => void | Promise<void>): this;
+    onBackgroundFillGradient(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillGradient) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundFillFreeformGradient updates
      * @overload
@@ -3090,8 +3413,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillfreeformgradient Telegram Bot API}
      */
-    onBackgroundFillFreeformGradient(handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>): this;
-    
+    onBackgroundFillFreeformGradient(
+      handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BackgroundFillFreeformGradient updates with filtering
      * @overload
@@ -3100,7 +3425,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillfreeformgradient Telegram Bot API}
      */
-    onBackgroundFillFreeformGradient(filter: string | ((data: any) => boolean), handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>): this;
+    onBackgroundFillFreeformGradient(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundType updates
      * @overload
@@ -3109,7 +3437,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundtype Telegram Bot API}
      */
     onBackgroundType(handler: (data: BackgroundType) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundType updates with filtering
      * @overload
@@ -3118,7 +3446,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtype Telegram Bot API}
      */
-    onBackgroundType(filter: string | ((data: any) => boolean), handler: (data: BackgroundType) => void | Promise<void>): this;
+    onBackgroundType(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundType) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundTypeFill updates
      * @overload
@@ -3127,7 +3458,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundtypefill Telegram Bot API}
      */
     onBackgroundTypeFill(handler: (data: BackgroundTypeFill) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundTypeFill updates with filtering
      * @overload
@@ -3136,7 +3467,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypefill Telegram Bot API}
      */
-    onBackgroundTypeFill(filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeFill) => void | Promise<void>): this;
+    onBackgroundTypeFill(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeFill) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundTypeWallpaper updates
      * @overload
@@ -3144,8 +3478,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypewallpaper Telegram Bot API}
      */
-    onBackgroundTypeWallpaper(handler: (data: BackgroundTypeWallpaper) => void | Promise<void>): this;
-    
+    onBackgroundTypeWallpaper(
+      handler: (data: BackgroundTypeWallpaper) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BackgroundTypeWallpaper updates with filtering
      * @overload
@@ -3154,7 +3490,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypewallpaper Telegram Bot API}
      */
-    onBackgroundTypeWallpaper(filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeWallpaper) => void | Promise<void>): this;
+    onBackgroundTypeWallpaper(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeWallpaper) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundTypePattern updates
      * @overload
@@ -3163,7 +3502,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundtypepattern Telegram Bot API}
      */
     onBackgroundTypePattern(handler: (data: BackgroundTypePattern) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BackgroundTypePattern updates with filtering
      * @overload
@@ -3172,7 +3511,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypepattern Telegram Bot API}
      */
-    onBackgroundTypePattern(filter: string | ((data: any) => boolean), handler: (data: BackgroundTypePattern) => void | Promise<void>): this;
+    onBackgroundTypePattern(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypePattern) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BackgroundTypeChatTheme updates
      * @overload
@@ -3180,8 +3522,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypechattheme Telegram Bot API}
      */
-    onBackgroundTypeChatTheme(handler: (data: BackgroundTypeChatTheme) => void | Promise<void>): this;
-    
+    onBackgroundTypeChatTheme(
+      handler: (data: BackgroundTypeChatTheme) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BackgroundTypeChatTheme updates with filtering
      * @overload
@@ -3190,7 +3534,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypechattheme Telegram Bot API}
      */
-    onBackgroundTypeChatTheme(filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeChatTheme) => void | Promise<void>): this;
+    onBackgroundTypeChatTheme(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeChatTheme) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBackground updates
      * @overload
@@ -3199,7 +3546,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatbackground Telegram Bot API}
      */
     onChatBackground(handler: (data: ChatBackground) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBackground updates with filtering
      * @overload
@@ -3208,7 +3555,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatbackground Telegram Bot API}
      */
-    onChatBackground(filter: string | ((data: any) => boolean), handler: (data: ChatBackground) => void | Promise<void>): this;
+    onChatBackground(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBackground) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForumTopicCreated updates
      * @overload
@@ -3217,7 +3567,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopiccreated Telegram Bot API}
      */
     onForumTopicCreated(handler: (data: ForumTopicCreated) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForumTopicCreated updates with filtering
      * @overload
@@ -3226,7 +3576,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopiccreated Telegram Bot API}
      */
-    onForumTopicCreated(filter: string | ((data: any) => boolean), handler: (data: ForumTopicCreated) => void | Promise<void>): this;
+    onForumTopicCreated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicCreated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForumTopicClosed updates
      * @overload
@@ -3235,7 +3588,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopicclosed Telegram Bot API}
      */
     onForumTopicClosed(handler: (data: ForumTopicClosed) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForumTopicClosed updates with filtering
      * @overload
@@ -3244,7 +3597,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicclosed Telegram Bot API}
      */
-    onForumTopicClosed(filter: string | ((data: any) => boolean), handler: (data: ForumTopicClosed) => void | Promise<void>): this;
+    onForumTopicClosed(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicClosed) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForumTopicEdited updates
      * @overload
@@ -3253,7 +3609,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopicedited Telegram Bot API}
      */
     onForumTopicEdited(handler: (data: ForumTopicEdited) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForumTopicEdited updates with filtering
      * @overload
@@ -3262,7 +3618,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicedited Telegram Bot API}
      */
-    onForumTopicEdited(filter: string | ((data: any) => boolean), handler: (data: ForumTopicEdited) => void | Promise<void>): this;
+    onForumTopicEdited(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicEdited) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForumTopicReopened updates
      * @overload
@@ -3271,7 +3630,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopicreopened Telegram Bot API}
      */
     onForumTopicReopened(handler: (data: ForumTopicReopened) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForumTopicReopened updates with filtering
      * @overload
@@ -3280,7 +3639,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicreopened Telegram Bot API}
      */
-    onForumTopicReopened(filter: string | ((data: any) => boolean), handler: (data: ForumTopicReopened) => void | Promise<void>): this;
+    onForumTopicReopened(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicReopened) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GeneralForumTopicHidden updates
      * @overload
@@ -3288,8 +3650,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopichidden Telegram Bot API}
      */
-    onGeneralForumTopicHidden(handler: (data: GeneralForumTopicHidden) => void | Promise<void>): this;
-    
+    onGeneralForumTopicHidden(
+      handler: (data: GeneralForumTopicHidden) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for GeneralForumTopicHidden updates with filtering
      * @overload
@@ -3298,7 +3662,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopichidden Telegram Bot API}
      */
-    onGeneralForumTopicHidden(filter: string | ((data: any) => boolean), handler: (data: GeneralForumTopicHidden) => void | Promise<void>): this;
+    onGeneralForumTopicHidden(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GeneralForumTopicHidden) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GeneralForumTopicUnhidden updates
      * @overload
@@ -3306,8 +3673,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopicunhidden Telegram Bot API}
      */
-    onGeneralForumTopicUnhidden(handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>): this;
-    
+    onGeneralForumTopicUnhidden(
+      handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for GeneralForumTopicUnhidden updates with filtering
      * @overload
@@ -3316,7 +3685,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopicunhidden Telegram Bot API}
      */
-    onGeneralForumTopicUnhidden(filter: string | ((data: any) => boolean), handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>): this;
+    onGeneralForumTopicUnhidden(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SharedUser updates
      * @overload
@@ -3325,7 +3697,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shareduser Telegram Bot API}
      */
     onSharedUser(handler: (data: SharedUser) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SharedUser updates with filtering
      * @overload
@@ -3334,7 +3706,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shareduser Telegram Bot API}
      */
-    onSharedUser(filter: string | ((data: any) => boolean), handler: (data: SharedUser) => void | Promise<void>): this;
+    onSharedUser(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SharedUser) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UsersShared updates
      * @overload
@@ -3343,7 +3718,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#usersshared Telegram Bot API}
      */
     onUsersShared(handler: (data: UsersShared) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UsersShared updates with filtering
      * @overload
@@ -3352,7 +3727,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#usersshared Telegram Bot API}
      */
-    onUsersShared(filter: string | ((data: any) => boolean), handler: (data: UsersShared) => void | Promise<void>): this;
+    onUsersShared(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UsersShared) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatShared updates
      * @overload
@@ -3361,7 +3739,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatshared Telegram Bot API}
      */
     onChatShared(handler: (data: ChatShared) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatShared updates with filtering
      * @overload
@@ -3370,7 +3748,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatshared Telegram Bot API}
      */
-    onChatShared(filter: string | ((data: any) => boolean), handler: (data: ChatShared) => void | Promise<void>): this;
+    onChatShared(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatShared) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for WriteAccessAllowed updates
      * @overload
@@ -3379,7 +3760,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#writeaccessallowed Telegram Bot API}
      */
     onWriteAccessAllowed(handler: (data: WriteAccessAllowed) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for WriteAccessAllowed updates with filtering
      * @overload
@@ -3388,7 +3769,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#writeaccessallowed Telegram Bot API}
      */
-    onWriteAccessAllowed(filter: string | ((data: any) => boolean), handler: (data: WriteAccessAllowed) => void | Promise<void>): this;
+    onWriteAccessAllowed(
+      filter: string | ((data: any) => boolean),
+      handler: (data: WriteAccessAllowed) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for VideoChatScheduled updates
      * @overload
@@ -3397,7 +3781,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videochatscheduled Telegram Bot API}
      */
     onVideoChatScheduled(handler: (data: VideoChatScheduled) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for VideoChatScheduled updates with filtering
      * @overload
@@ -3406,7 +3790,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatscheduled Telegram Bot API}
      */
-    onVideoChatScheduled(filter: string | ((data: any) => boolean), handler: (data: VideoChatScheduled) => void | Promise<void>): this;
+    onVideoChatScheduled(
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatScheduled) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for VideoChatStarted updates
      * @overload
@@ -3415,7 +3802,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videochatstarted Telegram Bot API}
      */
     onVideoChatStarted(handler: (data: VideoChatStarted) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for VideoChatStarted updates with filtering
      * @overload
@@ -3424,7 +3811,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatstarted Telegram Bot API}
      */
-    onVideoChatStarted(filter: string | ((data: any) => boolean), handler: (data: VideoChatStarted) => void | Promise<void>): this;
+    onVideoChatStarted(
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatStarted) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for VideoChatEnded updates
      * @overload
@@ -3433,7 +3823,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videochatended Telegram Bot API}
      */
     onVideoChatEnded(handler: (data: VideoChatEnded) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for VideoChatEnded updates with filtering
      * @overload
@@ -3442,7 +3832,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatended Telegram Bot API}
      */
-    onVideoChatEnded(filter: string | ((data: any) => boolean), handler: (data: VideoChatEnded) => void | Promise<void>): this;
+    onVideoChatEnded(
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatEnded) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for VideoChatParticipantsInvited updates
      * @overload
@@ -3450,8 +3843,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatparticipantsinvited Telegram Bot API}
      */
-    onVideoChatParticipantsInvited(handler: (data: VideoChatParticipantsInvited) => void | Promise<void>): this;
-    
+    onVideoChatParticipantsInvited(
+      handler: (data: VideoChatParticipantsInvited) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for VideoChatParticipantsInvited updates with filtering
      * @overload
@@ -3460,7 +3855,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatparticipantsinvited Telegram Bot API}
      */
-    onVideoChatParticipantsInvited(filter: string | ((data: any) => boolean), handler: (data: VideoChatParticipantsInvited) => void | Promise<void>): this;
+    onVideoChatParticipantsInvited(
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatParticipantsInvited) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMessagePriceChanged updates
      * @overload
@@ -3468,8 +3866,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmessagepricechanged Telegram Bot API}
      */
-    onPaidMessagePriceChanged(handler: (data: PaidMessagePriceChanged) => void | Promise<void>): this;
-    
+    onPaidMessagePriceChanged(
+      handler: (data: PaidMessagePriceChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PaidMessagePriceChanged updates with filtering
      * @overload
@@ -3478,7 +3878,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmessagepricechanged Telegram Bot API}
      */
-    onPaidMessagePriceChanged(filter: string | ((data: any) => boolean), handler: (data: PaidMessagePriceChanged) => void | Promise<void>): this;
+    onPaidMessagePriceChanged(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMessagePriceChanged) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for DirectMessagePriceChanged updates
      * @overload
@@ -3486,8 +3889,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagepricechanged Telegram Bot API}
      */
-    onDirectMessagePriceChanged(handler: (data: DirectMessagePriceChanged) => void | Promise<void>): this;
-    
+    onDirectMessagePriceChanged(
+      handler: (data: DirectMessagePriceChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for DirectMessagePriceChanged updates with filtering
      * @overload
@@ -3496,7 +3901,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagepricechanged Telegram Bot API}
      */
-    onDirectMessagePriceChanged(filter: string | ((data: any) => boolean), handler: (data: DirectMessagePriceChanged) => void | Promise<void>): this;
+    onDirectMessagePriceChanged(
+      filter: string | ((data: any) => boolean),
+      handler: (data: DirectMessagePriceChanged) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostApproved updates
      * @overload
@@ -3505,7 +3913,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapproved Telegram Bot API}
      */
     onSuggestedPostApproved(handler: (data: SuggestedPostApproved) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostApproved updates with filtering
      * @overload
@@ -3514,7 +3922,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapproved Telegram Bot API}
      */
-    onSuggestedPostApproved(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostApproved) => void | Promise<void>): this;
+    onSuggestedPostApproved(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostApproved) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostApprovalFailed updates
      * @overload
@@ -3522,8 +3933,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapprovalfailed Telegram Bot API}
      */
-    onSuggestedPostApprovalFailed(handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>): this;
-    
+    onSuggestedPostApprovalFailed(
+      handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for SuggestedPostApprovalFailed updates with filtering
      * @overload
@@ -3532,7 +3945,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapprovalfailed Telegram Bot API}
      */
-    onSuggestedPostApprovalFailed(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>): this;
+    onSuggestedPostApprovalFailed(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostDeclined updates
      * @overload
@@ -3541,7 +3957,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostdeclined Telegram Bot API}
      */
     onSuggestedPostDeclined(handler: (data: SuggestedPostDeclined) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostDeclined updates with filtering
      * @overload
@@ -3550,7 +3966,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostdeclined Telegram Bot API}
      */
-    onSuggestedPostDeclined(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostDeclined) => void | Promise<void>): this;
+    onSuggestedPostDeclined(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostDeclined) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostPaid updates
      * @overload
@@ -3559,7 +3978,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostpaid Telegram Bot API}
      */
     onSuggestedPostPaid(handler: (data: SuggestedPostPaid) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostPaid updates with filtering
      * @overload
@@ -3568,7 +3987,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostpaid Telegram Bot API}
      */
-    onSuggestedPostPaid(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostPaid) => void | Promise<void>): this;
+    onSuggestedPostPaid(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostPaid) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostRefunded updates
      * @overload
@@ -3577,7 +3999,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostrefunded Telegram Bot API}
      */
     onSuggestedPostRefunded(handler: (data: SuggestedPostRefunded) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostRefunded updates with filtering
      * @overload
@@ -3586,7 +4008,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostrefunded Telegram Bot API}
      */
-    onSuggestedPostRefunded(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostRefunded) => void | Promise<void>): this;
+    onSuggestedPostRefunded(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostRefunded) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GiveawayCreated updates
      * @overload
@@ -3595,7 +4020,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveawaycreated Telegram Bot API}
      */
     onGiveawayCreated(handler: (data: GiveawayCreated) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for GiveawayCreated updates with filtering
      * @overload
@@ -3604,7 +4029,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaycreated Telegram Bot API}
      */
-    onGiveawayCreated(filter: string | ((data: any) => boolean), handler: (data: GiveawayCreated) => void | Promise<void>): this;
+    onGiveawayCreated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayCreated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Giveaway updates
      * @overload
@@ -3613,7 +4041,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveaway Telegram Bot API}
      */
     onGiveaway(handler: (data: Giveaway) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Giveaway updates with filtering
      * @overload
@@ -3622,7 +4050,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveaway Telegram Bot API}
      */
-    onGiveaway(filter: string | ((data: any) => boolean), handler: (data: Giveaway) => void | Promise<void>): this;
+    onGiveaway(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Giveaway) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GiveawayWinners updates
      * @overload
@@ -3631,7 +4062,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveawaywinners Telegram Bot API}
      */
     onGiveawayWinners(handler: (data: GiveawayWinners) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for GiveawayWinners updates with filtering
      * @overload
@@ -3640,7 +4071,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaywinners Telegram Bot API}
      */
-    onGiveawayWinners(filter: string | ((data: any) => boolean), handler: (data: GiveawayWinners) => void | Promise<void>): this;
+    onGiveawayWinners(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayWinners) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GiveawayCompleted updates
      * @overload
@@ -3649,7 +4083,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveawaycompleted Telegram Bot API}
      */
     onGiveawayCompleted(handler: (data: GiveawayCompleted) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for GiveawayCompleted updates with filtering
      * @overload
@@ -3658,7 +4092,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaycompleted Telegram Bot API}
      */
-    onGiveawayCompleted(filter: string | ((data: any) => boolean), handler: (data: GiveawayCompleted) => void | Promise<void>): this;
+    onGiveawayCompleted(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayCompleted) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for LinkPreviewOptions updates
      * @overload
@@ -3667,7 +4104,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#linkpreviewoptions Telegram Bot API}
      */
     onLinkPreviewOptions(handler: (data: LinkPreviewOptions) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for LinkPreviewOptions updates with filtering
      * @overload
@@ -3676,7 +4113,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#linkpreviewoptions Telegram Bot API}
      */
-    onLinkPreviewOptions(filter: string | ((data: any) => boolean), handler: (data: LinkPreviewOptions) => void | Promise<void>): this;
+    onLinkPreviewOptions(
+      filter: string | ((data: any) => boolean),
+      handler: (data: LinkPreviewOptions) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostPrice updates
      * @overload
@@ -3685,7 +4125,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostprice Telegram Bot API}
      */
     onSuggestedPostPrice(handler: (data: SuggestedPostPrice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostPrice updates with filtering
      * @overload
@@ -3694,7 +4134,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostprice Telegram Bot API}
      */
-    onSuggestedPostPrice(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostPrice) => void | Promise<void>): this;
+    onSuggestedPostPrice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostPrice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostInfo updates
      * @overload
@@ -3703,7 +4146,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#suggestedpostinfo Telegram Bot API}
      */
     onSuggestedPostInfo(handler: (data: SuggestedPostInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuggestedPostInfo updates with filtering
      * @overload
@@ -3712,7 +4155,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostinfo Telegram Bot API}
      */
-    onSuggestedPostInfo(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostInfo) => void | Promise<void>): this;
+    onSuggestedPostInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuggestedPostParameters updates
      * @overload
@@ -3720,8 +4166,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostparameters Telegram Bot API}
      */
-    onSuggestedPostParameters(handler: (data: SuggestedPostParameters) => void | Promise<void>): this;
-    
+    onSuggestedPostParameters(
+      handler: (data: SuggestedPostParameters) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for SuggestedPostParameters updates with filtering
      * @overload
@@ -3730,7 +4178,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostparameters Telegram Bot API}
      */
-    onSuggestedPostParameters(filter: string | ((data: any) => boolean), handler: (data: SuggestedPostParameters) => void | Promise<void>): this;
+    onSuggestedPostParameters(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostParameters) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for DirectMessagesTopic updates
      * @overload
@@ -3739,7 +4190,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#directmessagestopic Telegram Bot API}
      */
     onDirectMessagesTopic(handler: (data: DirectMessagesTopic) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for DirectMessagesTopic updates with filtering
      * @overload
@@ -3748,7 +4199,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagestopic Telegram Bot API}
      */
-    onDirectMessagesTopic(filter: string | ((data: any) => boolean), handler: (data: DirectMessagesTopic) => void | Promise<void>): this;
+    onDirectMessagesTopic(
+      filter: string | ((data: any) => boolean),
+      handler: (data: DirectMessagesTopic) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UserProfilePhotos updates
      * @overload
@@ -3757,7 +4211,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
     onUserProfilePhotos(handler: (data: UserProfilePhotos) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UserProfilePhotos updates with filtering
      * @overload
@@ -3766,7 +4220,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
-    onUserProfilePhotos(filter: string | ((data: any) => boolean), handler: (data: UserProfilePhotos) => void | Promise<void>): this;
+    onUserProfilePhotos(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UserProfilePhotos) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for File updates
      * @overload
@@ -3775,7 +4232,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#file Telegram Bot API}
      */
     onFile(handler: (data: File) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for File updates with filtering
      * @overload
@@ -3784,7 +4241,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#file Telegram Bot API}
      */
-    onFile(filter: string | ((data: any) => boolean), handler: (data: File) => void | Promise<void>): this;
+    onFile(
+      filter: string | ((data: any) => boolean),
+      handler: (data: File) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for WebAppInfo updates
      * @overload
@@ -3793,7 +4253,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webappinfo Telegram Bot API}
      */
     onWebAppInfo(handler: (data: WebAppInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for WebAppInfo updates with filtering
      * @overload
@@ -3802,7 +4262,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webappinfo Telegram Bot API}
      */
-    onWebAppInfo(filter: string | ((data: any) => boolean), handler: (data: WebAppInfo) => void | Promise<void>): this;
+    onWebAppInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebAppInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReplyKeyboardMarkup updates
      * @overload
@@ -3811,7 +4274,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#replykeyboardmarkup Telegram Bot API}
      */
     onReplyKeyboardMarkup(handler: (data: ReplyKeyboardMarkup) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReplyKeyboardMarkup updates with filtering
      * @overload
@@ -3820,7 +4283,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardmarkup Telegram Bot API}
      */
-    onReplyKeyboardMarkup(filter: string | ((data: any) => boolean), handler: (data: ReplyKeyboardMarkup) => void | Promise<void>): this;
+    onReplyKeyboardMarkup(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyKeyboardMarkup) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for KeyboardButton updates
      * @overload
@@ -3829,7 +4295,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#keyboardbutton Telegram Bot API}
      */
     onKeyboardButton(handler: (data: KeyboardButton) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for KeyboardButton updates with filtering
      * @overload
@@ -3838,7 +4304,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbutton Telegram Bot API}
      */
-    onKeyboardButton(filter: string | ((data: any) => boolean), handler: (data: KeyboardButton) => void | Promise<void>): this;
+    onKeyboardButton(
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButton) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for KeyboardButtonRequestUsers updates
      * @overload
@@ -3846,8 +4315,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestusers Telegram Bot API}
      */
-    onKeyboardButtonRequestUsers(handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>): this;
-    
+    onKeyboardButtonRequestUsers(
+      handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for KeyboardButtonRequestUsers updates with filtering
      * @overload
@@ -3856,7 +4327,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestusers Telegram Bot API}
      */
-    onKeyboardButtonRequestUsers(filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>): this;
+    onKeyboardButtonRequestUsers(
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for KeyboardButtonRequestChat updates
      * @overload
@@ -3864,8 +4338,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
-    onKeyboardButtonRequestChat(handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
-    
+    onKeyboardButtonRequestChat(
+      handler: (data: KeyboardButtonRequestChat) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for KeyboardButtonRequestChat updates with filtering
      * @overload
@@ -3874,7 +4350,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
-    onKeyboardButtonRequestChat(filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
+    onKeyboardButtonRequestChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonRequestChat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for KeyboardButtonPollType updates
      * @overload
@@ -3883,7 +4362,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonpolltype Telegram Bot API}
      */
     onKeyboardButtonPollType(handler: (data: KeyboardButtonPollType) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for KeyboardButtonPollType updates with filtering
      * @overload
@@ -3892,7 +4371,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonpolltype Telegram Bot API}
      */
-    onKeyboardButtonPollType(filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonPollType) => void | Promise<void>): this;
+    onKeyboardButtonPollType(
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonPollType) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReplyKeyboardRemove updates
      * @overload
@@ -3901,7 +4383,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#replykeyboardremove Telegram Bot API}
      */
     onReplyKeyboardRemove(handler: (data: ReplyKeyboardRemove) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReplyKeyboardRemove updates with filtering
      * @overload
@@ -3910,7 +4392,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardremove Telegram Bot API}
      */
-    onReplyKeyboardRemove(filter: string | ((data: any) => boolean), handler: (data: ReplyKeyboardRemove) => void | Promise<void>): this;
+    onReplyKeyboardRemove(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyKeyboardRemove) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineKeyboardMarkup updates
      * @overload
@@ -3919,7 +4404,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardmarkup Telegram Bot API}
      */
     onInlineKeyboardMarkup(handler: (data: InlineKeyboardMarkup) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineKeyboardMarkup updates with filtering
      * @overload
@@ -3928,7 +4413,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardmarkup Telegram Bot API}
      */
-    onInlineKeyboardMarkup(filter: string | ((data: any) => boolean), handler: (data: InlineKeyboardMarkup) => void | Promise<void>): this;
+    onInlineKeyboardMarkup(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineKeyboardMarkup) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineKeyboardButton updates
      * @overload
@@ -3937,7 +4425,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardbutton Telegram Bot API}
      */
     onInlineKeyboardButton(handler: (data: InlineKeyboardButton) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineKeyboardButton updates with filtering
      * @overload
@@ -3946,7 +4434,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardbutton Telegram Bot API}
      */
-    onInlineKeyboardButton(filter: string | ((data: any) => boolean), handler: (data: InlineKeyboardButton) => void | Promise<void>): this;
+    onInlineKeyboardButton(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineKeyboardButton) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for LoginUrl updates
      * @overload
@@ -3955,7 +4446,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#loginurl Telegram Bot API}
      */
     onLoginUrl(handler: (data: LoginUrl) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for LoginUrl updates with filtering
      * @overload
@@ -3964,7 +4455,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#loginurl Telegram Bot API}
      */
-    onLoginUrl(filter: string | ((data: any) => boolean), handler: (data: LoginUrl) => void | Promise<void>): this;
+    onLoginUrl(
+      filter: string | ((data: any) => boolean),
+      handler: (data: LoginUrl) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SwitchInlineQueryChosenChat updates
      * @overload
@@ -3972,8 +4466,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#switchinlinequerychosenchat Telegram Bot API}
      */
-    onSwitchInlineQueryChosenChat(handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>): this;
-    
+    onSwitchInlineQueryChosenChat(
+      handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for SwitchInlineQueryChosenChat updates with filtering
      * @overload
@@ -3982,7 +4478,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#switchinlinequerychosenchat Telegram Bot API}
      */
-    onSwitchInlineQueryChosenChat(filter: string | ((data: any) => boolean), handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>): this;
+    onSwitchInlineQueryChosenChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for CopyTextButton updates
      * @overload
@@ -3991,7 +4490,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
     onCopyTextButton(handler: (data: CopyTextButton) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for CopyTextButton updates with filtering
      * @overload
@@ -4000,7 +4499,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
-    onCopyTextButton(filter: string | ((data: any) => boolean), handler: (data: CopyTextButton) => void | Promise<void>): this;
+    onCopyTextButton(
+      filter: string | ((data: any) => boolean),
+      handler: (data: CopyTextButton) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for CallbackQuery updates
      * @overload
@@ -4009,7 +4511,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#callbackquery Telegram Bot API}
      */
     onCallbackQuery(handler: (data: CallbackQuery) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for CallbackQuery updates with filtering
      * @overload
@@ -4018,7 +4520,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#callbackquery Telegram Bot API}
      */
-    onCallbackQuery(filter: string | ((data: any) => boolean), handler: (data: CallbackQuery) => void | Promise<void>): this;
+    onCallbackQuery(
+      filter: string | ((data: any) => boolean),
+      handler: (data: CallbackQuery) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForceReply updates
      * @overload
@@ -4027,7 +4532,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forcereply Telegram Bot API}
      */
     onForceReply(handler: (data: ForceReply) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForceReply updates with filtering
      * @overload
@@ -4036,7 +4541,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forcereply Telegram Bot API}
      */
-    onForceReply(filter: string | ((data: any) => boolean), handler: (data: ForceReply) => void | Promise<void>): this;
+    onForceReply(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForceReply) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatPhoto updates
      * @overload
@@ -4045,7 +4553,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatphoto Telegram Bot API}
      */
     onChatPhoto(handler: (data: ChatPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatPhoto updates with filtering
      * @overload
@@ -4054,7 +4562,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatphoto Telegram Bot API}
      */
-    onChatPhoto(filter: string | ((data: any) => boolean), handler: (data: ChatPhoto) => void | Promise<void>): this;
+    onChatPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatInviteLink updates
      * @overload
@@ -4063,7 +4574,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatinvitelink Telegram Bot API}
      */
     onChatInviteLink(handler: (data: ChatInviteLink) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatInviteLink updates with filtering
      * @overload
@@ -4072,7 +4583,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatinvitelink Telegram Bot API}
      */
-    onChatInviteLink(filter: string | ((data: any) => boolean), handler: (data: ChatInviteLink) => void | Promise<void>): this;
+    onChatInviteLink(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatInviteLink) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatAdministratorRights updates
      * @overload
@@ -4080,8 +4594,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatadministratorrights Telegram Bot API}
      */
-    onChatAdministratorRights(handler: (data: ChatAdministratorRights) => void | Promise<void>): this;
-    
+    onChatAdministratorRights(
+      handler: (data: ChatAdministratorRights) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ChatAdministratorRights updates with filtering
      * @overload
@@ -4090,7 +4606,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatadministratorrights Telegram Bot API}
      */
-    onChatAdministratorRights(filter: string | ((data: any) => boolean), handler: (data: ChatAdministratorRights) => void | Promise<void>): this;
+    onChatAdministratorRights(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatAdministratorRights) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberUpdated updates
      * @overload
@@ -4099,7 +4618,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberupdated Telegram Bot API}
      */
     onChatMemberUpdated(handler: (data: ChatMemberUpdated) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberUpdated updates with filtering
      * @overload
@@ -4108,7 +4627,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberupdated Telegram Bot API}
      */
-    onChatMemberUpdated(filter: string | ((data: any) => boolean), handler: (data: ChatMemberUpdated) => void | Promise<void>): this;
+    onChatMemberUpdated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberUpdated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMember updates
      * @overload
@@ -4117,7 +4639,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmember Telegram Bot API}
      */
     onChatMember(handler: (data: ChatMember) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMember updates with filtering
      * @overload
@@ -4126,7 +4648,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmember Telegram Bot API}
      */
-    onChatMember(filter: string | ((data: any) => boolean), handler: (data: ChatMember) => void | Promise<void>): this;
+    onChatMember(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMember) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberOwner updates
      * @overload
@@ -4135,7 +4660,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberowner Telegram Bot API}
      */
     onChatMemberOwner(handler: (data: ChatMemberOwner) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberOwner updates with filtering
      * @overload
@@ -4144,7 +4669,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberowner Telegram Bot API}
      */
-    onChatMemberOwner(filter: string | ((data: any) => boolean), handler: (data: ChatMemberOwner) => void | Promise<void>): this;
+    onChatMemberOwner(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberOwner) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberAdministrator updates
      * @overload
@@ -4152,8 +4680,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberadministrator Telegram Bot API}
      */
-    onChatMemberAdministrator(handler: (data: ChatMemberAdministrator) => void | Promise<void>): this;
-    
+    onChatMemberAdministrator(
+      handler: (data: ChatMemberAdministrator) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ChatMemberAdministrator updates with filtering
      * @overload
@@ -4162,7 +4692,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberadministrator Telegram Bot API}
      */
-    onChatMemberAdministrator(filter: string | ((data: any) => boolean), handler: (data: ChatMemberAdministrator) => void | Promise<void>): this;
+    onChatMemberAdministrator(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberAdministrator) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberMember updates
      * @overload
@@ -4171,7 +4704,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmembermember Telegram Bot API}
      */
     onChatMemberMember(handler: (data: ChatMemberMember) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberMember updates with filtering
      * @overload
@@ -4180,7 +4713,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmembermember Telegram Bot API}
      */
-    onChatMemberMember(filter: string | ((data: any) => boolean), handler: (data: ChatMemberMember) => void | Promise<void>): this;
+    onChatMemberMember(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberMember) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberRestricted updates
      * @overload
@@ -4189,7 +4725,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberrestricted Telegram Bot API}
      */
     onChatMemberRestricted(handler: (data: ChatMemberRestricted) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberRestricted updates with filtering
      * @overload
@@ -4198,7 +4734,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberrestricted Telegram Bot API}
      */
-    onChatMemberRestricted(filter: string | ((data: any) => boolean), handler: (data: ChatMemberRestricted) => void | Promise<void>): this;
+    onChatMemberRestricted(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberRestricted) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberLeft updates
      * @overload
@@ -4207,7 +4746,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberleft Telegram Bot API}
      */
     onChatMemberLeft(handler: (data: ChatMemberLeft) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberLeft updates with filtering
      * @overload
@@ -4216,7 +4755,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberleft Telegram Bot API}
      */
-    onChatMemberLeft(filter: string | ((data: any) => boolean), handler: (data: ChatMemberLeft) => void | Promise<void>): this;
+    onChatMemberLeft(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberLeft) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatMemberBanned updates
      * @overload
@@ -4225,7 +4767,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberbanned Telegram Bot API}
      */
     onChatMemberBanned(handler: (data: ChatMemberBanned) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatMemberBanned updates with filtering
      * @overload
@@ -4234,7 +4776,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberbanned Telegram Bot API}
      */
-    onChatMemberBanned(filter: string | ((data: any) => boolean), handler: (data: ChatMemberBanned) => void | Promise<void>): this;
+    onChatMemberBanned(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberBanned) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatJoinRequest updates
      * @overload
@@ -4243,7 +4788,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatjoinrequest Telegram Bot API}
      */
     onChatJoinRequest(handler: (data: ChatJoinRequest) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatJoinRequest updates with filtering
      * @overload
@@ -4252,7 +4797,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatjoinrequest Telegram Bot API}
      */
-    onChatJoinRequest(filter: string | ((data: any) => boolean), handler: (data: ChatJoinRequest) => void | Promise<void>): this;
+    onChatJoinRequest(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatJoinRequest) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatPermissions updates
      * @overload
@@ -4261,7 +4809,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatpermissions Telegram Bot API}
      */
     onChatPermissions(handler: (data: ChatPermissions) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatPermissions updates with filtering
      * @overload
@@ -4270,7 +4818,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatpermissions Telegram Bot API}
      */
-    onChatPermissions(filter: string | ((data: any) => boolean), handler: (data: ChatPermissions) => void | Promise<void>): this;
+    onChatPermissions(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatPermissions) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Birthdate updates
      * @overload
@@ -4279,7 +4830,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#birthdate Telegram Bot API}
      */
     onBirthdate(handler: (data: Birthdate) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Birthdate updates with filtering
      * @overload
@@ -4288,7 +4839,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#birthdate Telegram Bot API}
      */
-    onBirthdate(filter: string | ((data: any) => boolean), handler: (data: Birthdate) => void | Promise<void>): this;
+    onBirthdate(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Birthdate) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessIntro updates
      * @overload
@@ -4297,7 +4851,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businessintro Telegram Bot API}
      */
     onBusinessIntro(handler: (data: BusinessIntro) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BusinessIntro updates with filtering
      * @overload
@@ -4306,7 +4860,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessintro Telegram Bot API}
      */
-    onBusinessIntro(filter: string | ((data: any) => boolean), handler: (data: BusinessIntro) => void | Promise<void>): this;
+    onBusinessIntro(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessIntro) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessLocation updates
      * @overload
@@ -4315,7 +4872,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businesslocation Telegram Bot API}
      */
     onBusinessLocation(handler: (data: BusinessLocation) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BusinessLocation updates with filtering
      * @overload
@@ -4324,7 +4881,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businesslocation Telegram Bot API}
      */
-    onBusinessLocation(filter: string | ((data: any) => boolean), handler: (data: BusinessLocation) => void | Promise<void>): this;
+    onBusinessLocation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessLocation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessOpeningHoursInterval updates
      * @overload
@@ -4332,8 +4892,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghoursinterval Telegram Bot API}
      */
-    onBusinessOpeningHoursInterval(handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>): this;
-    
+    onBusinessOpeningHoursInterval(
+      handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BusinessOpeningHoursInterval updates with filtering
      * @overload
@@ -4342,7 +4904,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghoursinterval Telegram Bot API}
      */
-    onBusinessOpeningHoursInterval(filter: string | ((data: any) => boolean), handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>): this;
+    onBusinessOpeningHoursInterval(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessOpeningHours updates
      * @overload
@@ -4351,7 +4916,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businessopeninghours Telegram Bot API}
      */
     onBusinessOpeningHours(handler: (data: BusinessOpeningHours) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BusinessOpeningHours updates with filtering
      * @overload
@@ -4360,7 +4925,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghours Telegram Bot API}
      */
-    onBusinessOpeningHours(filter: string | ((data: any) => boolean), handler: (data: BusinessOpeningHours) => void | Promise<void>): this;
+    onBusinessOpeningHours(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessOpeningHours) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaPosition updates
      * @overload
@@ -4369,7 +4937,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareaposition Telegram Bot API}
      */
     onStoryAreaPosition(handler: (data: StoryAreaPosition) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryAreaPosition updates with filtering
      * @overload
@@ -4378,7 +4946,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareaposition Telegram Bot API}
      */
-    onStoryAreaPosition(filter: string | ((data: any) => boolean), handler: (data: StoryAreaPosition) => void | Promise<void>): this;
+    onStoryAreaPosition(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaPosition) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for LocationAddress updates
      * @overload
@@ -4387,7 +4958,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#locationaddress Telegram Bot API}
      */
     onLocationAddress(handler: (data: LocationAddress) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for LocationAddress updates with filtering
      * @overload
@@ -4396,7 +4967,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#locationaddress Telegram Bot API}
      */
-    onLocationAddress(filter: string | ((data: any) => boolean), handler: (data: LocationAddress) => void | Promise<void>): this;
+    onLocationAddress(
+      filter: string | ((data: any) => boolean),
+      handler: (data: LocationAddress) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaType updates
      * @overload
@@ -4405,7 +4979,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareatype Telegram Bot API}
      */
     onStoryAreaType(handler: (data: StoryAreaType) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryAreaType updates with filtering
      * @overload
@@ -4414,7 +4988,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatype Telegram Bot API}
      */
-    onStoryAreaType(filter: string | ((data: any) => boolean), handler: (data: StoryAreaType) => void | Promise<void>): this;
+    onStoryAreaType(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaType) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaTypeLocation updates
      * @overload
@@ -4423,7 +5000,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareatypelocation Telegram Bot API}
      */
     onStoryAreaTypeLocation(handler: (data: StoryAreaTypeLocation) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryAreaTypeLocation updates with filtering
      * @overload
@@ -4432,7 +5009,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelocation Telegram Bot API}
      */
-    onStoryAreaTypeLocation(filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeLocation) => void | Promise<void>): this;
+    onStoryAreaTypeLocation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeLocation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaTypeSuggestedReaction updates
      * @overload
@@ -4440,8 +5020,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypesuggestedreaction Telegram Bot API}
      */
-    onStoryAreaTypeSuggestedReaction(handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>): this;
-    
+    onStoryAreaTypeSuggestedReaction(
+      handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for StoryAreaTypeSuggestedReaction updates with filtering
      * @overload
@@ -4450,7 +5032,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypesuggestedreaction Telegram Bot API}
      */
-    onStoryAreaTypeSuggestedReaction(filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>): this;
+    onStoryAreaTypeSuggestedReaction(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaTypeLink updates
      * @overload
@@ -4459,7 +5044,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareatypelink Telegram Bot API}
      */
     onStoryAreaTypeLink(handler: (data: StoryAreaTypeLink) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryAreaTypeLink updates with filtering
      * @overload
@@ -4468,7 +5053,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelink Telegram Bot API}
      */
-    onStoryAreaTypeLink(filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeLink) => void | Promise<void>): this;
+    onStoryAreaTypeLink(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeLink) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaTypeWeather updates
      * @overload
@@ -4477,7 +5065,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareatypeweather Telegram Bot API}
      */
     onStoryAreaTypeWeather(handler: (data: StoryAreaTypeWeather) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryAreaTypeWeather updates with filtering
      * @overload
@@ -4486,7 +5074,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeweather Telegram Bot API}
      */
-    onStoryAreaTypeWeather(filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeWeather) => void | Promise<void>): this;
+    onStoryAreaTypeWeather(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeWeather) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryAreaTypeUniqueGift updates
      * @overload
@@ -4494,8 +5085,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeuniquegift Telegram Bot API}
      */
-    onStoryAreaTypeUniqueGift(handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>): this;
-    
+    onStoryAreaTypeUniqueGift(
+      handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for StoryAreaTypeUniqueGift updates with filtering
      * @overload
@@ -4504,7 +5097,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeuniquegift Telegram Bot API}
      */
-    onStoryAreaTypeUniqueGift(filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>): this;
+    onStoryAreaTypeUniqueGift(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StoryArea updates
      * @overload
@@ -4513,7 +5109,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyarea Telegram Bot API}
      */
     onStoryArea(handler: (data: StoryArea) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StoryArea updates with filtering
      * @overload
@@ -4522,7 +5118,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyarea Telegram Bot API}
      */
-    onStoryArea(filter: string | ((data: any) => boolean), handler: (data: StoryArea) => void | Promise<void>): this;
+    onStoryArea(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryArea) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatLocation updates
      * @overload
@@ -4531,7 +5130,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatlocation Telegram Bot API}
      */
     onChatLocation(handler: (data: ChatLocation) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatLocation updates with filtering
      * @overload
@@ -4540,7 +5139,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatlocation Telegram Bot API}
      */
-    onChatLocation(filter: string | ((data: any) => boolean), handler: (data: ChatLocation) => void | Promise<void>): this;
+    onChatLocation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatLocation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReactionType updates
      * @overload
@@ -4549,7 +5151,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactiontype Telegram Bot API}
      */
     onReactionType(handler: (data: ReactionType) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReactionType updates with filtering
      * @overload
@@ -4558,7 +5160,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontype Telegram Bot API}
      */
-    onReactionType(filter: string | ((data: any) => boolean), handler: (data: ReactionType) => void | Promise<void>): this;
+    onReactionType(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionType) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReactionTypeEmoji updates
      * @overload
@@ -4567,7 +5172,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactiontypeemoji Telegram Bot API}
      */
     onReactionTypeEmoji(handler: (data: ReactionTypeEmoji) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReactionTypeEmoji updates with filtering
      * @overload
@@ -4576,7 +5181,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypeemoji Telegram Bot API}
      */
-    onReactionTypeEmoji(filter: string | ((data: any) => boolean), handler: (data: ReactionTypeEmoji) => void | Promise<void>): this;
+    onReactionTypeEmoji(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypeEmoji) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReactionTypeCustomEmoji updates
      * @overload
@@ -4584,8 +5192,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypecustomemoji Telegram Bot API}
      */
-    onReactionTypeCustomEmoji(handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>): this;
-    
+    onReactionTypeCustomEmoji(
+      handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ReactionTypeCustomEmoji updates with filtering
      * @overload
@@ -4594,7 +5204,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypecustomemoji Telegram Bot API}
      */
-    onReactionTypeCustomEmoji(filter: string | ((data: any) => boolean), handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>): this;
+    onReactionTypeCustomEmoji(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReactionTypePaid updates
      * @overload
@@ -4603,7 +5216,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactiontypepaid Telegram Bot API}
      */
     onReactionTypePaid(handler: (data: ReactionTypePaid) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReactionTypePaid updates with filtering
      * @overload
@@ -4612,7 +5225,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypepaid Telegram Bot API}
      */
-    onReactionTypePaid(filter: string | ((data: any) => boolean), handler: (data: ReactionTypePaid) => void | Promise<void>): this;
+    onReactionTypePaid(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypePaid) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ReactionCount updates
      * @overload
@@ -4621,7 +5237,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactioncount Telegram Bot API}
      */
     onReactionCount(handler: (data: ReactionCount) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ReactionCount updates with filtering
      * @overload
@@ -4630,7 +5246,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactioncount Telegram Bot API}
      */
-    onReactionCount(filter: string | ((data: any) => boolean), handler: (data: ReactionCount) => void | Promise<void>): this;
+    onReactionCount(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionCount) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageReactionUpdated updates
      * @overload
@@ -4639,7 +5258,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messagereactionupdated Telegram Bot API}
      */
     onMessageReactionUpdated(handler: (data: MessageReactionUpdated) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MessageReactionUpdated updates with filtering
      * @overload
@@ -4648,7 +5267,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactionupdated Telegram Bot API}
      */
-    onMessageReactionUpdated(filter: string | ((data: any) => boolean), handler: (data: MessageReactionUpdated) => void | Promise<void>): this;
+    onMessageReactionUpdated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageReactionUpdated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MessageReactionCountUpdated updates
      * @overload
@@ -4656,8 +5278,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactioncountupdated Telegram Bot API}
      */
-    onMessageReactionCountUpdated(handler: (data: MessageReactionCountUpdated) => void | Promise<void>): this;
-    
+    onMessageReactionCountUpdated(
+      handler: (data: MessageReactionCountUpdated) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for MessageReactionCountUpdated updates with filtering
      * @overload
@@ -4666,7 +5290,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactioncountupdated Telegram Bot API}
      */
-    onMessageReactionCountUpdated(filter: string | ((data: any) => boolean), handler: (data: MessageReactionCountUpdated) => void | Promise<void>): this;
+    onMessageReactionCountUpdated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageReactionCountUpdated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ForumTopic updates
      * @overload
@@ -4675,7 +5302,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopic Telegram Bot API}
      */
     onForumTopic(handler: (data: ForumTopic) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ForumTopic updates with filtering
      * @overload
@@ -4684,7 +5311,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopic Telegram Bot API}
      */
-    onForumTopic(filter: string | ((data: any) => boolean), handler: (data: ForumTopic) => void | Promise<void>): this;
+    onForumTopic(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopic) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Gift updates
      * @overload
@@ -4693,7 +5323,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gift Telegram Bot API}
      */
     onGift(handler: (data: Gift) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Gift updates with filtering
      * @overload
@@ -4702,7 +5332,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gift Telegram Bot API}
      */
-    onGift(filter: string | ((data: any) => boolean), handler: (data: Gift) => void | Promise<void>): this;
+    onGift(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Gift) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Gifts updates
      * @overload
@@ -4711,7 +5344,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gifts Telegram Bot API}
      */
     onGifts(handler: (data: Gifts) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Gifts updates with filtering
      * @overload
@@ -4720,7 +5353,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gifts Telegram Bot API}
      */
-    onGifts(filter: string | ((data: any) => boolean), handler: (data: Gifts) => void | Promise<void>): this;
+    onGifts(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Gifts) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGiftModel updates
      * @overload
@@ -4729,7 +5365,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftmodel Telegram Bot API}
      */
     onUniqueGiftModel(handler: (data: UniqueGiftModel) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UniqueGiftModel updates with filtering
      * @overload
@@ -4738,7 +5374,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftmodel Telegram Bot API}
      */
-    onUniqueGiftModel(filter: string | ((data: any) => boolean), handler: (data: UniqueGiftModel) => void | Promise<void>): this;
+    onUniqueGiftModel(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftModel) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGiftSymbol updates
      * @overload
@@ -4747,7 +5386,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftsymbol Telegram Bot API}
      */
     onUniqueGiftSymbol(handler: (data: UniqueGiftSymbol) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UniqueGiftSymbol updates with filtering
      * @overload
@@ -4756,7 +5395,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftsymbol Telegram Bot API}
      */
-    onUniqueGiftSymbol(filter: string | ((data: any) => boolean), handler: (data: UniqueGiftSymbol) => void | Promise<void>): this;
+    onUniqueGiftSymbol(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftSymbol) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGiftBackdropColors updates
      * @overload
@@ -4764,8 +5406,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdropcolors Telegram Bot API}
      */
-    onUniqueGiftBackdropColors(handler: (data: UniqueGiftBackdropColors) => void | Promise<void>): this;
-    
+    onUniqueGiftBackdropColors(
+      handler: (data: UniqueGiftBackdropColors) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for UniqueGiftBackdropColors updates with filtering
      * @overload
@@ -4774,7 +5418,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdropcolors Telegram Bot API}
      */
-    onUniqueGiftBackdropColors(filter: string | ((data: any) => boolean), handler: (data: UniqueGiftBackdropColors) => void | Promise<void>): this;
+    onUniqueGiftBackdropColors(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftBackdropColors) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGiftBackdrop updates
      * @overload
@@ -4783,7 +5430,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdrop Telegram Bot API}
      */
     onUniqueGiftBackdrop(handler: (data: UniqueGiftBackdrop) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UniqueGiftBackdrop updates with filtering
      * @overload
@@ -4792,7 +5439,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdrop Telegram Bot API}
      */
-    onUniqueGiftBackdrop(filter: string | ((data: any) => boolean), handler: (data: UniqueGiftBackdrop) => void | Promise<void>): this;
+    onUniqueGiftBackdrop(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftBackdrop) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGift updates
      * @overload
@@ -4801,7 +5451,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegift Telegram Bot API}
      */
     onUniqueGift(handler: (data: UniqueGift) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UniqueGift updates with filtering
      * @overload
@@ -4810,7 +5460,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegift Telegram Bot API}
      */
-    onUniqueGift(filter: string | ((data: any) => boolean), handler: (data: UniqueGift) => void | Promise<void>): this;
+    onUniqueGift(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGift) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GiftInfo updates
      * @overload
@@ -4819,7 +5472,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giftinfo Telegram Bot API}
      */
     onGiftInfo(handler: (data: GiftInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for GiftInfo updates with filtering
      * @overload
@@ -4828,7 +5481,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giftinfo Telegram Bot API}
      */
-    onGiftInfo(filter: string | ((data: any) => boolean), handler: (data: GiftInfo) => void | Promise<void>): this;
+    onGiftInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiftInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UniqueGiftInfo updates
      * @overload
@@ -4837,7 +5493,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftinfo Telegram Bot API}
      */
     onUniqueGiftInfo(handler: (data: UniqueGiftInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UniqueGiftInfo updates with filtering
      * @overload
@@ -4846,7 +5502,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftinfo Telegram Bot API}
      */
-    onUniqueGiftInfo(filter: string | ((data: any) => boolean), handler: (data: UniqueGiftInfo) => void | Promise<void>): this;
+    onUniqueGiftInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for OwnedGift updates
      * @overload
@@ -4855,7 +5514,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgift Telegram Bot API}
      */
     onOwnedGift(handler: (data: OwnedGift) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for OwnedGift updates with filtering
      * @overload
@@ -4864,7 +5523,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgift Telegram Bot API}
      */
-    onOwnedGift(filter: string | ((data: any) => boolean), handler: (data: OwnedGift) => void | Promise<void>): this;
+    onOwnedGift(
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGift) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for OwnedGiftRegular updates
      * @overload
@@ -4873,7 +5535,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgiftregular Telegram Bot API}
      */
     onOwnedGiftRegular(handler: (data: OwnedGiftRegular) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for OwnedGiftRegular updates with filtering
      * @overload
@@ -4882,7 +5544,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgiftregular Telegram Bot API}
      */
-    onOwnedGiftRegular(filter: string | ((data: any) => boolean), handler: (data: OwnedGiftRegular) => void | Promise<void>): this;
+    onOwnedGiftRegular(
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGiftRegular) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for OwnedGiftUnique updates
      * @overload
@@ -4891,7 +5556,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgiftunique Telegram Bot API}
      */
     onOwnedGiftUnique(handler: (data: OwnedGiftUnique) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for OwnedGiftUnique updates with filtering
      * @overload
@@ -4900,7 +5565,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgiftunique Telegram Bot API}
      */
-    onOwnedGiftUnique(filter: string | ((data: any) => boolean), handler: (data: OwnedGiftUnique) => void | Promise<void>): this;
+    onOwnedGiftUnique(
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGiftUnique) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for OwnedGifts updates
      * @overload
@@ -4909,7 +5577,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgifts Telegram Bot API}
      */
     onOwnedGifts(handler: (data: OwnedGifts) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for OwnedGifts updates with filtering
      * @overload
@@ -4918,7 +5586,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgifts Telegram Bot API}
      */
-    onOwnedGifts(filter: string | ((data: any) => boolean), handler: (data: OwnedGifts) => void | Promise<void>): this;
+    onOwnedGifts(
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGifts) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for AcceptedGiftTypes updates
      * @overload
@@ -4927,7 +5598,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#acceptedgifttypes Telegram Bot API}
      */
     onAcceptedGiftTypes(handler: (data: AcceptedGiftTypes) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for AcceptedGiftTypes updates with filtering
      * @overload
@@ -4936,7 +5607,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#acceptedgifttypes Telegram Bot API}
      */
-    onAcceptedGiftTypes(filter: string | ((data: any) => boolean), handler: (data: AcceptedGiftTypes) => void | Promise<void>): this;
+    onAcceptedGiftTypes(
+      filter: string | ((data: any) => boolean),
+      handler: (data: AcceptedGiftTypes) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StarAmount updates
      * @overload
@@ -4945,7 +5619,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#staramount Telegram Bot API}
      */
     onStarAmount(handler: (data: StarAmount) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StarAmount updates with filtering
      * @overload
@@ -4954,7 +5628,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#staramount Telegram Bot API}
      */
-    onStarAmount(filter: string | ((data: any) => boolean), handler: (data: StarAmount) => void | Promise<void>): this;
+    onStarAmount(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarAmount) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommand updates
      * @overload
@@ -4963,7 +5640,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommand Telegram Bot API}
      */
     onBotCommand(handler: (data: BotCommand) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotCommand updates with filtering
      * @overload
@@ -4972,7 +5649,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommand Telegram Bot API}
      */
-    onBotCommand(filter: string | ((data: any) => boolean), handler: (data: BotCommand) => void | Promise<void>): this;
+    onBotCommand(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommand) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScope updates
      * @overload
@@ -4981,7 +5661,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommandscope Telegram Bot API}
      */
     onBotCommandScope(handler: (data: BotCommandScope) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotCommandScope updates with filtering
      * @overload
@@ -4990,7 +5670,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscope Telegram Bot API}
      */
-    onBotCommandScope(filter: string | ((data: any) => boolean), handler: (data: BotCommandScope) => void | Promise<void>): this;
+    onBotCommandScope(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScope) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeDefault updates
      * @overload
@@ -4999,7 +5682,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommandscopedefault Telegram Bot API}
      */
     onBotCommandScopeDefault(handler: (data: BotCommandScopeDefault) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotCommandScopeDefault updates with filtering
      * @overload
@@ -5008,7 +5691,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopedefault Telegram Bot API}
      */
-    onBotCommandScopeDefault(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeDefault) => void | Promise<void>): this;
+    onBotCommandScopeDefault(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeDefault) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeAllPrivateChats updates
      * @overload
@@ -5016,8 +5702,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallprivatechats Telegram Bot API}
      */
-    onBotCommandScopeAllPrivateChats(handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>): this;
-    
+    onBotCommandScopeAllPrivateChats(
+      handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BotCommandScopeAllPrivateChats updates with filtering
      * @overload
@@ -5026,7 +5714,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallprivatechats Telegram Bot API}
      */
-    onBotCommandScopeAllPrivateChats(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>): this;
+    onBotCommandScopeAllPrivateChats(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeAllGroupChats updates
      * @overload
@@ -5034,8 +5725,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallgroupchats Telegram Bot API}
      */
-    onBotCommandScopeAllGroupChats(handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>): this;
-    
+    onBotCommandScopeAllGroupChats(
+      handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BotCommandScopeAllGroupChats updates with filtering
      * @overload
@@ -5044,7 +5737,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallgroupchats Telegram Bot API}
      */
-    onBotCommandScopeAllGroupChats(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>): this;
+    onBotCommandScopeAllGroupChats(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeAllChatAdministrators updates
      * @overload
@@ -5052,8 +5748,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallchatadministrators Telegram Bot API}
      */
-    onBotCommandScopeAllChatAdministrators(handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>): this;
-    
+    onBotCommandScopeAllChatAdministrators(
+      handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BotCommandScopeAllChatAdministrators updates with filtering
      * @overload
@@ -5062,7 +5760,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallchatadministrators Telegram Bot API}
      */
-    onBotCommandScopeAllChatAdministrators(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>): this;
+    onBotCommandScopeAllChatAdministrators(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeChat updates
      * @overload
@@ -5071,7 +5772,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechat Telegram Bot API}
      */
     onBotCommandScopeChat(handler: (data: BotCommandScopeChat) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotCommandScopeChat updates with filtering
      * @overload
@@ -5080,7 +5781,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechat Telegram Bot API}
      */
-    onBotCommandScopeChat(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChat) => void | Promise<void>): this;
+    onBotCommandScopeChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeChatAdministrators updates
      * @overload
@@ -5088,8 +5792,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatadministrators Telegram Bot API}
      */
-    onBotCommandScopeChatAdministrators(handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>): this;
-    
+    onBotCommandScopeChatAdministrators(
+      handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BotCommandScopeChatAdministrators updates with filtering
      * @overload
@@ -5098,7 +5804,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatadministrators Telegram Bot API}
      */
-    onBotCommandScopeChatAdministrators(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>): this;
+    onBotCommandScopeChatAdministrators(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotCommandScopeChatMember updates
      * @overload
@@ -5106,8 +5815,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatmember Telegram Bot API}
      */
-    onBotCommandScopeChatMember(handler: (data: BotCommandScopeChatMember) => void | Promise<void>): this;
-    
+    onBotCommandScopeChatMember(
+      handler: (data: BotCommandScopeChatMember) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BotCommandScopeChatMember updates with filtering
      * @overload
@@ -5116,7 +5827,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatmember Telegram Bot API}
      */
-    onBotCommandScopeChatMember(filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChatMember) => void | Promise<void>): this;
+    onBotCommandScopeChatMember(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChatMember) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotName updates
      * @overload
@@ -5125,7 +5839,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botname Telegram Bot API}
      */
     onBotName(handler: (data: BotName) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotName updates with filtering
      * @overload
@@ -5134,7 +5848,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botname Telegram Bot API}
      */
-    onBotName(filter: string | ((data: any) => boolean), handler: (data: BotName) => void | Promise<void>): this;
+    onBotName(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotName) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotDescription updates
      * @overload
@@ -5143,7 +5860,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botdescription Telegram Bot API}
      */
     onBotDescription(handler: (data: BotDescription) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotDescription updates with filtering
      * @overload
@@ -5152,7 +5869,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botdescription Telegram Bot API}
      */
-    onBotDescription(filter: string | ((data: any) => boolean), handler: (data: BotDescription) => void | Promise<void>): this;
+    onBotDescription(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotDescription) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BotShortDescription updates
      * @overload
@@ -5161,7 +5881,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botshortdescription Telegram Bot API}
      */
     onBotShortDescription(handler: (data: BotShortDescription) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BotShortDescription updates with filtering
      * @overload
@@ -5170,7 +5890,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botshortdescription Telegram Bot API}
      */
-    onBotShortDescription(filter: string | ((data: any) => boolean), handler: (data: BotShortDescription) => void | Promise<void>): this;
+    onBotShortDescription(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotShortDescription) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MenuButton updates
      * @overload
@@ -5179,7 +5902,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubutton Telegram Bot API}
      */
     onMenuButton(handler: (data: MenuButton) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MenuButton updates with filtering
      * @overload
@@ -5188,7 +5911,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubutton Telegram Bot API}
      */
-    onMenuButton(filter: string | ((data: any) => boolean), handler: (data: MenuButton) => void | Promise<void>): this;
+    onMenuButton(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButton) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MenuButtonCommands updates
      * @overload
@@ -5197,7 +5923,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubuttoncommands Telegram Bot API}
      */
     onMenuButtonCommands(handler: (data: MenuButtonCommands) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MenuButtonCommands updates with filtering
      * @overload
@@ -5206,7 +5932,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttoncommands Telegram Bot API}
      */
-    onMenuButtonCommands(filter: string | ((data: any) => boolean), handler: (data: MenuButtonCommands) => void | Promise<void>): this;
+    onMenuButtonCommands(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonCommands) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MenuButtonWebApp updates
      * @overload
@@ -5215,7 +5944,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubuttonwebapp Telegram Bot API}
      */
     onMenuButtonWebApp(handler: (data: MenuButtonWebApp) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MenuButtonWebApp updates with filtering
      * @overload
@@ -5224,7 +5953,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttonwebapp Telegram Bot API}
      */
-    onMenuButtonWebApp(filter: string | ((data: any) => boolean), handler: (data: MenuButtonWebApp) => void | Promise<void>): this;
+    onMenuButtonWebApp(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonWebApp) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MenuButtonDefault updates
      * @overload
@@ -5233,7 +5965,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubuttondefault Telegram Bot API}
      */
     onMenuButtonDefault(handler: (data: MenuButtonDefault) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MenuButtonDefault updates with filtering
      * @overload
@@ -5242,7 +5974,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttondefault Telegram Bot API}
      */
-    onMenuButtonDefault(filter: string | ((data: any) => boolean), handler: (data: MenuButtonDefault) => void | Promise<void>): this;
+    onMenuButtonDefault(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonDefault) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostSource updates
      * @overload
@@ -5251,7 +5986,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostsource Telegram Bot API}
      */
     onChatBoostSource(handler: (data: ChatBoostSource) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoostSource updates with filtering
      * @overload
@@ -5260,7 +5995,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsource Telegram Bot API}
      */
-    onChatBoostSource(filter: string | ((data: any) => boolean), handler: (data: ChatBoostSource) => void | Promise<void>): this;
+    onChatBoostSource(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSource) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostSourcePremium updates
      * @overload
@@ -5269,7 +6007,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcepremium Telegram Bot API}
      */
     onChatBoostSourcePremium(handler: (data: ChatBoostSourcePremium) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoostSourcePremium updates with filtering
      * @overload
@@ -5278,7 +6016,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcepremium Telegram Bot API}
      */
-    onChatBoostSourcePremium(filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourcePremium) => void | Promise<void>): this;
+    onChatBoostSourcePremium(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourcePremium) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostSourceGiftCode updates
      * @overload
@@ -5286,8 +6027,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiftcode Telegram Bot API}
      */
-    onChatBoostSourceGiftCode(handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>): this;
-    
+    onChatBoostSourceGiftCode(
+      handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ChatBoostSourceGiftCode updates with filtering
      * @overload
@@ -5296,7 +6039,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiftcode Telegram Bot API}
      */
-    onChatBoostSourceGiftCode(filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>): this;
+    onChatBoostSourceGiftCode(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostSourceGiveaway updates
      * @overload
@@ -5304,8 +6050,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiveaway Telegram Bot API}
      */
-    onChatBoostSourceGiveaway(handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>): this;
-    
+    onChatBoostSourceGiveaway(
+      handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for ChatBoostSourceGiveaway updates with filtering
      * @overload
@@ -5314,7 +6062,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiveaway Telegram Bot API}
      */
-    onChatBoostSourceGiveaway(filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>): this;
+    onChatBoostSourceGiveaway(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoost updates
      * @overload
@@ -5323,7 +6074,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboost Telegram Bot API}
      */
     onChatBoost(handler: (data: ChatBoost) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoost updates with filtering
      * @overload
@@ -5332,7 +6083,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboost Telegram Bot API}
      */
-    onChatBoost(filter: string | ((data: any) => boolean), handler: (data: ChatBoost) => void | Promise<void>): this;
+    onChatBoost(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoost) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostUpdated updates
      * @overload
@@ -5341,7 +6095,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostupdated Telegram Bot API}
      */
     onChatBoostUpdated(handler: (data: ChatBoostUpdated) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoostUpdated updates with filtering
      * @overload
@@ -5350,7 +6104,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostupdated Telegram Bot API}
      */
-    onChatBoostUpdated(filter: string | ((data: any) => boolean), handler: (data: ChatBoostUpdated) => void | Promise<void>): this;
+    onChatBoostUpdated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostUpdated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChatBoostRemoved updates
      * @overload
@@ -5359,7 +6116,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
     onChatBoostRemoved(handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChatBoostRemoved updates with filtering
      * @overload
@@ -5368,7 +6125,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
-    onChatBoostRemoved(filter: string | ((data: any) => boolean), handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
+    onChatBoostRemoved(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostRemoved) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for UserChatBoosts updates
      * @overload
@@ -5377,7 +6137,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#userchatboosts Telegram Bot API}
      */
     onUserChatBoosts(handler: (data: UserChatBoosts) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for UserChatBoosts updates with filtering
      * @overload
@@ -5386,7 +6146,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#userchatboosts Telegram Bot API}
      */
-    onUserChatBoosts(filter: string | ((data: any) => boolean), handler: (data: UserChatBoosts) => void | Promise<void>): this;
+    onUserChatBoosts(
+      filter: string | ((data: any) => boolean),
+      handler: (data: UserChatBoosts) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessBotRights updates
      * @overload
@@ -5395,7 +6158,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businessbotrights Telegram Bot API}
      */
     onBusinessBotRights(handler: (data: BusinessBotRights) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BusinessBotRights updates with filtering
      * @overload
@@ -5404,7 +6167,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessbotrights Telegram Bot API}
      */
-    onBusinessBotRights(filter: string | ((data: any) => boolean), handler: (data: BusinessBotRights) => void | Promise<void>): this;
+    onBusinessBotRights(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessBotRights) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessConnection updates
      * @overload
@@ -5413,7 +6179,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businessconnection Telegram Bot API}
      */
     onBusinessConnection(handler: (data: BusinessConnection) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for BusinessConnection updates with filtering
      * @overload
@@ -5422,7 +6188,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessconnection Telegram Bot API}
      */
-    onBusinessConnection(filter: string | ((data: any) => boolean), handler: (data: BusinessConnection) => void | Promise<void>): this;
+    onBusinessConnection(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessConnection) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for BusinessMessagesDeleted updates
      * @overload
@@ -5430,8 +6199,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessmessagesdeleted Telegram Bot API}
      */
-    onBusinessMessagesDeleted(handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
-    
+    onBusinessMessagesDeleted(
+      handler: (data: BusinessMessagesDeleted) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for BusinessMessagesDeleted updates with filtering
      * @overload
@@ -5440,7 +6211,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessmessagesdeleted Telegram Bot API}
      */
-    onBusinessMessagesDeleted(filter: string | ((data: any) => boolean), handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
+    onBusinessMessagesDeleted(
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessMessagesDeleted) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ResponseParameters updates
      * @overload
@@ -5449,7 +6223,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#responseparameters Telegram Bot API}
      */
     onResponseParameters(handler: (data: ResponseParameters) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ResponseParameters updates with filtering
      * @overload
@@ -5458,7 +6232,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#responseparameters Telegram Bot API}
      */
-    onResponseParameters(filter: string | ((data: any) => boolean), handler: (data: ResponseParameters) => void | Promise<void>): this;
+    onResponseParameters(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ResponseParameters) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMedia updates
      * @overload
@@ -5467,7 +6244,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmedia Telegram Bot API}
      */
     onInputMedia(handler: (data: InputMedia) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMedia updates with filtering
      * @overload
@@ -5476,7 +6253,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmedia Telegram Bot API}
      */
-    onInputMedia(filter: string | ((data: any) => boolean), handler: (data: InputMedia) => void | Promise<void>): this;
+    onInputMedia(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMedia) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMediaPhoto updates
      * @overload
@@ -5485,7 +6265,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
      */
     onInputMediaPhoto(handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMediaPhoto updates with filtering
      * @overload
@@ -5494,7 +6274,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
      */
-    onInputMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    onInputMediaPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMediaVideo updates
      * @overload
@@ -5503,7 +6286,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
      */
     onInputMediaVideo(handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMediaVideo updates with filtering
      * @overload
@@ -5512,7 +6295,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
      */
-    onInputMediaVideo(filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    onInputMediaVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMediaAnimation updates
      * @overload
@@ -5521,7 +6307,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediaanimation Telegram Bot API}
      */
     onInputMediaAnimation(handler: (data: InputMediaAnimation) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMediaAnimation updates with filtering
      * @overload
@@ -5530,7 +6316,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaanimation Telegram Bot API}
      */
-    onInputMediaAnimation(filter: string | ((data: any) => boolean), handler: (data: InputMediaAnimation) => void | Promise<void>): this;
+    onInputMediaAnimation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaAnimation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMediaAudio updates
      * @overload
@@ -5539,7 +6328,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediaaudio Telegram Bot API}
      */
     onInputMediaAudio(handler: (data: InputMediaAudio) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMediaAudio updates with filtering
      * @overload
@@ -5548,7 +6337,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaaudio Telegram Bot API}
      */
-    onInputMediaAudio(filter: string | ((data: any) => boolean), handler: (data: InputMediaAudio) => void | Promise<void>): this;
+    onInputMediaAudio(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaAudio) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMediaDocument updates
      * @overload
@@ -5557,7 +6349,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediadocument Telegram Bot API}
      */
     onInputMediaDocument(handler: (data: InputMediaDocument) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMediaDocument updates with filtering
      * @overload
@@ -5566,7 +6358,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediadocument Telegram Bot API}
      */
-    onInputMediaDocument(filter: string | ((data: any) => boolean), handler: (data: InputMediaDocument) => void | Promise<void>): this;
+    onInputMediaDocument(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaDocument) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputFile updates
      * @overload
@@ -5575,7 +6370,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputfile Telegram Bot API}
      */
     onInputFile(handler: (data: InputFile) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputFile updates with filtering
      * @overload
@@ -5584,7 +6379,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputfile Telegram Bot API}
      */
-    onInputFile(filter: string | ((data: any) => boolean), handler: (data: InputFile) => void | Promise<void>): this;
+    onInputFile(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputFile) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputPaidMedia updates
      * @overload
@@ -5593,7 +6391,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
     onInputPaidMedia(handler: (data: InputPaidMedia) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputPaidMedia updates with filtering
      * @overload
@@ -5602,7 +6400,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
-    onInputPaidMedia(filter: string | ((data: any) => boolean), handler: (data: InputPaidMedia) => void | Promise<void>): this;
+    onInputPaidMedia(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMedia) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputPaidMediaPhoto updates
      * @overload
@@ -5611,7 +6412,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediaphoto Telegram Bot API}
      */
     onInputPaidMediaPhoto(handler: (data: InputPaidMediaPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputPaidMediaPhoto updates with filtering
      * @overload
@@ -5620,7 +6421,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediaphoto Telegram Bot API}
      */
-    onInputPaidMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaPhoto) => void | Promise<void>): this;
+    onInputPaidMediaPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputPaidMediaVideo updates
      * @overload
@@ -5629,7 +6433,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediavideo Telegram Bot API}
      */
     onInputPaidMediaVideo(handler: (data: InputPaidMediaVideo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputPaidMediaVideo updates with filtering
      * @overload
@@ -5638,7 +6442,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediavideo Telegram Bot API}
      */
-    onInputPaidMediaVideo(filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaVideo) => void | Promise<void>): this;
+    onInputPaidMediaVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputProfilePhoto updates
      * @overload
@@ -5647,7 +6454,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputprofilephoto Telegram Bot API}
      */
     onInputProfilePhoto(handler: (data: InputProfilePhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputProfilePhoto updates with filtering
      * @overload
@@ -5656,7 +6463,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephoto Telegram Bot API}
      */
-    onInputProfilePhoto(filter: string | ((data: any) => boolean), handler: (data: InputProfilePhoto) => void | Promise<void>): this;
+    onInputProfilePhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputProfilePhotoStatic updates
      * @overload
@@ -5664,8 +6474,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotostatic Telegram Bot API}
      */
-    onInputProfilePhotoStatic(handler: (data: InputProfilePhotoStatic) => void | Promise<void>): this;
-    
+    onInputProfilePhotoStatic(
+      handler: (data: InputProfilePhotoStatic) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputProfilePhotoStatic updates with filtering
      * @overload
@@ -5674,7 +6486,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotostatic Telegram Bot API}
      */
-    onInputProfilePhotoStatic(filter: string | ((data: any) => boolean), handler: (data: InputProfilePhotoStatic) => void | Promise<void>): this;
+    onInputProfilePhotoStatic(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhotoStatic) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputProfilePhotoAnimated updates
      * @overload
@@ -5682,8 +6497,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotoanimated Telegram Bot API}
      */
-    onInputProfilePhotoAnimated(handler: (data: InputProfilePhotoAnimated) => void | Promise<void>): this;
-    
+    onInputProfilePhotoAnimated(
+      handler: (data: InputProfilePhotoAnimated) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputProfilePhotoAnimated updates with filtering
      * @overload
@@ -5692,7 +6509,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotoanimated Telegram Bot API}
      */
-    onInputProfilePhotoAnimated(filter: string | ((data: any) => boolean), handler: (data: InputProfilePhotoAnimated) => void | Promise<void>): this;
+    onInputProfilePhotoAnimated(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhotoAnimated) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputStoryContent updates
      * @overload
@@ -5701,7 +6521,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputstorycontent Telegram Bot API}
      */
     onInputStoryContent(handler: (data: InputStoryContent) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputStoryContent updates with filtering
      * @overload
@@ -5710,7 +6530,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontent Telegram Bot API}
      */
-    onInputStoryContent(filter: string | ((data: any) => boolean), handler: (data: InputStoryContent) => void | Promise<void>): this;
+    onInputStoryContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputStoryContentPhoto updates
      * @overload
@@ -5719,7 +6542,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentphoto Telegram Bot API}
      */
     onInputStoryContentPhoto(handler: (data: InputStoryContentPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputStoryContentPhoto updates with filtering
      * @overload
@@ -5728,7 +6551,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentphoto Telegram Bot API}
      */
-    onInputStoryContentPhoto(filter: string | ((data: any) => boolean), handler: (data: InputStoryContentPhoto) => void | Promise<void>): this;
+    onInputStoryContentPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContentPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputStoryContentVideo updates
      * @overload
@@ -5737,7 +6563,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentvideo Telegram Bot API}
      */
     onInputStoryContentVideo(handler: (data: InputStoryContentVideo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputStoryContentVideo updates with filtering
      * @overload
@@ -5746,7 +6572,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentvideo Telegram Bot API}
      */
-    onInputStoryContentVideo(filter: string | ((data: any) => boolean), handler: (data: InputStoryContentVideo) => void | Promise<void>): this;
+    onInputStoryContentVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContentVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Sticker updates
      * @overload
@@ -5755,7 +6584,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#sticker Telegram Bot API}
      */
     onSticker(handler: (data: Sticker) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Sticker updates with filtering
      * @overload
@@ -5764,7 +6593,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#sticker Telegram Bot API}
      */
-    onSticker(filter: string | ((data: any) => boolean), handler: (data: Sticker) => void | Promise<void>): this;
+    onSticker(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Sticker) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StickerSet updates
      * @overload
@@ -5773,7 +6605,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#stickerset Telegram Bot API}
      */
     onStickerSet(handler: (data: StickerSet) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StickerSet updates with filtering
      * @overload
@@ -5782,7 +6614,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#stickerset Telegram Bot API}
      */
-    onStickerSet(filter: string | ((data: any) => boolean), handler: (data: StickerSet) => void | Promise<void>): this;
+    onStickerSet(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StickerSet) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for MaskPosition updates
      * @overload
@@ -5791,7 +6626,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#maskposition Telegram Bot API}
      */
     onMaskPosition(handler: (data: MaskPosition) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for MaskPosition updates with filtering
      * @overload
@@ -5800,7 +6635,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maskposition Telegram Bot API}
      */
-    onMaskPosition(filter: string | ((data: any) => boolean), handler: (data: MaskPosition) => void | Promise<void>): this;
+    onMaskPosition(
+      filter: string | ((data: any) => boolean),
+      handler: (data: MaskPosition) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputSticker updates
      * @overload
@@ -5809,7 +6647,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputsticker Telegram Bot API}
      */
     onInputSticker(handler: (data: InputSticker) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputSticker updates with filtering
      * @overload
@@ -5818,7 +6656,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputsticker Telegram Bot API}
      */
-    onInputSticker(filter: string | ((data: any) => boolean), handler: (data: InputSticker) => void | Promise<void>): this;
+    onInputSticker(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputSticker) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQuery updates
      * @overload
@@ -5827,7 +6668,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequery Telegram Bot API}
      */
     onInlineQuery(handler: (data: InlineQuery) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQuery updates with filtering
      * @overload
@@ -5836,7 +6677,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequery Telegram Bot API}
      */
-    onInlineQuery(filter: string | ((data: any) => boolean), handler: (data: InlineQuery) => void | Promise<void>): this;
+    onInlineQuery(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQuery) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultsButton updates
      * @overload
@@ -5844,8 +6688,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultsbutton Telegram Bot API}
      */
-    onInlineQueryResultsButton(handler: (data: InlineQueryResultsButton) => void | Promise<void>): this;
-    
+    onInlineQueryResultsButton(
+      handler: (data: InlineQueryResultsButton) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultsButton updates with filtering
      * @overload
@@ -5854,7 +6700,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultsbutton Telegram Bot API}
      */
-    onInlineQueryResultsButton(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultsButton) => void | Promise<void>): this;
+    onInlineQueryResultsButton(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultsButton) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResult updates
      * @overload
@@ -5863,7 +6712,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresult Telegram Bot API}
      */
     onInlineQueryResult(handler: (data: InlineQueryResult) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResult updates with filtering
      * @overload
@@ -5872,7 +6721,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresult Telegram Bot API}
      */
-    onInlineQueryResult(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResult) => void | Promise<void>): this;
+    onInlineQueryResult(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResult) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultArticle updates
      * @overload
@@ -5880,8 +6732,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultarticle Telegram Bot API}
      */
-    onInlineQueryResultArticle(handler: (data: InlineQueryResultArticle) => void | Promise<void>): this;
-    
+    onInlineQueryResultArticle(
+      handler: (data: InlineQueryResultArticle) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultArticle updates with filtering
      * @overload
@@ -5890,7 +6744,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultarticle Telegram Bot API}
      */
-    onInlineQueryResultArticle(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultArticle) => void | Promise<void>): this;
+    onInlineQueryResultArticle(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultArticle) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultPhoto updates
      * @overload
@@ -5899,7 +6756,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultphoto Telegram Bot API}
      */
     onInlineQueryResultPhoto(handler: (data: InlineQueryResultPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultPhoto updates with filtering
      * @overload
@@ -5908,7 +6765,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultphoto Telegram Bot API}
      */
-    onInlineQueryResultPhoto(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultPhoto) => void | Promise<void>): this;
+    onInlineQueryResultPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultGif updates
      * @overload
@@ -5917,7 +6777,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgif Telegram Bot API}
      */
     onInlineQueryResultGif(handler: (data: InlineQueryResultGif) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultGif updates with filtering
      * @overload
@@ -5926,7 +6786,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgif Telegram Bot API}
      */
-    onInlineQueryResultGif(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultGif) => void | Promise<void>): this;
+    onInlineQueryResultGif(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultGif) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultVideo updates
      * @overload
@@ -5935,7 +6798,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvideo Telegram Bot API}
      */
     onInlineQueryResultVideo(handler: (data: InlineQueryResultVideo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultVideo updates with filtering
      * @overload
@@ -5944,7 +6807,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvideo Telegram Bot API}
      */
-    onInlineQueryResultVideo(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVideo) => void | Promise<void>): this;
+    onInlineQueryResultVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultAudio updates
      * @overload
@@ -5953,7 +6819,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultaudio Telegram Bot API}
      */
     onInlineQueryResultAudio(handler: (data: InlineQueryResultAudio) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultAudio updates with filtering
      * @overload
@@ -5962,7 +6828,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultaudio Telegram Bot API}
      */
-    onInlineQueryResultAudio(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultAudio) => void | Promise<void>): this;
+    onInlineQueryResultAudio(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultAudio) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultVoice updates
      * @overload
@@ -5971,7 +6840,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvoice Telegram Bot API}
      */
     onInlineQueryResultVoice(handler: (data: InlineQueryResultVoice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultVoice updates with filtering
      * @overload
@@ -5980,7 +6849,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvoice Telegram Bot API}
      */
-    onInlineQueryResultVoice(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVoice) => void | Promise<void>): this;
+    onInlineQueryResultVoice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVoice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultDocument updates
      * @overload
@@ -5988,8 +6860,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultdocument Telegram Bot API}
      */
-    onInlineQueryResultDocument(handler: (data: InlineQueryResultDocument) => void | Promise<void>): this;
-    
+    onInlineQueryResultDocument(
+      handler: (data: InlineQueryResultDocument) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultDocument updates with filtering
      * @overload
@@ -5998,7 +6872,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultdocument Telegram Bot API}
      */
-    onInlineQueryResultDocument(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultDocument) => void | Promise<void>): this;
+    onInlineQueryResultDocument(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultDocument) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultLocation updates
      * @overload
@@ -6006,8 +6883,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultlocation Telegram Bot API}
      */
-    onInlineQueryResultLocation(handler: (data: InlineQueryResultLocation) => void | Promise<void>): this;
-    
+    onInlineQueryResultLocation(
+      handler: (data: InlineQueryResultLocation) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultLocation updates with filtering
      * @overload
@@ -6016,7 +6895,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultlocation Telegram Bot API}
      */
-    onInlineQueryResultLocation(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultLocation) => void | Promise<void>): this;
+    onInlineQueryResultLocation(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultLocation) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultVenue updates
      * @overload
@@ -6025,7 +6907,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvenue Telegram Bot API}
      */
     onInlineQueryResultVenue(handler: (data: InlineQueryResultVenue) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultVenue updates with filtering
      * @overload
@@ -6034,7 +6916,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvenue Telegram Bot API}
      */
-    onInlineQueryResultVenue(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVenue) => void | Promise<void>): this;
+    onInlineQueryResultVenue(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVenue) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultContact updates
      * @overload
@@ -6042,8 +6927,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcontact Telegram Bot API}
      */
-    onInlineQueryResultContact(handler: (data: InlineQueryResultContact) => void | Promise<void>): this;
-    
+    onInlineQueryResultContact(
+      handler: (data: InlineQueryResultContact) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultContact updates with filtering
      * @overload
@@ -6052,7 +6939,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcontact Telegram Bot API}
      */
-    onInlineQueryResultContact(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultContact) => void | Promise<void>): this;
+    onInlineQueryResultContact(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultContact) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultGame updates
      * @overload
@@ -6061,7 +6951,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgame Telegram Bot API}
      */
     onInlineQueryResultGame(handler: (data: InlineQueryResultGame) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InlineQueryResultGame updates with filtering
      * @overload
@@ -6070,7 +6960,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgame Telegram Bot API}
      */
-    onInlineQueryResultGame(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultGame) => void | Promise<void>): this;
+    onInlineQueryResultGame(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultGame) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedPhoto updates
      * @overload
@@ -6078,8 +6971,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedphoto Telegram Bot API}
      */
-    onInlineQueryResultCachedPhoto(handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedPhoto(
+      handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedPhoto updates with filtering
      * @overload
@@ -6088,7 +6983,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedphoto Telegram Bot API}
      */
-    onInlineQueryResultCachedPhoto(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>): this;
+    onInlineQueryResultCachedPhoto(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedGif updates
      * @overload
@@ -6096,8 +6994,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedgif Telegram Bot API}
      */
-    onInlineQueryResultCachedGif(handler: (data: InlineQueryResultCachedGif) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedGif(
+      handler: (data: InlineQueryResultCachedGif) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedGif updates with filtering
      * @overload
@@ -6106,7 +7006,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedgif Telegram Bot API}
      */
-    onInlineQueryResultCachedGif(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedGif) => void | Promise<void>): this;
+    onInlineQueryResultCachedGif(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedGif) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedSticker updates
      * @overload
@@ -6114,8 +7017,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedsticker Telegram Bot API}
      */
-    onInlineQueryResultCachedSticker(handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedSticker(
+      handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedSticker updates with filtering
      * @overload
@@ -6124,7 +7029,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedsticker Telegram Bot API}
      */
-    onInlineQueryResultCachedSticker(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>): this;
+    onInlineQueryResultCachedSticker(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedDocument updates
      * @overload
@@ -6132,8 +7040,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcacheddocument Telegram Bot API}
      */
-    onInlineQueryResultCachedDocument(handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedDocument(
+      handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedDocument updates with filtering
      * @overload
@@ -6142,7 +7052,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcacheddocument Telegram Bot API}
      */
-    onInlineQueryResultCachedDocument(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>): this;
+    onInlineQueryResultCachedDocument(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedVideo updates
      * @overload
@@ -6150,8 +7063,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvideo Telegram Bot API}
      */
-    onInlineQueryResultCachedVideo(handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedVideo(
+      handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedVideo updates with filtering
      * @overload
@@ -6160,7 +7075,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvideo Telegram Bot API}
      */
-    onInlineQueryResultCachedVideo(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>): this;
+    onInlineQueryResultCachedVideo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedVoice updates
      * @overload
@@ -6168,8 +7086,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvoice Telegram Bot API}
      */
-    onInlineQueryResultCachedVoice(handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedVoice(
+      handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedVoice updates with filtering
      * @overload
@@ -6178,7 +7098,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvoice Telegram Bot API}
      */
-    onInlineQueryResultCachedVoice(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>): this;
+    onInlineQueryResultCachedVoice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InlineQueryResultCachedAudio updates
      * @overload
@@ -6186,8 +7109,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedaudio Telegram Bot API}
      */
-    onInlineQueryResultCachedAudio(handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>): this;
-    
+    onInlineQueryResultCachedAudio(
+      handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InlineQueryResultCachedAudio updates with filtering
      * @overload
@@ -6196,7 +7121,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedaudio Telegram Bot API}
      */
-    onInlineQueryResultCachedAudio(filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>): this;
+    onInlineQueryResultCachedAudio(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputMessageContent updates
      * @overload
@@ -6205,7 +7133,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmessagecontent Telegram Bot API}
      */
     onInputMessageContent(handler: (data: InputMessageContent) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for InputMessageContent updates with filtering
      * @overload
@@ -6214,7 +7142,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmessagecontent Telegram Bot API}
      */
-    onInputMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputMessageContent) => void | Promise<void>): this;
+    onInputMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputTextMessageContent updates
      * @overload
@@ -6222,8 +7153,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputtextmessagecontent Telegram Bot API}
      */
-    onInputTextMessageContent(handler: (data: InputTextMessageContent) => void | Promise<void>): this;
-    
+    onInputTextMessageContent(
+      handler: (data: InputTextMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputTextMessageContent updates with filtering
      * @overload
@@ -6232,7 +7165,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputtextmessagecontent Telegram Bot API}
      */
-    onInputTextMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputTextMessageContent) => void | Promise<void>): this;
+    onInputTextMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputTextMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputLocationMessageContent updates
      * @overload
@@ -6240,8 +7176,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputlocationmessagecontent Telegram Bot API}
      */
-    onInputLocationMessageContent(handler: (data: InputLocationMessageContent) => void | Promise<void>): this;
-    
+    onInputLocationMessageContent(
+      handler: (data: InputLocationMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputLocationMessageContent updates with filtering
      * @overload
@@ -6250,7 +7188,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputlocationmessagecontent Telegram Bot API}
      */
-    onInputLocationMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputLocationMessageContent) => void | Promise<void>): this;
+    onInputLocationMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputLocationMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputVenueMessageContent updates
      * @overload
@@ -6258,8 +7199,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputvenuemessagecontent Telegram Bot API}
      */
-    onInputVenueMessageContent(handler: (data: InputVenueMessageContent) => void | Promise<void>): this;
-    
+    onInputVenueMessageContent(
+      handler: (data: InputVenueMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputVenueMessageContent updates with filtering
      * @overload
@@ -6268,7 +7211,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputvenuemessagecontent Telegram Bot API}
      */
-    onInputVenueMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputVenueMessageContent) => void | Promise<void>): this;
+    onInputVenueMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputVenueMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputContactMessageContent updates
      * @overload
@@ -6276,8 +7222,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputcontactmessagecontent Telegram Bot API}
      */
-    onInputContactMessageContent(handler: (data: InputContactMessageContent) => void | Promise<void>): this;
-    
+    onInputContactMessageContent(
+      handler: (data: InputContactMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputContactMessageContent updates with filtering
      * @overload
@@ -6286,7 +7234,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputcontactmessagecontent Telegram Bot API}
      */
-    onInputContactMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputContactMessageContent) => void | Promise<void>): this;
+    onInputContactMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputContactMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for InputInvoiceMessageContent updates
      * @overload
@@ -6294,8 +7245,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputinvoicemessagecontent Telegram Bot API}
      */
-    onInputInvoiceMessageContent(handler: (data: InputInvoiceMessageContent) => void | Promise<void>): this;
-    
+    onInputInvoiceMessageContent(
+      handler: (data: InputInvoiceMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for InputInvoiceMessageContent updates with filtering
      * @overload
@@ -6304,7 +7257,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputinvoicemessagecontent Telegram Bot API}
      */
-    onInputInvoiceMessageContent(filter: string | ((data: any) => boolean), handler: (data: InputInvoiceMessageContent) => void | Promise<void>): this;
+    onInputInvoiceMessageContent(
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputInvoiceMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ChosenInlineResult updates
      * @overload
@@ -6313,7 +7269,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
     onChosenInlineResult(handler: (data: ChosenInlineResult) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ChosenInlineResult updates with filtering
      * @overload
@@ -6322,7 +7278,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
-    onChosenInlineResult(filter: string | ((data: any) => boolean), handler: (data: ChosenInlineResult) => void | Promise<void>): this;
+    onChosenInlineResult(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChosenInlineResult) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SentWebAppMessage updates
      * @overload
@@ -6331,7 +7290,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
      */
     onSentWebAppMessage(handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SentWebAppMessage updates with filtering
      * @overload
@@ -6340,7 +7299,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
      */
-    onSentWebAppMessage(filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    onSentWebAppMessage(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SentWebAppMessage) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PreparedInlineMessage updates
      * @overload
@@ -6349,7 +7311,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
      */
     onPreparedInlineMessage(handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PreparedInlineMessage updates with filtering
      * @overload
@@ -6358,7 +7320,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
      */
-    onPreparedInlineMessage(filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    onPreparedInlineMessage(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PreparedInlineMessage) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for LabeledPrice updates
      * @overload
@@ -6367,7 +7332,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#labeledprice Telegram Bot API}
      */
     onLabeledPrice(handler: (data: LabeledPrice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for LabeledPrice updates with filtering
      * @overload
@@ -6376,7 +7341,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#labeledprice Telegram Bot API}
      */
-    onLabeledPrice(filter: string | ((data: any) => boolean), handler: (data: LabeledPrice) => void | Promise<void>): this;
+    onLabeledPrice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: LabeledPrice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Invoice updates
      * @overload
@@ -6385,7 +7353,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#invoice Telegram Bot API}
      */
     onInvoice(handler: (data: Invoice) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Invoice updates with filtering
      * @overload
@@ -6394,7 +7362,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#invoice Telegram Bot API}
      */
-    onInvoice(filter: string | ((data: any) => boolean), handler: (data: Invoice) => void | Promise<void>): this;
+    onInvoice(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Invoice) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ShippingAddress updates
      * @overload
@@ -6403,7 +7374,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingaddress Telegram Bot API}
      */
     onShippingAddress(handler: (data: ShippingAddress) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ShippingAddress updates with filtering
      * @overload
@@ -6412,7 +7383,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingaddress Telegram Bot API}
      */
-    onShippingAddress(filter: string | ((data: any) => boolean), handler: (data: ShippingAddress) => void | Promise<void>): this;
+    onShippingAddress(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingAddress) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for OrderInfo updates
      * @overload
@@ -6421,7 +7395,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#orderinfo Telegram Bot API}
      */
     onOrderInfo(handler: (data: OrderInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for OrderInfo updates with filtering
      * @overload
@@ -6430,7 +7404,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#orderinfo Telegram Bot API}
      */
-    onOrderInfo(filter: string | ((data: any) => boolean), handler: (data: OrderInfo) => void | Promise<void>): this;
+    onOrderInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: OrderInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ShippingOption updates
      * @overload
@@ -6439,7 +7416,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingoption Telegram Bot API}
      */
     onShippingOption(handler: (data: ShippingOption) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ShippingOption updates with filtering
      * @overload
@@ -6448,7 +7425,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingoption Telegram Bot API}
      */
-    onShippingOption(filter: string | ((data: any) => boolean), handler: (data: ShippingOption) => void | Promise<void>): this;
+    onShippingOption(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingOption) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for SuccessfulPayment updates
      * @overload
@@ -6457,7 +7437,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#successfulpayment Telegram Bot API}
      */
     onSuccessfulPayment(handler: (data: SuccessfulPayment) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for SuccessfulPayment updates with filtering
      * @overload
@@ -6466,7 +7446,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#successfulpayment Telegram Bot API}
      */
-    onSuccessfulPayment(filter: string | ((data: any) => boolean), handler: (data: SuccessfulPayment) => void | Promise<void>): this;
+    onSuccessfulPayment(
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuccessfulPayment) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for RefundedPayment updates
      * @overload
@@ -6475,7 +7458,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#refundedpayment Telegram Bot API}
      */
     onRefundedPayment(handler: (data: RefundedPayment) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for RefundedPayment updates with filtering
      * @overload
@@ -6484,7 +7467,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#refundedpayment Telegram Bot API}
      */
-    onRefundedPayment(filter: string | ((data: any) => boolean), handler: (data: RefundedPayment) => void | Promise<void>): this;
+    onRefundedPayment(
+      filter: string | ((data: any) => boolean),
+      handler: (data: RefundedPayment) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for ShippingQuery updates
      * @overload
@@ -6493,7 +7479,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingquery Telegram Bot API}
      */
     onShippingQuery(handler: (data: ShippingQuery) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for ShippingQuery updates with filtering
      * @overload
@@ -6502,7 +7488,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingquery Telegram Bot API}
      */
-    onShippingQuery(filter: string | ((data: any) => boolean), handler: (data: ShippingQuery) => void | Promise<void>): this;
+    onShippingQuery(
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingQuery) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PreCheckoutQuery updates
      * @overload
@@ -6511,7 +7500,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#precheckoutquery Telegram Bot API}
      */
     onPreCheckoutQuery(handler: (data: PreCheckoutQuery) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PreCheckoutQuery updates with filtering
      * @overload
@@ -6520,7 +7509,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#precheckoutquery Telegram Bot API}
      */
-    onPreCheckoutQuery(filter: string | ((data: any) => boolean), handler: (data: PreCheckoutQuery) => void | Promise<void>): this;
+    onPreCheckoutQuery(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PreCheckoutQuery) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PaidMediaPurchased updates
      * @overload
@@ -6529,7 +7521,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediapurchased Telegram Bot API}
      */
     onPaidMediaPurchased(handler: (data: PaidMediaPurchased) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PaidMediaPurchased updates with filtering
      * @overload
@@ -6538,7 +7530,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediapurchased Telegram Bot API}
      */
-    onPaidMediaPurchased(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPurchased) => void | Promise<void>): this;
+    onPaidMediaPurchased(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPurchased) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for RevenueWithdrawalState updates
      * @overload
@@ -6547,7 +7542,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstate Telegram Bot API}
      */
     onRevenueWithdrawalState(handler: (data: RevenueWithdrawalState) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for RevenueWithdrawalState updates with filtering
      * @overload
@@ -6556,7 +7551,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstate Telegram Bot API}
      */
-    onRevenueWithdrawalState(filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalState) => void | Promise<void>): this;
+    onRevenueWithdrawalState(
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalState) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for RevenueWithdrawalStatePending updates
      * @overload
@@ -6564,8 +7562,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatepending Telegram Bot API}
      */
-    onRevenueWithdrawalStatePending(handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>): this;
-    
+    onRevenueWithdrawalStatePending(
+      handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for RevenueWithdrawalStatePending updates with filtering
      * @overload
@@ -6574,7 +7574,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatepending Telegram Bot API}
      */
-    onRevenueWithdrawalStatePending(filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>): this;
+    onRevenueWithdrawalStatePending(
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for RevenueWithdrawalStateSucceeded updates
      * @overload
@@ -6582,8 +7585,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded Telegram Bot API}
      */
-    onRevenueWithdrawalStateSucceeded(handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>): this;
-    
+    onRevenueWithdrawalStateSucceeded(
+      handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for RevenueWithdrawalStateSucceeded updates with filtering
      * @overload
@@ -6592,7 +7597,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded Telegram Bot API}
      */
-    onRevenueWithdrawalStateSucceeded(filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>): this;
+    onRevenueWithdrawalStateSucceeded(
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for RevenueWithdrawalStateFailed updates
      * @overload
@@ -6600,8 +7608,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatefailed Telegram Bot API}
      */
-    onRevenueWithdrawalStateFailed(handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>): this;
-    
+    onRevenueWithdrawalStateFailed(
+      handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for RevenueWithdrawalStateFailed updates with filtering
      * @overload
@@ -6610,7 +7620,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatefailed Telegram Bot API}
      */
-    onRevenueWithdrawalStateFailed(filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>): this;
+    onRevenueWithdrawalStateFailed(
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for AffiliateInfo updates
      * @overload
@@ -6619,7 +7632,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#affiliateinfo Telegram Bot API}
      */
     onAffiliateInfo(handler: (data: AffiliateInfo) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for AffiliateInfo updates with filtering
      * @overload
@@ -6628,7 +7641,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#affiliateinfo Telegram Bot API}
      */
-    onAffiliateInfo(filter: string | ((data: any) => boolean), handler: (data: AffiliateInfo) => void | Promise<void>): this;
+    onAffiliateInfo(
+      filter: string | ((data: any) => boolean),
+      handler: (data: AffiliateInfo) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartner updates
      * @overload
@@ -6637,7 +7653,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#transactionpartner Telegram Bot API}
      */
     onTransactionPartner(handler: (data: TransactionPartner) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for TransactionPartner updates with filtering
      * @overload
@@ -6646,7 +7662,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartner Telegram Bot API}
      */
-    onTransactionPartner(filter: string | ((data: any) => boolean), handler: (data: TransactionPartner) => void | Promise<void>): this;
+    onTransactionPartner(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartner) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerUser updates
      * @overload
@@ -6655,7 +7674,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#transactionpartneruser Telegram Bot API}
      */
     onTransactionPartnerUser(handler: (data: TransactionPartnerUser) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for TransactionPartnerUser updates with filtering
      * @overload
@@ -6664,7 +7683,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneruser Telegram Bot API}
      */
-    onTransactionPartnerUser(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerUser) => void | Promise<void>): this;
+    onTransactionPartnerUser(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerUser) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerChat updates
      * @overload
@@ -6673,7 +7695,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerchat Telegram Bot API}
      */
     onTransactionPartnerChat(handler: (data: TransactionPartnerChat) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for TransactionPartnerChat updates with filtering
      * @overload
@@ -6682,7 +7704,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerchat Telegram Bot API}
      */
-    onTransactionPartnerChat(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerChat) => void | Promise<void>): this;
+    onTransactionPartnerChat(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerChat) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerAffiliateProgram updates
      * @overload
@@ -6690,8 +7715,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneraffiliateprogram Telegram Bot API}
      */
-    onTransactionPartnerAffiliateProgram(handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>): this;
-    
+    onTransactionPartnerAffiliateProgram(
+      handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for TransactionPartnerAffiliateProgram updates with filtering
      * @overload
@@ -6700,7 +7727,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneraffiliateprogram Telegram Bot API}
      */
-    onTransactionPartnerAffiliateProgram(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>): this;
+    onTransactionPartnerAffiliateProgram(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerFragment updates
      * @overload
@@ -6708,8 +7738,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerfragment Telegram Bot API}
      */
-    onTransactionPartnerFragment(handler: (data: TransactionPartnerFragment) => void | Promise<void>): this;
-    
+    onTransactionPartnerFragment(
+      handler: (data: TransactionPartnerFragment) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for TransactionPartnerFragment updates with filtering
      * @overload
@@ -6718,7 +7750,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerfragment Telegram Bot API}
      */
-    onTransactionPartnerFragment(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerFragment) => void | Promise<void>): this;
+    onTransactionPartnerFragment(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerFragment) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerTelegramAds updates
      * @overload
@@ -6726,8 +7761,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramads Telegram Bot API}
      */
-    onTransactionPartnerTelegramAds(handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>): this;
-    
+    onTransactionPartnerTelegramAds(
+      handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for TransactionPartnerTelegramAds updates with filtering
      * @overload
@@ -6736,7 +7773,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramads Telegram Bot API}
      */
-    onTransactionPartnerTelegramAds(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>): this;
+    onTransactionPartnerTelegramAds(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerTelegramApi updates
      * @overload
@@ -6744,8 +7784,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramapi Telegram Bot API}
      */
-    onTransactionPartnerTelegramApi(handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>): this;
-    
+    onTransactionPartnerTelegramApi(
+      handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for TransactionPartnerTelegramApi updates with filtering
      * @overload
@@ -6754,7 +7796,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramapi Telegram Bot API}
      */
-    onTransactionPartnerTelegramApi(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>): this;
+    onTransactionPartnerTelegramApi(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for TransactionPartnerOther updates
      * @overload
@@ -6762,8 +7807,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerother Telegram Bot API}
      */
-    onTransactionPartnerOther(handler: (data: TransactionPartnerOther) => void | Promise<void>): this;
-    
+    onTransactionPartnerOther(
+      handler: (data: TransactionPartnerOther) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for TransactionPartnerOther updates with filtering
      * @overload
@@ -6772,7 +7819,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerother Telegram Bot API}
      */
-    onTransactionPartnerOther(filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerOther) => void | Promise<void>): this;
+    onTransactionPartnerOther(
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerOther) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StarTransaction updates
      * @overload
@@ -6781,7 +7831,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#startransaction Telegram Bot API}
      */
     onStarTransaction(handler: (data: StarTransaction) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StarTransaction updates with filtering
      * @overload
@@ -6790,7 +7840,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#startransaction Telegram Bot API}
      */
-    onStarTransaction(filter: string | ((data: any) => boolean), handler: (data: StarTransaction) => void | Promise<void>): this;
+    onStarTransaction(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarTransaction) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for StarTransactions updates
      * @overload
@@ -6799,7 +7852,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#startransactions Telegram Bot API}
      */
     onStarTransactions(handler: (data: StarTransactions) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for StarTransactions updates with filtering
      * @overload
@@ -6808,7 +7861,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#startransactions Telegram Bot API}
      */
-    onStarTransactions(filter: string | ((data: any) => boolean), handler: (data: StarTransactions) => void | Promise<void>): this;
+    onStarTransactions(
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarTransactions) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportData updates
      * @overload
@@ -6817,7 +7873,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#passportdata Telegram Bot API}
      */
     onPassportData(handler: (data: PassportData) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PassportData updates with filtering
      * @overload
@@ -6826,7 +7882,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportdata Telegram Bot API}
      */
-    onPassportData(filter: string | ((data: any) => boolean), handler: (data: PassportData) => void | Promise<void>): this;
+    onPassportData(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportData) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportFile updates
      * @overload
@@ -6835,7 +7894,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#passportfile Telegram Bot API}
      */
     onPassportFile(handler: (data: PassportFile) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PassportFile updates with filtering
      * @overload
@@ -6844,7 +7903,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportfile Telegram Bot API}
      */
-    onPassportFile(filter: string | ((data: any) => boolean), handler: (data: PassportFile) => void | Promise<void>): this;
+    onPassportFile(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportFile) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for EncryptedPassportElement updates
      * @overload
@@ -6852,8 +7914,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedpassportelement Telegram Bot API}
      */
-    onEncryptedPassportElement(handler: (data: EncryptedPassportElement) => void | Promise<void>): this;
-    
+    onEncryptedPassportElement(
+      handler: (data: EncryptedPassportElement) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for EncryptedPassportElement updates with filtering
      * @overload
@@ -6862,7 +7926,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedpassportelement Telegram Bot API}
      */
-    onEncryptedPassportElement(filter: string | ((data: any) => boolean), handler: (data: EncryptedPassportElement) => void | Promise<void>): this;
+    onEncryptedPassportElement(
+      filter: string | ((data: any) => boolean),
+      handler: (data: EncryptedPassportElement) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for EncryptedCredentials updates
      * @overload
@@ -6871,7 +7938,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#encryptedcredentials Telegram Bot API}
      */
     onEncryptedCredentials(handler: (data: EncryptedCredentials) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for EncryptedCredentials updates with filtering
      * @overload
@@ -6880,7 +7947,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedcredentials Telegram Bot API}
      */
-    onEncryptedCredentials(filter: string | ((data: any) => boolean), handler: (data: EncryptedCredentials) => void | Promise<void>): this;
+    onEncryptedCredentials(
+      filter: string | ((data: any) => boolean),
+      handler: (data: EncryptedCredentials) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementError updates
      * @overload
@@ -6889,7 +7959,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#passportelementerror Telegram Bot API}
      */
     onPassportElementError(handler: (data: PassportElementError) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for PassportElementError updates with filtering
      * @overload
@@ -6898,7 +7968,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerror Telegram Bot API}
      */
-    onPassportElementError(filter: string | ((data: any) => boolean), handler: (data: PassportElementError) => void | Promise<void>): this;
+    onPassportElementError(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementError) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorDataField updates
      * @overload
@@ -6906,8 +7979,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrordatafield Telegram Bot API}
      */
-    onPassportElementErrorDataField(handler: (data: PassportElementErrorDataField) => void | Promise<void>): this;
-    
+    onPassportElementErrorDataField(
+      handler: (data: PassportElementErrorDataField) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorDataField updates with filtering
      * @overload
@@ -6916,7 +7991,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrordatafield Telegram Bot API}
      */
-    onPassportElementErrorDataField(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorDataField) => void | Promise<void>): this;
+    onPassportElementErrorDataField(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorDataField) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorFrontSide updates
      * @overload
@@ -6924,8 +8002,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfrontside Telegram Bot API}
      */
-    onPassportElementErrorFrontSide(handler: (data: PassportElementErrorFrontSide) => void | Promise<void>): this;
-    
+    onPassportElementErrorFrontSide(
+      handler: (data: PassportElementErrorFrontSide) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorFrontSide updates with filtering
      * @overload
@@ -6934,7 +8014,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfrontside Telegram Bot API}
      */
-    onPassportElementErrorFrontSide(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFrontSide) => void | Promise<void>): this;
+    onPassportElementErrorFrontSide(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFrontSide) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorReverseSide updates
      * @overload
@@ -6942,8 +8025,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorreverseside Telegram Bot API}
      */
-    onPassportElementErrorReverseSide(handler: (data: PassportElementErrorReverseSide) => void | Promise<void>): this;
-    
+    onPassportElementErrorReverseSide(
+      handler: (data: PassportElementErrorReverseSide) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorReverseSide updates with filtering
      * @overload
@@ -6952,7 +8037,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorreverseside Telegram Bot API}
      */
-    onPassportElementErrorReverseSide(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorReverseSide) => void | Promise<void>): this;
+    onPassportElementErrorReverseSide(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorReverseSide) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorSelfie updates
      * @overload
@@ -6960,8 +8048,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorselfie Telegram Bot API}
      */
-    onPassportElementErrorSelfie(handler: (data: PassportElementErrorSelfie) => void | Promise<void>): this;
-    
+    onPassportElementErrorSelfie(
+      handler: (data: PassportElementErrorSelfie) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorSelfie updates with filtering
      * @overload
@@ -6970,7 +8060,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorselfie Telegram Bot API}
      */
-    onPassportElementErrorSelfie(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorSelfie) => void | Promise<void>): this;
+    onPassportElementErrorSelfie(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorSelfie) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorFile updates
      * @overload
@@ -6978,8 +8071,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfile Telegram Bot API}
      */
-    onPassportElementErrorFile(handler: (data: PassportElementErrorFile) => void | Promise<void>): this;
-    
+    onPassportElementErrorFile(
+      handler: (data: PassportElementErrorFile) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorFile updates with filtering
      * @overload
@@ -6988,7 +8083,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfile Telegram Bot API}
      */
-    onPassportElementErrorFile(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFile) => void | Promise<void>): this;
+    onPassportElementErrorFile(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFile) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorFiles updates
      * @overload
@@ -6996,8 +8094,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfiles Telegram Bot API}
      */
-    onPassportElementErrorFiles(handler: (data: PassportElementErrorFiles) => void | Promise<void>): this;
-    
+    onPassportElementErrorFiles(
+      handler: (data: PassportElementErrorFiles) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorFiles updates with filtering
      * @overload
@@ -7006,7 +8106,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfiles Telegram Bot API}
      */
-    onPassportElementErrorFiles(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFiles) => void | Promise<void>): this;
+    onPassportElementErrorFiles(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFiles) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorTranslationFile updates
      * @overload
@@ -7014,8 +8117,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfile Telegram Bot API}
      */
-    onPassportElementErrorTranslationFile(handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>): this;
-    
+    onPassportElementErrorTranslationFile(
+      handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorTranslationFile updates with filtering
      * @overload
@@ -7024,7 +8129,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfile Telegram Bot API}
      */
-    onPassportElementErrorTranslationFile(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>): this;
+    onPassportElementErrorTranslationFile(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorTranslationFiles updates
      * @overload
@@ -7032,8 +8140,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfiles Telegram Bot API}
      */
-    onPassportElementErrorTranslationFiles(handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>): this;
-    
+    onPassportElementErrorTranslationFiles(
+      handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorTranslationFiles updates with filtering
      * @overload
@@ -7042,7 +8152,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfiles Telegram Bot API}
      */
-    onPassportElementErrorTranslationFiles(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>): this;
+    onPassportElementErrorTranslationFiles(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for PassportElementErrorUnspecified updates
      * @overload
@@ -7050,8 +8163,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorunspecified Telegram Bot API}
      */
-    onPassportElementErrorUnspecified(handler: (data: PassportElementErrorUnspecified) => void | Promise<void>): this;
-    
+    onPassportElementErrorUnspecified(
+      handler: (data: PassportElementErrorUnspecified) => void | Promise<void>
+    ): this;
+
     /**
      * Registers a handler for PassportElementErrorUnspecified updates with filtering
      * @overload
@@ -7060,7 +8175,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorunspecified Telegram Bot API}
      */
-    onPassportElementErrorUnspecified(filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorUnspecified) => void | Promise<void>): this;
+    onPassportElementErrorUnspecified(
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorUnspecified) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for Game updates
      * @overload
@@ -7069,7 +8187,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#game Telegram Bot API}
      */
     onGame(handler: (data: Game) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for Game updates with filtering
      * @overload
@@ -7078,7 +8196,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#game Telegram Bot API}
      */
-    onGame(filter: string | ((data: any) => boolean), handler: (data: Game) => void | Promise<void>): this;
+    onGame(
+      filter: string | ((data: any) => boolean),
+      handler: (data: Game) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for CallbackGame updates
      * @overload
@@ -7087,7 +8208,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#callbackgame Telegram Bot API}
      */
     onCallbackGame(handler: (data: CallbackGame) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for CallbackGame updates with filtering
      * @overload
@@ -7096,7 +8217,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#callbackgame Telegram Bot API}
      */
-    onCallbackGame(filter: string | ((data: any) => boolean), handler: (data: CallbackGame) => void | Promise<void>): this;
+    onCallbackGame(
+      filter: string | ((data: any) => boolean),
+      handler: (data: CallbackGame) => void | Promise<void>
+    ): this;
     /**
      * Registers a handler for GameHighScore updates
      * @overload
@@ -7105,7 +8229,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gamehighscore Telegram Bot API}
      */
     onGameHighScore(handler: (data: GameHighScore) => void | Promise<void>): this;
-    
+
     /**
      * Registers a handler for GameHighScore updates with filtering
      * @overload
@@ -7114,7 +8238,10 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gamehighscore Telegram Bot API}
      */
-    onGameHighScore(filter: string | ((data: any) => boolean), handler: (data: GameHighScore) => void | Promise<void>): this;
+    onGameHighScore(
+      filter: string | ((data: any) => boolean),
+      handler: (data: GameHighScore) => void | Promise<void>
+    ): this;
 
     // Generic handlers
     /**
@@ -7125,7 +8252,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#update Telegram Bot API}
      */
     on(event: 'update', handler: (data: Update) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'update' event with filtering
      * @param event - Event name: 'update'
@@ -7134,7 +8261,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#update Telegram Bot API}
      */
-    on(event: 'update', filter: string | ((data: any) => boolean), handler: (data: Update) => void | Promise<void>): this;
+    on(
+      event: 'update',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Update) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'webhookinfo' event (strongly typed)
      * @param event - Event name: 'webhookinfo'
@@ -7143,7 +8274,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webhookinfo Telegram Bot API}
      */
     on(event: 'webhookinfo', handler: (data: WebhookInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'webhookinfo' event with filtering
      * @param event - Event name: 'webhookinfo'
@@ -7152,7 +8283,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webhookinfo Telegram Bot API}
      */
-    on(event: 'webhookinfo', filter: string | ((data: any) => boolean), handler: (data: WebhookInfo) => void | Promise<void>): this;
+    on(
+      event: 'webhookinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebhookInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'user' event (strongly typed)
      * @param event - Event name: 'user'
@@ -7161,7 +8296,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#user Telegram Bot API}
      */
     on(event: 'user', handler: (data: User) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'user' event with filtering
      * @param event - Event name: 'user'
@@ -7170,7 +8305,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#user Telegram Bot API}
      */
-    on(event: 'user', filter: string | ((data: any) => boolean), handler: (data: User) => void | Promise<void>): this;
+    on(
+      event: 'user',
+      filter: string | ((data: any) => boolean),
+      handler: (data: User) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chat' event (strongly typed)
      * @param event - Event name: 'chat'
@@ -7179,7 +8318,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chat Telegram Bot API}
      */
     on(event: 'chat', handler: (data: Chat) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chat' event with filtering
      * @param event - Event name: 'chat'
@@ -7188,7 +8327,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chat Telegram Bot API}
      */
-    on(event: 'chat', filter: string | ((data: any) => boolean), handler: (data: Chat) => void | Promise<void>): this;
+    on(
+      event: 'chat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Chat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatfullinfo' event (strongly typed)
      * @param event - Event name: 'chatfullinfo'
@@ -7197,7 +8340,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatfullinfo Telegram Bot API}
      */
     on(event: 'chatfullinfo', handler: (data: ChatFullInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatfullinfo' event with filtering
      * @param event - Event name: 'chatfullinfo'
@@ -7206,7 +8349,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatfullinfo Telegram Bot API}
      */
-    on(event: 'chatfullinfo', filter: string | ((data: any) => boolean), handler: (data: ChatFullInfo) => void | Promise<void>): this;
+    on(
+      event: 'chatfullinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatFullInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'message' event (strongly typed)
      * @param event - Event name: 'message'
@@ -7215,7 +8362,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#message Telegram Bot API}
      */
     on(event: 'message', handler: (data: Message) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'message' event with filtering
      * @param event - Event name: 'message'
@@ -7224,7 +8371,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#message Telegram Bot API}
      */
-    on(event: 'message', filter: string | ((data: any) => boolean), handler: (data: Message) => void | Promise<void>): this;
+    on(
+      event: 'message',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Message) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageid' event (strongly typed)
      * @param event - Event name: 'messageid'
@@ -7233,7 +8384,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageid Telegram Bot API}
      */
     on(event: 'messageid', handler: (data: MessageId) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'messageid' event with filtering
      * @param event - Event name: 'messageid'
@@ -7242,7 +8393,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageid Telegram Bot API}
      */
-    on(event: 'messageid', filter: string | ((data: any) => boolean), handler: (data: MessageId) => void | Promise<void>): this;
+    on(
+      event: 'messageid',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageId) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inaccessiblemessage' event (strongly typed)
      * @param event - Event name: 'inaccessiblemessage'
@@ -7250,8 +8405,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inaccessiblemessage Telegram Bot API}
      */
-    on(event: 'inaccessiblemessage', handler: (data: InaccessibleMessage) => void | Promise<void>): this;
-    
+    on(
+      event: 'inaccessiblemessage',
+      handler: (data: InaccessibleMessage) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inaccessiblemessage' event with filtering
      * @param event - Event name: 'inaccessiblemessage'
@@ -7260,7 +8418,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inaccessiblemessage Telegram Bot API}
      */
-    on(event: 'inaccessiblemessage', filter: string | ((data: any) => boolean), handler: (data: InaccessibleMessage) => void | Promise<void>): this;
+    on(
+      event: 'inaccessiblemessage',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InaccessibleMessage) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'maybeinaccessiblemessage' event (strongly typed)
      * @param event - Event name: 'maybeinaccessiblemessage'
@@ -7268,8 +8430,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maybeinaccessiblemessage Telegram Bot API}
      */
-    on(event: 'maybeinaccessiblemessage', handler: (data: MaybeInaccessibleMessage) => void | Promise<void>): this;
-    
+    on(
+      event: 'maybeinaccessiblemessage',
+      handler: (data: MaybeInaccessibleMessage) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'maybeinaccessiblemessage' event with filtering
      * @param event - Event name: 'maybeinaccessiblemessage'
@@ -7278,7 +8443,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maybeinaccessiblemessage Telegram Bot API}
      */
-    on(event: 'maybeinaccessiblemessage', filter: string | ((data: any) => boolean), handler: (data: MaybeInaccessibleMessage) => void | Promise<void>): this;
+    on(
+      event: 'maybeinaccessiblemessage',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MaybeInaccessibleMessage) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageentity' event (strongly typed)
      * @param event - Event name: 'messageentity'
@@ -7287,7 +8456,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageentity Telegram Bot API}
      */
     on(event: 'messageentity', handler: (data: MessageEntity) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'messageentity' event with filtering
      * @param event - Event name: 'messageentity'
@@ -7296,7 +8465,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageentity Telegram Bot API}
      */
-    on(event: 'messageentity', filter: string | ((data: any) => boolean), handler: (data: MessageEntity) => void | Promise<void>): this;
+    on(
+      event: 'messageentity',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageEntity) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'textquote' event (strongly typed)
      * @param event - Event name: 'textquote'
@@ -7305,7 +8478,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#textquote Telegram Bot API}
      */
     on(event: 'textquote', handler: (data: TextQuote) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'textquote' event with filtering
      * @param event - Event name: 'textquote'
@@ -7314,7 +8487,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#textquote Telegram Bot API}
      */
-    on(event: 'textquote', filter: string | ((data: any) => boolean), handler: (data: TextQuote) => void | Promise<void>): this;
+    on(
+      event: 'textquote',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TextQuote) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'externalreplyinfo' event (strongly typed)
      * @param event - Event name: 'externalreplyinfo'
@@ -7322,8 +8499,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#externalreplyinfo Telegram Bot API}
      */
-    on(event: 'externalreplyinfo', handler: (data: ExternalReplyInfo) => void | Promise<void>): this;
-    
+    on(
+      event: 'externalreplyinfo',
+      handler: (data: ExternalReplyInfo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'externalreplyinfo' event with filtering
      * @param event - Event name: 'externalreplyinfo'
@@ -7332,7 +8512,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#externalreplyinfo Telegram Bot API}
      */
-    on(event: 'externalreplyinfo', filter: string | ((data: any) => boolean), handler: (data: ExternalReplyInfo) => void | Promise<void>): this;
+    on(
+      event: 'externalreplyinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ExternalReplyInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'replyparameters' event (strongly typed)
      * @param event - Event name: 'replyparameters'
@@ -7341,7 +8525,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#replyparameters Telegram Bot API}
      */
     on(event: 'replyparameters', handler: (data: ReplyParameters) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'replyparameters' event with filtering
      * @param event - Event name: 'replyparameters'
@@ -7350,7 +8534,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replyparameters Telegram Bot API}
      */
-    on(event: 'replyparameters', filter: string | ((data: any) => boolean), handler: (data: ReplyParameters) => void | Promise<void>): this;
+    on(
+      event: 'replyparameters',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyParameters) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageorigin' event (strongly typed)
      * @param event - Event name: 'messageorigin'
@@ -7359,7 +8547,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#messageorigin Telegram Bot API}
      */
     on(event: 'messageorigin', handler: (data: MessageOrigin) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'messageorigin' event with filtering
      * @param event - Event name: 'messageorigin'
@@ -7368,7 +8556,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageorigin Telegram Bot API}
      */
-    on(event: 'messageorigin', filter: string | ((data: any) => boolean), handler: (data: MessageOrigin) => void | Promise<void>): this;
+    on(
+      event: 'messageorigin',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOrigin) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageoriginuser' event (strongly typed)
      * @param event - Event name: 'messageoriginuser'
@@ -7376,8 +8568,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginuser Telegram Bot API}
      */
-    on(event: 'messageoriginuser', handler: (data: MessageOriginUser) => void | Promise<void>): this;
-    
+    on(
+      event: 'messageoriginuser',
+      handler: (data: MessageOriginUser) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messageoriginuser' event with filtering
      * @param event - Event name: 'messageoriginuser'
@@ -7386,7 +8581,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginuser Telegram Bot API}
      */
-    on(event: 'messageoriginuser', filter: string | ((data: any) => boolean), handler: (data: MessageOriginUser) => void | Promise<void>): this;
+    on(
+      event: 'messageoriginuser',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginUser) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageoriginhiddenuser' event (strongly typed)
      * @param event - Event name: 'messageoriginhiddenuser'
@@ -7394,8 +8593,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginhiddenuser Telegram Bot API}
      */
-    on(event: 'messageoriginhiddenuser', handler: (data: MessageOriginHiddenUser) => void | Promise<void>): this;
-    
+    on(
+      event: 'messageoriginhiddenuser',
+      handler: (data: MessageOriginHiddenUser) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messageoriginhiddenuser' event with filtering
      * @param event - Event name: 'messageoriginhiddenuser'
@@ -7404,7 +8606,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginhiddenuser Telegram Bot API}
      */
-    on(event: 'messageoriginhiddenuser', filter: string | ((data: any) => boolean), handler: (data: MessageOriginHiddenUser) => void | Promise<void>): this;
+    on(
+      event: 'messageoriginhiddenuser',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginHiddenUser) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageoriginchat' event (strongly typed)
      * @param event - Event name: 'messageoriginchat'
@@ -7412,8 +8618,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchat Telegram Bot API}
      */
-    on(event: 'messageoriginchat', handler: (data: MessageOriginChat) => void | Promise<void>): this;
-    
+    on(
+      event: 'messageoriginchat',
+      handler: (data: MessageOriginChat) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messageoriginchat' event with filtering
      * @param event - Event name: 'messageoriginchat'
@@ -7422,7 +8631,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchat Telegram Bot API}
      */
-    on(event: 'messageoriginchat', filter: string | ((data: any) => boolean), handler: (data: MessageOriginChat) => void | Promise<void>): this;
+    on(
+      event: 'messageoriginchat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginChat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageoriginchannel' event (strongly typed)
      * @param event - Event name: 'messageoriginchannel'
@@ -7430,8 +8643,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchannel Telegram Bot API}
      */
-    on(event: 'messageoriginchannel', handler: (data: MessageOriginChannel) => void | Promise<void>): this;
-    
+    on(
+      event: 'messageoriginchannel',
+      handler: (data: MessageOriginChannel) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messageoriginchannel' event with filtering
      * @param event - Event name: 'messageoriginchannel'
@@ -7440,7 +8656,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageoriginchannel Telegram Bot API}
      */
-    on(event: 'messageoriginchannel', filter: string | ((data: any) => boolean), handler: (data: MessageOriginChannel) => void | Promise<void>): this;
+    on(
+      event: 'messageoriginchannel',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageOriginChannel) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'photosize' event (strongly typed)
      * @param event - Event name: 'photosize'
@@ -7449,7 +8669,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#photosize Telegram Bot API}
      */
     on(event: 'photosize', handler: (data: PhotoSize) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'photosize' event with filtering
      * @param event - Event name: 'photosize'
@@ -7458,7 +8678,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#photosize Telegram Bot API}
      */
-    on(event: 'photosize', filter: string | ((data: any) => boolean), handler: (data: PhotoSize) => void | Promise<void>): this;
+    on(
+      event: 'photosize',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PhotoSize) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'animation' event (strongly typed)
      * @param event - Event name: 'animation'
@@ -7467,7 +8691,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#animation Telegram Bot API}
      */
     on(event: 'animation', handler: (data: Animation) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'animation' event with filtering
      * @param event - Event name: 'animation'
@@ -7476,7 +8700,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#animation Telegram Bot API}
      */
-    on(event: 'animation', filter: string | ((data: any) => boolean), handler: (data: Animation) => void | Promise<void>): this;
+    on(
+      event: 'animation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Animation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'audio' event (strongly typed)
      * @param event - Event name: 'audio'
@@ -7485,7 +8713,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#audio Telegram Bot API}
      */
     on(event: 'audio', handler: (data: Audio) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'audio' event with filtering
      * @param event - Event name: 'audio'
@@ -7494,7 +8722,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#audio Telegram Bot API}
      */
-    on(event: 'audio', filter: string | ((data: any) => boolean), handler: (data: Audio) => void | Promise<void>): this;
+    on(
+      event: 'audio',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Audio) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'document' event (strongly typed)
      * @param event - Event name: 'document'
@@ -7503,7 +8735,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#document Telegram Bot API}
      */
     on(event: 'document', handler: (data: Document) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'document' event with filtering
      * @param event - Event name: 'document'
@@ -7512,7 +8744,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#document Telegram Bot API}
      */
-    on(event: 'document', filter: string | ((data: any) => boolean), handler: (data: Document) => void | Promise<void>): this;
+    on(
+      event: 'document',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Document) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'story' event (strongly typed)
      * @param event - Event name: 'story'
@@ -7521,7 +8757,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#story Telegram Bot API}
      */
     on(event: 'story', handler: (data: Story) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'story' event with filtering
      * @param event - Event name: 'story'
@@ -7530,7 +8766,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#story Telegram Bot API}
      */
-    on(event: 'story', filter: string | ((data: any) => boolean), handler: (data: Story) => void | Promise<void>): this;
+    on(
+      event: 'story',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Story) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'video' event (strongly typed)
      * @param event - Event name: 'video'
@@ -7539,7 +8779,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#video Telegram Bot API}
      */
     on(event: 'video', handler: (data: Video) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'video' event with filtering
      * @param event - Event name: 'video'
@@ -7548,7 +8788,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#video Telegram Bot API}
      */
-    on(event: 'video', filter: string | ((data: any) => boolean), handler: (data: Video) => void | Promise<void>): this;
+    on(
+      event: 'video',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Video) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'videonote' event (strongly typed)
      * @param event - Event name: 'videonote'
@@ -7557,7 +8801,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videonote Telegram Bot API}
      */
     on(event: 'videonote', handler: (data: VideoNote) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'videonote' event with filtering
      * @param event - Event name: 'videonote'
@@ -7566,7 +8810,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videonote Telegram Bot API}
      */
-    on(event: 'videonote', filter: string | ((data: any) => boolean), handler: (data: VideoNote) => void | Promise<void>): this;
+    on(
+      event: 'videonote',
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoNote) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'voice' event (strongly typed)
      * @param event - Event name: 'voice'
@@ -7575,7 +8823,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#voice Telegram Bot API}
      */
     on(event: 'voice', handler: (data: Voice) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'voice' event with filtering
      * @param event - Event name: 'voice'
@@ -7584,7 +8832,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#voice Telegram Bot API}
      */
-    on(event: 'voice', filter: string | ((data: any) => boolean), handler: (data: Voice) => void | Promise<void>): this;
+    on(
+      event: 'voice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Voice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmediainfo' event (strongly typed)
      * @param event - Event name: 'paidmediainfo'
@@ -7593,7 +8845,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediainfo Telegram Bot API}
      */
     on(event: 'paidmediainfo', handler: (data: PaidMediaInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'paidmediainfo' event with filtering
      * @param event - Event name: 'paidmediainfo'
@@ -7602,7 +8854,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediainfo Telegram Bot API}
      */
-    on(event: 'paidmediainfo', filter: string | ((data: any) => boolean), handler: (data: PaidMediaInfo) => void | Promise<void>): this;
+    on(
+      event: 'paidmediainfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmedia' event (strongly typed)
      * @param event - Event name: 'paidmedia'
@@ -7611,7 +8867,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmedia Telegram Bot API}
      */
     on(event: 'paidmedia', handler: (data: PaidMedia) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'paidmedia' event with filtering
      * @param event - Event name: 'paidmedia'
@@ -7620,7 +8876,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmedia Telegram Bot API}
      */
-    on(event: 'paidmedia', filter: string | ((data: any) => boolean), handler: (data: PaidMedia) => void | Promise<void>): this;
+    on(
+      event: 'paidmedia',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMedia) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmediapreview' event (strongly typed)
      * @param event - Event name: 'paidmediapreview'
@@ -7629,7 +8889,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
      */
     on(event: 'paidmediapreview', handler: (data: PaidMediaPreview) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'paidmediapreview' event with filtering
      * @param event - Event name: 'paidmediapreview'
@@ -7638,7 +8898,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
      */
-    on(event: 'paidmediapreview', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    on(
+      event: 'paidmediapreview',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPreview) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmediaphoto' event (strongly typed)
      * @param event - Event name: 'paidmediaphoto'
@@ -7647,7 +8911,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
     on(event: 'paidmediaphoto', handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'paidmediaphoto' event with filtering
      * @param event - Event name: 'paidmediaphoto'
@@ -7656,7 +8920,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
-    on(event: 'paidmediaphoto', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
+    on(
+      event: 'paidmediaphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmediavideo' event (strongly typed)
      * @param event - Event name: 'paidmediavideo'
@@ -7665,7 +8933,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediavideo Telegram Bot API}
      */
     on(event: 'paidmediavideo', handler: (data: PaidMediaVideo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'paidmediavideo' event with filtering
      * @param event - Event name: 'paidmediavideo'
@@ -7674,7 +8942,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediavideo Telegram Bot API}
      */
-    on(event: 'paidmediavideo', filter: string | ((data: any) => boolean), handler: (data: PaidMediaVideo) => void | Promise<void>): this;
+    on(
+      event: 'paidmediavideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'contact' event (strongly typed)
      * @param event - Event name: 'contact'
@@ -7683,7 +8955,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#contact Telegram Bot API}
      */
     on(event: 'contact', handler: (data: Contact) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'contact' event with filtering
      * @param event - Event name: 'contact'
@@ -7692,7 +8964,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#contact Telegram Bot API}
      */
-    on(event: 'contact', filter: string | ((data: any) => boolean), handler: (data: Contact) => void | Promise<void>): this;
+    on(
+      event: 'contact',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Contact) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'dice' event (strongly typed)
      * @param event - Event name: 'dice'
@@ -7701,7 +8977,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
     on(event: 'dice', handler: (data: Dice) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'dice' event with filtering
      * @param event - Event name: 'dice'
@@ -7710,7 +8986,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
-    on(event: 'dice', filter: string | ((data: any) => boolean), handler: (data: Dice) => void | Promise<void>): this;
+    on(
+      event: 'dice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Dice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'polloption' event (strongly typed)
      * @param event - Event name: 'polloption'
@@ -7719,7 +8999,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#polloption Telegram Bot API}
      */
     on(event: 'polloption', handler: (data: PollOption) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'polloption' event with filtering
      * @param event - Event name: 'polloption'
@@ -7728,7 +9008,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#polloption Telegram Bot API}
      */
-    on(event: 'polloption', filter: string | ((data: any) => boolean), handler: (data: PollOption) => void | Promise<void>): this;
+    on(
+      event: 'polloption',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PollOption) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputpolloption' event (strongly typed)
      * @param event - Event name: 'inputpolloption'
@@ -7737,7 +9021,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpolloption Telegram Bot API}
      */
     on(event: 'inputpolloption', handler: (data: InputPollOption) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputpolloption' event with filtering
      * @param event - Event name: 'inputpolloption'
@@ -7746,7 +9030,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpolloption Telegram Bot API}
      */
-    on(event: 'inputpolloption', filter: string | ((data: any) => boolean), handler: (data: InputPollOption) => void | Promise<void>): this;
+    on(
+      event: 'inputpolloption',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPollOption) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'pollanswer' event (strongly typed)
      * @param event - Event name: 'pollanswer'
@@ -7755,7 +9043,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#pollanswer Telegram Bot API}
      */
     on(event: 'pollanswer', handler: (data: PollAnswer) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'pollanswer' event with filtering
      * @param event - Event name: 'pollanswer'
@@ -7764,7 +9052,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#pollanswer Telegram Bot API}
      */
-    on(event: 'pollanswer', filter: string | ((data: any) => boolean), handler: (data: PollAnswer) => void | Promise<void>): this;
+    on(
+      event: 'pollanswer',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PollAnswer) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'poll' event (strongly typed)
      * @param event - Event name: 'poll'
@@ -7773,7 +9065,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#poll Telegram Bot API}
      */
     on(event: 'poll', handler: (data: Poll) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'poll' event with filtering
      * @param event - Event name: 'poll'
@@ -7782,7 +9074,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#poll Telegram Bot API}
      */
-    on(event: 'poll', filter: string | ((data: any) => boolean), handler: (data: Poll) => void | Promise<void>): this;
+    on(
+      event: 'poll',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Poll) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'checklisttask' event (strongly typed)
      * @param event - Event name: 'checklisttask'
@@ -7791,7 +9087,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklisttask Telegram Bot API}
      */
     on(event: 'checklisttask', handler: (data: ChecklistTask) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'checklisttask' event with filtering
      * @param event - Event name: 'checklisttask'
@@ -7800,7 +9096,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttask Telegram Bot API}
      */
-    on(event: 'checklisttask', filter: string | ((data: any) => boolean), handler: (data: ChecklistTask) => void | Promise<void>): this;
+    on(
+      event: 'checklisttask',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTask) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'checklist' event (strongly typed)
      * @param event - Event name: 'checklist'
@@ -7809,7 +9109,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#checklist Telegram Bot API}
      */
     on(event: 'checklist', handler: (data: Checklist) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'checklist' event with filtering
      * @param event - Event name: 'checklist'
@@ -7818,7 +9118,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklist Telegram Bot API}
      */
-    on(event: 'checklist', filter: string | ((data: any) => boolean), handler: (data: Checklist) => void | Promise<void>): this;
+    on(
+      event: 'checklist',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Checklist) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputchecklisttask' event (strongly typed)
      * @param event - Event name: 'inputchecklisttask'
@@ -7826,8 +9130,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputchecklisttask Telegram Bot API}
      */
-    on(event: 'inputchecklisttask', handler: (data: InputChecklistTask) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputchecklisttask',
+      handler: (data: InputChecklistTask) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputchecklisttask' event with filtering
      * @param event - Event name: 'inputchecklisttask'
@@ -7836,7 +9143,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputchecklisttask Telegram Bot API}
      */
-    on(event: 'inputchecklisttask', filter: string | ((data: any) => boolean), handler: (data: InputChecklistTask) => void | Promise<void>): this;
+    on(
+      event: 'inputchecklisttask',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputChecklistTask) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputchecklist' event (strongly typed)
      * @param event - Event name: 'inputchecklist'
@@ -7845,7 +9156,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputchecklist Telegram Bot API}
      */
     on(event: 'inputchecklist', handler: (data: InputChecklist) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputchecklist' event with filtering
      * @param event - Event name: 'inputchecklist'
@@ -7854,7 +9165,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputchecklist Telegram Bot API}
      */
-    on(event: 'inputchecklist', filter: string | ((data: any) => boolean), handler: (data: InputChecklist) => void | Promise<void>): this;
+    on(
+      event: 'inputchecklist',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputChecklist) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'checklisttasksdone' event (strongly typed)
      * @param event - Event name: 'checklisttasksdone'
@@ -7862,8 +9177,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksdone Telegram Bot API}
      */
-    on(event: 'checklisttasksdone', handler: (data: ChecklistTasksDone) => void | Promise<void>): this;
-    
+    on(
+      event: 'checklisttasksdone',
+      handler: (data: ChecklistTasksDone) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'checklisttasksdone' event with filtering
      * @param event - Event name: 'checklisttasksdone'
@@ -7872,7 +9190,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksdone Telegram Bot API}
      */
-    on(event: 'checklisttasksdone', filter: string | ((data: any) => boolean), handler: (data: ChecklistTasksDone) => void | Promise<void>): this;
+    on(
+      event: 'checklisttasksdone',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTasksDone) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'checklisttasksadded' event (strongly typed)
      * @param event - Event name: 'checklisttasksadded'
@@ -7880,8 +9202,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksadded Telegram Bot API}
      */
-    on(event: 'checklisttasksadded', handler: (data: ChecklistTasksAdded) => void | Promise<void>): this;
-    
+    on(
+      event: 'checklisttasksadded',
+      handler: (data: ChecklistTasksAdded) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'checklisttasksadded' event with filtering
      * @param event - Event name: 'checklisttasksadded'
@@ -7890,7 +9215,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#checklisttasksadded Telegram Bot API}
      */
-    on(event: 'checklisttasksadded', filter: string | ((data: any) => boolean), handler: (data: ChecklistTasksAdded) => void | Promise<void>): this;
+    on(
+      event: 'checklisttasksadded',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChecklistTasksAdded) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'location' event (strongly typed)
      * @param event - Event name: 'location'
@@ -7899,7 +9228,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#location Telegram Bot API}
      */
     on(event: 'location', handler: (data: Location) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'location' event with filtering
      * @param event - Event name: 'location'
@@ -7908,7 +9237,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#location Telegram Bot API}
      */
-    on(event: 'location', filter: string | ((data: any) => boolean), handler: (data: Location) => void | Promise<void>): this;
+    on(
+      event: 'location',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Location) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'venue' event (strongly typed)
      * @param event - Event name: 'venue'
@@ -7917,7 +9250,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#venue Telegram Bot API}
      */
     on(event: 'venue', handler: (data: Venue) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'venue' event with filtering
      * @param event - Event name: 'venue'
@@ -7926,7 +9259,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#venue Telegram Bot API}
      */
-    on(event: 'venue', filter: string | ((data: any) => boolean), handler: (data: Venue) => void | Promise<void>): this;
+    on(
+      event: 'venue',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Venue) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'webappdata' event (strongly typed)
      * @param event - Event name: 'webappdata'
@@ -7935,7 +9272,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webappdata Telegram Bot API}
      */
     on(event: 'webappdata', handler: (data: WebAppData) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'webappdata' event with filtering
      * @param event - Event name: 'webappdata'
@@ -7944,7 +9281,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webappdata Telegram Bot API}
      */
-    on(event: 'webappdata', filter: string | ((data: any) => boolean), handler: (data: WebAppData) => void | Promise<void>): this;
+    on(
+      event: 'webappdata',
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebAppData) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'proximityalerttriggered' event (strongly typed)
      * @param event - Event name: 'proximityalerttriggered'
@@ -7952,8 +9293,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#proximityalerttriggered Telegram Bot API}
      */
-    on(event: 'proximityalerttriggered', handler: (data: ProximityAlertTriggered) => void | Promise<void>): this;
-    
+    on(
+      event: 'proximityalerttriggered',
+      handler: (data: ProximityAlertTriggered) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'proximityalerttriggered' event with filtering
      * @param event - Event name: 'proximityalerttriggered'
@@ -7962,7 +9306,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#proximityalerttriggered Telegram Bot API}
      */
-    on(event: 'proximityalerttriggered', filter: string | ((data: any) => boolean), handler: (data: ProximityAlertTriggered) => void | Promise<void>): this;
+    on(
+      event: 'proximityalerttriggered',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ProximityAlertTriggered) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messageautodeletetimerchanged' event (strongly typed)
      * @param event - Event name: 'messageautodeletetimerchanged'
@@ -7970,8 +9318,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageautodeletetimerchanged Telegram Bot API}
      */
-    on(event: 'messageautodeletetimerchanged', handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
-    
+    on(
+      event: 'messageautodeletetimerchanged',
+      handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messageautodeletetimerchanged' event with filtering
      * @param event - Event name: 'messageautodeletetimerchanged'
@@ -7980,7 +9331,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messageautodeletetimerchanged Telegram Bot API}
      */
-    on(event: 'messageautodeletetimerchanged', filter: string | ((data: any) => boolean), handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
+    on(
+      event: 'messageautodeletetimerchanged',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostadded' event (strongly typed)
      * @param event - Event name: 'chatboostadded'
@@ -7989,7 +9344,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostadded Telegram Bot API}
      */
     on(event: 'chatboostadded', handler: (data: ChatBoostAdded) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatboostadded' event with filtering
      * @param event - Event name: 'chatboostadded'
@@ -7998,7 +9353,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostadded Telegram Bot API}
      */
-    on(event: 'chatboostadded', filter: string | ((data: any) => boolean), handler: (data: ChatBoostAdded) => void | Promise<void>): this;
+    on(
+      event: 'chatboostadded',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostAdded) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundfill' event (strongly typed)
      * @param event - Event name: 'backgroundfill'
@@ -8007,7 +9366,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundfill Telegram Bot API}
      */
     on(event: 'backgroundfill', handler: (data: BackgroundFill) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'backgroundfill' event with filtering
      * @param event - Event name: 'backgroundfill'
@@ -8016,7 +9375,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfill Telegram Bot API}
      */
-    on(event: 'backgroundfill', filter: string | ((data: any) => boolean), handler: (data: BackgroundFill) => void | Promise<void>): this;
+    on(
+      event: 'backgroundfill',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFill) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundfillsolid' event (strongly typed)
      * @param event - Event name: 'backgroundfillsolid'
@@ -8024,8 +9387,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillsolid Telegram Bot API}
      */
-    on(event: 'backgroundfillsolid', handler: (data: BackgroundFillSolid) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundfillsolid',
+      handler: (data: BackgroundFillSolid) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundfillsolid' event with filtering
      * @param event - Event name: 'backgroundfillsolid'
@@ -8034,7 +9400,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillsolid Telegram Bot API}
      */
-    on(event: 'backgroundfillsolid', filter: string | ((data: any) => boolean), handler: (data: BackgroundFillSolid) => void | Promise<void>): this;
+    on(
+      event: 'backgroundfillsolid',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillSolid) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundfillgradient' event (strongly typed)
      * @param event - Event name: 'backgroundfillgradient'
@@ -8042,8 +9412,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillgradient Telegram Bot API}
      */
-    on(event: 'backgroundfillgradient', handler: (data: BackgroundFillGradient) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundfillgradient',
+      handler: (data: BackgroundFillGradient) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundfillgradient' event with filtering
      * @param event - Event name: 'backgroundfillgradient'
@@ -8052,7 +9425,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillgradient Telegram Bot API}
      */
-    on(event: 'backgroundfillgradient', filter: string | ((data: any) => boolean), handler: (data: BackgroundFillGradient) => void | Promise<void>): this;
+    on(
+      event: 'backgroundfillgradient',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillGradient) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundfillfreeformgradient' event (strongly typed)
      * @param event - Event name: 'backgroundfillfreeformgradient'
@@ -8060,8 +9437,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillfreeformgradient Telegram Bot API}
      */
-    on(event: 'backgroundfillfreeformgradient', handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundfillfreeformgradient',
+      handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundfillfreeformgradient' event with filtering
      * @param event - Event name: 'backgroundfillfreeformgradient'
@@ -8070,7 +9450,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundfillfreeformgradient Telegram Bot API}
      */
-    on(event: 'backgroundfillfreeformgradient', filter: string | ((data: any) => boolean), handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>): this;
+    on(
+      event: 'backgroundfillfreeformgradient',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundFillFreeformGradient) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundtype' event (strongly typed)
      * @param event - Event name: 'backgroundtype'
@@ -8079,7 +9463,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#backgroundtype Telegram Bot API}
      */
     on(event: 'backgroundtype', handler: (data: BackgroundType) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'backgroundtype' event with filtering
      * @param event - Event name: 'backgroundtype'
@@ -8088,7 +9472,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtype Telegram Bot API}
      */
-    on(event: 'backgroundtype', filter: string | ((data: any) => boolean), handler: (data: BackgroundType) => void | Promise<void>): this;
+    on(
+      event: 'backgroundtype',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundType) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundtypefill' event (strongly typed)
      * @param event - Event name: 'backgroundtypefill'
@@ -8096,8 +9484,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypefill Telegram Bot API}
      */
-    on(event: 'backgroundtypefill', handler: (data: BackgroundTypeFill) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundtypefill',
+      handler: (data: BackgroundTypeFill) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundtypefill' event with filtering
      * @param event - Event name: 'backgroundtypefill'
@@ -8106,7 +9497,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypefill Telegram Bot API}
      */
-    on(event: 'backgroundtypefill', filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeFill) => void | Promise<void>): this;
+    on(
+      event: 'backgroundtypefill',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeFill) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundtypewallpaper' event (strongly typed)
      * @param event - Event name: 'backgroundtypewallpaper'
@@ -8114,8 +9509,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypewallpaper Telegram Bot API}
      */
-    on(event: 'backgroundtypewallpaper', handler: (data: BackgroundTypeWallpaper) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundtypewallpaper',
+      handler: (data: BackgroundTypeWallpaper) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundtypewallpaper' event with filtering
      * @param event - Event name: 'backgroundtypewallpaper'
@@ -8124,7 +9522,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypewallpaper Telegram Bot API}
      */
-    on(event: 'backgroundtypewallpaper', filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeWallpaper) => void | Promise<void>): this;
+    on(
+      event: 'backgroundtypewallpaper',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeWallpaper) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundtypepattern' event (strongly typed)
      * @param event - Event name: 'backgroundtypepattern'
@@ -8132,8 +9534,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypepattern Telegram Bot API}
      */
-    on(event: 'backgroundtypepattern', handler: (data: BackgroundTypePattern) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundtypepattern',
+      handler: (data: BackgroundTypePattern) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundtypepattern' event with filtering
      * @param event - Event name: 'backgroundtypepattern'
@@ -8142,7 +9547,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypepattern Telegram Bot API}
      */
-    on(event: 'backgroundtypepattern', filter: string | ((data: any) => boolean), handler: (data: BackgroundTypePattern) => void | Promise<void>): this;
+    on(
+      event: 'backgroundtypepattern',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypePattern) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'backgroundtypechattheme' event (strongly typed)
      * @param event - Event name: 'backgroundtypechattheme'
@@ -8150,8 +9559,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypechattheme Telegram Bot API}
      */
-    on(event: 'backgroundtypechattheme', handler: (data: BackgroundTypeChatTheme) => void | Promise<void>): this;
-    
+    on(
+      event: 'backgroundtypechattheme',
+      handler: (data: BackgroundTypeChatTheme) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'backgroundtypechattheme' event with filtering
      * @param event - Event name: 'backgroundtypechattheme'
@@ -8160,7 +9572,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#backgroundtypechattheme Telegram Bot API}
      */
-    on(event: 'backgroundtypechattheme', filter: string | ((data: any) => boolean), handler: (data: BackgroundTypeChatTheme) => void | Promise<void>): this;
+    on(
+      event: 'backgroundtypechattheme',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BackgroundTypeChatTheme) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatbackground' event (strongly typed)
      * @param event - Event name: 'chatbackground'
@@ -8169,7 +9585,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatbackground Telegram Bot API}
      */
     on(event: 'chatbackground', handler: (data: ChatBackground) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatbackground' event with filtering
      * @param event - Event name: 'chatbackground'
@@ -8178,7 +9594,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatbackground Telegram Bot API}
      */
-    on(event: 'chatbackground', filter: string | ((data: any) => boolean), handler: (data: ChatBackground) => void | Promise<void>): this;
+    on(
+      event: 'chatbackground',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBackground) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forumtopiccreated' event (strongly typed)
      * @param event - Event name: 'forumtopiccreated'
@@ -8186,8 +9606,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopiccreated Telegram Bot API}
      */
-    on(event: 'forumtopiccreated', handler: (data: ForumTopicCreated) => void | Promise<void>): this;
-    
+    on(
+      event: 'forumtopiccreated',
+      handler: (data: ForumTopicCreated) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'forumtopiccreated' event with filtering
      * @param event - Event name: 'forumtopiccreated'
@@ -8196,7 +9619,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopiccreated Telegram Bot API}
      */
-    on(event: 'forumtopiccreated', filter: string | ((data: any) => boolean), handler: (data: ForumTopicCreated) => void | Promise<void>): this;
+    on(
+      event: 'forumtopiccreated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicCreated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forumtopicclosed' event (strongly typed)
      * @param event - Event name: 'forumtopicclosed'
@@ -8205,7 +9632,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopicclosed Telegram Bot API}
      */
     on(event: 'forumtopicclosed', handler: (data: ForumTopicClosed) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'forumtopicclosed' event with filtering
      * @param event - Event name: 'forumtopicclosed'
@@ -8214,7 +9641,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicclosed Telegram Bot API}
      */
-    on(event: 'forumtopicclosed', filter: string | ((data: any) => boolean), handler: (data: ForumTopicClosed) => void | Promise<void>): this;
+    on(
+      event: 'forumtopicclosed',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicClosed) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forumtopicedited' event (strongly typed)
      * @param event - Event name: 'forumtopicedited'
@@ -8223,7 +9654,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopicedited Telegram Bot API}
      */
     on(event: 'forumtopicedited', handler: (data: ForumTopicEdited) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'forumtopicedited' event with filtering
      * @param event - Event name: 'forumtopicedited'
@@ -8232,7 +9663,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicedited Telegram Bot API}
      */
-    on(event: 'forumtopicedited', filter: string | ((data: any) => boolean), handler: (data: ForumTopicEdited) => void | Promise<void>): this;
+    on(
+      event: 'forumtopicedited',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicEdited) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forumtopicreopened' event (strongly typed)
      * @param event - Event name: 'forumtopicreopened'
@@ -8240,8 +9675,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicreopened Telegram Bot API}
      */
-    on(event: 'forumtopicreopened', handler: (data: ForumTopicReopened) => void | Promise<void>): this;
-    
+    on(
+      event: 'forumtopicreopened',
+      handler: (data: ForumTopicReopened) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'forumtopicreopened' event with filtering
      * @param event - Event name: 'forumtopicreopened'
@@ -8250,7 +9688,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopicreopened Telegram Bot API}
      */
-    on(event: 'forumtopicreopened', filter: string | ((data: any) => boolean), handler: (data: ForumTopicReopened) => void | Promise<void>): this;
+    on(
+      event: 'forumtopicreopened',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopicReopened) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'generalforumtopichidden' event (strongly typed)
      * @param event - Event name: 'generalforumtopichidden'
@@ -8258,8 +9700,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopichidden Telegram Bot API}
      */
-    on(event: 'generalforumtopichidden', handler: (data: GeneralForumTopicHidden) => void | Promise<void>): this;
-    
+    on(
+      event: 'generalforumtopichidden',
+      handler: (data: GeneralForumTopicHidden) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'generalforumtopichidden' event with filtering
      * @param event - Event name: 'generalforumtopichidden'
@@ -8268,7 +9713,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopichidden Telegram Bot API}
      */
-    on(event: 'generalforumtopichidden', filter: string | ((data: any) => boolean), handler: (data: GeneralForumTopicHidden) => void | Promise<void>): this;
+    on(
+      event: 'generalforumtopichidden',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GeneralForumTopicHidden) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'generalforumtopicunhidden' event (strongly typed)
      * @param event - Event name: 'generalforumtopicunhidden'
@@ -8276,8 +9725,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopicunhidden Telegram Bot API}
      */
-    on(event: 'generalforumtopicunhidden', handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>): this;
-    
+    on(
+      event: 'generalforumtopicunhidden',
+      handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'generalforumtopicunhidden' event with filtering
      * @param event - Event name: 'generalforumtopicunhidden'
@@ -8286,7 +9738,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#generalforumtopicunhidden Telegram Bot API}
      */
-    on(event: 'generalforumtopicunhidden', filter: string | ((data: any) => boolean), handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>): this;
+    on(
+      event: 'generalforumtopicunhidden',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GeneralForumTopicUnhidden) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'shareduser' event (strongly typed)
      * @param event - Event name: 'shareduser'
@@ -8295,7 +9751,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shareduser Telegram Bot API}
      */
     on(event: 'shareduser', handler: (data: SharedUser) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'shareduser' event with filtering
      * @param event - Event name: 'shareduser'
@@ -8304,7 +9760,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shareduser Telegram Bot API}
      */
-    on(event: 'shareduser', filter: string | ((data: any) => boolean), handler: (data: SharedUser) => void | Promise<void>): this;
+    on(
+      event: 'shareduser',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SharedUser) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'usersshared' event (strongly typed)
      * @param event - Event name: 'usersshared'
@@ -8313,7 +9773,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#usersshared Telegram Bot API}
      */
     on(event: 'usersshared', handler: (data: UsersShared) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'usersshared' event with filtering
      * @param event - Event name: 'usersshared'
@@ -8322,7 +9782,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#usersshared Telegram Bot API}
      */
-    on(event: 'usersshared', filter: string | ((data: any) => boolean), handler: (data: UsersShared) => void | Promise<void>): this;
+    on(
+      event: 'usersshared',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UsersShared) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatshared' event (strongly typed)
      * @param event - Event name: 'chatshared'
@@ -8331,7 +9795,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatshared Telegram Bot API}
      */
     on(event: 'chatshared', handler: (data: ChatShared) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatshared' event with filtering
      * @param event - Event name: 'chatshared'
@@ -8340,7 +9804,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatshared Telegram Bot API}
      */
-    on(event: 'chatshared', filter: string | ((data: any) => boolean), handler: (data: ChatShared) => void | Promise<void>): this;
+    on(
+      event: 'chatshared',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatShared) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'writeaccessallowed' event (strongly typed)
      * @param event - Event name: 'writeaccessallowed'
@@ -8348,8 +9816,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#writeaccessallowed Telegram Bot API}
      */
-    on(event: 'writeaccessallowed', handler: (data: WriteAccessAllowed) => void | Promise<void>): this;
-    
+    on(
+      event: 'writeaccessallowed',
+      handler: (data: WriteAccessAllowed) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'writeaccessallowed' event with filtering
      * @param event - Event name: 'writeaccessallowed'
@@ -8358,7 +9829,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#writeaccessallowed Telegram Bot API}
      */
-    on(event: 'writeaccessallowed', filter: string | ((data: any) => boolean), handler: (data: WriteAccessAllowed) => void | Promise<void>): this;
+    on(
+      event: 'writeaccessallowed',
+      filter: string | ((data: any) => boolean),
+      handler: (data: WriteAccessAllowed) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'videochatscheduled' event (strongly typed)
      * @param event - Event name: 'videochatscheduled'
@@ -8366,8 +9841,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatscheduled Telegram Bot API}
      */
-    on(event: 'videochatscheduled', handler: (data: VideoChatScheduled) => void | Promise<void>): this;
-    
+    on(
+      event: 'videochatscheduled',
+      handler: (data: VideoChatScheduled) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'videochatscheduled' event with filtering
      * @param event - Event name: 'videochatscheduled'
@@ -8376,7 +9854,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatscheduled Telegram Bot API}
      */
-    on(event: 'videochatscheduled', filter: string | ((data: any) => boolean), handler: (data: VideoChatScheduled) => void | Promise<void>): this;
+    on(
+      event: 'videochatscheduled',
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatScheduled) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'videochatstarted' event (strongly typed)
      * @param event - Event name: 'videochatstarted'
@@ -8385,7 +9867,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videochatstarted Telegram Bot API}
      */
     on(event: 'videochatstarted', handler: (data: VideoChatStarted) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'videochatstarted' event with filtering
      * @param event - Event name: 'videochatstarted'
@@ -8394,7 +9876,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatstarted Telegram Bot API}
      */
-    on(event: 'videochatstarted', filter: string | ((data: any) => boolean), handler: (data: VideoChatStarted) => void | Promise<void>): this;
+    on(
+      event: 'videochatstarted',
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatStarted) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'videochatended' event (strongly typed)
      * @param event - Event name: 'videochatended'
@@ -8403,7 +9889,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#videochatended Telegram Bot API}
      */
     on(event: 'videochatended', handler: (data: VideoChatEnded) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'videochatended' event with filtering
      * @param event - Event name: 'videochatended'
@@ -8412,7 +9898,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatended Telegram Bot API}
      */
-    on(event: 'videochatended', filter: string | ((data: any) => boolean), handler: (data: VideoChatEnded) => void | Promise<void>): this;
+    on(
+      event: 'videochatended',
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatEnded) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'videochatparticipantsinvited' event (strongly typed)
      * @param event - Event name: 'videochatparticipantsinvited'
@@ -8420,8 +9910,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatparticipantsinvited Telegram Bot API}
      */
-    on(event: 'videochatparticipantsinvited', handler: (data: VideoChatParticipantsInvited) => void | Promise<void>): this;
-    
+    on(
+      event: 'videochatparticipantsinvited',
+      handler: (data: VideoChatParticipantsInvited) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'videochatparticipantsinvited' event with filtering
      * @param event - Event name: 'videochatparticipantsinvited'
@@ -8430,7 +9923,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#videochatparticipantsinvited Telegram Bot API}
      */
-    on(event: 'videochatparticipantsinvited', filter: string | ((data: any) => boolean), handler: (data: VideoChatParticipantsInvited) => void | Promise<void>): this;
+    on(
+      event: 'videochatparticipantsinvited',
+      filter: string | ((data: any) => boolean),
+      handler: (data: VideoChatParticipantsInvited) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmessagepricechanged' event (strongly typed)
      * @param event - Event name: 'paidmessagepricechanged'
@@ -8438,8 +9935,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmessagepricechanged Telegram Bot API}
      */
-    on(event: 'paidmessagepricechanged', handler: (data: PaidMessagePriceChanged) => void | Promise<void>): this;
-    
+    on(
+      event: 'paidmessagepricechanged',
+      handler: (data: PaidMessagePriceChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'paidmessagepricechanged' event with filtering
      * @param event - Event name: 'paidmessagepricechanged'
@@ -8448,7 +9948,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmessagepricechanged Telegram Bot API}
      */
-    on(event: 'paidmessagepricechanged', filter: string | ((data: any) => boolean), handler: (data: PaidMessagePriceChanged) => void | Promise<void>): this;
+    on(
+      event: 'paidmessagepricechanged',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMessagePriceChanged) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'directmessagepricechanged' event (strongly typed)
      * @param event - Event name: 'directmessagepricechanged'
@@ -8456,8 +9960,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagepricechanged Telegram Bot API}
      */
-    on(event: 'directmessagepricechanged', handler: (data: DirectMessagePriceChanged) => void | Promise<void>): this;
-    
+    on(
+      event: 'directmessagepricechanged',
+      handler: (data: DirectMessagePriceChanged) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'directmessagepricechanged' event with filtering
      * @param event - Event name: 'directmessagepricechanged'
@@ -8466,7 +9973,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagepricechanged Telegram Bot API}
      */
-    on(event: 'directmessagepricechanged', filter: string | ((data: any) => boolean), handler: (data: DirectMessagePriceChanged) => void | Promise<void>): this;
+    on(
+      event: 'directmessagepricechanged',
+      filter: string | ((data: any) => boolean),
+      handler: (data: DirectMessagePriceChanged) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostapproved' event (strongly typed)
      * @param event - Event name: 'suggestedpostapproved'
@@ -8474,8 +9985,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapproved Telegram Bot API}
      */
-    on(event: 'suggestedpostapproved', handler: (data: SuggestedPostApproved) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostapproved',
+      handler: (data: SuggestedPostApproved) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostapproved' event with filtering
      * @param event - Event name: 'suggestedpostapproved'
@@ -8484,7 +9998,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapproved Telegram Bot API}
      */
-    on(event: 'suggestedpostapproved', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostApproved) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostapproved',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostApproved) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostapprovalfailed' event (strongly typed)
      * @param event - Event name: 'suggestedpostapprovalfailed'
@@ -8492,8 +10010,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapprovalfailed Telegram Bot API}
      */
-    on(event: 'suggestedpostapprovalfailed', handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostapprovalfailed',
+      handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostapprovalfailed' event with filtering
      * @param event - Event name: 'suggestedpostapprovalfailed'
@@ -8502,7 +10023,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostapprovalfailed Telegram Bot API}
      */
-    on(event: 'suggestedpostapprovalfailed', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostapprovalfailed',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostApprovalFailed) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostdeclined' event (strongly typed)
      * @param event - Event name: 'suggestedpostdeclined'
@@ -8510,8 +10035,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostdeclined Telegram Bot API}
      */
-    on(event: 'suggestedpostdeclined', handler: (data: SuggestedPostDeclined) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostdeclined',
+      handler: (data: SuggestedPostDeclined) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostdeclined' event with filtering
      * @param event - Event name: 'suggestedpostdeclined'
@@ -8520,7 +10048,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostdeclined Telegram Bot API}
      */
-    on(event: 'suggestedpostdeclined', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostDeclined) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostdeclined',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostDeclined) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostpaid' event (strongly typed)
      * @param event - Event name: 'suggestedpostpaid'
@@ -8528,8 +10060,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostpaid Telegram Bot API}
      */
-    on(event: 'suggestedpostpaid', handler: (data: SuggestedPostPaid) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostpaid',
+      handler: (data: SuggestedPostPaid) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostpaid' event with filtering
      * @param event - Event name: 'suggestedpostpaid'
@@ -8538,7 +10073,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostpaid Telegram Bot API}
      */
-    on(event: 'suggestedpostpaid', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostPaid) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostpaid',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostPaid) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostrefunded' event (strongly typed)
      * @param event - Event name: 'suggestedpostrefunded'
@@ -8546,8 +10085,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostrefunded Telegram Bot API}
      */
-    on(event: 'suggestedpostrefunded', handler: (data: SuggestedPostRefunded) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostrefunded',
+      handler: (data: SuggestedPostRefunded) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostrefunded' event with filtering
      * @param event - Event name: 'suggestedpostrefunded'
@@ -8556,7 +10098,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostrefunded Telegram Bot API}
      */
-    on(event: 'suggestedpostrefunded', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostRefunded) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostrefunded',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostRefunded) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'giveawaycreated' event (strongly typed)
      * @param event - Event name: 'giveawaycreated'
@@ -8565,7 +10111,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveawaycreated Telegram Bot API}
      */
     on(event: 'giveawaycreated', handler: (data: GiveawayCreated) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'giveawaycreated' event with filtering
      * @param event - Event name: 'giveawaycreated'
@@ -8574,7 +10120,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaycreated Telegram Bot API}
      */
-    on(event: 'giveawaycreated', filter: string | ((data: any) => boolean), handler: (data: GiveawayCreated) => void | Promise<void>): this;
+    on(
+      event: 'giveawaycreated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayCreated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'giveaway' event (strongly typed)
      * @param event - Event name: 'giveaway'
@@ -8583,7 +10133,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveaway Telegram Bot API}
      */
     on(event: 'giveaway', handler: (data: Giveaway) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'giveaway' event with filtering
      * @param event - Event name: 'giveaway'
@@ -8592,7 +10142,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveaway Telegram Bot API}
      */
-    on(event: 'giveaway', filter: string | ((data: any) => boolean), handler: (data: Giveaway) => void | Promise<void>): this;
+    on(
+      event: 'giveaway',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Giveaway) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'giveawaywinners' event (strongly typed)
      * @param event - Event name: 'giveawaywinners'
@@ -8601,7 +10155,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giveawaywinners Telegram Bot API}
      */
     on(event: 'giveawaywinners', handler: (data: GiveawayWinners) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'giveawaywinners' event with filtering
      * @param event - Event name: 'giveawaywinners'
@@ -8610,7 +10164,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaywinners Telegram Bot API}
      */
-    on(event: 'giveawaywinners', filter: string | ((data: any) => boolean), handler: (data: GiveawayWinners) => void | Promise<void>): this;
+    on(
+      event: 'giveawaywinners',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayWinners) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'giveawaycompleted' event (strongly typed)
      * @param event - Event name: 'giveawaycompleted'
@@ -8618,8 +10176,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaycompleted Telegram Bot API}
      */
-    on(event: 'giveawaycompleted', handler: (data: GiveawayCompleted) => void | Promise<void>): this;
-    
+    on(
+      event: 'giveawaycompleted',
+      handler: (data: GiveawayCompleted) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'giveawaycompleted' event with filtering
      * @param event - Event name: 'giveawaycompleted'
@@ -8628,7 +10189,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giveawaycompleted Telegram Bot API}
      */
-    on(event: 'giveawaycompleted', filter: string | ((data: any) => boolean), handler: (data: GiveawayCompleted) => void | Promise<void>): this;
+    on(
+      event: 'giveawaycompleted',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiveawayCompleted) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'linkpreviewoptions' event (strongly typed)
      * @param event - Event name: 'linkpreviewoptions'
@@ -8636,8 +10201,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#linkpreviewoptions Telegram Bot API}
      */
-    on(event: 'linkpreviewoptions', handler: (data: LinkPreviewOptions) => void | Promise<void>): this;
-    
+    on(
+      event: 'linkpreviewoptions',
+      handler: (data: LinkPreviewOptions) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'linkpreviewoptions' event with filtering
      * @param event - Event name: 'linkpreviewoptions'
@@ -8646,7 +10214,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#linkpreviewoptions Telegram Bot API}
      */
-    on(event: 'linkpreviewoptions', filter: string | ((data: any) => boolean), handler: (data: LinkPreviewOptions) => void | Promise<void>): this;
+    on(
+      event: 'linkpreviewoptions',
+      filter: string | ((data: any) => boolean),
+      handler: (data: LinkPreviewOptions) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostprice' event (strongly typed)
      * @param event - Event name: 'suggestedpostprice'
@@ -8654,8 +10226,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostprice Telegram Bot API}
      */
-    on(event: 'suggestedpostprice', handler: (data: SuggestedPostPrice) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostprice',
+      handler: (data: SuggestedPostPrice) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostprice' event with filtering
      * @param event - Event name: 'suggestedpostprice'
@@ -8664,7 +10239,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostprice Telegram Bot API}
      */
-    on(event: 'suggestedpostprice', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostPrice) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostprice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostPrice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostinfo' event (strongly typed)
      * @param event - Event name: 'suggestedpostinfo'
@@ -8672,8 +10251,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostinfo Telegram Bot API}
      */
-    on(event: 'suggestedpostinfo', handler: (data: SuggestedPostInfo) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostinfo',
+      handler: (data: SuggestedPostInfo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostinfo' event with filtering
      * @param event - Event name: 'suggestedpostinfo'
@@ -8682,7 +10264,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostinfo Telegram Bot API}
      */
-    on(event: 'suggestedpostinfo', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostInfo) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'suggestedpostparameters' event (strongly typed)
      * @param event - Event name: 'suggestedpostparameters'
@@ -8690,8 +10276,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostparameters Telegram Bot API}
      */
-    on(event: 'suggestedpostparameters', handler: (data: SuggestedPostParameters) => void | Promise<void>): this;
-    
+    on(
+      event: 'suggestedpostparameters',
+      handler: (data: SuggestedPostParameters) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'suggestedpostparameters' event with filtering
      * @param event - Event name: 'suggestedpostparameters'
@@ -8700,7 +10289,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#suggestedpostparameters Telegram Bot API}
      */
-    on(event: 'suggestedpostparameters', filter: string | ((data: any) => boolean), handler: (data: SuggestedPostParameters) => void | Promise<void>): this;
+    on(
+      event: 'suggestedpostparameters',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuggestedPostParameters) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'directmessagestopic' event (strongly typed)
      * @param event - Event name: 'directmessagestopic'
@@ -8708,8 +10301,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagestopic Telegram Bot API}
      */
-    on(event: 'directmessagestopic', handler: (data: DirectMessagesTopic) => void | Promise<void>): this;
-    
+    on(
+      event: 'directmessagestopic',
+      handler: (data: DirectMessagesTopic) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'directmessagestopic' event with filtering
      * @param event - Event name: 'directmessagestopic'
@@ -8718,7 +10314,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#directmessagestopic Telegram Bot API}
      */
-    on(event: 'directmessagestopic', filter: string | ((data: any) => boolean), handler: (data: DirectMessagesTopic) => void | Promise<void>): this;
+    on(
+      event: 'directmessagestopic',
+      filter: string | ((data: any) => boolean),
+      handler: (data: DirectMessagesTopic) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'userprofilephotos' event (strongly typed)
      * @param event - Event name: 'userprofilephotos'
@@ -8726,8 +10326,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
-    on(event: 'userprofilephotos', handler: (data: UserProfilePhotos) => void | Promise<void>): this;
-    
+    on(
+      event: 'userprofilephotos',
+      handler: (data: UserProfilePhotos) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'userprofilephotos' event with filtering
      * @param event - Event name: 'userprofilephotos'
@@ -8736,7 +10339,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
-    on(event: 'userprofilephotos', filter: string | ((data: any) => boolean), handler: (data: UserProfilePhotos) => void | Promise<void>): this;
+    on(
+      event: 'userprofilephotos',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UserProfilePhotos) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'file' event (strongly typed)
      * @param event - Event name: 'file'
@@ -8745,7 +10352,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#file Telegram Bot API}
      */
     on(event: 'file', handler: (data: File) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'file' event with filtering
      * @param event - Event name: 'file'
@@ -8754,7 +10361,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#file Telegram Bot API}
      */
-    on(event: 'file', filter: string | ((data: any) => boolean), handler: (data: File) => void | Promise<void>): this;
+    on(
+      event: 'file',
+      filter: string | ((data: any) => boolean),
+      handler: (data: File) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'webappinfo' event (strongly typed)
      * @param event - Event name: 'webappinfo'
@@ -8763,7 +10374,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#webappinfo Telegram Bot API}
      */
     on(event: 'webappinfo', handler: (data: WebAppInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'webappinfo' event with filtering
      * @param event - Event name: 'webappinfo'
@@ -8772,7 +10383,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#webappinfo Telegram Bot API}
      */
-    on(event: 'webappinfo', filter: string | ((data: any) => boolean), handler: (data: WebAppInfo) => void | Promise<void>): this;
+    on(
+      event: 'webappinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: WebAppInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'replykeyboardmarkup' event (strongly typed)
      * @param event - Event name: 'replykeyboardmarkup'
@@ -8780,8 +10395,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardmarkup Telegram Bot API}
      */
-    on(event: 'replykeyboardmarkup', handler: (data: ReplyKeyboardMarkup) => void | Promise<void>): this;
-    
+    on(
+      event: 'replykeyboardmarkup',
+      handler: (data: ReplyKeyboardMarkup) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'replykeyboardmarkup' event with filtering
      * @param event - Event name: 'replykeyboardmarkup'
@@ -8790,7 +10408,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardmarkup Telegram Bot API}
      */
-    on(event: 'replykeyboardmarkup', filter: string | ((data: any) => boolean), handler: (data: ReplyKeyboardMarkup) => void | Promise<void>): this;
+    on(
+      event: 'replykeyboardmarkup',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyKeyboardMarkup) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'keyboardbutton' event (strongly typed)
      * @param event - Event name: 'keyboardbutton'
@@ -8799,7 +10421,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#keyboardbutton Telegram Bot API}
      */
     on(event: 'keyboardbutton', handler: (data: KeyboardButton) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'keyboardbutton' event with filtering
      * @param event - Event name: 'keyboardbutton'
@@ -8808,7 +10430,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbutton Telegram Bot API}
      */
-    on(event: 'keyboardbutton', filter: string | ((data: any) => boolean), handler: (data: KeyboardButton) => void | Promise<void>): this;
+    on(
+      event: 'keyboardbutton',
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButton) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'keyboardbuttonrequestusers' event (strongly typed)
      * @param event - Event name: 'keyboardbuttonrequestusers'
@@ -8816,8 +10442,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestusers Telegram Bot API}
      */
-    on(event: 'keyboardbuttonrequestusers', handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>): this;
-    
+    on(
+      event: 'keyboardbuttonrequestusers',
+      handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'keyboardbuttonrequestusers' event with filtering
      * @param event - Event name: 'keyboardbuttonrequestusers'
@@ -8826,7 +10455,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestusers Telegram Bot API}
      */
-    on(event: 'keyboardbuttonrequestusers', filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>): this;
+    on(
+      event: 'keyboardbuttonrequestusers',
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonRequestUsers) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'keyboardbuttonrequestchat' event (strongly typed)
      * @param event - Event name: 'keyboardbuttonrequestchat'
@@ -8834,8 +10467,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
-    on(event: 'keyboardbuttonrequestchat', handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
-    
+    on(
+      event: 'keyboardbuttonrequestchat',
+      handler: (data: KeyboardButtonRequestChat) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'keyboardbuttonrequestchat' event with filtering
      * @param event - Event name: 'keyboardbuttonrequestchat'
@@ -8844,7 +10480,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
-    on(event: 'keyboardbuttonrequestchat', filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
+    on(
+      event: 'keyboardbuttonrequestchat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonRequestChat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'keyboardbuttonpolltype' event (strongly typed)
      * @param event - Event name: 'keyboardbuttonpolltype'
@@ -8852,8 +10492,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonpolltype Telegram Bot API}
      */
-    on(event: 'keyboardbuttonpolltype', handler: (data: KeyboardButtonPollType) => void | Promise<void>): this;
-    
+    on(
+      event: 'keyboardbuttonpolltype',
+      handler: (data: KeyboardButtonPollType) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'keyboardbuttonpolltype' event with filtering
      * @param event - Event name: 'keyboardbuttonpolltype'
@@ -8862,7 +10505,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonpolltype Telegram Bot API}
      */
-    on(event: 'keyboardbuttonpolltype', filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonPollType) => void | Promise<void>): this;
+    on(
+      event: 'keyboardbuttonpolltype',
+      filter: string | ((data: any) => boolean),
+      handler: (data: KeyboardButtonPollType) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'replykeyboardremove' event (strongly typed)
      * @param event - Event name: 'replykeyboardremove'
@@ -8870,8 +10517,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardremove Telegram Bot API}
      */
-    on(event: 'replykeyboardremove', handler: (data: ReplyKeyboardRemove) => void | Promise<void>): this;
-    
+    on(
+      event: 'replykeyboardremove',
+      handler: (data: ReplyKeyboardRemove) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'replykeyboardremove' event with filtering
      * @param event - Event name: 'replykeyboardremove'
@@ -8880,7 +10530,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#replykeyboardremove Telegram Bot API}
      */
-    on(event: 'replykeyboardremove', filter: string | ((data: any) => boolean), handler: (data: ReplyKeyboardRemove) => void | Promise<void>): this;
+    on(
+      event: 'replykeyboardremove',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReplyKeyboardRemove) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinekeyboardmarkup' event (strongly typed)
      * @param event - Event name: 'inlinekeyboardmarkup'
@@ -8888,8 +10542,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardmarkup Telegram Bot API}
      */
-    on(event: 'inlinekeyboardmarkup', handler: (data: InlineKeyboardMarkup) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinekeyboardmarkup',
+      handler: (data: InlineKeyboardMarkup) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinekeyboardmarkup' event with filtering
      * @param event - Event name: 'inlinekeyboardmarkup'
@@ -8898,7 +10555,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardmarkup Telegram Bot API}
      */
-    on(event: 'inlinekeyboardmarkup', filter: string | ((data: any) => boolean), handler: (data: InlineKeyboardMarkup) => void | Promise<void>): this;
+    on(
+      event: 'inlinekeyboardmarkup',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineKeyboardMarkup) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinekeyboardbutton' event (strongly typed)
      * @param event - Event name: 'inlinekeyboardbutton'
@@ -8906,8 +10567,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardbutton Telegram Bot API}
      */
-    on(event: 'inlinekeyboardbutton', handler: (data: InlineKeyboardButton) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinekeyboardbutton',
+      handler: (data: InlineKeyboardButton) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinekeyboardbutton' event with filtering
      * @param event - Event name: 'inlinekeyboardbutton'
@@ -8916,7 +10580,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinekeyboardbutton Telegram Bot API}
      */
-    on(event: 'inlinekeyboardbutton', filter: string | ((data: any) => boolean), handler: (data: InlineKeyboardButton) => void | Promise<void>): this;
+    on(
+      event: 'inlinekeyboardbutton',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineKeyboardButton) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'loginurl' event (strongly typed)
      * @param event - Event name: 'loginurl'
@@ -8925,7 +10593,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#loginurl Telegram Bot API}
      */
     on(event: 'loginurl', handler: (data: LoginUrl) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'loginurl' event with filtering
      * @param event - Event name: 'loginurl'
@@ -8934,7 +10602,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#loginurl Telegram Bot API}
      */
-    on(event: 'loginurl', filter: string | ((data: any) => boolean), handler: (data: LoginUrl) => void | Promise<void>): this;
+    on(
+      event: 'loginurl',
+      filter: string | ((data: any) => boolean),
+      handler: (data: LoginUrl) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'switchinlinequerychosenchat' event (strongly typed)
      * @param event - Event name: 'switchinlinequerychosenchat'
@@ -8942,8 +10614,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#switchinlinequerychosenchat Telegram Bot API}
      */
-    on(event: 'switchinlinequerychosenchat', handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>): this;
-    
+    on(
+      event: 'switchinlinequerychosenchat',
+      handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'switchinlinequerychosenchat' event with filtering
      * @param event - Event name: 'switchinlinequerychosenchat'
@@ -8952,7 +10627,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#switchinlinequerychosenchat Telegram Bot API}
      */
-    on(event: 'switchinlinequerychosenchat', filter: string | ((data: any) => boolean), handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>): this;
+    on(
+      event: 'switchinlinequerychosenchat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SwitchInlineQueryChosenChat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'copytextbutton' event (strongly typed)
      * @param event - Event name: 'copytextbutton'
@@ -8961,7 +10640,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
     on(event: 'copytextbutton', handler: (data: CopyTextButton) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'copytextbutton' event with filtering
      * @param event - Event name: 'copytextbutton'
@@ -8970,7 +10649,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
-    on(event: 'copytextbutton', filter: string | ((data: any) => boolean), handler: (data: CopyTextButton) => void | Promise<void>): this;
+    on(
+      event: 'copytextbutton',
+      filter: string | ((data: any) => boolean),
+      handler: (data: CopyTextButton) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'callbackquery' event (strongly typed)
      * @param event - Event name: 'callbackquery'
@@ -8979,7 +10662,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#callbackquery Telegram Bot API}
      */
     on(event: 'callbackquery', handler: (data: CallbackQuery) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'callbackquery' event with filtering
      * @param event - Event name: 'callbackquery'
@@ -8988,7 +10671,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#callbackquery Telegram Bot API}
      */
-    on(event: 'callbackquery', filter: string | ((data: any) => boolean), handler: (data: CallbackQuery) => void | Promise<void>): this;
+    on(
+      event: 'callbackquery',
+      filter: string | ((data: any) => boolean),
+      handler: (data: CallbackQuery) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forcereply' event (strongly typed)
      * @param event - Event name: 'forcereply'
@@ -8997,7 +10684,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forcereply Telegram Bot API}
      */
     on(event: 'forcereply', handler: (data: ForceReply) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'forcereply' event with filtering
      * @param event - Event name: 'forcereply'
@@ -9006,7 +10693,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forcereply Telegram Bot API}
      */
-    on(event: 'forcereply', filter: string | ((data: any) => boolean), handler: (data: ForceReply) => void | Promise<void>): this;
+    on(
+      event: 'forcereply',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForceReply) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatphoto' event (strongly typed)
      * @param event - Event name: 'chatphoto'
@@ -9015,7 +10706,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatphoto Telegram Bot API}
      */
     on(event: 'chatphoto', handler: (data: ChatPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatphoto' event with filtering
      * @param event - Event name: 'chatphoto'
@@ -9024,7 +10715,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatphoto Telegram Bot API}
      */
-    on(event: 'chatphoto', filter: string | ((data: any) => boolean), handler: (data: ChatPhoto) => void | Promise<void>): this;
+    on(
+      event: 'chatphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatinvitelink' event (strongly typed)
      * @param event - Event name: 'chatinvitelink'
@@ -9033,7 +10728,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatinvitelink Telegram Bot API}
      */
     on(event: 'chatinvitelink', handler: (data: ChatInviteLink) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatinvitelink' event with filtering
      * @param event - Event name: 'chatinvitelink'
@@ -9042,7 +10737,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatinvitelink Telegram Bot API}
      */
-    on(event: 'chatinvitelink', filter: string | ((data: any) => boolean), handler: (data: ChatInviteLink) => void | Promise<void>): this;
+    on(
+      event: 'chatinvitelink',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatInviteLink) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatadministratorrights' event (strongly typed)
      * @param event - Event name: 'chatadministratorrights'
@@ -9050,8 +10749,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatadministratorrights Telegram Bot API}
      */
-    on(event: 'chatadministratorrights', handler: (data: ChatAdministratorRights) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatadministratorrights',
+      handler: (data: ChatAdministratorRights) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatadministratorrights' event with filtering
      * @param event - Event name: 'chatadministratorrights'
@@ -9060,7 +10762,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatadministratorrights Telegram Bot API}
      */
-    on(event: 'chatadministratorrights', filter: string | ((data: any) => boolean), handler: (data: ChatAdministratorRights) => void | Promise<void>): this;
+    on(
+      event: 'chatadministratorrights',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatAdministratorRights) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberupdated' event (strongly typed)
      * @param event - Event name: 'chatmemberupdated'
@@ -9068,8 +10774,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberupdated Telegram Bot API}
      */
-    on(event: 'chatmemberupdated', handler: (data: ChatMemberUpdated) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatmemberupdated',
+      handler: (data: ChatMemberUpdated) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatmemberupdated' event with filtering
      * @param event - Event name: 'chatmemberupdated'
@@ -9078,7 +10787,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberupdated Telegram Bot API}
      */
-    on(event: 'chatmemberupdated', filter: string | ((data: any) => boolean), handler: (data: ChatMemberUpdated) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberupdated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberUpdated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmember' event (strongly typed)
      * @param event - Event name: 'chatmember'
@@ -9087,7 +10800,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmember Telegram Bot API}
      */
     on(event: 'chatmember', handler: (data: ChatMember) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatmember' event with filtering
      * @param event - Event name: 'chatmember'
@@ -9096,7 +10809,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmember Telegram Bot API}
      */
-    on(event: 'chatmember', filter: string | ((data: any) => boolean), handler: (data: ChatMember) => void | Promise<void>): this;
+    on(
+      event: 'chatmember',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMember) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberowner' event (strongly typed)
      * @param event - Event name: 'chatmemberowner'
@@ -9105,7 +10822,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberowner Telegram Bot API}
      */
     on(event: 'chatmemberowner', handler: (data: ChatMemberOwner) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatmemberowner' event with filtering
      * @param event - Event name: 'chatmemberowner'
@@ -9114,7 +10831,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberowner Telegram Bot API}
      */
-    on(event: 'chatmemberowner', filter: string | ((data: any) => boolean), handler: (data: ChatMemberOwner) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberowner',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberOwner) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberadministrator' event (strongly typed)
      * @param event - Event name: 'chatmemberadministrator'
@@ -9122,8 +10843,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberadministrator Telegram Bot API}
      */
-    on(event: 'chatmemberadministrator', handler: (data: ChatMemberAdministrator) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatmemberadministrator',
+      handler: (data: ChatMemberAdministrator) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatmemberadministrator' event with filtering
      * @param event - Event name: 'chatmemberadministrator'
@@ -9132,7 +10856,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberadministrator Telegram Bot API}
      */
-    on(event: 'chatmemberadministrator', filter: string | ((data: any) => boolean), handler: (data: ChatMemberAdministrator) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberadministrator',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberAdministrator) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmembermember' event (strongly typed)
      * @param event - Event name: 'chatmembermember'
@@ -9141,7 +10869,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmembermember Telegram Bot API}
      */
     on(event: 'chatmembermember', handler: (data: ChatMemberMember) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatmembermember' event with filtering
      * @param event - Event name: 'chatmembermember'
@@ -9150,7 +10878,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmembermember Telegram Bot API}
      */
-    on(event: 'chatmembermember', filter: string | ((data: any) => boolean), handler: (data: ChatMemberMember) => void | Promise<void>): this;
+    on(
+      event: 'chatmembermember',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberMember) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberrestricted' event (strongly typed)
      * @param event - Event name: 'chatmemberrestricted'
@@ -9158,8 +10890,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberrestricted Telegram Bot API}
      */
-    on(event: 'chatmemberrestricted', handler: (data: ChatMemberRestricted) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatmemberrestricted',
+      handler: (data: ChatMemberRestricted) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatmemberrestricted' event with filtering
      * @param event - Event name: 'chatmemberrestricted'
@@ -9168,7 +10903,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberrestricted Telegram Bot API}
      */
-    on(event: 'chatmemberrestricted', filter: string | ((data: any) => boolean), handler: (data: ChatMemberRestricted) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberrestricted',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberRestricted) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberleft' event (strongly typed)
      * @param event - Event name: 'chatmemberleft'
@@ -9177,7 +10916,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberleft Telegram Bot API}
      */
     on(event: 'chatmemberleft', handler: (data: ChatMemberLeft) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatmemberleft' event with filtering
      * @param event - Event name: 'chatmemberleft'
@@ -9186,7 +10925,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberleft Telegram Bot API}
      */
-    on(event: 'chatmemberleft', filter: string | ((data: any) => boolean), handler: (data: ChatMemberLeft) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberleft',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberLeft) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatmemberbanned' event (strongly typed)
      * @param event - Event name: 'chatmemberbanned'
@@ -9195,7 +10938,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatmemberbanned Telegram Bot API}
      */
     on(event: 'chatmemberbanned', handler: (data: ChatMemberBanned) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatmemberbanned' event with filtering
      * @param event - Event name: 'chatmemberbanned'
@@ -9204,7 +10947,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatmemberbanned Telegram Bot API}
      */
-    on(event: 'chatmemberbanned', filter: string | ((data: any) => boolean), handler: (data: ChatMemberBanned) => void | Promise<void>): this;
+    on(
+      event: 'chatmemberbanned',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatMemberBanned) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatjoinrequest' event (strongly typed)
      * @param event - Event name: 'chatjoinrequest'
@@ -9213,7 +10960,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatjoinrequest Telegram Bot API}
      */
     on(event: 'chatjoinrequest', handler: (data: ChatJoinRequest) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatjoinrequest' event with filtering
      * @param event - Event name: 'chatjoinrequest'
@@ -9222,7 +10969,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatjoinrequest Telegram Bot API}
      */
-    on(event: 'chatjoinrequest', filter: string | ((data: any) => boolean), handler: (data: ChatJoinRequest) => void | Promise<void>): this;
+    on(
+      event: 'chatjoinrequest',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatJoinRequest) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatpermissions' event (strongly typed)
      * @param event - Event name: 'chatpermissions'
@@ -9231,7 +10982,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatpermissions Telegram Bot API}
      */
     on(event: 'chatpermissions', handler: (data: ChatPermissions) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatpermissions' event with filtering
      * @param event - Event name: 'chatpermissions'
@@ -9240,7 +10991,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatpermissions Telegram Bot API}
      */
-    on(event: 'chatpermissions', filter: string | ((data: any) => boolean), handler: (data: ChatPermissions) => void | Promise<void>): this;
+    on(
+      event: 'chatpermissions',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatPermissions) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'birthdate' event (strongly typed)
      * @param event - Event name: 'birthdate'
@@ -9249,7 +11004,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#birthdate Telegram Bot API}
      */
     on(event: 'birthdate', handler: (data: Birthdate) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'birthdate' event with filtering
      * @param event - Event name: 'birthdate'
@@ -9258,7 +11013,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#birthdate Telegram Bot API}
      */
-    on(event: 'birthdate', filter: string | ((data: any) => boolean), handler: (data: Birthdate) => void | Promise<void>): this;
+    on(
+      event: 'birthdate',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Birthdate) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessintro' event (strongly typed)
      * @param event - Event name: 'businessintro'
@@ -9267,7 +11026,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businessintro Telegram Bot API}
      */
     on(event: 'businessintro', handler: (data: BusinessIntro) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'businessintro' event with filtering
      * @param event - Event name: 'businessintro'
@@ -9276,7 +11035,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessintro Telegram Bot API}
      */
-    on(event: 'businessintro', filter: string | ((data: any) => boolean), handler: (data: BusinessIntro) => void | Promise<void>): this;
+    on(
+      event: 'businessintro',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessIntro) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businesslocation' event (strongly typed)
      * @param event - Event name: 'businesslocation'
@@ -9285,7 +11048,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#businesslocation Telegram Bot API}
      */
     on(event: 'businesslocation', handler: (data: BusinessLocation) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'businesslocation' event with filtering
      * @param event - Event name: 'businesslocation'
@@ -9294,7 +11057,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businesslocation Telegram Bot API}
      */
-    on(event: 'businesslocation', filter: string | ((data: any) => boolean), handler: (data: BusinessLocation) => void | Promise<void>): this;
+    on(
+      event: 'businesslocation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessLocation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessopeninghoursinterval' event (strongly typed)
      * @param event - Event name: 'businessopeninghoursinterval'
@@ -9302,8 +11069,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghoursinterval Telegram Bot API}
      */
-    on(event: 'businessopeninghoursinterval', handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>): this;
-    
+    on(
+      event: 'businessopeninghoursinterval',
+      handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'businessopeninghoursinterval' event with filtering
      * @param event - Event name: 'businessopeninghoursinterval'
@@ -9312,7 +11082,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghoursinterval Telegram Bot API}
      */
-    on(event: 'businessopeninghoursinterval', filter: string | ((data: any) => boolean), handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>): this;
+    on(
+      event: 'businessopeninghoursinterval',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessOpeningHoursInterval) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessopeninghours' event (strongly typed)
      * @param event - Event name: 'businessopeninghours'
@@ -9320,8 +11094,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghours Telegram Bot API}
      */
-    on(event: 'businessopeninghours', handler: (data: BusinessOpeningHours) => void | Promise<void>): this;
-    
+    on(
+      event: 'businessopeninghours',
+      handler: (data: BusinessOpeningHours) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'businessopeninghours' event with filtering
      * @param event - Event name: 'businessopeninghours'
@@ -9330,7 +11107,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessopeninghours Telegram Bot API}
      */
-    on(event: 'businessopeninghours', filter: string | ((data: any) => boolean), handler: (data: BusinessOpeningHours) => void | Promise<void>): this;
+    on(
+      event: 'businessopeninghours',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessOpeningHours) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareaposition' event (strongly typed)
      * @param event - Event name: 'storyareaposition'
@@ -9338,8 +11119,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareaposition Telegram Bot API}
      */
-    on(event: 'storyareaposition', handler: (data: StoryAreaPosition) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareaposition',
+      handler: (data: StoryAreaPosition) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareaposition' event with filtering
      * @param event - Event name: 'storyareaposition'
@@ -9348,7 +11132,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareaposition Telegram Bot API}
      */
-    on(event: 'storyareaposition', filter: string | ((data: any) => boolean), handler: (data: StoryAreaPosition) => void | Promise<void>): this;
+    on(
+      event: 'storyareaposition',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaPosition) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'locationaddress' event (strongly typed)
      * @param event - Event name: 'locationaddress'
@@ -9357,7 +11145,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#locationaddress Telegram Bot API}
      */
     on(event: 'locationaddress', handler: (data: LocationAddress) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'locationaddress' event with filtering
      * @param event - Event name: 'locationaddress'
@@ -9366,7 +11154,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#locationaddress Telegram Bot API}
      */
-    on(event: 'locationaddress', filter: string | ((data: any) => boolean), handler: (data: LocationAddress) => void | Promise<void>): this;
+    on(
+      event: 'locationaddress',
+      filter: string | ((data: any) => boolean),
+      handler: (data: LocationAddress) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatype' event (strongly typed)
      * @param event - Event name: 'storyareatype'
@@ -9375,7 +11167,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyareatype Telegram Bot API}
      */
     on(event: 'storyareatype', handler: (data: StoryAreaType) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'storyareatype' event with filtering
      * @param event - Event name: 'storyareatype'
@@ -9384,7 +11176,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatype Telegram Bot API}
      */
-    on(event: 'storyareatype', filter: string | ((data: any) => boolean), handler: (data: StoryAreaType) => void | Promise<void>): this;
+    on(
+      event: 'storyareatype',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaType) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatypelocation' event (strongly typed)
      * @param event - Event name: 'storyareatypelocation'
@@ -9392,8 +11188,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelocation Telegram Bot API}
      */
-    on(event: 'storyareatypelocation', handler: (data: StoryAreaTypeLocation) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareatypelocation',
+      handler: (data: StoryAreaTypeLocation) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareatypelocation' event with filtering
      * @param event - Event name: 'storyareatypelocation'
@@ -9402,7 +11201,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelocation Telegram Bot API}
      */
-    on(event: 'storyareatypelocation', filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeLocation) => void | Promise<void>): this;
+    on(
+      event: 'storyareatypelocation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeLocation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatypesuggestedreaction' event (strongly typed)
      * @param event - Event name: 'storyareatypesuggestedreaction'
@@ -9410,8 +11213,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypesuggestedreaction Telegram Bot API}
      */
-    on(event: 'storyareatypesuggestedreaction', handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareatypesuggestedreaction',
+      handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareatypesuggestedreaction' event with filtering
      * @param event - Event name: 'storyareatypesuggestedreaction'
@@ -9420,7 +11226,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypesuggestedreaction Telegram Bot API}
      */
-    on(event: 'storyareatypesuggestedreaction', filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>): this;
+    on(
+      event: 'storyareatypesuggestedreaction',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeSuggestedReaction) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatypelink' event (strongly typed)
      * @param event - Event name: 'storyareatypelink'
@@ -9428,8 +11238,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelink Telegram Bot API}
      */
-    on(event: 'storyareatypelink', handler: (data: StoryAreaTypeLink) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareatypelink',
+      handler: (data: StoryAreaTypeLink) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareatypelink' event with filtering
      * @param event - Event name: 'storyareatypelink'
@@ -9438,7 +11251,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypelink Telegram Bot API}
      */
-    on(event: 'storyareatypelink', filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeLink) => void | Promise<void>): this;
+    on(
+      event: 'storyareatypelink',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeLink) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatypeweather' event (strongly typed)
      * @param event - Event name: 'storyareatypeweather'
@@ -9446,8 +11263,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeweather Telegram Bot API}
      */
-    on(event: 'storyareatypeweather', handler: (data: StoryAreaTypeWeather) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareatypeweather',
+      handler: (data: StoryAreaTypeWeather) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareatypeweather' event with filtering
      * @param event - Event name: 'storyareatypeweather'
@@ -9456,7 +11276,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeweather Telegram Bot API}
      */
-    on(event: 'storyareatypeweather', filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeWeather) => void | Promise<void>): this;
+    on(
+      event: 'storyareatypeweather',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeWeather) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyareatypeuniquegift' event (strongly typed)
      * @param event - Event name: 'storyareatypeuniquegift'
@@ -9464,8 +11288,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeuniquegift Telegram Bot API}
      */
-    on(event: 'storyareatypeuniquegift', handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>): this;
-    
+    on(
+      event: 'storyareatypeuniquegift',
+      handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'storyareatypeuniquegift' event with filtering
      * @param event - Event name: 'storyareatypeuniquegift'
@@ -9474,7 +11301,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyareatypeuniquegift Telegram Bot API}
      */
-    on(event: 'storyareatypeuniquegift', filter: string | ((data: any) => boolean), handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>): this;
+    on(
+      event: 'storyareatypeuniquegift',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryAreaTypeUniqueGift) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'storyarea' event (strongly typed)
      * @param event - Event name: 'storyarea'
@@ -9483,7 +11314,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#storyarea Telegram Bot API}
      */
     on(event: 'storyarea', handler: (data: StoryArea) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'storyarea' event with filtering
      * @param event - Event name: 'storyarea'
@@ -9492,7 +11323,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#storyarea Telegram Bot API}
      */
-    on(event: 'storyarea', filter: string | ((data: any) => boolean), handler: (data: StoryArea) => void | Promise<void>): this;
+    on(
+      event: 'storyarea',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StoryArea) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatlocation' event (strongly typed)
      * @param event - Event name: 'chatlocation'
@@ -9501,7 +11336,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatlocation Telegram Bot API}
      */
     on(event: 'chatlocation', handler: (data: ChatLocation) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatlocation' event with filtering
      * @param event - Event name: 'chatlocation'
@@ -9510,7 +11345,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatlocation Telegram Bot API}
      */
-    on(event: 'chatlocation', filter: string | ((data: any) => boolean), handler: (data: ChatLocation) => void | Promise<void>): this;
+    on(
+      event: 'chatlocation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatLocation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'reactiontype' event (strongly typed)
      * @param event - Event name: 'reactiontype'
@@ -9519,7 +11358,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactiontype Telegram Bot API}
      */
     on(event: 'reactiontype', handler: (data: ReactionType) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'reactiontype' event with filtering
      * @param event - Event name: 'reactiontype'
@@ -9528,7 +11367,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontype Telegram Bot API}
      */
-    on(event: 'reactiontype', filter: string | ((data: any) => boolean), handler: (data: ReactionType) => void | Promise<void>): this;
+    on(
+      event: 'reactiontype',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionType) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'reactiontypeemoji' event (strongly typed)
      * @param event - Event name: 'reactiontypeemoji'
@@ -9536,8 +11379,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypeemoji Telegram Bot API}
      */
-    on(event: 'reactiontypeemoji', handler: (data: ReactionTypeEmoji) => void | Promise<void>): this;
-    
+    on(
+      event: 'reactiontypeemoji',
+      handler: (data: ReactionTypeEmoji) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'reactiontypeemoji' event with filtering
      * @param event - Event name: 'reactiontypeemoji'
@@ -9546,7 +11392,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypeemoji Telegram Bot API}
      */
-    on(event: 'reactiontypeemoji', filter: string | ((data: any) => boolean), handler: (data: ReactionTypeEmoji) => void | Promise<void>): this;
+    on(
+      event: 'reactiontypeemoji',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypeEmoji) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'reactiontypecustomemoji' event (strongly typed)
      * @param event - Event name: 'reactiontypecustomemoji'
@@ -9554,8 +11404,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypecustomemoji Telegram Bot API}
      */
-    on(event: 'reactiontypecustomemoji', handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>): this;
-    
+    on(
+      event: 'reactiontypecustomemoji',
+      handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'reactiontypecustomemoji' event with filtering
      * @param event - Event name: 'reactiontypecustomemoji'
@@ -9564,7 +11417,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypecustomemoji Telegram Bot API}
      */
-    on(event: 'reactiontypecustomemoji', filter: string | ((data: any) => boolean), handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>): this;
+    on(
+      event: 'reactiontypecustomemoji',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypeCustomEmoji) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'reactiontypepaid' event (strongly typed)
      * @param event - Event name: 'reactiontypepaid'
@@ -9573,7 +11430,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactiontypepaid Telegram Bot API}
      */
     on(event: 'reactiontypepaid', handler: (data: ReactionTypePaid) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'reactiontypepaid' event with filtering
      * @param event - Event name: 'reactiontypepaid'
@@ -9582,7 +11439,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactiontypepaid Telegram Bot API}
      */
-    on(event: 'reactiontypepaid', filter: string | ((data: any) => boolean), handler: (data: ReactionTypePaid) => void | Promise<void>): this;
+    on(
+      event: 'reactiontypepaid',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionTypePaid) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'reactioncount' event (strongly typed)
      * @param event - Event name: 'reactioncount'
@@ -9591,7 +11452,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#reactioncount Telegram Bot API}
      */
     on(event: 'reactioncount', handler: (data: ReactionCount) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'reactioncount' event with filtering
      * @param event - Event name: 'reactioncount'
@@ -9600,7 +11461,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#reactioncount Telegram Bot API}
      */
-    on(event: 'reactioncount', filter: string | ((data: any) => boolean), handler: (data: ReactionCount) => void | Promise<void>): this;
+    on(
+      event: 'reactioncount',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ReactionCount) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messagereactionupdated' event (strongly typed)
      * @param event - Event name: 'messagereactionupdated'
@@ -9608,8 +11473,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactionupdated Telegram Bot API}
      */
-    on(event: 'messagereactionupdated', handler: (data: MessageReactionUpdated) => void | Promise<void>): this;
-    
+    on(
+      event: 'messagereactionupdated',
+      handler: (data: MessageReactionUpdated) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messagereactionupdated' event with filtering
      * @param event - Event name: 'messagereactionupdated'
@@ -9618,7 +11486,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactionupdated Telegram Bot API}
      */
-    on(event: 'messagereactionupdated', filter: string | ((data: any) => boolean), handler: (data: MessageReactionUpdated) => void | Promise<void>): this;
+    on(
+      event: 'messagereactionupdated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageReactionUpdated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'messagereactioncountupdated' event (strongly typed)
      * @param event - Event name: 'messagereactioncountupdated'
@@ -9626,8 +11498,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactioncountupdated Telegram Bot API}
      */
-    on(event: 'messagereactioncountupdated', handler: (data: MessageReactionCountUpdated) => void | Promise<void>): this;
-    
+    on(
+      event: 'messagereactioncountupdated',
+      handler: (data: MessageReactionCountUpdated) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'messagereactioncountupdated' event with filtering
      * @param event - Event name: 'messagereactioncountupdated'
@@ -9636,7 +11511,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#messagereactioncountupdated Telegram Bot API}
      */
-    on(event: 'messagereactioncountupdated', filter: string | ((data: any) => boolean), handler: (data: MessageReactionCountUpdated) => void | Promise<void>): this;
+    on(
+      event: 'messagereactioncountupdated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MessageReactionCountUpdated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'forumtopic' event (strongly typed)
      * @param event - Event name: 'forumtopic'
@@ -9645,7 +11524,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#forumtopic Telegram Bot API}
      */
     on(event: 'forumtopic', handler: (data: ForumTopic) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'forumtopic' event with filtering
      * @param event - Event name: 'forumtopic'
@@ -9654,7 +11533,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#forumtopic Telegram Bot API}
      */
-    on(event: 'forumtopic', filter: string | ((data: any) => boolean), handler: (data: ForumTopic) => void | Promise<void>): this;
+    on(
+      event: 'forumtopic',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ForumTopic) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'gift' event (strongly typed)
      * @param event - Event name: 'gift'
@@ -9663,7 +11546,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gift Telegram Bot API}
      */
     on(event: 'gift', handler: (data: Gift) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'gift' event with filtering
      * @param event - Event name: 'gift'
@@ -9672,7 +11555,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gift Telegram Bot API}
      */
-    on(event: 'gift', filter: string | ((data: any) => boolean), handler: (data: Gift) => void | Promise<void>): this;
+    on(
+      event: 'gift',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Gift) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'gifts' event (strongly typed)
      * @param event - Event name: 'gifts'
@@ -9681,7 +11568,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gifts Telegram Bot API}
      */
     on(event: 'gifts', handler: (data: Gifts) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'gifts' event with filtering
      * @param event - Event name: 'gifts'
@@ -9690,7 +11577,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gifts Telegram Bot API}
      */
-    on(event: 'gifts', filter: string | ((data: any) => boolean), handler: (data: Gifts) => void | Promise<void>): this;
+    on(
+      event: 'gifts',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Gifts) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegiftmodel' event (strongly typed)
      * @param event - Event name: 'uniquegiftmodel'
@@ -9699,7 +11590,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftmodel Telegram Bot API}
      */
     on(event: 'uniquegiftmodel', handler: (data: UniqueGiftModel) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'uniquegiftmodel' event with filtering
      * @param event - Event name: 'uniquegiftmodel'
@@ -9708,7 +11599,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftmodel Telegram Bot API}
      */
-    on(event: 'uniquegiftmodel', filter: string | ((data: any) => boolean), handler: (data: UniqueGiftModel) => void | Promise<void>): this;
+    on(
+      event: 'uniquegiftmodel',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftModel) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegiftsymbol' event (strongly typed)
      * @param event - Event name: 'uniquegiftsymbol'
@@ -9717,7 +11612,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftsymbol Telegram Bot API}
      */
     on(event: 'uniquegiftsymbol', handler: (data: UniqueGiftSymbol) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'uniquegiftsymbol' event with filtering
      * @param event - Event name: 'uniquegiftsymbol'
@@ -9726,7 +11621,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftsymbol Telegram Bot API}
      */
-    on(event: 'uniquegiftsymbol', filter: string | ((data: any) => boolean), handler: (data: UniqueGiftSymbol) => void | Promise<void>): this;
+    on(
+      event: 'uniquegiftsymbol',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftSymbol) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegiftbackdropcolors' event (strongly typed)
      * @param event - Event name: 'uniquegiftbackdropcolors'
@@ -9734,8 +11633,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdropcolors Telegram Bot API}
      */
-    on(event: 'uniquegiftbackdropcolors', handler: (data: UniqueGiftBackdropColors) => void | Promise<void>): this;
-    
+    on(
+      event: 'uniquegiftbackdropcolors',
+      handler: (data: UniqueGiftBackdropColors) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'uniquegiftbackdropcolors' event with filtering
      * @param event - Event name: 'uniquegiftbackdropcolors'
@@ -9744,7 +11646,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdropcolors Telegram Bot API}
      */
-    on(event: 'uniquegiftbackdropcolors', filter: string | ((data: any) => boolean), handler: (data: UniqueGiftBackdropColors) => void | Promise<void>): this;
+    on(
+      event: 'uniquegiftbackdropcolors',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftBackdropColors) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegiftbackdrop' event (strongly typed)
      * @param event - Event name: 'uniquegiftbackdrop'
@@ -9752,8 +11658,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdrop Telegram Bot API}
      */
-    on(event: 'uniquegiftbackdrop', handler: (data: UniqueGiftBackdrop) => void | Promise<void>): this;
-    
+    on(
+      event: 'uniquegiftbackdrop',
+      handler: (data: UniqueGiftBackdrop) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'uniquegiftbackdrop' event with filtering
      * @param event - Event name: 'uniquegiftbackdrop'
@@ -9762,7 +11671,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftbackdrop Telegram Bot API}
      */
-    on(event: 'uniquegiftbackdrop', filter: string | ((data: any) => boolean), handler: (data: UniqueGiftBackdrop) => void | Promise<void>): this;
+    on(
+      event: 'uniquegiftbackdrop',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftBackdrop) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegift' event (strongly typed)
      * @param event - Event name: 'uniquegift'
@@ -9771,7 +11684,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegift Telegram Bot API}
      */
     on(event: 'uniquegift', handler: (data: UniqueGift) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'uniquegift' event with filtering
      * @param event - Event name: 'uniquegift'
@@ -9780,7 +11693,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegift Telegram Bot API}
      */
-    on(event: 'uniquegift', filter: string | ((data: any) => boolean), handler: (data: UniqueGift) => void | Promise<void>): this;
+    on(
+      event: 'uniquegift',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGift) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'giftinfo' event (strongly typed)
      * @param event - Event name: 'giftinfo'
@@ -9789,7 +11706,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#giftinfo Telegram Bot API}
      */
     on(event: 'giftinfo', handler: (data: GiftInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'giftinfo' event with filtering
      * @param event - Event name: 'giftinfo'
@@ -9798,7 +11715,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#giftinfo Telegram Bot API}
      */
-    on(event: 'giftinfo', filter: string | ((data: any) => boolean), handler: (data: GiftInfo) => void | Promise<void>): this;
+    on(
+      event: 'giftinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GiftInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'uniquegiftinfo' event (strongly typed)
      * @param event - Event name: 'uniquegiftinfo'
@@ -9807,7 +11728,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#uniquegiftinfo Telegram Bot API}
      */
     on(event: 'uniquegiftinfo', handler: (data: UniqueGiftInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'uniquegiftinfo' event with filtering
      * @param event - Event name: 'uniquegiftinfo'
@@ -9816,7 +11737,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#uniquegiftinfo Telegram Bot API}
      */
-    on(event: 'uniquegiftinfo', filter: string | ((data: any) => boolean), handler: (data: UniqueGiftInfo) => void | Promise<void>): this;
+    on(
+      event: 'uniquegiftinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UniqueGiftInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'ownedgift' event (strongly typed)
      * @param event - Event name: 'ownedgift'
@@ -9825,7 +11750,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgift Telegram Bot API}
      */
     on(event: 'ownedgift', handler: (data: OwnedGift) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'ownedgift' event with filtering
      * @param event - Event name: 'ownedgift'
@@ -9834,7 +11759,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgift Telegram Bot API}
      */
-    on(event: 'ownedgift', filter: string | ((data: any) => boolean), handler: (data: OwnedGift) => void | Promise<void>): this;
+    on(
+      event: 'ownedgift',
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGift) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'ownedgiftregular' event (strongly typed)
      * @param event - Event name: 'ownedgiftregular'
@@ -9843,7 +11772,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgiftregular Telegram Bot API}
      */
     on(event: 'ownedgiftregular', handler: (data: OwnedGiftRegular) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'ownedgiftregular' event with filtering
      * @param event - Event name: 'ownedgiftregular'
@@ -9852,7 +11781,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgiftregular Telegram Bot API}
      */
-    on(event: 'ownedgiftregular', filter: string | ((data: any) => boolean), handler: (data: OwnedGiftRegular) => void | Promise<void>): this;
+    on(
+      event: 'ownedgiftregular',
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGiftRegular) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'ownedgiftunique' event (strongly typed)
      * @param event - Event name: 'ownedgiftunique'
@@ -9861,7 +11794,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgiftunique Telegram Bot API}
      */
     on(event: 'ownedgiftunique', handler: (data: OwnedGiftUnique) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'ownedgiftunique' event with filtering
      * @param event - Event name: 'ownedgiftunique'
@@ -9870,7 +11803,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgiftunique Telegram Bot API}
      */
-    on(event: 'ownedgiftunique', filter: string | ((data: any) => boolean), handler: (data: OwnedGiftUnique) => void | Promise<void>): this;
+    on(
+      event: 'ownedgiftunique',
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGiftUnique) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'ownedgifts' event (strongly typed)
      * @param event - Event name: 'ownedgifts'
@@ -9879,7 +11816,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#ownedgifts Telegram Bot API}
      */
     on(event: 'ownedgifts', handler: (data: OwnedGifts) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'ownedgifts' event with filtering
      * @param event - Event name: 'ownedgifts'
@@ -9888,7 +11825,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#ownedgifts Telegram Bot API}
      */
-    on(event: 'ownedgifts', filter: string | ((data: any) => boolean), handler: (data: OwnedGifts) => void | Promise<void>): this;
+    on(
+      event: 'ownedgifts',
+      filter: string | ((data: any) => boolean),
+      handler: (data: OwnedGifts) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'acceptedgifttypes' event (strongly typed)
      * @param event - Event name: 'acceptedgifttypes'
@@ -9896,8 +11837,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#acceptedgifttypes Telegram Bot API}
      */
-    on(event: 'acceptedgifttypes', handler: (data: AcceptedGiftTypes) => void | Promise<void>): this;
-    
+    on(
+      event: 'acceptedgifttypes',
+      handler: (data: AcceptedGiftTypes) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'acceptedgifttypes' event with filtering
      * @param event - Event name: 'acceptedgifttypes'
@@ -9906,7 +11850,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#acceptedgifttypes Telegram Bot API}
      */
-    on(event: 'acceptedgifttypes', filter: string | ((data: any) => boolean), handler: (data: AcceptedGiftTypes) => void | Promise<void>): this;
+    on(
+      event: 'acceptedgifttypes',
+      filter: string | ((data: any) => boolean),
+      handler: (data: AcceptedGiftTypes) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'staramount' event (strongly typed)
      * @param event - Event name: 'staramount'
@@ -9915,7 +11863,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#staramount Telegram Bot API}
      */
     on(event: 'staramount', handler: (data: StarAmount) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'staramount' event with filtering
      * @param event - Event name: 'staramount'
@@ -9924,7 +11872,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#staramount Telegram Bot API}
      */
-    on(event: 'staramount', filter: string | ((data: any) => boolean), handler: (data: StarAmount) => void | Promise<void>): this;
+    on(
+      event: 'staramount',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarAmount) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommand' event (strongly typed)
      * @param event - Event name: 'botcommand'
@@ -9933,7 +11885,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommand Telegram Bot API}
      */
     on(event: 'botcommand', handler: (data: BotCommand) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'botcommand' event with filtering
      * @param event - Event name: 'botcommand'
@@ -9942,7 +11894,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommand Telegram Bot API}
      */
-    on(event: 'botcommand', filter: string | ((data: any) => boolean), handler: (data: BotCommand) => void | Promise<void>): this;
+    on(
+      event: 'botcommand',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommand) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscope' event (strongly typed)
      * @param event - Event name: 'botcommandscope'
@@ -9951,7 +11907,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botcommandscope Telegram Bot API}
      */
     on(event: 'botcommandscope', handler: (data: BotCommandScope) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'botcommandscope' event with filtering
      * @param event - Event name: 'botcommandscope'
@@ -9960,7 +11916,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscope Telegram Bot API}
      */
-    on(event: 'botcommandscope', filter: string | ((data: any) => boolean), handler: (data: BotCommandScope) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscope',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScope) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopedefault' event (strongly typed)
      * @param event - Event name: 'botcommandscopedefault'
@@ -9968,8 +11928,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopedefault Telegram Bot API}
      */
-    on(event: 'botcommandscopedefault', handler: (data: BotCommandScopeDefault) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopedefault',
+      handler: (data: BotCommandScopeDefault) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopedefault' event with filtering
      * @param event - Event name: 'botcommandscopedefault'
@@ -9978,7 +11941,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopedefault Telegram Bot API}
      */
-    on(event: 'botcommandscopedefault', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeDefault) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopedefault',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeDefault) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopeallprivatechats' event (strongly typed)
      * @param event - Event name: 'botcommandscopeallprivatechats'
@@ -9986,8 +11953,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallprivatechats Telegram Bot API}
      */
-    on(event: 'botcommandscopeallprivatechats', handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopeallprivatechats',
+      handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopeallprivatechats' event with filtering
      * @param event - Event name: 'botcommandscopeallprivatechats'
@@ -9996,7 +11966,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallprivatechats Telegram Bot API}
      */
-    on(event: 'botcommandscopeallprivatechats', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopeallprivatechats',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllPrivateChats) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopeallgroupchats' event (strongly typed)
      * @param event - Event name: 'botcommandscopeallgroupchats'
@@ -10004,8 +11978,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallgroupchats Telegram Bot API}
      */
-    on(event: 'botcommandscopeallgroupchats', handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopeallgroupchats',
+      handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopeallgroupchats' event with filtering
      * @param event - Event name: 'botcommandscopeallgroupchats'
@@ -10014,7 +11991,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallgroupchats Telegram Bot API}
      */
-    on(event: 'botcommandscopeallgroupchats', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopeallgroupchats',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllGroupChats) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopeallchatadministrators' event (strongly typed)
      * @param event - Event name: 'botcommandscopeallchatadministrators'
@@ -10022,8 +12003,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallchatadministrators Telegram Bot API}
      */
-    on(event: 'botcommandscopeallchatadministrators', handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopeallchatadministrators',
+      handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopeallchatadministrators' event with filtering
      * @param event - Event name: 'botcommandscopeallchatadministrators'
@@ -10032,7 +12016,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopeallchatadministrators Telegram Bot API}
      */
-    on(event: 'botcommandscopeallchatadministrators', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopeallchatadministrators',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeAllChatAdministrators) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopechat' event (strongly typed)
      * @param event - Event name: 'botcommandscopechat'
@@ -10040,8 +12028,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechat Telegram Bot API}
      */
-    on(event: 'botcommandscopechat', handler: (data: BotCommandScopeChat) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopechat',
+      handler: (data: BotCommandScopeChat) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopechat' event with filtering
      * @param event - Event name: 'botcommandscopechat'
@@ -10050,7 +12041,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechat Telegram Bot API}
      */
-    on(event: 'botcommandscopechat', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChat) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopechat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopechatadministrators' event (strongly typed)
      * @param event - Event name: 'botcommandscopechatadministrators'
@@ -10058,8 +12053,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatadministrators Telegram Bot API}
      */
-    on(event: 'botcommandscopechatadministrators', handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopechatadministrators',
+      handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopechatadministrators' event with filtering
      * @param event - Event name: 'botcommandscopechatadministrators'
@@ -10068,7 +12066,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatadministrators Telegram Bot API}
      */
-    on(event: 'botcommandscopechatadministrators', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopechatadministrators',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChatAdministrators) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botcommandscopechatmember' event (strongly typed)
      * @param event - Event name: 'botcommandscopechatmember'
@@ -10076,8 +12078,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatmember Telegram Bot API}
      */
-    on(event: 'botcommandscopechatmember', handler: (data: BotCommandScopeChatMember) => void | Promise<void>): this;
-    
+    on(
+      event: 'botcommandscopechatmember',
+      handler: (data: BotCommandScopeChatMember) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botcommandscopechatmember' event with filtering
      * @param event - Event name: 'botcommandscopechatmember'
@@ -10086,7 +12091,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botcommandscopechatmember Telegram Bot API}
      */
-    on(event: 'botcommandscopechatmember', filter: string | ((data: any) => boolean), handler: (data: BotCommandScopeChatMember) => void | Promise<void>): this;
+    on(
+      event: 'botcommandscopechatmember',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotCommandScopeChatMember) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botname' event (strongly typed)
      * @param event - Event name: 'botname'
@@ -10095,7 +12104,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botname Telegram Bot API}
      */
     on(event: 'botname', handler: (data: BotName) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'botname' event with filtering
      * @param event - Event name: 'botname'
@@ -10104,7 +12113,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botname Telegram Bot API}
      */
-    on(event: 'botname', filter: string | ((data: any) => boolean), handler: (data: BotName) => void | Promise<void>): this;
+    on(
+      event: 'botname',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotName) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botdescription' event (strongly typed)
      * @param event - Event name: 'botdescription'
@@ -10113,7 +12126,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#botdescription Telegram Bot API}
      */
     on(event: 'botdescription', handler: (data: BotDescription) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'botdescription' event with filtering
      * @param event - Event name: 'botdescription'
@@ -10122,7 +12135,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botdescription Telegram Bot API}
      */
-    on(event: 'botdescription', filter: string | ((data: any) => boolean), handler: (data: BotDescription) => void | Promise<void>): this;
+    on(
+      event: 'botdescription',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotDescription) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'botshortdescription' event (strongly typed)
      * @param event - Event name: 'botshortdescription'
@@ -10130,8 +12147,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botshortdescription Telegram Bot API}
      */
-    on(event: 'botshortdescription', handler: (data: BotShortDescription) => void | Promise<void>): this;
-    
+    on(
+      event: 'botshortdescription',
+      handler: (data: BotShortDescription) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'botshortdescription' event with filtering
      * @param event - Event name: 'botshortdescription'
@@ -10140,7 +12160,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#botshortdescription Telegram Bot API}
      */
-    on(event: 'botshortdescription', filter: string | ((data: any) => boolean), handler: (data: BotShortDescription) => void | Promise<void>): this;
+    on(
+      event: 'botshortdescription',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BotShortDescription) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'menubutton' event (strongly typed)
      * @param event - Event name: 'menubutton'
@@ -10149,7 +12173,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubutton Telegram Bot API}
      */
     on(event: 'menubutton', handler: (data: MenuButton) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'menubutton' event with filtering
      * @param event - Event name: 'menubutton'
@@ -10158,7 +12182,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubutton Telegram Bot API}
      */
-    on(event: 'menubutton', filter: string | ((data: any) => boolean), handler: (data: MenuButton) => void | Promise<void>): this;
+    on(
+      event: 'menubutton',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButton) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'menubuttoncommands' event (strongly typed)
      * @param event - Event name: 'menubuttoncommands'
@@ -10166,8 +12194,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttoncommands Telegram Bot API}
      */
-    on(event: 'menubuttoncommands', handler: (data: MenuButtonCommands) => void | Promise<void>): this;
-    
+    on(
+      event: 'menubuttoncommands',
+      handler: (data: MenuButtonCommands) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'menubuttoncommands' event with filtering
      * @param event - Event name: 'menubuttoncommands'
@@ -10176,7 +12207,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttoncommands Telegram Bot API}
      */
-    on(event: 'menubuttoncommands', filter: string | ((data: any) => boolean), handler: (data: MenuButtonCommands) => void | Promise<void>): this;
+    on(
+      event: 'menubuttoncommands',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonCommands) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'menubuttonwebapp' event (strongly typed)
      * @param event - Event name: 'menubuttonwebapp'
@@ -10185,7 +12220,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#menubuttonwebapp Telegram Bot API}
      */
     on(event: 'menubuttonwebapp', handler: (data: MenuButtonWebApp) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'menubuttonwebapp' event with filtering
      * @param event - Event name: 'menubuttonwebapp'
@@ -10194,7 +12229,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttonwebapp Telegram Bot API}
      */
-    on(event: 'menubuttonwebapp', filter: string | ((data: any) => boolean), handler: (data: MenuButtonWebApp) => void | Promise<void>): this;
+    on(
+      event: 'menubuttonwebapp',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonWebApp) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'menubuttondefault' event (strongly typed)
      * @param event - Event name: 'menubuttondefault'
@@ -10202,8 +12241,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttondefault Telegram Bot API}
      */
-    on(event: 'menubuttondefault', handler: (data: MenuButtonDefault) => void | Promise<void>): this;
-    
+    on(
+      event: 'menubuttondefault',
+      handler: (data: MenuButtonDefault) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'menubuttondefault' event with filtering
      * @param event - Event name: 'menubuttondefault'
@@ -10212,7 +12254,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#menubuttondefault Telegram Bot API}
      */
-    on(event: 'menubuttondefault', filter: string | ((data: any) => boolean), handler: (data: MenuButtonDefault) => void | Promise<void>): this;
+    on(
+      event: 'menubuttondefault',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MenuButtonDefault) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostsource' event (strongly typed)
      * @param event - Event name: 'chatboostsource'
@@ -10221,7 +12267,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostsource Telegram Bot API}
      */
     on(event: 'chatboostsource', handler: (data: ChatBoostSource) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatboostsource' event with filtering
      * @param event - Event name: 'chatboostsource'
@@ -10230,7 +12276,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsource Telegram Bot API}
      */
-    on(event: 'chatboostsource', filter: string | ((data: any) => boolean), handler: (data: ChatBoostSource) => void | Promise<void>): this;
+    on(
+      event: 'chatboostsource',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSource) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostsourcepremium' event (strongly typed)
      * @param event - Event name: 'chatboostsourcepremium'
@@ -10238,8 +12288,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcepremium Telegram Bot API}
      */
-    on(event: 'chatboostsourcepremium', handler: (data: ChatBoostSourcePremium) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatboostsourcepremium',
+      handler: (data: ChatBoostSourcePremium) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatboostsourcepremium' event with filtering
      * @param event - Event name: 'chatboostsourcepremium'
@@ -10248,7 +12301,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcepremium Telegram Bot API}
      */
-    on(event: 'chatboostsourcepremium', filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourcePremium) => void | Promise<void>): this;
+    on(
+      event: 'chatboostsourcepremium',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourcePremium) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostsourcegiftcode' event (strongly typed)
      * @param event - Event name: 'chatboostsourcegiftcode'
@@ -10256,8 +12313,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiftcode Telegram Bot API}
      */
-    on(event: 'chatboostsourcegiftcode', handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatboostsourcegiftcode',
+      handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatboostsourcegiftcode' event with filtering
      * @param event - Event name: 'chatboostsourcegiftcode'
@@ -10266,7 +12326,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiftcode Telegram Bot API}
      */
-    on(event: 'chatboostsourcegiftcode', filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>): this;
+    on(
+      event: 'chatboostsourcegiftcode',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourceGiftCode) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostsourcegiveaway' event (strongly typed)
      * @param event - Event name: 'chatboostsourcegiveaway'
@@ -10274,8 +12338,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiveaway Telegram Bot API}
      */
-    on(event: 'chatboostsourcegiveaway', handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>): this;
-    
+    on(
+      event: 'chatboostsourcegiveaway',
+      handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'chatboostsourcegiveaway' event with filtering
      * @param event - Event name: 'chatboostsourcegiveaway'
@@ -10284,7 +12351,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostsourcegiveaway Telegram Bot API}
      */
-    on(event: 'chatboostsourcegiveaway', filter: string | ((data: any) => boolean), handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>): this;
+    on(
+      event: 'chatboostsourcegiveaway',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostSourceGiveaway) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboost' event (strongly typed)
      * @param event - Event name: 'chatboost'
@@ -10293,7 +12364,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboost Telegram Bot API}
      */
     on(event: 'chatboost', handler: (data: ChatBoost) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatboost' event with filtering
      * @param event - Event name: 'chatboost'
@@ -10302,7 +12373,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboost Telegram Bot API}
      */
-    on(event: 'chatboost', filter: string | ((data: any) => boolean), handler: (data: ChatBoost) => void | Promise<void>): this;
+    on(
+      event: 'chatboost',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoost) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostupdated' event (strongly typed)
      * @param event - Event name: 'chatboostupdated'
@@ -10311,7 +12386,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostupdated Telegram Bot API}
      */
     on(event: 'chatboostupdated', handler: (data: ChatBoostUpdated) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatboostupdated' event with filtering
      * @param event - Event name: 'chatboostupdated'
@@ -10320,7 +12395,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostupdated Telegram Bot API}
      */
-    on(event: 'chatboostupdated', filter: string | ((data: any) => boolean), handler: (data: ChatBoostUpdated) => void | Promise<void>): this;
+    on(
+      event: 'chatboostupdated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostUpdated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'chatboostremoved' event (strongly typed)
      * @param event - Event name: 'chatboostremoved'
@@ -10329,7 +12408,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
     on(event: 'chatboostremoved', handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'chatboostremoved' event with filtering
      * @param event - Event name: 'chatboostremoved'
@@ -10338,7 +12417,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
-    on(event: 'chatboostremoved', filter: string | ((data: any) => boolean), handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
+    on(
+      event: 'chatboostremoved',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChatBoostRemoved) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'userchatboosts' event (strongly typed)
      * @param event - Event name: 'userchatboosts'
@@ -10347,7 +12430,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#userchatboosts Telegram Bot API}
      */
     on(event: 'userchatboosts', handler: (data: UserChatBoosts) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'userchatboosts' event with filtering
      * @param event - Event name: 'userchatboosts'
@@ -10356,7 +12439,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#userchatboosts Telegram Bot API}
      */
-    on(event: 'userchatboosts', filter: string | ((data: any) => boolean), handler: (data: UserChatBoosts) => void | Promise<void>): this;
+    on(
+      event: 'userchatboosts',
+      filter: string | ((data: any) => boolean),
+      handler: (data: UserChatBoosts) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessbotrights' event (strongly typed)
      * @param event - Event name: 'businessbotrights'
@@ -10364,8 +12451,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessbotrights Telegram Bot API}
      */
-    on(event: 'businessbotrights', handler: (data: BusinessBotRights) => void | Promise<void>): this;
-    
+    on(
+      event: 'businessbotrights',
+      handler: (data: BusinessBotRights) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'businessbotrights' event with filtering
      * @param event - Event name: 'businessbotrights'
@@ -10374,7 +12464,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessbotrights Telegram Bot API}
      */
-    on(event: 'businessbotrights', filter: string | ((data: any) => boolean), handler: (data: BusinessBotRights) => void | Promise<void>): this;
+    on(
+      event: 'businessbotrights',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessBotRights) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessconnection' event (strongly typed)
      * @param event - Event name: 'businessconnection'
@@ -10382,8 +12476,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessconnection Telegram Bot API}
      */
-    on(event: 'businessconnection', handler: (data: BusinessConnection) => void | Promise<void>): this;
-    
+    on(
+      event: 'businessconnection',
+      handler: (data: BusinessConnection) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'businessconnection' event with filtering
      * @param event - Event name: 'businessconnection'
@@ -10392,7 +12489,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessconnection Telegram Bot API}
      */
-    on(event: 'businessconnection', filter: string | ((data: any) => boolean), handler: (data: BusinessConnection) => void | Promise<void>): this;
+    on(
+      event: 'businessconnection',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessConnection) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'businessmessagesdeleted' event (strongly typed)
      * @param event - Event name: 'businessmessagesdeleted'
@@ -10400,8 +12501,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessmessagesdeleted Telegram Bot API}
      */
-    on(event: 'businessmessagesdeleted', handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
-    
+    on(
+      event: 'businessmessagesdeleted',
+      handler: (data: BusinessMessagesDeleted) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'businessmessagesdeleted' event with filtering
      * @param event - Event name: 'businessmessagesdeleted'
@@ -10410,7 +12514,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#businessmessagesdeleted Telegram Bot API}
      */
-    on(event: 'businessmessagesdeleted', filter: string | ((data: any) => boolean), handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
+    on(
+      event: 'businessmessagesdeleted',
+      filter: string | ((data: any) => boolean),
+      handler: (data: BusinessMessagesDeleted) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'responseparameters' event (strongly typed)
      * @param event - Event name: 'responseparameters'
@@ -10418,8 +12526,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#responseparameters Telegram Bot API}
      */
-    on(event: 'responseparameters', handler: (data: ResponseParameters) => void | Promise<void>): this;
-    
+    on(
+      event: 'responseparameters',
+      handler: (data: ResponseParameters) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'responseparameters' event with filtering
      * @param event - Event name: 'responseparameters'
@@ -10428,7 +12539,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#responseparameters Telegram Bot API}
      */
-    on(event: 'responseparameters', filter: string | ((data: any) => boolean), handler: (data: ResponseParameters) => void | Promise<void>): this;
+    on(
+      event: 'responseparameters',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ResponseParameters) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmedia' event (strongly typed)
      * @param event - Event name: 'inputmedia'
@@ -10437,7 +12552,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmedia Telegram Bot API}
      */
     on(event: 'inputmedia', handler: (data: InputMedia) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputmedia' event with filtering
      * @param event - Event name: 'inputmedia'
@@ -10446,7 +12561,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmedia Telegram Bot API}
      */
-    on(event: 'inputmedia', filter: string | ((data: any) => boolean), handler: (data: InputMedia) => void | Promise<void>): this;
+    on(
+      event: 'inputmedia',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMedia) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmediaphoto' event (strongly typed)
      * @param event - Event name: 'inputmediaphoto'
@@ -10455,7 +12574,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
      */
     on(event: 'inputmediaphoto', handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputmediaphoto' event with filtering
      * @param event - Event name: 'inputmediaphoto'
@@ -10464,7 +12583,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
      */
-    on(event: 'inputmediaphoto', filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    on(
+      event: 'inputmediaphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmediavideo' event (strongly typed)
      * @param event - Event name: 'inputmediavideo'
@@ -10473,7 +12596,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
      */
     on(event: 'inputmediavideo', handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputmediavideo' event with filtering
      * @param event - Event name: 'inputmediavideo'
@@ -10482,7 +12605,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
      */
-    on(event: 'inputmediavideo', filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    on(
+      event: 'inputmediavideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmediaanimation' event (strongly typed)
      * @param event - Event name: 'inputmediaanimation'
@@ -10490,8 +12617,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaanimation Telegram Bot API}
      */
-    on(event: 'inputmediaanimation', handler: (data: InputMediaAnimation) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputmediaanimation',
+      handler: (data: InputMediaAnimation) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputmediaanimation' event with filtering
      * @param event - Event name: 'inputmediaanimation'
@@ -10500,7 +12630,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaanimation Telegram Bot API}
      */
-    on(event: 'inputmediaanimation', filter: string | ((data: any) => boolean), handler: (data: InputMediaAnimation) => void | Promise<void>): this;
+    on(
+      event: 'inputmediaanimation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaAnimation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmediaaudio' event (strongly typed)
      * @param event - Event name: 'inputmediaaudio'
@@ -10509,7 +12643,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputmediaaudio Telegram Bot API}
      */
     on(event: 'inputmediaaudio', handler: (data: InputMediaAudio) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputmediaaudio' event with filtering
      * @param event - Event name: 'inputmediaaudio'
@@ -10518,7 +12652,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediaaudio Telegram Bot API}
      */
-    on(event: 'inputmediaaudio', filter: string | ((data: any) => boolean), handler: (data: InputMediaAudio) => void | Promise<void>): this;
+    on(
+      event: 'inputmediaaudio',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaAudio) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmediadocument' event (strongly typed)
      * @param event - Event name: 'inputmediadocument'
@@ -10526,8 +12664,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediadocument Telegram Bot API}
      */
-    on(event: 'inputmediadocument', handler: (data: InputMediaDocument) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputmediadocument',
+      handler: (data: InputMediaDocument) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputmediadocument' event with filtering
      * @param event - Event name: 'inputmediadocument'
@@ -10536,7 +12677,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmediadocument Telegram Bot API}
      */
-    on(event: 'inputmediadocument', filter: string | ((data: any) => boolean), handler: (data: InputMediaDocument) => void | Promise<void>): this;
+    on(
+      event: 'inputmediadocument',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMediaDocument) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputfile' event (strongly typed)
      * @param event - Event name: 'inputfile'
@@ -10545,7 +12690,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputfile Telegram Bot API}
      */
     on(event: 'inputfile', handler: (data: InputFile) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputfile' event with filtering
      * @param event - Event name: 'inputfile'
@@ -10554,7 +12699,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputfile Telegram Bot API}
      */
-    on(event: 'inputfile', filter: string | ((data: any) => boolean), handler: (data: InputFile) => void | Promise<void>): this;
+    on(
+      event: 'inputfile',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputFile) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputpaidmedia' event (strongly typed)
      * @param event - Event name: 'inputpaidmedia'
@@ -10563,7 +12712,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
     on(event: 'inputpaidmedia', handler: (data: InputPaidMedia) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputpaidmedia' event with filtering
      * @param event - Event name: 'inputpaidmedia'
@@ -10572,7 +12721,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
-    on(event: 'inputpaidmedia', filter: string | ((data: any) => boolean), handler: (data: InputPaidMedia) => void | Promise<void>): this;
+    on(
+      event: 'inputpaidmedia',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMedia) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputpaidmediaphoto' event (strongly typed)
      * @param event - Event name: 'inputpaidmediaphoto'
@@ -10580,8 +12733,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediaphoto Telegram Bot API}
      */
-    on(event: 'inputpaidmediaphoto', handler: (data: InputPaidMediaPhoto) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputpaidmediaphoto',
+      handler: (data: InputPaidMediaPhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputpaidmediaphoto' event with filtering
      * @param event - Event name: 'inputpaidmediaphoto'
@@ -10590,7 +12746,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediaphoto Telegram Bot API}
      */
-    on(event: 'inputpaidmediaphoto', filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaPhoto) => void | Promise<void>): this;
+    on(
+      event: 'inputpaidmediaphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMediaPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputpaidmediavideo' event (strongly typed)
      * @param event - Event name: 'inputpaidmediavideo'
@@ -10598,8 +12758,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediavideo Telegram Bot API}
      */
-    on(event: 'inputpaidmediavideo', handler: (data: InputPaidMediaVideo) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputpaidmediavideo',
+      handler: (data: InputPaidMediaVideo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputpaidmediavideo' event with filtering
      * @param event - Event name: 'inputpaidmediavideo'
@@ -10608,7 +12771,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputpaidmediavideo Telegram Bot API}
      */
-    on(event: 'inputpaidmediavideo', filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaVideo) => void | Promise<void>): this;
+    on(
+      event: 'inputpaidmediavideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputPaidMediaVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputprofilephoto' event (strongly typed)
      * @param event - Event name: 'inputprofilephoto'
@@ -10616,8 +12783,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephoto Telegram Bot API}
      */
-    on(event: 'inputprofilephoto', handler: (data: InputProfilePhoto) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputprofilephoto',
+      handler: (data: InputProfilePhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputprofilephoto' event with filtering
      * @param event - Event name: 'inputprofilephoto'
@@ -10626,7 +12796,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephoto Telegram Bot API}
      */
-    on(event: 'inputprofilephoto', filter: string | ((data: any) => boolean), handler: (data: InputProfilePhoto) => void | Promise<void>): this;
+    on(
+      event: 'inputprofilephoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputprofilephotostatic' event (strongly typed)
      * @param event - Event name: 'inputprofilephotostatic'
@@ -10634,8 +12808,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotostatic Telegram Bot API}
      */
-    on(event: 'inputprofilephotostatic', handler: (data: InputProfilePhotoStatic) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputprofilephotostatic',
+      handler: (data: InputProfilePhotoStatic) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputprofilephotostatic' event with filtering
      * @param event - Event name: 'inputprofilephotostatic'
@@ -10644,7 +12821,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotostatic Telegram Bot API}
      */
-    on(event: 'inputprofilephotostatic', filter: string | ((data: any) => boolean), handler: (data: InputProfilePhotoStatic) => void | Promise<void>): this;
+    on(
+      event: 'inputprofilephotostatic',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhotoStatic) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputprofilephotoanimated' event (strongly typed)
      * @param event - Event name: 'inputprofilephotoanimated'
@@ -10652,8 +12833,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotoanimated Telegram Bot API}
      */
-    on(event: 'inputprofilephotoanimated', handler: (data: InputProfilePhotoAnimated) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputprofilephotoanimated',
+      handler: (data: InputProfilePhotoAnimated) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputprofilephotoanimated' event with filtering
      * @param event - Event name: 'inputprofilephotoanimated'
@@ -10662,7 +12846,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputprofilephotoanimated Telegram Bot API}
      */
-    on(event: 'inputprofilephotoanimated', filter: string | ((data: any) => boolean), handler: (data: InputProfilePhotoAnimated) => void | Promise<void>): this;
+    on(
+      event: 'inputprofilephotoanimated',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputProfilePhotoAnimated) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputstorycontent' event (strongly typed)
      * @param event - Event name: 'inputstorycontent'
@@ -10670,8 +12858,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontent Telegram Bot API}
      */
-    on(event: 'inputstorycontent', handler: (data: InputStoryContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputstorycontent',
+      handler: (data: InputStoryContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputstorycontent' event with filtering
      * @param event - Event name: 'inputstorycontent'
@@ -10680,7 +12871,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontent Telegram Bot API}
      */
-    on(event: 'inputstorycontent', filter: string | ((data: any) => boolean), handler: (data: InputStoryContent) => void | Promise<void>): this;
+    on(
+      event: 'inputstorycontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputstorycontentphoto' event (strongly typed)
      * @param event - Event name: 'inputstorycontentphoto'
@@ -10688,8 +12883,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentphoto Telegram Bot API}
      */
-    on(event: 'inputstorycontentphoto', handler: (data: InputStoryContentPhoto) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputstorycontentphoto',
+      handler: (data: InputStoryContentPhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputstorycontentphoto' event with filtering
      * @param event - Event name: 'inputstorycontentphoto'
@@ -10698,7 +12896,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentphoto Telegram Bot API}
      */
-    on(event: 'inputstorycontentphoto', filter: string | ((data: any) => boolean), handler: (data: InputStoryContentPhoto) => void | Promise<void>): this;
+    on(
+      event: 'inputstorycontentphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContentPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputstorycontentvideo' event (strongly typed)
      * @param event - Event name: 'inputstorycontentvideo'
@@ -10706,8 +12908,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentvideo Telegram Bot API}
      */
-    on(event: 'inputstorycontentvideo', handler: (data: InputStoryContentVideo) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputstorycontentvideo',
+      handler: (data: InputStoryContentVideo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputstorycontentvideo' event with filtering
      * @param event - Event name: 'inputstorycontentvideo'
@@ -10716,7 +12921,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputstorycontentvideo Telegram Bot API}
      */
-    on(event: 'inputstorycontentvideo', filter: string | ((data: any) => boolean), handler: (data: InputStoryContentVideo) => void | Promise<void>): this;
+    on(
+      event: 'inputstorycontentvideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputStoryContentVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'sticker' event (strongly typed)
      * @param event - Event name: 'sticker'
@@ -10725,7 +12934,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#sticker Telegram Bot API}
      */
     on(event: 'sticker', handler: (data: Sticker) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'sticker' event with filtering
      * @param event - Event name: 'sticker'
@@ -10734,7 +12943,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#sticker Telegram Bot API}
      */
-    on(event: 'sticker', filter: string | ((data: any) => boolean), handler: (data: Sticker) => void | Promise<void>): this;
+    on(
+      event: 'sticker',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Sticker) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'stickerset' event (strongly typed)
      * @param event - Event name: 'stickerset'
@@ -10743,7 +12956,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#stickerset Telegram Bot API}
      */
     on(event: 'stickerset', handler: (data: StickerSet) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'stickerset' event with filtering
      * @param event - Event name: 'stickerset'
@@ -10752,7 +12965,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#stickerset Telegram Bot API}
      */
-    on(event: 'stickerset', filter: string | ((data: any) => boolean), handler: (data: StickerSet) => void | Promise<void>): this;
+    on(
+      event: 'stickerset',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StickerSet) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'maskposition' event (strongly typed)
      * @param event - Event name: 'maskposition'
@@ -10761,7 +12978,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#maskposition Telegram Bot API}
      */
     on(event: 'maskposition', handler: (data: MaskPosition) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'maskposition' event with filtering
      * @param event - Event name: 'maskposition'
@@ -10770,7 +12987,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#maskposition Telegram Bot API}
      */
-    on(event: 'maskposition', filter: string | ((data: any) => boolean), handler: (data: MaskPosition) => void | Promise<void>): this;
+    on(
+      event: 'maskposition',
+      filter: string | ((data: any) => boolean),
+      handler: (data: MaskPosition) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputsticker' event (strongly typed)
      * @param event - Event name: 'inputsticker'
@@ -10779,7 +13000,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputsticker Telegram Bot API}
      */
     on(event: 'inputsticker', handler: (data: InputSticker) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inputsticker' event with filtering
      * @param event - Event name: 'inputsticker'
@@ -10788,7 +13009,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputsticker Telegram Bot API}
      */
-    on(event: 'inputsticker', filter: string | ((data: any) => boolean), handler: (data: InputSticker) => void | Promise<void>): this;
+    on(
+      event: 'inputsticker',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputSticker) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequery' event (strongly typed)
      * @param event - Event name: 'inlinequery'
@@ -10797,7 +13022,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inlinequery Telegram Bot API}
      */
     on(event: 'inlinequery', handler: (data: InlineQuery) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'inlinequery' event with filtering
      * @param event - Event name: 'inlinequery'
@@ -10806,7 +13031,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequery Telegram Bot API}
      */
-    on(event: 'inlinequery', filter: string | ((data: any) => boolean), handler: (data: InlineQuery) => void | Promise<void>): this;
+    on(
+      event: 'inlinequery',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQuery) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultsbutton' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultsbutton'
@@ -10814,8 +13043,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultsbutton Telegram Bot API}
      */
-    on(event: 'inlinequeryresultsbutton', handler: (data: InlineQueryResultsButton) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultsbutton',
+      handler: (data: InlineQueryResultsButton) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultsbutton' event with filtering
      * @param event - Event name: 'inlinequeryresultsbutton'
@@ -10824,7 +13056,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultsbutton Telegram Bot API}
      */
-    on(event: 'inlinequeryresultsbutton', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultsButton) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultsbutton',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultsButton) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresult' event (strongly typed)
      * @param event - Event name: 'inlinequeryresult'
@@ -10832,8 +13068,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresult Telegram Bot API}
      */
-    on(event: 'inlinequeryresult', handler: (data: InlineQueryResult) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresult',
+      handler: (data: InlineQueryResult) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresult' event with filtering
      * @param event - Event name: 'inlinequeryresult'
@@ -10842,7 +13081,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresult Telegram Bot API}
      */
-    on(event: 'inlinequeryresult', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResult) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresult',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResult) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultarticle' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultarticle'
@@ -10850,8 +13093,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultarticle Telegram Bot API}
      */
-    on(event: 'inlinequeryresultarticle', handler: (data: InlineQueryResultArticle) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultarticle',
+      handler: (data: InlineQueryResultArticle) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultarticle' event with filtering
      * @param event - Event name: 'inlinequeryresultarticle'
@@ -10860,7 +13106,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultarticle Telegram Bot API}
      */
-    on(event: 'inlinequeryresultarticle', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultArticle) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultarticle',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultArticle) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultphoto' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultphoto'
@@ -10868,8 +13118,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultphoto Telegram Bot API}
      */
-    on(event: 'inlinequeryresultphoto', handler: (data: InlineQueryResultPhoto) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultphoto',
+      handler: (data: InlineQueryResultPhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultphoto' event with filtering
      * @param event - Event name: 'inlinequeryresultphoto'
@@ -10878,7 +13131,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultphoto Telegram Bot API}
      */
-    on(event: 'inlinequeryresultphoto', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultPhoto) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultgif' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultgif'
@@ -10886,8 +13143,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgif Telegram Bot API}
      */
-    on(event: 'inlinequeryresultgif', handler: (data: InlineQueryResultGif) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultgif',
+      handler: (data: InlineQueryResultGif) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultgif' event with filtering
      * @param event - Event name: 'inlinequeryresultgif'
@@ -10896,7 +13156,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgif Telegram Bot API}
      */
-    on(event: 'inlinequeryresultgif', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultGif) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultgif',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultGif) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultvideo' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultvideo'
@@ -10904,8 +13168,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvideo Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvideo', handler: (data: InlineQueryResultVideo) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultvideo',
+      handler: (data: InlineQueryResultVideo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultvideo' event with filtering
      * @param event - Event name: 'inlinequeryresultvideo'
@@ -10914,7 +13181,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvideo Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvideo', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVideo) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultvideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultaudio' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultaudio'
@@ -10922,8 +13193,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultaudio Telegram Bot API}
      */
-    on(event: 'inlinequeryresultaudio', handler: (data: InlineQueryResultAudio) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultaudio',
+      handler: (data: InlineQueryResultAudio) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultaudio' event with filtering
      * @param event - Event name: 'inlinequeryresultaudio'
@@ -10932,7 +13206,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultaudio Telegram Bot API}
      */
-    on(event: 'inlinequeryresultaudio', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultAudio) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultaudio',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultAudio) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultvoice' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultvoice'
@@ -10940,8 +13218,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvoice Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvoice', handler: (data: InlineQueryResultVoice) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultvoice',
+      handler: (data: InlineQueryResultVoice) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultvoice' event with filtering
      * @param event - Event name: 'inlinequeryresultvoice'
@@ -10950,7 +13231,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvoice Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvoice', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVoice) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultvoice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVoice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultdocument' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultdocument'
@@ -10958,8 +13243,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultdocument Telegram Bot API}
      */
-    on(event: 'inlinequeryresultdocument', handler: (data: InlineQueryResultDocument) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultdocument',
+      handler: (data: InlineQueryResultDocument) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultdocument' event with filtering
      * @param event - Event name: 'inlinequeryresultdocument'
@@ -10968,7 +13256,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultdocument Telegram Bot API}
      */
-    on(event: 'inlinequeryresultdocument', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultDocument) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultdocument',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultDocument) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultlocation' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultlocation'
@@ -10976,8 +13268,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultlocation Telegram Bot API}
      */
-    on(event: 'inlinequeryresultlocation', handler: (data: InlineQueryResultLocation) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultlocation',
+      handler: (data: InlineQueryResultLocation) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultlocation' event with filtering
      * @param event - Event name: 'inlinequeryresultlocation'
@@ -10986,7 +13281,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultlocation Telegram Bot API}
      */
-    on(event: 'inlinequeryresultlocation', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultLocation) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultlocation',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultLocation) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultvenue' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultvenue'
@@ -10994,8 +13293,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvenue Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvenue', handler: (data: InlineQueryResultVenue) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultvenue',
+      handler: (data: InlineQueryResultVenue) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultvenue' event with filtering
      * @param event - Event name: 'inlinequeryresultvenue'
@@ -11004,7 +13306,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultvenue Telegram Bot API}
      */
-    on(event: 'inlinequeryresultvenue', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultVenue) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultvenue',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultVenue) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcontact' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcontact'
@@ -11012,8 +13318,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcontact Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcontact', handler: (data: InlineQueryResultContact) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcontact',
+      handler: (data: InlineQueryResultContact) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcontact' event with filtering
      * @param event - Event name: 'inlinequeryresultcontact'
@@ -11022,7 +13331,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcontact Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcontact', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultContact) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcontact',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultContact) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultgame' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultgame'
@@ -11030,8 +13343,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgame Telegram Bot API}
      */
-    on(event: 'inlinequeryresultgame', handler: (data: InlineQueryResultGame) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultgame',
+      handler: (data: InlineQueryResultGame) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultgame' event with filtering
      * @param event - Event name: 'inlinequeryresultgame'
@@ -11040,7 +13356,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultgame Telegram Bot API}
      */
-    on(event: 'inlinequeryresultgame', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultGame) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultgame',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultGame) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedphoto' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedphoto'
@@ -11048,8 +13368,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedphoto Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedphoto', handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedphoto',
+      handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedphoto' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedphoto'
@@ -11058,7 +13381,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedphoto Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedphoto', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedphoto',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedPhoto) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedgif' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedgif'
@@ -11066,8 +13393,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedgif Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedgif', handler: (data: InlineQueryResultCachedGif) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedgif',
+      handler: (data: InlineQueryResultCachedGif) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedgif' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedgif'
@@ -11076,7 +13406,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedgif Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedgif', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedGif) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedgif',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedGif) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedsticker' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedsticker'
@@ -11084,8 +13418,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedsticker Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedsticker', handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedsticker',
+      handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedsticker' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedsticker'
@@ -11094,7 +13431,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedsticker Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedsticker', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedsticker',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedSticker) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcacheddocument' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcacheddocument'
@@ -11102,8 +13443,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcacheddocument Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcacheddocument', handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcacheddocument',
+      handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcacheddocument' event with filtering
      * @param event - Event name: 'inlinequeryresultcacheddocument'
@@ -11112,7 +13456,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcacheddocument Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcacheddocument', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcacheddocument',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedDocument) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedvideo' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedvideo'
@@ -11120,8 +13468,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvideo Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedvideo', handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedvideo',
+      handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedvideo' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedvideo'
@@ -11130,7 +13481,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvideo Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedvideo', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedvideo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedVideo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedvoice' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedvoice'
@@ -11138,8 +13493,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvoice Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedvoice', handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedvoice',
+      handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedvoice' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedvoice'
@@ -11148,7 +13506,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedvoice Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedvoice', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedvoice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedVoice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inlinequeryresultcachedaudio' event (strongly typed)
      * @param event - Event name: 'inlinequeryresultcachedaudio'
@@ -11156,8 +13518,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedaudio Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedaudio', handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>): this;
-    
+    on(
+      event: 'inlinequeryresultcachedaudio',
+      handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inlinequeryresultcachedaudio' event with filtering
      * @param event - Event name: 'inlinequeryresultcachedaudio'
@@ -11166,7 +13531,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inlinequeryresultcachedaudio Telegram Bot API}
      */
-    on(event: 'inlinequeryresultcachedaudio', filter: string | ((data: any) => boolean), handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>): this;
+    on(
+      event: 'inlinequeryresultcachedaudio',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InlineQueryResultCachedAudio) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputmessagecontent' event (strongly typed)
      * @param event - Event name: 'inputmessagecontent'
@@ -11174,8 +13543,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmessagecontent Telegram Bot API}
      */
-    on(event: 'inputmessagecontent', handler: (data: InputMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputmessagecontent',
+      handler: (data: InputMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputmessagecontent' event with filtering
      * @param event - Event name: 'inputmessagecontent'
@@ -11184,7 +13556,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputmessagecontent Telegram Bot API}
      */
-    on(event: 'inputmessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputmessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputtextmessagecontent' event (strongly typed)
      * @param event - Event name: 'inputtextmessagecontent'
@@ -11192,8 +13568,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputtextmessagecontent Telegram Bot API}
      */
-    on(event: 'inputtextmessagecontent', handler: (data: InputTextMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputtextmessagecontent',
+      handler: (data: InputTextMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputtextmessagecontent' event with filtering
      * @param event - Event name: 'inputtextmessagecontent'
@@ -11202,7 +13581,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputtextmessagecontent Telegram Bot API}
      */
-    on(event: 'inputtextmessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputTextMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputtextmessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputTextMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputlocationmessagecontent' event (strongly typed)
      * @param event - Event name: 'inputlocationmessagecontent'
@@ -11210,8 +13593,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputlocationmessagecontent Telegram Bot API}
      */
-    on(event: 'inputlocationmessagecontent', handler: (data: InputLocationMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputlocationmessagecontent',
+      handler: (data: InputLocationMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputlocationmessagecontent' event with filtering
      * @param event - Event name: 'inputlocationmessagecontent'
@@ -11220,7 +13606,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputlocationmessagecontent Telegram Bot API}
      */
-    on(event: 'inputlocationmessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputLocationMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputlocationmessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputLocationMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputvenuemessagecontent' event (strongly typed)
      * @param event - Event name: 'inputvenuemessagecontent'
@@ -11228,8 +13618,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputvenuemessagecontent Telegram Bot API}
      */
-    on(event: 'inputvenuemessagecontent', handler: (data: InputVenueMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputvenuemessagecontent',
+      handler: (data: InputVenueMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputvenuemessagecontent' event with filtering
      * @param event - Event name: 'inputvenuemessagecontent'
@@ -11238,7 +13631,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputvenuemessagecontent Telegram Bot API}
      */
-    on(event: 'inputvenuemessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputVenueMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputvenuemessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputVenueMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputcontactmessagecontent' event (strongly typed)
      * @param event - Event name: 'inputcontactmessagecontent'
@@ -11246,8 +13643,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputcontactmessagecontent Telegram Bot API}
      */
-    on(event: 'inputcontactmessagecontent', handler: (data: InputContactMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputcontactmessagecontent',
+      handler: (data: InputContactMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputcontactmessagecontent' event with filtering
      * @param event - Event name: 'inputcontactmessagecontent'
@@ -11256,7 +13656,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputcontactmessagecontent Telegram Bot API}
      */
-    on(event: 'inputcontactmessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputContactMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputcontactmessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputContactMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'inputinvoicemessagecontent' event (strongly typed)
      * @param event - Event name: 'inputinvoicemessagecontent'
@@ -11264,8 +13668,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputinvoicemessagecontent Telegram Bot API}
      */
-    on(event: 'inputinvoicemessagecontent', handler: (data: InputInvoiceMessageContent) => void | Promise<void>): this;
-    
+    on(
+      event: 'inputinvoicemessagecontent',
+      handler: (data: InputInvoiceMessageContent) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'inputinvoicemessagecontent' event with filtering
      * @param event - Event name: 'inputinvoicemessagecontent'
@@ -11274,7 +13681,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#inputinvoicemessagecontent Telegram Bot API}
      */
-    on(event: 'inputinvoicemessagecontent', filter: string | ((data: any) => boolean), handler: (data: InputInvoiceMessageContent) => void | Promise<void>): this;
+    on(
+      event: 'inputinvoicemessagecontent',
+      filter: string | ((data: any) => boolean),
+      handler: (data: InputInvoiceMessageContent) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'choseninlineresult' event (strongly typed)
      * @param event - Event name: 'choseninlineresult'
@@ -11282,8 +13693,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
-    on(event: 'choseninlineresult', handler: (data: ChosenInlineResult) => void | Promise<void>): this;
-    
+    on(
+      event: 'choseninlineresult',
+      handler: (data: ChosenInlineResult) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'choseninlineresult' event with filtering
      * @param event - Event name: 'choseninlineresult'
@@ -11292,7 +13706,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
-    on(event: 'choseninlineresult', filter: string | ((data: any) => boolean), handler: (data: ChosenInlineResult) => void | Promise<void>): this;
+    on(
+      event: 'choseninlineresult',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ChosenInlineResult) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'sentwebappmessage' event (strongly typed)
      * @param event - Event name: 'sentwebappmessage'
@@ -11300,8 +13718,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
      */
-    on(event: 'sentwebappmessage', handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    
+    on(
+      event: 'sentwebappmessage',
+      handler: (data: SentWebAppMessage) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'sentwebappmessage' event with filtering
      * @param event - Event name: 'sentwebappmessage'
@@ -11310,7 +13731,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
      */
-    on(event: 'sentwebappmessage', filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    on(
+      event: 'sentwebappmessage',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SentWebAppMessage) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'preparedinlinemessage' event (strongly typed)
      * @param event - Event name: 'preparedinlinemessage'
@@ -11318,8 +13743,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
      */
-    on(event: 'preparedinlinemessage', handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
-    
+    on(
+      event: 'preparedinlinemessage',
+      handler: (data: PreparedInlineMessage) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'preparedinlinemessage' event with filtering
      * @param event - Event name: 'preparedinlinemessage'
@@ -11328,7 +13756,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
      */
-    on(event: 'preparedinlinemessage', filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    on(
+      event: 'preparedinlinemessage',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PreparedInlineMessage) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'labeledprice' event (strongly typed)
      * @param event - Event name: 'labeledprice'
@@ -11337,7 +13769,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#labeledprice Telegram Bot API}
      */
     on(event: 'labeledprice', handler: (data: LabeledPrice) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'labeledprice' event with filtering
      * @param event - Event name: 'labeledprice'
@@ -11346,7 +13778,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#labeledprice Telegram Bot API}
      */
-    on(event: 'labeledprice', filter: string | ((data: any) => boolean), handler: (data: LabeledPrice) => void | Promise<void>): this;
+    on(
+      event: 'labeledprice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: LabeledPrice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'invoice' event (strongly typed)
      * @param event - Event name: 'invoice'
@@ -11355,7 +13791,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#invoice Telegram Bot API}
      */
     on(event: 'invoice', handler: (data: Invoice) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'invoice' event with filtering
      * @param event - Event name: 'invoice'
@@ -11364,7 +13800,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#invoice Telegram Bot API}
      */
-    on(event: 'invoice', filter: string | ((data: any) => boolean), handler: (data: Invoice) => void | Promise<void>): this;
+    on(
+      event: 'invoice',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Invoice) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'shippingaddress' event (strongly typed)
      * @param event - Event name: 'shippingaddress'
@@ -11373,7 +13813,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingaddress Telegram Bot API}
      */
     on(event: 'shippingaddress', handler: (data: ShippingAddress) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'shippingaddress' event with filtering
      * @param event - Event name: 'shippingaddress'
@@ -11382,7 +13822,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingaddress Telegram Bot API}
      */
-    on(event: 'shippingaddress', filter: string | ((data: any) => boolean), handler: (data: ShippingAddress) => void | Promise<void>): this;
+    on(
+      event: 'shippingaddress',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingAddress) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'orderinfo' event (strongly typed)
      * @param event - Event name: 'orderinfo'
@@ -11391,7 +13835,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#orderinfo Telegram Bot API}
      */
     on(event: 'orderinfo', handler: (data: OrderInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'orderinfo' event with filtering
      * @param event - Event name: 'orderinfo'
@@ -11400,7 +13844,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#orderinfo Telegram Bot API}
      */
-    on(event: 'orderinfo', filter: string | ((data: any) => boolean), handler: (data: OrderInfo) => void | Promise<void>): this;
+    on(
+      event: 'orderinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: OrderInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'shippingoption' event (strongly typed)
      * @param event - Event name: 'shippingoption'
@@ -11409,7 +13857,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingoption Telegram Bot API}
      */
     on(event: 'shippingoption', handler: (data: ShippingOption) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'shippingoption' event with filtering
      * @param event - Event name: 'shippingoption'
@@ -11418,7 +13866,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingoption Telegram Bot API}
      */
-    on(event: 'shippingoption', filter: string | ((data: any) => boolean), handler: (data: ShippingOption) => void | Promise<void>): this;
+    on(
+      event: 'shippingoption',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingOption) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'successfulpayment' event (strongly typed)
      * @param event - Event name: 'successfulpayment'
@@ -11426,8 +13878,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#successfulpayment Telegram Bot API}
      */
-    on(event: 'successfulpayment', handler: (data: SuccessfulPayment) => void | Promise<void>): this;
-    
+    on(
+      event: 'successfulpayment',
+      handler: (data: SuccessfulPayment) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'successfulpayment' event with filtering
      * @param event - Event name: 'successfulpayment'
@@ -11436,7 +13891,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#successfulpayment Telegram Bot API}
      */
-    on(event: 'successfulpayment', filter: string | ((data: any) => boolean), handler: (data: SuccessfulPayment) => void | Promise<void>): this;
+    on(
+      event: 'successfulpayment',
+      filter: string | ((data: any) => boolean),
+      handler: (data: SuccessfulPayment) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'refundedpayment' event (strongly typed)
      * @param event - Event name: 'refundedpayment'
@@ -11445,7 +13904,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#refundedpayment Telegram Bot API}
      */
     on(event: 'refundedpayment', handler: (data: RefundedPayment) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'refundedpayment' event with filtering
      * @param event - Event name: 'refundedpayment'
@@ -11454,7 +13913,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#refundedpayment Telegram Bot API}
      */
-    on(event: 'refundedpayment', filter: string | ((data: any) => boolean), handler: (data: RefundedPayment) => void | Promise<void>): this;
+    on(
+      event: 'refundedpayment',
+      filter: string | ((data: any) => boolean),
+      handler: (data: RefundedPayment) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'shippingquery' event (strongly typed)
      * @param event - Event name: 'shippingquery'
@@ -11463,7 +13926,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#shippingquery Telegram Bot API}
      */
     on(event: 'shippingquery', handler: (data: ShippingQuery) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'shippingquery' event with filtering
      * @param event - Event name: 'shippingquery'
@@ -11472,7 +13935,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#shippingquery Telegram Bot API}
      */
-    on(event: 'shippingquery', filter: string | ((data: any) => boolean), handler: (data: ShippingQuery) => void | Promise<void>): this;
+    on(
+      event: 'shippingquery',
+      filter: string | ((data: any) => boolean),
+      handler: (data: ShippingQuery) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'precheckoutquery' event (strongly typed)
      * @param event - Event name: 'precheckoutquery'
@@ -11481,7 +13948,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#precheckoutquery Telegram Bot API}
      */
     on(event: 'precheckoutquery', handler: (data: PreCheckoutQuery) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'precheckoutquery' event with filtering
      * @param event - Event name: 'precheckoutquery'
@@ -11490,7 +13957,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#precheckoutquery Telegram Bot API}
      */
-    on(event: 'precheckoutquery', filter: string | ((data: any) => boolean), handler: (data: PreCheckoutQuery) => void | Promise<void>): this;
+    on(
+      event: 'precheckoutquery',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PreCheckoutQuery) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'paidmediapurchased' event (strongly typed)
      * @param event - Event name: 'paidmediapurchased'
@@ -11498,8 +13969,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediapurchased Telegram Bot API}
      */
-    on(event: 'paidmediapurchased', handler: (data: PaidMediaPurchased) => void | Promise<void>): this;
-    
+    on(
+      event: 'paidmediapurchased',
+      handler: (data: PaidMediaPurchased) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'paidmediapurchased' event with filtering
      * @param event - Event name: 'paidmediapurchased'
@@ -11508,7 +13982,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#paidmediapurchased Telegram Bot API}
      */
-    on(event: 'paidmediapurchased', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPurchased) => void | Promise<void>): this;
+    on(
+      event: 'paidmediapurchased',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PaidMediaPurchased) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'revenuewithdrawalstate' event (strongly typed)
      * @param event - Event name: 'revenuewithdrawalstate'
@@ -11516,8 +13994,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstate Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstate', handler: (data: RevenueWithdrawalState) => void | Promise<void>): this;
-    
+    on(
+      event: 'revenuewithdrawalstate',
+      handler: (data: RevenueWithdrawalState) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'revenuewithdrawalstate' event with filtering
      * @param event - Event name: 'revenuewithdrawalstate'
@@ -11526,7 +14007,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstate Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstate', filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalState) => void | Promise<void>): this;
+    on(
+      event: 'revenuewithdrawalstate',
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalState) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'revenuewithdrawalstatepending' event (strongly typed)
      * @param event - Event name: 'revenuewithdrawalstatepending'
@@ -11534,8 +14019,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatepending Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatepending', handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>): this;
-    
+    on(
+      event: 'revenuewithdrawalstatepending',
+      handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'revenuewithdrawalstatepending' event with filtering
      * @param event - Event name: 'revenuewithdrawalstatepending'
@@ -11544,7 +14032,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatepending Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatepending', filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>): this;
+    on(
+      event: 'revenuewithdrawalstatepending',
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStatePending) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'revenuewithdrawalstatesucceeded' event (strongly typed)
      * @param event - Event name: 'revenuewithdrawalstatesucceeded'
@@ -11552,8 +14044,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatesucceeded', handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>): this;
-    
+    on(
+      event: 'revenuewithdrawalstatesucceeded',
+      handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'revenuewithdrawalstatesucceeded' event with filtering
      * @param event - Event name: 'revenuewithdrawalstatesucceeded'
@@ -11562,7 +14057,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatesucceeded', filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>): this;
+    on(
+      event: 'revenuewithdrawalstatesucceeded',
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStateSucceeded) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'revenuewithdrawalstatefailed' event (strongly typed)
      * @param event - Event name: 'revenuewithdrawalstatefailed'
@@ -11570,8 +14069,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatefailed Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatefailed', handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>): this;
-    
+    on(
+      event: 'revenuewithdrawalstatefailed',
+      handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'revenuewithdrawalstatefailed' event with filtering
      * @param event - Event name: 'revenuewithdrawalstatefailed'
@@ -11580,7 +14082,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#revenuewithdrawalstatefailed Telegram Bot API}
      */
-    on(event: 'revenuewithdrawalstatefailed', filter: string | ((data: any) => boolean), handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>): this;
+    on(
+      event: 'revenuewithdrawalstatefailed',
+      filter: string | ((data: any) => boolean),
+      handler: (data: RevenueWithdrawalStateFailed) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'affiliateinfo' event (strongly typed)
      * @param event - Event name: 'affiliateinfo'
@@ -11589,7 +14095,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#affiliateinfo Telegram Bot API}
      */
     on(event: 'affiliateinfo', handler: (data: AffiliateInfo) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'affiliateinfo' event with filtering
      * @param event - Event name: 'affiliateinfo'
@@ -11598,7 +14104,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#affiliateinfo Telegram Bot API}
      */
-    on(event: 'affiliateinfo', filter: string | ((data: any) => boolean), handler: (data: AffiliateInfo) => void | Promise<void>): this;
+    on(
+      event: 'affiliateinfo',
+      filter: string | ((data: any) => boolean),
+      handler: (data: AffiliateInfo) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartner' event (strongly typed)
      * @param event - Event name: 'transactionpartner'
@@ -11606,8 +14116,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartner Telegram Bot API}
      */
-    on(event: 'transactionpartner', handler: (data: TransactionPartner) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartner',
+      handler: (data: TransactionPartner) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartner' event with filtering
      * @param event - Event name: 'transactionpartner'
@@ -11616,7 +14129,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartner Telegram Bot API}
      */
-    on(event: 'transactionpartner', filter: string | ((data: any) => boolean), handler: (data: TransactionPartner) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartner',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartner) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartneruser' event (strongly typed)
      * @param event - Event name: 'transactionpartneruser'
@@ -11624,8 +14141,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneruser Telegram Bot API}
      */
-    on(event: 'transactionpartneruser', handler: (data: TransactionPartnerUser) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartneruser',
+      handler: (data: TransactionPartnerUser) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartneruser' event with filtering
      * @param event - Event name: 'transactionpartneruser'
@@ -11634,7 +14154,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneruser Telegram Bot API}
      */
-    on(event: 'transactionpartneruser', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerUser) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartneruser',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerUser) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartnerchat' event (strongly typed)
      * @param event - Event name: 'transactionpartnerchat'
@@ -11642,8 +14166,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerchat Telegram Bot API}
      */
-    on(event: 'transactionpartnerchat', handler: (data: TransactionPartnerChat) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartnerchat',
+      handler: (data: TransactionPartnerChat) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartnerchat' event with filtering
      * @param event - Event name: 'transactionpartnerchat'
@@ -11652,7 +14179,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerchat Telegram Bot API}
      */
-    on(event: 'transactionpartnerchat', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerChat) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartnerchat',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerChat) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartneraffiliateprogram' event (strongly typed)
      * @param event - Event name: 'transactionpartneraffiliateprogram'
@@ -11660,8 +14191,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneraffiliateprogram Telegram Bot API}
      */
-    on(event: 'transactionpartneraffiliateprogram', handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartneraffiliateprogram',
+      handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartneraffiliateprogram' event with filtering
      * @param event - Event name: 'transactionpartneraffiliateprogram'
@@ -11670,7 +14204,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartneraffiliateprogram Telegram Bot API}
      */
-    on(event: 'transactionpartneraffiliateprogram', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartneraffiliateprogram',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerAffiliateProgram) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartnerfragment' event (strongly typed)
      * @param event - Event name: 'transactionpartnerfragment'
@@ -11678,8 +14216,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerfragment Telegram Bot API}
      */
-    on(event: 'transactionpartnerfragment', handler: (data: TransactionPartnerFragment) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartnerfragment',
+      handler: (data: TransactionPartnerFragment) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartnerfragment' event with filtering
      * @param event - Event name: 'transactionpartnerfragment'
@@ -11688,7 +14229,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerfragment Telegram Bot API}
      */
-    on(event: 'transactionpartnerfragment', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerFragment) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartnerfragment',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerFragment) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartnertelegramads' event (strongly typed)
      * @param event - Event name: 'transactionpartnertelegramads'
@@ -11696,8 +14241,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramads Telegram Bot API}
      */
-    on(event: 'transactionpartnertelegramads', handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartnertelegramads',
+      handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartnertelegramads' event with filtering
      * @param event - Event name: 'transactionpartnertelegramads'
@@ -11706,7 +14254,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramads Telegram Bot API}
      */
-    on(event: 'transactionpartnertelegramads', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartnertelegramads',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerTelegramAds) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartnertelegramapi' event (strongly typed)
      * @param event - Event name: 'transactionpartnertelegramapi'
@@ -11714,8 +14266,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramapi Telegram Bot API}
      */
-    on(event: 'transactionpartnertelegramapi', handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartnertelegramapi',
+      handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartnertelegramapi' event with filtering
      * @param event - Event name: 'transactionpartnertelegramapi'
@@ -11724,7 +14279,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnertelegramapi Telegram Bot API}
      */
-    on(event: 'transactionpartnertelegramapi', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartnertelegramapi',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerTelegramApi) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'transactionpartnerother' event (strongly typed)
      * @param event - Event name: 'transactionpartnerother'
@@ -11732,8 +14291,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerother Telegram Bot API}
      */
-    on(event: 'transactionpartnerother', handler: (data: TransactionPartnerOther) => void | Promise<void>): this;
-    
+    on(
+      event: 'transactionpartnerother',
+      handler: (data: TransactionPartnerOther) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'transactionpartnerother' event with filtering
      * @param event - Event name: 'transactionpartnerother'
@@ -11742,7 +14304,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#transactionpartnerother Telegram Bot API}
      */
-    on(event: 'transactionpartnerother', filter: string | ((data: any) => boolean), handler: (data: TransactionPartnerOther) => void | Promise<void>): this;
+    on(
+      event: 'transactionpartnerother',
+      filter: string | ((data: any) => boolean),
+      handler: (data: TransactionPartnerOther) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'startransaction' event (strongly typed)
      * @param event - Event name: 'startransaction'
@@ -11751,7 +14317,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#startransaction Telegram Bot API}
      */
     on(event: 'startransaction', handler: (data: StarTransaction) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'startransaction' event with filtering
      * @param event - Event name: 'startransaction'
@@ -11760,7 +14326,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#startransaction Telegram Bot API}
      */
-    on(event: 'startransaction', filter: string | ((data: any) => boolean), handler: (data: StarTransaction) => void | Promise<void>): this;
+    on(
+      event: 'startransaction',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarTransaction) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'startransactions' event (strongly typed)
      * @param event - Event name: 'startransactions'
@@ -11769,7 +14339,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#startransactions Telegram Bot API}
      */
     on(event: 'startransactions', handler: (data: StarTransactions) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'startransactions' event with filtering
      * @param event - Event name: 'startransactions'
@@ -11778,7 +14348,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#startransactions Telegram Bot API}
      */
-    on(event: 'startransactions', filter: string | ((data: any) => boolean), handler: (data: StarTransactions) => void | Promise<void>): this;
+    on(
+      event: 'startransactions',
+      filter: string | ((data: any) => boolean),
+      handler: (data: StarTransactions) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportdata' event (strongly typed)
      * @param event - Event name: 'passportdata'
@@ -11787,7 +14361,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#passportdata Telegram Bot API}
      */
     on(event: 'passportdata', handler: (data: PassportData) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'passportdata' event with filtering
      * @param event - Event name: 'passportdata'
@@ -11796,7 +14370,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportdata Telegram Bot API}
      */
-    on(event: 'passportdata', filter: string | ((data: any) => boolean), handler: (data: PassportData) => void | Promise<void>): this;
+    on(
+      event: 'passportdata',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportData) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportfile' event (strongly typed)
      * @param event - Event name: 'passportfile'
@@ -11805,7 +14383,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#passportfile Telegram Bot API}
      */
     on(event: 'passportfile', handler: (data: PassportFile) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'passportfile' event with filtering
      * @param event - Event name: 'passportfile'
@@ -11814,7 +14392,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportfile Telegram Bot API}
      */
-    on(event: 'passportfile', filter: string | ((data: any) => boolean), handler: (data: PassportFile) => void | Promise<void>): this;
+    on(
+      event: 'passportfile',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportFile) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'encryptedpassportelement' event (strongly typed)
      * @param event - Event name: 'encryptedpassportelement'
@@ -11822,8 +14404,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedpassportelement Telegram Bot API}
      */
-    on(event: 'encryptedpassportelement', handler: (data: EncryptedPassportElement) => void | Promise<void>): this;
-    
+    on(
+      event: 'encryptedpassportelement',
+      handler: (data: EncryptedPassportElement) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'encryptedpassportelement' event with filtering
      * @param event - Event name: 'encryptedpassportelement'
@@ -11832,7 +14417,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedpassportelement Telegram Bot API}
      */
-    on(event: 'encryptedpassportelement', filter: string | ((data: any) => boolean), handler: (data: EncryptedPassportElement) => void | Promise<void>): this;
+    on(
+      event: 'encryptedpassportelement',
+      filter: string | ((data: any) => boolean),
+      handler: (data: EncryptedPassportElement) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'encryptedcredentials' event (strongly typed)
      * @param event - Event name: 'encryptedcredentials'
@@ -11840,8 +14429,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedcredentials Telegram Bot API}
      */
-    on(event: 'encryptedcredentials', handler: (data: EncryptedCredentials) => void | Promise<void>): this;
-    
+    on(
+      event: 'encryptedcredentials',
+      handler: (data: EncryptedCredentials) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'encryptedcredentials' event with filtering
      * @param event - Event name: 'encryptedcredentials'
@@ -11850,7 +14442,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#encryptedcredentials Telegram Bot API}
      */
-    on(event: 'encryptedcredentials', filter: string | ((data: any) => boolean), handler: (data: EncryptedCredentials) => void | Promise<void>): this;
+    on(
+      event: 'encryptedcredentials',
+      filter: string | ((data: any) => boolean),
+      handler: (data: EncryptedCredentials) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerror' event (strongly typed)
      * @param event - Event name: 'passportelementerror'
@@ -11858,8 +14454,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerror Telegram Bot API}
      */
-    on(event: 'passportelementerror', handler: (data: PassportElementError) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerror',
+      handler: (data: PassportElementError) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerror' event with filtering
      * @param event - Event name: 'passportelementerror'
@@ -11868,7 +14467,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerror Telegram Bot API}
      */
-    on(event: 'passportelementerror', filter: string | ((data: any) => boolean), handler: (data: PassportElementError) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerror',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementError) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrordatafield' event (strongly typed)
      * @param event - Event name: 'passportelementerrordatafield'
@@ -11876,8 +14479,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrordatafield Telegram Bot API}
      */
-    on(event: 'passportelementerrordatafield', handler: (data: PassportElementErrorDataField) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrordatafield',
+      handler: (data: PassportElementErrorDataField) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrordatafield' event with filtering
      * @param event - Event name: 'passportelementerrordatafield'
@@ -11886,7 +14492,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrordatafield Telegram Bot API}
      */
-    on(event: 'passportelementerrordatafield', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorDataField) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrordatafield',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorDataField) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorfrontside' event (strongly typed)
      * @param event - Event name: 'passportelementerrorfrontside'
@@ -11894,8 +14504,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfrontside Telegram Bot API}
      */
-    on(event: 'passportelementerrorfrontside', handler: (data: PassportElementErrorFrontSide) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorfrontside',
+      handler: (data: PassportElementErrorFrontSide) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorfrontside' event with filtering
      * @param event - Event name: 'passportelementerrorfrontside'
@@ -11904,7 +14517,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfrontside Telegram Bot API}
      */
-    on(event: 'passportelementerrorfrontside', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFrontSide) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorfrontside',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFrontSide) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorreverseside' event (strongly typed)
      * @param event - Event name: 'passportelementerrorreverseside'
@@ -11912,8 +14529,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorreverseside Telegram Bot API}
      */
-    on(event: 'passportelementerrorreverseside', handler: (data: PassportElementErrorReverseSide) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorreverseside',
+      handler: (data: PassportElementErrorReverseSide) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorreverseside' event with filtering
      * @param event - Event name: 'passportelementerrorreverseside'
@@ -11922,7 +14542,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorreverseside Telegram Bot API}
      */
-    on(event: 'passportelementerrorreverseside', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorReverseSide) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorreverseside',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorReverseSide) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorselfie' event (strongly typed)
      * @param event - Event name: 'passportelementerrorselfie'
@@ -11930,8 +14554,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorselfie Telegram Bot API}
      */
-    on(event: 'passportelementerrorselfie', handler: (data: PassportElementErrorSelfie) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorselfie',
+      handler: (data: PassportElementErrorSelfie) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorselfie' event with filtering
      * @param event - Event name: 'passportelementerrorselfie'
@@ -11940,7 +14567,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorselfie Telegram Bot API}
      */
-    on(event: 'passportelementerrorselfie', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorSelfie) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorselfie',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorSelfie) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorfile' event (strongly typed)
      * @param event - Event name: 'passportelementerrorfile'
@@ -11948,8 +14579,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfile Telegram Bot API}
      */
-    on(event: 'passportelementerrorfile', handler: (data: PassportElementErrorFile) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorfile',
+      handler: (data: PassportElementErrorFile) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorfile' event with filtering
      * @param event - Event name: 'passportelementerrorfile'
@@ -11958,7 +14592,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfile Telegram Bot API}
      */
-    on(event: 'passportelementerrorfile', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFile) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorfile',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFile) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorfiles' event (strongly typed)
      * @param event - Event name: 'passportelementerrorfiles'
@@ -11966,8 +14604,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfiles Telegram Bot API}
      */
-    on(event: 'passportelementerrorfiles', handler: (data: PassportElementErrorFiles) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorfiles',
+      handler: (data: PassportElementErrorFiles) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorfiles' event with filtering
      * @param event - Event name: 'passportelementerrorfiles'
@@ -11976,7 +14617,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorfiles Telegram Bot API}
      */
-    on(event: 'passportelementerrorfiles', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorFiles) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorfiles',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorFiles) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrortranslationfile' event (strongly typed)
      * @param event - Event name: 'passportelementerrortranslationfile'
@@ -11984,8 +14629,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfile Telegram Bot API}
      */
-    on(event: 'passportelementerrortranslationfile', handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrortranslationfile',
+      handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrortranslationfile' event with filtering
      * @param event - Event name: 'passportelementerrortranslationfile'
@@ -11994,7 +14642,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfile Telegram Bot API}
      */
-    on(event: 'passportelementerrortranslationfile', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrortranslationfile',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorTranslationFile) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrortranslationfiles' event (strongly typed)
      * @param event - Event name: 'passportelementerrortranslationfiles'
@@ -12002,8 +14654,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfiles Telegram Bot API}
      */
-    on(event: 'passportelementerrortranslationfiles', handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrortranslationfiles',
+      handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrortranslationfiles' event with filtering
      * @param event - Event name: 'passportelementerrortranslationfiles'
@@ -12012,7 +14667,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrortranslationfiles Telegram Bot API}
      */
-    on(event: 'passportelementerrortranslationfiles', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrortranslationfiles',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorTranslationFiles) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'passportelementerrorunspecified' event (strongly typed)
      * @param event - Event name: 'passportelementerrorunspecified'
@@ -12020,8 +14679,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorunspecified Telegram Bot API}
      */
-    on(event: 'passportelementerrorunspecified', handler: (data: PassportElementErrorUnspecified) => void | Promise<void>): this;
-    
+    on(
+      event: 'passportelementerrorunspecified',
+      handler: (data: PassportElementErrorUnspecified) => void | Promise<void>
+    ): this;
+
     /**
      * Generic handler for 'passportelementerrorunspecified' event with filtering
      * @param event - Event name: 'passportelementerrorunspecified'
@@ -12030,7 +14692,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#passportelementerrorunspecified Telegram Bot API}
      */
-    on(event: 'passportelementerrorunspecified', filter: string | ((data: any) => boolean), handler: (data: PassportElementErrorUnspecified) => void | Promise<void>): this;
+    on(
+      event: 'passportelementerrorunspecified',
+      filter: string | ((data: any) => boolean),
+      handler: (data: PassportElementErrorUnspecified) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'game' event (strongly typed)
      * @param event - Event name: 'game'
@@ -12039,7 +14705,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#game Telegram Bot API}
      */
     on(event: 'game', handler: (data: Game) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'game' event with filtering
      * @param event - Event name: 'game'
@@ -12048,7 +14714,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#game Telegram Bot API}
      */
-    on(event: 'game', filter: string | ((data: any) => boolean), handler: (data: Game) => void | Promise<void>): this;
+    on(
+      event: 'game',
+      filter: string | ((data: any) => boolean),
+      handler: (data: Game) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'callbackgame' event (strongly typed)
      * @param event - Event name: 'callbackgame'
@@ -12057,7 +14727,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#callbackgame Telegram Bot API}
      */
     on(event: 'callbackgame', handler: (data: CallbackGame) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'callbackgame' event with filtering
      * @param event - Event name: 'callbackgame'
@@ -12066,7 +14736,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#callbackgame Telegram Bot API}
      */
-    on(event: 'callbackgame', filter: string | ((data: any) => boolean), handler: (data: CallbackGame) => void | Promise<void>): this;
+    on(
+      event: 'callbackgame',
+      filter: string | ((data: any) => boolean),
+      handler: (data: CallbackGame) => void | Promise<void>
+    ): this;
     /**
      * Generic handler for 'gamehighscore' event (strongly typed)
      * @param event - Event name: 'gamehighscore'
@@ -12075,7 +14749,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#gamehighscore Telegram Bot API}
      */
     on(event: 'gamehighscore', handler: (data: GameHighScore) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for 'gamehighscore' event with filtering
      * @param event - Event name: 'gamehighscore'
@@ -12084,7 +14758,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#gamehighscore Telegram Bot API}
      */
-    on(event: 'gamehighscore', filter: string | ((data: any) => boolean), handler: (data: GameHighScore) => void | Promise<void>): this;
+    on(
+      event: 'gamehighscore',
+      filter: string | ((data: any) => boolean),
+      handler: (data: GameHighScore) => void | Promise<void>
+    ): this;
 
     /**
      * Generic handler for any event (weakly typed)
@@ -12094,7 +14772,7 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#getting-updates Telegram Bot API}
      */
     on(event: string, handler: (data: any) => void | Promise<void>): this;
-    
+
     /**
      * Generic handler for any event with filtering
      * @param event - Event name as string
@@ -12103,7 +14781,11 @@ declare module '../core/bot' {
      * @returns {this} Bot instance for chaining
      * @see {@link https://core.telegram.org/bots/api#getting-updates Telegram Bot API}
      */
-    on(event: string, filter: string | ((data: any) => boolean), handler: (data: any) => void | Promise<void>): this;
+    on(
+      event: string,
+      filter: string | ((data: any) => boolean),
+      handler: (data: any) => void | Promise<void>
+    ): this;
   }
 }
 
@@ -12163,7 +14845,10 @@ declare module './types/user' {
      * @note Contextual parameters (userId) are automatically filled from this User instance
      * @see {@link https://core.telegram.org/bots/api#setUserEmojiStatus Telegram Bot API}
      */
-    setUserEmojiStatus(emojiStatusCustomEmojiId?: string, emojiStatusExpirationDate?: number): Promise<any>;
+    setUserEmojiStatus(
+      emojiStatusCustomEmojiId?: string,
+      emojiStatusExpirationDate?: number
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param chatId: number | string - Method parameters (contextual parameters are auto-filled)
@@ -12249,7 +14934,11 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -12293,7 +14982,9 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#restrictChatMember Telegram Bot API}
      */
-    restrictChatMember(params: Omit<Interfaces.RestrictChatMemberParams, 'chatId' | 'userId'>): Promise<any>;
+    restrictChatMember(
+      params: Omit<Interfaces.RestrictChatMemberParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12302,7 +14993,9 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#promoteChatMember Telegram Bot API}
      */
-    promoteChatMember(params: Omit<Interfaces.PromoteChatMemberParams, 'chatId' | 'userId'>): Promise<any>;
+    promoteChatMember(
+      params: Omit<Interfaces.PromoteChatMemberParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
      * @param customTitle: string - Method parameters (contextual parameters are auto-filled)
@@ -12338,7 +15031,10 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#setChatPermissions Telegram Bot API}
      */
-    setChatPermissions(permissions: ChatPermissions, useIndependentChatPermissions?: boolean): Promise<any>;
+    setChatPermissions(
+      permissions: ChatPermissions,
+      useIndependentChatPermissions?: boolean
+    ): Promise<any>;
     /**
      * Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -12356,7 +15052,9 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#createChatInviteLink Telegram Bot API}
      */
-    createChatInviteLink(params: Omit<Interfaces.CreateChatInviteLinkParams, 'chatId'>): Promise<any>;
+    createChatInviteLink(
+      params: Omit<Interfaces.CreateChatInviteLinkParams, 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12374,7 +15072,11 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#createChatSubscriptionInviteLink Telegram Bot API}
      */
-    createChatSubscriptionInviteLink(subscriptionPeriod: number, subscriptionPrice: number, name?: string): Promise<any>;
+    createChatSubscriptionInviteLink(
+      subscriptionPeriod: number,
+      subscriptionPrice: number,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param inviteLink: string, name?: string - Method parameters (contextual parameters are auto-filled)
@@ -12545,7 +15247,11 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -12629,7 +15335,9 @@ declare module './types/chat' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.
      * @param customDescription?: string - Method parameters (contextual parameters are auto-filled)
@@ -12737,7 +15445,9 @@ declare module './types/chatFullInfo' {
      * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId) are automatically filled from this ChatFullInfo instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    getMe(
+      params: Omit<Interfaces.GetMeParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -12799,7 +15509,11 @@ declare module './types/chatFullInfo' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatFullInfo instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -12874,7 +15588,9 @@ declare module './types/chatFullInfo' {
      * @note Contextual parameters (giftId, userId, chatId) are automatically filled from this ChatFullInfo instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -12948,7 +15664,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendMessage(
+      params: Omit<
+        Interfaces.SendMessageParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12957,7 +15678,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<
+        Interfaces.ForwardMessageParams,
+        'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12966,7 +15692,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<
+        Interfaces.ForwardMessagesParams,
+        'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12975,7 +15706,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#copyMessage Telegram Bot API}
      */
-    copyMessage(params: Omit<Interfaces.CopyMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    copyMessage(
+      params: Omit<
+        Interfaces.CopyMessageParams,
+        'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12984,7 +15720,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#copyMessages Telegram Bot API}
      */
-    copyMessages(params: Omit<Interfaces.CopyMessagesParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    copyMessages(
+      params: Omit<
+        Interfaces.CopyMessagesParams,
+        'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -12993,7 +15734,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendPhoto(
+      params: Omit<
+        Interfaces.SendPhotoParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13002,7 +15748,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendAudio(
+      params: Omit<
+        Interfaces.SendAudioParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13011,7 +15762,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendDocument(
+      params: Omit<
+        Interfaces.SendDocumentParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13020,7 +15776,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendVideo(
+      params: Omit<
+        Interfaces.SendVideoParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13029,7 +15790,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendAnimation(
+      params: Omit<
+        Interfaces.SendAnimationParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13038,7 +15804,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendVoice(
+      params: Omit<
+        Interfaces.SendVoiceParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13047,7 +15818,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendVideoNote(
+      params: Omit<
+        Interfaces.SendVideoNoteParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13056,7 +15832,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
      */
-    sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendPaidMedia(
+      params: Omit<
+        Interfaces.SendPaidMediaParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13065,7 +15846,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
      */
-    sendMediaGroup(params: Omit<Interfaces.SendMediaGroupParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendMediaGroup(
+      params: Omit<
+        Interfaces.SendMediaGroupParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13074,7 +15860,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendLocation(
+      params: Omit<
+        Interfaces.SendLocationParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13083,7 +15874,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendVenue(
+      params: Omit<
+        Interfaces.SendVenueParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13092,7 +15888,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendContact(
+      params: Omit<
+        Interfaces.SendContactParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13101,7 +15902,9 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
      */
-    sendPoll(params: Omit<Interfaces.SendPollParams, 'chatId' | 'businessConnectionId' | 'messageThreadId'>): Promise<any>;
+    sendPoll(
+      params: Omit<Interfaces.SendPollParams, 'chatId' | 'businessConnectionId' | 'messageThreadId'>
+    ): Promise<any>;
     /**
      * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13110,7 +15913,9 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
      */
-    sendChecklist(params: Omit<Interfaces.SendChecklistParams, 'businessConnectionId' | 'chatId'>): Promise<any>;
+    sendChecklist(
+      params: Omit<Interfaces.SendChecklistParams, 'businessConnectionId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13119,7 +15924,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
      */
-    sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendDice(
+      params: Omit<
+        Interfaces.SendDiceParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
      * @param action: string - Method parameters (contextual parameters are auto-filled)
@@ -13254,7 +16064,9 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, storyId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
      */
-    editStory(params: Omit<Interfaces.EditStoryParams, 'businessConnectionId' | 'storyId'>): Promise<any>;
+    editStory(
+      params: Omit<Interfaces.EditStoryParams, 'businessConnectionId' | 'storyId'>
+    ): Promise<any>;
     /**
      * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13263,7 +16075,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<
+        Interfaces.EditMessageTextParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13272,7 +16089,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<
+        Interfaces.EditMessageCaptionParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13281,7 +16103,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<
+        Interfaces.EditMessageMediaParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13290,7 +16117,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<
+        Interfaces.EditMessageLiveLocationParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to stop updating a live location message before live\_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13299,7 +16131,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#stopMessageLiveLocation Telegram Bot API}
      */
-    stopMessageLiveLocation(params: Omit<Interfaces.StopMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    stopMessageLiveLocation(
+      params: Omit<
+        Interfaces.StopMessageLiveLocationParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13308,7 +16145,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<
+        Interfaces.EditMessageChecklistParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13317,7 +16159,12 @@ declare module './types/message' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<
+        Interfaces.EditMessageReplyMarkupParams,
+        'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- Service messages about a supergroup, channel, or forum topic creation can&#39;t be deleted.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can\_post\_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can\_delete\_messages administrator right in a supergroup or a channel, it can delete any message there.- If the bot has can\_manage\_direct\_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.Returns True on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -13344,7 +16191,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendSticker(
+      params: Omit<
+        Interfaces.SendStickerParams,
+        'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13353,7 +16205,9 @@ declare module './types/message' {
      * @note Contextual parameters (userId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
      */
-    savePreparedInlineMessage(params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>): Promise<any>;
+    savePreparedInlineMessage(
+      params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>
+    ): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13362,7 +16216,12 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
      */
-    sendInvoice(params: Omit<Interfaces.SendInvoiceParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    sendInvoice(
+      params: Omit<
+        Interfaces.SendInvoiceParams,
+        'chatId' | 'messageThreadId' | 'directMessagesTopicId'
+      >
+    ): Promise<any>;
     /**
      * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
      * @param telegramPaymentChargeId: string, isCanceled: boolean - Method parameters (contextual parameters are auto-filled)
@@ -13380,7 +16239,9 @@ declare module './types/message' {
      * @note Contextual parameters (chatId, businessConnectionId, messageThreadId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
      */
-    sendGame(params: Omit<Interfaces.SendGameParams, 'chatId' | 'businessConnectionId' | 'messageThreadId'>): Promise<any>;
+    sendGame(
+      params: Omit<Interfaces.SendGameParams, 'chatId' | 'businessConnectionId' | 'messageThreadId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -13541,7 +16402,12 @@ declare module './types/messageId' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -13557,7 +16423,11 @@ declare module './types/messageId' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -13565,7 +16435,12 @@ declare module './types/messageId' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -13598,7 +16473,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13607,7 +16484,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13616,7 +16495,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13625,7 +16506,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13634,7 +16517,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13643,7 +16528,9 @@ declare module './types/messageId' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this MessageId instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -13667,7 +16554,11 @@ declare module './types/messageId' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -13701,7 +16592,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId, fromChatId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13710,7 +16603,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13854,7 +16749,11 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13881,7 +16780,11 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -13916,7 +16819,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13925,7 +16830,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13934,7 +16841,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13943,7 +16852,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13952,7 +16863,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13961,7 +16874,9 @@ declare module './types/inaccessibleMessage' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13987,7 +16902,11 @@ declare module './types/inaccessibleMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14157,7 +17076,12 @@ declare module './types/maybeInaccessibleMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -14173,7 +17097,11 @@ declare module './types/maybeInaccessibleMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -14181,7 +17109,12 @@ declare module './types/maybeInaccessibleMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -14224,7 +17157,9 @@ declare module './types/maybeInaccessibleMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14242,7 +17177,9 @@ declare module './types/maybeInaccessibleMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14251,7 +17188,9 @@ declare module './types/maybeInaccessibleMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14260,7 +17199,9 @@ declare module './types/maybeInaccessibleMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -14487,7 +17428,12 @@ declare module './types/messageEntity' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -14503,7 +17449,11 @@ declare module './types/messageEntity' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -14511,7 +17461,12 @@ declare module './types/messageEntity' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -14546,7 +17501,9 @@ declare module './types/messageEntity' {
      * @note Contextual parameters (userId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#giftPremiumSubscription Telegram Bot API}
      */
-    giftPremiumSubscription(params: Omit<Interfaces.GiftPremiumSubscriptionParams, 'userId'>): Promise<any>;
+    giftPremiumSubscription(
+      params: Omit<Interfaces.GiftPremiumSubscriptionParams, 'userId'>
+    ): Promise<any>;
     /**
      * Posts a story on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
      * @param params - Method parameters object
@@ -14580,7 +17537,9 @@ declare module './types/messageEntity' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14598,7 +17557,9 @@ declare module './types/messageEntity' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14607,7 +17568,9 @@ declare module './types/messageEntity' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14616,7 +17579,9 @@ declare module './types/messageEntity' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -15025,7 +17990,12 @@ declare module './types/messageOrigin' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -15041,7 +18011,11 @@ declare module './types/messageOrigin' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -15049,7 +18023,12 @@ declare module './types/messageOrigin' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -15092,7 +18071,9 @@ declare module './types/messageOrigin' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15110,7 +18091,9 @@ declare module './types/messageOrigin' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15119,7 +18102,9 @@ declare module './types/messageOrigin' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15128,7 +18113,9 @@ declare module './types/messageOrigin' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -15322,7 +18309,12 @@ declare module './types/messageOriginUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -15338,7 +18330,11 @@ declare module './types/messageOriginUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -15346,7 +18342,12 @@ declare module './types/messageOriginUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -15389,7 +18390,9 @@ declare module './types/messageOriginUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15407,7 +18410,9 @@ declare module './types/messageOriginUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15416,7 +18421,9 @@ declare module './types/messageOriginUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15425,7 +18432,9 @@ declare module './types/messageOriginUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -15619,7 +18628,12 @@ declare module './types/messageOriginHiddenUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -15635,7 +18649,11 @@ declare module './types/messageOriginHiddenUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -15643,7 +18661,12 @@ declare module './types/messageOriginHiddenUser' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -15686,7 +18709,9 @@ declare module './types/messageOriginHiddenUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginHiddenUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15704,7 +18729,9 @@ declare module './types/messageOriginHiddenUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginHiddenUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15713,7 +18740,9 @@ declare module './types/messageOriginHiddenUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginHiddenUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15722,7 +18751,9 @@ declare module './types/messageOriginHiddenUser' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageOriginHiddenUser instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -15806,7 +18837,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, fromChatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'fromChatId' | 'messageId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'fromChatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15815,7 +18848,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -15959,7 +18994,11 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param userId: number, offset?: number, limit?: number - Method parameters
@@ -16038,7 +19077,11 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -16047,7 +19090,11 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -16173,7 +19220,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16182,7 +19231,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16191,7 +19242,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16200,7 +19253,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16209,7 +19264,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16218,7 +19275,9 @@ declare module './types/messageOriginChat' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16276,7 +19335,11 @@ declare module './types/messageOriginChat' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16320,7 +19383,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId, fromChatId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16329,7 +19394,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16473,7 +19540,11 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16500,7 +19571,11 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -16535,7 +19610,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16544,7 +19621,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16553,7 +19632,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16562,7 +19643,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16571,7 +19654,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16580,7 +19665,9 @@ declare module './types/messageOriginChannel' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16606,7 +19693,11 @@ declare module './types/messageOriginChannel' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16759,7 +19850,12 @@ declare module './types/photoSize' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -16967,7 +20063,12 @@ declare module './types/document' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -17177,7 +20278,12 @@ declare module './types/video' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -17353,7 +20459,12 @@ declare module './types/videoNote' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -17577,7 +20688,12 @@ declare module './types/paidMediaPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -17753,7 +20869,12 @@ declare module './types/paidMediaVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -17857,7 +20978,12 @@ declare module './types/poll' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#stopPoll Telegram Bot API}
      */
-    stopPoll(chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    stopPoll(
+      chatId: number | string,
+      messageId: number,
+      businessConnectionId?: string,
+      replyMarkup?: InlineKeyboardMarkup
+    ): Promise<any>;
   }
 }
 /**
@@ -17954,7 +21080,9 @@ declare module './types/venue' {
      * @note Contextual parameters (foursquareId, googlePlaceId) are automatically filled from this Venue instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'foursquareId' | 'googlePlaceId'>): Promise<any>;
+    sendVenue(
+      params: Omit<Interfaces.SendVenueParams, 'foursquareId' | 'googlePlaceId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -18115,7 +21243,12 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -18131,7 +21264,11 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -18139,7 +21276,12 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -18181,7 +21323,9 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageAutoDeleteTimerChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18199,7 +21343,9 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageAutoDeleteTimerChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18208,7 +21354,9 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageAutoDeleteTimerChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18217,7 +21365,9 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this MessageAutoDeleteTimerChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -18241,7 +21391,11 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -18343,7 +21497,11 @@ declare module './types/chatBoostAdded' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostAdded instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -18569,7 +21727,11 @@ declare module './types/backgroundTypeChatTheme' {
      * @note Contextual parameters (chatId) are automatically filled from this BackgroundTypeChatTheme instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -18795,7 +21957,11 @@ declare module './types/chatBackground' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBackground instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -19038,7 +22204,11 @@ declare module './types/chatShared' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatShared instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -19113,7 +22283,9 @@ declare module './types/chatShared' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this ChatShared instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -19356,7 +22528,11 @@ declare module './types/videoChatScheduled' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatScheduled instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param userId: number, offset?: number, limit?: number - Method parameters
@@ -19417,7 +22593,11 @@ declare module './types/videoChatScheduled' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatScheduled instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -19771,7 +22951,11 @@ declare module './types/videoChatStarted' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatStarted instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param userId: number, offset?: number, limit?: number - Method parameters
@@ -19832,7 +23016,11 @@ declare module './types/videoChatStarted' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatStarted instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -20186,7 +23374,11 @@ declare module './types/videoChatEnded' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatEnded instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param userId: number, offset?: number, limit?: number - Method parameters
@@ -20247,7 +23439,11 @@ declare module './types/videoChatEnded' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatEnded instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -20601,7 +23797,11 @@ declare module './types/videoChatParticipantsInvited' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -20663,7 +23863,11 @@ declare module './types/videoChatParticipantsInvited' {
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -20738,7 +23942,9 @@ declare module './types/videoChatParticipantsInvited' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -20992,7 +24198,12 @@ declare module './types/paidMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -21008,7 +24219,11 @@ declare module './types/paidMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -21016,7 +24231,12 @@ declare module './types/paidMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -21058,7 +24278,9 @@ declare module './types/paidMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this PaidMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21076,7 +24298,9 @@ declare module './types/paidMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this PaidMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21085,7 +24309,9 @@ declare module './types/paidMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this PaidMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21094,7 +24320,9 @@ declare module './types/paidMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this PaidMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -21118,7 +24346,11 @@ declare module './types/paidMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -21287,7 +24519,12 @@ declare module './types/directMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -21303,7 +24540,11 @@ declare module './types/directMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -21311,7 +24552,12 @@ declare module './types/directMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -21353,7 +24599,9 @@ declare module './types/directMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21371,7 +24619,9 @@ declare module './types/directMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21380,7 +24630,9 @@ declare module './types/directMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21389,7 +24641,9 @@ declare module './types/directMessagePriceChanged' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagePriceChanged instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -21413,7 +24667,11 @@ declare module './types/directMessagePriceChanged' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -21663,7 +24921,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId, messageId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'directMessagesTopicId' | 'messageId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'directMessagesTopicId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21672,7 +24932,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'directMessagesTopicId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21699,7 +24961,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'directMessagesTopicId'>): Promise<any>;
+    sendDocument(
+      params: Omit<Interfaces.SendDocumentParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21717,7 +24981,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'directMessagesTopicId'>): Promise<any>;
+    sendAnimation(
+      params: Omit<Interfaces.SendAnimationParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21735,7 +25001,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'directMessagesTopicId'>): Promise<any>;
+    sendVideoNote(
+      params: Omit<Interfaces.SendVideoNoteParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21744,7 +25012,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
      */
-    sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'directMessagesTopicId'>): Promise<any>;
+    sendPaidMedia(
+      params: Omit<Interfaces.SendPaidMediaParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21753,7 +25023,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
      */
-    sendMediaGroup(params: Omit<Interfaces.SendMediaGroupParams, 'directMessagesTopicId'>): Promise<any>;
+    sendMediaGroup(
+      params: Omit<Interfaces.SendMediaGroupParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21762,7 +25034,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'directMessagesTopicId'>): Promise<any>;
+    sendLocation(
+      params: Omit<Interfaces.SendLocationParams, 'directMessagesTopicId'>
+    ): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21813,7 +25087,12 @@ declare module './types/directMessagesTopic' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -21829,7 +25108,11 @@ declare module './types/directMessagesTopic' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -21837,7 +25120,12 @@ declare module './types/directMessagesTopic' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -21880,7 +25168,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21898,7 +25188,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21907,7 +25199,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21916,7 +25210,9 @@ declare module './types/directMessagesTopic' {
      * @note Contextual parameters (messageId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -22095,7 +25391,12 @@ declare module './types/userProfilePhotos' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -22170,7 +25471,11 @@ declare module './types/file' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountProfilePhoto Telegram Bot API}
      */
-    setBusinessAccountProfilePhoto(businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean): Promise<any>;
+    setBusinessAccountProfilePhoto(
+      businessConnectionId: string,
+      photo: InputProfilePhoto,
+      isPublic?: boolean
+    ): Promise<any>;
     /**
      * Removes the current profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
      * @param businessConnectionId: string, isPublic?: boolean - Method parameters
@@ -22178,7 +25483,10 @@ declare module './types/file' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#removeBusinessAccountProfilePhoto Telegram Bot API}
      */
-    removeBusinessAccountProfilePhoto(businessConnectionId: string, isPublic?: boolean): Promise<any>;
+    removeBusinessAccountProfilePhoto(
+      businessConnectionId: string,
+      isPublic?: boolean
+    ): Promise<any>;
     /**
      * Use this method to upload a file with a sticker for later use in the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods \(the file can be used multiple times\). Returns the uploaded File on success.
      * @param userId: number, sticker: InputFile, stickerFormat: string - Method parameters
@@ -22441,7 +25749,11 @@ declare module './types/keyboardButtonRequestChat' {
      * @note Contextual parameters (chatId) are automatically filled from this KeyboardButtonRequestChat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -22516,7 +25828,9 @@ declare module './types/keyboardButtonRequestChat' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this KeyboardButtonRequestChat instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -22957,7 +26271,12 @@ declare module './types/inlineKeyboardMarkup' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#stopPoll Telegram Bot API}
      */
-    stopPoll(chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    stopPoll(
+      chatId: number | string,
+      messageId: number,
+      businessConnectionId?: string,
+      replyMarkup?: InlineKeyboardMarkup
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -23076,7 +26395,11 @@ declare module './types/switchInlineQueryChosenChat' {
      * @note Contextual parameters (chatId) are automatically filled from this SwitchInlineQueryChosenChat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -23151,7 +26474,9 @@ declare module './types/switchInlineQueryChosenChat' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this SwitchInlineQueryChosenChat instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -23225,7 +26550,9 @@ declare module './types/callbackQuery' {
      * @note Contextual parameters (callbackQueryId) are automatically filled from this CallbackQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerCallbackQuery Telegram Bot API}
      */
-    answerCallbackQuery(params: Omit<Interfaces.AnswerCallbackQueryParams, 'callbackQueryId'>): Promise<any>;
+    answerCallbackQuery(
+      params: Omit<Interfaces.AnswerCallbackQueryParams, 'callbackQueryId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -23571,7 +26898,11 @@ declare module './types/chatPhoto' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatPhoto instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param userId: number, offset?: number, limit?: number - Method parameters
@@ -23650,7 +26981,11 @@ declare module './types/chatPhoto' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatPhoto instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -23886,7 +27221,9 @@ declare module './types/chatInviteLink' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatInviteLink instance
      * @see {@link https://core.telegram.org/bots/api#createChatInviteLink Telegram Bot API}
      */
-    createChatInviteLink(params: Omit<Interfaces.CreateChatInviteLinkParams, 'chatId'>): Promise<any>;
+    createChatInviteLink(
+      params: Omit<Interfaces.CreateChatInviteLinkParams, 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -23949,7 +27286,11 @@ declare module './types/chatInviteLink' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatInviteLink instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24024,7 +27365,9 @@ declare module './types/chatInviteLink' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatInviteLink instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -24176,7 +27519,11 @@ declare module './types/chatAdministratorRights' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatAdministratorRights instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24242,7 +27589,10 @@ declare module './types/chatAdministratorRights' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyDefaultAdministratorRights Telegram Bot API}
      */
-    setMyDefaultAdministratorRights(rights?: ChatAdministratorRights, forChannels?: boolean): Promise<any>;
+    setMyDefaultAdministratorRights(
+      rights?: ChatAdministratorRights,
+      forChannels?: boolean
+    ): Promise<any>;
     /**
      * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
      * @param forChannels?: boolean - Method parameters
@@ -24259,7 +27609,9 @@ declare module './types/chatAdministratorRights' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatAdministratorRights instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -24411,7 +27763,11 @@ declare module './types/chatMemberUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24486,7 +27842,9 @@ declare module './types/chatMemberUpdated' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this ChatMemberUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -24620,7 +27978,9 @@ declare module './types/chatMember' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#restrictChatMember Telegram Bot API}
      */
-    restrictChatMember(params: Omit<Interfaces.RestrictChatMemberParams, 'userId' | 'chatId'>): Promise<any>;
+    restrictChatMember(
+      params: Omit<Interfaces.RestrictChatMemberParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -24629,7 +27989,9 @@ declare module './types/chatMember' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#promoteChatMember Telegram Bot API}
      */
-    promoteChatMember(params: Omit<Interfaces.PromoteChatMemberParams, 'userId' | 'chatId'>): Promise<any>;
+    promoteChatMember(
+      params: Omit<Interfaces.PromoteChatMemberParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24674,7 +28036,11 @@ declare module './types/chatMember' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24749,7 +28115,9 @@ declare module './types/chatMember' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -24901,7 +28269,11 @@ declare module './types/chatMemberOwner' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberOwner instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24976,7 +28348,9 @@ declare module './types/chatMemberOwner' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberOwner instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -25128,7 +28502,11 @@ declare module './types/chatMemberAdministrator' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberAdministrator instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25203,7 +28581,9 @@ declare module './types/chatMemberAdministrator' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberAdministrator instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -25355,7 +28735,11 @@ declare module './types/chatMemberMember' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberMember instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25430,7 +28814,9 @@ declare module './types/chatMemberMember' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberMember instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -25582,7 +28968,11 @@ declare module './types/chatMemberRestricted' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberRestricted instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25657,7 +29047,9 @@ declare module './types/chatMemberRestricted' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberRestricted instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -25809,7 +29201,11 @@ declare module './types/chatMemberLeft' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberLeft instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25884,7 +29280,9 @@ declare module './types/chatMemberLeft' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberLeft instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -26036,7 +29434,11 @@ declare module './types/chatMemberBanned' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberBanned instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26111,7 +29513,9 @@ declare module './types/chatMemberBanned' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMemberBanned instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -26281,7 +29685,11 @@ declare module './types/chatJoinRequest' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatJoinRequest instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26356,7 +29764,9 @@ declare module './types/chatJoinRequest' {
      * @note Contextual parameters (chatId, userId) are automatically filled from this ChatJoinRequest instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId' | 'userId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -26472,7 +29882,9 @@ declare module './types/chatPermissions' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatPermissions instance
      * @see {@link https://core.telegram.org/bots/api#restrictChatMember Telegram Bot API}
      */
-    restrictChatMember(params: Omit<Interfaces.RestrictChatMemberParams, 'userId' | 'chatId'>): Promise<any>;
+    restrictChatMember(
+      params: Omit<Interfaces.RestrictChatMemberParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can\_restrict\_members administrator rights. Returns True on success.
      * @param permissions: ChatPermissions, useIndependentChatPermissions?: boolean - Method parameters (contextual parameters are auto-filled)
@@ -26481,7 +29893,10 @@ declare module './types/chatPermissions' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatPermissions instance
      * @see {@link https://core.telegram.org/bots/api#setChatPermissions Telegram Bot API}
      */
-    setChatPermissions(permissions: ChatPermissions, useIndependentChatPermissions?: boolean): Promise<any>;
+    setChatPermissions(
+      permissions: ChatPermissions,
+      useIndependentChatPermissions?: boolean
+    ): Promise<any>;
     /**
      * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26526,7 +29941,11 @@ declare module './types/chatPermissions' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatPermissions instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26601,7 +30020,9 @@ declare module './types/chatPermissions' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatPermissions instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -26777,7 +30198,11 @@ declare module './types/chatLocation' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatLocation instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -26925,7 +30350,12 @@ declare module './types/reactionType' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMessageReaction Telegram Bot API}
      */
-    setMessageReaction(chatId: number | string, messageId: number, reaction?: ReactionType[], isBig?: boolean): Promise<any>;
+    setMessageReaction(
+      chatId: number | string,
+      messageId: number,
+      reaction?: ReactionType[],
+      isBig?: boolean
+    ): Promise<any>;
   }
 }
 /**
@@ -26951,7 +30381,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId, fromChatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -26960,7 +30392,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27104,7 +30538,11 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27131,7 +30569,11 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -27166,7 +30608,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27175,7 +30619,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27184,7 +30630,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27193,7 +30641,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27202,7 +30652,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27211,7 +30663,9 @@ declare module './types/messageReactionUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27273,7 +30727,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId, fromChatId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27282,7 +30738,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27426,7 +30884,11 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27453,7 +30915,11 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -27488,7 +30954,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27497,7 +30965,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27506,7 +30976,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27515,7 +30987,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27524,7 +30998,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27533,7 +31009,9 @@ declare module './types/messageReactionCountUpdated' {
      * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27559,7 +31037,11 @@ declare module './types/messageReactionCountUpdated' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27585,7 +31067,11 @@ declare module './types/forumTopic' {
      * @note Contextual parameters (iconCustomEmojiId) are automatically filled from this ForumTopic instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number): Promise<any>;
+    getForumTopicIconStickers(
+      chatId: number | string,
+      name: string,
+      iconColor?: number
+    ): Promise<any>;
     /**
      * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
      * @param chatId: number | string, name: string, iconColor?: number - Method parameters (contextual parameters are auto-filled)
@@ -27704,7 +31190,9 @@ declare module './types/gift' {
      * @note Contextual parameters (giftId, chatId) are automatically filled from this Gift instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27729,7 +31217,11 @@ declare module './types/gift' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountGiftSettings Telegram Bot API}
      */
-    setBusinessAccountGiftSettings(businessConnectionId: string, showGiftButton: boolean, acceptedGiftTypes: AcceptedGiftTypes): Promise<any>;
+    setBusinessAccountGiftSettings(
+      businessConnectionId: string,
+      showGiftButton: boolean,
+      acceptedGiftTypes: AcceptedGiftTypes
+    ): Promise<any>;
     /**
      * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
      * @param params - Method parameters object
@@ -27755,7 +31247,11 @@ declare module './types/gift' {
      * @note Contextual parameters (ownedGiftId) are automatically filled from this Gift instance
      * @see {@link https://core.telegram.org/bots/api#upgradeGift Telegram Bot API}
      */
-    upgradeGift(businessConnectionId: string, keepOriginalDetails?: boolean, starCount?: number): Promise<any>;
+    upgradeGift(
+      businessConnectionId: string,
+      keepOriginalDetails?: boolean,
+      starCount?: number
+    ): Promise<any>;
     /**
      * Transfers an owned unique gift to another user. Requires the can\_transfer\_and\_upgrade\_gifts business bot right. Requires can\_transfer\_stars business bot right if the transfer is paid. Returns True on success.
      * @param businessConnectionId: string, starCount?: number - Method parameters (contextual parameters are auto-filled)
@@ -27789,7 +31285,11 @@ declare module './types/gifts' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountGiftSettings Telegram Bot API}
      */
-    setBusinessAccountGiftSettings(businessConnectionId: string, showGiftButton: boolean, acceptedGiftTypes: AcceptedGiftTypes): Promise<any>;
+    setBusinessAccountGiftSettings(
+      businessConnectionId: string,
+      showGiftButton: boolean,
+      acceptedGiftTypes: AcceptedGiftTypes
+    ): Promise<any>;
     /**
      * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
      * @param params - Method parameters object
@@ -27813,7 +31313,11 @@ declare module './types/acceptedGiftTypes' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountGiftSettings Telegram Bot API}
      */
-    setBusinessAccountGiftSettings(businessConnectionId: string, showGiftButton: boolean, acceptedGiftTypes: AcceptedGiftTypes): Promise<any>;
+    setBusinessAccountGiftSettings(
+      businessConnectionId: string,
+      showGiftButton: boolean,
+      acceptedGiftTypes: AcceptedGiftTypes
+    ): Promise<any>;
   }
 }
 /**
@@ -27829,7 +31333,11 @@ declare module './types/botCommand' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyCommands Telegram Bot API}
      */
-    setMyCommands(commands: BotCommand[], scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    setMyCommands(
+      commands: BotCommand[],
+      scope?: BotCommandScope,
+      languageCode?: string
+    ): Promise<any>;
   }
 }
 /**
@@ -27845,7 +31353,11 @@ declare module './types/botCommandScope' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyCommands Telegram Bot API}
      */
-    setMyCommands(commands: BotCommand[], scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    setMyCommands(
+      commands: BotCommand[],
+      scope?: BotCommandScope,
+      languageCode?: string
+    ): Promise<any>;
     /**
      * Use this method to delete the list of the bot&#39;s commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27955,7 +31467,11 @@ declare module './types/botCommandScopeAllPrivateChats' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllPrivateChats instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -28181,7 +31697,11 @@ declare module './types/botCommandScopeAllGroupChats' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllGroupChats instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -28407,7 +31927,11 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllChatAdministrators instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -28633,7 +32157,11 @@ declare module './types/botCommandScopeChat' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -28859,7 +32387,11 @@ declare module './types/botCommandScopeChatAdministrators' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChatAdministrators instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -29086,7 +32618,11 @@ declare module './types/botCommandScopeChatMember' {
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -29161,7 +32697,9 @@ declare module './types/botCommandScopeChatMember' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this BotCommandScopeChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -29337,7 +32875,11 @@ declare module './types/chatBoostSource' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSource instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -29412,7 +32954,9 @@ declare module './types/chatBoostSource' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatBoostSource instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -29564,7 +33108,11 @@ declare module './types/chatBoostSourcePremium' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourcePremium instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -29639,7 +33187,9 @@ declare module './types/chatBoostSourcePremium' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatBoostSourcePremium instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -29791,7 +33341,11 @@ declare module './types/chatBoostSourceGiftCode' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiftCode instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -29866,7 +33420,9 @@ declare module './types/chatBoostSourceGiftCode' {
      * @note Contextual parameters (userId, giftId, chatId) are automatically filled from this ChatBoostSourceGiftCode instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'giftId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'giftId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -30018,7 +33574,11 @@ declare module './types/chatBoostSourceGiveaway' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiveaway instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30093,7 +33653,9 @@ declare module './types/chatBoostSourceGiveaway' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this ChatBoostSourceGiveaway instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -30244,7 +33806,11 @@ declare module './types/chatBoost' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoost instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -30470,7 +34036,11 @@ declare module './types/chatBoostUpdated' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -30696,7 +34266,11 @@ declare module './types/chatBoostRemoved' {
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostRemoved instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -30923,7 +34497,11 @@ declare module './types/userChatBoosts' {
      * @note Contextual parameters (chatId) are automatically filled from this UserChatBoosts instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30998,7 +34576,9 @@ declare module './types/userChatBoosts' {
      * @note Contextual parameters (userId, chatId) are automatically filled from this UserChatBoosts instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -31089,7 +34669,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendMessage(
+      params: Omit<Interfaces.SendMessageParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31098,7 +34680,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, fromChatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'fromChatId' | 'messageId'>): Promise<any>;
+    forwardMessage(
+      params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'fromChatId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31107,7 +34691,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, fromChatId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
      */
-    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>): Promise<any>;
+    forwardMessages(
+      params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'fromChatId'>
+    ): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31116,7 +34702,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendPhoto(
+      params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31125,7 +34713,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendAudio(
+      params: Omit<Interfaces.SendAudioParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31134,7 +34724,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendDocument(
+      params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31143,7 +34735,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendVideo(
+      params: Omit<Interfaces.SendVideoParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31152,7 +34746,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendAnimation(
+      params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31161,7 +34757,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendVoice(
+      params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31170,7 +34768,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendVideoNote(
+      params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31179,7 +34779,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
      */
-    sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendPaidMedia(
+      params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31188,7 +34790,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
      */
-    sendMediaGroup(params: Omit<Interfaces.SendMediaGroupParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendMediaGroup(
+      params: Omit<Interfaces.SendMediaGroupParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31197,7 +34801,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendLocation(
+      params: Omit<Interfaces.SendLocationParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31206,7 +34812,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendVenue(
+      params: Omit<Interfaces.SendVenueParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31215,7 +34823,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendContact(
+      params: Omit<Interfaces.SendContactParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31224,7 +34834,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
      */
-    sendPoll(params: Omit<Interfaces.SendPollParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendPoll(
+      params: Omit<Interfaces.SendPollParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31233,7 +34845,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
      */
-    sendChecklist(params: Omit<Interfaces.SendChecklistParams, 'businessConnectionId' | 'chatId'>): Promise<any>;
+    sendChecklist(
+      params: Omit<Interfaces.SendChecklistParams, 'businessConnectionId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31242,7 +34856,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
      */
-    sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendDice(
+      params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
      * @param action: string, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
@@ -31278,7 +34894,11 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -31314,7 +34934,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<
+        Interfaces.EditMessageTextParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31323,7 +34948,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<
+        Interfaces.EditMessageCaptionParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31332,7 +34962,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<
+        Interfaces.EditMessageMediaParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31341,7 +34976,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<
+        Interfaces.EditMessageLiveLocationParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31350,7 +34990,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<
+        Interfaces.EditMessageChecklistParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31359,7 +35004,12 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<
+        Interfaces.EditMessageReplyMarkupParams,
+        'businessConnectionId' | 'chatId' | 'messageId'
+      >
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31368,7 +35018,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendSticker(
+      params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31385,7 +35037,11 @@ declare module './types/businessMessagesDeleted' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -31394,7 +35050,9 @@ declare module './types/businessMessagesDeleted' {
      * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
      */
-    sendGame(params: Omit<Interfaces.SendGameParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    sendGame(
+      params: Omit<Interfaces.SendGameParams, 'chatId' | 'businessConnectionId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -31554,7 +35212,12 @@ declare module './types/inputMediaPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -31730,7 +35393,12 @@ declare module './types/inputMediaVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -31906,7 +35574,12 @@ declare module './types/inputMediaDocument' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -32042,7 +35715,12 @@ declare module './types/inputFile' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setStickerSetThumbnail Telegram Bot API}
      */
-    setStickerSetThumbnail(name: string, userId: number, format: string, thumbnail?: InputFile | string): Promise<any>;
+    setStickerSetThumbnail(
+      name: string,
+      userId: number,
+      format: string,
+      thumbnail?: InputFile | string
+    ): Promise<any>;
   }
 }
 /**
@@ -32202,7 +35880,12 @@ declare module './types/inputPaidMediaPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -32378,7 +36061,12 @@ declare module './types/inputPaidMediaVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -32554,7 +36242,12 @@ declare module './types/inputProfilePhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -32570,7 +36263,11 @@ declare module './types/inputProfilePhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setBusinessAccountProfilePhoto Telegram Bot API}
      */
-    setBusinessAccountProfilePhoto(businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean): Promise<any>;
+    setBusinessAccountProfilePhoto(
+      businessConnectionId: string,
+      photo: InputProfilePhoto,
+      isPublic?: boolean
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -32738,7 +36435,12 @@ declare module './types/inputProfilePhotoStatic' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -32914,7 +36616,12 @@ declare module './types/inputProfilePhotoAnimated' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -33115,7 +36822,12 @@ declare module './types/inputStoryContentPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -33291,7 +37003,12 @@ declare module './types/inputStoryContentVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -33356,7 +37073,11 @@ declare module './types/sticker' {
      * @note Contextual parameters (iconCustomEmojiId) are automatically filled from this Sticker instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number): Promise<any>;
+    getForumTopicIconStickers(
+      chatId: number | string,
+      name: string,
+      iconColor?: number
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -33468,7 +37189,12 @@ declare module './types/sticker' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setStickerSetThumbnail Telegram Bot API}
      */
-    setStickerSetThumbnail(name: string, userId: number, format: string, thumbnail?: InputFile | string): Promise<any>;
+    setStickerSetThumbnail(
+      name: string,
+      userId: number,
+      format: string,
+      thumbnail?: InputFile | string
+    ): Promise<any>;
     /**
      * Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
      * @param name: string - Method parameters (contextual parameters are auto-filled)
@@ -33541,7 +37267,12 @@ declare module './types/stickerSet' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setStickerSetThumbnail Telegram Bot API}
      */
-    setStickerSetThumbnail(name: string, userId: number, format: string, thumbnail?: InputFile | string): Promise<any>;
+    setStickerSetThumbnail(
+      name: string,
+      userId: number,
+      format: string,
+      thumbnail?: InputFile | string
+    ): Promise<any>;
     /**
      * Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
      * @param name: string, customEmojiId?: string - Method parameters
@@ -33622,7 +37353,9 @@ declare module './types/inlineQuery' {
      * @note Contextual parameters (inlineQueryId) are automatically filled from this InlineQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
      */
-    answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
+    answerInlineQuery(
+      params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -33639,7 +37372,9 @@ declare module './types/inlineQueryResultsButton' {
      * @note Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResultsButton instance
      * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
      */
-    answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
+    answerInlineQuery(
+      params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -33656,7 +37391,9 @@ declare module './types/inlineQueryResult' {
      * @note Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResult instance
      * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
      */
-    answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
+    answerInlineQuery(
+      params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>
+    ): Promise<any>;
     /**
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
      * @param params - Method parameters object
@@ -33816,7 +37553,12 @@ declare module './types/inlineQueryResultPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -33992,7 +37734,12 @@ declare module './types/inlineQueryResultVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -34168,7 +37915,12 @@ declare module './types/inlineQueryResultDocument' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -34344,7 +38096,12 @@ declare module './types/inlineQueryResultCachedPhoto' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -34520,7 +38277,12 @@ declare module './types/inlineQueryResultCachedDocument' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -34696,7 +38458,12 @@ declare module './types/inlineQueryResultCachedVideo' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -34889,7 +38656,12 @@ declare module './types/inputMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -34905,7 +38677,11 @@ declare module './types/inputMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -34913,7 +38689,12 @@ declare module './types/inputMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -34955,7 +38736,9 @@ declare module './types/inputMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -34973,7 +38756,9 @@ declare module './types/inputMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -34982,7 +38767,9 @@ declare module './types/inputMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -34991,7 +38778,9 @@ declare module './types/inputMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35015,7 +38804,11 @@ declare module './types/inputMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35184,7 +38977,12 @@ declare module './types/inputTextMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -35200,7 +38998,11 @@ declare module './types/inputTextMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -35208,7 +39010,12 @@ declare module './types/inputTextMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -35250,7 +39057,9 @@ declare module './types/inputTextMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputTextMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35268,7 +39077,9 @@ declare module './types/inputTextMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputTextMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35277,7 +39088,9 @@ declare module './types/inputTextMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputTextMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35286,7 +39099,9 @@ declare module './types/inputTextMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputTextMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35310,7 +39125,11 @@ declare module './types/inputTextMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35479,7 +39298,12 @@ declare module './types/inputLocationMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -35495,7 +39319,11 @@ declare module './types/inputLocationMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -35503,7 +39331,12 @@ declare module './types/inputLocationMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -35545,7 +39378,9 @@ declare module './types/inputLocationMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputLocationMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35563,7 +39398,9 @@ declare module './types/inputLocationMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputLocationMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35572,7 +39409,9 @@ declare module './types/inputLocationMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputLocationMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35581,7 +39420,9 @@ declare module './types/inputLocationMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputLocationMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35605,7 +39446,11 @@ declare module './types/inputLocationMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35735,7 +39580,9 @@ declare module './types/inputVenueMessageContent' {
      * @note Contextual parameters (foursquareId, googlePlaceId) are automatically filled from this InputVenueMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'foursquareId' | 'googlePlaceId'>): Promise<any>;
+    sendVenue(
+      params: Omit<Interfaces.SendVenueParams, 'foursquareId' | 'googlePlaceId'>
+    ): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35775,7 +39622,12 @@ declare module './types/inputVenueMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -35791,7 +39643,11 @@ declare module './types/inputVenueMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -35799,7 +39655,12 @@ declare module './types/inputVenueMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -35841,7 +39702,9 @@ declare module './types/inputVenueMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputVenueMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35859,7 +39722,9 @@ declare module './types/inputVenueMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputVenueMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35868,7 +39733,9 @@ declare module './types/inputVenueMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputVenueMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35877,7 +39744,9 @@ declare module './types/inputVenueMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputVenueMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35901,7 +39770,11 @@ declare module './types/inputVenueMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36070,7 +39943,12 @@ declare module './types/inputContactMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -36086,7 +39964,11 @@ declare module './types/inputContactMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -36094,7 +39976,12 @@ declare module './types/inputContactMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -36136,7 +40023,9 @@ declare module './types/inputContactMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputContactMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36154,7 +40043,9 @@ declare module './types/inputContactMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputContactMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36163,7 +40054,9 @@ declare module './types/inputContactMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputContactMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36172,7 +40065,9 @@ declare module './types/inputContactMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputContactMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36196,7 +40091,11 @@ declare module './types/inputContactMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36365,7 +40264,12 @@ declare module './types/inputInvoiceMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -36381,7 +40285,11 @@ declare module './types/inputInvoiceMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -36389,7 +40297,12 @@ declare module './types/inputInvoiceMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -36431,7 +40344,9 @@ declare module './types/inputInvoiceMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputInvoiceMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36449,7 +40364,9 @@ declare module './types/inputInvoiceMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputInvoiceMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36458,7 +40375,9 @@ declare module './types/inputInvoiceMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputInvoiceMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36467,7 +40386,9 @@ declare module './types/inputInvoiceMessageContent' {
      * @note Contextual parameters (messageId) are automatically filled from this InputInvoiceMessageContent instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36491,7 +40412,11 @@ declare module './types/inputInvoiceMessageContent' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36660,7 +40585,12 @@ declare module './types/sentWebAppMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -36676,7 +40606,11 @@ declare module './types/sentWebAppMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -36684,7 +40618,12 @@ declare module './types/sentWebAppMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -36717,7 +40656,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36726,7 +40667,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36735,7 +40678,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36744,7 +40689,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36753,7 +40700,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36762,7 +40711,9 @@ declare module './types/sentWebAppMessage' {
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36786,7 +40737,11 @@ declare module './types/sentWebAppMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -36955,7 +40910,12 @@ declare module './types/preparedInlineMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    sendChatAction(
+      chatId: number | string,
+      action: string,
+      businessConnectionId?: string,
+      messageThreadId?: number
+    ): Promise<any>;
     /**
      * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
      * @param params - Method parameters object
@@ -36971,7 +40931,11 @@ declare module './types/preparedInlineMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
      */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    editChatSubscriptionInviteLink(
+      chatId: number | string,
+      inviteLink: string,
+      name?: string
+    ): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
@@ -36979,7 +40943,12 @@ declare module './types/preparedInlineMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
      */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    editForumTopic(
+      chatId: number | string,
+      messageThreadId: number,
+      name?: string,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
      * @param chatId: number | string, name: string - Method parameters
@@ -37012,7 +40981,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageText(
+      params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -37021,7 +40992,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageCaption(
+      params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -37030,7 +41003,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageMedia(
+      params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -37039,7 +41014,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageLiveLocation(
+      params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -37048,7 +41025,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    editMessageChecklist(
+      params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>
+    ): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -37057,7 +41036,9 @@ declare module './types/preparedInlineMessage' {
      * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageReplyMarkup(
+      params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>
+    ): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -37089,7 +41070,11 @@ declare module './types/preparedInlineMessage' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
      */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    editUserStarSubscription(
+      userId: number,
+      telegramPaymentChargeId: string,
+      isCanceled: boolean
+    ): Promise<any>;
     /**
      * Use this method to send a game. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -37178,7 +41163,9 @@ declare module './types/shippingQuery' {
      * @note Contextual parameters (shippingQueryId) are automatically filled from this ShippingQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
      */
-    answerShippingQuery(params: Omit<Interfaces.AnswerShippingQueryParams, 'shippingQueryId'>): Promise<any>;
+    answerShippingQuery(
+      params: Omit<Interfaces.AnswerShippingQueryParams, 'shippingQueryId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -37195,7 +41182,9 @@ declare module './types/preCheckoutQuery' {
      * @note Contextual parameters (preCheckoutQueryId) are automatically filled from this PreCheckoutQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram Bot API}
      */
-    answerPreCheckoutQuery(params: Omit<Interfaces.AnswerPreCheckoutQueryParams, 'preCheckoutQueryId'>): Promise<any>;
+    answerPreCheckoutQuery(
+      params: Omit<Interfaces.AnswerPreCheckoutQueryParams, 'preCheckoutQueryId'>
+    ): Promise<any>;
   }
 }
 /**
@@ -37289,7 +41278,11 @@ declare module './types/transactionPartnerChat' {
      * @note Contextual parameters (chatId) are automatically filled from this TransactionPartnerChat instance
      * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
      */
-    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    getForumTopicIconStickers(
+      name: string,
+      iconColor?: number,
+      iconCustomEmojiId?: string
+    ): Promise<any>;
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param userId: number - Method parameters (contextual parameters are auto-filled)
@@ -37364,7 +41357,9 @@ declare module './types/transactionPartnerChat' {
      * @note Contextual parameters (giftId, chatId) are automatically filled from this TransactionPartnerChat instance
      * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
      */
-    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'chatId'>): Promise<any>;
+    getAvailableGifts(
+      params: Omit<Interfaces.GetAvailableGiftsParams, 'giftId' | 'chatId'>
+    ): Promise<any>;
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
      * @param businessConnectionId: string - Method parameters
@@ -37517,7 +41512,12 @@ declare module './types/game' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
      */
-    getGameHighScores(userId: number, chatId?: number, messageId?: number, inlineMessageId?: string): Promise<any>;
+    getGameHighScores(
+      userId: number,
+      chatId?: number,
+      messageId?: number,
+      inlineMessageId?: string
+    ): Promise<any>;
   }
 }
 /**

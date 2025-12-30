@@ -4,12 +4,11 @@ This object describes the type of a background. Currently, it can be one of
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the background, always “fill” |
-| fill | `BackgroundFill` | Yes | The background fill |
-| darkThemeDimming | `number` | Yes | Dimming of the background in dark themes, as a percentage; 0-100 |
-
+| Name             | Type             | Required | Description                                                      |
+| :--------------- | :--------------- | :------: | :--------------------------------------------------------------- |
+| type             | `string`         |   Yes    | Type of the background, always “fill”                            |
+| fill             | `BackgroundFill` |   Yes    | The background fill                                              |
+| darkThemeDimming | `number`         |   Yes    | Dimming of the background in dark themes, as a percentage; 0-100 |
 
 ## Event Handlers
 

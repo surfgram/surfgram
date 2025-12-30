@@ -16,7 +16,7 @@ describe('AcceptedGiftTypes', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.unlimitedGifts ?? instance.raw?.unlimited_gifts).toEqual(true);
     expect(instance.limitedGifts ?? instance.raw?.limited_gifts).toEqual(true);
     expect(instance.uniqueGifts ?? instance.raw?.unique_gifts).toEqual(true);
