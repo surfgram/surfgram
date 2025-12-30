@@ -6,6 +6,7 @@
  * @class ReactionCount
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ReactionCount {
    * @public
    */
   type!: ReactionType;
+
   /**
    * Number of times the reaction was added
    * @type { number }
@@ -59,15 +61,13 @@ export class ReactionCount {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.totalCount = data.totalCount;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class AffiliateInfo
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class AffiliateInfo {
    * @public
    */
   affiliateUser?: User;
+
   /**
    * Optional. The chat that received an affiliate commission if it was received by a chat
    * @type { Chat }
@@ -33,6 +35,7 @@ export class AffiliateInfo {
    * @public
    */
   affiliateChat?: Chat;
+
   /**
    * The number of Telegram Stars received by the affiliate for each 1000 Telegram Stars received by the bot from referred users
    * @type { number }
@@ -41,6 +44,7 @@ export class AffiliateInfo {
    * @public
    */
   commissionPerMille!: number;
+
   /**
    * Integer amount of Telegram Stars received by the affiliate from the transaction, rounded to 0; can be negative for refunds
    * @type { number }
@@ -49,6 +53,7 @@ export class AffiliateInfo {
    * @public
    */
   amount!: number;
+
   /**
    * Optional. The number of 1/1000000000 shares of Telegram Stars received by the affiliate; from -999999999 to 999999999; can be negative for refunds
    * @type { number }
@@ -84,18 +89,13 @@ export class AffiliateInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.affiliateUser = data.affiliateUser;
-      this.affiliateChat = data.affiliateChat;
-      this.commissionPerMille = data.commissionPerMille;
-      this.amount = data.amount;
-      this.nanostarAmount = data.nanostarAmount;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

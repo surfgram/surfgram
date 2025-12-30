@@ -24,12 +24,7 @@ import { InputSticker } from '../types/inputSticker';
  * // Direct parameters
  * await bot.addStickerToSet(...);
  */
-export async function addStickerToSet(
-  this: Bot,
-  userId: number,
-  name: string,
-  sticker: InputSticker
-): Promise<any> {
+export async function addStickerToSet(this: Bot, userId: number, name: string, sticker: InputSticker): Promise<any> {
   const apiParams = {
     userId: userId,
     name: name,

@@ -6,6 +6,7 @@
  * @class BusinessIntro
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class BusinessIntro {
    * @public
    */
   title?: string;
+
   /**
    * Optional. Message text of the business intro
    * @type { string }
@@ -32,6 +34,7 @@ export class BusinessIntro {
    * @public
    */
   message?: string;
+
   /**
    * Optional. Sticker of the business intro
    * @type { Sticker }
@@ -67,16 +70,13 @@ export class BusinessIntro {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.title = data.title;
-      this.message = data.message;
-      this.sticker = data.sticker;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

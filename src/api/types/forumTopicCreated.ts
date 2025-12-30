@@ -6,6 +6,7 @@
  * @class ForumTopicCreated
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ForumTopicCreated {
    * @public
    */
   name!: string;
+
   /**
    * Color of the topic icon in RGB format
    * @type { number }
@@ -31,6 +33,7 @@ export class ForumTopicCreated {
    * @public
    */
   iconColor!: number;
+
   /**
    * Optional. Unique identifier of the custom emoji shown as the topic icon
    * @type { string }
@@ -66,16 +69,13 @@ export class ForumTopicCreated {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.name = data.name;
-      this.iconColor = data.iconColor;
-      this.iconCustomEmojiId = data.iconCustomEmojiId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

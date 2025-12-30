@@ -6,6 +6,7 @@
  * @class MessageReactionCountUpdated
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class MessageReactionCountUpdated {
    * @public
    */
   chat!: Chat;
+
   /**
    * Unique message identifier inside the chat
    * @type { number }
@@ -33,6 +35,7 @@ export class MessageReactionCountUpdated {
    * @public
    */
   messageId!: number;
+
   /**
    * Date of the change in Unix time
    * @type { number }
@@ -41,6 +44,7 @@ export class MessageReactionCountUpdated {
    * @public
    */
   date!: number;
+
   /**
    * List of reactions that are present on the message
    * @type { ReactionCount[] }
@@ -76,17 +80,13 @@ export class MessageReactionCountUpdated {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.chat = data.chat;
-      this.messageId = data.messageId;
-      this.date = data.date;
-      this.reactions = data.reactions;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

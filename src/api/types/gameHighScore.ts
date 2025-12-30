@@ -6,6 +6,7 @@
  * @class GameHighScore
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class GameHighScore {
    * @public
    */
   position!: number;
+
   /**
    * User
    * @type { User }
@@ -32,6 +34,7 @@ export class GameHighScore {
    * @public
    */
   user!: User;
+
   /**
    * Score
    * @type { number }
@@ -67,16 +70,13 @@ export class GameHighScore {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.position = data.position;
-      this.user = data.user;
-      this.score = data.score;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class MessageEntity
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class MessageEntity {
    * @public
    */
   type!: string;
+
   /**
    * Offset in UTF-16 code units to the start of the entity
    * @type { number }
@@ -32,6 +34,7 @@ export class MessageEntity {
    * @public
    */
   offset!: number;
+
   /**
    * Length of the entity in UTF-16 code units
    * @type { number }
@@ -40,6 +43,7 @@ export class MessageEntity {
    * @public
    */
   length!: number;
+
   /**
    * Optional. For “text\_link” only, URL that will be opened after user taps on the text
    * @type { string }
@@ -48,6 +52,7 @@ export class MessageEntity {
    * @public
    */
   url?: string;
+
   /**
    * Optional. For “text\_mention” only, the mentioned user
    * @type { User }
@@ -56,6 +61,7 @@ export class MessageEntity {
    * @public
    */
   user?: User;
+
   /**
    * Optional. For “pre” only, the programming language of the entity text
    * @type { string }
@@ -64,6 +70,7 @@ export class MessageEntity {
    * @public
    */
   language?: string;
+
   /**
    * Optional. For “custom\_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker
    * @type { string }
@@ -99,20 +106,13 @@ export class MessageEntity {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.offset = data.offset;
-      this.length = data.length;
-      this.url = data.url;
-      this.user = data.user;
-      this.language = data.language;
-      this.customEmojiId = data.customEmojiId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

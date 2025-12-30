@@ -6,6 +6,7 @@
  * @class InlineQueryResultCachedDocument
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -34,6 +36,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   id!: string;
+
   /**
    * Title for the result
    * @type { string }
@@ -42,6 +45,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   title!: string;
+
   /**
    * A valid file identifier for the file
    * @type { string }
@@ -50,6 +54,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   documentFileId!: string;
+
   /**
    * Optional. Short description of the result
    * @type { string }
@@ -58,6 +63,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   description?: string;
+
   /**
    * Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -66,6 +72,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. Mode for parsing entities in the document caption. See formatting options for more details.
    * @type { string }
@@ -74,6 +81,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -82,6 +90,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -90,6 +99,7 @@ export class InlineQueryResultCachedDocument {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. Content of the message to be sent instead of the file
    * @type { InputMessageContent }
@@ -125,23 +135,13 @@ export class InlineQueryResultCachedDocument {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.title = data.title;
-      this.documentFileId = data.documentFileId;
-      this.description = data.description;
-      this.caption = data.caption;
-      this.parseMode = data.parseMode;
-      this.captionEntities = data.captionEntities;
-      this.replyMarkup = data.replyMarkup;
-      this.inputMessageContent = data.inputMessageContent;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

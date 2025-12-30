@@ -6,6 +6,7 @@
  * @class Dice
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class Dice {
    * @public
    */
   emoji!: string;
+
   /**
    * Value of the dice, 1-6 for “”, “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji
    * @type { number }
@@ -58,15 +60,13 @@ export class Dice {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.emoji = data.emoji;
-      this.value = data.value;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

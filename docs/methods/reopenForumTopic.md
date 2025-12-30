@@ -1,6 +1,6 @@
 # reopenForumTopic
 
-Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 ## Fluent Usage
 
@@ -14,12 +14,14 @@ This method is available as a fluent method on the following types:
 
 [View ForumTopic documentation with fluent methods](../types/ForumTopic.md)
 
+
 ## Parameters
 
-| Parameter         | Type                 | Required | Description                                                                                                      |
-| :---------------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`          | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `messageThreadId` | `number`             |   Yes    | Unique identifier for the target message thread of the forum topic                                               |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `messageThreadId` | `number` | Yes | Unique identifier for the target message thread of the forum topic |
+
 
 ## Usage Example
 
@@ -30,12 +32,9 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 });
 
 // With filtering
-bot.onForumTopic(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onForumTopic((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

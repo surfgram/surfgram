@@ -6,6 +6,7 @@
  * @class InlineQueryResultVideo
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -34,6 +36,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   id!: string;
+
   /**
    * A valid URL for the embedded video player or video file
    * @type { string }
@@ -42,6 +45,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   videoUrl!: string;
+
   /**
    * MIME type of the content of the video URL, “text/html” or “video/mp4”
    * @type { string }
@@ -50,6 +54,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   mimeType!: string;
+
   /**
    * URL of the thumbnail \(JPEG only\) for the video
    * @type { string }
@@ -58,6 +63,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   thumbnailUrl!: string;
+
   /**
    * Title for the result
    * @type { string }
@@ -66,6 +72,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   title!: string;
+
   /**
    * Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -74,6 +81,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. Mode for parsing entities in the video caption. See formatting options for more details.
    * @type { string }
@@ -82,6 +90,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -90,6 +99,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. Pass True, if the caption must be shown above the message media
    * @type { boolean }
@@ -98,6 +108,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   showCaptionAboveMedia?: boolean;
+
   /**
    * Optional. Video width
    * @type { number }
@@ -106,6 +117,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   videoWidth?: number;
+
   /**
    * Optional. Video height
    * @type { number }
@@ -114,6 +126,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   videoHeight?: number;
+
   /**
    * Optional. Video duration in seconds
    * @type { number }
@@ -122,6 +135,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   videoDuration?: number;
+
   /**
    * Optional. Short description of the result
    * @type { string }
@@ -130,6 +144,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   description?: string;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -138,6 +153,7 @@ export class InlineQueryResultVideo {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result \(e.g., a YouTube video\).
    * @type { InputMessageContent }
@@ -173,29 +189,13 @@ export class InlineQueryResultVideo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.videoUrl = data.videoUrl;
-      this.mimeType = data.mimeType;
-      this.thumbnailUrl = data.thumbnailUrl;
-      this.title = data.title;
-      this.caption = data.caption;
-      this.parseMode = data.parseMode;
-      this.captionEntities = data.captionEntities;
-      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
-      this.videoWidth = data.videoWidth;
-      this.videoHeight = data.videoHeight;
-      this.videoDuration = data.videoDuration;
-      this.description = data.description;
-      this.replyMarkup = data.replyMarkup;
-      this.inputMessageContent = data.inputMessageContent;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

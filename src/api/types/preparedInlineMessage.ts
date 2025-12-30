@@ -6,6 +6,7 @@
  * @class PreparedInlineMessage
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class PreparedInlineMessage {
    * @public
    */
   id!: string;
+
   /**
    * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
    * @type { number }
@@ -58,15 +60,13 @@ export class PreparedInlineMessage {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.expirationDate = data.expirationDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class AcceptedGiftTypes
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class AcceptedGiftTypes {
    * @public
    */
   unlimitedGifts!: boolean;
+
   /**
    * True, if limited regular gifts are accepted
    * @type { boolean }
@@ -31,6 +33,7 @@ export class AcceptedGiftTypes {
    * @public
    */
   limitedGifts!: boolean;
+
   /**
    * True, if unique gifts or gifts that can be upgraded to unique for free are accepted
    * @type { boolean }
@@ -39,6 +42,7 @@ export class AcceptedGiftTypes {
    * @public
    */
   uniqueGifts!: boolean;
+
   /**
    * True, if a Telegram Premium subscription is accepted
    * @type { boolean }
@@ -74,17 +78,13 @@ export class AcceptedGiftTypes {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.unlimitedGifts = data.unlimitedGifts;
-      this.limitedGifts = data.limitedGifts;
-      this.uniqueGifts = data.uniqueGifts;
-      this.premiumSubscription = data.premiumSubscription;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

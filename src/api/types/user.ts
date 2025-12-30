@@ -6,6 +6,7 @@
  * @class User
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class User {
    * @public
    */
   id!: number;
+
   /**
    * True, if this user is a bot
    * @type { boolean }
@@ -31,6 +33,7 @@ export class User {
    * @public
    */
   isBot!: boolean;
+
   /**
    * User's or bot's first name
    * @type { string }
@@ -39,6 +42,7 @@ export class User {
    * @public
    */
   firstName!: string;
+
   /**
    * Optional. User's or bot's last name
    * @type { string }
@@ -47,6 +51,7 @@ export class User {
    * @public
    */
   lastName?: string;
+
   /**
    * Optional. User's or bot's username
    * @type { string }
@@ -55,6 +60,7 @@ export class User {
    * @public
    */
   username?: string;
+
   /**
    * Optional. IETF language tag of the user's language
    * @type { string }
@@ -63,6 +69,7 @@ export class User {
    * @public
    */
   languageCode?: string;
+
   /**
    * Optional. True, if this user is a Telegram Premium user
    * @type { boolean }
@@ -71,6 +78,7 @@ export class User {
    * @public
    */
   isPremium?: boolean;
+
   /**
    * Optional. True, if this user added the bot to the attachment menu
    * @type { boolean }
@@ -79,6 +87,7 @@ export class User {
    * @public
    */
   addedToAttachmentMenu?: boolean;
+
   /**
    * Optional. True, if the bot can be invited to groups. Returned only in getMe.
    * @type { boolean }
@@ -87,6 +96,7 @@ export class User {
    * @public
    */
   canJoinGroups?: boolean;
+
   /**
    * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
    * @type { boolean }
@@ -95,6 +105,7 @@ export class User {
    * @public
    */
   canReadAllGroupMessages?: boolean;
+
   /**
    * Optional. True, if the bot supports inline queries. Returned only in getMe.
    * @type { boolean }
@@ -103,6 +114,7 @@ export class User {
    * @public
    */
   supportsInlineQueries?: boolean;
+
   /**
    * Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
    * @type { boolean }
@@ -111,6 +123,7 @@ export class User {
    * @public
    */
   canConnectToBusiness?: boolean;
+
   /**
    * Optional. True, if the bot has a main Web App. Returned only in getMe.
    * @type { boolean }
@@ -146,26 +159,13 @@ export class User {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.isBot = data.isBot;
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.username = data.username;
-      this.languageCode = data.languageCode;
-      this.isPremium = data.isPremium;
-      this.addedToAttachmentMenu = data.addedToAttachmentMenu;
-      this.canJoinGroups = data.canJoinGroups;
-      this.canReadAllGroupMessages = data.canReadAllGroupMessages;
-      this.supportsInlineQueries = data.supportsInlineQueries;
-      this.canConnectToBusiness = data.canConnectToBusiness;
-      this.hasMainWebApp = data.hasMainWebApp;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

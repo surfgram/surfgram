@@ -6,6 +6,7 @@
  * @class WebhookInfo
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class WebhookInfo {
    * @public
    */
   url!: string;
+
   /**
    * True, if a custom certificate was provided for webhook certificate checks
    * @type { boolean }
@@ -31,6 +33,7 @@ export class WebhookInfo {
    * @public
    */
   hasCustomCertificate!: boolean;
+
   /**
    * Number of updates awaiting delivery
    * @type { number }
@@ -39,6 +42,7 @@ export class WebhookInfo {
    * @public
    */
   pendingUpdateCount!: number;
+
   /**
    * Optional. Currently used webhook IP address
    * @type { string }
@@ -47,6 +51,7 @@ export class WebhookInfo {
    * @public
    */
   ipAddress?: string;
+
   /**
    * Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
    * @type { number }
@@ -55,6 +60,7 @@ export class WebhookInfo {
    * @public
    */
   lastErrorDate?: number;
+
   /**
    * Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook
    * @type { string }
@@ -63,6 +69,7 @@ export class WebhookInfo {
    * @public
    */
   lastErrorMessage?: string;
+
   /**
    * Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters
    * @type { number }
@@ -71,6 +78,7 @@ export class WebhookInfo {
    * @public
    */
   lastSynchronizationErrorDate?: number;
+
   /**
    * Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
    * @type { number }
@@ -79,6 +87,7 @@ export class WebhookInfo {
    * @public
    */
   maxConnections?: number;
+
   /**
    * Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member
    * @type { string[] }
@@ -114,22 +123,13 @@ export class WebhookInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.url = data.url;
-      this.hasCustomCertificate = data.hasCustomCertificate;
-      this.pendingUpdateCount = data.pendingUpdateCount;
-      this.ipAddress = data.ipAddress;
-      this.lastErrorDate = data.lastErrorDate;
-      this.lastErrorMessage = data.lastErrorMessage;
-      this.lastSynchronizationErrorDate = data.lastSynchronizationErrorDate;
-      this.maxConnections = data.maxConnections;
-      this.allowedUpdates = data.allowedUpdates;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

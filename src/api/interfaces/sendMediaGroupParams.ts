@@ -87,4 +87,5 @@ export interface SendMediaGroupParams {
    * @required No
    */
   replyParameters?: ReplyParameters;
+
 }

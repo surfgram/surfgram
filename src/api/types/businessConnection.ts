@@ -6,6 +6,7 @@
  * @class BusinessConnection
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class BusinessConnection {
    * @public
    */
   id!: string;
+
   /**
    * Business account user that created the business connection
    * @type { User }
@@ -33,6 +35,7 @@ export class BusinessConnection {
    * @public
    */
   user!: User;
+
   /**
    * Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
    * @type { number }
@@ -41,6 +44,7 @@ export class BusinessConnection {
    * @public
    */
   userChatId!: number;
+
   /**
    * Date the connection was established in Unix time
    * @type { number }
@@ -49,6 +53,7 @@ export class BusinessConnection {
    * @public
    */
   date!: number;
+
   /**
    * Optional. Rights of the business bot
    * @type { BusinessBotRights }
@@ -57,6 +62,7 @@ export class BusinessConnection {
    * @public
    */
   rights?: BusinessBotRights;
+
   /**
    * True, if the connection is active
    * @type { boolean }
@@ -92,19 +98,13 @@ export class BusinessConnection {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.id = data.id;
-      this.user = data.user;
-      this.userChatId = data.userChatId;
-      this.date = data.date;
-      this.rights = data.rights;
-      this.isEnabled = data.isEnabled;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

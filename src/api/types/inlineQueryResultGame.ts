@@ -6,6 +6,7 @@
  * @class InlineQueryResultGame
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class InlineQueryResultGame {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -32,6 +34,7 @@ export class InlineQueryResultGame {
    * @public
    */
   id!: string;
+
   /**
    * Short name of the game
    * @type { string }
@@ -40,6 +43,7 @@ export class InlineQueryResultGame {
    * @public
    */
   gameShortName!: string;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -75,17 +79,13 @@ export class InlineQueryResultGame {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.gameShortName = data.gameShortName;
-      this.replyMarkup = data.replyMarkup;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

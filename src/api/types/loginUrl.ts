@@ -6,6 +6,7 @@
  * @class LoginUrl
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class LoginUrl {
    * @public
    */
   url!: string;
+
   /**
    * Optional. New text of the button in forwarded messages.
    * @type { string }
@@ -31,6 +33,7 @@ export class LoginUrl {
    * @public
    */
   forwardText?: string;
+
   /**
    * Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
    * @type { string }
@@ -39,6 +42,7 @@ export class LoginUrl {
    * @public
    */
   botUsername?: string;
+
   /**
    * Optional. Pass True to request the permission for your bot to send messages to the user.
    * @type { boolean }
@@ -74,17 +78,13 @@ export class LoginUrl {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.url = data.url;
-      this.forwardText = data.forwardText;
-      this.botUsername = data.botUsername;
-      this.requestWriteAccess = data.requestWriteAccess;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

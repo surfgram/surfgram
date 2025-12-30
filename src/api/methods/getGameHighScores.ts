@@ -24,13 +24,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getGameHighScores(...);
  */
-export async function getGameHighScores(
-  this: Bot,
-  userId: number,
-  chatId?: number,
-  messageId?: number,
-  inlineMessageId?: string
-): Promise<any> {
+export async function getGameHighScores(this: Bot, userId: number, chatId?: number, messageId?: number, inlineMessageId?: string): Promise<any> {
   const apiParams = {
     userId: userId,
     chatId: chatId,

@@ -6,6 +6,7 @@
  * @class Game
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class Game {
    * @public
    */
   title!: string;
+
   /**
    * Description of the game
    * @type { string }
@@ -34,6 +36,7 @@ export class Game {
    * @public
    */
   description!: string;
+
   /**
    * Photo that will be displayed in the game message in chats.
    * @type { PhotoSize[] }
@@ -42,6 +45,7 @@ export class Game {
    * @public
    */
   photo!: PhotoSize[];
+
   /**
    * Optional. Brief description of the game or high scores included in the game message. Can be automatically edited to include current high scores for the game when the bot calls setGameScore, or manually edited using editMessageText. 0-4096 characters.
    * @type { string }
@@ -50,6 +54,7 @@ export class Game {
    * @public
    */
   text?: string;
+
   /**
    * Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc.
    * @type { MessageEntity[] }
@@ -58,6 +63,7 @@ export class Game {
    * @public
    */
   textEntities?: MessageEntity[];
+
   /**
    * Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
    * @type { Animation }
@@ -93,19 +99,13 @@ export class Game {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.title = data.title;
-      this.description = data.description;
-      this.photo = data.photo;
-      this.text = data.text;
-      this.textEntities = data.textEntities;
-      this.animation = data.animation;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

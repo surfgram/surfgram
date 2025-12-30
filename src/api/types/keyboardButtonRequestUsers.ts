@@ -6,6 +6,7 @@
  * @class KeyboardButtonRequestUsers
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   requestId!: number;
+
   /**
    * Optional. Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.
    * @type { boolean }
@@ -31,6 +33,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   userIsBot?: boolean;
+
   /**
    * Optional. Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied.
    * @type { boolean }
@@ -39,6 +42,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   userIsPremium?: boolean;
+
   /**
    * Optional. The maximum number of users to be selected; 1-10. Defaults to 1.
    * @type { number }
@@ -47,6 +51,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   maxQuantity?: number;
+
   /**
    * Optional. Pass True to request the users' first and last names
    * @type { boolean }
@@ -55,6 +60,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   requestName?: boolean;
+
   /**
    * Optional. Pass True to request the users' usernames
    * @type { boolean }
@@ -63,6 +69,7 @@ export class KeyboardButtonRequestUsers {
    * @public
    */
   requestUsername?: boolean;
+
   /**
    * Optional. Pass True to request the users' photos
    * @type { boolean }
@@ -98,20 +105,13 @@ export class KeyboardButtonRequestUsers {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.requestId = data.requestId;
-      this.userIsBot = data.userIsBot;
-      this.userIsPremium = data.userIsPremium;
-      this.maxQuantity = data.maxQuantity;
-      this.requestName = data.requestName;
-      this.requestUsername = data.requestUsername;
-      this.requestPhoto = data.requestPhoto;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

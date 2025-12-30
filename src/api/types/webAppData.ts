@@ -6,6 +6,7 @@
  * @class WebAppData
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class WebAppData {
    * @public
    */
   data!: string;
+
   /**
    * Text of the web\_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field.
    * @type { string }
@@ -58,15 +60,13 @@ export class WebAppData {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.data = data.data;
-      this.buttonText = data.buttonText;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

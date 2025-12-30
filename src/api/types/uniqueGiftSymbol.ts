@@ -6,6 +6,7 @@
  * @class UniqueGiftSymbol
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class UniqueGiftSymbol {
    * @public
    */
   name!: string;
+
   /**
    * The sticker that represents the unique gift
    * @type { Sticker }
@@ -32,6 +34,7 @@ export class UniqueGiftSymbol {
    * @public
    */
   sticker!: Sticker;
+
   /**
    * The number of unique gifts that receive this model for every 1000 gifts upgraded
    * @type { number }
@@ -67,16 +70,13 @@ export class UniqueGiftSymbol {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.name = data.name;
-      this.sticker = data.sticker;
-      this.rarityPerMille = data.rarityPerMille;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

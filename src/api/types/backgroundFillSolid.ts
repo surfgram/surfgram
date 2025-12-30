@@ -6,6 +6,7 @@
  * @class BackgroundFillSolid
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class BackgroundFillSolid {
    * @public
    */
   type!: string;
+
   /**
    * The color of the background fill in the RGB24 format
    * @type { number }
@@ -58,15 +60,13 @@ export class BackgroundFillSolid {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.color = data.color;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

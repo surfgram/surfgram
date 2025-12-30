@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#copyMessages Telegram API Documentation}
  */
 
+
 export interface CopyMessagesParams {
   /**
    * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -69,4 +70,5 @@ export interface CopyMessagesParams {
    * @required No
    */
   removeCaption?: boolean;
+
 }

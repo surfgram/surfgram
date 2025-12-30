@@ -183,4 +183,5 @@ export interface CreateInvoiceLinkParams {
    * @required No
    */
   isFlexible?: boolean;
+
 }

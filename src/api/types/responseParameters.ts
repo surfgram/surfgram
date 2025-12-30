@@ -6,6 +6,7 @@
  * @class ResponseParameters
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ResponseParameters {
    * @public
    */
   migrateToChatId?: number;
+
   /**
    * Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated
    * @type { number }
@@ -58,15 +60,13 @@ export class ResponseParameters {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.migrateToChatId = data.migrateToChatId;
-      this.retryAfter = data.retryAfter;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

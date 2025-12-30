@@ -13,7 +13,7 @@ describe('VideoChatParticipantsInvited', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.users ?? instance.raw?.users).toEqual([{} as any]);
   });
 });

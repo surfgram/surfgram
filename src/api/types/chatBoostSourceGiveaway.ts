@@ -6,6 +6,7 @@
  * @class ChatBoostSourceGiveaway
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatBoostSourceGiveaway {
    * @public
    */
   source!: string;
+
   /**
    * Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet.
    * @type { number }
@@ -32,6 +34,7 @@ export class ChatBoostSourceGiveaway {
    * @public
    */
   giveawayMessageId!: number;
+
   /**
    * Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only
    * @type { User }
@@ -40,6 +43,7 @@ export class ChatBoostSourceGiveaway {
    * @public
    */
   user?: User;
+
   /**
    * Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
    * @type { number }
@@ -48,6 +52,7 @@ export class ChatBoostSourceGiveaway {
    * @public
    */
   prizeStarCount?: number;
+
   /**
    * Optional. True, if the giveaway was completed, but there was no user to win the prize
    * @type { boolean }
@@ -83,18 +88,13 @@ export class ChatBoostSourceGiveaway {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.source = data.source;
-      this.giveawayMessageId = data.giveawayMessageId;
-      this.user = data.user;
-      this.prizeStarCount = data.prizeStarCount;
-      this.isUnclaimed = data.isUnclaimed;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

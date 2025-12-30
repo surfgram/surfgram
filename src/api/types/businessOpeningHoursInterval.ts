@@ -6,6 +6,7 @@
  * @class BusinessOpeningHoursInterval
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class BusinessOpeningHoursInterval {
    * @public
    */
   openingMinute!: number;
+
   /**
    * The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 \* 24 \* 60
    * @type { number }
@@ -58,15 +60,13 @@ export class BusinessOpeningHoursInterval {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.openingMinute = data.openingMinute;
-      this.closingMinute = data.closingMinute;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

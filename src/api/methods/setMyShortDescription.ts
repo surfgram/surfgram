@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setMyShortDescription(...);
  */
-export async function setMyShortDescription(
-  this: Bot,
-  shortDescription?: string,
-  languageCode?: string
-): Promise<any> {
+export async function setMyShortDescription(this: Bot, shortDescription?: string, languageCode?: string): Promise<any> {
   const apiParams = {
     shortDescription: shortDescription,
     languageCode: languageCode,

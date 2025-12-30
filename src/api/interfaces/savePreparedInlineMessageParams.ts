@@ -55,4 +55,5 @@ export interface SavePreparedInlineMessageParams {
    * @required No
    */
   allowChannelChats?: boolean;
+
 }

@@ -6,19 +6,19 @@ describe('answerShippingQuery', () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
     const params = {
-      shippingQueryId: 'example text',
+      shippingQueryId: "example text",
       ok: true,
       shippingOptions: [{} as any],
-      errorMessage: 'example text',
+      errorMessage: "example text",
     };
 
     await answerShippingQuery.call(mockBot, params);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('answerShippingQuery', {
-      shipping_query_id: 'example text',
+      shipping_query_id: "example text",
       ok: true,
       shipping_options: [{} as any],
-      error_message: 'example text',
+      error_message: "example text",
     });
   });
 });

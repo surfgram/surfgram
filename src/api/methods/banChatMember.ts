@@ -24,13 +24,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.banChatMember(...);
  */
-export async function banChatMember(
-  this: Bot,
-  chatId: number | string,
-  userId: number,
-  untilDate?: number,
-  revokeMessages?: boolean
-): Promise<any> {
+export async function banChatMember(this: Bot, chatId: number | string, userId: number, untilDate?: number, revokeMessages?: boolean): Promise<any> {
   const apiParams = {
     chatId: chatId,
     userId: userId,

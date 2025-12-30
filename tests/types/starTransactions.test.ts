@@ -13,7 +13,7 @@ describe('StarTransactions', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.transactions ?? instance.raw?.transactions).toEqual([{} as any]);
   });
 });

@@ -6,6 +6,7 @@
  * @class ChatMemberAdministrator
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   status!: string;
+
   /**
    * Information about the user
    * @type { User }
@@ -32,6 +34,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   user!: User;
+
   /**
    * True, if the bot is allowed to edit administrator privileges of that user
    * @type { boolean }
@@ -40,6 +43,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canBeEdited!: boolean;
+
   /**
    * True, if the user's presence in the chat is hidden
    * @type { boolean }
@@ -48,6 +52,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   isAnonymous!: boolean;
+
   /**
    * True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
    * @type { boolean }
@@ -56,6 +61,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canManageChat!: boolean;
+
   /**
    * True, if the administrator can delete messages of other users
    * @type { boolean }
@@ -64,6 +70,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canDeleteMessages!: boolean;
+
   /**
    * True, if the administrator can manage video chats
    * @type { boolean }
@@ -72,6 +79,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canManageVideoChats!: boolean;
+
   /**
    * True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics
    * @type { boolean }
@@ -80,6 +88,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canRestrictMembers!: boolean;
+
   /**
    * True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly \(promoted by administrators that were appointed by the user\)
    * @type { boolean }
@@ -88,6 +97,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canPromoteMembers!: boolean;
+
   /**
    * True, if the user is allowed to change the chat title, photo and other settings
    * @type { boolean }
@@ -96,6 +106,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canChangeInfo!: boolean;
+
   /**
    * True, if the user is allowed to invite new users to the chat
    * @type { boolean }
@@ -104,6 +115,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canInviteUsers!: boolean;
+
   /**
    * True, if the administrator can post stories to the chat
    * @type { boolean }
@@ -112,6 +124,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canPostStories!: boolean;
+
   /**
    * True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
    * @type { boolean }
@@ -120,6 +133,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canEditStories!: boolean;
+
   /**
    * True, if the administrator can delete stories posted by other users
    * @type { boolean }
@@ -128,6 +142,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canDeleteStories!: boolean;
+
   /**
    * Optional. True, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
    * @type { boolean }
@@ -136,6 +151,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canPostMessages?: boolean;
+
   /**
    * Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only
    * @type { boolean }
@@ -144,6 +160,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canEditMessages?: boolean;
+
   /**
    * Optional. True, if the user is allowed to pin messages; for groups and supergroups only
    * @type { boolean }
@@ -152,6 +169,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canPinMessages?: boolean;
+
   /**
    * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
    * @type { boolean }
@@ -160,6 +178,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canManageTopics?: boolean;
+
   /**
    * Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
    * @type { boolean }
@@ -168,6 +187,7 @@ export class ChatMemberAdministrator {
    * @public
    */
   canManageDirectMessages?: boolean;
+
   /**
    * Optional. Custom title for this user
    * @type { string }
@@ -203,33 +223,13 @@ export class ChatMemberAdministrator {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.status = data.status;
-      this.user = data.user;
-      this.canBeEdited = data.canBeEdited;
-      this.isAnonymous = data.isAnonymous;
-      this.canManageChat = data.canManageChat;
-      this.canDeleteMessages = data.canDeleteMessages;
-      this.canManageVideoChats = data.canManageVideoChats;
-      this.canRestrictMembers = data.canRestrictMembers;
-      this.canPromoteMembers = data.canPromoteMembers;
-      this.canChangeInfo = data.canChangeInfo;
-      this.canInviteUsers = data.canInviteUsers;
-      this.canPostStories = data.canPostStories;
-      this.canEditStories = data.canEditStories;
-      this.canDeleteStories = data.canDeleteStories;
-      this.canPostMessages = data.canPostMessages;
-      this.canEditMessages = data.canEditMessages;
-      this.canPinMessages = data.canPinMessages;
-      this.canManageTopics = data.canManageTopics;
-      this.canManageDirectMessages = data.canManageDirectMessages;
-      this.customTitle = data.customTitle;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

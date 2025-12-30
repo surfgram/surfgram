@@ -6,6 +6,7 @@
  * @class InlineQueryResultArticle
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 Bytes
    * @type { string }
@@ -33,6 +35,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   id!: string;
+
   /**
    * Title of the result
    * @type { string }
@@ -41,6 +44,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   title!: string;
+
   /**
    * Content of the message to be sent
    * @type { InputMessageContent }
@@ -49,6 +53,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   inputMessageContent!: InputMessageContent;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -57,6 +62,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. URL of the result
    * @type { string }
@@ -65,6 +71,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   url?: string;
+
   /**
    * Optional. Short description of the result
    * @type { string }
@@ -73,6 +80,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   description?: string;
+
   /**
    * Optional. Url of the thumbnail for the result
    * @type { string }
@@ -81,6 +89,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   thumbnailUrl?: string;
+
   /**
    * Optional. Thumbnail width
    * @type { number }
@@ -89,6 +98,7 @@ export class InlineQueryResultArticle {
    * @public
    */
   thumbnailWidth?: number;
+
   /**
    * Optional. Thumbnail height
    * @type { number }
@@ -124,23 +134,13 @@ export class InlineQueryResultArticle {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.title = data.title;
-      this.inputMessageContent = data.inputMessageContent;
-      this.replyMarkup = data.replyMarkup;
-      this.url = data.url;
-      this.description = data.description;
-      this.thumbnailUrl = data.thumbnailUrl;
-      this.thumbnailWidth = data.thumbnailWidth;
-      this.thumbnailHeight = data.thumbnailHeight;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

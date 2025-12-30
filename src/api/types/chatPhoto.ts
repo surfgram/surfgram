@@ -6,6 +6,7 @@
  * @class ChatPhoto
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class ChatPhoto {
    * @public
    */
   smallFileId!: string;
+
   /**
    * Unique file identifier of small \(160x160\) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -31,6 +33,7 @@ export class ChatPhoto {
    * @public
    */
   smallFileUniqueId!: string;
+
   /**
    * File identifier of big \(640x640\) chat photo. This file\_id can be used only for photo download and only for as long as the photo is not changed.
    * @type { string }
@@ -39,6 +42,7 @@ export class ChatPhoto {
    * @public
    */
   bigFileId!: string;
+
   /**
    * Unique file identifier of big \(640x640\) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -74,17 +78,13 @@ export class ChatPhoto {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.smallFileId = data.smallFileId;
-      this.smallFileUniqueId = data.smallFileUniqueId;
-      this.bigFileId = data.bigFileId;
-      this.bigFileUniqueId = data.bigFileUniqueId;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

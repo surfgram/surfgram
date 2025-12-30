@@ -6,6 +6,7 @@
  * @class UniqueGiftInfo
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class UniqueGiftInfo {
    * @public
    */
   gift!: UniqueGift;
+
   /**
    * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, or “resale” for gifts bought from other users
    * @type { string }
@@ -32,6 +34,7 @@ export class UniqueGiftInfo {
    * @public
    */
   origin!: string;
+
   /**
    * Optional. For gifts bought from other users, the price paid for the gift
    * @type { number }
@@ -40,6 +43,7 @@ export class UniqueGiftInfo {
    * @public
    */
   lastResaleStarCount?: number;
+
   /**
    * Optional. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
    * @type { string }
@@ -48,6 +52,7 @@ export class UniqueGiftInfo {
    * @public
    */
   ownedGiftId?: string;
+
   /**
    * Optional. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
    * @type { number }
@@ -56,6 +61,7 @@ export class UniqueGiftInfo {
    * @public
    */
   transferStarCount?: number;
+
   /**
    * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now
    * @type { number }
@@ -91,19 +97,13 @@ export class UniqueGiftInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.gift = data.gift;
-      this.origin = data.origin;
-      this.lastResaleStarCount = data.lastResaleStarCount;
-      this.ownedGiftId = data.ownedGiftId;
-      this.transferStarCount = data.transferStarCount;
-      this.nextTransferDate = data.nextTransferDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

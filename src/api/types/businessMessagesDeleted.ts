@@ -6,6 +6,7 @@
  * @class BusinessMessagesDeleted
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class BusinessMessagesDeleted {
    * @public
    */
   businessConnectionId!: string;
+
   /**
    * Information about a chat in the business account. The bot may not have access to the chat or the corresponding user.
    * @type { Chat }
@@ -32,6 +34,7 @@ export class BusinessMessagesDeleted {
    * @public
    */
   chat!: Chat;
+
   /**
    * The list of identifiers of deleted messages in the chat of the business account
    * @type { number[] }
@@ -67,16 +70,13 @@ export class BusinessMessagesDeleted {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.businessConnectionId = data.businessConnectionId;
-      this.chat = data.chat;
-      this.messageIds = data.messageIds;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

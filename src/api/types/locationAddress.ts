@@ -6,6 +6,7 @@
  * @class LocationAddress
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class LocationAddress {
    * @public
    */
   countryCode!: string;
+
   /**
    * Optional. State of the location
    * @type { string }
@@ -31,6 +33,7 @@ export class LocationAddress {
    * @public
    */
   state?: string;
+
   /**
    * Optional. City of the location
    * @type { string }
@@ -39,6 +42,7 @@ export class LocationAddress {
    * @public
    */
   city?: string;
+
   /**
    * Optional. Street address of the location
    * @type { string }
@@ -74,17 +78,13 @@ export class LocationAddress {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.countryCode = data.countryCode;
-      this.state = data.state;
-      this.city = data.city;
-      this.street = data.street;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

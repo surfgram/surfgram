@@ -6,6 +6,7 @@
  * @class MessageOriginChannel
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class MessageOriginChannel {
    * @public
    */
   type!: string;
+
   /**
    * Date the message was sent originally in Unix time
    * @type { number }
@@ -32,6 +34,7 @@ export class MessageOriginChannel {
    * @public
    */
   date!: number;
+
   /**
    * Channel chat to which the message was originally sent
    * @type { Chat }
@@ -40,6 +43,7 @@ export class MessageOriginChannel {
    * @public
    */
   chat!: Chat;
+
   /**
    * Unique message identifier inside the chat
    * @type { number }
@@ -48,6 +52,7 @@ export class MessageOriginChannel {
    * @public
    */
   messageId!: number;
+
   /**
    * Optional. Signature of the original post author
    * @type { string }
@@ -83,18 +88,13 @@ export class MessageOriginChannel {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.date = data.date;
-      this.chat = data.chat;
-      this.messageId = data.messageId;
-      this.authorSignature = data.authorSignature;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class PollAnswer
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class PollAnswer {
    * @public
    */
   pollId!: string;
+
   /**
    * Optional. The chat that changed the answer to the poll, if the voter is anonymous
    * @type { Chat }
@@ -33,6 +35,7 @@ export class PollAnswer {
    * @public
    */
   voterChat?: Chat;
+
   /**
    * Optional. The user that changed the answer to the poll, if the voter isn't anonymous
    * @type { User }
@@ -41,6 +44,7 @@ export class PollAnswer {
    * @public
    */
   user?: User;
+
   /**
    * 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
    * @type { number[] }
@@ -76,17 +80,13 @@ export class PollAnswer {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.pollId = data.pollId;
-      this.voterChat = data.voterChat;
-      this.user = data.user;
-      this.optionIds = data.optionIds;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

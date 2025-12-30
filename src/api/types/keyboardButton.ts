@@ -6,6 +6,7 @@
  * @class KeyboardButton
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -27,6 +28,7 @@ export class KeyboardButton {
    * @public
    */
   text?: string;
+
   /**
    * Optional. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users\_shared” service message. Available in private chats only.
    * @type { KeyboardButtonRequestUsers }
@@ -35,6 +37,7 @@ export class KeyboardButton {
    * @public
    */
   requestUsers?: KeyboardButtonRequestUsers;
+
   /**
    * Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat\_shared” service message. Available in private chats only.
    * @type { KeyboardButtonRequestChat }
@@ -43,6 +46,7 @@ export class KeyboardButton {
    * @public
    */
   requestChat?: KeyboardButtonRequestChat;
+
   /**
    * Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.
    * @type { boolean }
@@ -51,6 +55,7 @@ export class KeyboardButton {
    * @public
    */
   requestContact?: boolean;
+
   /**
    * Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only.
    * @type { boolean }
@@ -59,6 +64,7 @@ export class KeyboardButton {
    * @public
    */
   requestLocation?: boolean;
+
   /**
    * Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only.
    * @type { KeyboardButtonPollType }
@@ -67,6 +73,7 @@ export class KeyboardButton {
    * @public
    */
   requestPoll?: KeyboardButtonPollType;
+
   /**
    * Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a “web\_app\_data” service message. Available in private chats only.
    * @type { WebAppInfo }
@@ -102,20 +109,13 @@ export class KeyboardButton {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.text = data.text;
-      this.requestUsers = data.requestUsers;
-      this.requestChat = data.requestChat;
-      this.requestContact = data.requestContact;
-      this.requestLocation = data.requestLocation;
-      this.requestPoll = data.requestPoll;
-      this.webApp = data.webApp;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -25,12 +25,7 @@ import { BotCommandScope } from '../types/botCommandScope';
  * // Direct parameters
  * await bot.setMyCommands(...);
  */
-export async function setMyCommands(
-  this: Bot,
-  commands: BotCommand[],
-  scope?: BotCommandScope,
-  languageCode?: string
-): Promise<any> {
+export async function setMyCommands(this: Bot, commands: BotCommand[], scope?: BotCommandScope, languageCode?: string): Promise<any> {
   const apiParams = {
     commands: commands,
     scope: scope,

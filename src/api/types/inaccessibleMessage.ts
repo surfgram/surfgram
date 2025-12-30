@@ -6,6 +6,7 @@
  * @class InaccessibleMessage
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class InaccessibleMessage {
    * @public
    */
   chat!: Chat;
+
   /**
    * Unique message identifier inside the chat
    * @type { number }
@@ -32,6 +34,7 @@ export class InaccessibleMessage {
    * @public
    */
   messageId!: number;
+
   /**
    * Always 0. The field can be used to differentiate regular and inaccessible messages.
    * @type { number }
@@ -67,16 +70,13 @@ export class InaccessibleMessage {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.chat = data.chat;
-      this.messageId = data.messageId;
-      this.date = data.date;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -23,4 +23,5 @@ export interface AnswerWebAppQueryParams {
    * @required Yes
    */
   result: InlineQueryResult;
+
 }

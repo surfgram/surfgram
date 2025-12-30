@@ -4,11 +4,12 @@ This object describes the model of a unique gift.
 
 ## Fields
 
-| Name           | Type      | Required | Description                                                                      |
-| :------------- | :-------- | :------: | :------------------------------------------------------------------------------- |
-| name           | `string`  |   Yes    | Name of the model                                                                |
-| sticker        | `Sticker` |   Yes    | The sticker that represents the unique gift                                      |
-| rarityPerMille | `number`  |   Yes    | The number of unique gifts that receive this model for every 1000 gifts upgraded |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| name | `string` | Yes | Name of the model |
+| sticker | `Sticker` | Yes | The sticker that represents the unique gift |
+| rarityPerMille | `number` | Yes | The number of unique gifts that receive this model for every 1000 gifts upgraded |
+
 
 ## Event Handlers
 

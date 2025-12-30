@@ -6,6 +6,7 @@
  * @class InputChecklist
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class InputChecklist {
    * @public
    */
   title!: string;
+
   /**
    * Optional. Mode for parsing entities in the title. See formatting options for more details.
    * @type { string }
@@ -33,6 +35,7 @@ export class InputChecklist {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the title, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are allowed.
    * @type { MessageEntity[] }
@@ -41,6 +44,7 @@ export class InputChecklist {
    * @public
    */
   titleEntities?: MessageEntity[];
+
   /**
    * List of 1-30 tasks in the checklist
    * @type { InputChecklistTask[] }
@@ -49,6 +53,7 @@ export class InputChecklist {
    * @public
    */
   tasks!: InputChecklistTask[];
+
   /**
    * Optional. Pass True if other users can add tasks to the checklist
    * @type { boolean }
@@ -57,6 +62,7 @@ export class InputChecklist {
    * @public
    */
   othersCanAddTasks?: boolean;
+
   /**
    * Optional. Pass True if other users can mark tasks as done or not done in the checklist
    * @type { boolean }
@@ -92,19 +98,13 @@ export class InputChecklist {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.title = data.title;
-      this.parseMode = data.parseMode;
-      this.titleEntities = data.titleEntities;
-      this.tasks = data.tasks;
-      this.othersCanAddTasks = data.othersCanAddTasks;
-      this.othersCanMarkTasksAsDone = data.othersCanMarkTasksAsDone;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

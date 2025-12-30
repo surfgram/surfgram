@@ -6,6 +6,7 @@
  * @class StickerSet
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class StickerSet {
    * @public
    */
   name!: string;
+
   /**
    * Sticker set title
    * @type { string }
@@ -33,6 +35,7 @@ export class StickerSet {
    * @public
    */
   title!: string;
+
   /**
    * Type of stickers in the set, currently one of “regular”, “mask”, “custom\_emoji”
    * @type { string }
@@ -41,6 +44,7 @@ export class StickerSet {
    * @public
    */
   stickerType!: string;
+
   /**
    * List of all set stickers
    * @type { Sticker[] }
@@ -49,6 +53,7 @@ export class StickerSet {
    * @public
    */
   stickers!: Sticker[];
+
   /**
    * Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
    * @type { PhotoSize }
@@ -84,18 +89,13 @@ export class StickerSet {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.name = data.name;
-      this.title = data.title;
-      this.stickerType = data.stickerType;
-      this.stickers = data.stickers;
-      this.thumbnail = data.thumbnail;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

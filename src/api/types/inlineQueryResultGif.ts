@@ -6,6 +6,7 @@
  * @class InlineQueryResultGif
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -26,6 +27,7 @@ export class InlineQueryResultGif {
    * @public
    */
   type!: string;
+
   /**
    * Unique identifier for this result, 1-64 bytes
    * @type { string }
@@ -34,6 +36,7 @@ export class InlineQueryResultGif {
    * @public
    */
   id!: string;
+
   /**
    * A valid URL for the GIF file
    * @type { string }
@@ -42,6 +45,7 @@ export class InlineQueryResultGif {
    * @public
    */
   gifUrl!: string;
+
   /**
    * Optional. Width of the GIF
    * @type { number }
@@ -50,6 +54,7 @@ export class InlineQueryResultGif {
    * @public
    */
   gifWidth?: number;
+
   /**
    * Optional. Height of the GIF
    * @type { number }
@@ -58,6 +63,7 @@ export class InlineQueryResultGif {
    * @public
    */
   gifHeight?: number;
+
   /**
    * Optional. Duration of the GIF in seconds
    * @type { number }
@@ -66,6 +72,7 @@ export class InlineQueryResultGif {
    * @public
    */
   gifDuration?: number;
+
   /**
    * URL of the static \(JPEG or GIF\) or animated \(MPEG4\) thumbnail for the result
    * @type { string }
@@ -74,6 +81,7 @@ export class InlineQueryResultGif {
    * @public
    */
   thumbnailUrl!: string;
+
   /**
    * Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
    * @type { string }
@@ -82,6 +90,7 @@ export class InlineQueryResultGif {
    * @public
    */
   thumbnailMimeType?: string;
+
   /**
    * Optional. Title for the result
    * @type { string }
@@ -90,6 +99,7 @@ export class InlineQueryResultGif {
    * @public
    */
   title?: string;
+
   /**
    * Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
    * @type { string }
@@ -98,6 +108,7 @@ export class InlineQueryResultGif {
    * @public
    */
   caption?: string;
+
   /**
    * Optional. Mode for parsing entities in the caption. See formatting options for more details.
    * @type { string }
@@ -106,6 +117,7 @@ export class InlineQueryResultGif {
    * @public
    */
   parseMode?: string;
+
   /**
    * Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode
    * @type { MessageEntity[] }
@@ -114,6 +126,7 @@ export class InlineQueryResultGif {
    * @public
    */
   captionEntities?: MessageEntity[];
+
   /**
    * Optional. Pass True, if the caption must be shown above the message media
    * @type { boolean }
@@ -122,6 +135,7 @@ export class InlineQueryResultGif {
    * @public
    */
   showCaptionAboveMedia?: boolean;
+
   /**
    * Optional. Inline keyboard attached to the message
    * @type { InlineKeyboardMarkup }
@@ -130,6 +144,7 @@ export class InlineQueryResultGif {
    * @public
    */
   replyMarkup?: InlineKeyboardMarkup;
+
   /**
    * Optional. Content of the message to be sent instead of the GIF animation
    * @type { InputMessageContent }
@@ -165,28 +180,13 @@ export class InlineQueryResultGif {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.id = data.id;
-      this.gifUrl = data.gifUrl;
-      this.gifWidth = data.gifWidth;
-      this.gifHeight = data.gifHeight;
-      this.gifDuration = data.gifDuration;
-      this.thumbnailUrl = data.thumbnailUrl;
-      this.thumbnailMimeType = data.thumbnailMimeType;
-      this.title = data.title;
-      this.caption = data.caption;
-      this.parseMode = data.parseMode;
-      this.captionEntities = data.captionEntities;
-      this.showCaptionAboveMedia = data.showCaptionAboveMedia;
-      this.replyMarkup = data.replyMarkup;
-      this.inputMessageContent = data.inputMessageContent;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

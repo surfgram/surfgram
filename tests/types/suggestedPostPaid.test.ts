@@ -7,7 +7,7 @@ describe('SuggestedPostPaid', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       suggested_post_message: {} as any,
-      currency: 'example text',
+      currency: "example text",
       amount: 123,
       star_amount: {} as any,
     };
@@ -16,11 +16,9 @@ describe('SuggestedPostPaid', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.suggestedPostMessage ?? instance.raw?.suggested_post_message).toEqual(
-      {} as any
-    );
-    expect(instance.currency ?? instance.raw?.currency).toEqual('example text');
+    
+    expect(instance.suggestedPostMessage ?? instance.raw?.suggested_post_message).toEqual({} as any);
+    expect(instance.currency ?? instance.raw?.currency).toEqual("example text");
     expect(instance.amount ?? instance.raw?.amount).toEqual(123);
     expect(instance.starAmount ?? instance.raw?.star_amount).toEqual({} as any);
   });

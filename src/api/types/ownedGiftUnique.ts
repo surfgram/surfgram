@@ -6,6 +6,7 @@
  * @class OwnedGiftUnique
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -25,6 +26,7 @@ export class OwnedGiftUnique {
    * @public
    */
   type!: string;
+
   /**
    * Information about the unique gift
    * @type { UniqueGift }
@@ -33,6 +35,7 @@ export class OwnedGiftUnique {
    * @public
    */
   gift!: UniqueGift;
+
   /**
    * Optional. Unique identifier of the received gift for the bot; for gifts received on behalf of business accounts only
    * @type { string }
@@ -41,6 +44,7 @@ export class OwnedGiftUnique {
    * @public
    */
   ownedGiftId?: string;
+
   /**
    * Optional. Sender of the gift if it is a known user
    * @type { User }
@@ -49,6 +53,7 @@ export class OwnedGiftUnique {
    * @public
    */
   senderUser?: User;
+
   /**
    * Date the gift was sent in Unix time
    * @type { number }
@@ -57,6 +62,7 @@ export class OwnedGiftUnique {
    * @public
    */
   sendDate!: number;
+
   /**
    * Optional. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only
    * @type { boolean }
@@ -65,6 +71,7 @@ export class OwnedGiftUnique {
    * @public
    */
   isSaved?: boolean;
+
   /**
    * Optional. True, if the gift can be transferred to another owner; for gifts received on behalf of business accounts only
    * @type { boolean }
@@ -73,6 +80,7 @@ export class OwnedGiftUnique {
    * @public
    */
   canBeTransferred?: boolean;
+
   /**
    * Optional. Number of Telegram Stars that must be paid to transfer the gift; omitted if the bot cannot transfer the gift
    * @type { number }
@@ -81,6 +89,7 @@ export class OwnedGiftUnique {
    * @public
    */
   transferStarCount?: number;
+
   /**
    * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now
    * @type { number }
@@ -116,22 +125,13 @@ export class OwnedGiftUnique {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.gift = data.gift;
-      this.ownedGiftId = data.ownedGiftId;
-      this.senderUser = data.senderUser;
-      this.sendDate = data.sendDate;
-      this.isSaved = data.isSaved;
-      this.canBeTransferred = data.canBeTransferred;
-      this.transferStarCount = data.transferStarCount;
-      this.nextTransferDate = data.nextTransferDate;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

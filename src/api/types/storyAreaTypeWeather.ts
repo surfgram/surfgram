@@ -6,6 +6,7 @@
  * @class StoryAreaTypeWeather
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class StoryAreaTypeWeather {
    * @public
    */
   type!: string;
+
   /**
    * Temperature, in degree Celsius
    * @type { number }
@@ -31,6 +33,7 @@ export class StoryAreaTypeWeather {
    * @public
    */
   temperature!: number;
+
   /**
    * Emoji representing the weather
    * @type { string }
@@ -39,6 +42,7 @@ export class StoryAreaTypeWeather {
    * @public
    */
   emoji!: string;
+
   /**
    * A color of the area background in the ARGB format
    * @type { number }
@@ -74,17 +78,13 @@ export class StoryAreaTypeWeather {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.type = data.type;
-      this.temperature = data.temperature;
-      this.emoji = data.emoji;
-      this.backgroundColor = data.backgroundColor;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class Audio
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class Audio {
    * @public
    */
   fileId!: string;
+
   /**
    * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
    * @type { string }
@@ -32,6 +34,7 @@ export class Audio {
    * @public
    */
   fileUniqueId!: string;
+
   /**
    * Duration of the audio in seconds as defined by the sender
    * @type { number }
@@ -40,6 +43,7 @@ export class Audio {
    * @public
    */
   duration!: number;
+
   /**
    * Optional. Performer of the audio as defined by the sender or by audio tags
    * @type { string }
@@ -48,6 +52,7 @@ export class Audio {
    * @public
    */
   performer?: string;
+
   /**
    * Optional. Title of the audio as defined by the sender or by audio tags
    * @type { string }
@@ -56,6 +61,7 @@ export class Audio {
    * @public
    */
   title?: string;
+
   /**
    * Optional. Original filename as defined by the sender
    * @type { string }
@@ -64,6 +70,7 @@ export class Audio {
    * @public
    */
   fileName?: string;
+
   /**
    * Optional. MIME type of the file as defined by the sender
    * @type { string }
@@ -72,6 +79,7 @@ export class Audio {
    * @public
    */
   mimeType?: string;
+
   /**
    * Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
    * @type { number }
@@ -80,6 +88,7 @@ export class Audio {
    * @public
    */
   fileSize?: number;
+
   /**
    * Optional. Thumbnail of the album cover to which the music file belongs
    * @type { PhotoSize }
@@ -115,22 +124,13 @@ export class Audio {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.fileId = data.fileId;
-      this.fileUniqueId = data.fileUniqueId;
-      this.duration = data.duration;
-      this.performer = data.performer;
-      this.title = data.title;
-      this.fileName = data.fileName;
-      this.mimeType = data.mimeType;
-      this.fileSize = data.fileSize;
-      this.thumbnail = data.thumbnail;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

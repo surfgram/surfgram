@@ -6,6 +6,7 @@
  * @class ChatMember
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -24,6 +25,7 @@ export class ChatMember {
    * @public
    */
   status!: string;
+
   /**
    * Information about the user
    * @type { User }
@@ -32,6 +34,7 @@ export class ChatMember {
    * @public
    */
   user!: User;
+
   /**
    * True, if the user's presence in the chat is hidden
    * @type { boolean }
@@ -40,6 +43,7 @@ export class ChatMember {
    * @public
    */
   isAnonymous!: boolean;
+
   /**
    * Optional. Custom title for this user
    * @type { string }
@@ -75,17 +79,13 @@ export class ChatMember {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.status = data.status;
-      this.user = data.user;
-      this.isAnonymous = data.isAnonymous;
-      this.customTitle = data.customTitle;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }

@@ -6,6 +6,7 @@
  * @class WriteAccessAllowed
  * @extends TelegramObject
  */
+
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
@@ -23,6 +24,7 @@ export class WriteAccessAllowed {
    * @public
    */
   fromRequest?: boolean;
+
   /**
    * Optional. Name of the Web App, if the access was granted when the Web App was launched from a link
    * @type { string }
@@ -31,6 +33,7 @@ export class WriteAccessAllowed {
    * @public
    */
   webAppName?: string;
+
   /**
    * Optional. True, if the access was granted when the bot was added to the attachment or side menu
    * @type { boolean }
@@ -66,16 +69,13 @@ export class WriteAccessAllowed {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
-
-    if (raw) {
-      const data = snakeToCamel(raw) as any;
-
-      this.fromRequest = data.fromRequest;
-      this.webAppName = data.webAppName;
-      this.fromAttachmentMenu = data.fromAttachmentMenu;
-    }
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
   }
 }
