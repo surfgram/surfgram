@@ -88,4 +88,5 @@ export interface SendGameParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
+
 }

@@ -6,7 +6,7 @@ describe('BotCommandScopeChat', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       chat_id: 123,
     };
 
@@ -14,8 +14,8 @@ describe('BotCommandScopeChat', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.chatId ?? instance.raw?.chat_id).toEqual(123);
   });
 });

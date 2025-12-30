@@ -47,4 +47,5 @@ export interface StopMessageLiveLocationParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
+
 }

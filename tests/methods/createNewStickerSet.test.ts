@@ -7,10 +7,10 @@ describe('createNewStickerSet', () => {
 
     const params = {
       userId: 123,
-      name: 'example text',
-      title: 'example text',
+      name: "example text",
+      title: "example text",
       stickers: [{} as any],
-      stickerType: 'example text',
+      stickerType: "example text",
       needsRepainting: true,
     };
 
@@ -18,10 +18,10 @@ describe('createNewStickerSet', () => {
 
     expect(mockBot.callApi).toHaveBeenCalledWith('createNewStickerSet', {
       user_id: 123,
-      name: 'example text',
-      title: 'example text',
+      name: "example text",
+      title: "example text",
       stickers: [{} as any],
-      sticker_type: 'example text',
+      sticker_type: "example text",
       needs_repainting: true,
     });
   });

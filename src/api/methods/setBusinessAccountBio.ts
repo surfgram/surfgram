@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setBusinessAccountBio(...);
  */
-export async function setBusinessAccountBio(
-  this: Bot,
-  businessConnectionId: string,
-  bio?: string
-): Promise<any> {
+export async function setBusinessAccountBio(this: Bot, businessConnectionId: string, bio?: string): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     bio: bio,

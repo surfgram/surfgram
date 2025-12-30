@@ -6,11 +6,11 @@ describe('InputMediaAnimation', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
-      media: 'example text',
-      thumbnail: 'example text',
-      caption: 'example text',
-      parse_mode: 'example text',
+      type: "example text",
+      media: "example text",
+      thumbnail: "example text",
+      caption: "example text",
+      parse_mode: "example text",
       caption_entities: [{} as any],
       show_caption_above_media: true,
       width: 123,
@@ -23,12 +23,12 @@ describe('InputMediaAnimation', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.media ?? instance.raw?.media).toEqual('example text');
-    expect(instance.thumbnail ?? instance.raw?.thumbnail).toEqual('example text');
-    expect(instance.caption ?? instance.raw?.caption).toEqual('example text');
-    expect(instance.parseMode ?? instance.raw?.parse_mode).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+    expect(instance.media ?? instance.raw?.media).toEqual("example text");
+    expect(instance.thumbnail ?? instance.raw?.thumbnail).toEqual("example text");
+    expect(instance.caption ?? instance.raw?.caption).toEqual("example text");
+    expect(instance.parseMode ?? instance.raw?.parse_mode).toEqual("example text");
     expect(instance.captionEntities ?? instance.raw?.caption_entities).toEqual([{} as any]);
     expect(instance.showCaptionAboveMedia ?? instance.raw?.show_caption_above_media).toEqual(true);
     expect(instance.width ?? instance.raw?.width).toEqual(123);

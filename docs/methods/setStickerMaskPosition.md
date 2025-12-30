@@ -10,20 +10,24 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `sendSticker`, `getStickerSet`, `getCustomEmojiStickers`, `uploadStickerFile`, `createNewStickerSet`, `addStickerToSet`, `setStickerPositionInSet`, `deleteStickerFromSet`, `replaceStickerInSet`, `setStickerEmojiList`, `setStickerKeywords`, `setStickerMaskPosition`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
+
 [View Sticker documentation with fluent methods](../types/Sticker.md)
 
 ### MaskPosition (1 methods)
 
 **Available methods:** `setStickerMaskPosition`
 
+
 [View MaskPosition documentation with fluent methods](../types/MaskPosition.md)
+
 
 ## Parameters
 
-| Parameter      | Type           | Required | Description                                                                                                                          |
-| :------------- | :------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------- |
-| `sticker`      | `string`       |   Yes    | File identifier of the sticker                                                                                                       |
-| `maskPosition` | `MaskPosition` |    No    | A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `sticker` | `string` | Yes | File identifier of the sticker |
+| `maskPosition` | `MaskPosition` | No | A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position. |
+
 
 ## Usage Example
 
@@ -34,12 +38,9 @@ bot.onSticker(async (sticker: Sticker) => {
 });
 
 // With filtering
-bot.onSticker(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onSticker((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

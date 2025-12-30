@@ -90,11 +90,13 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendChecklist`, `editMessageChecklist`
 
+
 [View Checklist documentation with fluent methods](../types/Checklist.md)
 
 ### InputChecklist (2 methods)
 
 **Available methods:** `sendChecklist`, `editMessageChecklist`
+
 
 [View InputChecklist documentation with fluent methods](../types/InputChecklist.md)
 
@@ -133,6 +135,7 @@ This method is available as a fluent method on the following types:
 ### InlineKeyboardMarkup (30 methods)
 
 **Available methods:** `getMe`, `logOut`, `close`, `sendMessage`, `copyMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `stopMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `stopPoll`, `sendSticker`, `sendInvoice`, `sendGame`
+
 
 [View InlineKeyboardMarkup documentation with fluent methods](../types/InlineKeyboardMarkup.md)
 
@@ -224,15 +227,17 @@ This method is available as a fluent method on the following types:
 
 [View PreparedInlineMessage documentation with fluent methods](../types/PreparedInlineMessage.md)
 
+
 ## Parameters
 
-| Parameter              | Type                   | Required | Description                                                                              |
-| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------- |
-| `businessConnectionId` | `string`               |   Yes    | Unique identifier of the business connection on behalf of which the message will be sent |
-| `chatId`               | `number`               |   Yes    | Unique identifier for the target chat                                                    |
-| `messageId`            | `number`               |   Yes    | Unique identifier for the target message                                                 |
-| `checklist`            | `InputChecklist`       |   Yes    | A JSON-serialized object for the new checklist                                           |
-| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for the new inline keyboard for the message                     |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which the message will be sent |
+| `chatId` | `number` | Yes | Unique identifier for the target chat |
+| `messageId` | `number` | Yes | Unique identifier for the target message |
+| `checklist` | `InputChecklist` | Yes | A JSON-serialized object for the new checklist |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for the new inline keyboard for the message |
+
 
 ## Usage Example
 
@@ -243,12 +248,9 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onMessage((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

@@ -4,10 +4,11 @@ Describes a story area pointing to a unique gift. Currently, a story can have at
 
 ## Fields
 
-| Name | Type     | Required | Description                            |
-| :--- | :------- | :------: | :------------------------------------- |
-| type | `string` |   Yes    | Type of the area, always “unique_gift” |
-| name | `string` |   Yes    | Unique name of the gift                |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the area, always “unique\_gift” |
+| name | `string` | Yes | Unique name of the gift |
+
 
 ## Event Handlers
 

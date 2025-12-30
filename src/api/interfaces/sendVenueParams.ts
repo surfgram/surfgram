@@ -164,4 +164,5 @@ export interface SendVenueParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }

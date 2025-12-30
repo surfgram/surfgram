@@ -1,6 +1,6 @@
 # editMessageLiveLocation
 
-Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
 
 ## Fluent Usage
 
@@ -90,6 +90,7 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendLocation`, `editMessageLiveLocation`, `stopMessageLiveLocation`
 
+
 [View Location documentation with fluent methods](../types/Location.md)
 
 ### MessageAutoDeleteTimerChanged (35 methods)
@@ -127,6 +128,7 @@ This method is available as a fluent method on the following types:
 ### InlineKeyboardMarkup (30 methods)
 
 **Available methods:** `getMe`, `logOut`, `close`, `sendMessage`, `copyMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `stopMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `stopPoll`, `sendSticker`, `sendInvoice`, `sendGame`
+
 
 [View InlineKeyboardMarkup documentation with fluent methods](../types/InlineKeyboardMarkup.md)
 
@@ -218,21 +220,23 @@ This method is available as a fluent method on the following types:
 
 [View PreparedInlineMessage documentation with fluent methods](../types/PreparedInlineMessage.md)
 
+
 ## Parameters
 
-| Parameter              | Type                   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                     |
-| :--------------------- | :--------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `latitude`             | `number`               |   Yes    | Latitude of new location                                                                                                                                                                                                                                                                                                                                                                        |
-| `longitude`            | `number`               |   Yes    | Longitude of new location                                                                                                                                                                                                                                                                                                                                                                       |
-| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                                                                                                                                                                                                                                                               |
-| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                      |
-| `messageId`            | `number`               |    No    | Required if inline_message_id is not specified. Identifier of the message to edit                                                                                                                                                                                                                                                                                                               |
-| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                                                                                                                                                                                                                                                          |
-| `livePeriod`           | `number`               |    No    | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged |
-| `horizontalAccuracy`   | `number`               |    No    | The radius of uncertainty for the location, measured in meters; 0-1500                                                                                                                                                                                                                                                                                                                          |
-| `heading`              | `number`               |    No    | Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.                                                                                                                                                                                                                                                                                                      |
-| `proximityAlertRadius` | `number`               |    No    | The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.                                                                                                                                                                                                                                                          |
-| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for a new inline keyboard.                                                                                                                                                                                                                                                                                                                                             |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `latitude` | `number` | Yes | Latitude of new location |
+| `longitude` | `number` | Yes | Longitude of new location |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
+| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the message to edit |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `livePeriod` | `number` | No | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged |
+| `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
+| `heading` | `number` | No | Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
+| `proximityAlertRadius` | `number` | No | The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard. |
+
 
 ## Usage Example
 
@@ -243,12 +247,9 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onMessage((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

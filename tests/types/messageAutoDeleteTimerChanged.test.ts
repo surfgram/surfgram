@@ -13,7 +13,7 @@ describe('MessageAutoDeleteTimerChanged', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.messageAutoDeleteTime ?? instance.raw?.message_auto_delete_time).toEqual(123);
   });
 });

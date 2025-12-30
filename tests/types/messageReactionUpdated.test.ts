@@ -19,7 +19,7 @@ describe('MessageReactionUpdated', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
     expect(instance.messageId ?? instance.raw?.message_id).toEqual(123);
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);

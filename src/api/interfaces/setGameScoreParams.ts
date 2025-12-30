@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#setGameScore Telegram API Documentation}
  */
 
+
 export interface SetGameScoreParams {
   /**
    * User identifier
@@ -61,4 +62,5 @@ export interface SetGameScoreParams {
    * @required No
    */
   inlineMessageId?: string;
+
 }
