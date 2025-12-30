@@ -38,7 +38,6 @@ jobs:
     - name: Bump patch version if changed
       if: steps.check.outputs.changed == 'true'
       run: |
-        # Тупо увеличиваем patch версию на 1
         npm version patch --no-git-tag-version
         NEW_VERSION=$(node -p "require('./package.json').version")
         echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
@@ -46,8 +45,8 @@ jobs:
     - name: Commit if changed
       if: steps.check.outputs.changed == 'true'
       run: |
-        git config user.email "github-actions@github.com"
-        git config user.name "GitHub Actions"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
         git add .
         git commit -m "chore: auto-generate types (v${{ steps.check.outputs.new_version }})"
     
