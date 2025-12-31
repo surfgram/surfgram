@@ -25,7 +25,13 @@ import { ReactionType } from '../types/reactionType';
  * // Direct parameters
  * await bot.setMessageReaction(...);
  */
-export async function setMessageReaction(this: Bot, chatId: number | string, messageId: number, reaction?: ReactionType[], isBig?: boolean): Promise<any> {
+export async function setMessageReaction(
+  this: Bot,
+  chatId: number | string,
+  messageId: number,
+  reaction?: ReactionType[],
+  isBig?: boolean
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageId: messageId,

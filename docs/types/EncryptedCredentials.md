@@ -4,12 +4,11 @@ Describes data required for decrypting and authenticating EncryptedPassportEleme
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| data | `string` | Yes | Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for EncryptedPassportElement decryption and authentication |
-| hash | `string` | Yes | Base64-encoded data hash for data authentication |
-| secret | `string` | Yes | Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption |
-
+| Name   | Type     | Required | Description                                                                                                                                                           |
+| :----- | :------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| data   | `string` |   Yes    | Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for EncryptedPassportElement decryption and authentication |
+| hash   | `string` |   Yes    | Base64-encoded data hash for data authentication                                                                                                                      |
+| secret | `string` |   Yes    | Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption                                                                          |
 
 ## Event Handlers
 

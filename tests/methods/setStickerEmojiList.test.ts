@@ -5,11 +5,11 @@ describe('setStickerEmojiList', () => {
   it('should call callApi with correct parameters', async () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
-    await setStickerEmojiList.call(mockBot, "example text", ["example text"]);
+    await setStickerEmojiList.call(mockBot, 'example text', ['example text']);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('setStickerEmojiList', {
-      sticker: "example text",
-      emoji_list: ["example text"],
+      sticker: 'example text',
+      emoji_list: ['example text'],
     });
   });
 });

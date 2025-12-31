@@ -4,11 +4,10 @@ Describes a service message about the failed approval of a suggested post. Curre
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| suggestedPostMessage | `Message` | No | Optional. Message containing the suggested post whose approval has failed. Note that the Message object in this field will not contain the reply\_to\_message field even if it itself is a reply. |
-| price | `SuggestedPostPrice` | Yes | Expected price of the post |
-
+| Name                 | Type                 | Required | Description                                                                                                                                                                                     |
+| :------------------- | :------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| suggestedPostMessage | `Message`            |    No    | Optional. Message containing the suggested post whose approval has failed. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply. |
+| price                | `SuggestedPostPrice` |   Yes    | Expected price of the post                                                                                                                                                                      |
 
 ## Event Handlers
 
@@ -16,9 +15,11 @@ You can listen for SuggestedPostApprovalFailed events using:
 
 ```typescript
 // Type-specific handler
-bot.onSuggestedPostApprovalFailed(async (suggestedpostapprovalfailed: SuggestedPostApprovalFailed) => {
-  console.log('Received:', suggestedpostapprovalfailed);
-});
+bot.onSuggestedPostApprovalFailed(
+  async (suggestedpostapprovalfailed: SuggestedPostApprovalFailed) => {
+    console.log('Received:', suggestedpostapprovalfailed);
+  }
+);
 
 // Generic handler
 bot.on('suggestedpostapprovalfailed', async (data: SuggestedPostApprovalFailed) => {

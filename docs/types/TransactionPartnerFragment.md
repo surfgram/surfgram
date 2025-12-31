@@ -4,11 +4,10 @@ Describes a withdrawal transaction with Fragment.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the transaction partner, always “fragment” |
-| withdrawalState | `RevenueWithdrawalState` | No | Optional. State of the transaction if the transaction is outgoing |
-
+| Name            | Type                     | Required | Description                                                       |
+| :-------------- | :----------------------- | :------: | :---------------------------------------------------------------- |
+| type            | `string`                 |   Yes    | Type of the transaction partner, always “fragment”                |
+| withdrawalState | `RevenueWithdrawalState` |    No    | Optional. State of the transaction if the transaction is outgoing |
 
 ## Event Handlers
 

@@ -55,5 +55,4 @@ export interface CreateNewStickerSetParams {
    * @required No
    */
   needsRepainting?: boolean;
-
 }

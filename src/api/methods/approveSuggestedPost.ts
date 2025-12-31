@@ -23,7 +23,12 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.approveSuggestedPost(...);
  */
-export async function approveSuggestedPost(this: Bot, chatId: number, messageId: number, sendDate?: number): Promise<any> {
+export async function approveSuggestedPost(
+  this: Bot,
+  chatId: number,
+  messageId: number,
+  sendDate?: number
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageId: messageId,

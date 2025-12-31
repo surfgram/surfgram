@@ -1,6 +1,6 @@
 # removeBusinessAccountProfilePhoto
 
-Removes the current profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
+Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -10,17 +10,14 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
-
 [View File documentation with fluent methods](../types/File.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `isPublic` | `boolean` | No | Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo \(if present\) becomes the main photo. |
-
+| Parameter              | Type      | Required | Description                                                                                                                                                                                                                            |
+| :--------------------- | :-------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`  |   Yes    | Unique identifier of the business connection                                                                                                                                                                                           |
+| `isPublic`             | `boolean` |    No    | Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo \(if present\) becomes the main photo. |
 
 ## Usage Example
 
@@ -31,9 +28,12 @@ bot.onFile(async (file: File) => {
 });
 
 // With filtering
-bot.onFile((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onFile(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

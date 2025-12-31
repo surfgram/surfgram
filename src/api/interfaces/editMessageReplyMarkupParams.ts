@@ -47,5 +47,4 @@ export interface EditMessageReplyMarkupParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
-
 }

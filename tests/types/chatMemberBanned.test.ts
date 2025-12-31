@@ -6,7 +6,7 @@ describe('ChatMemberBanned', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      status: "example text",
+      status: 'example text',
       user: {} as any,
       until_date: 123,
     };
@@ -15,8 +15,8 @@ describe('ChatMemberBanned', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.status ?? instance.raw?.status).toEqual("example text");
+
+    expect(instance.status ?? instance.raw?.status).toEqual('example text');
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.untilDate ?? instance.raw?.until_date).toEqual(123);
   });

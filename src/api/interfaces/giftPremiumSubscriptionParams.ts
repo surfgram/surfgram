@@ -55,5 +55,4 @@ export interface GiftPremiumSubscriptionParams {
    * @required No
    */
   textEntities?: MessageEntity[];
-
 }

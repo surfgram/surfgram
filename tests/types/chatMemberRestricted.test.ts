@@ -6,7 +6,7 @@ describe('ChatMemberRestricted', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      status: "example text",
+      status: 'example text',
       user: {} as any,
       is_member: true,
       can_send_messages: true,
@@ -30,8 +30,8 @@ describe('ChatMemberRestricted', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.status ?? instance.raw?.status).toEqual("example text");
+
+    expect(instance.status ?? instance.raw?.status).toEqual('example text');
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.isMember ?? instance.raw?.is_member).toEqual(true);
     expect(instance.canSendMessages ?? instance.raw?.can_send_messages).toEqual(true);

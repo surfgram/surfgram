@@ -65,5 +65,4 @@ export interface EditStoryParams {
    * @required No
    */
   areas?: StoryArea[];
-
 }

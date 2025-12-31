@@ -4,14 +4,14 @@ Describes the connection of the bot with a business account.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| id | `string` | Yes | Unique identifier of the business connection |
-| user | `User` | Yes | Business account user that created the business connection |
-| userChatId | `number` | Yes | Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. |
-| date | `number` | Yes | Date the connection was established in Unix time |
-| rights | `BusinessBotRights` | No | Optional. Rights of the business bot |
-| isEnabled | `boolean` | Yes | True, if the connection is active |
+| Name       | Type                | Required | Description                                                                                                                                                                                                                                                                                                                                               |
+| :--------- | :------------------ | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | `string`            |   Yes    | Unique identifier of the business connection                                                                                                                                                                                                                                                                                                              |
+| user       | `User`              |   Yes    | Business account user that created the business connection                                                                                                                                                                                                                                                                                                |
+| userChatId | `number`            |   Yes    | Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. |
+| date       | `number`            |   Yes    | Date the connection was established in Unix time                                                                                                                                                                                                                                                                                                          |
+| rights     | `BusinessBotRights` |    No    | Optional. Rights of the business bot                                                                                                                                                                                                                                                                                                                      |
+| isEnabled  | `boolean`           |   Yes    | True, if the connection is active                                                                                                                                                                                                                                                                                                                         |
 
 ## Fluent Methods
 
@@ -23,10 +23,9 @@ Use this method to get information about the connection of the bot with a busine
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter              | Source    | Description                                  |
+| :--------------------- | :-------- | :------------------------------------------- |
 | `businessConnectionId` | `this.id` | Unique identifier of the business connection |
-
 
 **Usage examples:**
 
@@ -47,7 +46,6 @@ bot.onBusinessConnection(async (businessconnection: BusinessConnection) => {
 ```
 
 **See also:** [getBusinessConnection API method](../methods/getBusinessConnection.md)
-
 
 ## Event Handlers
 

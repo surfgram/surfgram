@@ -23,7 +23,12 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.declineSuggestedPost(...);
  */
-export async function declineSuggestedPost(this: Bot, chatId: number, messageId: number, comment?: string): Promise<any> {
+export async function declineSuggestedPost(
+  this: Bot,
+  chatId: number,
+  messageId: number,
+  comment?: string
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageId: messageId,
