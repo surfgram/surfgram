@@ -4,9 +4,10 @@ The withdrawal is in progress.
 
 ## Fields
 
-| Name | Type     | Required | Description                         |
-| :--- | :------- | :------: | :---------------------------------- |
-| type | `string` |   Yes    | Type of the state, always “pending” |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the state, always “pending” |
+
 
 ## Event Handlers
 
@@ -14,11 +15,9 @@ You can listen for RevenueWithdrawalStatePending events using:
 
 ```typescript
 // Type-specific handler
-bot.onRevenueWithdrawalStatePending(
-  async (revenuewithdrawalstatepending: RevenueWithdrawalStatePending) => {
-    console.log('Received:', revenuewithdrawalstatepending);
-  }
-);
+bot.onRevenueWithdrawalStatePending(async (revenuewithdrawalstatepending: RevenueWithdrawalStatePending) => {
+  console.log('Received:', revenuewithdrawalstatepending);
+});
 
 // Generic handler
 bot.on('revenuewithdrawalstatepending', async (data: RevenueWithdrawalStatePending) => {

@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#createNewStickerSet Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { CreateNewStickerSetParams } from "../interfaces/createNewStickerSetParams";
-import { InputSticker } from "../types/inputSticker";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { CreateNewStickerSetParams } from '../interfaces/createNewStickerSetParams';
+import { InputSticker } from '../types/inputSticker';
 
 /**
  * Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. Returns True on success.
@@ -25,11 +25,8 @@ import { InputSticker } from "../types/inputSticker";
  * // ... params
  * });
  */
-export async function createNewStickerSet(
-	this: Bot,
-	params: CreateNewStickerSetParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("createNewStickerSet", snakeParams);
-	return response;
+export async function createNewStickerSet(this: Bot, params: CreateNewStickerSetParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('createNewStickerSet', snakeParams);
+  return response;
 }

@@ -1,26 +1,28 @@
 # readBusinessMessage
 
-Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right. Returns True on success.
+Marks incoming message as read on behalf of a business account. Requires the can\_read\_messages business bot right. Returns True on success.
 
 ## Fluent Usage
 
 This method is available as a fluent method on the following types:
 
-### Message (49 methods)
+### Message (50 methods)
 
-**Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `copyMessage`, `copyMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `setMessageReaction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `pinChatMessage`, `unpinChatMessage`, `unpinAllChatMessages`, `editForumTopic`, `unpinAllForumTopicMessages`, `editGeneralForumTopic`, `unpinAllGeneralForumTopicMessages`, `sendGift`, `readBusinessMessage`, `deleteBusinessMessages`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `stopMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `deleteMessage`, `deleteMessages`, `sendSticker`, `savePreparedInlineMessage`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
+**Available methods:** `sendMessage`, `forwardMessage`, `forwardMessages`, `copyMessage`, `copyMessages`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendMessageDraft`, `sendChatAction`, `setMessageReaction`, `editChatInviteLink`, `editChatSubscriptionInviteLink`, `pinChatMessage`, `unpinChatMessage`, `unpinAllChatMessages`, `editForumTopic`, `unpinAllForumTopicMessages`, `editGeneralForumTopic`, `unpinAllGeneralForumTopicMessages`, `sendGift`, `readBusinessMessage`, `deleteBusinessMessages`, `editStory`, `editMessageText`, `editMessageCaption`, `editMessageMedia`, `editMessageLiveLocation`, `stopMessageLiveLocation`, `editMessageChecklist`, `editMessageReplyMarkup`, `deleteMessage`, `deleteMessages`, `sendSticker`, `savePreparedInlineMessage`, `sendInvoice`, `editUserStarSubscription`, `sendGame`
 
 **Auto-filled parameters:** businessConnectionId, chatId, messageId
 
 [View Message documentation with fluent methods](../types/Message.md)
 
+
 ## Parameters
 
-| Parameter              | Type     | Required | Description                                                                                                           |
-| :--------------------- | :------- | :------: | :-------------------------------------------------------------------------------------------------------------------- |
-| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection on behalf of which to read the message                                   |
-| `chatId`               | `number` |   Yes    | Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours. |
-| `messageId`            | `number` |   Yes    | Unique identifier of the message to mark as read                                                                      |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which to read the message |
+| `chatId` | `number` | Yes | Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours. |
+| `messageId` | `number` | Yes | Unique identifier of the message to mark as read |
+
 
 ## Usage Example
 
@@ -31,12 +33,9 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onMessage((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

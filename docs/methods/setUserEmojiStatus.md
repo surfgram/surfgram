@@ -6,21 +6,23 @@ Changes the emoji status for a given user that previously allowed the bot to man
 
 This method is available as a fluent method on the following types:
 
-### User (7 methods)
+### User (8 methods)
 
-**Available methods:** `getUserProfilePhotos`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `editUserStarSubscription`
+**Available methods:** `getUserProfilePhotos`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
 
 **Auto-filled parameters:** userId
 
 [View User documentation with fluent methods](../types/User.md)
 
+
 ## Parameters
 
-| Parameter                   | Type     | Required | Description                                                                                    |
-| :-------------------------- | :------- | :------: | :--------------------------------------------------------------------------------------------- |
-| `userId`                    | `number` |   Yes    | Unique identifier of the target user                                                           |
-| `emojiStatusCustomEmojiId`  | `string` |    No    | Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status. |
-| `emojiStatusExpirationDate` | `number` |    No    | Expiration date of the emoji status, if any                                                    |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `emojiStatusCustomEmojiId` | `string` | No | Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status. |
+| `emojiStatusExpirationDate` | `number` | No | Expiration date of the emoji status, if any |
+
 
 ## Usage Example
 
@@ -31,12 +33,9 @@ bot.onUser(async (user: User) => {
 });
 
 // With filtering
-bot.onUser(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onUser((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

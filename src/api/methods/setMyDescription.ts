@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setMyDescription Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to change the bot&#39;s description, which is shown in the chat with the bot if the chat is empty. Returns True on success.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.setMyDescription(...);
  */
-export async function setMyDescription(
-	this: Bot,
-	description?: string,
-	languageCode?: string,
-): Promise<any> {
-	const apiParams = {
-		description: description,
-		languageCode: languageCode,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("setMyDescription", snakeParams);
-	return response;
+export async function setMyDescription(this: Bot, description?: string, languageCode?: string): Promise<any> {
+  const apiParams = {
+    description: description,
+    languageCode: languageCode,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('setMyDescription', snakeParams);
+  return response;
 }

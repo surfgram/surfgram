@@ -4,11 +4,12 @@ Contains the list of gifts received and owned by a user or a chat.
 
 ## Fields
 
-| Name       | Type          | Required | Description                                                                     |
-| :--------- | :------------ | :------: | :------------------------------------------------------------------------------ |
-| totalCount | `number`      |   Yes    | The total number of gifts owned by the user or the chat                         |
-| gifts      | `OwnedGift[]` |   Yes    | The list of gifts                                                               |
-| nextOffset | `string`      |    No    | Optional. Offset for the next request. If empty, then there are no more results |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| totalCount | `number` | Yes | The total number of gifts owned by the user or the chat |
+| gifts | `OwnedGift[]` | Yes | The list of gifts |
+| nextOffset | `string` | No | Optional. Offset for the next request. If empty, then there are no more results |
+
 
 ## Event Handlers
 

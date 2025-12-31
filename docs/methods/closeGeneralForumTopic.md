@@ -1,6 +1,6 @@
 # closeGeneralForumTopic
 
-Use this method to close an open &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+Use this method to close an open &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
 
 ## Fluent Usage
 
@@ -10,13 +10,16 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getForumTopicIconStickers`, `createForumTopic`, `editForumTopic`, `closeForumTopic`, `reopenForumTopic`, `deleteForumTopic`, `unpinAllForumTopicMessages`, `editGeneralForumTopic`, `closeGeneralForumTopic`, `reopenGeneralForumTopic`, `hideGeneralForumTopic`, `unhideGeneralForumTopic`, `unpinAllGeneralForumTopicMessages`
 
+
 [View ForumTopic documentation with fluent methods](../types/ForumTopic.md)
+
 
 ## Parameters
 
-| Parameter | Type                 | Required | Description                                                                                                      |
-| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+
 
 ## Usage Example
 
@@ -27,12 +30,9 @@ bot.onForumTopic(async (forumtopic: ForumTopic) => {
 });
 
 // With filtering
-bot.onForumTopic(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onForumTopic((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

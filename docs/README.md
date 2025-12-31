@@ -1,7 +1,6 @@
 # API Documentation
 
 ## Core
-
 - [Bot](bot.md)
 - [Core Concepts](core-concepts.md)
 - [Plugins](plugins.md)
@@ -212,6 +211,7 @@
 - [BusinessLocation](types/BusinessLocation.md)
 - [BusinessOpeningHoursInterval](types/BusinessOpeningHoursInterval.md)
 - [BusinessOpeningHours](types/BusinessOpeningHours.md)
+- [UserRating](types/UserRating.md)
 - [StoryAreaPosition](types/StoryAreaPosition.md)
 - [LocationAddress](types/LocationAddress.md)
 - [StoryAreaType](types/StoryAreaType.md)
@@ -224,10 +224,12 @@
 - [ReactionTypeCustomEmoji](types/ReactionTypeCustomEmoji.md)
 - [ReactionTypePaid](types/ReactionTypePaid.md)
 - [ReactionCount](types/ReactionCount.md)
+- [GiftBackground](types/GiftBackground.md)
 - [UniqueGiftModel](types/UniqueGiftModel.md)
 - [UniqueGiftSymbol](types/UniqueGiftSymbol.md)
 - [UniqueGiftBackdropColors](types/UniqueGiftBackdropColors.md)
 - [UniqueGiftBackdrop](types/UniqueGiftBackdrop.md)
+- [UniqueGiftColors](types/UniqueGiftColors.md)
 - [UniqueGift](types/UniqueGift.md)
 - [GiftInfo](types/GiftInfo.md)
 - [UniqueGiftInfo](types/UniqueGiftInfo.md)
@@ -292,6 +294,7 @@
 - [CallbackGame](types/CallbackGame.md)
 
 ## API Methods
+
 
 ## Fluent API Overview
 

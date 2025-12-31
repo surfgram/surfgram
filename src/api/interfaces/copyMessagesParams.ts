@@ -5,68 +5,70 @@
  * @see {@link https://core.telegram.org/bots/api#copyMessages Telegram API Documentation}
  */
 
+
 export interface CopyMessagesParams {
-	/**
-	 * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
-	 * @type { number | string }
-	 * @originalType Integer or String
-	 * @required Yes
-	 */
-	chatId: number | string;
+  /**
+   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * @type { number | string }
+   * @originalType Integer or String
+   * @required Yes
+   */
+  chatId: number | string;
 
-	/**
-	 * Unique identifier for the chat where the original messages were sent \(or channel username in the format @channelusername\)
-	 * @type { number | string }
-	 * @originalType Integer or String
-	 * @required Yes
-	 */
-	fromChatId: number | string;
+  /**
+   * Unique identifier for the chat where the original messages were sent \(or channel username in the format @channelusername\)
+   * @type { number | string }
+   * @originalType Integer or String
+   * @required Yes
+   */
+  fromChatId: number | string;
 
-	/**
-	 * A JSON-serialized list of 1-100 identifiers of messages in the chat from\_chat\_id to copy. The identifiers must be specified in a strictly increasing order.
-	 * @type { number[] }
-	 * @originalType Array of Integer
-	 * @required Yes
-	 */
-	messageIds: number[];
+  /**
+   * A JSON-serialized list of 1-100 identifiers of messages in the chat from\_chat\_id to copy. The identifiers must be specified in a strictly increasing order.
+   * @type { number[] }
+   * @originalType Array of Integer
+   * @required Yes
+   */
+  messageIds: number[];
 
-	/**
-	 * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
-	 * @type { number }
-	 * @originalType Integer
-	 * @required No
-	 */
-	messageThreadId?: number;
+  /**
+   * Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
+   * @type { number }
+   * @originalType Integer
+   * @required No
+   */
+  messageThreadId?: number;
 
-	/**
-	 * Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
-	 * @type { number }
-	 * @originalType Integer
-	 * @required No
-	 */
-	directMessagesTopicId?: number;
+  /**
+   * Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat
+   * @type { number }
+   * @originalType Integer
+   * @required No
+   */
+  directMessagesTopicId?: number;
 
-	/**
-	 * Sends the messages silently. Users will receive a notification with no sound.
-	 * @type { boolean }
-	 * @originalType Boolean
-	 * @required No
-	 */
-	disableNotification?: boolean;
+  /**
+   * Sends the messages silently. Users will receive a notification with no sound.
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  disableNotification?: boolean;
 
-	/**
-	 * Protects the contents of the sent messages from forwarding and saving
-	 * @type { boolean }
-	 * @originalType Boolean
-	 * @required No
-	 */
-	protectContent?: boolean;
+  /**
+   * Protects the contents of the sent messages from forwarding and saving
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  protectContent?: boolean;
 
-	/**
-	 * Pass True to copy the messages without their captions
-	 * @type { boolean }
-	 * @originalType Boolean
-	 * @required No
-	 */
-	removeCaption?: boolean;
+  /**
+   * Pass True to copy the messages without their captions
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  removeCaption?: boolean;
+
 }
