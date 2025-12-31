@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#setMyCommands Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { BotCommand } from '../types/botCommand';
-import { BotCommandScope } from '../types/botCommandScope';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { BotCommand } from "../types/botCommand";
+import { BotCommandScope } from "../types/botCommandScope";
 
 /**
  * Use this method to change the list of the bot&#39;s commands. See this manual for more details about bot commands. Returns True on success.
@@ -25,13 +25,18 @@ import { BotCommandScope } from '../types/botCommandScope';
  * // Direct parameters
  * await bot.setMyCommands(...);
  */
-export async function setMyCommands(this: Bot, commands: BotCommand[], scope?: BotCommandScope, languageCode?: string): Promise<any> {
-  const apiParams = {
-    commands: commands,
-    scope: scope,
-    languageCode: languageCode,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setMyCommands', snakeParams);
-  return response;
+export async function setMyCommands(
+	this: Bot,
+	commands: BotCommand[],
+	scope?: BotCommandScope,
+	languageCode?: string,
+): Promise<any> {
+	const apiParams = {
+		commands: commands,
+		scope: scope,
+		languageCode: languageCode,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("setMyCommands", snakeParams);
+	return response;
 }

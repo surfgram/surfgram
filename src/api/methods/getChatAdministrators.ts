@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
@@ -21,11 +21,17 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getChatAdministrators(...);
  */
-export async function getChatAdministrators(this: Bot, chatId: number | string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getChatAdministrators', snakeParams);
-  return response;
+export async function getChatAdministrators(
+	this: Bot,
+	chatId: number | string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"getChatAdministrators",
+		snakeParams,
+	);
+	return response;
 }

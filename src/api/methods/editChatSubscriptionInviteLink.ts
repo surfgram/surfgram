@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
@@ -23,13 +23,21 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.editChatSubscriptionInviteLink(...);
  */
-export async function editChatSubscriptionInviteLink(this: Bot, chatId: number | string, inviteLink: string, name?: string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    inviteLink: inviteLink,
-    name: name,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('editChatSubscriptionInviteLink', snakeParams);
-  return response;
+export async function editChatSubscriptionInviteLink(
+	this: Bot,
+	chatId: number | string,
+	inviteLink: string,
+	name?: string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		inviteLink: inviteLink,
+		name: name,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"editChatSubscriptionInviteLink",
+		snakeParams,
+	);
+	return response;
 }

@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#leaveChat Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method for your bot to leave a group, supergroup or channel. Returns True on success.
@@ -21,11 +21,14 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.leaveChat(...);
  */
-export async function leaveChat(this: Bot, chatId: number | string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('leaveChat', snakeParams);
-  return response;
+export async function leaveChat(
+	this: Bot,
+	chatId: number | string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("leaveChat", snakeParams);
+	return response;
 }

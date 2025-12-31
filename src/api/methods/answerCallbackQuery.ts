@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#answerCallbackQuery Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { AnswerCallbackQueryParams } from '../interfaces/answerCallbackQueryParams';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { AnswerCallbackQueryParams } from "../interfaces/answerCallbackQueryParams";
 
 /**
  * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
@@ -24,8 +24,11 @@ import { AnswerCallbackQueryParams } from '../interfaces/answerCallbackQueryPara
  * // ... params
  * });
  */
-export async function answerCallbackQuery(this: Bot, params: AnswerCallbackQueryParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('answerCallbackQuery', snakeParams);
-  return response;
+export async function answerCallbackQuery(
+	this: Bot,
+	params: AnswerCallbackQueryParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("answerCallbackQuery", snakeParams);
+	return response;
 }

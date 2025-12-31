@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
@@ -21,11 +21,17 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getBusinessAccountStarBalance(...);
  */
-export async function getBusinessAccountStarBalance(this: Bot, businessConnectionId: string): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getBusinessAccountStarBalance', snakeParams);
-  return response;
+export async function getBusinessAccountStarBalance(
+	this: Bot,
+	businessConnectionId: string,
+): Promise<any> {
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"getBusinessAccountStarBalance",
+		snakeParams,
+	);
+	return response;
 }
