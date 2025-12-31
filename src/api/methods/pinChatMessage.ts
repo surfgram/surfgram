@@ -24,7 +24,13 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.pinChatMessage(...);
  */
-export async function pinChatMessage(this: Bot, chatId: number | string, messageId: number, businessConnectionId?: string, disableNotification?: boolean): Promise<any> {
+export async function pinChatMessage(
+  this: Bot,
+  chatId: number | string,
+  messageId: number,
+  businessConnectionId?: string,
+  disableNotification?: boolean
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageId: messageId,

@@ -10,24 +10,20 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `sendSticker`, `getStickerSet`, `getCustomEmojiStickers`, `uploadStickerFile`, `createNewStickerSet`, `addStickerToSet`, `setStickerPositionInSet`, `deleteStickerFromSet`, `replaceStickerInSet`, `setStickerEmojiList`, `setStickerKeywords`, `setStickerMaskPosition`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
-
 [View Sticker documentation with fluent methods](../types/Sticker.md)
 
 ### StickerSet (8 methods)
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getStickerSet`, `createNewStickerSet`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
-
 [View StickerSet documentation with fluent methods](../types/StickerSet.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `name` | `string` | Yes | Sticker set name |
-| `title` | `string` | Yes | Sticker set title, 1-64 characters |
-
+| Parameter | Type     | Required | Description                        |
+| :-------- | :------- | :------: | :--------------------------------- |
+| `name`    | `string` |   Yes    | Sticker set name                   |
+| `title`   | `string` |   Yes    | Sticker set title, 1-64 characters |
 
 ## Usage Example
 
@@ -38,9 +34,12 @@ bot.onSticker(async (sticker: Sticker) => {
 });
 
 // With filtering
-bot.onSticker((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onSticker(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

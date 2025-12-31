@@ -13,7 +13,7 @@ describe('PaidMessagePriceChanged', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.paidMessageStarCount ?? instance.raw?.paid_message_star_count).toEqual(123);
   });
 });

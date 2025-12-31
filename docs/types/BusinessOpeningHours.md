@@ -4,11 +4,10 @@ Describes the opening hours of a business.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| timeZoneName | `string` | Yes | Unique name of the time zone for which the opening hours are defined |
-| openingHours | `BusinessOpeningHoursInterval[]` | Yes | List of time intervals describing business opening hours |
-
+| Name         | Type                             | Required | Description                                                          |
+| :----------- | :------------------------------- | :------: | :------------------------------------------------------------------- |
+| timeZoneName | `string`                         |   Yes    | Unique name of the time zone for which the opening hours are defined |
+| openingHours | `BusinessOpeningHoursInterval[]` |   Yes    | List of time intervals describing business opening hours             |
 
 ## Event Handlers
 

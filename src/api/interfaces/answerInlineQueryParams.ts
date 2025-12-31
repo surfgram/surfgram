@@ -56,5 +56,4 @@ export interface AnswerInlineQueryParams {
    * @required No
    */
   button?: InlineQueryResultsButton;
-
 }

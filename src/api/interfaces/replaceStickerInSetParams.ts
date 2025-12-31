@@ -39,5 +39,4 @@ export interface ReplaceStickerInSetParams {
    * @required Yes
    */
   sticker: InputSticker;
-
 }

@@ -4,10 +4,9 @@ Describes a Web App.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| url | `string` | Yes | An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps |
-
+| Name | Type     | Required | Description                                                                                       |
+| :--- | :------- | :------: | :------------------------------------------------------------------------------------------------ |
+| url  | `string` |   Yes    | An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps |
 
 ## Event Handlers
 

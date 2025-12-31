@@ -17,7 +17,7 @@ describe('AffiliateInfo', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.affiliateUser ?? instance.raw?.affiliate_user).toEqual({} as any);
     expect(instance.affiliateChat ?? instance.raw?.affiliate_chat).toEqual({} as any);
     expect(instance.commissionPerMille ?? instance.raw?.commission_per_mille).toEqual(123);

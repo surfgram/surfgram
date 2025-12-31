@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.deleteMessages(...);
  */
-export async function deleteMessages(this: Bot, chatId: number | string, messageIds: number[]): Promise<any> {
+export async function deleteMessages(
+  this: Bot,
+  chatId: number | string,
+  messageIds: number[]
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageIds: messageIds,

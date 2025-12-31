@@ -25,7 +25,13 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // Direct parameters
  * await bot.stopPoll(...);
  */
-export async function stopPoll(this: Bot, chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any> {
+export async function stopPoll(
+  this: Bot,
+  chatId: number | string,
+  messageId: number,
+  businessConnectionId?: string,
+  replyMarkup?: InlineKeyboardMarkup
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageId: messageId,

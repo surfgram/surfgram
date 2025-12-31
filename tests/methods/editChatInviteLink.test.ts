@@ -7,8 +7,8 @@ describe('editChatInviteLink', () => {
 
     const params = {
       chatId: 123,
-      inviteLink: "example text",
-      name: "example text",
+      inviteLink: 'example text',
+      name: 'example text',
       expireDate: 123,
       memberLimit: 123,
       createsJoinRequest: true,
@@ -18,8 +18,8 @@ describe('editChatInviteLink', () => {
 
     expect(mockBot.callApi).toHaveBeenCalledWith('editChatInviteLink', {
       chat_id: 123,
-      invite_link: "example text",
-      name: "example text",
+      invite_link: 'example text',
+      name: 'example text',
       expire_date: 123,
       member_limit: 123,
       creates_join_request: true,

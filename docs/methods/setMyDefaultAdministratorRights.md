@@ -10,17 +10,14 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUpdates`, `getWebhookInfo`, `getMe`, `getUserProfilePhotos`, `getFile`, `getChat`, `getChatAdministrators`, `getChatMemberCount`, `getChatMember`, `getForumTopicIconStickers`, `getUserChatBoosts`, `getBusinessConnection`, `getMyCommands`, `getMyName`, `getMyDescription`, `getMyShortDescription`, `getChatMenuButton`, `setMyDefaultAdministratorRights`, `getMyDefaultAdministratorRights`, `getAvailableGifts`, `getBusinessAccountStarBalance`, `getBusinessAccountGifts`, `getStickerSet`, `getCustomEmojiStickers`, `getMyStarBalance`, `getStarTransactions`, `getGameHighScores`
 
-
 [View ChatAdministratorRights documentation with fluent methods](../types/ChatAdministratorRights.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `rights` | `ChatAdministratorRights` | No | A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared. |
-| `forChannels` | `boolean` | No | Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed. |
-
+| Parameter     | Type                      | Required | Description                                                                                                                                                                     |
+| :------------ | :------------------------ | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `rights`      | `ChatAdministratorRights` |    No    | A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared.                                       |
+| `forChannels` | `boolean`                 |    No    | Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed. |
 
 ## Usage Example
 
@@ -31,9 +28,12 @@ bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorR
 });
 
 // With filtering
-bot.onChatAdministratorRights((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChatAdministratorRights(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

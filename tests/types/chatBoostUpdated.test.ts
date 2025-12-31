@@ -14,7 +14,7 @@ describe('ChatBoostUpdated', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
     expect(instance.boost ?? instance.raw?.boost).toEqual({} as any);
   });

@@ -6,7 +6,7 @@ describe('BackgroundFillFreeformGradient', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: "example text",
+      type: 'example text',
       colors: [123],
     };
 
@@ -14,8 +14,8 @@ describe('BackgroundFillFreeformGradient', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+
+    expect(instance.type ?? instance.raw?.type).toEqual('example text');
     expect(instance.colors ?? instance.raw?.colors).toEqual([123]);
   });
 });

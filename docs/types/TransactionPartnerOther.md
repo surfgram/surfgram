@@ -4,10 +4,9 @@ Describes a transaction with an unknown source or recipient.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the transaction partner, always “other” |
-
+| Name | Type     | Required | Description                                     |
+| :--- | :------- | :------: | :---------------------------------------------- |
+| type | `string` |   Yes    | Type of the transaction partner, always “other” |
 
 ## Event Handlers
 

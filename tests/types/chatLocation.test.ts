@@ -7,15 +7,15 @@ describe('ChatLocation', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       location: {} as any,
-      address: "example text",
+      address: 'example text',
     };
 
     const instance = new ChatLocation(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.location ?? instance.raw?.location).toEqual({} as any);
-    expect(instance.address ?? instance.raw?.address).toEqual("example text");
+    expect(instance.address ?? instance.raw?.address).toEqual('example text');
   });
 });

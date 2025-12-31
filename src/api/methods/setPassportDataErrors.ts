@@ -23,7 +23,11 @@ import { PassportElementError } from '../types/passportElementError';
  * // Direct parameters
  * await bot.setPassportDataErrors(...);
  */
-export async function setPassportDataErrors(this: Bot, userId: number, errors: PassportElementError[]): Promise<any> {
+export async function setPassportDataErrors(
+  this: Bot,
+  userId: number,
+  errors: PassportElementError[]
+): Promise<any> {
   const apiParams = {
     userId: userId,
     errors: errors,
