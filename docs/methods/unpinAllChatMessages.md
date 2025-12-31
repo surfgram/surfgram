@@ -1,6 +1,6 @@
 # unpinAllChatMessages
 
-Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin all pinned messages in groups and channels respectively. Returns True on success.
+Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the &#39;can_pin_messages&#39; right or the &#39;can_edit_messages&#39; right to unpin all pinned messages in groups and channels respectively. Returns True on success.
 
 ## Fluent Usage
 
@@ -22,13 +22,11 @@ This method is available as a fluent method on the following types:
 
 [View Message documentation with fluent methods](../types/Message.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-
+| Parameter | Type                 | Required | Description                                                                                                |
+| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
 
 ## Usage Example
 
@@ -39,9 +37,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

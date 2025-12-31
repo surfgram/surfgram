@@ -4,13 +4,12 @@ Represents a Game.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the result, must be game |
-| id | `string` | Yes | Unique identifier for this result, 1-64 bytes |
-| gameShortName | `string` | Yes | Short name of the game |
-| replyMarkup | `InlineKeyboardMarkup` | No | Optional. Inline keyboard attached to the message |
-
+| Name          | Type                   | Required | Description                                       |
+| :------------ | :--------------------- | :------: | :------------------------------------------------ |
+| type          | `string`               |   Yes    | Type of the result, must be game                  |
+| id            | `string`               |   Yes    | Unique identifier for this result, 1-64 bytes     |
+| gameShortName | `string`               |   Yes    | Short name of the game                            |
+| replyMarkup   | `InlineKeyboardMarkup` |    No    | Optional. Inline keyboard attached to the message |
 
 ## Event Handlers
 

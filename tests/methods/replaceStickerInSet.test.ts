@@ -7,8 +7,8 @@ describe('replaceStickerInSet', () => {
 
     const params = {
       userId: 123,
-      name: "example text",
-      oldSticker: "example text",
+      name: 'example text',
+      oldSticker: 'example text',
       sticker: {} as any,
     };
 
@@ -16,8 +16,8 @@ describe('replaceStickerInSet', () => {
 
     expect(mockBot.callApi).toHaveBeenCalledWith('replaceStickerInSet', {
       user_id: 123,
-      name: "example text",
-      old_sticker: "example text",
+      name: 'example text',
+      old_sticker: 'example text',
       sticker: {} as any,
     });
   });

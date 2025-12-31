@@ -4,13 +4,12 @@ Represents an issue with a document scan. The error is considered resolved when 
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| source | `string` | Yes | Error source, must be file |
-| type | `string` | Yes | The section of the user's Telegram Passport which has the issue, one of “utility\_bill”, “bank\_statement”, “rental\_agreement”, “passport\_registration”, “temporary\_registration” |
-| fileHash | `string` | Yes | Base64-encoded file hash |
-| message | `string` | Yes | Error message |
-
+| Name     | Type     | Required | Description                                                                                                                                                                     |
+| :------- | :------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| source   | `string` |   Yes    | Error source, must be file                                                                                                                                                      |
+| type     | `string` |   Yes    | The section of the user's Telegram Passport which has the issue, one of “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration” |
+| fileHash | `string` |   Yes    | Base64-encoded file hash                                                                                                                                                        |
+| message  | `string` |   Yes    | Error message                                                                                                                                                                   |
 
 ## Event Handlers
 

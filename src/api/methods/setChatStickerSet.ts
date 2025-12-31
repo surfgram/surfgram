@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setChatStickerSet(...);
  */
-export async function setChatStickerSet(this: Bot, chatId: number | string, stickerSetName: string): Promise<any> {
+export async function setChatStickerSet(
+  this: Bot,
+  chatId: number | string,
+  stickerSetName: string
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     stickerSetName: stickerSetName,

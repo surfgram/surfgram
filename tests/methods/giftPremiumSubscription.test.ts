@@ -9,8 +9,8 @@ describe('giftPremiumSubscription', () => {
       userId: 123,
       monthCount: 123,
       starCount: 123,
-      text: "example text",
-      textParseMode: "example text",
+      text: 'example text',
+      textParseMode: 'example text',
       textEntities: [{} as any],
     };
 
@@ -20,8 +20,8 @@ describe('giftPremiumSubscription', () => {
       user_id: 123,
       month_count: 123,
       star_count: 123,
-      text: "example text",
-      text_parse_mode: "example text",
+      text: 'example text',
+      text_parse_mode: 'example text',
       text_entities: [{} as any],
     });
   });

@@ -14,7 +14,7 @@ describe('SuggestedPostParameters', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.price ?? instance.raw?.price).toEqual({} as any);
     expect(instance.sendDate ?? instance.raw?.send_date).toEqual(123);
   });

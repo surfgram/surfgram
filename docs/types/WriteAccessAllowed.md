@@ -4,12 +4,11 @@ This object represents a service message about a user allowing a bot to write me
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| fromRequest | `boolean` | No | Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess |
-| webAppName | `string` | No | Optional. Name of the Web App, if the access was granted when the Web App was launched from a link |
-| fromAttachmentMenu | `boolean` | No | Optional. True, if the access was granted when the bot was added to the attachment or side menu |
-
+| Name               | Type      | Required | Description                                                                                                                                |
+| :----------------- | :-------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| fromRequest        | `boolean` |    No    | Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess |
+| webAppName         | `string`  |    No    | Optional. Name of the Web App, if the access was granted when the Web App was launched from a link                                         |
+| fromAttachmentMenu | `boolean` |    No    | Optional. True, if the access was granted when the bot was added to the attachment or side menu                                            |
 
 ## Event Handlers
 

@@ -4,14 +4,14 @@ This object represents an incoming inline query. When the user sends an empty qu
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| id | `string` | Yes | Unique identifier for this query |
-| from | `User` | Yes | Sender |
-| query | `string` | Yes | Text of the query \(up to 256 characters\) |
-| offset | `string` | Yes | Offset of the results to be returned, can be controlled by the bot |
-| chatType | `string` | No | Optional. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat |
-| location | `Location` | No | Optional. Sender location, only for bots that request user location |
+| Name     | Type       | Required | Description                                                                                                                                                                                                                                                                                                                                        |
+| :------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id       | `string`   |   Yes    | Unique identifier for this query                                                                                                                                                                                                                                                                                                                   |
+| from     | `User`     |   Yes    | Sender                                                                                                                                                                                                                                                                                                                                             |
+| query    | `string`   |   Yes    | Text of the query \(up to 256 characters\)                                                                                                                                                                                                                                                                                                         |
+| offset   | `string`   |   Yes    | Offset of the results to be returned, can be controlled by the bot                                                                                                                                                                                                                                                                                 |
+| chatType | `string`   |    No    | Optional. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat |
+| location | `Location` |    No    | Optional. Sender location, only for bots that request user location                                                                                                                                                                                                                                                                                |
 
 ## Fluent Methods
 
@@ -23,19 +23,19 @@ Use this method to send answers to an inline query. On success, True is returned
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter       | Source    | Description                              |
+| :-------------- | :-------- | :--------------------------------------- |
 | `inlineQueryId` | `this.id` | Unique identifier for the answered query |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `results` | `InlineQueryResult[]` | Yes | A JSON-serialized array of results for the inline query |
-| `cacheTime` | `number` | No | The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300. |
-| `isPersonal` | `boolean` | No | Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query. |
-| `nextOffset` | `string` | No | Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes. |
-| `button` | `InlineQueryResultsButton` | No | A JSON-serialized object describing a button to be shown above inline query results |
+| Parameter    | Type                       | Required | Description                                                                                                                                                                                                                        |
+| :----------- | :------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `results`    | `InlineQueryResult[]`      |   Yes    | A JSON-serialized array of results for the inline query                                                                                                                                                                            |
+| `cacheTime`  | `number`                   |    No    | The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300.                                                                                                            |
+| `isPersonal` | `boolean`                  |    No    | Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.                                                             |
+| `nextOffset` | `string`                   |    No    | Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes. |
+| `button`     | `InlineQueryResultsButton` |    No    | A JSON-serialized object describing a button to be shown above inline query results                                                                                                                                                |
 
 **Usage examples:**
 
@@ -54,12 +54,11 @@ await inlinequery.answerInlineQuery({
 ```typescript
 bot.onInlineQuery(async (inlinequery: InlineQuery) => {
   // Auto-fills parameters from the inlinequery instance
-  await inlinequery.answerInlineQuery({ nextOffset: "Response" });
+  await inlinequery.answerInlineQuery({ nextOffset: 'Response' });
 });
 ```
 
 **See also:** [answerInlineQuery API method](../methods/answerInlineQuery.md)
-
 
 ## Event Handlers
 

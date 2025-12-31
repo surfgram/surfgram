@@ -24,7 +24,12 @@ import { ChatPermissions } from '../types/chatPermissions';
  * // Direct parameters
  * await bot.setChatPermissions(...);
  */
-export async function setChatPermissions(this: Bot, chatId: number | string, permissions: ChatPermissions, useIndependentChatPermissions?: boolean): Promise<any> {
+export async function setChatPermissions(
+  this: Bot,
+  chatId: number | string,
+  permissions: ChatPermissions,
+  useIndependentChatPermissions?: boolean
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     permissions: permissions,

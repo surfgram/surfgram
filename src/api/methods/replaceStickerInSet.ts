@@ -25,7 +25,10 @@ import { InputSticker } from '../types/inputSticker';
  * // ... params
  * });
  */
-export async function replaceStickerInSet(this: Bot, params: ReplaceStickerInSetParams): Promise<any> {
+export async function replaceStickerInSet(
+  this: Bot,
+  params: ReplaceStickerInSetParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('replaceStickerInSet', snakeParams);
   return response;

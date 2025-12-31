@@ -23,7 +23,12 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.editUserStarSubscription(...);
  */
-export async function editUserStarSubscription(this: Bot, userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any> {
+export async function editUserStarSubscription(
+  this: Bot,
+  userId: number,
+  telegramPaymentChargeId: string,
+  isCanceled: boolean
+): Promise<any> {
   const apiParams = {
     userId: userId,
     telegramPaymentChargeId: telegramPaymentChargeId,

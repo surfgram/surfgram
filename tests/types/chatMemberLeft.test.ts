@@ -6,7 +6,7 @@ describe('ChatMemberLeft', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      status: "example text",
+      status: 'example text',
       user: {} as any,
     };
 
@@ -14,8 +14,8 @@ describe('ChatMemberLeft', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.status ?? instance.raw?.status).toEqual("example text");
+
+    expect(instance.status ?? instance.raw?.status).toEqual('example text');
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
   });
 });
