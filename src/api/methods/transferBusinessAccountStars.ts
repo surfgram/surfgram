@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#transferBusinessAccountStars Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Transfers Telegram Stars from the business account balance to the bot&#39;s balance. Requires the can\_transfer\_stars business bot right. Returns True on success.
@@ -22,19 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.transferBusinessAccountStars(...);
  */
-export async function transferBusinessAccountStars(
-	this: Bot,
-	businessConnectionId: string,
-	starCount: number,
-): Promise<any> {
-	const apiParams = {
-		businessConnectionId: businessConnectionId,
-		starCount: starCount,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"transferBusinessAccountStars",
-		snakeParams,
-	);
-	return response;
+export async function transferBusinessAccountStars(this: Bot, businessConnectionId: string, starCount: number): Promise<any> {
+  const apiParams = {
+    businessConnectionId: businessConnectionId,
+    starCount: starCount,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('transferBusinessAccountStars', snakeParams);
+  return response;
 }
