@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setChatAdministratorCustomTitle Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
@@ -23,13 +23,21 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setChatAdministratorCustomTitle(...);
  */
-export async function setChatAdministratorCustomTitle(this: Bot, chatId: number | string, userId: number, customTitle: string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    userId: userId,
-    customTitle: customTitle,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setChatAdministratorCustomTitle', snakeParams);
-  return response;
+export async function setChatAdministratorCustomTitle(
+	this: Bot,
+	chatId: number | string,
+	userId: number,
+	customTitle: string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		userId: userId,
+		customTitle: customTitle,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setChatAdministratorCustomTitle",
+		snakeParams,
+	);
+	return response;
 }
