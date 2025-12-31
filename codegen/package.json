@@ -6,8 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
-    "format": "prettier --write ."
+    "start": "ts-node src/index.ts"
   },
   "keywords": [
     "telegram",
