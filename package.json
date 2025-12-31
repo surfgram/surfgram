@@ -11,7 +11,7 @@
     "dev": "npm run generate && npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "format": "prettier --write . && cd codegen && npm run format",
+    "format": "prettier --write . && cd codegen && npx prettier --write .",
     "prepare": "npm run build"
   },
   "keywords": [
