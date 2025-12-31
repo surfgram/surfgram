@@ -5,11 +5,11 @@
  * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { AnswerInlineQueryParams } from "../interfaces/answerInlineQueryParams";
-import { InlineQueryResult } from "../types/inlineQueryResult";
-import { InlineQueryResultsButton } from "../types/inlineQueryResultsButton";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { AnswerInlineQueryParams } from '../interfaces/answerInlineQueryParams';
+import { InlineQueryResult } from '../types/inlineQueryResult';
+import { InlineQueryResultsButton } from '../types/inlineQueryResultsButton';
 
 /**
  * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
@@ -26,11 +26,8 @@ import { InlineQueryResultsButton } from "../types/inlineQueryResultsButton";
  * // ... params
  * });
  */
-export async function answerInlineQuery(
-	this: Bot,
-	params: AnswerInlineQueryParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("answerInlineQuery", snakeParams);
-	return response;
+export async function answerInlineQuery(this: Bot, params: AnswerInlineQueryParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('answerInlineQuery', snakeParams);
+  return response;
 }

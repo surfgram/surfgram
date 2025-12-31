@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get a sticker set. On success, a StickerSet object is returned.
@@ -22,10 +22,10 @@ import { camelToSnake } from "../../core/utils";
  * await bot.getStickerSet(...);
  */
 export async function getStickerSet(this: Bot, name: string): Promise<any> {
-	const apiParams = {
-		name: name,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getStickerSet", snakeParams);
-	return response;
+  const apiParams = {
+    name: name,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getStickerSet', snakeParams);
+  return response;
 }

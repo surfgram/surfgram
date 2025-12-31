@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { ForwardMessageParams } from "../interfaces/forwardMessageParams";
-import { SuggestedPostParameters } from "../types/suggestedPostParameters";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { ForwardMessageParams } from '../interfaces/forwardMessageParams';
+import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 
 /**
  * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
@@ -25,11 +25,8 @@ import { SuggestedPostParameters } from "../types/suggestedPostParameters";
  * // ... params
  * });
  */
-export async function forwardMessage(
-	this: Bot,
-	params: ForwardMessageParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("forwardMessage", snakeParams);
-	return response;
+export async function forwardMessage(this: Bot, params: ForwardMessageParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('forwardMessage', snakeParams);
+  return response;
 }

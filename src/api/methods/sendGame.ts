@@ -5,11 +5,11 @@
  * @see {@link https://core.telegram.org/bots/api#sendGame Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { SendGameParams } from "../interfaces/sendGameParams";
-import { ReplyParameters } from "../types/replyParameters";
-import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { SendGameParams } from '../interfaces/sendGameParams';
+import { ReplyParameters } from '../types/replyParameters';
+import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 /**
  * Use this method to send a game. On success, the sent Message is returned.
@@ -26,11 +26,8 @@ import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
  * // ... params
  * });
  */
-export async function sendGame(
-	this: Bot,
-	params: SendGameParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("sendGame", snakeParams);
-	return response;
+export async function sendGame(this: Bot, params: SendGameParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('sendGame', snakeParams);
+  return response;
 }
