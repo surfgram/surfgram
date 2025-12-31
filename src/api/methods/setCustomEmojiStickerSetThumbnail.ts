@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setCustomEmojiStickerSetThumbnail Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
@@ -22,19 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.setCustomEmojiStickerSetThumbnail(...);
  */
-export async function setCustomEmojiStickerSetThumbnail(
-	this: Bot,
-	name: string,
-	customEmojiId?: string,
-): Promise<any> {
-	const apiParams = {
-		name: name,
-		customEmojiId: customEmojiId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"setCustomEmojiStickerSetThumbnail",
-		snakeParams,
-	);
-	return response;
+export async function setCustomEmojiStickerSetThumbnail(this: Bot, name: string, customEmojiId?: string): Promise<any> {
+  const apiParams = {
+    name: name,
+    customEmojiId: customEmojiId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('setCustomEmojiStickerSetThumbnail', snakeParams);
+  return response;
 }

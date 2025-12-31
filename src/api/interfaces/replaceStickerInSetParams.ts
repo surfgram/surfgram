@@ -5,38 +5,39 @@
  * @see {@link https://core.telegram.org/bots/api#replaceStickerInSet Telegram API Documentation}
  */
 
-import { InputSticker } from "../types/inputSticker";
+import { InputSticker } from '../types/inputSticker';
 
 export interface ReplaceStickerInSetParams {
-	/**
-	 * User identifier of the sticker set owner
-	 * @type { number }
-	 * @originalType Integer
-	 * @required Yes
-	 */
-	userId: number;
+  /**
+   * User identifier of the sticker set owner
+   * @type { number }
+   * @originalType Integer
+   * @required Yes
+   */
+  userId: number;
 
-	/**
-	 * Sticker set name
-	 * @type { string }
-	 * @originalType String
-	 * @required Yes
-	 */
-	name: string;
+  /**
+   * Sticker set name
+   * @type { string }
+   * @originalType String
+   * @required Yes
+   */
+  name: string;
 
-	/**
-	 * File identifier of the replaced sticker
-	 * @type { string }
-	 * @originalType String
-	 * @required Yes
-	 */
-	oldSticker: string;
+  /**
+   * File identifier of the replaced sticker
+   * @type { string }
+   * @originalType String
+   * @required Yes
+   */
+  oldSticker: string;
 
-	/**
-	 * A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
-	 * @type { InputSticker }
-	 * @originalType InputSticker
-	 * @required Yes
-	 */
-	sticker: InputSticker;
+  /**
+   * A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
+   * @type { InputSticker }
+   * @originalType InputSticker
+   * @required Yes
+   */
+  sticker: InputSticker;
+
 }

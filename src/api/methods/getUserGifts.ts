@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { GetUserGiftsParams } from "../interfaces/getUserGiftsParams";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { GetUserGiftsParams } from '../interfaces/getUserGiftsParams';
 
 /**
  * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
@@ -24,11 +24,8 @@ import { GetUserGiftsParams } from "../interfaces/getUserGiftsParams";
  * // ... params
  * });
  */
-export async function getUserGifts(
-	this: Bot,
-	params: GetUserGiftsParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("getUserGifts", snakeParams);
-	return response;
+export async function getUserGifts(this: Bot, params: GetUserGiftsParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('getUserGifts', snakeParams);
+  return response;
 }

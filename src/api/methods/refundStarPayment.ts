@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#refundStarPayment Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Refunds a successful payment in Telegram Stars. Returns True on success.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.refundStarPayment(...);
  */
-export async function refundStarPayment(
-	this: Bot,
-	userId: number,
-	telegramPaymentChargeId: string,
-): Promise<any> {
-	const apiParams = {
-		userId: userId,
-		telegramPaymentChargeId: telegramPaymentChargeId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("refundStarPayment", snakeParams);
-	return response;
+export async function refundStarPayment(this: Bot, userId: number, telegramPaymentChargeId: string): Promise<any> {
+  const apiParams = {
+    userId: userId,
+    telegramPaymentChargeId: telegramPaymentChargeId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('refundStarPayment', snakeParams);
+  return response;
 }

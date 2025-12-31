@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
@@ -24,20 +24,14 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getGameHighScores(...);
  */
-export async function getGameHighScores(
-	this: Bot,
-	userId: number,
-	chatId?: number,
-	messageId?: number,
-	inlineMessageId?: string,
-): Promise<any> {
-	const apiParams = {
-		userId: userId,
-		chatId: chatId,
-		messageId: messageId,
-		inlineMessageId: inlineMessageId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getGameHighScores", snakeParams);
-	return response;
+export async function getGameHighScores(this: Bot, userId: number, chatId?: number, messageId?: number, inlineMessageId?: string): Promise<any> {
+  const apiParams = {
+    userId: userId,
+    chatId: chatId,
+    messageId: messageId,
+    inlineMessageId: inlineMessageId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getGameHighScores', snakeParams);
+  return response;
 }
