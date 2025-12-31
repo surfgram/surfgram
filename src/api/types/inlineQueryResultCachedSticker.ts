@@ -7,95 +7,92 @@
  * @extends TelegramObject
  */
 
-import { Bot } from '../../core/bot';
-import { snakeToCamel } from '../../core/utils';
-import { TelegramObject } from './telegramObject';
-import { InlineKeyboardMarkup } from './inlineKeyboardMarkup';
-import { InputMessageContent } from './inputMessageContent';
+import { Bot } from "../../core/bot";
+import { snakeToCamel } from "../../core/utils";
+import { TelegramObject } from "./telegramObject";
+import { InlineKeyboardMarkup } from "./inlineKeyboardMarkup";
+import { InputMessageContent } from "./inputMessageContent";
 
 /**
  * Represents a InlineQueryResultCachedSticker object from the Telegram Bot API
  * @class InlineQueryResultCachedSticker
  */
 export class InlineQueryResultCachedSticker {
-  /**
-   * Type of the result, must be sticker
-   * @type { string }
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  type!: string;
+	/**
+	 * Type of the result, must be sticker
+	 * @type { string }
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	type!: string;
 
-  /**
-   * Unique identifier for this result, 1-64 bytes
-   * @type { string }
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  id!: string;
+	/**
+	 * Unique identifier for this result, 1-64 bytes
+	 * @type { string }
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	id!: string;
 
-  /**
-   * A valid file identifier of the sticker
-   * @type { string }
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  stickerFileId!: string;
+	/**
+	 * A valid file identifier of the sticker
+	 * @type { string }
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	stickerFileId!: string;
 
-  /**
-   * Optional. Inline keyboard attached to the message
-   * @type { InlineKeyboardMarkup }
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  replyMarkup?: InlineKeyboardMarkup;
+	/**
+	 * Optional. Inline keyboard attached to the message
+	 * @type { InlineKeyboardMarkup }
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	replyMarkup?: InlineKeyboardMarkup;
 
-  /**
-   * Optional. Content of the message to be sent instead of the sticker
-   * @type { InputMessageContent }
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  inputMessageContent?: InputMessageContent;
+	/**
+	 * Optional. Content of the message to be sent instead of the sticker
+	 * @type { InputMessageContent }
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	inputMessageContent?: InputMessageContent;
 
-  /**
-   * Raw data from Telegram API in snake_case format
-   * @type {TelegramObject}
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  public raw?: TelegramObject;
+	/**
+	 * Raw data from Telegram API in snake_case format
+	 * @type {TelegramObject}
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	public raw?: TelegramObject;
 
-  /**
-   * Bot instance associated with this object
-   * @type {Bot}
-   * @memberof InlineQueryResultCachedSticker
-   * @instance
-   * @public
-   */
-  public bot?: Bot;
+	/**
+	 * Bot instance associated with this object
+	 * @type {Bot}
+	 * @memberof InlineQueryResultCachedSticker
+	 * @instance
+	 * @public
+	 */
+	public bot?: Bot;
 
-  /**
-   * Creates a new InlineQueryResultCachedSticker instance from raw Telegram API data
-   * @constructor
-   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
-   * @param {Bot} bot - Bot instance for executing methods
-   * @example
-   * const message = new Message(rawData, botInstance);
-   */
-  constructor(
-    raw?: TelegramObject,
-    bot?: Bot
-  ) {
-    this.raw = raw;
-    this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
-  }
+	/**
+	 * Creates a new InlineQueryResultCachedSticker instance from raw Telegram API data
+	 * @constructor
+	 * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+	 * @param {Bot} bot - Bot instance for executing methods
+	 * @example
+	 * const message = new Message(rawData, botInstance);
+	 */
+	constructor(raw?: TelegramObject, bot?: Bot) {
+		this.raw = raw;
+		this.bot = bot;
+		const converted = snakeToCamel(raw);
+		Object.assign(this, converted);
+	}
 }
