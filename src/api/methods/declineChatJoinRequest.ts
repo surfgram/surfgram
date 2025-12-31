@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.declineChatJoinRequest(...);
  */
-export async function declineChatJoinRequest(
-  this: Bot,
-  chatId: number | string,
-  userId: number
-): Promise<any> {
+export async function declineChatJoinRequest(this: Bot, chatId: number | string, userId: number): Promise<any> {
   const apiParams = {
     chatId: chatId,
     userId: userId,

@@ -13,7 +13,7 @@ describe('VideoChatScheduled', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.startDate ?? instance.raw?.start_date).toEqual(123);
   });
 });

@@ -6,7 +6,7 @@ describe('LabeledPrice', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      label: 'example text',
+      label: "example text",
       amount: 123,
     };
 
@@ -14,8 +14,8 @@ describe('LabeledPrice', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.label ?? instance.raw?.label).toEqual('example text');
+    
+    expect(instance.label ?? instance.raw?.label).toEqual("example text");
     expect(instance.amount ?? instance.raw?.amount).toEqual(123);
   });
 });

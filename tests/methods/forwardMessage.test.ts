@@ -14,6 +14,7 @@ describe('forwardMessage', () => {
       videoStartTimestamp: 123,
       disableNotification: true,
       protectContent: true,
+      messageEffectId: "example text",
       suggestedPostParameters: {} as any,
     };
 
@@ -28,6 +29,7 @@ describe('forwardMessage', () => {
       video_start_timestamp: 123,
       disable_notification: true,
       protect_content: true,
+      message_effect_id: "example text",
       suggested_post_parameters: {} as any,
     });
   });

@@ -10,9 +10,9 @@
  * @see {@link https://github.com/user-with-username/surfgram GitHub Repository}
  */
 
-export * from './core/bot';
-export * from './core/plugin';
-export * from './core/utils';
+export * from "./core/bot";
+export * from "./core/plugin";
+export * from "./core/utils";
 export * from './api/interfaces';
 export * from './api/methods';
 export * from './api/types';
@@ -141,6 +141,7 @@ export * from './api/types/businessIntro';
 export * from './api/types/businessLocation';
 export * from './api/types/businessOpeningHoursInterval';
 export * from './api/types/businessOpeningHours';
+export * from './api/types/userRating';
 export * from './api/types/storyAreaPosition';
 export * from './api/types/locationAddress';
 export * from './api/types/storyAreaType';
@@ -159,12 +160,14 @@ export * from './api/types/reactionCount';
 export * from './api/types/messageReactionUpdated';
 export * from './api/types/messageReactionCountUpdated';
 export * from './api/types/forumTopic';
+export * from './api/types/giftBackground';
 export * from './api/types/gift';
 export * from './api/types/gifts';
 export * from './api/types/uniqueGiftModel';
 export * from './api/types/uniqueGiftSymbol';
 export * from './api/types/uniqueGiftBackdropColors';
 export * from './api/types/uniqueGiftBackdrop';
+export * from './api/types/uniqueGiftColors';
 export * from './api/types/uniqueGift';
 export * from './api/types/giftInfo';
 export * from './api/types/uniqueGiftInfo';

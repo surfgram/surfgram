@@ -13,6 +13,7 @@ import { TelegramObject } from './telegramObject';
 import { UniqueGiftModel } from './uniqueGiftModel';
 import { UniqueGiftSymbol } from './uniqueGiftSymbol';
 import { UniqueGiftBackdrop } from './uniqueGiftBackdrop';
+import { UniqueGiftColors } from './uniqueGiftColors';
 import { Chat } from './chat';
 
 /**
@@ -20,6 +21,15 @@ import { Chat } from './chat';
  * @class UniqueGift
  */
 export class UniqueGift {
+  /**
+   * Identifier of the regular gift from which the gift was upgraded
+   * @type { string }
+   * @memberof UniqueGift
+   * @instance
+   * @public
+   */
+  giftId!: string;
+
   /**
    * Human-readable name of the regular gift from which this unique gift was upgraded
    * @type { string }
@@ -75,6 +85,33 @@ export class UniqueGift {
   backdrop!: UniqueGiftBackdrop;
 
   /**
+   * Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
+   * @type { boolean }
+   * @memberof UniqueGift
+   * @instance
+   * @public
+   */
+  isPremium?: boolean;
+
+  /**
+   * Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
+   * @type { boolean }
+   * @memberof UniqueGift
+   * @instance
+   * @public
+   */
+  isFromBlockchain?: boolean;
+
+  /**
+   * Optional. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only
+   * @type { UniqueGiftColors }
+   * @memberof UniqueGift
+   * @instance
+   * @public
+   */
+  colors?: UniqueGiftColors;
+
+  /**
    * Optional. Information about the chat that published the gift
    * @type { Chat }
    * @memberof UniqueGift
@@ -109,7 +146,10 @@ export class UniqueGift {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

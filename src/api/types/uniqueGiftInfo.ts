@@ -27,7 +27,7 @@ export class UniqueGiftInfo {
   gift!: UniqueGift;
 
   /**
-   * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, or “resale” for gifts bought from other users
+   * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers
    * @type { string }
    * @memberof UniqueGiftInfo
    * @instance
@@ -36,13 +36,22 @@ export class UniqueGiftInfo {
   origin!: string;
 
   /**
-   * Optional. For gifts bought from other users, the price paid for the gift
+   * Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+   * @type { string }
+   * @memberof UniqueGiftInfo
+   * @instance
+   * @public
+   */
+  lastResaleCurrency?: string;
+
+  /**
+   * Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins
    * @type { number }
    * @memberof UniqueGiftInfo
    * @instance
    * @public
    */
-  lastResaleStarCount?: number;
+  lastResaleAmount?: number;
 
   /**
    * Optional. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
@@ -97,7 +106,10 @@ export class UniqueGiftInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

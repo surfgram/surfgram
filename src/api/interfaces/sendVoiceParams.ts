@@ -40,7 +40,7 @@ export interface SendVoiceParams {
   businessConnectionId?: string;
 
   /**
-   * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
+   * Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
    * @type { number }
    * @originalType Integer
    * @required No
@@ -142,4 +142,5 @@ export interface SendVoiceParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }

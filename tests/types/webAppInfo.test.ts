@@ -6,14 +6,14 @@ describe('WebAppInfo', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      url: 'example text',
+      url: "example text",
     };
 
     const instance = new WebAppInfo(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.url ?? instance.raw?.url).toEqual('example text');
+    
+    expect(instance.url ?? instance.raw?.url).toEqual("example text");
   });
 });

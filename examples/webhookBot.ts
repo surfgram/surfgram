@@ -1,11 +1,11 @@
-import { Bot, Message } from 'surfgram';
+import { Bot, Message } from "surfgram";
 
-const bot = new Bot('TOKEN');
+const bot = new Bot("TOKEN");
 
 bot.onMessage(async (msg: Message) => {
-  await msg.sendMessage({
-    text: 'Hi there!',
-  });
+	await msg.sendMessage({
+		text: "Hi there!",
+	});
 });
 
-bot.startWebhook({ url: 'your-webhook-url.com' });
+bot.startWebhook({ url: "your-webhook-url.com" });

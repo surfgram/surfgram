@@ -4,11 +4,13 @@ This object represents a service message about a new forum topic created in the 
 
 ## Fields
 
-| Name              | Type     | Required | Description                                                             |
-| :---------------- | :------- | :------: | :---------------------------------------------------------------------- |
-| name              | `string` |   Yes    | Name of the topic                                                       |
-| iconColor         | `number` |   Yes    | Color of the topic icon in RGB format                                   |
-| iconCustomEmojiId | `string` |    No    | Optional. Unique identifier of the custom emoji shown as the topic icon |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| name | `string` | Yes | Name of the topic |
+| iconColor | `number` | Yes | Color of the topic icon in RGB format |
+| iconCustomEmojiId | `string` | No | Optional. Unique identifier of the custom emoji shown as the topic icon |
+| isNameImplicit | `boolean` | No | Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot |
+
 
 ## Event Handlers
 

@@ -17,20 +17,14 @@ import { camelToSnake } from '../../core/utils';
  *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
  *  * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
  *  * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
- *  * @param { number } messageThreadId? - Unique identifier for the target message thread; for supergroups only
+ *  * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example
  * // Direct parameters
  * await bot.sendChatAction(...);
  */
-export async function sendChatAction(
-  this: Bot,
-  chatId: number | string,
-  action: string,
-  businessConnectionId?: string,
-  messageThreadId?: number
-): Promise<any> {
+export async function sendChatAction(this: Bot, chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any> {
   const apiParams = {
     chatId: chatId,
     action: action,

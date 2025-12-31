@@ -4,9 +4,9 @@ This object describes the bot&#39;s menu button in a private chat. It should be 
 
 ## Fields
 
-| Name | Type     | Required | Description                          |
-| :--- | :------- | :------: | :----------------------------------- |
-| type | `string` |   Yes    | Type of the button, must be commands |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the button, must be commands |
 
 ## Fluent Methods
 
@@ -16,12 +16,13 @@ The `MenuButton` class has the following fluent methods that automatically injec
 
 Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
 
+
 **Required parameters:**
 
-| Parameter    | Type         | Required | Description                                                                                                |
-| :----------- | :----------- | :------: | :--------------------------------------------------------------------------------------------------------- |
-| `chatId`     | `number`     |    No    | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
-| `menuButton` | `MenuButton` |    No    | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault                      |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
 
 **Usage examples:**
 
@@ -29,7 +30,10 @@ Use this method to change the bot&#39;s menu button in a private chat, or the de
 
 ```typescript
 const menubutton = new MenuButton(rawData, bot);
-await menubutton.setChatMenuButton(123, {} as any);
+await menubutton.setChatMenuButton(
+  123,
+  {} as any,
+);
 ```
 
 2. In an event handler:
@@ -47,11 +51,12 @@ bot.onMenuButton(async (menubutton: MenuButton) => {
 
 Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
 
+
 **Required parameters:**
 
-| Parameter | Type     | Required | Description                                                                                                 |
-| :-------- | :------- | :------: | :---------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` |    No    | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
 
 **Usage examples:**
 
@@ -59,7 +64,9 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 ```typescript
 const menubutton = new MenuButton(rawData, bot);
-await menubutton.getChatMenuButton(123);
+await menubutton.getChatMenuButton(
+  123,
+);
 ```
 
 2. In an event handler:
@@ -72,6 +79,7 @@ bot.onMenuButton(async (menubutton: MenuButton) => {
 ```
 
 **See also:** [getChatMenuButton API method](../methods/getChatMenuButton.md)
+
 
 ## Event Handlers
 

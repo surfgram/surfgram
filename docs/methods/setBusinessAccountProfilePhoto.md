@@ -1,6 +1,6 @@
 # setBusinessAccountProfilePhoto
 
-Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.
+Changes the profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -10,21 +10,25 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
+
 [View File documentation with fluent methods](../types/File.md)
 
-### InputProfilePhoto (22 methods)
+### InputProfilePhoto (23 methods)
 
-**Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendChatAction`, `sendGift`, `setBusinessAccountProfilePhoto`, `sendSticker`, `sendInvoice`, `sendGame`
+**Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendMessageDraft`, `sendChatAction`, `sendGift`, `setBusinessAccountProfilePhoto`, `sendSticker`, `sendInvoice`, `sendGame`
+
 
 [View InputProfilePhoto documentation with fluent methods](../types/InputProfilePhoto.md)
 
+
 ## Parameters
 
-| Parameter              | Type                | Required | Description                                                                                                                                                                      |
-| :--------------------- | :------------------ | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `businessConnectionId` | `string`            |   Yes    | Unique identifier of the business connection                                                                                                                                     |
-| `photo`                | `InputProfilePhoto` |   Yes    | The new profile photo to set                                                                                                                                                     |
-| `isPublic`             | `boolean`           |    No    | Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
+| `photo` | `InputProfilePhoto` | Yes | The new profile photo to set |
+| `isPublic` | `boolean` | No | Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo. |
+
 
 ## Usage Example
 
@@ -35,12 +39,9 @@ bot.onFile(async (file: File) => {
 });
 
 // With filtering
-bot.onFile(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onFile((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

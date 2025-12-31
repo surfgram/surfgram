@@ -53,6 +53,15 @@ export class AcceptedGiftTypes {
   premiumSubscription!: boolean;
 
   /**
+   * True, if transfers of unique gifts from channels are accepted
+   * @type { boolean }
+   * @memberof AcceptedGiftTypes
+   * @instance
+   * @public
+   */
+  giftsFromChannels!: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof AcceptedGiftTypes
@@ -78,7 +87,10 @@ export class AcceptedGiftTypes {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

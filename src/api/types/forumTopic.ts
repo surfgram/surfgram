@@ -53,6 +53,15 @@ export class ForumTopic {
   iconCustomEmojiId?: string;
 
   /**
+   * Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot
+   * @type { boolean }
+   * @memberof ForumTopic
+   * @instance
+   * @public
+   */
+  isNameImplicit?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof ForumTopic
@@ -78,7 +87,10 @@ export class ForumTopic {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

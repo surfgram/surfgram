@@ -46,13 +46,22 @@ export class GiftInfo {
   convertStarCount?: number;
 
   /**
-   * Optional. Number of Telegram Stars that were prepaid by the sender for the ability to upgrade the gift
+   * Optional. Number of Telegram Stars that were prepaid for the ability to upgrade the gift
    * @type { number }
    * @memberof GiftInfo
    * @instance
    * @public
    */
   prepaidUpgradeStarCount?: number;
+
+  /**
+   * Optional. True, if the gift's upgrade was purchased after the gift was sent
+   * @type { boolean }
+   * @memberof GiftInfo
+   * @instance
+   * @public
+   */
+  isUpgradeSeparate?: boolean;
 
   /**
    * Optional. True, if the gift can be upgraded to a unique gift
@@ -91,6 +100,15 @@ export class GiftInfo {
   isPrivate?: boolean;
 
   /**
+   * Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+   * @type { number }
+   * @memberof GiftInfo
+   * @instance
+   * @public
+   */
+  uniqueGiftNumber?: number;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof GiftInfo
@@ -116,7 +134,10 @@ export class GiftInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

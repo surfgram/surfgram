@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#promoteChatMember Telegram API Documentation}
  */
 
+
 export interface PromoteChatMemberParams {
   /**
    * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -55,7 +56,7 @@ export interface PromoteChatMemberParams {
   canManageVideoChats?: boolean;
 
   /**
-   * Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics
+   * Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators
    * @type { boolean }
    * @originalType Boolean
    * @required No
@@ -149,4 +150,5 @@ export interface PromoteChatMemberParams {
    * @required No
    */
   canManageDirectMessages?: boolean;
+
 }

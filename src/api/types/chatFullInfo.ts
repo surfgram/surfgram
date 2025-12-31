@@ -21,6 +21,8 @@ import { Message } from './message';
 import { ChatPermissions } from './chatPermissions';
 import { AcceptedGiftTypes } from './acceptedGiftTypes';
 import { ChatLocation } from './chatLocation';
+import { UserRating } from './userRating';
+import { UniqueGiftColors } from './uniqueGiftColors';
 
 /**
  * Represents a ChatFullInfo object from the Telegram Bot API
@@ -451,6 +453,33 @@ export class ChatFullInfo {
   location?: ChatLocation;
 
   /**
+   * Optional. For private chats, the rating of the user if any
+   * @type { UserRating }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  rating?: UserRating;
+
+  /**
+   * Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
+   * @type { UniqueGiftColors }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  uniqueGiftColors?: UniqueGiftColors;
+
+  /**
+   * Optional. The number of Telegram Stars a general user have to pay to send a message to the chat
+   * @type { number }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  paidMessageStarCount?: number;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof ChatFullInfo
@@ -476,7 +505,10 @@ export class ChatFullInfo {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

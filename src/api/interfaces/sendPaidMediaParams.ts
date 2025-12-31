@@ -24,7 +24,7 @@ export interface SendPaidMediaParams {
   chatId: number | string;
 
   /**
-   * The number of Telegram Stars that must be paid to buy access to the media; 1-10000
+   * The number of Telegram Stars that must be paid to buy access to the media; 1-25000
    * @type { number }
    * @originalType Integer
    * @required Yes
@@ -48,7 +48,7 @@ export interface SendPaidMediaParams {
   businessConnectionId?: string;
 
   /**
-   * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
+   * Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
    * @type { number }
    * @originalType Integer
    * @required No
@@ -150,4 +150,5 @@ export interface SendPaidMediaParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }

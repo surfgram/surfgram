@@ -11,6 +11,7 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { Sticker } from './sticker';
+import { GiftBackground } from './giftBackground';
 import { Chat } from './chat';
 
 /**
@@ -55,7 +56,25 @@ export class Gift {
   upgradeStarCount?: number;
 
   /**
-   * Optional. The total number of the gifts of this type that can be sent; for limited gifts only
+   * Optional. True, if the gift can only be purchased by Telegram Premium subscribers
+   * @type { boolean }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  isPremium?: boolean;
+
+  /**
+   * Optional. True, if the gift can be used \(after being upgraded\) to customize a user's appearance
+   * @type { boolean }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  hasColors?: boolean;
+
+  /**
+   * Optional. The total number of gifts of this type that can be sent by all users; for limited gifts only
    * @type { number }
    * @memberof Gift
    * @instance
@@ -64,13 +83,49 @@ export class Gift {
   totalCount?: number;
 
   /**
-   * Optional. The number of remaining gifts of this type that can be sent; for limited gifts only
+   * Optional. The number of remaining gifts of this type that can be sent by all users; for limited gifts only
    * @type { number }
    * @memberof Gift
    * @instance
    * @public
    */
   remainingCount?: number;
+
+  /**
+   * Optional. The total number of gifts of this type that can be sent by the bot; for limited gifts only
+   * @type { number }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  personalTotalCount?: number;
+
+  /**
+   * Optional. The number of remaining gifts of this type that can be sent by the bot; for limited gifts only
+   * @type { number }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  personalRemainingCount?: number;
+
+  /**
+   * Optional. Background of the gift
+   * @type { GiftBackground }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  background?: GiftBackground;
+
+  /**
+   * Optional. The total number of different unique gifts that can be obtained by upgrading the gift
+   * @type { number }
+   * @memberof Gift
+   * @instance
+   * @public
+   */
+  uniqueGiftVariantCount?: number;
 
   /**
    * Optional. Information about the chat that published the gift
@@ -107,7 +162,10 @@ export class Gift {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

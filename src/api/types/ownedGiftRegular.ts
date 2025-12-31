@@ -119,7 +119,7 @@ export class OwnedGiftRegular {
   wasRefunded?: boolean;
 
   /**
-   * Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars
+   * Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only
    * @type { number }
    * @memberof OwnedGiftRegular
    * @instance
@@ -128,13 +128,31 @@ export class OwnedGiftRegular {
   convertStarCount?: number;
 
   /**
-   * Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift
+   * Optional. Number of Telegram Stars that were paid for the ability to upgrade the gift
    * @type { number }
    * @memberof OwnedGiftRegular
    * @instance
    * @public
    */
   prepaidUpgradeStarCount?: number;
+
+  /**
+   * Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only
+   * @type { boolean }
+   * @memberof OwnedGiftRegular
+   * @instance
+   * @public
+   */
+  isUpgradeSeparate?: boolean;
+
+  /**
+   * Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+   * @type { number }
+   * @memberof OwnedGiftRegular
+   * @instance
+   * @public
+   */
+  uniqueGiftNumber?: number;
 
   /**
    * Raw data from Telegram API in snake_case format
@@ -162,7 +180,10 @@ export class OwnedGiftRegular {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

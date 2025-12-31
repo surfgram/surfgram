@@ -13,7 +13,7 @@ describe('ChatBoostAdded', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.boostCount ?? instance.raw?.boost_count).toEqual(123);
   });
 });

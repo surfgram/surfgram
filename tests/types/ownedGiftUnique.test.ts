@@ -6,9 +6,9 @@ describe('OwnedGiftUnique', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: 'example text',
+      type: "example text",
       gift: {} as any,
-      owned_gift_id: 'example text',
+      owned_gift_id: "example text",
       sender_user: {} as any,
       send_date: 123,
       is_saved: true,
@@ -21,10 +21,10 @@ describe('OwnedGiftUnique', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
+    
+    expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.gift ?? instance.raw?.gift).toEqual({} as any);
-    expect(instance.ownedGiftId ?? instance.raw?.owned_gift_id).toEqual('example text');
+    expect(instance.ownedGiftId ?? instance.raw?.owned_gift_id).toEqual("example text");
     expect(instance.senderUser ?? instance.raw?.sender_user).toEqual({} as any);
     expect(instance.sendDate ?? instance.raw?.send_date).toEqual(123);
     expect(instance.isSaved ?? instance.raw?.is_saved).toEqual(true);

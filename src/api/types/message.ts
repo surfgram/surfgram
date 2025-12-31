@@ -91,7 +91,7 @@ export class Message {
   messageId!: number;
 
   /**
-   * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+   * Optional. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only
    * @type { number }
    * @memberof Message
    * @instance
@@ -181,7 +181,7 @@ export class Message {
   forwardOrigin?: MessageOrigin;
 
   /**
-   * Optional. True, if the message is sent to a forum topic
+   * Optional. True, if the message is sent to a topic in a forum supergroup or a private chat with the bot
    * @type { boolean }
    * @memberof Message
    * @instance
@@ -721,6 +721,15 @@ export class Message {
   uniqueGift?: UniqueGiftInfo;
 
   /**
+   * Optional. Service message: upgrade of a gift was purchased after the gift was sent
+   * @type { GiftInfo }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  giftUpgradeSent?: GiftInfo;
+
+  /**
    * Optional. The domain name of the website on which the user has logged in. More about Telegram Login »
    * @type { string }
    * @memberof Message
@@ -1025,7 +1034,10 @@ export class Message {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

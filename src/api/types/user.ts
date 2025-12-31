@@ -134,6 +134,15 @@ export class User {
   hasMainWebApp?: boolean;
 
   /**
+   * Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe.
+   * @type { boolean }
+   * @memberof User
+   * @instance
+   * @public
+   */
+  hasTopicsEnabled?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof User
@@ -159,7 +168,10 @@ export class User {
    * @example
    * const message = new Message(rawData, botInstance);
    */
-  constructor(raw?: TelegramObject, bot?: Bot) {
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
     this.raw = raw;
     this.bot = bot;
     const converted = snakeToCamel(raw);

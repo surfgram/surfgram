@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram API Documentation}
  */
 
+
 export interface GetBusinessAccountGiftsParams {
   /**
    * Unique identifier of the business connection
@@ -39,12 +40,20 @@ export interface GetBusinessAccountGiftsParams {
   excludeUnlimited?: boolean;
 
   /**
-   * Pass True to exclude gifts that can be purchased a limited number of times
+   * Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique
    * @type { boolean }
    * @originalType Boolean
    * @required No
    */
-  excludeLimited?: boolean;
+  excludeLimitedUpgradable?: boolean;
+
+  /**
+   * Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  excludeLimitedNonUpgradable?: boolean;
 
   /**
    * Pass True to exclude unique gifts
@@ -53,6 +62,14 @@ export interface GetBusinessAccountGiftsParams {
    * @required No
    */
   excludeUnique?: boolean;
+
+  /**
+   * Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  excludeFromBlockchain?: boolean;
 
   /**
    * Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.
@@ -77,4 +94,5 @@ export interface GetBusinessAccountGiftsParams {
    * @required No
    */
   limit?: number;
+
 }

@@ -9,7 +9,7 @@ import { MessageEntity } from '../types/messageEntity';
 
 export interface SendGiftParams {
   /**
-   * Identifier of the gift
+   * Identifier of the gift; limited gifts can't be sent to channel chats
    * @type { string }
    * @originalType String
    * @required Yes
@@ -63,4 +63,5 @@ export interface SendGiftParams {
    * @required No
    */
   textEntities?: MessageEntity[];
+
 }

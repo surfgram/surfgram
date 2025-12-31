@@ -39,7 +39,7 @@ export interface CopyMessageParams {
   messageId: number;
 
   /**
-   * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
+   * Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
    * @type { number }
    * @originalType Integer
    * @required No
@@ -119,6 +119,14 @@ export interface CopyMessageParams {
   allowPaidBroadcast?: boolean;
 
   /**
+   * Unique identifier of the message effect to be added to the message; only available when copying to private chats
+   * @type { string }
+   * @originalType String
+   * @required No
+   */
+  messageEffectId?: string;
+
+  /**
    * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
    * @type { SuggestedPostParameters }
    * @originalType SuggestedPostParameters
@@ -141,4 +149,5 @@ export interface CopyMessageParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }

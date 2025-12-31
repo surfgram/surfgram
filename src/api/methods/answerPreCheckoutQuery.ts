@@ -23,12 +23,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.answerPreCheckoutQuery(...);
  */
-export async function answerPreCheckoutQuery(
-  this: Bot,
-  preCheckoutQueryId: string,
-  ok: boolean,
-  errorMessage?: string
-): Promise<any> {
+export async function answerPreCheckoutQuery(this: Bot, preCheckoutQueryId: string, ok: boolean, errorMessage?: string): Promise<any> {
   const apiParams = {
     preCheckoutQueryId: preCheckoutQueryId,
     ok: ok,

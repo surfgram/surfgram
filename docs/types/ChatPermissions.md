@@ -4,22 +4,22 @@ Describes actions that a non-administrator user is allowed to take in a chat.
 
 ## Fields
 
-| Name                  | Type      | Required | Description                                                                                                                         |
-| :-------------------- | :-------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------- |
-| canSendMessages       | `boolean` |    No    | Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
-| canSendAudios         | `boolean` |    No    | Optional. True, if the user is allowed to send audios                                                                               |
-| canSendDocuments      | `boolean` |    No    | Optional. True, if the user is allowed to send documents                                                                            |
-| canSendPhotos         | `boolean` |    No    | Optional. True, if the user is allowed to send photos                                                                               |
-| canSendVideos         | `boolean` |    No    | Optional. True, if the user is allowed to send videos                                                                               |
-| canSendVideoNotes     | `boolean` |    No    | Optional. True, if the user is allowed to send video notes                                                                          |
-| canSendVoiceNotes     | `boolean` |    No    | Optional. True, if the user is allowed to send voice notes                                                                          |
-| canSendPolls          | `boolean` |    No    | Optional. True, if the user is allowed to send polls and checklists                                                                 |
-| canSendOtherMessages  | `boolean` |    No    | Optional. True, if the user is allowed to send animations, games, stickers and use inline bots                                      |
-| canAddWebPagePreviews | `boolean` |    No    | Optional. True, if the user is allowed to add web page previews to their messages                                                   |
-| canChangeInfo         | `boolean` |    No    | Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups            |
-| canInviteUsers        | `boolean` |    No    | Optional. True, if the user is allowed to invite new users to the chat                                                              |
-| canPinMessages        | `boolean` |    No    | Optional. True, if the user is allowed to pin messages. Ignored in public supergroups                                               |
-| canManageTopics       | `boolean` |    No    | Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages                 |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| canSendMessages | `boolean` | No | Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
+| canSendAudios | `boolean` | No | Optional. True, if the user is allowed to send audios |
+| canSendDocuments | `boolean` | No | Optional. True, if the user is allowed to send documents |
+| canSendPhotos | `boolean` | No | Optional. True, if the user is allowed to send photos |
+| canSendVideos | `boolean` | No | Optional. True, if the user is allowed to send videos |
+| canSendVideoNotes | `boolean` | No | Optional. True, if the user is allowed to send video notes |
+| canSendVoiceNotes | `boolean` | No | Optional. True, if the user is allowed to send voice notes |
+| canSendPolls | `boolean` | No | Optional. True, if the user is allowed to send polls and checklists |
+| canSendOtherMessages | `boolean` | No | Optional. True, if the user is allowed to send animations, games, stickers and use inline bots |
+| canAddWebPagePreviews | `boolean` | No | Optional. True, if the user is allowed to add web page previews to their messages |
+| canChangeInfo | `boolean` | No | Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups |
+| canInviteUsers | `boolean` | No | Optional. True, if the user is allowed to invite new users to the chat |
+| canPinMessages | `boolean` | No | Optional. True, if the user is allowed to pin messages. Ignored in public supergroups |
+| canManageTopics | `boolean` | No | Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages |
 
 ## Fluent Methods
 
@@ -29,14 +29,15 @@ The `ChatPermissions` class has the following fluent methods that automatically 
 
 Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
 
+
 **Required parameters:**
 
-| Parameter        | Type       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :--------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `offset`         | `number`   |    No    | Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.                                                                                                |
-| `limit`          | `number`   |    No    | Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `timeout`        | `number`   |    No    | Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `allowedUpdates` | `string[]` |    No    | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited_channel_post", "callback_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update\_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten. |
+| `limit` | `number` | No | Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| `timeout` | `number` | No | Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only. |
+| `allowedUpdates` | `string[]` | No | A JSON-serialized list of the update types you want your bot to receive. For example, specify \["message", "edited\_channel\_post", "callback\_query"\] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat\_member, message\_reaction, and message\_reaction\_count \(default\). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time. |
 
 **Usage examples:**
 
@@ -65,19 +66,20 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
 
+
 **Required parameters:**
 
-| Parameter                      | Type       | Required | Description                                                                                                                           |
-| :----------------------------- | :--------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`                          | `string`   |   Yes    | Webhook URL, may be empty if webhook is not set up                                                                                    |
-| `hasCustomCertificate`         | `boolean`  |   Yes    | True, if a custom certificate was provided for webhook certificate checks                                                             |
-| `pendingUpdateCount`           | `number`   |   Yes    | Number of updates awaiting delivery                                                                                                   |
-| `ipAddress`                    | `string`   |    No    | Optional. Currently used webhook IP address                                                                                           |
-| `lastErrorDate`                | `number`   |    No    | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook                              |
-| `lastErrorMessage`             | `string`   |    No    | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
-| `lastSynchronizationErrorDate` | `number`   |    No    | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters     |
-| `maxConnections`               | `number`   |    No    | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery                             |
-| `allowedUpdates`               | `string[]` |    No    | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member                            |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `url` | `string` | Yes | Webhook URL, may be empty if webhook is not set up |
+| `hasCustomCertificate` | `boolean` | Yes | True, if a custom certificate was provided for webhook certificate checks |
+| `pendingUpdateCount` | `number` | Yes | Number of updates awaiting delivery |
+| `ipAddress` | `string` | No | Optional. Currently used webhook IP address |
+| `lastErrorDate` | `number` | No | Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook |
+| `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
+| `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
+| `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
+| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
 
 **Usage examples:**
 
@@ -86,7 +88,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
 await chatpermissions.getWebhookInfo({
-  url: 'example text',
+  url: "example text",
   hasCustomCertificate: true,
 });
 ```
@@ -96,7 +98,7 @@ await chatpermissions.getWebhookInfo({
 ```typescript
 bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
   // Auto-fills parameters from the chatpermissions instance
-  await chatpermissions.getWebhookInfo({ url: 'Response' });
+  await chatpermissions.getWebhookInfo({ url: "Response" });
 });
 ```
 
@@ -108,28 +110,28 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                              |
-| :-------- | :--------- | :------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 
 **Required parameters:**
 
-| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
-| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `text`                    | `string`                                                                                 |   Yes    | Text of the message to be sent, 1-4096 characters after entities parsing                                                                                                                                                           |
-| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
-| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
-| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
-| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the message text. See formatting options for more details.                                                                                                                                            |
-| `entities`                | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode                                                                                                               |
-| `linkPreviewOptions`      | `LinkPreviewOptions`                                                                     |    No    | Link preview generation options for the message                                                                                                                                                                                    |
-| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
-| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
-| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
-| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
-| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
-| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
+| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
+| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
 
 **Usage examples:**
 
@@ -138,8 +140,8 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
 await chatpermissions.getMe({
-  text: 'example text',
-  businessConnectionId: 'example text',
+  text: "example text",
+  businessConnectionId: "example text",
 });
 ```
 
@@ -148,7 +150,7 @@ await chatpermissions.getMe({
 ```typescript
 bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
   // Auto-fills parameters from the chatpermissions instance
-  await chatpermissions.getMe({ text: 'Response' });
+  await chatpermissions.getMe({ text: "Response" });
 });
 ```
 
@@ -160,16 +162,16 @@ Use this method to get a list of profile pictures for a user. Returns a UserProf
 
 **Auto-filled parameters:**
 
-| Parameter | Source                    | Description                          |
-| :-------- | :------------------------ | :----------------------------------- |
-| `userId`  | `this.canInviteUsers?.id` | Unique identifier of the target user |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
 
 **Required parameters:**
 
-| Parameter | Type     | Required | Description                                                                                      |
-| :-------- | :------- | :------: | :----------------------------------------------------------------------------------------------- |
-| `offset`  | `number` |    No    | Sequential number of the first photo to be returned. By default, all photos are returned.        |
-| `limit`   | `number` |    No    | Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Sequential number of the first photo to be returned. By default, all photos are returned. |
+| `limit` | `number` | No | Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -177,7 +179,10 @@ Use this method to get a list of profile pictures for a user. Returns a UserProf
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getUserProfilePhotos(123, 123);
+await chatpermissions.getUserProfilePhotos(
+  123,
+  123,
+);
 ```
 
 2. In an event handler:
@@ -193,13 +198,14 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 ### getFile
 
-Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+
 
 **Required parameters:**
 
-| Parameter | Type     | Required | Description                              |
-| :-------- | :------- | :------: | :--------------------------------------- |
-| `fileId`  | `string` |   Yes    | File identifier to get information about |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `fileId` | `string` | Yes | File identifier to get information about |
 
 **Usage examples:**
 
@@ -207,7 +213,9 @@ Use this method to get basic information about a file and prepare it for downloa
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getFile('example text');
+await chatpermissions.getFile(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -227,18 +235,18 @@ Use this method to restrict a user in a supergroup. The bot must be an administr
 
 **Auto-filled parameters:**
 
-| Parameter | Source                    | Description                                                                                                    |
-| :-------- | :------------------------ | :------------------------------------------------------------------------------------------------------------- |
-| `userId`  | `this.canInviteUsers?.id` | Unique identifier of the target user                                                                           |
-| `chatId`  | `this?.id`                | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
 
 **Required parameters:**
 
-| Parameter                       | Type              | Required | Description                                                                                                                                                                                                                                                                                                                                                                           |
-| :------------------------------ | :---------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `permissions`                   | `ChatPermissions` |   Yes    | A JSON-serialized object for new user permissions                                                                                                                                                                                                                                                                                                                                     |
-| `useIndependentChatPermissions` | `boolean`         |    No    | Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission. |
-| `untilDate`                     | `number`          |    No    | Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever                                                                                                                                                                               |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `permissions` | `ChatPermissions` | Yes | A JSON-serialized object for new user permissions |
+| `useIndependentChatPermissions` | `boolean` | No | Pass True if chat permissions are set independently. Otherwise, the can\_send\_other\_messages and can\_add\_web\_page\_previews permissions will imply the can\_send\_messages, can\_send\_audios, can\_send\_documents, can\_send\_photos, can\_send\_videos, can\_send\_video\_notes, and can\_send\_voice\_notes permissions; the can\_send\_polls permission will imply the can\_send\_messages permission. |
+| `untilDate` | `number` | No | Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever |
 
 **Usage examples:**
 
@@ -265,20 +273,20 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 ### setChatPermissions
 
-Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights. Returns True on success.
+Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can\_restrict\_members administrator rights. Returns True on success.
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                    |
-| :-------- | :--------- | :------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
 
 **Required parameters:**
 
-| Parameter                       | Type              | Required | Description                                                                                                                                                                                                                                                                                                                                                                           |
-| :------------------------------ | :---------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `permissions`                   | `ChatPermissions` |   Yes    | A JSON-serialized object for new default chat permissions                                                                                                                                                                                                                                                                                                                             |
-| `useIndependentChatPermissions` | `boolean`         |    No    | Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `permissions` | `ChatPermissions` | Yes | A JSON-serialized object for new default chat permissions |
+| `useIndependentChatPermissions` | `boolean` | No | Pass True if chat permissions are set independently. Otherwise, the can\_send\_other\_messages and can\_add\_web\_page\_previews permissions will imply the can\_send\_messages, can\_send\_audios, can\_send\_documents, can\_send\_photos, can\_send\_videos, can\_send\_video\_notes, and can\_send\_voice\_notes permissions; the can\_send\_polls permission will imply the can\_send\_messages permission. |
 
 **Usage examples:**
 
@@ -286,7 +294,10 @@ Use this method to set default chat permissions for all members. The bot must be
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.setChatPermissions({} as any, true);
+await chatpermissions.setChatPermissions(
+  {} as any,
+  true,
+);
 ```
 
 2. In an event handler:
@@ -306,9 +317,10 @@ Use this method to get up-to-date information about the chat. Returns a ChatFull
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                            |
-| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+
 
 **Usage examples:**
 
@@ -336,9 +348,10 @@ Use this method to get a list of administrators in a chat, which aren&#39;t bots
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                            |
-| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+
 
 **Usage examples:**
 
@@ -366,9 +379,10 @@ Use this method to get the number of members in a chat. Returns Int on success.
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                            |
-| :-------- | :--------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+
 
 **Usage examples:**
 
@@ -396,10 +410,11 @@ Use this method to get information about a member of a chat. The method is only 
 
 **Auto-filled parameters:**
 
-| Parameter | Source                    | Description                                                                                                            |
-| :-------- | :------------------------ | :--------------------------------------------------------------------------------------------------------------------- |
-| `userId`  | `this.canInviteUsers?.id` | Unique identifier of the target user                                                                                   |
-| `chatId`  | `this?.id`                | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+
 
 **Usage examples:**
 
@@ -427,17 +442,17 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                    |
-| :-------- | :--------- | :------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
 
 **Required parameters:**
 
-| Parameter           | Type     | Required | Description                                                                                                                                                                                                |
-| :------------------ | :------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`              | `string` |   Yes    | Topic name, 1-128 characters                                                                                                                                                                               |
-| `iconColor`         | `number` |    No    | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
-| `iconCustomEmojiId` | `string` |    No    | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.                                                                  |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `name` | `string` | Yes | Topic name, 1-128 characters |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconCustomEmojiId` | `string` | No | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Usage examples:**
 
@@ -445,7 +460,10 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getForumTopicIconStickers('example text', 123);
+await chatpermissions.getForumTopicIconStickers(
+  "example text",
+  123,
+);
 ```
 
 2. In an event handler:
@@ -465,10 +483,11 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 **Auto-filled parameters:**
 
-| Parameter | Source                    | Description                                                                                |
-| :-------- | :------------------------ | :----------------------------------------------------------------------------------------- |
-| `userId`  | `this.canInviteUsers?.id` | Unique identifier of the target user                                                       |
-| `chatId`  | `this?.id`                | Unique identifier for the chat or username of the channel (in the format @channelusername) |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
+| `chatId` | `this?.id` | Unique identifier for the chat or username of the channel (in the format @channelusername) |
+
 
 **Usage examples:**
 
@@ -494,11 +513,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
 
+
 **Required parameters:**
 
-| Parameter              | Type     | Required | Description                                  |
-| :--------------------- | :------- | :------: | :------------------------------------------- |
-| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
 
 **Usage examples:**
 
@@ -506,7 +526,9 @@ Use this method to get information about the connection of the bot with a busine
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getBusinessConnection('example text');
+await chatpermissions.getBusinessConnection(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -524,12 +546,13 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
 
+
 **Required parameters:**
 
-| Parameter      | Type              | Required | Description                                                                              |
-| :------------- | :---------------- | :------: | :--------------------------------------------------------------------------------------- |
-| `scope`        | `BotCommandScope` |    No    | A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault. |
-| `languageCode` | `string`          |    No    | A two-letter ISO 639-1 language code or an empty string                                  |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `scope` | `BotCommandScope` | No | A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault. |
+| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -537,7 +560,10 @@ Use this method to get the current list of the bot&#39;s commands for the given 
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyCommands({} as any, 'example text');
+await chatpermissions.getMyCommands(
+  {} as any,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -555,11 +581,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get the current bot name for the given user language. Returns BotName on success.
 
+
 **Required parameters:**
 
-| Parameter      | Type     | Required | Description                                             |
-| :------------- | :------- | :------: | :------------------------------------------------------ |
-| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -567,7 +594,9 @@ Use this method to get the current bot name for the given user language. Returns
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyName('example text');
+await chatpermissions.getMyName(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -585,11 +614,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get the current bot description for the given user language. Returns BotDescription on success.
 
+
 **Required parameters:**
 
-| Parameter      | Type     | Required | Description                                             |
-| :------------- | :------- | :------: | :------------------------------------------------------ |
-| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -597,7 +627,9 @@ Use this method to get the current bot description for the given user language. 
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyDescription('example text');
+await chatpermissions.getMyDescription(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -615,11 +647,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
 
+
 **Required parameters:**
 
-| Parameter      | Type     | Required | Description                                             |
-| :------------- | :------- | :------: | :------------------------------------------------------ |
-| `languageCode` | `string` |    No    | A two-letter ISO 639-1 language code or an empty string |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `languageCode` | `string` | No | A two-letter ISO 639-1 language code or an empty string |
 
 **Usage examples:**
 
@@ -627,7 +660,9 @@ Use this method to get the current bot short description for the given user lang
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyShortDescription('example text');
+await chatpermissions.getMyShortDescription(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -647,9 +682,10 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 **Auto-filled parameters:**
 
-| Parameter | Source     | Description                                                                                                 |
-| :-------- | :--------- | :---------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `this?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+
 
 **Usage examples:**
 
@@ -675,11 +711,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
 
+
 **Required parameters:**
 
-| Parameter     | Type      | Required | Description                                                                                                                                                           |
-| :------------ | :-------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `forChannels` | `boolean` |    No    | Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `forChannels` | `boolean` | No | Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned. |
 
 **Usage examples:**
 
@@ -687,7 +724,9 @@ Use this method to get the current default administrator rights of the bot. Retu
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyDefaultAdministratorRights(true);
+await chatpermissions.getMyDefaultAdministratorRights(
+  true,
+);
 ```
 
 2. In an event handler:
@@ -707,20 +746,20 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 
 **Auto-filled parameters:**
 
-| Parameter | Source                    | Description                                                                                                                                                  |
-| :-------- | :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `userId`  | `this.canInviteUsers?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.                                                        |
-| `chatId`  | `this?.id`                | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift. |
+| `chatId` | `this?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
 
 **Required parameters:**
 
-| Parameter       | Type              | Required | Description                                                                                                                                                                                                                             |
-| :-------------- | :---------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `giftId`        | `string`          |   Yes    | Identifier of the gift                                                                                                                                                                                                                  |
-| `payForUpgrade` | `boolean`         |    No    | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver                                                                                                                          |
-| `text`          | `string`          |    No    | Text that will be shown along with the gift; 0-128 characters                                                                                                                                                                           |
-| `textParseMode` | `string`          |    No    | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.                                          |
-| `textEntities`  | `MessageEntity[]` |    No    | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `giftId` | `string` | Yes | Identifier of the gift; limited gifts can't be sent to channel chats |
+| `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
+| `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
+| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
+| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
 
 **Usage examples:**
 
@@ -729,7 +768,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
 await chatpermissions.getAvailableGifts({
-  giftId: 'example text',
+  giftId: "example text",
   payForUpgrade: true,
 });
 ```
@@ -739,7 +778,7 @@ await chatpermissions.getAvailableGifts({
 ```typescript
 bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
   // Auto-fills parameters from the chatpermissions instance
-  await chatpermissions.getAvailableGifts({ giftId: 'Response' });
+  await chatpermissions.getAvailableGifts({ giftId: "Response" });
 });
 ```
 
@@ -747,13 +786,14 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 ### getBusinessAccountStarBalance
 
-Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns StarAmount on success.
+Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+
 
 **Required parameters:**
 
-| Parameter              | Type     | Required | Description                                  |
-| :--------------------- | :------- | :------: | :------------------------------------------- |
-| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
 
 **Usage examples:**
 
@@ -761,7 +801,9 @@ Returns the amount of Telegram Stars owned by a managed business account. Requir
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getBusinessAccountStarBalance('example text');
+await chatpermissions.getBusinessAccountStarBalance(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -777,21 +819,24 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 ### getBusinessAccountGifts
 
-Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success.
+Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+
 
 **Required parameters:**
 
-| Parameter              | Type      | Required | Description                                                                                                                   |
-| :--------------------- | :-------- | :------: | :---------------------------------------------------------------------------------------------------------------------------- |
-| `businessConnectionId` | `string`  |   Yes    | Unique identifier of the business connection                                                                                  |
-| `excludeUnsaved`       | `boolean` |    No    | Pass True to exclude gifts that aren't saved to the account's profile page                                                    |
-| `excludeSaved`         | `boolean` |    No    | Pass True to exclude gifts that are saved to the account's profile page                                                       |
-| `excludeUnlimited`     | `boolean` |    No    | Pass True to exclude gifts that can be purchased an unlimited number of times                                                 |
-| `excludeLimited`       | `boolean` |    No    | Pass True to exclude gifts that can be purchased a limited number of times                                                    |
-| `excludeUnique`        | `boolean` |    No    | Pass True to exclude unique gifts                                                                                             |
-| `sortByPrice`          | `boolean` |    No    | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.                           |
-| `offset`               | `string`  |    No    | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit`                | `number`  |    No    | The maximum number of gifts to be returned; 1-100. Defaults to 100                                                            |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
+| `excludeUnsaved` | `boolean` | No | Pass True to exclude gifts that aren't saved to the account's profile page |
+| `excludeSaved` | `boolean` | No | Pass True to exclude gifts that are saved to the account's profile page |
+| `excludeUnlimited` | `boolean` | No | Pass True to exclude gifts that can be purchased an unlimited number of times |
+| `excludeLimitedUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique |
+| `excludeLimitedNonUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique |
+| `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
+| `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
+| `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
+| `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
 
 **Usage examples:**
 
@@ -800,7 +845,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
 await chatpermissions.getBusinessAccountGifts({
-  businessConnectionId: 'example text',
+  businessConnectionId: "example text",
   excludeUnsaved: true,
 });
 ```
@@ -810,21 +855,34 @@ await chatpermissions.getBusinessAccountGifts({
 ```typescript
 bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
   // Auto-fills parameters from the chatpermissions instance
-  await chatpermissions.getBusinessAccountGifts({ businessConnectionId: 'Response' });
+  await chatpermissions.getBusinessAccountGifts({ businessConnectionId: "Response" });
 });
 ```
 
 **See also:** [getBusinessAccountGifts API method](../methods/getBusinessAccountGifts.md)
 
-### getStickerSet
+### getUserGifts
 
-Use this method to get a sticker set. On success, a StickerSet object is returned.
+Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier of the user |
 
 **Required parameters:**
 
-| Parameter | Type     | Required | Description             |
-| :-------- | :------- | :------: | :---------------------- |
-| `name`    | `string` |   Yes    | Name of the sticker set |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `excludeUnlimited` | `boolean` | No | Pass True to exclude gifts that can be purchased an unlimited number of times |
+| `excludeLimitedUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique |
+| `excludeLimitedNonUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique |
+| `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
+| `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
+| `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
+| `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
 
 **Usage examples:**
 
@@ -832,7 +890,91 @@ Use this method to get a sticker set. On success, a StickerSet object is returne
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getStickerSet('example text');
+await chatpermissions.getUserGifts({
+  excludeUnlimited: true,
+  excludeLimitedUpgradable: true,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
+  // Auto-fills parameters from the chatpermissions instance
+  await chatpermissions.getUserGifts({ offset: "Response" });
+});
+```
+
+**See also:** [getUserGifts API method](../methods/getUserGifts.md)
+
+### getChatGifts
+
+Returns the gifts owned by a chat. Returns OwnedGifts on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `excludeUnsaved` | `boolean` | No | Pass True to exclude gifts that aren't saved to the chat's profile page. Always True, unless the bot has the can\_post\_messages administrator right in the channel. |
+| `excludeSaved` | `boolean` | No | Pass True to exclude gifts that are saved to the chat's profile page. Always False, unless the bot has the can\_post\_messages administrator right in the channel. |
+| `excludeUnlimited` | `boolean` | No | Pass True to exclude gifts that can be purchased an unlimited number of times |
+| `excludeLimitedUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique |
+| `excludeLimitedNonUpgradable` | `boolean` | No | Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique |
+| `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
+| `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
+| `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
+| `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatpermissions = new ChatPermissions(rawData, bot);
+await chatpermissions.getChatGifts({
+  excludeUnsaved: true,
+  excludeSaved: true,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
+  // Auto-fills parameters from the chatpermissions instance
+  await chatpermissions.getChatGifts({ offset: "Response" });
+});
+```
+
+**See also:** [getChatGifts API method](../methods/getChatGifts.md)
+
+### getStickerSet
+
+Use this method to get a sticker set. On success, a StickerSet object is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `name` | `string` | Yes | Name of the sticker set |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatpermissions = new ChatPermissions(rawData, bot);
+await chatpermissions.getStickerSet(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -850,11 +992,12 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
 
+
 **Required parameters:**
 
-| Parameter        | Type       | Required | Description                                                                                                |
-| :--------------- | :--------- | :------: | :--------------------------------------------------------------------------------------------------------- |
-| `customEmojiIds` | `string[]` |   Yes    | A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `customEmojiIds` | `string[]` | Yes | A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified. |
 
 **Usage examples:**
 
@@ -862,7 +1005,9 @@ Use this method to get information about custom emoji stickers by their identifi
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getCustomEmojiStickers(['example text']);
+await chatpermissions.getCustomEmojiStickers(
+  ["example text"],
+);
 ```
 
 2. In an event handler:
@@ -880,12 +1025,13 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
 
+
 **Required parameters:**
 
-| Parameter | Type     | Required | Description                                                                                             |
-| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------ |
-| `offset`  | `number` |    No    | Number of transactions to skip in the response                                                          |
-| `limit`   | `number` |    No    | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Number of transactions to skip in the response |
+| `limit` | `number` | No | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -893,7 +1039,10 @@ A method to get the current Telegram Stars balance of the bot. Requires no param
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getMyStarBalance(123, 123);
+await chatpermissions.getMyStarBalance(
+  123,
+  123,
+);
 ```
 
 2. In an event handler:
@@ -911,12 +1060,13 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 
 Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
 
+
 **Required parameters:**
 
-| Parameter | Type     | Required | Description                                                                                             |
-| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------ |
-| `offset`  | `number` |    No    | Number of transactions to skip in the response                                                          |
-| `limit`   | `number` |    No    | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Number of transactions to skip in the response |
+| `limit` | `number` | No | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -924,7 +1074,10 @@ Returns the bot&#39;s Telegram Star transactions in chronological order. On succ
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getStarTransactions(123, 123);
+await chatpermissions.getStarTransactions(
+  123,
+  123,
+);
 ```
 
 2. In an event handler:
@@ -944,17 +1097,17 @@ Use this method to get data for high score tables. Will return the score of the 
 
 **Auto-filled parameters:**
 
-| Parameter   | Source                     | Description                                                                           |
-| :---------- | :------------------------- | :------------------------------------------------------------------------------------ |
-| `userId`    | `this.canInviteUsers?.id`  | Target user id                                                                        |
-| `messageId` | `this.canSendMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message        |
-| `chatId`    | `this?.id`                 | Required if inline_message_id is not specified. Unique identifier for the target chat |
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Target user id |
+| `messageId` | `this.canSendMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message |
+| `chatId` | `this?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat |
 
 **Required parameters:**
 
-| Parameter         | Type     | Required | Description                                                                            |
-| :---------------- | :------- | :------: | :------------------------------------------------------------------------------------- |
-| `inlineMessageId` | `string` |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
 
 **Usage examples:**
 
@@ -962,7 +1115,9 @@ Use this method to get data for high score tables. Will return the score of the 
 
 ```typescript
 const chatpermissions = new ChatPermissions(rawData, bot);
-await chatpermissions.getGameHighScores('example text');
+await chatpermissions.getGameHighScores(
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -975,6 +1130,7 @@ bot.onChatPermissions(async (chatpermissions: ChatPermissions) => {
 ```
 
 **See also:** [getGameHighScores API method](../methods/getGameHighScores.md)
+
 
 ## Event Handlers
 
