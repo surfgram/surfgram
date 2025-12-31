@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setMyDefaultAdministratorRights Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { ChatAdministratorRights } from '../types/chatAdministratorRights';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { ChatAdministratorRights } from "../types/chatAdministratorRights";
 
 /**
  * Use this method to change the default administrator rights requested by the bot when it&#39;s added as an administrator to groups or channels. These rights will be suggested to users, but they are free to modify the list before adding the bot. Returns True on success.
@@ -24,15 +24,18 @@ import { ChatAdministratorRights } from '../types/chatAdministratorRights';
  * await bot.setMyDefaultAdministratorRights(...);
  */
 export async function setMyDefaultAdministratorRights(
-  this: Bot,
-  rights?: ChatAdministratorRights,
-  forChannels?: boolean
+	this: Bot,
+	rights?: ChatAdministratorRights,
+	forChannels?: boolean,
 ): Promise<any> {
-  const apiParams = {
-    rights: rights,
-    forChannels: forChannels,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setMyDefaultAdministratorRights', snakeParams);
-  return response;
+	const apiParams = {
+		rights: rights,
+		forChannels: forChannels,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setMyDefaultAdministratorRights",
+		snakeParams,
+	);
+	return response;
 }

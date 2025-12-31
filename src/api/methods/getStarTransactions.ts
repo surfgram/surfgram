@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
@@ -23,15 +23,15 @@ import { camelToSnake } from '../../core/utils';
  * await bot.getStarTransactions(...);
  */
 export async function getStarTransactions(
-  this: Bot,
-  offset?: number,
-  limit?: number
+	this: Bot,
+	offset?: number,
+	limit?: number,
 ): Promise<any> {
-  const apiParams = {
-    offset: offset,
-    limit: limit,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getStarTransactions', snakeParams);
-  return response;
+	const apiParams = {
+		offset: offset,
+		limit: limit,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("getStarTransactions", snakeParams);
+	return response;
 }

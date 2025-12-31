@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#unpinChatMessage Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin messages in groups and channels respectively. Returns True on success.
@@ -24,17 +24,17 @@ import { camelToSnake } from '../../core/utils';
  * await bot.unpinChatMessage(...);
  */
 export async function unpinChatMessage(
-  this: Bot,
-  chatId: number | string,
-  businessConnectionId?: string,
-  messageId?: number
+	this: Bot,
+	chatId: number | string,
+	businessConnectionId?: string,
+	messageId?: number,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    businessConnectionId: businessConnectionId,
-    messageId: messageId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('unpinChatMessage', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		businessConnectionId: businessConnectionId,
+		messageId: messageId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("unpinChatMessage", snakeParams);
+	return response;
 }

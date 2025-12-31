@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { EditChatInviteLinkParams } from '../interfaces/editChatInviteLinkParams';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { EditChatInviteLinkParams } from "../interfaces/editChatInviteLinkParams";
 
 /**
  * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
@@ -25,10 +25,10 @@ import { EditChatInviteLinkParams } from '../interfaces/editChatInviteLinkParams
  * });
  */
 export async function editChatInviteLink(
-  this: Bot,
-  params: EditChatInviteLinkParams
+	this: Bot,
+	params: EditChatInviteLinkParams,
 ): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('editChatInviteLink', snakeParams);
-  return response;
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("editChatInviteLink", snakeParams);
+	return response;
 }

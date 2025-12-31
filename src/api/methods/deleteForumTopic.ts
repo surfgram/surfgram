@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#deleteForumTopic Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_delete\_messages administrator rights. Returns True on success.
@@ -23,15 +23,15 @@ import { camelToSnake } from '../../core/utils';
  * await bot.deleteForumTopic(...);
  */
 export async function deleteForumTopic(
-  this: Bot,
-  chatId: number | string,
-  messageThreadId: number
+	this: Bot,
+	chatId: number | string,
+	messageThreadId: number,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    messageThreadId: messageThreadId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('deleteForumTopic', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		messageThreadId: messageThreadId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("deleteForumTopic", snakeParams);
+	return response;
 }

@@ -7,92 +7,92 @@
  * @extends TelegramObject
  */
 
-import { Bot } from '../../core/bot';
-import { snakeToCamel } from '../../core/utils';
-import { TelegramObject } from './telegramObject';
-import { Sticker } from './sticker';
-import { PhotoSize } from './photoSize';
+import { Bot } from "../../core/bot";
+import { snakeToCamel } from "../../core/utils";
+import { TelegramObject } from "./telegramObject";
+import { Sticker } from "./sticker";
+import { PhotoSize } from "./photoSize";
 
 /**
  * Represents a StickerSet object from the Telegram Bot API
  * @class StickerSet
  */
 export class StickerSet {
-  /**
-   * Sticker set name
-   * @type { string }
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  name!: string;
+	/**
+	 * Sticker set name
+	 * @type { string }
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	name!: string;
 
-  /**
-   * Sticker set title
-   * @type { string }
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  title!: string;
+	/**
+	 * Sticker set title
+	 * @type { string }
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	title!: string;
 
-  /**
-   * Type of stickers in the set, currently one of “regular”, “mask”, “custom\_emoji”
-   * @type { string }
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  stickerType!: string;
+	/**
+	 * Type of stickers in the set, currently one of “regular”, “mask”, “custom\_emoji”
+	 * @type { string }
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	stickerType!: string;
 
-  /**
-   * List of all set stickers
-   * @type { Sticker[] }
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  stickers!: Sticker[];
+	/**
+	 * List of all set stickers
+	 * @type { Sticker[] }
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	stickers!: Sticker[];
 
-  /**
-   * Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
-   * @type { PhotoSize }
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  thumbnail?: PhotoSize;
+	/**
+	 * Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
+	 * @type { PhotoSize }
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	thumbnail?: PhotoSize;
 
-  /**
-   * Raw data from Telegram API in snake_case format
-   * @type {TelegramObject}
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  public raw?: TelegramObject;
+	/**
+	 * Raw data from Telegram API in snake_case format
+	 * @type {TelegramObject}
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	public raw?: TelegramObject;
 
-  /**
-   * Bot instance associated with this object
-   * @type {Bot}
-   * @memberof StickerSet
-   * @instance
-   * @public
-   */
-  public bot?: Bot;
+	/**
+	 * Bot instance associated with this object
+	 * @type {Bot}
+	 * @memberof StickerSet
+	 * @instance
+	 * @public
+	 */
+	public bot?: Bot;
 
-  /**
-   * Creates a new StickerSet instance from raw Telegram API data
-   * @constructor
-   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
-   * @param {Bot} bot - Bot instance for executing methods
-   * @example
-   * const message = new Message(rawData, botInstance);
-   */
-  constructor(raw?: TelegramObject, bot?: Bot) {
-    this.raw = raw;
-    this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
-  }
+	/**
+	 * Creates a new StickerSet instance from raw Telegram API data
+	 * @constructor
+	 * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+	 * @param {Bot} bot - Bot instance for executing methods
+	 * @example
+	 * const message = new Message(rawData, botInstance);
+	 */
+	constructor(raw?: TelegramObject, bot?: Bot) {
+		this.raw = raw;
+		this.bot = bot;
+		const converted = snakeToCamel(raw);
+		Object.assign(this, converted);
+	}
 }

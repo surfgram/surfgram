@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#addStickerToSet Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { InputSticker } from '../types/inputSticker';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { InputSticker } from "../types/inputSticker";
 
 /**
  * Use this method to add a new sticker to a set created by the bot. Emoji sticker sets can have up to 200 stickers. Other sticker sets can have up to 120 stickers. Returns True on success.
@@ -25,17 +25,17 @@ import { InputSticker } from '../types/inputSticker';
  * await bot.addStickerToSet(...);
  */
 export async function addStickerToSet(
-  this: Bot,
-  userId: number,
-  name: string,
-  sticker: InputSticker
+	this: Bot,
+	userId: number,
+	name: string,
+	sticker: InputSticker,
 ): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    name: name,
-    sticker: sticker,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('addStickerToSet', snakeParams);
-  return response;
+	const apiParams = {
+		userId: userId,
+		name: name,
+		sticker: sticker,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("addStickerToSet", snakeParams);
+	return response;
 }

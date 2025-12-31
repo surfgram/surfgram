@@ -1,2 +1,2 @@
-export * from './bot';
-export * from './plugin';
+export * from "./bot";
+export * from "./plugin";

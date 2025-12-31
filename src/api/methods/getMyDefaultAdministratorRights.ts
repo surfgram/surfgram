@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
@@ -22,13 +22,16 @@ import { camelToSnake } from '../../core/utils';
  * await bot.getMyDefaultAdministratorRights(...);
  */
 export async function getMyDefaultAdministratorRights(
-  this: Bot,
-  forChannels?: boolean
+	this: Bot,
+	forChannels?: boolean,
 ): Promise<any> {
-  const apiParams = {
-    forChannels: forChannels,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getMyDefaultAdministratorRights', snakeParams);
-  return response;
+	const apiParams = {
+		forChannels: forChannels,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"getMyDefaultAdministratorRights",
+		snakeParams,
+	);
+	return response;
 }

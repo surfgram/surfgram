@@ -5,147 +5,151 @@
  * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram API Documentation}
  */
 
-import { SuggestedPostParameters } from '../types/suggestedPostParameters';
-import { ReplyParameters } from '../types/replyParameters';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
-import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
-import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
-import { ForceReply } from '../types/forceReply';
+import { SuggestedPostParameters } from "../types/suggestedPostParameters";
+import { ReplyParameters } from "../types/replyParameters";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
+import { ReplyKeyboardMarkup } from "../types/replyKeyboardMarkup";
+import { ReplyKeyboardRemove } from "../types/replyKeyboardRemove";
+import { ForceReply } from "../types/forceReply";
 
 export interface SendLocationParams {
-  /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
-   * @type { number | string }
-   * @originalType Integer or String
-   * @required Yes
-   */
-  chatId: number | string;
+	/**
+	 * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+	 * @type { number | string }
+	 * @originalType Integer or String
+	 * @required Yes
+	 */
+	chatId: number | string;
 
-  /**
-   * Latitude of the location
-   * @type { number }
-   * @originalType Float
-   * @required Yes
-   */
-  latitude: number;
+	/**
+	 * Latitude of the location
+	 * @type { number }
+	 * @originalType Float
+	 * @required Yes
+	 */
+	latitude: number;
 
-  /**
-   * Longitude of the location
-   * @type { number }
-   * @originalType Float
-   * @required Yes
-   */
-  longitude: number;
+	/**
+	 * Longitude of the location
+	 * @type { number }
+	 * @originalType Float
+	 * @required Yes
+	 */
+	longitude: number;
 
-  /**
-   * Unique identifier of the business connection on behalf of which the message will be sent
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  businessConnectionId?: string;
+	/**
+	 * Unique identifier of the business connection on behalf of which the message will be sent
+	 * @type { string }
+	 * @originalType String
+	 * @required No
+	 */
+	businessConnectionId?: string;
 
-  /**
-   * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  messageThreadId?: number;
+	/**
+	 * Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	messageThreadId?: number;
 
-  /**
-   * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  directMessagesTopicId?: number;
+	/**
+	 * Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	directMessagesTopicId?: number;
 
-  /**
-   * The radius of uncertainty for the location, measured in meters; 0-1500
-   * @type { number }
-   * @originalType Float
-   * @required No
-   */
-  horizontalAccuracy?: number;
+	/**
+	 * The radius of uncertainty for the location, measured in meters; 0-1500
+	 * @type { number }
+	 * @originalType Float
+	 * @required No
+	 */
+	horizontalAccuracy?: number;
 
-  /**
-   * Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  livePeriod?: number;
+	/**
+	 * Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	livePeriod?: number;
 
-  /**
-   * For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  heading?: number;
+	/**
+	 * For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	heading?: number;
 
-  /**
-   * For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  proximityAlertRadius?: number;
+	/**
+	 * For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	proximityAlertRadius?: number;
 
-  /**
-   * Sends the message silently. Users will receive a notification with no sound.
-   * @type { boolean }
-   * @originalType Boolean
-   * @required No
-   */
-  disableNotification?: boolean;
+	/**
+	 * Sends the message silently. Users will receive a notification with no sound.
+	 * @type { boolean }
+	 * @originalType Boolean
+	 * @required No
+	 */
+	disableNotification?: boolean;
 
-  /**
-   * Protects the contents of the sent message from forwarding and saving
-   * @type { boolean }
-   * @originalType Boolean
-   * @required No
-   */
-  protectContent?: boolean;
+	/**
+	 * Protects the contents of the sent message from forwarding and saving
+	 * @type { boolean }
+	 * @originalType Boolean
+	 * @required No
+	 */
+	protectContent?: boolean;
 
-  /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
-   * @type { boolean }
-   * @originalType Boolean
-   * @required No
-   */
-  allowPaidBroadcast?: boolean;
+	/**
+	 * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+	 * @type { boolean }
+	 * @originalType Boolean
+	 * @required No
+	 */
+	allowPaidBroadcast?: boolean;
 
-  /**
-   * Unique identifier of the message effect to be added to the message; for private chats only
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  messageEffectId?: string;
+	/**
+	 * Unique identifier of the message effect to be added to the message; for private chats only
+	 * @type { string }
+	 * @originalType String
+	 * @required No
+	 */
+	messageEffectId?: string;
 
-  /**
-   * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
-   * @type { SuggestedPostParameters }
-   * @originalType SuggestedPostParameters
-   * @required No
-   */
-  suggestedPostParameters?: SuggestedPostParameters;
+	/**
+	 * A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+	 * @type { SuggestedPostParameters }
+	 * @originalType SuggestedPostParameters
+	 * @required No
+	 */
+	suggestedPostParameters?: SuggestedPostParameters;
 
-  /**
-   * Description of the message to reply to
-   * @type { ReplyParameters }
-   * @originalType ReplyParameters
-   * @required No
-   */
-  replyParameters?: ReplyParameters;
+	/**
+	 * Description of the message to reply to
+	 * @type { ReplyParameters }
+	 * @originalType ReplyParameters
+	 * @required No
+	 */
+	replyParameters?: ReplyParameters;
 
-  /**
-   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
-   * @type { InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply }
-   * @originalType InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply
-   * @required No
-   */
-  replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+	/**
+	 * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+	 * @type { InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply }
+	 * @originalType InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply
+	 * @required No
+	 */
+	replyMarkup?:
+		| InlineKeyboardMarkup
+		| ReplyKeyboardMarkup
+		| ReplyKeyboardRemove
+		| ForceReply;
 }

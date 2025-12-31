@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setStickerSetThumbnail Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { InputFile } from '../types/inputFile';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { InputFile } from "../types/inputFile";
 
 /**
  * Use this method to set the thumbnail of a regular or mask sticker set. The format of the thumbnail file must match the format of the stickers in the set. Returns True on success.
@@ -26,19 +26,22 @@ import { InputFile } from '../types/inputFile';
  * await bot.setStickerSetThumbnail(...);
  */
 export async function setStickerSetThumbnail(
-  this: Bot,
-  name: string,
-  userId: number,
-  format: string,
-  thumbnail?: InputFile | string
+	this: Bot,
+	name: string,
+	userId: number,
+	format: string,
+	thumbnail?: InputFile | string,
 ): Promise<any> {
-  const apiParams = {
-    name: name,
-    userId: userId,
-    format: format,
-    thumbnail: thumbnail,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setStickerSetThumbnail', snakeParams);
-  return response;
+	const apiParams = {
+		name: name,
+		userId: userId,
+		format: format,
+		thumbnail: thumbnail,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setStickerSetThumbnail",
+		snakeParams,
+	);
+	return response;
 }

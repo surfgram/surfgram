@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setBusinessAccountBio Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Changes the bio of a managed business account. Requires the can\_change\_bio business bot right. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setBusinessAccountBio(...);
  */
 export async function setBusinessAccountBio(
-  this: Bot,
-  businessConnectionId: string,
-  bio?: string
+	this: Bot,
+	businessConnectionId: string,
+	bio?: string,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    bio: bio,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setBusinessAccountBio', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		bio: bio,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setBusinessAccountBio",
+		snakeParams,
+	);
+	return response;
 }

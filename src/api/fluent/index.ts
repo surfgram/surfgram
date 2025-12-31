@@ -3,5 +3,5 @@
  * @module fluent
  */
 
-import './methods';
-import './events';
+import "./methods";
+import "./events";

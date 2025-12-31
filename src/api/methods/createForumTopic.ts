@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#createForumTopic Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
@@ -25,19 +25,19 @@ import { camelToSnake } from '../../core/utils';
  * await bot.createForumTopic(...);
  */
 export async function createForumTopic(
-  this: Bot,
-  chatId: number | string,
-  name: string,
-  iconColor?: number,
-  iconCustomEmojiId?: string
+	this: Bot,
+	chatId: number | string,
+	name: string,
+	iconColor?: number,
+	iconCustomEmojiId?: string,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    name: name,
-    iconColor: iconColor,
-    iconCustomEmojiId: iconCustomEmojiId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('createForumTopic', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		name: name,
+		iconColor: iconColor,
+		iconCustomEmojiId: iconCustomEmojiId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("createForumTopic", snakeParams);
+	return response;
 }

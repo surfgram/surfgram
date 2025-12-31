@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#banChatMember Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
@@ -25,19 +25,19 @@ import { camelToSnake } from '../../core/utils';
  * await bot.banChatMember(...);
  */
 export async function banChatMember(
-  this: Bot,
-  chatId: number | string,
-  userId: number,
-  untilDate?: number,
-  revokeMessages?: boolean
+	this: Bot,
+	chatId: number | string,
+	userId: number,
+	untilDate?: number,
+	revokeMessages?: boolean,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    userId: userId,
-    untilDate: untilDate,
-    revokeMessages: revokeMessages,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('banChatMember', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		userId: userId,
+		untilDate: untilDate,
+		revokeMessages: revokeMessages,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("banChatMember", snakeParams);
+	return response;
 }

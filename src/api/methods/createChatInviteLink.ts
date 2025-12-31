@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#createChatInviteLink Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { CreateChatInviteLinkParams } from '../interfaces/createChatInviteLinkParams';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { CreateChatInviteLinkParams } from "../interfaces/createChatInviteLinkParams";
 
 /**
  * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
@@ -25,10 +25,10 @@ import { CreateChatInviteLinkParams } from '../interfaces/createChatInviteLinkPa
  * });
  */
 export async function createChatInviteLink(
-  this: Bot,
-  params: CreateChatInviteLinkParams
+	this: Bot,
+	params: CreateChatInviteLinkParams,
 ): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('createChatInviteLink', snakeParams);
-  return response;
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("createChatInviteLink", snakeParams);
+	return response;
 }

@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#giftPremiumSubscription Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { GiftPremiumSubscriptionParams } from '../interfaces/giftPremiumSubscriptionParams';
-import { MessageEntity } from '../types/messageEntity';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { GiftPremiumSubscriptionParams } from "../interfaces/giftPremiumSubscriptionParams";
+import { MessageEntity } from "../types/messageEntity";
 
 /**
  * Gifts a Telegram Premium subscription to the given user. Returns True on success.
@@ -26,10 +26,13 @@ import { MessageEntity } from '../types/messageEntity';
  * });
  */
 export async function giftPremiumSubscription(
-  this: Bot,
-  params: GiftPremiumSubscriptionParams
+	this: Bot,
+	params: GiftPremiumSubscriptionParams,
 ): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('giftPremiumSubscription', snakeParams);
-  return response;
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>(
+		"giftPremiumSubscription",
+		snakeParams,
+	);
+	return response;
 }

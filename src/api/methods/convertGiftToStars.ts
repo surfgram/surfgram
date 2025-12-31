@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#convertGiftToStars Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Converts a given regular gift to Telegram Stars. Requires the can\_convert\_gifts\_to\_stars business bot right. Returns True on success.
@@ -23,15 +23,15 @@ import { camelToSnake } from '../../core/utils';
  * await bot.convertGiftToStars(...);
  */
 export async function convertGiftToStars(
-  this: Bot,
-  businessConnectionId: string,
-  ownedGiftId: string
+	this: Bot,
+	businessConnectionId: string,
+	ownedGiftId: string,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    ownedGiftId: ownedGiftId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('convertGiftToStars', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		ownedGiftId: ownedGiftId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("convertGiftToStars", snakeParams);
+	return response;
 }

@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#approveChatJoinRequest Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can\_invite\_users administrator right. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.approveChatJoinRequest(...);
  */
 export async function approveChatJoinRequest(
-  this: Bot,
-  chatId: number | string,
-  userId: number
+	this: Bot,
+	chatId: number | string,
+	userId: number,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    userId: userId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('approveChatJoinRequest', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		userId: userId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"approveChatJoinRequest",
+		snakeParams,
+	);
+	return response;
 }

@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setStickerKeywords Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to change search keywords assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns True on success.
@@ -23,15 +23,15 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setStickerKeywords(...);
  */
 export async function setStickerKeywords(
-  this: Bot,
-  sticker: string,
-  keywords?: string[]
+	this: Bot,
+	sticker: string,
+	keywords?: string[],
 ): Promise<any> {
-  const apiParams = {
-    sticker: sticker,
-    keywords: keywords,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setStickerKeywords', snakeParams);
-  return response;
+	const apiParams = {
+		sticker: sticker,
+		keywords: keywords,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("setStickerKeywords", snakeParams);
+	return response;
 }

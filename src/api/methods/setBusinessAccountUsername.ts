@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setBusinessAccountUsername Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Changes the username of a managed business account. Requires the can\_change\_username business bot right. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setBusinessAccountUsername(...);
  */
 export async function setBusinessAccountUsername(
-  this: Bot,
-  businessConnectionId: string,
-  username?: string
+	this: Bot,
+	businessConnectionId: string,
+	username?: string,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    username: username,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setBusinessAccountUsername', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		username: username,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setBusinessAccountUsername",
+		snakeParams,
+	);
+	return response;
 }

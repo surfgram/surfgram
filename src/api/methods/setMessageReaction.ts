@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setMessageReaction Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { ReactionType } from '../types/reactionType';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { ReactionType } from "../types/reactionType";
 
 /**
  * Use this method to change the chosen reactions on a message. Service messages of some types can&#39;t be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can&#39;t use paid reactions. Returns True on success.
@@ -26,19 +26,19 @@ import { ReactionType } from '../types/reactionType';
  * await bot.setMessageReaction(...);
  */
 export async function setMessageReaction(
-  this: Bot,
-  chatId: number | string,
-  messageId: number,
-  reaction?: ReactionType[],
-  isBig?: boolean
+	this: Bot,
+	chatId: number | string,
+	messageId: number,
+	reaction?: ReactionType[],
+	isBig?: boolean,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    messageId: messageId,
-    reaction: reaction,
-    isBig: isBig,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setMessageReaction', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		messageId: messageId,
+		reaction: reaction,
+		isBig: isBig,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("setMessageReaction", snakeParams);
+	return response;
 }

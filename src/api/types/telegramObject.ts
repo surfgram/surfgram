@@ -25,14 +25,16 @@
  * const cls: JsonValue<MyClass> = MyClass;
  */
 export type JsonValue<T = unknown> =
-  | string
-  | number
-  | boolean
-  | null
-  | JsonValue<T>[]
-  | { [key: string]: JsonValue<T> }
-  | ((...args: unknown[]) => T)
-  | (new (...args: unknown[]) => T);
+	| string
+	| number
+	| boolean
+	| null
+	| JsonValue<T>[]
+	| { [key: string]: JsonValue<T> }
+	| ((...args: unknown[]) => T)
+	| (new (
+			...args: unknown[]
+	  ) => T);
 
 /**
  * Base type for all Telegram Bot API objects

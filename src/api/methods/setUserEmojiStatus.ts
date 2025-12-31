@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setUserEmojiStatus Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
@@ -24,17 +24,17 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setUserEmojiStatus(...);
  */
 export async function setUserEmojiStatus(
-  this: Bot,
-  userId: number,
-  emojiStatusCustomEmojiId?: string,
-  emojiStatusExpirationDate?: number
+	this: Bot,
+	userId: number,
+	emojiStatusCustomEmojiId?: string,
+	emojiStatusExpirationDate?: number,
 ): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    emojiStatusCustomEmojiId: emojiStatusCustomEmojiId,
-    emojiStatusExpirationDate: emojiStatusExpirationDate,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setUserEmojiStatus', snakeParams);
-  return response;
+	const apiParams = {
+		userId: userId,
+		emojiStatusCustomEmojiId: emojiStatusCustomEmojiId,
+		emojiStatusExpirationDate: emojiStatusExpirationDate,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("setUserEmojiStatus", snakeParams);
+	return response;
 }

@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setStickerMaskPosition Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { MaskPosition } from '../types/maskPosition';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { MaskPosition } from "../types/maskPosition";
 
 /**
  * Use this method to change the mask position of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns True on success.
@@ -24,15 +24,18 @@ import { MaskPosition } from '../types/maskPosition';
  * await bot.setStickerMaskPosition(...);
  */
 export async function setStickerMaskPosition(
-  this: Bot,
-  sticker: string,
-  maskPosition?: MaskPosition
+	this: Bot,
+	sticker: string,
+	maskPosition?: MaskPosition,
 ): Promise<any> {
-  const apiParams = {
-    sticker: sticker,
-    maskPosition: maskPosition,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setStickerMaskPosition', snakeParams);
-  return response;
+	const apiParams = {
+		sticker: sticker,
+		maskPosition: maskPosition,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setStickerMaskPosition",
+		snakeParams,
+	);
+	return response;
 }

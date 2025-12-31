@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setMyShortDescription Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to change the bot&#39;s short description, which is shown on the bot&#39;s profile page and is sent together with the link when users share the bot. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setMyShortDescription(...);
  */
 export async function setMyShortDescription(
-  this: Bot,
-  shortDescription?: string,
-  languageCode?: string
+	this: Bot,
+	shortDescription?: string,
+	languageCode?: string,
 ): Promise<any> {
-  const apiParams = {
-    shortDescription: shortDescription,
-    languageCode: languageCode,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setMyShortDescription', snakeParams);
-  return response;
+	const apiParams = {
+		shortDescription: shortDescription,
+		languageCode: languageCode,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setMyShortDescription",
+		snakeParams,
+	);
+	return response;
 }

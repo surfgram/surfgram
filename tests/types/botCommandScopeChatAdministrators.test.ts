@@ -1,21 +1,21 @@
-import { BotCommandScopeChatAdministrators } from '../../src/api';
-import { Bot } from '../../src/core/bot';
+import { BotCommandScopeChatAdministrators } from "../../src/api";
+import { Bot } from "../../src/core/bot";
 
-describe('BotCommandScopeChatAdministrators', () => {
-  const mockBot = { callApi: jest.fn() } as unknown as Bot;
+describe("BotCommandScopeChatAdministrators", () => {
+	const mockBot = { callApi: jest.fn() } as unknown as Bot;
 
-  it('should correctly instantiate from raw data', () => {
-    const raw = {
-      type: 'example text',
-      chat_id: 123,
-    };
+	it("should correctly instantiate from raw data", () => {
+		const raw = {
+			type: "example text",
+			chat_id: 123,
+		};
 
-    const instance = new BotCommandScopeChatAdministrators(raw, mockBot);
+		const instance = new BotCommandScopeChatAdministrators(raw, mockBot);
 
-    expect(instance.raw).toEqual(raw);
-    expect(instance.bot).toBe(mockBot);
+		expect(instance.raw).toEqual(raw);
+		expect(instance.bot).toBe(mockBot);
 
-    expect(instance.type ?? instance.raw?.type).toEqual('example text');
-    expect(instance.chatId ?? instance.raw?.chat_id).toEqual(123);
-  });
+		expect(instance.type ?? instance.raw?.type).toEqual("example text");
+		expect(instance.chatId ?? instance.raw?.chat_id).toEqual(123);
+	});
 });

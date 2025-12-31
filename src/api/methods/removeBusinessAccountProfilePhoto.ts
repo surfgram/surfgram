@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#removeBusinessAccountProfilePhoto Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Removes the current profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.removeBusinessAccountProfilePhoto(...);
  */
 export async function removeBusinessAccountProfilePhoto(
-  this: Bot,
-  businessConnectionId: string,
-  isPublic?: boolean
+	this: Bot,
+	businessConnectionId: string,
+	isPublic?: boolean,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    isPublic: isPublic,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('removeBusinessAccountProfilePhoto', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		isPublic: isPublic,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"removeBusinessAccountProfilePhoto",
+		snakeParams,
+	);
+	return response;
 }

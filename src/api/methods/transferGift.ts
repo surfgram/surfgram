@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#transferGift Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Transfers an owned unique gift to another user. Requires the can\_transfer\_and\_upgrade\_gifts business bot right. Requires can\_transfer\_stars business bot right if the transfer is paid. Returns True on success.
@@ -25,19 +25,19 @@ import { camelToSnake } from '../../core/utils';
  * await bot.transferGift(...);
  */
 export async function transferGift(
-  this: Bot,
-  businessConnectionId: string,
-  ownedGiftId: string,
-  newOwnerChatId: number,
-  starCount?: number
+	this: Bot,
+	businessConnectionId: string,
+	ownedGiftId: string,
+	newOwnerChatId: number,
+	starCount?: number,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    ownedGiftId: ownedGiftId,
-    newOwnerChatId: newOwnerChatId,
-    starCount: starCount,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('transferGift', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		ownedGiftId: ownedGiftId,
+		newOwnerChatId: newOwnerChatId,
+		starCount: starCount,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("transferGift", snakeParams);
+	return response;
 }

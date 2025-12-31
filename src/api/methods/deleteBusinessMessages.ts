@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#deleteBusinessMessages Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Delete messages on behalf of a business account. Requires the can\_delete\_sent\_messages business bot right to delete messages sent by the bot itself, or the can\_delete\_all\_messages business bot right to delete any message. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.deleteBusinessMessages(...);
  */
 export async function deleteBusinessMessages(
-  this: Bot,
-  businessConnectionId: string,
-  messageIds: number[]
+	this: Bot,
+	businessConnectionId: string,
+	messageIds: number[],
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    messageIds: messageIds,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('deleteBusinessMessages', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		messageIds: messageIds,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"deleteBusinessMessages",
+		snakeParams,
+	);
+	return response;
 }

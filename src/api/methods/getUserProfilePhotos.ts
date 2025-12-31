@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
@@ -24,17 +24,17 @@ import { camelToSnake } from '../../core/utils';
  * await bot.getUserProfilePhotos(...);
  */
 export async function getUserProfilePhotos(
-  this: Bot,
-  userId: number,
-  offset?: number,
-  limit?: number
+	this: Bot,
+	userId: number,
+	offset?: number,
+	limit?: number,
 ): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    offset: offset,
-    limit: limit,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getUserProfilePhotos', snakeParams);
-  return response;
+	const apiParams = {
+		userId: userId,
+		offset: offset,
+		limit: limit,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("getUserProfilePhotos", snakeParams);
+	return response;
 }

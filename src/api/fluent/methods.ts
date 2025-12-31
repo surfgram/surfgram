@@ -4,8 +4,8 @@
  * @description Attaches all API methods to Bot prototype for fluent API access
  */
 
-import { Bot } from '../../core/bot';
-import * as methods from '../methods';
+import { Bot } from "../../core/bot";
+import * as methods from "../methods";
 
 /**
  * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
@@ -15,7 +15,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getUpdates = function (...args: any[]) {
-  return (methods as any).getUpdates.apply(this, args);
+	return (methods as any).getUpdates.apply(this, args);
 };
 
 /**
@@ -26,7 +26,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setWebhook = function (...args: any[]) {
-  return (methods as any).setWebhook.apply(this, args);
+	return (methods as any).setWebhook.apply(this, args);
 };
 
 /**
@@ -37,7 +37,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteWebhook = function (...args: any[]) {
-  return (methods as any).deleteWebhook.apply(this, args);
+	return (methods as any).deleteWebhook.apply(this, args);
 };
 
 /**
@@ -48,7 +48,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getWebhookInfo = function (...args: any[]) {
-  return (methods as any).getWebhookInfo.apply(this, args);
+	return (methods as any).getWebhookInfo.apply(this, args);
 };
 
 /**
@@ -59,7 +59,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMe = function (...args: any[]) {
-  return (methods as any).getMe.apply(this, args);
+	return (methods as any).getMe.apply(this, args);
 };
 
 /**
@@ -70,7 +70,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).logOut = function (...args: any[]) {
-  return (methods as any).logOut.apply(this, args);
+	return (methods as any).logOut.apply(this, args);
 };
 
 /**
@@ -81,7 +81,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).close = function (...args: any[]) {
-  return (methods as any).close.apply(this, args);
+	return (methods as any).close.apply(this, args);
 };
 
 /**
@@ -92,7 +92,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendMessage = function (...args: any[]) {
-  return (methods as any).sendMessage.apply(this, args);
+	return (methods as any).sendMessage.apply(this, args);
 };
 
 /**
@@ -103,7 +103,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).forwardMessage = function (...args: any[]) {
-  return (methods as any).forwardMessage.apply(this, args);
+	return (methods as any).forwardMessage.apply(this, args);
 };
 
 /**
@@ -114,7 +114,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).forwardMessages = function (...args: any[]) {
-  return (methods as any).forwardMessages.apply(this, args);
+	return (methods as any).forwardMessages.apply(this, args);
 };
 
 /**
@@ -125,7 +125,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).copyMessage = function (...args: any[]) {
-  return (methods as any).copyMessage.apply(this, args);
+	return (methods as any).copyMessage.apply(this, args);
 };
 
 /**
@@ -136,7 +136,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).copyMessages = function (...args: any[]) {
-  return (methods as any).copyMessages.apply(this, args);
+	return (methods as any).copyMessages.apply(this, args);
 };
 
 /**
@@ -147,7 +147,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendPhoto = function (...args: any[]) {
-  return (methods as any).sendPhoto.apply(this, args);
+	return (methods as any).sendPhoto.apply(this, args);
 };
 
 /**
@@ -158,7 +158,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendAudio = function (...args: any[]) {
-  return (methods as any).sendAudio.apply(this, args);
+	return (methods as any).sendAudio.apply(this, args);
 };
 
 /**
@@ -169,7 +169,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendDocument = function (...args: any[]) {
-  return (methods as any).sendDocument.apply(this, args);
+	return (methods as any).sendDocument.apply(this, args);
 };
 
 /**
@@ -180,7 +180,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendVideo = function (...args: any[]) {
-  return (methods as any).sendVideo.apply(this, args);
+	return (methods as any).sendVideo.apply(this, args);
 };
 
 /**
@@ -191,7 +191,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendAnimation = function (...args: any[]) {
-  return (methods as any).sendAnimation.apply(this, args);
+	return (methods as any).sendAnimation.apply(this, args);
 };
 
 /**
@@ -202,7 +202,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendVoice = function (...args: any[]) {
-  return (methods as any).sendVoice.apply(this, args);
+	return (methods as any).sendVoice.apply(this, args);
 };
 
 /**
@@ -213,7 +213,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendVideoNote = function (...args: any[]) {
-  return (methods as any).sendVideoNote.apply(this, args);
+	return (methods as any).sendVideoNote.apply(this, args);
 };
 
 /**
@@ -224,7 +224,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendPaidMedia = function (...args: any[]) {
-  return (methods as any).sendPaidMedia.apply(this, args);
+	return (methods as any).sendPaidMedia.apply(this, args);
 };
 
 /**
@@ -235,7 +235,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendMediaGroup = function (...args: any[]) {
-  return (methods as any).sendMediaGroup.apply(this, args);
+	return (methods as any).sendMediaGroup.apply(this, args);
 };
 
 /**
@@ -246,7 +246,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendLocation = function (...args: any[]) {
-  return (methods as any).sendLocation.apply(this, args);
+	return (methods as any).sendLocation.apply(this, args);
 };
 
 /**
@@ -257,7 +257,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendVenue = function (...args: any[]) {
-  return (methods as any).sendVenue.apply(this, args);
+	return (methods as any).sendVenue.apply(this, args);
 };
 
 /**
@@ -268,7 +268,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendContact = function (...args: any[]) {
-  return (methods as any).sendContact.apply(this, args);
+	return (methods as any).sendContact.apply(this, args);
 };
 
 /**
@@ -279,7 +279,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendPoll = function (...args: any[]) {
-  return (methods as any).sendPoll.apply(this, args);
+	return (methods as any).sendPoll.apply(this, args);
 };
 
 /**
@@ -290,7 +290,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendChecklist = function (...args: any[]) {
-  return (methods as any).sendChecklist.apply(this, args);
+	return (methods as any).sendChecklist.apply(this, args);
 };
 
 /**
@@ -301,7 +301,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendDice = function (...args: any[]) {
-  return (methods as any).sendDice.apply(this, args);
+	return (methods as any).sendDice.apply(this, args);
 };
 
 /**
@@ -312,7 +312,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendChatAction = function (...args: any[]) {
-  return (methods as any).sendChatAction.apply(this, args);
+	return (methods as any).sendChatAction.apply(this, args);
 };
 
 /**
@@ -323,7 +323,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setMessageReaction = function (...args: any[]) {
-  return (methods as any).setMessageReaction.apply(this, args);
+	return (methods as any).setMessageReaction.apply(this, args);
 };
 
 /**
@@ -334,7 +334,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getUserProfilePhotos = function (...args: any[]) {
-  return (methods as any).getUserProfilePhotos.apply(this, args);
+	return (methods as any).getUserProfilePhotos.apply(this, args);
 };
 
 /**
@@ -345,7 +345,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setUserEmojiStatus = function (...args: any[]) {
-  return (methods as any).setUserEmojiStatus.apply(this, args);
+	return (methods as any).setUserEmojiStatus.apply(this, args);
 };
 
 /**
@@ -356,7 +356,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getFile = function (...args: any[]) {
-  return (methods as any).getFile.apply(this, args);
+	return (methods as any).getFile.apply(this, args);
 };
 
 /**
@@ -367,7 +367,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).banChatMember = function (...args: any[]) {
-  return (methods as any).banChatMember.apply(this, args);
+	return (methods as any).banChatMember.apply(this, args);
 };
 
 /**
@@ -378,7 +378,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unbanChatMember = function (...args: any[]) {
-  return (methods as any).unbanChatMember.apply(this, args);
+	return (methods as any).unbanChatMember.apply(this, args);
 };
 
 /**
@@ -389,7 +389,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).restrictChatMember = function (...args: any[]) {
-  return (methods as any).restrictChatMember.apply(this, args);
+	return (methods as any).restrictChatMember.apply(this, args);
 };
 
 /**
@@ -400,7 +400,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).promoteChatMember = function (...args: any[]) {
-  return (methods as any).promoteChatMember.apply(this, args);
+	return (methods as any).promoteChatMember.apply(this, args);
 };
 
 /**
@@ -410,8 +410,10 @@ import * as methods from '../methods';
  * @function setChatAdministratorCustomTitle
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).setChatAdministratorCustomTitle = function (...args: any[]) {
-  return (methods as any).setChatAdministratorCustomTitle.apply(this, args);
+(Bot.prototype as any).setChatAdministratorCustomTitle = function (
+	...args: any[]
+) {
+	return (methods as any).setChatAdministratorCustomTitle.apply(this, args);
 };
 
 /**
@@ -422,7 +424,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).banChatSenderChat = function (...args: any[]) {
-  return (methods as any).banChatSenderChat.apply(this, args);
+	return (methods as any).banChatSenderChat.apply(this, args);
 };
 
 /**
@@ -433,7 +435,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unbanChatSenderChat = function (...args: any[]) {
-  return (methods as any).unbanChatSenderChat.apply(this, args);
+	return (methods as any).unbanChatSenderChat.apply(this, args);
 };
 
 /**
@@ -444,7 +446,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatPermissions = function (...args: any[]) {
-  return (methods as any).setChatPermissions.apply(this, args);
+	return (methods as any).setChatPermissions.apply(this, args);
 };
 
 /**
@@ -455,7 +457,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).exportChatInviteLink = function (...args: any[]) {
-  return (methods as any).exportChatInviteLink.apply(this, args);
+	return (methods as any).exportChatInviteLink.apply(this, args);
 };
 
 /**
@@ -466,7 +468,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).createChatInviteLink = function (...args: any[]) {
-  return (methods as any).createChatInviteLink.apply(this, args);
+	return (methods as any).createChatInviteLink.apply(this, args);
 };
 
 /**
@@ -477,7 +479,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editChatInviteLink = function (...args: any[]) {
-  return (methods as any).editChatInviteLink.apply(this, args);
+	return (methods as any).editChatInviteLink.apply(this, args);
 };
 
 /**
@@ -487,8 +489,10 @@ import * as methods from '../methods';
  * @function createChatSubscriptionInviteLink
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).createChatSubscriptionInviteLink = function (...args: any[]) {
-  return (methods as any).createChatSubscriptionInviteLink.apply(this, args);
+(Bot.prototype as any).createChatSubscriptionInviteLink = function (
+	...args: any[]
+) {
+	return (methods as any).createChatSubscriptionInviteLink.apply(this, args);
 };
 
 /**
@@ -498,8 +502,10 @@ import * as methods from '../methods';
  * @function editChatSubscriptionInviteLink
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).editChatSubscriptionInviteLink = function (...args: any[]) {
-  return (methods as any).editChatSubscriptionInviteLink.apply(this, args);
+(Bot.prototype as any).editChatSubscriptionInviteLink = function (
+	...args: any[]
+) {
+	return (methods as any).editChatSubscriptionInviteLink.apply(this, args);
 };
 
 /**
@@ -510,7 +516,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).revokeChatInviteLink = function (...args: any[]) {
-  return (methods as any).revokeChatInviteLink.apply(this, args);
+	return (methods as any).revokeChatInviteLink.apply(this, args);
 };
 
 /**
@@ -521,7 +527,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).approveChatJoinRequest = function (...args: any[]) {
-  return (methods as any).approveChatJoinRequest.apply(this, args);
+	return (methods as any).approveChatJoinRequest.apply(this, args);
 };
 
 /**
@@ -532,7 +538,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).declineChatJoinRequest = function (...args: any[]) {
-  return (methods as any).declineChatJoinRequest.apply(this, args);
+	return (methods as any).declineChatJoinRequest.apply(this, args);
 };
 
 /**
@@ -543,7 +549,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatPhoto = function (...args: any[]) {
-  return (methods as any).setChatPhoto.apply(this, args);
+	return (methods as any).setChatPhoto.apply(this, args);
 };
 
 /**
@@ -554,7 +560,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteChatPhoto = function (...args: any[]) {
-  return (methods as any).deleteChatPhoto.apply(this, args);
+	return (methods as any).deleteChatPhoto.apply(this, args);
 };
 
 /**
@@ -565,7 +571,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatTitle = function (...args: any[]) {
-  return (methods as any).setChatTitle.apply(this, args);
+	return (methods as any).setChatTitle.apply(this, args);
 };
 
 /**
@@ -576,7 +582,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatDescription = function (...args: any[]) {
-  return (methods as any).setChatDescription.apply(this, args);
+	return (methods as any).setChatDescription.apply(this, args);
 };
 
 /**
@@ -587,7 +593,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).pinChatMessage = function (...args: any[]) {
-  return (methods as any).pinChatMessage.apply(this, args);
+	return (methods as any).pinChatMessage.apply(this, args);
 };
 
 /**
@@ -598,7 +604,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unpinChatMessage = function (...args: any[]) {
-  return (methods as any).unpinChatMessage.apply(this, args);
+	return (methods as any).unpinChatMessage.apply(this, args);
 };
 
 /**
@@ -609,7 +615,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unpinAllChatMessages = function (...args: any[]) {
-  return (methods as any).unpinAllChatMessages.apply(this, args);
+	return (methods as any).unpinAllChatMessages.apply(this, args);
 };
 
 /**
@@ -620,7 +626,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).leaveChat = function (...args: any[]) {
-  return (methods as any).leaveChat.apply(this, args);
+	return (methods as any).leaveChat.apply(this, args);
 };
 
 /**
@@ -631,7 +637,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getChat = function (...args: any[]) {
-  return (methods as any).getChat.apply(this, args);
+	return (methods as any).getChat.apply(this, args);
 };
 
 /**
@@ -642,7 +648,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getChatAdministrators = function (...args: any[]) {
-  return (methods as any).getChatAdministrators.apply(this, args);
+	return (methods as any).getChatAdministrators.apply(this, args);
 };
 
 /**
@@ -653,7 +659,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getChatMemberCount = function (...args: any[]) {
-  return (methods as any).getChatMemberCount.apply(this, args);
+	return (methods as any).getChatMemberCount.apply(this, args);
 };
 
 /**
@@ -664,7 +670,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getChatMember = function (...args: any[]) {
-  return (methods as any).getChatMember.apply(this, args);
+	return (methods as any).getChatMember.apply(this, args);
 };
 
 /**
@@ -675,7 +681,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatStickerSet = function (...args: any[]) {
-  return (methods as any).setChatStickerSet.apply(this, args);
+	return (methods as any).setChatStickerSet.apply(this, args);
 };
 
 /**
@@ -686,7 +692,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteChatStickerSet = function (...args: any[]) {
-  return (methods as any).deleteChatStickerSet.apply(this, args);
+	return (methods as any).deleteChatStickerSet.apply(this, args);
 };
 
 /**
@@ -697,7 +703,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getForumTopicIconStickers = function (...args: any[]) {
-  return (methods as any).getForumTopicIconStickers.apply(this, args);
+	return (methods as any).getForumTopicIconStickers.apply(this, args);
 };
 
 /**
@@ -708,7 +714,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).createForumTopic = function (...args: any[]) {
-  return (methods as any).createForumTopic.apply(this, args);
+	return (methods as any).createForumTopic.apply(this, args);
 };
 
 /**
@@ -719,7 +725,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editForumTopic = function (...args: any[]) {
-  return (methods as any).editForumTopic.apply(this, args);
+	return (methods as any).editForumTopic.apply(this, args);
 };
 
 /**
@@ -730,7 +736,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).closeForumTopic = function (...args: any[]) {
-  return (methods as any).closeForumTopic.apply(this, args);
+	return (methods as any).closeForumTopic.apply(this, args);
 };
 
 /**
@@ -741,7 +747,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).reopenForumTopic = function (...args: any[]) {
-  return (methods as any).reopenForumTopic.apply(this, args);
+	return (methods as any).reopenForumTopic.apply(this, args);
 };
 
 /**
@@ -752,7 +758,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteForumTopic = function (...args: any[]) {
-  return (methods as any).deleteForumTopic.apply(this, args);
+	return (methods as any).deleteForumTopic.apply(this, args);
 };
 
 /**
@@ -763,7 +769,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unpinAllForumTopicMessages = function (...args: any[]) {
-  return (methods as any).unpinAllForumTopicMessages.apply(this, args);
+	return (methods as any).unpinAllForumTopicMessages.apply(this, args);
 };
 
 /**
@@ -774,7 +780,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editGeneralForumTopic = function (...args: any[]) {
-  return (methods as any).editGeneralForumTopic.apply(this, args);
+	return (methods as any).editGeneralForumTopic.apply(this, args);
 };
 
 /**
@@ -785,7 +791,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).closeGeneralForumTopic = function (...args: any[]) {
-  return (methods as any).closeGeneralForumTopic.apply(this, args);
+	return (methods as any).closeGeneralForumTopic.apply(this, args);
 };
 
 /**
@@ -796,7 +802,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).reopenGeneralForumTopic = function (...args: any[]) {
-  return (methods as any).reopenGeneralForumTopic.apply(this, args);
+	return (methods as any).reopenGeneralForumTopic.apply(this, args);
 };
 
 /**
@@ -807,7 +813,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).hideGeneralForumTopic = function (...args: any[]) {
-  return (methods as any).hideGeneralForumTopic.apply(this, args);
+	return (methods as any).hideGeneralForumTopic.apply(this, args);
 };
 
 /**
@@ -818,7 +824,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).unhideGeneralForumTopic = function (...args: any[]) {
-  return (methods as any).unhideGeneralForumTopic.apply(this, args);
+	return (methods as any).unhideGeneralForumTopic.apply(this, args);
 };
 
 /**
@@ -828,8 +834,10 @@ import * as methods from '../methods';
  * @function unpinAllGeneralForumTopicMessages
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).unpinAllGeneralForumTopicMessages = function (...args: any[]) {
-  return (methods as any).unpinAllGeneralForumTopicMessages.apply(this, args);
+(Bot.prototype as any).unpinAllGeneralForumTopicMessages = function (
+	...args: any[]
+) {
+	return (methods as any).unpinAllGeneralForumTopicMessages.apply(this, args);
 };
 
 /**
@@ -840,7 +848,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).answerCallbackQuery = function (...args: any[]) {
-  return (methods as any).answerCallbackQuery.apply(this, args);
+	return (methods as any).answerCallbackQuery.apply(this, args);
 };
 
 /**
@@ -851,7 +859,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getUserChatBoosts = function (...args: any[]) {
-  return (methods as any).getUserChatBoosts.apply(this, args);
+	return (methods as any).getUserChatBoosts.apply(this, args);
 };
 
 /**
@@ -862,7 +870,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getBusinessConnection = function (...args: any[]) {
-  return (methods as any).getBusinessConnection.apply(this, args);
+	return (methods as any).getBusinessConnection.apply(this, args);
 };
 
 /**
@@ -873,7 +881,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setMyCommands = function (...args: any[]) {
-  return (methods as any).setMyCommands.apply(this, args);
+	return (methods as any).setMyCommands.apply(this, args);
 };
 
 /**
@@ -884,7 +892,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteMyCommands = function (...args: any[]) {
-  return (methods as any).deleteMyCommands.apply(this, args);
+	return (methods as any).deleteMyCommands.apply(this, args);
 };
 
 /**
@@ -895,7 +903,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMyCommands = function (...args: any[]) {
-  return (methods as any).getMyCommands.apply(this, args);
+	return (methods as any).getMyCommands.apply(this, args);
 };
 
 /**
@@ -906,7 +914,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setMyName = function (...args: any[]) {
-  return (methods as any).setMyName.apply(this, args);
+	return (methods as any).setMyName.apply(this, args);
 };
 
 /**
@@ -917,7 +925,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMyName = function (...args: any[]) {
-  return (methods as any).getMyName.apply(this, args);
+	return (methods as any).getMyName.apply(this, args);
 };
 
 /**
@@ -928,7 +936,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setMyDescription = function (...args: any[]) {
-  return (methods as any).setMyDescription.apply(this, args);
+	return (methods as any).setMyDescription.apply(this, args);
 };
 
 /**
@@ -939,7 +947,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMyDescription = function (...args: any[]) {
-  return (methods as any).getMyDescription.apply(this, args);
+	return (methods as any).getMyDescription.apply(this, args);
 };
 
 /**
@@ -950,7 +958,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setMyShortDescription = function (...args: any[]) {
-  return (methods as any).setMyShortDescription.apply(this, args);
+	return (methods as any).setMyShortDescription.apply(this, args);
 };
 
 /**
@@ -961,7 +969,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMyShortDescription = function (...args: any[]) {
-  return (methods as any).getMyShortDescription.apply(this, args);
+	return (methods as any).getMyShortDescription.apply(this, args);
 };
 
 /**
@@ -972,7 +980,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setChatMenuButton = function (...args: any[]) {
-  return (methods as any).setChatMenuButton.apply(this, args);
+	return (methods as any).setChatMenuButton.apply(this, args);
 };
 
 /**
@@ -983,7 +991,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getChatMenuButton = function (...args: any[]) {
-  return (methods as any).getChatMenuButton.apply(this, args);
+	return (methods as any).getChatMenuButton.apply(this, args);
 };
 
 /**
@@ -993,8 +1001,10 @@ import * as methods from '../methods';
  * @function setMyDefaultAdministratorRights
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).setMyDefaultAdministratorRights = function (...args: any[]) {
-  return (methods as any).setMyDefaultAdministratorRights.apply(this, args);
+(Bot.prototype as any).setMyDefaultAdministratorRights = function (
+	...args: any[]
+) {
+	return (methods as any).setMyDefaultAdministratorRights.apply(this, args);
 };
 
 /**
@@ -1004,8 +1014,10 @@ import * as methods from '../methods';
  * @function getMyDefaultAdministratorRights
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).getMyDefaultAdministratorRights = function (...args: any[]) {
-  return (methods as any).getMyDefaultAdministratorRights.apply(this, args);
+(Bot.prototype as any).getMyDefaultAdministratorRights = function (
+	...args: any[]
+) {
+	return (methods as any).getMyDefaultAdministratorRights.apply(this, args);
 };
 
 /**
@@ -1016,7 +1028,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getAvailableGifts = function (...args: any[]) {
-  return (methods as any).getAvailableGifts.apply(this, args);
+	return (methods as any).getAvailableGifts.apply(this, args);
 };
 
 /**
@@ -1027,7 +1039,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendGift = function (...args: any[]) {
-  return (methods as any).sendGift.apply(this, args);
+	return (methods as any).sendGift.apply(this, args);
 };
 
 /**
@@ -1038,7 +1050,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).giftPremiumSubscription = function (...args: any[]) {
-  return (methods as any).giftPremiumSubscription.apply(this, args);
+	return (methods as any).giftPremiumSubscription.apply(this, args);
 };
 
 /**
@@ -1049,7 +1061,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).verifyUser = function (...args: any[]) {
-  return (methods as any).verifyUser.apply(this, args);
+	return (methods as any).verifyUser.apply(this, args);
 };
 
 /**
@@ -1060,7 +1072,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).verifyChat = function (...args: any[]) {
-  return (methods as any).verifyChat.apply(this, args);
+	return (methods as any).verifyChat.apply(this, args);
 };
 
 /**
@@ -1071,7 +1083,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).removeUserVerification = function (...args: any[]) {
-  return (methods as any).removeUserVerification.apply(this, args);
+	return (methods as any).removeUserVerification.apply(this, args);
 };
 
 /**
@@ -1082,7 +1094,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).removeChatVerification = function (...args: any[]) {
-  return (methods as any).removeChatVerification.apply(this, args);
+	return (methods as any).removeChatVerification.apply(this, args);
 };
 
 /**
@@ -1093,7 +1105,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).readBusinessMessage = function (...args: any[]) {
-  return (methods as any).readBusinessMessage.apply(this, args);
+	return (methods as any).readBusinessMessage.apply(this, args);
 };
 
 /**
@@ -1104,7 +1116,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteBusinessMessages = function (...args: any[]) {
-  return (methods as any).deleteBusinessMessages.apply(this, args);
+	return (methods as any).deleteBusinessMessages.apply(this, args);
 };
 
 /**
@@ -1115,7 +1127,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setBusinessAccountName = function (...args: any[]) {
-  return (methods as any).setBusinessAccountName.apply(this, args);
+	return (methods as any).setBusinessAccountName.apply(this, args);
 };
 
 /**
@@ -1126,7 +1138,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setBusinessAccountUsername = function (...args: any[]) {
-  return (methods as any).setBusinessAccountUsername.apply(this, args);
+	return (methods as any).setBusinessAccountUsername.apply(this, args);
 };
 
 /**
@@ -1137,7 +1149,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setBusinessAccountBio = function (...args: any[]) {
-  return (methods as any).setBusinessAccountBio.apply(this, args);
+	return (methods as any).setBusinessAccountBio.apply(this, args);
 };
 
 /**
@@ -1147,8 +1159,10 @@ import * as methods from '../methods';
  * @function setBusinessAccountProfilePhoto
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).setBusinessAccountProfilePhoto = function (...args: any[]) {
-  return (methods as any).setBusinessAccountProfilePhoto.apply(this, args);
+(Bot.prototype as any).setBusinessAccountProfilePhoto = function (
+	...args: any[]
+) {
+	return (methods as any).setBusinessAccountProfilePhoto.apply(this, args);
 };
 
 /**
@@ -1158,8 +1172,10 @@ import * as methods from '../methods';
  * @function removeBusinessAccountProfilePhoto
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).removeBusinessAccountProfilePhoto = function (...args: any[]) {
-  return (methods as any).removeBusinessAccountProfilePhoto.apply(this, args);
+(Bot.prototype as any).removeBusinessAccountProfilePhoto = function (
+	...args: any[]
+) {
+	return (methods as any).removeBusinessAccountProfilePhoto.apply(this, args);
 };
 
 /**
@@ -1169,8 +1185,10 @@ import * as methods from '../methods';
  * @function setBusinessAccountGiftSettings
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).setBusinessAccountGiftSettings = function (...args: any[]) {
-  return (methods as any).setBusinessAccountGiftSettings.apply(this, args);
+(Bot.prototype as any).setBusinessAccountGiftSettings = function (
+	...args: any[]
+) {
+	return (methods as any).setBusinessAccountGiftSettings.apply(this, args);
 };
 
 /**
@@ -1180,8 +1198,10 @@ import * as methods from '../methods';
  * @function getBusinessAccountStarBalance
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).getBusinessAccountStarBalance = function (...args: any[]) {
-  return (methods as any).getBusinessAccountStarBalance.apply(this, args);
+(Bot.prototype as any).getBusinessAccountStarBalance = function (
+	...args: any[]
+) {
+	return (methods as any).getBusinessAccountStarBalance.apply(this, args);
 };
 
 /**
@@ -1191,8 +1211,10 @@ import * as methods from '../methods';
  * @function transferBusinessAccountStars
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).transferBusinessAccountStars = function (...args: any[]) {
-  return (methods as any).transferBusinessAccountStars.apply(this, args);
+(Bot.prototype as any).transferBusinessAccountStars = function (
+	...args: any[]
+) {
+	return (methods as any).transferBusinessAccountStars.apply(this, args);
 };
 
 /**
@@ -1203,7 +1225,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getBusinessAccountGifts = function (...args: any[]) {
-  return (methods as any).getBusinessAccountGifts.apply(this, args);
+	return (methods as any).getBusinessAccountGifts.apply(this, args);
 };
 
 /**
@@ -1214,7 +1236,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).convertGiftToStars = function (...args: any[]) {
-  return (methods as any).convertGiftToStars.apply(this, args);
+	return (methods as any).convertGiftToStars.apply(this, args);
 };
 
 /**
@@ -1225,7 +1247,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).upgradeGift = function (...args: any[]) {
-  return (methods as any).upgradeGift.apply(this, args);
+	return (methods as any).upgradeGift.apply(this, args);
 };
 
 /**
@@ -1236,7 +1258,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).transferGift = function (...args: any[]) {
-  return (methods as any).transferGift.apply(this, args);
+	return (methods as any).transferGift.apply(this, args);
 };
 
 /**
@@ -1247,7 +1269,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).postStory = function (...args: any[]) {
-  return (methods as any).postStory.apply(this, args);
+	return (methods as any).postStory.apply(this, args);
 };
 
 /**
@@ -1258,7 +1280,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editStory = function (...args: any[]) {
-  return (methods as any).editStory.apply(this, args);
+	return (methods as any).editStory.apply(this, args);
 };
 
 /**
@@ -1269,7 +1291,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteStory = function (...args: any[]) {
-  return (methods as any).deleteStory.apply(this, args);
+	return (methods as any).deleteStory.apply(this, args);
 };
 
 /**
@@ -1280,7 +1302,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageText = function (...args: any[]) {
-  return (methods as any).editMessageText.apply(this, args);
+	return (methods as any).editMessageText.apply(this, args);
 };
 
 /**
@@ -1291,7 +1313,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageCaption = function (...args: any[]) {
-  return (methods as any).editMessageCaption.apply(this, args);
+	return (methods as any).editMessageCaption.apply(this, args);
 };
 
 /**
@@ -1302,7 +1324,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageMedia = function (...args: any[]) {
-  return (methods as any).editMessageMedia.apply(this, args);
+	return (methods as any).editMessageMedia.apply(this, args);
 };
 
 /**
@@ -1313,7 +1335,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageLiveLocation = function (...args: any[]) {
-  return (methods as any).editMessageLiveLocation.apply(this, args);
+	return (methods as any).editMessageLiveLocation.apply(this, args);
 };
 
 /**
@@ -1324,7 +1346,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).stopMessageLiveLocation = function (...args: any[]) {
-  return (methods as any).stopMessageLiveLocation.apply(this, args);
+	return (methods as any).stopMessageLiveLocation.apply(this, args);
 };
 
 /**
@@ -1335,7 +1357,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageChecklist = function (...args: any[]) {
-  return (methods as any).editMessageChecklist.apply(this, args);
+	return (methods as any).editMessageChecklist.apply(this, args);
 };
 
 /**
@@ -1346,7 +1368,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editMessageReplyMarkup = function (...args: any[]) {
-  return (methods as any).editMessageReplyMarkup.apply(this, args);
+	return (methods as any).editMessageReplyMarkup.apply(this, args);
 };
 
 /**
@@ -1357,7 +1379,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).stopPoll = function (...args: any[]) {
-  return (methods as any).stopPoll.apply(this, args);
+	return (methods as any).stopPoll.apply(this, args);
 };
 
 /**
@@ -1368,7 +1390,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).approveSuggestedPost = function (...args: any[]) {
-  return (methods as any).approveSuggestedPost.apply(this, args);
+	return (methods as any).approveSuggestedPost.apply(this, args);
 };
 
 /**
@@ -1379,7 +1401,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).declineSuggestedPost = function (...args: any[]) {
-  return (methods as any).declineSuggestedPost.apply(this, args);
+	return (methods as any).declineSuggestedPost.apply(this, args);
 };
 
 /**
@@ -1390,7 +1412,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteMessage = function (...args: any[]) {
-  return (methods as any).deleteMessage.apply(this, args);
+	return (methods as any).deleteMessage.apply(this, args);
 };
 
 /**
@@ -1401,7 +1423,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteMessages = function (...args: any[]) {
-  return (methods as any).deleteMessages.apply(this, args);
+	return (methods as any).deleteMessages.apply(this, args);
 };
 
 /**
@@ -1412,7 +1434,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendSticker = function (...args: any[]) {
-  return (methods as any).sendSticker.apply(this, args);
+	return (methods as any).sendSticker.apply(this, args);
 };
 
 /**
@@ -1423,7 +1445,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getStickerSet = function (...args: any[]) {
-  return (methods as any).getStickerSet.apply(this, args);
+	return (methods as any).getStickerSet.apply(this, args);
 };
 
 /**
@@ -1434,7 +1456,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getCustomEmojiStickers = function (...args: any[]) {
-  return (methods as any).getCustomEmojiStickers.apply(this, args);
+	return (methods as any).getCustomEmojiStickers.apply(this, args);
 };
 
 /**
@@ -1445,7 +1467,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).uploadStickerFile = function (...args: any[]) {
-  return (methods as any).uploadStickerFile.apply(this, args);
+	return (methods as any).uploadStickerFile.apply(this, args);
 };
 
 /**
@@ -1456,7 +1478,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).createNewStickerSet = function (...args: any[]) {
-  return (methods as any).createNewStickerSet.apply(this, args);
+	return (methods as any).createNewStickerSet.apply(this, args);
 };
 
 /**
@@ -1467,7 +1489,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).addStickerToSet = function (...args: any[]) {
-  return (methods as any).addStickerToSet.apply(this, args);
+	return (methods as any).addStickerToSet.apply(this, args);
 };
 
 /**
@@ -1478,7 +1500,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerPositionInSet = function (...args: any[]) {
-  return (methods as any).setStickerPositionInSet.apply(this, args);
+	return (methods as any).setStickerPositionInSet.apply(this, args);
 };
 
 /**
@@ -1489,7 +1511,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteStickerFromSet = function (...args: any[]) {
-  return (methods as any).deleteStickerFromSet.apply(this, args);
+	return (methods as any).deleteStickerFromSet.apply(this, args);
 };
 
 /**
@@ -1500,7 +1522,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).replaceStickerInSet = function (...args: any[]) {
-  return (methods as any).replaceStickerInSet.apply(this, args);
+	return (methods as any).replaceStickerInSet.apply(this, args);
 };
 
 /**
@@ -1511,7 +1533,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerEmojiList = function (...args: any[]) {
-  return (methods as any).setStickerEmojiList.apply(this, args);
+	return (methods as any).setStickerEmojiList.apply(this, args);
 };
 
 /**
@@ -1522,7 +1544,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerKeywords = function (...args: any[]) {
-  return (methods as any).setStickerKeywords.apply(this, args);
+	return (methods as any).setStickerKeywords.apply(this, args);
 };
 
 /**
@@ -1533,7 +1555,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerMaskPosition = function (...args: any[]) {
-  return (methods as any).setStickerMaskPosition.apply(this, args);
+	return (methods as any).setStickerMaskPosition.apply(this, args);
 };
 
 /**
@@ -1544,7 +1566,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerSetTitle = function (...args: any[]) {
-  return (methods as any).setStickerSetTitle.apply(this, args);
+	return (methods as any).setStickerSetTitle.apply(this, args);
 };
 
 /**
@@ -1555,7 +1577,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setStickerSetThumbnail = function (...args: any[]) {
-  return (methods as any).setStickerSetThumbnail.apply(this, args);
+	return (methods as any).setStickerSetThumbnail.apply(this, args);
 };
 
 /**
@@ -1565,8 +1587,10 @@ import * as methods from '../methods';
  * @function setCustomEmojiStickerSetThumbnail
  * @returns {Promise<any>} Method result
  */
-(Bot.prototype as any).setCustomEmojiStickerSetThumbnail = function (...args: any[]) {
-  return (methods as any).setCustomEmojiStickerSetThumbnail.apply(this, args);
+(Bot.prototype as any).setCustomEmojiStickerSetThumbnail = function (
+	...args: any[]
+) {
+	return (methods as any).setCustomEmojiStickerSetThumbnail.apply(this, args);
 };
 
 /**
@@ -1577,7 +1601,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).deleteStickerSet = function (...args: any[]) {
-  return (methods as any).deleteStickerSet.apply(this, args);
+	return (methods as any).deleteStickerSet.apply(this, args);
 };
 
 /**
@@ -1588,7 +1612,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).answerInlineQuery = function (...args: any[]) {
-  return (methods as any).answerInlineQuery.apply(this, args);
+	return (methods as any).answerInlineQuery.apply(this, args);
 };
 
 /**
@@ -1599,7 +1623,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).answerWebAppQuery = function (...args: any[]) {
-  return (methods as any).answerWebAppQuery.apply(this, args);
+	return (methods as any).answerWebAppQuery.apply(this, args);
 };
 
 /**
@@ -1610,7 +1634,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).savePreparedInlineMessage = function (...args: any[]) {
-  return (methods as any).savePreparedInlineMessage.apply(this, args);
+	return (methods as any).savePreparedInlineMessage.apply(this, args);
 };
 
 /**
@@ -1621,7 +1645,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendInvoice = function (...args: any[]) {
-  return (methods as any).sendInvoice.apply(this, args);
+	return (methods as any).sendInvoice.apply(this, args);
 };
 
 /**
@@ -1632,7 +1656,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).createInvoiceLink = function (...args: any[]) {
-  return (methods as any).createInvoiceLink.apply(this, args);
+	return (methods as any).createInvoiceLink.apply(this, args);
 };
 
 /**
@@ -1643,7 +1667,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).answerShippingQuery = function (...args: any[]) {
-  return (methods as any).answerShippingQuery.apply(this, args);
+	return (methods as any).answerShippingQuery.apply(this, args);
 };
 
 /**
@@ -1654,7 +1678,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).answerPreCheckoutQuery = function (...args: any[]) {
-  return (methods as any).answerPreCheckoutQuery.apply(this, args);
+	return (methods as any).answerPreCheckoutQuery.apply(this, args);
 };
 
 /**
@@ -1665,7 +1689,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getMyStarBalance = function (...args: any[]) {
-  return (methods as any).getMyStarBalance.apply(this, args);
+	return (methods as any).getMyStarBalance.apply(this, args);
 };
 
 /**
@@ -1676,7 +1700,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getStarTransactions = function (...args: any[]) {
-  return (methods as any).getStarTransactions.apply(this, args);
+	return (methods as any).getStarTransactions.apply(this, args);
 };
 
 /**
@@ -1687,7 +1711,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).refundStarPayment = function (...args: any[]) {
-  return (methods as any).refundStarPayment.apply(this, args);
+	return (methods as any).refundStarPayment.apply(this, args);
 };
 
 /**
@@ -1698,7 +1722,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).editUserStarSubscription = function (...args: any[]) {
-  return (methods as any).editUserStarSubscription.apply(this, args);
+	return (methods as any).editUserStarSubscription.apply(this, args);
 };
 
 /**
@@ -1709,7 +1733,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setPassportDataErrors = function (...args: any[]) {
-  return (methods as any).setPassportDataErrors.apply(this, args);
+	return (methods as any).setPassportDataErrors.apply(this, args);
 };
 
 /**
@@ -1720,7 +1744,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).sendGame = function (...args: any[]) {
-  return (methods as any).sendGame.apply(this, args);
+	return (methods as any).sendGame.apply(this, args);
 };
 
 /**
@@ -1731,7 +1755,7 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).setGameScore = function (...args: any[]) {
-  return (methods as any).setGameScore.apply(this, args);
+	return (methods as any).setGameScore.apply(this, args);
 };
 
 /**
@@ -1742,5 +1766,5 @@ import * as methods from '../methods';
  * @returns {Promise<any>} Method result
  */
 (Bot.prototype as any).getGameHighScores = function (...args: any[]) {
-  return (methods as any).getGameHighScores.apply(this, args);
+	return (methods as any).getGameHighScores.apply(this, args);
 };

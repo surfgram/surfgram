@@ -8,8 +8,8 @@
  * @property {number} [error_code] - Error code (if ok is false)
  */
 export interface TelegramApiResponse<T = any> {
-  ok: boolean;
-  result?: T;
-  description?: string;
-  error_code?: number;
+	ok: boolean;
+	result?: T;
+	description?: string;
+	error_code?: number;
 }

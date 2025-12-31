@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setPassportDataErrors Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { PassportElementError } from '../types/passportElementError';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { PassportElementError } from "../types/passportElementError";
 
 /**
  * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed \(the contents of the field for which you returned the error must change\). Returns True on success.
@@ -24,15 +24,18 @@ import { PassportElementError } from '../types/passportElementError';
  * await bot.setPassportDataErrors(...);
  */
 export async function setPassportDataErrors(
-  this: Bot,
-  userId: number,
-  errors: PassportElementError[]
+	this: Bot,
+	userId: number,
+	errors: PassportElementError[],
 ): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    errors: errors,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setPassportDataErrors', snakeParams);
-  return response;
+	const apiParams = {
+		userId: userId,
+		errors: errors,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setPassportDataErrors",
+		snakeParams,
+	);
+	return response;
 }

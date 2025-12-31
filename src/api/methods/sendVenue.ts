@@ -5,15 +5,15 @@
  * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { SendVenueParams } from '../interfaces/sendVenueParams';
-import { SuggestedPostParameters } from '../types/suggestedPostParameters';
-import { ReplyParameters } from '../types/replyParameters';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
-import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
-import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
-import { ForceReply } from '../types/forceReply';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { SendVenueParams } from "../interfaces/sendVenueParams";
+import { SuggestedPostParameters } from "../types/suggestedPostParameters";
+import { ReplyParameters } from "../types/replyParameters";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
+import { ReplyKeyboardMarkup } from "../types/replyKeyboardMarkup";
+import { ReplyKeyboardRemove } from "../types/replyKeyboardRemove";
+import { ForceReply } from "../types/forceReply";
 
 /**
  * Use this method to send information about a venue. On success, the sent Message is returned.
@@ -30,8 +30,11 @@ import { ForceReply } from '../types/forceReply';
  * // ... params
  * });
  */
-export async function sendVenue(this: Bot, params: SendVenueParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('sendVenue', snakeParams);
-  return response;
+export async function sendVenue(
+	this: Bot,
+	params: SendVenueParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("sendVenue", snakeParams);
+	return response;
 }

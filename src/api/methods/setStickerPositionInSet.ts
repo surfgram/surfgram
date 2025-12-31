@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setStickerPositionInSet Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.
@@ -23,15 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * await bot.setStickerPositionInSet(...);
  */
 export async function setStickerPositionInSet(
-  this: Bot,
-  sticker: string,
-  position: number
+	this: Bot,
+	sticker: string,
+	position: number,
 ): Promise<any> {
-  const apiParams = {
-    sticker: sticker,
-    position: position,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setStickerPositionInSet', snakeParams);
-  return response;
+	const apiParams = {
+		sticker: sticker,
+		position: position,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setStickerPositionInSet",
+		snakeParams,
+	);
+	return response;
 }

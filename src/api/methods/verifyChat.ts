@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#verifyChat Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.
@@ -23,15 +23,15 @@ import { camelToSnake } from '../../core/utils';
  * await bot.verifyChat(...);
  */
 export async function verifyChat(
-  this: Bot,
-  chatId: number | string,
-  customDescription?: string
+	this: Bot,
+	chatId: number | string,
+	customDescription?: string,
 ): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    customDescription: customDescription,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('verifyChat', snakeParams);
-  return response;
+	const apiParams = {
+		chatId: chatId,
+		customDescription: customDescription,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("verifyChat", snakeParams);
+	return response;
 }

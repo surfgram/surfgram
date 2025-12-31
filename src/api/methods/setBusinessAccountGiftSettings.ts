@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setBusinessAccountGiftSettings Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { AcceptedGiftTypes } from '../types/acceptedGiftTypes';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { AcceptedGiftTypes } from "../types/acceptedGiftTypes";
 
 /**
  * Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can\_change\_gift\_settings business bot right. Returns True on success.
@@ -25,17 +25,20 @@ import { AcceptedGiftTypes } from '../types/acceptedGiftTypes';
  * await bot.setBusinessAccountGiftSettings(...);
  */
 export async function setBusinessAccountGiftSettings(
-  this: Bot,
-  businessConnectionId: string,
-  showGiftButton: boolean,
-  acceptedGiftTypes: AcceptedGiftTypes
+	this: Bot,
+	businessConnectionId: string,
+	showGiftButton: boolean,
+	acceptedGiftTypes: AcceptedGiftTypes,
 ): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    showGiftButton: showGiftButton,
-    acceptedGiftTypes: acceptedGiftTypes,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('setBusinessAccountGiftSettings', snakeParams);
-  return response;
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		showGiftButton: showGiftButton,
+		acceptedGiftTypes: acceptedGiftTypes,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"setBusinessAccountGiftSettings",
+		snakeParams,
+	);
+	return response;
 }

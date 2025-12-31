@@ -3,5 +3,5 @@
  * @module plugin
  */
 
-export { Plugin } from './plugin';
-export { PluginManager } from './pluginManager';
+export { Plugin } from "./plugin";
+export { PluginManager } from "./pluginManager";
