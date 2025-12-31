@@ -2,11 +2,6 @@
 
 ![Surfgram Logo](assets/logo.svg)
 
-> [!IMPORTANT]
-> Surfgram is in the very early alpha testing. Not all features are stable
-
----
-
 ## Overview
 
 Surfgram is a no-nonsense SDK for Telegram Bot API designed for developers who want:
