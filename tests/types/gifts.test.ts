@@ -13,7 +13,7 @@ describe('Gifts', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.gifts ?? instance.raw?.gifts).toEqual([{} as any]);
   });
 });

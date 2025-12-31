@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#promoteChatMember Telegram API Documentation}
  */
 
+
 export interface PromoteChatMemberParams {
   /**
    * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -149,4 +150,5 @@ export interface PromoteChatMemberParams {
    * @required No
    */
   canManageDirectMessages?: boolean;
+
 }

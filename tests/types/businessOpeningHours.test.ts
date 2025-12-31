@@ -6,7 +6,7 @@ describe('BusinessOpeningHours', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      time_zone_name: 'example text',
+      time_zone_name: "example text",
       opening_hours: [{} as any],
     };
 
@@ -14,8 +14,8 @@ describe('BusinessOpeningHours', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.timeZoneName ?? instance.raw?.time_zone_name).toEqual('example text');
+    
+    expect(instance.timeZoneName ?? instance.raw?.time_zone_name).toEqual("example text");
     expect(instance.openingHours ?? instance.raw?.opening_hours).toEqual([{} as any]);
   });
 });

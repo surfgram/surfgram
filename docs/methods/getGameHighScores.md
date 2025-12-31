@@ -346,6 +346,7 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `sendGame`, `setGameScore`, `getGameHighScores`
 
+
 [View Game documentation with fluent methods](../types/Game.md)
 
 ### GameHighScore (1 methods)
@@ -356,14 +357,16 @@ This method is available as a fluent method on the following types:
 
 [View GameHighScore documentation with fluent methods](../types/GameHighScore.md)
 
+
 ## Parameters
 
-| Parameter         | Type     | Required | Description                                                                            |
-| :---------------- | :------- | :------: | :------------------------------------------------------------------------------------- |
-| `userId`          | `number` |   Yes    | Target user id                                                                         |
-| `chatId`          | `number` |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat  |
-| `messageId`       | `number` |    No    | Required if inline_message_id is not specified. Identifier of the sent message         |
-| `inlineMessageId` | `string` |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Target user id |
+| `chatId` | `number` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat |
+| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+
 
 ## Usage Example
 
@@ -374,12 +377,9 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onChat((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

@@ -6,14 +6,14 @@ describe('CopyTextButton', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      text: 'example text',
+      text: "example text",
     };
 
     const instance = new CopyTextButton(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.text ?? instance.raw?.text).toEqual('example text');
+    
+    expect(instance.text ?? instance.raw?.text).toEqual("example text");
   });
 });

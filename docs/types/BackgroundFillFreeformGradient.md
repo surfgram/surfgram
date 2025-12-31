@@ -4,10 +4,11 @@ The background is a freeform gradient that rotates after every message in the ch
 
 ## Fields
 
-| Name   | Type       | Required | Description                                                                                          |
-| :----- | :--------- | :------: | :--------------------------------------------------------------------------------------------------- |
-| type   | `string`   |   Yes    | Type of the background fill, always “freeform_gradient”                                              |
-| colors | `number[]` |   Yes    | A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the background fill, always “freeform\_gradient” |
+| colors | `number[]` | Yes | A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format |
+
 
 ## Event Handlers
 
@@ -15,11 +16,9 @@ You can listen for BackgroundFillFreeformGradient events using:
 
 ```typescript
 // Type-specific handler
-bot.onBackgroundFillFreeformGradient(
-  async (backgroundfillfreeformgradient: BackgroundFillFreeformGradient) => {
-    console.log('Received:', backgroundfillfreeformgradient);
-  }
-);
+bot.onBackgroundFillFreeformGradient(async (backgroundfillfreeformgradient: BackgroundFillFreeformGradient) => {
+  console.log('Received:', backgroundfillfreeformgradient);
+});
 
 // Generic handler
 bot.on('backgroundfillfreeformgradient', async (data: BackgroundFillFreeformGradient) => {

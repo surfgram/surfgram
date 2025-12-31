@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram API Documentation}
  */
 
+
 export interface GetUpdatesParams {
   /**
    * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update\_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.
@@ -37,4 +38,5 @@ export interface GetUpdatesParams {
    * @required No
    */
   allowedUpdates?: string[];
+
 }

@@ -13,7 +13,7 @@ describe('InlineKeyboardMarkup', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.inlineKeyboard ?? instance.raw?.inline_keyboard).toEqual([[{} as any]]);
   });
 });

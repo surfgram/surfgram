@@ -56,4 +56,5 @@ export interface EditMessageMediaParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
+
 }

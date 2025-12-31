@@ -6,14 +6,14 @@ describe('BotDescription', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      description: 'example text',
+      description: "example text",
     };
 
     const instance = new BotDescription(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.description ?? instance.raw?.description).toEqual('example text');
+    
+    expect(instance.description ?? instance.raw?.description).toEqual("example text");
   });
 });

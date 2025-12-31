@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram API Documentation}
  */
 
+
 export interface GetBusinessAccountGiftsParams {
   /**
    * Unique identifier of the business connection
@@ -77,4 +78,5 @@ export interface GetBusinessAccountGiftsParams {
    * @required No
    */
   limit?: number;
+
 }

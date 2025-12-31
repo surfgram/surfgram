@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setChatDescription(...);
  */
-export async function setChatDescription(
-  this: Bot,
-  chatId: number | string,
-  description?: string
-): Promise<any> {
+export async function setChatDescription(this: Bot, chatId: number | string, description?: string): Promise<any> {
   const apiParams = {
     chatId: chatId,
     description: description,

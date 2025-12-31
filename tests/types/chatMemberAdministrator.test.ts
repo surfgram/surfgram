@@ -6,7 +6,7 @@ describe('ChatMemberAdministrator', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      status: 'example text',
+      status: "example text",
       user: {} as any,
       can_be_edited: true,
       is_anonymous: true,
@@ -25,15 +25,15 @@ describe('ChatMemberAdministrator', () => {
       can_pin_messages: true,
       can_manage_topics: true,
       can_manage_direct_messages: true,
-      custom_title: 'example text',
+      custom_title: "example text",
     };
 
     const instance = new ChatMemberAdministrator(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.status ?? instance.raw?.status).toEqual('example text');
+    
+    expect(instance.status ?? instance.raw?.status).toEqual("example text");
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.canBeEdited ?? instance.raw?.can_be_edited).toEqual(true);
     expect(instance.isAnonymous ?? instance.raw?.is_anonymous).toEqual(true);
@@ -51,9 +51,7 @@ describe('ChatMemberAdministrator', () => {
     expect(instance.canEditMessages ?? instance.raw?.can_edit_messages).toEqual(true);
     expect(instance.canPinMessages ?? instance.raw?.can_pin_messages).toEqual(true);
     expect(instance.canManageTopics ?? instance.raw?.can_manage_topics).toEqual(true);
-    expect(instance.canManageDirectMessages ?? instance.raw?.can_manage_direct_messages).toEqual(
-      true
-    );
-    expect(instance.customTitle ?? instance.raw?.custom_title).toEqual('example text');
+    expect(instance.canManageDirectMessages ?? instance.raw?.can_manage_direct_messages).toEqual(true);
+    expect(instance.customTitle ?? instance.raw?.custom_title).toEqual("example text");
   });
 });

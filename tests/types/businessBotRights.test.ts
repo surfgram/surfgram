@@ -26,7 +26,7 @@ describe('BusinessBotRights', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.canReply ?? instance.raw?.can_reply).toEqual(true);
     expect(instance.canReadMessages ?? instance.raw?.can_read_messages).toEqual(true);
     expect(instance.canDeleteSentMessages ?? instance.raw?.can_delete_sent_messages).toEqual(true);
@@ -37,12 +37,8 @@ describe('BusinessBotRights', () => {
     expect(instance.canEditUsername ?? instance.raw?.can_edit_username).toEqual(true);
     expect(instance.canChangeGiftSettings ?? instance.raw?.can_change_gift_settings).toEqual(true);
     expect(instance.canViewGiftsAndStars ?? instance.raw?.can_view_gifts_and_stars).toEqual(true);
-    expect(instance.canConvertGiftsToStars ?? instance.raw?.can_convert_gifts_to_stars).toEqual(
-      true
-    );
-    expect(
-      instance.canTransferAndUpgradeGifts ?? instance.raw?.can_transfer_and_upgrade_gifts
-    ).toEqual(true);
+    expect(instance.canConvertGiftsToStars ?? instance.raw?.can_convert_gifts_to_stars).toEqual(true);
+    expect(instance.canTransferAndUpgradeGifts ?? instance.raw?.can_transfer_and_upgrade_gifts).toEqual(true);
     expect(instance.canTransferStars ?? instance.raw?.can_transfer_stars).toEqual(true);
     expect(instance.canManageStories ?? instance.raw?.can_manage_stories).toEqual(true);
   });

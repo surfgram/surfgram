@@ -141,4 +141,5 @@ export interface CopyMessageParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
+
 }
