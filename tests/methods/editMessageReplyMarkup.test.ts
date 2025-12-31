@@ -1,26 +1,28 @@
-import { editMessageReplyMarkup } from '../../src/api';
-import { Bot } from '../../src/core/bot';
+import { editMessageReplyMarkup } from "../../src/api";
+import { Bot } from "../../src/core/bot";
 
-describe('editMessageReplyMarkup', () => {
-  it('should call callApi with correct parameters', async () => {
-    const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
+describe("editMessageReplyMarkup", () => {
+	it("should call callApi with correct parameters", async () => {
+		const mockBot = {
+			callApi: jest.fn().mockResolvedValue({} as any),
+		} as unknown as Bot;
 
-    const params = {
-      businessConnectionId: "example text",
-      chatId: 123,
-      messageId: 123,
-      inlineMessageId: "example text",
-      replyMarkup: {} as any,
-    };
+		const params = {
+			businessConnectionId: "example text",
+			chatId: 123,
+			messageId: 123,
+			inlineMessageId: "example text",
+			replyMarkup: {} as any,
+		};
 
-    await editMessageReplyMarkup.call(mockBot, params);
+		await editMessageReplyMarkup.call(mockBot, params);
 
-    expect(mockBot.callApi).toHaveBeenCalledWith('editMessageReplyMarkup', {
-      business_connection_id: "example text",
-      chat_id: 123,
-      message_id: 123,
-      inline_message_id: "example text",
-      reply_markup: {} as any,
-    });
-  });
+		expect(mockBot.callApi).toHaveBeenCalledWith("editMessageReplyMarkup", {
+			business_connection_id: "example text",
+			chat_id: 123,
+			message_id: 123,
+			inline_message_id: "example text",
+			reply_markup: {} as any,
+		});
+	});
 });

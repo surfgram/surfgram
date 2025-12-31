@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { EditMessageLiveLocationParams } from '../interfaces/editMessageLiveLocationParams';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { EditMessageLiveLocationParams } from "../interfaces/editMessageLiveLocationParams";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
 
 /**
  * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
@@ -25,8 +25,14 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageLiveLocation(this: Bot, params: EditMessageLiveLocationParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('editMessageLiveLocation', snakeParams);
-  return response;
+export async function editMessageLiveLocation(
+	this: Bot,
+	params: EditMessageLiveLocationParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>(
+		"editMessageLiveLocation",
+		snakeParams,
+	);
+	return response;
 }

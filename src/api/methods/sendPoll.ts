@@ -5,16 +5,16 @@
  * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { SendPollParams } from '../interfaces/sendPollParams';
-import { InputPollOption } from '../types/inputPollOption';
-import { MessageEntity } from '../types/messageEntity';
-import { ReplyParameters } from '../types/replyParameters';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
-import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
-import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
-import { ForceReply } from '../types/forceReply';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { SendPollParams } from "../interfaces/sendPollParams";
+import { InputPollOption } from "../types/inputPollOption";
+import { MessageEntity } from "../types/messageEntity";
+import { ReplyParameters } from "../types/replyParameters";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
+import { ReplyKeyboardMarkup } from "../types/replyKeyboardMarkup";
+import { ReplyKeyboardRemove } from "../types/replyKeyboardRemove";
+import { ForceReply } from "../types/forceReply";
 
 /**
  * Use this method to send a native poll. On success, the sent Message is returned.
@@ -31,8 +31,11 @@ import { ForceReply } from '../types/forceReply';
  * // ... params
  * });
  */
-export async function sendPoll(this: Bot, params: SendPollParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('sendPoll', snakeParams);
-  return response;
+export async function sendPoll(
+	this: Bot,
+	params: SendPollParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("sendPoll", snakeParams);
+	return response;
 }

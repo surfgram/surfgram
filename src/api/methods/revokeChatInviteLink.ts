@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#revokeChatInviteLink Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
@@ -22,12 +22,16 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.revokeChatInviteLink(...);
  */
-export async function revokeChatInviteLink(this: Bot, chatId: number | string, inviteLink: string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    inviteLink: inviteLink,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('revokeChatInviteLink', snakeParams);
-  return response;
+export async function revokeChatInviteLink(
+	this: Bot,
+	chatId: number | string,
+	inviteLink: string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		inviteLink: inviteLink,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("revokeChatInviteLink", snakeParams);
+	return response;
 }

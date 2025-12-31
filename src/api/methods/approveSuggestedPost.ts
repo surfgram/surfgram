@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#approveSuggestedPost Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to approve a suggested post in a direct messages chat. The bot must have the &#39;can\_post\_messages&#39; administrator right in the corresponding channel chat. Returns True on success.
@@ -23,13 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.approveSuggestedPost(...);
  */
-export async function approveSuggestedPost(this: Bot, chatId: number, messageId: number, sendDate?: number): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    messageId: messageId,
-    sendDate: sendDate,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('approveSuggestedPost', snakeParams);
-  return response;
+export async function approveSuggestedPost(
+	this: Bot,
+	chatId: number,
+	messageId: number,
+	sendDate?: number,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		messageId: messageId,
+		sendDate: sendDate,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("approveSuggestedPost", snakeParams);
+	return response;
 }
