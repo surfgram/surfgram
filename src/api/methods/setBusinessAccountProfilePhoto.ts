@@ -24,7 +24,12 @@ import { InputProfilePhoto } from '../types/inputProfilePhoto';
  * // Direct parameters
  * await bot.setBusinessAccountProfilePhoto(...);
  */
-export async function setBusinessAccountProfilePhoto(this: Bot, businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean): Promise<any> {
+export async function setBusinessAccountProfilePhoto(
+  this: Bot,
+  businessConnectionId: string,
+  photo: InputProfilePhoto,
+  isPublic?: boolean
+): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     photo: photo,

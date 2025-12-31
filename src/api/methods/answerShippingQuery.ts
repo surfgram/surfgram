@@ -25,7 +25,13 @@ import { ShippingOption } from '../types/shippingOption';
  * // Direct parameters
  * await bot.answerShippingQuery(...);
  */
-export async function answerShippingQuery(this: Bot, shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any> {
+export async function answerShippingQuery(
+  this: Bot,
+  shippingQueryId: string,
+  ok: boolean,
+  shippingOptions?: ShippingOption[],
+  errorMessage?: string
+): Promise<any> {
   const apiParams = {
     shippingQueryId: shippingQueryId,
     ok: ok,

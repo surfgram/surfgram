@@ -26,17 +26,14 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setWebhook`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
 
-
 [View InputFile documentation with fluent methods](../types/InputFile.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `photo` | `InputFile` | Yes | New chat photo, uploaded using multipart/form-data |
-
+| Parameter | Type                 | Required | Description                                                                                                |
+| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `photo`   | `InputFile`          |   Yes    | New chat photo, uploaded using multipart/form-data                                                         |
 
 ## Usage Example
 
@@ -47,9 +44,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

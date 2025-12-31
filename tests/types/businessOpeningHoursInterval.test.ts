@@ -14,7 +14,7 @@ describe('BusinessOpeningHoursInterval', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.openingMinute ?? instance.raw?.opening_minute).toEqual(123);
     expect(instance.closingMinute ?? instance.raw?.closing_minute).toEqual(123);
   });

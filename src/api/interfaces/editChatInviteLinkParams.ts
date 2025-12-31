@@ -5,7 +5,6 @@
  * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram API Documentation}
  */
 
-
 export interface EditChatInviteLinkParams {
   /**
    * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -54,5 +53,4 @@ export interface EditChatInviteLinkParams {
    * @required No
    */
   createsJoinRequest?: boolean;
-
 }

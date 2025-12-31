@@ -6,18 +6,18 @@ describe('InlineQueryResultsButton', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      text: "example text",
+      text: 'example text',
       web_app: {} as any,
-      start_parameter: "example text",
+      start_parameter: 'example text',
     };
 
     const instance = new InlineQueryResultsButton(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.text ?? instance.raw?.text).toEqual("example text");
+
+    expect(instance.text ?? instance.raw?.text).toEqual('example text');
     expect(instance.webApp ?? instance.raw?.web_app).toEqual({} as any);
-    expect(instance.startParameter ?? instance.raw?.start_parameter).toEqual("example text");
+    expect(instance.startParameter ?? instance.raw?.start_parameter).toEqual('example text');
   });
 });

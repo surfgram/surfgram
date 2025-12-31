@@ -23,7 +23,11 @@ import { ChatAdministratorRights } from '../types/chatAdministratorRights';
  * // Direct parameters
  * await bot.setMyDefaultAdministratorRights(...);
  */
-export async function setMyDefaultAdministratorRights(this: Bot, rights?: ChatAdministratorRights, forChannels?: boolean): Promise<any> {
+export async function setMyDefaultAdministratorRights(
+  this: Bot,
+  rights?: ChatAdministratorRights,
+  forChannels?: boolean
+): Promise<any> {
   const apiParams = {
     rights: rights,
     forChannels: forChannels,

@@ -4,13 +4,12 @@ This object represents a service message about the completion of a giveaway with
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| winnerCount | `number` | Yes | Number of winners in the giveaway |
-| unclaimedPrizeCount | `number` | No | Optional. Number of undistributed prizes |
-| giveawayMessage | `Message` | No | Optional. Message with the giveaway that was completed, if it wasn't deleted |
-| isStarGiveaway | `boolean` | No | Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway. |
-
+| Name                | Type      | Required | Description                                                                                                                     |
+| :------------------ | :-------- | :------: | :------------------------------------------------------------------------------------------------------------------------------ |
+| winnerCount         | `number`  |   Yes    | Number of winners in the giveaway                                                                                               |
+| unclaimedPrizeCount | `number`  |    No    | Optional. Number of undistributed prizes                                                                                        |
+| giveawayMessage     | `Message` |    No    | Optional. Message with the giveaway that was completed, if it wasn't deleted                                                    |
+| isStarGiveaway      | `boolean` |    No    | Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway. |
 
 ## Event Handlers
 

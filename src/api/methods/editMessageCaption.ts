@@ -26,7 +26,10 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageCaption(this: Bot, params: EditMessageCaptionParams): Promise<any> {
+export async function editMessageCaption(
+  this: Bot,
+  params: EditMessageCaptionParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('editMessageCaption', snakeParams);
   return response;

@@ -63,5 +63,4 @@ export interface SendGiftParams {
    * @required No
    */
   textEntities?: MessageEntity[];
-
 }

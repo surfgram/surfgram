@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setStickerKeywords(...);
  */
-export async function setStickerKeywords(this: Bot, sticker: string, keywords?: string[]): Promise<any> {
+export async function setStickerKeywords(
+  this: Bot,
+  sticker: string,
+  keywords?: string[]
+): Promise<any> {
   const apiParams = {
     sticker: sticker,
     keywords: keywords,

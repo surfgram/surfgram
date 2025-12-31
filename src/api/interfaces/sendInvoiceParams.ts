@@ -258,5 +258,4 @@ export interface SendInvoiceParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
-
 }

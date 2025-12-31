@@ -24,7 +24,13 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getForumTopicIconStickers(...);
  */
-export async function getForumTopicIconStickers(this: Bot, chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any> {
+export async function getForumTopicIconStickers(
+  this: Bot,
+  chatId: number | string,
+  name: string,
+  iconColor?: number,
+  iconCustomEmojiId?: string
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     name: name,

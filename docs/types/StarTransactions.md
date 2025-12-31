@@ -4,9 +4,9 @@ Contains a list of Telegram Star transactions.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| transactions | `StarTransaction[]` | Yes | The list of transactions |
+| Name         | Type                | Required | Description              |
+| :----------- | :------------------ | :------: | :----------------------- |
+| transactions | `StarTransaction[]` |   Yes    | The list of transactions |
 
 ## Fluent Methods
 
@@ -16,13 +16,12 @@ The `StarTransactions` class has the following fluent methods that automatically
 
 Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `offset` | `number` | No | Number of transactions to skip in the response |
-| `limit` | `number` | No | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+| Parameter | Type     | Required | Description                                                                                             |
+| :-------- | :------- | :------: | :------------------------------------------------------------------------------------------------------ |
+| `offset`  | `number` |    No    | Number of transactions to skip in the response                                                          |
+| `limit`   | `number` |    No    | The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
 
 **Usage examples:**
 
@@ -30,10 +29,7 @@ Returns the bot&#39;s Telegram Star transactions in chronological order. On succ
 
 ```typescript
 const startransactions = new StarTransactions(rawData, bot);
-await startransactions.getStarTransactions(
-  123,
-  123,
-);
+await startransactions.getStarTransactions(123, 123);
 ```
 
 2. In an event handler:
@@ -46,7 +42,6 @@ bot.onStarTransactions(async (startransactions: StarTransactions) => {
 ```
 
 **See also:** [getStarTransactions API method](../methods/getStarTransactions.md)
-
 
 ## Event Handlers
 

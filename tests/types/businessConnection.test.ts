@@ -6,7 +6,7 @@ describe('BusinessConnection', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      id: "example text",
+      id: 'example text',
       user: {} as any,
       user_chat_id: 123,
       date: 123,
@@ -18,8 +18,8 @@ describe('BusinessConnection', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.id ?? instance.raw?.id).toEqual("example text");
+
+    expect(instance.id ?? instance.raw?.id).toEqual('example text');
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.userChatId ?? instance.raw?.user_chat_id).toEqual(123);
     expect(instance.date ?? instance.raw?.date).toEqual(123);
