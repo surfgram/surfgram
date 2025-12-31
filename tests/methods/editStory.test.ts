@@ -6,11 +6,11 @@ describe('editStory', () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
     const params = {
-      businessConnectionId: "example text",
+      businessConnectionId: 'example text',
       storyId: 123,
       content: {} as any,
-      caption: "example text",
-      parseMode: "example text",
+      caption: 'example text',
+      parseMode: 'example text',
       captionEntities: [{} as any],
       areas: [{} as any],
     };
@@ -18,11 +18,11 @@ describe('editStory', () => {
     await editStory.call(mockBot, params);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('editStory', {
-      business_connection_id: "example text",
+      business_connection_id: 'example text',
       story_id: 123,
       content: {} as any,
-      caption: "example text",
-      parse_mode: "example text",
+      caption: 'example text',
+      parse_mode: 'example text',
       caption_entities: [{} as any],
       areas: [{} as any],
     });

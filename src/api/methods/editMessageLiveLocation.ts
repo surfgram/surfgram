@@ -25,7 +25,10 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageLiveLocation(this: Bot, params: EditMessageLiveLocationParams): Promise<any> {
+export async function editMessageLiveLocation(
+  this: Bot,
+  params: EditMessageLiveLocationParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('editMessageLiveLocation', snakeParams);
   return response;

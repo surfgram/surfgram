@@ -7,8 +7,8 @@ describe('InputChecklistTask', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       id: 123,
-      text: "example text",
-      parse_mode: "example text",
+      text: 'example text',
+      parse_mode: 'example text',
       text_entities: [{} as any],
     };
 
@@ -16,10 +16,10 @@ describe('InputChecklistTask', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.id ?? instance.raw?.id).toEqual(123);
-    expect(instance.text ?? instance.raw?.text).toEqual("example text");
-    expect(instance.parseMode ?? instance.raw?.parse_mode).toEqual("example text");
+    expect(instance.text ?? instance.raw?.text).toEqual('example text');
+    expect(instance.parseMode ?? instance.raw?.parse_mode).toEqual('example text');
     expect(instance.textEntities ?? instance.raw?.text_entities).toEqual([{} as any]);
   });
 });

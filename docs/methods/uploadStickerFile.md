@@ -10,13 +10,11 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
-
 [View File documentation with fluent methods](../types/File.md)
 
 ### InputFile (12 methods)
 
 **Available methods:** `setWebhook`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
-
 
 [View InputFile documentation with fluent methods](../types/InputFile.md)
 
@@ -24,18 +22,15 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `sendSticker`, `getStickerSet`, `getCustomEmojiStickers`, `uploadStickerFile`, `createNewStickerSet`, `addStickerToSet`, `setStickerPositionInSet`, `deleteStickerFromSet`, `replaceStickerInSet`, `setStickerEmojiList`, `setStickerKeywords`, `setStickerMaskPosition`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
-
 [View Sticker documentation with fluent methods](../types/Sticker.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `userId` | `number` | Yes | User identifier of sticker file owner |
-| `sticker` | `InputFile` | Yes | A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files » |
-| `stickerFormat` | `string` | Yes | Format of the sticker, must be one of “static”, “animated”, “video” |
-
+| Parameter       | Type        | Required | Description                                                                                                                                                           |
+| :-------------- | :---------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `userId`        | `number`    |   Yes    | User identifier of sticker file owner                                                                                                                                 |
+| `sticker`       | `InputFile` |   Yes    | A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files » |
+| `stickerFormat` | `string`    |   Yes    | Format of the sticker, must be one of “static”, “animated”, “video”                                                                                                   |
 
 ## Usage Example
 
@@ -46,9 +41,12 @@ bot.onFile(async (file: File) => {
 });
 
 // With filtering
-bot.onFile((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onFile(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

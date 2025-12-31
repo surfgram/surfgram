@@ -81,5 +81,4 @@ export interface EditMessageTextParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
-
 }

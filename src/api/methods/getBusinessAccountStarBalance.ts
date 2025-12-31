@@ -21,7 +21,10 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getBusinessAccountStarBalance(...);
  */
-export async function getBusinessAccountStarBalance(this: Bot, businessConnectionId: string): Promise<any> {
+export async function getBusinessAccountStarBalance(
+  this: Bot,
+  businessConnectionId: string
+): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
   };

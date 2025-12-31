@@ -1,6 +1,6 @@
 # readBusinessMessage
 
-Marks incoming message as read on behalf of a business account. Requires the can\_read\_messages business bot right. Returns True on success.
+Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right. Returns True on success.
 
 ## Fluent Usage
 
@@ -14,15 +14,13 @@ This method is available as a fluent method on the following types:
 
 [View Message documentation with fluent methods](../types/Message.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which to read the message |
-| `chatId` | `number` | Yes | Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours. |
-| `messageId` | `number` | Yes | Unique identifier of the message to mark as read |
-
+| Parameter              | Type     | Required | Description                                                                                                           |
+| :--------------------- | :------- | :------: | :-------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string` |   Yes    | Unique identifier of the business connection on behalf of which to read the message                                   |
+| `chatId`               | `number` |   Yes    | Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours. |
+| `messageId`            | `number` |   Yes    | Unique identifier of the message to mark as read                                                                      |
 
 ## Usage Example
 
@@ -33,9 +31,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

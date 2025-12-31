@@ -5,7 +5,6 @@
  * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram API Documentation}
  */
 
-
 export interface GetWebhookInfoParams {
   /**
    * Webhook URL, may be empty if webhook is not set up
@@ -78,5 +77,4 @@ export interface GetWebhookInfoParams {
    * @required No
    */
   allowedUpdates?: string[];
-
 }

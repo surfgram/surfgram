@@ -134,5 +134,4 @@ export interface GetMeParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
-
 }

@@ -366,19 +366,17 @@ This method is available as a fluent method on the following types:
 
 [View TransactionPartnerChat documentation with fluent methods](../types/TransactionPartnerChat.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `giftId` | `string` | Yes | Identifier of the gift |
-| `userId` | `number` | No | Required if chat\_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `number` \| `string` | No | Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift. |
-| `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
-| `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-
+| Parameter       | Type                 | Required | Description                                                                                                                                                                                                                             |
+| :-------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `giftId`        | `string`             |   Yes    | Identifier of the gift                                                                                                                                                                                                                  |
+| `userId`        | `number`             |    No    | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.                                                                                                                                   |
+| `chatId`        | `number` \| `string` |    No    | Required if user_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift.                                                                          |
+| `payForUpgrade` | `boolean`            |    No    | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver                                                                                                                          |
+| `text`          | `string`             |    No    | Text that will be shown along with the gift; 0-128 characters                                                                                                                                                                           |
+| `textParseMode` | `string`             |    No    | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.                                          |
+| `textEntities`  | `MessageEntity[]`    |    No    | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored. |
 
 ## Usage Example
 
@@ -389,9 +387,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

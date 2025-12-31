@@ -12,7 +12,7 @@ describe('setGameScore', () => {
       disableEditMessage: true,
       chatId: 123,
       messageId: 123,
-      inlineMessageId: "example text",
+      inlineMessageId: 'example text',
     };
 
     await setGameScore.call(mockBot, params);
@@ -24,7 +24,7 @@ describe('setGameScore', () => {
       disable_edit_message: true,
       chat_id: 123,
       message_id: 123,
-      inline_message_id: "example text",
+      inline_message_id: 'example text',
     });
   });
 });
