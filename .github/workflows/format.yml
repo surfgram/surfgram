@@ -44,6 +44,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes after formatting"
           else
-            git commit -m "style: format with prettier [skip ci]"
+            git commit -m "style: format with biome [skip ci]"
             git push origin main
           fi
