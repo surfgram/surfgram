@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { GetBusinessAccountGiftsParams } from "../interfaces/getBusinessAccountGiftsParams";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { GetBusinessAccountGiftsParams } from '../interfaces/getBusinessAccountGiftsParams';
 
 /**
  * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
@@ -24,14 +24,8 @@ import { GetBusinessAccountGiftsParams } from "../interfaces/getBusinessAccountG
  * // ... params
  * });
  */
-export async function getBusinessAccountGifts(
-	this: Bot,
-	params: GetBusinessAccountGiftsParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>(
-		"getBusinessAccountGifts",
-		snakeParams,
-	);
-	return response;
+export async function getBusinessAccountGifts(this: Bot, params: GetBusinessAccountGiftsParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('getBusinessAccountGifts', snakeParams);
+  return response;
 }

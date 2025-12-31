@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getMyName Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get the current bot name for the given user language. Returns BotName on success.
@@ -21,14 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getMyName(...);
  */
-export async function getMyName(
-	this: Bot,
-	languageCode?: string,
-): Promise<any> {
-	const apiParams = {
-		languageCode: languageCode,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getMyName", snakeParams);
-	return response;
+export async function getMyName(this: Bot, languageCode?: string): Promise<any> {
+  const apiParams = {
+    languageCode: languageCode,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getMyName', snakeParams);
+  return response;
 }

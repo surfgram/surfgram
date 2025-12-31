@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#upgradeGift Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Upgrades a given regular gift to a unique gift. Requires the can\_transfer\_and\_upgrade\_gifts business bot right. Additionally requires the can\_transfer\_stars business bot right if the upgrade is paid. Returns True on success.
@@ -24,20 +24,14 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.upgradeGift(...);
  */
-export async function upgradeGift(
-	this: Bot,
-	businessConnectionId: string,
-	ownedGiftId: string,
-	keepOriginalDetails?: boolean,
-	starCount?: number,
-): Promise<any> {
-	const apiParams = {
-		businessConnectionId: businessConnectionId,
-		ownedGiftId: ownedGiftId,
-		keepOriginalDetails: keepOriginalDetails,
-		starCount: starCount,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("upgradeGift", snakeParams);
-	return response;
+export async function upgradeGift(this: Bot, businessConnectionId: string, ownedGiftId: string, keepOriginalDetails?: boolean, starCount?: number): Promise<any> {
+  const apiParams = {
+    businessConnectionId: businessConnectionId,
+    ownedGiftId: ownedGiftId,
+    keepOriginalDetails: keepOriginalDetails,
+    starCount: starCount,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('upgradeGift', snakeParams);
+  return response;
 }

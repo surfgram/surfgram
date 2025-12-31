@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#deleteWebhook Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success.
@@ -21,14 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.deleteWebhook(...);
  */
-export async function deleteWebhook(
-	this: Bot,
-	dropPendingUpdates?: boolean,
-): Promise<any> {
-	const apiParams = {
-		dropPendingUpdates: dropPendingUpdates,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("deleteWebhook", snakeParams);
-	return response;
+export async function deleteWebhook(this: Bot, dropPendingUpdates?: boolean): Promise<any> {
+  const apiParams = {
+    dropPendingUpdates: dropPendingUpdates,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('deleteWebhook', snakeParams);
+  return response;
 }

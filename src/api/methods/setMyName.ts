@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setMyName Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to change the bot&#39;s name. Returns True on success.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.setMyName(...);
  */
-export async function setMyName(
-	this: Bot,
-	name?: string,
-	languageCode?: string,
-): Promise<any> {
-	const apiParams = {
-		name: name,
-		languageCode: languageCode,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("setMyName", snakeParams);
-	return response;
+export async function setMyName(this: Bot, name?: string, languageCode?: string): Promise<any> {
+  const apiParams = {
+    name: name,
+    languageCode: languageCode,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('setMyName', snakeParams);
+  return response;
 }

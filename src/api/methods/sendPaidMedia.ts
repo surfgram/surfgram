@@ -5,17 +5,17 @@
  * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { SendPaidMediaParams } from "../interfaces/sendPaidMediaParams";
-import { InputPaidMedia } from "../types/inputPaidMedia";
-import { MessageEntity } from "../types/messageEntity";
-import { SuggestedPostParameters } from "../types/suggestedPostParameters";
-import { ReplyParameters } from "../types/replyParameters";
-import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
-import { ReplyKeyboardMarkup } from "../types/replyKeyboardMarkup";
-import { ReplyKeyboardRemove } from "../types/replyKeyboardRemove";
-import { ForceReply } from "../types/forceReply";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { SendPaidMediaParams } from '../interfaces/sendPaidMediaParams';
+import { InputPaidMedia } from '../types/inputPaidMedia';
+import { MessageEntity } from '../types/messageEntity';
+import { SuggestedPostParameters } from '../types/suggestedPostParameters';
+import { ReplyParameters } from '../types/replyParameters';
+import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
+import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
+import { ForceReply } from '../types/forceReply';
 
 /**
  * Use this method to send paid media. On success, the sent Message is returned.
@@ -32,11 +32,8 @@ import { ForceReply } from "../types/forceReply";
  * // ... params
  * });
  */
-export async function sendPaidMedia(
-	this: Bot,
-	params: SendPaidMediaParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("sendPaidMedia", snakeParams);
-	return response;
+export async function sendPaidMedia(this: Bot, params: SendPaidMediaParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('sendPaidMedia', snakeParams);
+  return response;
 }
