@@ -82,10 +82,10 @@ Use this method to set the result of an interaction with a Web App and send a co
 
 ```typescript
 const inlinequeryresult = new InlineQueryResult(rawData, bot);
-await inlinequeryresult.answerWebAppQuery({
-  webAppQueryId: "example text",
-  result: {} as any,
-});
+await inlinequeryresult.answerWebAppQuery(
+  "example text",
+  {} as any,
+);
 ```
 
 2. In an event handler:
@@ -93,7 +93,7 @@ await inlinequeryresult.answerWebAppQuery({
 ```typescript
 bot.onInlineQueryResult(async (inlinequeryresult: InlineQueryResult) => {
   // Auto-fills parameters from the inlinequeryresult instance
-  await inlinequeryresult.answerWebAppQuery({ webAppQueryId: "Response" });
+  await inlinequeryresult.answerWebAppQuery();
 });
 ```
 

@@ -70742,14 +70742,24 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof InlineQueryResult.prototype
  * @instance
  * @function answerWebAppQuery
- * @param {Omit<Interfaces.AnswerWebAppQueryParams, never>} params - Method parameters
+ *  * @param { string } webAppQueryId - Unique identifier for the query to be answered
+ * @param { InlineQueryResult } result - A JSON-serialized object describing the message to be sent
  * @returns {Promise<any>} Promise resolving to method result
  * @description Contextual parameters () are automatically filled from this InlineQueryResult instance
  * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
  */
-(InlineQueryResult.prototype as any).answerWebAppQuery = function(params: Omit<Interfaces.AnswerWebAppQueryParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.answerWebAppQuery(fullParams as Interfaces.AnswerWebAppQueryParams);
+(InlineQueryResult.prototype as any).answerWebAppQuery = function(
+  webAppQueryId: string,   result: InlineQueryResult): Promise<any> {
+  const params: any = {};
+  if (webAppQueryId !== undefined) {
+    params.webAppQueryId = webAppQueryId;
+  }
+  if (result !== undefined) {
+    params.result = result;
+  }
+
+
+  return this.bot.answerWebAppQuery(params);
 };
 
 /**
@@ -78181,14 +78191,32 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof ShippingOption.prototype
  * @instance
  * @function answerShippingQuery
- * @param {Omit<Interfaces.AnswerShippingQueryParams, never>} params - Method parameters
+ *  * @param { string } shippingQueryId - Unique identifier for the query to be answered
+ * @param { boolean } ok - Pass True if delivery to the specified address is possible and False if there are any problems \(for example, if delivery to the specified address is not possible\)
+ * @param { ShippingOption[] } shippingOptions? - Required if ok is True. A JSON-serialized array of available shipping options.
+ * @param { string } errorMessage? - Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order \(e.g. “Sorry, delivery to your desired address is unavailable”\). Telegram will display this message to the user.
  * @returns {Promise<any>} Promise resolving to method result
  * @description Contextual parameters () are automatically filled from this ShippingOption instance
  * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
  */
-(ShippingOption.prototype as any).answerShippingQuery = function(params: Omit<Interfaces.AnswerShippingQueryParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.answerShippingQuery(fullParams as Interfaces.AnswerShippingQueryParams);
+(ShippingOption.prototype as any).answerShippingQuery = function(
+  shippingQueryId: string,   ok: boolean,   shippingOptions?: ShippingOption[],   errorMessage?: string): Promise<any> {
+  const params: any = {};
+  if (shippingQueryId !== undefined) {
+    params.shippingQueryId = shippingQueryId;
+  }
+  if (ok !== undefined) {
+    params.ok = ok;
+  }
+  if (shippingOptions !== undefined) {
+    params.shippingOptions = shippingOptions;
+  }
+  if (errorMessage !== undefined) {
+    params.errorMessage = errorMessage;
+  }
+
+
+  return this.bot.answerShippingQuery(params);
 };
 
 /**
@@ -78196,22 +78224,36 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof ShippingQuery.prototype
  * @instance
  * @function answerShippingQuery
- * @param {Omit<Interfaces.AnswerShippingQueryParams, 'shippingQueryId'>} params - Method parameters
+ *  * @param { boolean } ok - Pass True if delivery to the specified address is possible and False if there are any problems \(for example, if delivery to the specified address is not possible\)
+ * @param { ShippingOption[] } shippingOptions? - Required if ok is True. A JSON-serialized array of available shipping options.
+ * @param { string } errorMessage? - Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order \(e.g. “Sorry, delivery to your desired address is unavailable”\). Telegram will display this message to the user.
  * @returns {Promise<any>} Promise resolving to method result
  * @description Contextual parameters (shippingQueryId) are automatically filled from this ShippingQuery instance
  * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
  */
-(ShippingQuery.prototype as any).answerShippingQuery = function(params: Omit<Interfaces.AnswerShippingQueryParams, 'shippingQueryId'>): Promise<any> {
-  const fullParams: any = { ...params };
+(ShippingQuery.prototype as any).answerShippingQuery = function(
+  ok: boolean,   shippingOptions?: ShippingOption[],   errorMessage?: string): Promise<any> {
+  const params: any = {};
+  if (ok !== undefined) {
+    params.ok = ok;
+  }
+  if (shippingOptions !== undefined) {
+    params.shippingOptions = shippingOptions;
+  }
+  if (errorMessage !== undefined) {
+    params.errorMessage = errorMessage;
+  }
+
   try {
     const value = this.id;
     if (value !== undefined && value !== null) {
-      fullParams.shippingQueryId = value;
+      params.shippingQueryId = value;
     }
   } catch (e) {
     console.warn('Could not auto-fill shippingQueryId from this.id:', e);
   }
-  return this.bot.answerShippingQuery(fullParams as Interfaces.AnswerShippingQueryParams);
+
+  return this.bot.answerShippingQuery(params);
 };
 
 /**
@@ -78219,22 +78261,32 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof PreCheckoutQuery.prototype
  * @instance
  * @function answerPreCheckoutQuery
- * @param {Omit<Interfaces.AnswerPreCheckoutQueryParams, 'preCheckoutQueryId'>} params - Method parameters
+ *  * @param { boolean } ok - Specify True if everything is alright \(goods are available, etc.\) and the bot is ready to proceed with the order. Use False if there are any problems.
+ * @param { string } errorMessage? - Required if ok is False. Error message in human readable form that explains the reason for failure to proceed with the checkout \(e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"\). Telegram will display this message to the user.
  * @returns {Promise<any>} Promise resolving to method result
  * @description Contextual parameters (preCheckoutQueryId) are automatically filled from this PreCheckoutQuery instance
  * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram Bot API}
  */
-(PreCheckoutQuery.prototype as any).answerPreCheckoutQuery = function(params: Omit<Interfaces.AnswerPreCheckoutQueryParams, 'preCheckoutQueryId'>): Promise<any> {
-  const fullParams: any = { ...params };
+(PreCheckoutQuery.prototype as any).answerPreCheckoutQuery = function(
+  ok: boolean,   errorMessage?: string): Promise<any> {
+  const params: any = {};
+  if (ok !== undefined) {
+    params.ok = ok;
+  }
+  if (errorMessage !== undefined) {
+    params.errorMessage = errorMessage;
+  }
+
   try {
     const value = this.id;
     if (value !== undefined && value !== null) {
-      fullParams.preCheckoutQueryId = value;
+      params.preCheckoutQueryId = value;
     }
   } catch (e) {
     console.warn('Could not auto-fill preCheckoutQueryId from this.id:', e);
   }
-  return this.bot.answerPreCheckoutQuery(fullParams as Interfaces.AnswerPreCheckoutQueryParams);
+
+  return this.bot.answerPreCheckoutQuery(params);
 };
 
 /**

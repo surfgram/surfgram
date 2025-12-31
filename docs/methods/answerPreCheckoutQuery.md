@@ -29,7 +29,7 @@ This method is available as a fluent method on the following types:
 ```typescript
 // When you already have a PreCheckoutQuery instance
 bot.onPreCheckoutQuery(async (precheckoutquery: PreCheckoutQuery) => {
-  await precheckoutquery.answerPreCheckoutQuery({});
+  await precheckoutquery.answerPreCheckoutQuery();
 });
 
 // With filtering

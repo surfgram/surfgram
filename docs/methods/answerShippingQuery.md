@@ -37,7 +37,7 @@ This method is available as a fluent method on the following types:
 ```typescript
 // When you already have a ShippingOption instance
 bot.onShippingOption(async (shippingoption: ShippingOption) => {
-  await shippingoption.answerShippingQuery({});
+  await shippingoption.answerShippingQuery();
 });
 
 // With filtering

@@ -1954,17 +1954,9 @@ declare module '../core/bot' {
     answerInlineQuery(inlineQueryId: string, results: InlineQueryResult[]): Promise<any>;
     /**
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link Interfaces.AnswerWebAppQueryParams} for parameter details
-     * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
-     */
-    answerWebAppQuery(params: Interfaces.AnswerWebAppQueryParams): Promise<any>;
-    /**
-     * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
-     * @param webAppQueryId, result - Required parameters
-     * @returns {Promise<any>} Promise resolving to method result
+     *      * @param webAppQueryId - Unique identifier for the query to be answered
+     *      * @param result - A JSON-serialized object describing the message to be sent
+     *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
      */
@@ -2022,38 +2014,25 @@ declare module '../core/bot' {
     createInvoiceLink(title: string, description: string, payload: string): Promise<any>;
     /**
      * If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the Bot API will send an Update with a shipping\_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link Interfaces.AnswerShippingQueryParams} for parameter details
-     * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
-     */
-    answerShippingQuery(params: Interfaces.AnswerShippingQueryParams): Promise<any>;
-    /**
-     * If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the Bot API will send an Update with a shipping\_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
-     * @param shippingQueryId, ok - Required parameters
-     * @returns {Promise<any>} Promise resolving to method result
+     *      * @param shippingQueryId - Unique identifier for the query to be answered
+     *      * @param ok - Pass True if delivery to the specified address is possible and False if there are any problems \(for example, if delivery to the specified address is not possible\)
+     *      * @param shippingOptions - Required if ok is True. A JSON-serialized array of available shipping options.
+     *      * @param errorMessage - Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order \(e.g. “Sorry, delivery to your desired address is unavailable”\). Telegram will display this message to the user.
+     *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
      */
-    answerShippingQuery(shippingQueryId: string, ok: boolean): Promise<any>;
+    answerShippingQuery(shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any>;
     /**
      * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre\_checkout\_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link Interfaces.AnswerPreCheckoutQueryParams} for parameter details
-     * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram Bot API}
-     */
-    answerPreCheckoutQuery(params: Interfaces.AnswerPreCheckoutQueryParams): Promise<any>;
-    /**
-     * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre\_checkout\_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
-     * @param preCheckoutQueryId, ok - Required parameters
-     * @returns {Promise<any>} Promise resolving to method result
+     *      * @param preCheckoutQueryId - Unique identifier for the query to be answered
+     *      * @param ok - Specify True if everything is alright \(goods are available, etc.\) and the bot is ready to proceed with the order. Use False if there are any problems.
+     *      * @param errorMessage - Required if ok is False. Error message in human readable form that explains the reason for failure to proceed with the checkout \(e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"\). Telegram will display this message to the user.
+     *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram Bot API}
      */
-    answerPreCheckoutQuery(preCheckoutQueryId: string, ok: boolean): Promise<any>;
+    answerPreCheckoutQuery(preCheckoutQueryId: string, ok: boolean, errorMessage?: string): Promise<any>;
     /**
      * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
      *      * @param offset - Number of transactions to skip in the response
@@ -33659,12 +33638,12 @@ declare module './types/inlineQueryResult' {
     answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
     /**
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
-     * @param params - Method parameters object
+     * @param webAppQueryId: string, result: InlineQueryResult - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
      */
-    answerWebAppQuery(params: Interfaces.AnswerWebAppQueryParams): Promise<any>;
+    answerWebAppQuery(webAppQueryId: string, result: InlineQueryResult): Promise<any>;
     /**
      * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
      * @param params - Method parameters object
@@ -37156,12 +37135,12 @@ declare module './types/shippingOption' {
   interface ShippingOption {
     /**
      * If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the Bot API will send an Update with a shipping\_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
-     * @param params - Method parameters object
+     * @param shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
      */
-    answerShippingQuery(params: Interfaces.AnswerShippingQueryParams): Promise<any>;
+    answerShippingQuery(shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any>;
   }
 }
 /**
@@ -37172,13 +37151,13 @@ declare module './types/shippingQuery' {
   interface ShippingQuery {
     /**
      * If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the Bot API will send an Update with a shipping\_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (shippingQueryId) are automatically filled from this ShippingQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram Bot API}
      */
-    answerShippingQuery(params: Omit<Interfaces.AnswerShippingQueryParams, 'shippingQueryId'>): Promise<any>;
+    answerShippingQuery(ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any>;
   }
 }
 /**
@@ -37189,13 +37168,13 @@ declare module './types/preCheckoutQuery' {
   interface PreCheckoutQuery {
     /**
      * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre\_checkout\_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param ok: boolean, errorMessage?: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (preCheckoutQueryId) are automatically filled from this PreCheckoutQuery instance
      * @see {@link https://core.telegram.org/bots/api#answerPreCheckoutQuery Telegram Bot API}
      */
-    answerPreCheckoutQuery(params: Omit<Interfaces.AnswerPreCheckoutQueryParams, 'preCheckoutQueryId'>): Promise<any>;
+    answerPreCheckoutQuery(ok: boolean, errorMessage?: string): Promise<any>;
   }
 }
 /**

@@ -34,10 +34,10 @@ If you sent an invoice requesting a shipping address and the parameter is\_flexi
 
 ```typescript
 const shippingoption = new ShippingOption(rawData, bot);
-await shippingoption.answerShippingQuery({
-  shippingQueryId: "example text",
-  ok: true,
-});
+await shippingoption.answerShippingQuery(
+  "example text",
+  true,
+);
 ```
 
 2. In an event handler:
@@ -45,7 +45,7 @@ await shippingoption.answerShippingQuery({
 ```typescript
 bot.onShippingOption(async (shippingoption: ShippingOption) => {
   // Auto-fills parameters from the shippingoption instance
-  await shippingoption.answerShippingQuery({ shippingQueryId: "Response" });
+  await shippingoption.answerShippingQuery();
 });
 ```
 

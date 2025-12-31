@@ -27,7 +27,7 @@ This method is available as a fluent method on the following types:
 ```typescript
 // When you already have a InlineQueryResult instance
 bot.onInlineQueryResult(async (inlinequeryresult: InlineQueryResult) => {
-  await inlinequeryresult.answerWebAppQuery({});
+  await inlinequeryresult.answerWebAppQuery();
 });
 
 // With filtering

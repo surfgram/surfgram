@@ -41,10 +41,10 @@ Once the user has confirmed their payment and shipping details, the Bot API send
 
 ```typescript
 const precheckoutquery = new PreCheckoutQuery(rawData, bot);
-await precheckoutquery.answerPreCheckoutQuery({
-  ok: true,
-  errorMessage: "example text",
-});
+await precheckoutquery.answerPreCheckoutQuery(
+  true,
+  "example text",
+);
 ```
 
 2. In an event handler:
@@ -52,7 +52,7 @@ await precheckoutquery.answerPreCheckoutQuery({
 ```typescript
 bot.onPreCheckoutQuery(async (precheckoutquery: PreCheckoutQuery) => {
   // Auto-fills parameters from the precheckoutquery instance
-  await precheckoutquery.answerPreCheckoutQuery({ errorMessage: "Response" });
+  await precheckoutquery.answerPreCheckoutQuery();
 });
 ```
 
