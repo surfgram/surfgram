@@ -1,6 +1,6 @@
 # Codegen
 
-**Automatic type and method generator (and docs with test for them) for Telegram Bot API**
+**Automatic type and method generator (docs and tests for them too) for Telegram Bot API**
 
 ## Overview
 
