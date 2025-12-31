@@ -7,86 +7,83 @@
  * @extends TelegramObject
  */
 
-import { Bot } from '../../core/bot';
-import { snakeToCamel } from '../../core/utils';
-import { TelegramObject } from './telegramObject';
-import { Chat } from './chat';
-import { User } from './user';
+import { Bot } from "../../core/bot";
+import { snakeToCamel } from "../../core/utils";
+import { TelegramObject } from "./telegramObject";
+import { Chat } from "./chat";
+import { User } from "./user";
 
 /**
  * Represents a PollAnswer object from the Telegram Bot API
  * @class PollAnswer
  */
 export class PollAnswer {
-  /**
-   * Unique poll identifier
-   * @type { string }
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  pollId!: string;
+	/**
+	 * Unique poll identifier
+	 * @type { string }
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	pollId!: string;
 
-  /**
-   * Optional. The chat that changed the answer to the poll, if the voter is anonymous
-   * @type { Chat }
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  voterChat?: Chat;
+	/**
+	 * Optional. The chat that changed the answer to the poll, if the voter is anonymous
+	 * @type { Chat }
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	voterChat?: Chat;
 
-  /**
-   * Optional. The user that changed the answer to the poll, if the voter isn't anonymous
-   * @type { User }
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  user?: User;
+	/**
+	 * Optional. The user that changed the answer to the poll, if the voter isn't anonymous
+	 * @type { User }
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	user?: User;
 
-  /**
-   * 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
-   * @type { number[] }
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  optionIds!: number[];
+	/**
+	 * 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
+	 * @type { number[] }
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	optionIds!: number[];
 
-  /**
-   * Raw data from Telegram API in snake_case format
-   * @type {TelegramObject}
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  public raw?: TelegramObject;
+	/**
+	 * Raw data from Telegram API in snake_case format
+	 * @type {TelegramObject}
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	public raw?: TelegramObject;
 
-  /**
-   * Bot instance associated with this object
-   * @type {Bot}
-   * @memberof PollAnswer
-   * @instance
-   * @public
-   */
-  public bot?: Bot;
+	/**
+	 * Bot instance associated with this object
+	 * @type {Bot}
+	 * @memberof PollAnswer
+	 * @instance
+	 * @public
+	 */
+	public bot?: Bot;
 
-  /**
-   * Creates a new PollAnswer instance from raw Telegram API data
-   * @constructor
-   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
-   * @param {Bot} bot - Bot instance for executing methods
-   * @example
-   * const message = new Message(rawData, botInstance);
-   */
-  constructor(
-    raw?: TelegramObject,
-    bot?: Bot
-  ) {
-    this.raw = raw;
-    this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
-  }
+	/**
+	 * Creates a new PollAnswer instance from raw Telegram API data
+	 * @constructor
+	 * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+	 * @param {Bot} bot - Bot instance for executing methods
+	 * @example
+	 * const message = new Message(rawData, botInstance);
+	 */
+	constructor(raw?: TelegramObject, bot?: Bot) {
+		this.raw = raw;
+		this.bot = bot;
+		const converted = snakeToCamel(raw);
+		Object.assign(this, converted);
+	}
 }

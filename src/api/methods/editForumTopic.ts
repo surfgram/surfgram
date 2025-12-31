@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
@@ -24,14 +24,20 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.editForumTopic(...);
  */
-export async function editForumTopic(this: Bot, chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    messageThreadId: messageThreadId,
-    name: name,
-    iconCustomEmojiId: iconCustomEmojiId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('editForumTopic', snakeParams);
-  return response;
+export async function editForumTopic(
+	this: Bot,
+	chatId: number | string,
+	messageThreadId: number,
+	name?: string,
+	iconCustomEmojiId?: string,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		messageThreadId: messageThreadId,
+		name: name,
+		iconCustomEmojiId: iconCustomEmojiId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("editForumTopic", snakeParams);
+	return response;
 }

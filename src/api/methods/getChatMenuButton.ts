@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
@@ -21,11 +21,14 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getChatMenuButton(...);
  */
-export async function getChatMenuButton(this: Bot, chatId?: number): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getChatMenuButton', snakeParams);
-  return response;
+export async function getChatMenuButton(
+	this: Bot,
+	chatId?: number,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("getChatMenuButton", snakeParams);
+	return response;
 }
