@@ -13,7 +13,7 @@ describe('UserChatBoosts', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.boosts ?? instance.raw?.boosts).toEqual([{} as any]);
   });
 });

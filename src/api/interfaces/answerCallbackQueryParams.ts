@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#answerCallbackQuery Telegram API Documentation}
  */
 
+
 export interface AnswerCallbackQueryParams {
   /**
    * Unique identifier for the query to be answered
@@ -45,4 +46,5 @@ export interface AnswerCallbackQueryParams {
    * @required No
    */
   cacheTime?: number;
+
 }

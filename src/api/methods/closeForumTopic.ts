@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.closeForumTopic(...);
  */
-export async function closeForumTopic(
-  this: Bot,
-  chatId: number | string,
-  messageThreadId: number
-): Promise<any> {
+export async function closeForumTopic(this: Bot, chatId: number | string, messageThreadId: number): Promise<any> {
   const apiParams = {
     chatId: chatId,
     messageThreadId: messageThreadId,

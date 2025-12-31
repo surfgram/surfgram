@@ -14,7 +14,7 @@ describe('PassportData', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.data ?? instance.raw?.data).toEqual([{} as any]);
     expect(instance.credentials ?? instance.raw?.credentials).toEqual({} as any);
   });

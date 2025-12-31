@@ -14,7 +14,7 @@ describe('StoryArea', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.position ?? instance.raw?.position).toEqual({} as any);
     expect(instance.type ?? instance.raw?.type).toEqual({} as any);
   });

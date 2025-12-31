@@ -4,10 +4,11 @@ The reaction is based on a custom emoji.
 
 ## Fields
 
-| Name          | Type     | Required | Description                                 |
-| :------------ | :------- | :------: | :------------------------------------------ |
-| type          | `string` |   Yes    | Type of the reaction, always “custom_emoji” |
-| customEmojiId | `string` |   Yes    | Custom emoji identifier                     |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the reaction, always “custom\_emoji” |
+| customEmojiId | `string` | Yes | Custom emoji identifier |
+
 
 ## Event Handlers
 

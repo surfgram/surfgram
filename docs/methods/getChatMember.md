@@ -342,12 +342,14 @@ This method is available as a fluent method on the following types:
 
 [View TransactionPartnerChat documentation with fluent methods](../types/TransactionPartnerChat.md)
 
+
 ## Parameters
 
-| Parameter | Type                 | Required | Description                                                                                                              |
-| :-------- | :------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------- |
-| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\) |
-| `userId`  | `number`             |   Yes    | Unique identifier of the target user                                                                                     |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\) |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+
 
 ## Usage Example
 
@@ -358,12 +360,9 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onChat((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

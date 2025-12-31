@@ -14,12 +14,14 @@ This method is available as a fluent method on the following types:
 
 [View User documentation with fluent methods](../types/User.md)
 
+
 ## Parameters
 
-| Parameter           | Type     | Required | Description                                                                                                                                             |
-| :------------------ | :------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `userId`            | `number` |   Yes    | Unique identifier of the target user                                                                                                                    |
-| `customDescription` | `string` |    No    | Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `customDescription` | `string` | No | Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description. |
+
 
 ## Usage Example
 
@@ -30,12 +32,9 @@ bot.onUser(async (user: User) => {
 });
 
 // With filtering
-bot.onUser(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onUser((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

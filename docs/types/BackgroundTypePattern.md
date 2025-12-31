@@ -4,14 +4,15 @@ The background is a .PNG or .TGV \(gzipped subset of SVG with MIME type “appli
 
 ## Fields
 
-| Name       | Type             | Required | Description                                                                                                                                      |
-| :--------- | :--------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| type       | `string`         |   Yes    | Type of the background, always “pattern”                                                                                                         |
-| document   | `Document`       |   Yes    | Document with the pattern                                                                                                                        |
-| fill       | `BackgroundFill` |   Yes    | The background fill that is combined with the pattern                                                                                            |
-| intensity  | `number`         |   Yes    | Intensity of the pattern when it is shown above the filled background; 0-100                                                                     |
-| isInverted | `boolean`        |    No    | Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only |
-| isMoving   | `boolean`        |    No    | Optional. True, if the background moves slightly when the device is tilted                                                                       |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the background, always “pattern” |
+| document | `Document` | Yes | Document with the pattern |
+| fill | `BackgroundFill` | Yes | The background fill that is combined with the pattern |
+| intensity | `number` | Yes | Intensity of the pattern when it is shown above the filled background; 0-100 |
+| isInverted | `boolean` | No | Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only |
+| isMoving | `boolean` | No | Optional. True, if the background moves slightly when the device is tilted |
+
 
 ## Event Handlers
 

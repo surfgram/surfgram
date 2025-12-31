@@ -6,14 +6,14 @@ describe('SentWebAppMessage', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      inline_message_id: 'example text',
+      inline_message_id: "example text",
     };
 
     const instance = new SentWebAppMessage(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
-    expect(instance.inlineMessageId ?? instance.raw?.inline_message_id).toEqual('example text');
+    
+    expect(instance.inlineMessageId ?? instance.raw?.inline_message_id).toEqual("example text");
   });
 });

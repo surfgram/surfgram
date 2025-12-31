@@ -79,4 +79,5 @@ export interface ForwardMessageParams {
    * @required No
    */
   suggestedPostParameters?: SuggestedPostParameters;
+
 }

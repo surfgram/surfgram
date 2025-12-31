@@ -23,12 +23,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.readBusinessMessage(...);
  */
-export async function readBusinessMessage(
-  this: Bot,
-  businessConnectionId: string,
-  chatId: number,
-  messageId: number
-): Promise<any> {
+export async function readBusinessMessage(this: Bot, businessConnectionId: string, chatId: number, messageId: number): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     chatId: chatId,
