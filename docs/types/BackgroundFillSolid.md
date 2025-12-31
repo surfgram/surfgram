@@ -4,11 +4,10 @@ The background is filled using the selected color.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the background fill, always “solid” |
-| color | `number` | Yes | The color of the background fill in the RGB24 format |
-
+| Name  | Type     | Required | Description                                          |
+| :---- | :------- | :------: | :--------------------------------------------------- |
+| type  | `string` |   Yes    | Type of the background fill, always “solid”          |
+| color | `number` |   Yes    | The color of the background fill in the RGB24 format |
 
 ## Event Handlers
 

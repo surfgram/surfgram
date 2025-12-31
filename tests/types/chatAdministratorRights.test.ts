@@ -28,7 +28,7 @@ describe('ChatAdministratorRights', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.isAnonymous ?? instance.raw?.is_anonymous).toEqual(true);
     expect(instance.canManageChat ?? instance.raw?.can_manage_chat).toEqual(true);
     expect(instance.canDeleteMessages ?? instance.raw?.can_delete_messages).toEqual(true);
@@ -44,6 +44,8 @@ describe('ChatAdministratorRights', () => {
     expect(instance.canEditMessages ?? instance.raw?.can_edit_messages).toEqual(true);
     expect(instance.canPinMessages ?? instance.raw?.can_pin_messages).toEqual(true);
     expect(instance.canManageTopics ?? instance.raw?.can_manage_topics).toEqual(true);
-    expect(instance.canManageDirectMessages ?? instance.raw?.can_manage_direct_messages).toEqual(true);
+    expect(instance.canManageDirectMessages ?? instance.raw?.can_manage_direct_messages).toEqual(
+      true
+    );
   });
 });

@@ -4,11 +4,11 @@ This object represents one row of the high scores table for a game.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| position | `number` | Yes | Position in high score table for the game |
-| user | `User` | Yes | User |
-| score | `number` | Yes | Score |
+| Name     | Type     | Required | Description                               |
+| :------- | :------- | :------: | :---------------------------------------- |
+| position | `number` |   Yes    | Position in high score table for the game |
+| user     | `User`   |   Yes    | User                                      |
+| score    | `number` |   Yes    | Score                                     |
 
 ## Fluent Methods
 
@@ -20,17 +20,17 @@ Use this method to get data for high score tables. Will return the score of the 
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.user?.id` | Target user id |
+| Parameter | Source          | Description    |
+| :-------- | :-------------- | :------------- |
+| `userId`  | `this.user?.id` | Target user id |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat |
-| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| Parameter         | Type     | Required | Description                                                                            |
+| :---------------- | :------- | :------: | :------------------------------------------------------------------------------------- |
+| `chatId`          | `number` |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat  |
+| `messageId`       | `number` |    No    | Required if inline_message_id is not specified. Identifier of the sent message         |
+| `inlineMessageId` | `string` |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Usage examples:**
 
@@ -38,10 +38,7 @@ Use this method to get data for high score tables. Will return the score of the 
 
 ```typescript
 const gamehighscore = new GameHighScore(rawData, bot);
-await gamehighscore.getGameHighScores(
-  123,
-  123,
-);
+await gamehighscore.getGameHighScores(123, 123);
 ```
 
 2. In an event handler:
@@ -54,7 +51,6 @@ bot.onGameHighScore(async (gamehighscore: GameHighScore) => {
 ```
 
 **See also:** [getGameHighScores API method](../methods/getGameHighScores.md)
-
 
 ## Event Handlers
 

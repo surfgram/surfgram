@@ -4,10 +4,9 @@ This object represents the bot&#39;s short description.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| shortDescription | `string` | Yes | The bot's short description |
-
+| Name             | Type     | Required | Description                 |
+| :--------------- | :------- | :------: | :-------------------------- |
+| shortDescription | `string` |   Yes    | The bot's short description |
 
 ## Event Handlers
 

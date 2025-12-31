@@ -7,15 +7,15 @@ describe('PaidMediaPurchased', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       from: {} as any,
-      paid_media_payload: "example text",
+      paid_media_payload: 'example text',
     };
 
     const instance = new PaidMediaPurchased(raw, mockBot);
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.from ?? instance.raw?.from).toEqual({} as any);
-    expect(instance.paidMediaPayload ?? instance.raw?.paid_media_payload).toEqual("example text");
+    expect(instance.paidMediaPayload ?? instance.raw?.paid_media_payload).toEqual('example text');
   });
 });

@@ -6,7 +6,7 @@ describe('MaskPosition', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      point: "example text",
+      point: 'example text',
       x_shift: 123,
       y_shift: 123,
       scale: 123,
@@ -16,8 +16,8 @@ describe('MaskPosition', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.point ?? instance.raw?.point).toEqual("example text");
+
+    expect(instance.point ?? instance.raw?.point).toEqual('example text');
     expect(instance.xShift ?? instance.raw?.x_shift).toEqual(123);
     expect(instance.yShift ?? instance.raw?.y_shift).toEqual(123);
     expect(instance.scale ?? instance.raw?.scale).toEqual(123);

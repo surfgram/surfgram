@@ -22,14 +22,12 @@ This method is available as a fluent method on the following types:
 
 [View ChatInviteLink documentation with fluent methods](../types/ChatInviteLink.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier of the target chat or username of the target channel \(in the format @channelusername\) |
-| `inviteLink` | `string` | Yes | The invite link to revoke |
-
+| Parameter    | Type                 | Required | Description                                                                                               |
+| :----------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------- |
+| `chatId`     | `number` \| `string` |   Yes    | Unique identifier of the target chat or username of the target channel \(in the format @channelusername\) |
+| `inviteLink` | `string`             |   Yes    | The invite link to revoke                                                                                 |
 
 ## Usage Example
 
@@ -40,9 +38,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

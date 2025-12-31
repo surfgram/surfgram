@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setStickerEmojiList(...);
  */
-export async function setStickerEmojiList(this: Bot, sticker: string, emojiList: string[]): Promise<any> {
+export async function setStickerEmojiList(
+  this: Bot,
+  sticker: string,
+  emojiList: string[]
+): Promise<any> {
   const apiParams = {
     sticker: sticker,
     emojiList: emojiList,

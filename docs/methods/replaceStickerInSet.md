@@ -10,26 +10,22 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `sendSticker`, `getStickerSet`, `getCustomEmojiStickers`, `uploadStickerFile`, `createNewStickerSet`, `addStickerToSet`, `setStickerPositionInSet`, `deleteStickerFromSet`, `replaceStickerInSet`, `setStickerEmojiList`, `setStickerKeywords`, `setStickerMaskPosition`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
-
 [View Sticker documentation with fluent methods](../types/Sticker.md)
 
 ### InputSticker (3 methods)
 
 **Available methods:** `createNewStickerSet`, `addStickerToSet`, `replaceStickerInSet`
 
-
 [View InputSticker documentation with fluent methods](../types/InputSticker.md)
-
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `userId` | `number` | Yes | User identifier of the sticker set owner |
-| `name` | `string` | Yes | Sticker set name |
-| `oldSticker` | `string` | Yes | File identifier of the replaced sticker |
-| `sticker` | `InputSticker` | Yes | A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged. |
-
+| Parameter    | Type           | Required | Description                                                                                                                                                       |
+| :----------- | :------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `userId`     | `number`       |   Yes    | User identifier of the sticker set owner                                                                                                                          |
+| `name`       | `string`       |   Yes    | Sticker set name                                                                                                                                                  |
+| `oldSticker` | `string`       |   Yes    | File identifier of the replaced sticker                                                                                                                           |
+| `sticker`    | `InputSticker` |   Yes    | A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged. |
 
 ## Usage Example
 
@@ -40,9 +36,12 @@ bot.onSticker(async (sticker: Sticker) => {
 });
 
 // With filtering
-bot.onSticker((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onSticker(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

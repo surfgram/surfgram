@@ -4,11 +4,10 @@ Contains information about the location of a Telegram Business account.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| address | `string` | Yes | Address of the business |
-| location | `Location` | No | Optional. Location of the business |
-
+| Name     | Type       | Required | Description                        |
+| :------- | :--------- | :------: | :--------------------------------- |
+| address  | `string`   |   Yes    | Address of the business            |
+| location | `Location` |    No    | Optional. Location of the business |
 
 ## Event Handlers
 

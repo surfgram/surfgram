@@ -25,7 +25,10 @@ import { MessageEntity } from '../types/messageEntity';
  * // ... params
  * });
  */
-export async function giftPremiumSubscription(this: Bot, params: GiftPremiumSubscriptionParams): Promise<any> {
+export async function giftPremiumSubscription(
+  this: Bot,
+  params: GiftPremiumSubscriptionParams
+): Promise<any> {
   const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('giftPremiumSubscription', snakeParams);
   return response;

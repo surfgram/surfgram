@@ -4,10 +4,10 @@ Describes a clickable area on a story media.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| position | `StoryAreaPosition` | Yes | Position of the area |
-| type | `StoryAreaType` | Yes | Type of the area |
+| Name     | Type                | Required | Description          |
+| :------- | :------------------ | :------: | :------------------- |
+| position | `StoryAreaPosition` |   Yes    | Position of the area |
+| type     | `StoryAreaType`     |   Yes    | Type of the area     |
 
 ## Fluent Methods
 
@@ -15,22 +15,21 @@ The `StoryArea` class has the following fluent methods that automatically inject
 
 ### postStory
 
-Posts a story on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
-
+Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `content` | `InputStoryContent` | Yes | Content of the story |
-| `activePeriod` | `number` | Yes | Period after which the story is moved to the archive, in seconds; must be one of 6 \* 3600, 12 \* 3600, 86400, or 2 \* 86400 |
-| `caption` | `string` | No | Caption of the story, 0-2048 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the story caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `areas` | `StoryArea[]` | No | A JSON-serialized list of clickable areas to be shown on the story |
-| `postToChatPage` | `boolean` | No | Pass True to keep the story accessible after it expires |
-| `protectContent` | `boolean` | No | Pass True if the content of the story must be protected from forwarding and screenshotting |
+| Parameter              | Type                | Required | Description                                                                                                                  |
+| :--------------------- | :------------------ | :------: | :--------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`            |   Yes    | Unique identifier of the business connection                                                                                 |
+| `content`              | `InputStoryContent` |   Yes    | Content of the story                                                                                                         |
+| `activePeriod`         | `number`            |   Yes    | Period after which the story is moved to the archive, in seconds; must be one of 6 \* 3600, 12 \* 3600, 86400, or 2 \* 86400 |
+| `caption`              | `string`            |    No    | Caption of the story, 0-2048 characters after entities parsing                                                               |
+| `parseMode`            | `string`            |    No    | Mode for parsing entities in the story caption. See formatting options for more details.                                     |
+| `captionEntities`      | `MessageEntity[]`   |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode          |
+| `areas`                | `StoryArea[]`       |    No    | A JSON-serialized list of clickable areas to be shown on the story                                                           |
+| `postToChatPage`       | `boolean`           |    No    | Pass True to keep the story accessible after it expires                                                                      |
+| `protectContent`       | `boolean`           |    No    | Pass True if the content of the story must be protected from forwarding and screenshotting                                   |
 
 **Usage examples:**
 
@@ -39,7 +38,7 @@ Posts a story on behalf of a managed business account. Requires the can\_manage\
 ```typescript
 const storyarea = new StoryArea(rawData, bot);
 await storyarea.postStory({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   content: {} as any,
 });
 ```
@@ -49,7 +48,7 @@ await storyarea.postStory({
 ```typescript
 bot.onStoryArea(async (storyarea: StoryArea) => {
   // Auto-fills parameters from the storyarea instance
-  await storyarea.postStory({ businessConnectionId: "Response" });
+  await storyarea.postStory({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -57,24 +56,24 @@ bot.onStoryArea(async (storyarea: StoryArea) => {
 
 ### editStory
 
-Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter | Source     | Description                            |
+| :-------- | :--------- | :------------------------------------- |
 | `storyId` | `this?.id` | Unique identifier of the story to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `content` | `InputStoryContent` | Yes | Content of the story |
-| `caption` | `string` | No | Caption of the story, 0-2048 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the story caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `areas` | `StoryArea[]` | No | A JSON-serialized list of clickable areas to be shown on the story |
+| Parameter              | Type                | Required | Description                                                                                                         |
+| :--------------------- | :------------------ | :------: | :------------------------------------------------------------------------------------------------------------------ |
+| `businessConnectionId` | `string`            |   Yes    | Unique identifier of the business connection                                                                        |
+| `content`              | `InputStoryContent` |   Yes    | Content of the story                                                                                                |
+| `caption`              | `string`            |    No    | Caption of the story, 0-2048 characters after entities parsing                                                      |
+| `parseMode`            | `string`            |    No    | Mode for parsing entities in the story caption. See formatting options for more details.                            |
+| `captionEntities`      | `MessageEntity[]`   |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode |
+| `areas`                | `StoryArea[]`       |    No    | A JSON-serialized list of clickable areas to be shown on the story                                                  |
 
 **Usage examples:**
 
@@ -83,7 +82,7 @@ Edits a story previously posted by the bot on behalf of a managed business accou
 ```typescript
 const storyarea = new StoryArea(rawData, bot);
 await storyarea.editStory({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   content: {} as any,
 });
 ```
@@ -93,12 +92,11 @@ await storyarea.editStory({
 ```typescript
 bot.onStoryArea(async (storyarea: StoryArea) => {
   // Auto-fills parameters from the storyarea instance
-  await storyarea.editStory({ businessConnectionId: "Response" });
+  await storyarea.editStory({ businessConnectionId: 'Response' });
 });
 ```
 
 **See also:** [editStory API method](../methods/editStory.md)
-
 
 ## Event Handlers
 

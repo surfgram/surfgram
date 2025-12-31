@@ -7,7 +7,7 @@ describe('WriteAccessAllowed', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       from_request: true,
-      web_app_name: "example text",
+      web_app_name: 'example text',
       from_attachment_menu: true,
     };
 
@@ -15,9 +15,9 @@ describe('WriteAccessAllowed', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.fromRequest ?? instance.raw?.from_request).toEqual(true);
-    expect(instance.webAppName ?? instance.raw?.web_app_name).toEqual("example text");
+    expect(instance.webAppName ?? instance.raw?.web_app_name).toEqual('example text');
     expect(instance.fromAttachmentMenu ?? instance.raw?.from_attachment_menu).toEqual(true);
   });
 });

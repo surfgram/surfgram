@@ -6,7 +6,7 @@ describe('TransactionPartnerTelegramApi', () => {
 
   it('should correctly instantiate from raw data', () => {
     const raw = {
-      type: "example text",
+      type: 'example text',
       request_count: 123,
     };
 
@@ -14,8 +14,8 @@ describe('TransactionPartnerTelegramApi', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
+
+    expect(instance.type ?? instance.raw?.type).toEqual('example text');
     expect(instance.requestCount ?? instance.raw?.request_count).toEqual(123);
   });
 });

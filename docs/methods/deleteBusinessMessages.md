@@ -1,6 +1,6 @@
 # deleteBusinessMessages
 
-Delete messages on behalf of a business account. Requires the can\_delete\_sent\_messages business bot right to delete messages sent by the bot itself, or the can\_delete\_all\_messages business bot right to delete any message. Returns True on success.
+Delete messages on behalf of a business account. Requires the can_delete_sent_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message. Returns True on success.
 
 ## Fluent Usage
 
@@ -14,14 +14,12 @@ This method is available as a fluent method on the following types:
 
 [View Message documentation with fluent methods](../types/Message.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which to delete the messages |
-| `messageIds` | `number[]` | Yes | A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted |
-
+| Parameter              | Type       | Required | Description                                                                                                                                                                    |
+| :--------------------- | :--------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`   |   Yes    | Unique identifier of the business connection on behalf of which to delete the messages                                                                                         |
+| `messageIds`           | `number[]` |   Yes    | A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted |
 
 ## Usage Example
 
@@ -32,9 +30,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

@@ -4,28 +4,28 @@ Represents the content of an invoice message to be sent as the result of an inli
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| title | `string` | Yes | Product name, 1-32 characters |
-| description | `string` | Yes | Product description, 1-255 characters |
-| payload | `string` | Yes | Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes. |
-| providerToken | `string` | No | Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars. |
-| currency | `string` | Yes | Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars. |
-| prices | `LabeledPrice[]` | Yes | Price breakdown, a JSON-serialized list of components \(e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.\). Must contain exactly one item for payments in Telegram Stars. |
-| maxTipAmount | `number` | No | Optional. The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max\_tip\_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars. |
-| suggestedTipAmounts | `number[]` | No | Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount. |
-| providerData | `string` | No | Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider. |
-| photoUrl | `string` | No | Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. |
-| photoSize | `number` | No | Optional. Photo size in bytes |
-| photoWidth | `number` | No | Optional. Photo width |
-| photoHeight | `number` | No | Optional. Photo height |
-| needName | `boolean` | No | Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars. |
-| needPhoneNumber | `boolean` | No | Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars. |
-| needEmail | `boolean` | No | Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars. |
-| needShippingAddress | `boolean` | No | Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars. |
-| sendPhoneNumberToProvider | `boolean` | No | Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars. |
-| sendEmailToProvider | `boolean` | No | Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars. |
-| isFlexible | `boolean` | No | Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars. |
+| Name                      | Type             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :------------------------ | :--------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| title                     | `string`         |   Yes    | Product name, 1-32 characters                                                                                                                                                                                                                                                                                                                                                                                 |
+| description               | `string`         |   Yes    | Product description, 1-255 characters                                                                                                                                                                                                                                                                                                                                                                         |
+| payload                   | `string`         |   Yes    | Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.                                                                                                                                                                                                                                                                                         |
+| providerToken             | `string`         |    No    | Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.                                                                                                                                                                                                                                                                                               |
+| currency                  | `string`         |   Yes    | Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.                                                                                                                                                                                                                                                                                                       |
+| prices                    | `LabeledPrice[]` |   Yes    | Price breakdown, a JSON-serialized list of components \(e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.\). Must contain exactly one item for payments in Telegram Stars.                                                                                                                                                                                                          |
+| maxTipAmount              | `number`         |    No    | Optional. The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars. |
+| suggestedTipAmounts       | `number[]`       |    No    | Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.                                                                                                     |
+| providerData              | `string`         |    No    | Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.                                                                                                                                                                                                      |
+| photoUrl                  | `string`         |    No    | Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.                                                                                                                                                                                                                                                                                           |
+| photoSize                 | `number`         |    No    | Optional. Photo size in bytes                                                                                                                                                                                                                                                                                                                                                                                 |
+| photoWidth                | `number`         |    No    | Optional. Photo width                                                                                                                                                                                                                                                                                                                                                                                         |
+| photoHeight               | `number`         |    No    | Optional. Photo height                                                                                                                                                                                                                                                                                                                                                                                        |
+| needName                  | `boolean`        |    No    | Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                        |
+| needPhoneNumber           | `boolean`        |    No    | Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                     |
+| needEmail                 | `boolean`        |    No    | Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                    |
+| needShippingAddress       | `boolean`        |    No    | Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                 |
+| sendPhoneNumberToProvider | `boolean`        |    No    | Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                        |
+| sendEmailToProvider       | `boolean`        |    No    | Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                       |
+| isFlexible                | `boolean`        |    No    | Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                                |
 
 ## Fluent Methods
 
@@ -35,26 +35,25 @@ The `InputInvoiceMessageContent` class has the following fluent methods that aut
 
 Use this method to send text messages. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
-| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
-| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                         |
+| `text`                    | `string`                                                                                 |   Yes    | Text of the message to be sent, 1-4096 characters after entities parsing                                                                                                                                                           |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the message text. See formatting options for more details.                                                                                                                                            |
+| `entities`                | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode                                                                                                               |
+| `linkPreviewOptions`      | `LinkPreviewOptions`                                                                     |    No    | Link preview generation options for the message                                                                                                                                                                                    |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -64,7 +63,7 @@ Use this method to send text messages. On success, the sent Message is returned.
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendMessage({
   chatId: 123,
-  text: "example text",
+  text: 'example text',
 });
 ```
 
@@ -73,7 +72,7 @@ await inputinvoicemessagecontent.sendMessage({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendMessage({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendMessage({ chatId: 'Response' });
 });
 ```
 
@@ -85,22 +84,22 @@ Use this method to forward messages of any kind. Service messages and messages w
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                              |
+| :---------- | :--------- | :------------------------------------------------------- |
 | `messageId` | `this?.id` | Message identifier in the chat specified in from_chat_id |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `fromChatId` | `number` \| `string` | Yes | Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\) |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat |
-| `videoStartTimestamp` | `number` | No | New start timestamp for the forwarded video in the message |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the forwarded message from forwarding and saving |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only |
+| Parameter                 | Type                      | Required | Description                                                                                                                                    |
+| :------------------------ | :------------------------ | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`      |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                     |
+| `fromChatId`              | `number` \| `string`      |   Yes    | Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\)                      |
+| `messageThreadId`         | `number`                  |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                             |
+| `directMessagesTopicId`   | `number`                  |    No    | Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat |
+| `videoStartTimestamp`     | `number`                  |    No    | New start timestamp for the forwarded video in the message                                                                                     |
+| `disableNotification`     | `boolean`                 |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                   |
+| `protectContent`          | `boolean`                 |    No    | Protects the contents of the forwarded message from forwarding and saving                                                                      |
+| `suggestedPostParameters` | `SuggestedPostParameters` |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only                               |
 
 **Usage examples:**
 
@@ -119,7 +118,7 @@ await inputinvoicemessagecontent.forwardMessage({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.forwardMessage({ chatId: "Response" });
+  await inputinvoicemessagecontent.forwardMessage({ chatId: 'Response' });
 });
 ```
 
@@ -129,18 +128,17 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `fromChatId` | `number` \| `string` | Yes | Unique identifier for the chat where the original messages were sent \(or channel username in the format @channelusername\) |
-| `messageIds` | `number[]` | Yes | A JSON-serialized list of 1-100 identifiers of messages in the chat from\_chat\_id to forward. The identifiers must be specified in a strictly increasing order. |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the messages will be forwarded; required if the messages are forwarded to a direct messages chat |
-| `disableNotification` | `boolean` | No | Sends the messages silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the forwarded messages from forwarding and saving |
+| Parameter               | Type                 | Required | Description                                                                                                                                                    |
+| :---------------------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                     |
+| `fromChatId`            | `number` \| `string` |   Yes    | Unique identifier for the chat where the original messages were sent \(or channel username in the format @channelusername\)                                    |
+| `messageIds`            | `number[]`           |   Yes    | A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order. |
+| `messageThreadId`       | `number`             |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                             |
+| `directMessagesTopicId` | `number`             |    No    | Identifier of the direct messages topic to which the messages will be forwarded; required if the messages are forwarded to a direct messages chat              |
+| `disableNotification`   | `boolean`            |    No    | Sends the messages silently. Users will receive a notification with no sound.                                                                                  |
+| `protectContent`        | `boolean`            |    No    | Protects the contents of the forwarded messages from forwarding and saving                                                                                     |
 
 **Usage examples:**
 
@@ -159,7 +157,7 @@ await inputinvoicemessagecontent.forwardMessages({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.forwardMessages({ chatId: "Response" });
+  await inputinvoicemessagecontent.forwardMessages({ chatId: 'Response' });
 });
 ```
 
@@ -169,28 +167,27 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send photos. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `photo` | `InputFile` \| `string` | Yes | Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `caption` | `string` | No | Photo caption \(may also be used when resending photos by file\_id\), 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the photo caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
-| `hasSpoiler` | `boolean` | No | Pass True if the photo needs to be covered with a spoiler animation |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                     |
+| `photo`                   | `InputFile` \| `string`                                                                  |   Yes    | Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files » |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                       |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                             |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                           |
+| `caption`                 | `string`                                                                                 |    No    | Photo caption \(may also be used when resending photos by file_id\), 0-1024 characters after entities parsing                                                                                                                                                                                                                                                                                                                  |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the photo caption. See formatting options for more details.                                                                                                                                                                                                                                                                                                                                       |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                                                                                                                                                                            |
+| `showCaptionAboveMedia`   | `boolean`                                                                                |    No    | Pass True, if the caption must be shown above the message media                                                                                                                                                                                                                                                                                                                                                                |
+| `hasSpoiler`              | `boolean`                                                                                |    No    | Pass True if the photo needs to be covered with a spoiler animation                                                                                                                                                                                                                                                                                                                                                            |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                   |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                           |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                       |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                     |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                             |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                         |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                |
 
 **Usage examples:**
 
@@ -209,7 +206,7 @@ await inputinvoicemessagecontent.sendPhoto({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendPhoto({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendPhoto({ chatId: 'Response' });
 });
 ```
 
@@ -219,30 +216,29 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `audio` | `InputFile` \| `string` | Yes | Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `caption` | `string` | No | Audio caption, 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the audio caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `duration` | `number` | No | Duration of the audio in seconds |
-| `performer` | `string` | No | Performer |
-| `title` | `string` | No | Track name |
-| `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `audio`                   | `InputFile` \| `string`                                                                  |   Yes    | Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »                                                                                                                                                                                                                                                           |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `caption`                 | `string`                                                                                 |    No    | Audio caption, 0-1024 characters after entities parsing                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the audio caption. See formatting options for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `duration`                | `number`                                                                                 |    No    | Duration of the audio in seconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `performer`               | `string`                                                                                 |    No    | Performer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `title`                   | `string`                                                                                 |    No    | Track name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `thumbnail`               | `InputFile` \| `string`                                                                  |    No    | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More information on Sending Files » |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                                                                                                                                               |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                                                                                                                                                     |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Usage examples:**
 
@@ -261,7 +257,7 @@ await inputinvoicemessagecontent.sendAudio({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendAudio({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendAudio({ chatId: 'Response' });
 });
 ```
 
@@ -271,28 +267,27 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `document` | `InputFile` \| `string` | Yes | File to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
-| `caption` | `string` | No | Document caption \(may also be used when resending documents by file\_id\), 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the document caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `disableContentTypeDetection` | `boolean` | No | Disables automatic server-side content type detection for files uploaded using multipart/form-data |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                     | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :---------------------------- | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                      | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `document`                    | `InputFile` \| `string`                                                                  |   Yes    | File to send. Pass a file_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »                                                                                                                                                                                                                                                                               |
+| `businessConnectionId`        | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `messageThreadId`             | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `directMessagesTopicId`       | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `thumbnail`                   | `InputFile` \| `string`                                                                  |    No    | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More information on Sending Files » |
+| `caption`                     | `string`                                                                                 |    No    | Document caption \(may also be used when resending documents by file_id\), 0-1024 characters after entities parsing                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `parseMode`                   | `string`                                                                                 |    No    | Mode for parsing entities in the document caption. See formatting options for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `captionEntities`             | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `disableContentTypeDetection` | `boolean`                                                                                |    No    | Disables automatic server-side content type detection for files uploaded using multipart/form-data                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `disableNotification`         | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `protectContent`              | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowPaidBroadcast`          | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                                                                                                                                               |
+| `messageEffectId`             | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `suggestedPostParameters`     | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                                                                                                                                                     |
+| `replyParameters`             | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `replyMarkup`                 | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Usage examples:**
 
@@ -311,7 +306,7 @@ await inputinvoicemessagecontent.sendDocument({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendDocument({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendDocument({ chatId: 'Response' });
 });
 ```
 
@@ -321,35 +316,34 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `video` | `InputFile` \| `string` | Yes | Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `duration` | `number` | No | Duration of sent video in seconds |
-| `width` | `number` | No | Video width |
-| `height` | `number` | No | Video height |
-| `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
-| `cover` | `InputFile` \| `string` | No | Cover for the video in the message. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files » |
-| `startTimestamp` | `number` | No | Start timestamp for the video in the message |
-| `caption` | `string` | No | Video caption \(may also be used when resending videos by file\_id\), 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the video caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
-| `hasSpoiler` | `boolean` | No | Pass True if the video needs to be covered with a spoiler animation |
-| `supportsStreaming` | `boolean` | No | Pass True if the uploaded video is suitable for streaming |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `video`                   | `InputFile` \| `string`                                                                  |   Yes    | Video to send. Pass a file_id as String to send a video that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »                                                                                                                                                                                                                                                                          |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `duration`                | `number`                                                                                 |    No    | Duration of sent video in seconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `width`                   | `number`                                                                                 |    No    | Video width                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `height`                  | `number`                                                                                 |    No    | Video height                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `thumbnail`               | `InputFile` \| `string`                                                                  |    No    | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More information on Sending Files » |
+| `cover`                   | `InputFile` \| `string`                                                                  |    No    | Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file_attach_name&gt;” to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. More information on Sending Files »                                                                                                                                                                                               |
+| `startTimestamp`          | `number`                                                                                 |    No    | Start timestamp for the video in the message                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `caption`                 | `string`                                                                                 |    No    | Video caption \(may also be used when resending videos by file_id\), 0-1024 characters after entities parsing                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the video caption. See formatting options for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `showCaptionAboveMedia`   | `boolean`                                                                                |    No    | Pass True, if the caption must be shown above the message media                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `hasSpoiler`              | `boolean`                                                                                |    No    | Pass True if the video needs to be covered with a spoiler animation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `supportsStreaming`       | `boolean`                                                                                |    No    | Pass True if the uploaded video is suitable for streaming                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                                                                                                                                               |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                                                                                                                                                     |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Usage examples:**
 
@@ -368,7 +362,7 @@ await inputinvoicemessagecontent.sendVideo({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendVideo({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendVideo({ chatId: 'Response' });
 });
 ```
 
@@ -378,32 +372,31 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `animation` | `InputFile` \| `string` | Yes | Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `duration` | `number` | No | Duration of sent animation in seconds |
-| `width` | `number` | No | Animation width |
-| `height` | `number` | No | Animation height |
-| `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
-| `caption` | `string` | No | Animation caption \(may also be used when resending animation by file\_id\), 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the animation caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
-| `hasSpoiler` | `boolean` | No | Pass True if the animation needs to be covered with a spoiler animation |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `animation`               | `InputFile` \| `string`                                                                  |   Yes    | Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »                                                                                                                                                                                                                                                        |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `duration`                | `number`                                                                                 |    No    | Duration of sent animation in seconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `width`                   | `number`                                                                                 |    No    | Animation width                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `height`                  | `number`                                                                                 |    No    | Animation height                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `thumbnail`               | `InputFile` \| `string`                                                                  |    No    | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More information on Sending Files » |
+| `caption`                 | `string`                                                                                 |    No    | Animation caption \(may also be used when resending animation by file_id\), 0-1024 characters after entities parsing                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the animation caption. See formatting options for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `showCaptionAboveMedia`   | `boolean`                                                                                |    No    | Pass True, if the caption must be shown above the message media                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `hasSpoiler`              | `boolean`                                                                                |    No    | Pass True if the animation needs to be covered with a spoiler animation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                                                                                                                                               |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                                                                                                                                                     |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Usage examples:**
 
@@ -422,7 +415,7 @@ await inputinvoicemessagecontent.sendAnimation({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendAnimation({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendAnimation({ chatId: 'Response' });
 });
 ```
 
@@ -432,27 +425,26 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `voice` | `InputFile` \| `string` | Yes | Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `caption` | `string` | No | Voice message caption, 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the voice message caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `duration` | `number` | No | Duration of the voice message in seconds |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                    |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                     |
+| `voice`                   | `InputFile` \| `string`                                                                  |   Yes    | Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                       |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                             |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                           |
+| `caption`                 | `string`                                                                                 |    No    | Voice message caption, 0-1024 characters after entities parsing                                                                                                                                                                                                                |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the voice message caption. See formatting options for more details.                                                                                                                                                                               |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                            |
+| `duration`                | `number`                                                                                 |    No    | Duration of the voice message in seconds                                                                                                                                                                                                                                       |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                   |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                           |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                       |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                     |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                             |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                         |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                |
 
 **Usage examples:**
 
@@ -471,7 +463,7 @@ await inputinvoicemessagecontent.sendVoice({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendVoice({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendVoice({ chatId: 'Response' });
 });
 ```
 
@@ -481,26 +473,25 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `videoNote` | `InputFile` \| `string` | Yes | Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `duration` | `number` | No | Duration of sent video in seconds |
-| `length` | `number` | No | Video width and height, i.e. diameter of the video message |
-| `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `videoNote`               | `InputFile` \| `string`                                                                  |   Yes    | Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported                                                                                                                                                                                                                                                                                      |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `duration`                | `number`                                                                                 |    No    | Duration of sent video in seconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `length`                  | `number`                                                                                 |    No    | Video width and height, i.e. diameter of the video message                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `thumbnail`               | `InputFile` \| `string`                                                                  |    No    | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More information on Sending Files » |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                                                                                                                                                                               |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                                                                                                                                                                     |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Usage examples:**
 
@@ -519,7 +510,7 @@ await inputinvoicemessagecontent.sendVideoNote({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendVideoNote({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendVideoNote({ chatId: 'Response' });
 });
 ```
 
@@ -529,28 +520,27 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send paid media. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance. |
-| `starCount` | `number` | Yes | The number of Telegram Stars that must be paid to buy access to the media; 1-10000 |
-| `media` | `InputPaidMedia[]` | Yes | A JSON-serialized array describing the media to be sent; up to 10 items |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `payload` | `string` | No | Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes. |
-| `caption` | `string` | No | Media caption, 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the media caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                     |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance. |
+| `starCount`               | `number`                                                                                 |   Yes    | The number of Telegram Stars that must be paid to buy access to the media; 1-10000                                                                                                                                                                                              |
+| `media`                   | `InputPaidMedia[]`                                                                       |   Yes    | A JSON-serialized array describing the media to be sent; up to 10 items                                                                                                                                                                                                         |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                        |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                              |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                            |
+| `payload`                 | `string`                                                                                 |    No    | Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.                                                                                                                                                        |
+| `caption`                 | `string`                                                                                 |    No    | Media caption, 0-1024 characters after entities parsing                                                                                                                                                                                                                         |
+| `parseMode`               | `string`                                                                                 |    No    | Mode for parsing entities in the media caption. See formatting options for more details.                                                                                                                                                                                        |
+| `captionEntities`         | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                                                                                                                                             |
+| `showCaptionAboveMedia`   | `boolean`                                                                                |    No    | Pass True, if the caption must be shown above the message media                                                                                                                                                                                                                 |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                    |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                            |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                        |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                              |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                          |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                 |
 
 **Usage examples:**
 
@@ -569,7 +559,7 @@ await inputinvoicemessagecontent.sendPaidMedia({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendPaidMedia({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendPaidMedia({ chatId: 'Response' });
 });
 ```
 
@@ -579,21 +569,20 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `media` | `any[]` | Yes | A JSON-serialized array describing messages to be sent, must include 2-10 items |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat |
-| `disableNotification` | `boolean` | No | Sends messages silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent messages from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| Parameter               | Type                 | Required | Description                                                                                                                                                                              |
+| :---------------------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                               |
+| `media`                 | `any[]`              |   Yes    | A JSON-serialized array describing messages to be sent, must include 2-10 items                                                                                                          |
+| `businessConnectionId`  | `string`             |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                 |
+| `messageThreadId`       | `number`             |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                       |
+| `directMessagesTopicId` | `number`             |    No    | Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat                                                  |
+| `disableNotification`   | `boolean`            |    No    | Sends messages silently. Users will receive a notification with no sound.                                                                                                                |
+| `protectContent`        | `boolean`            |    No    | Protects the contents of the sent messages from forwarding and saving                                                                                                                    |
+| `allowPaidBroadcast`    | `boolean`            |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `messageEffectId`       | `string`             |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                               |
+| `replyParameters`       | `ReplyParameters`    |    No    | Description of the message to reply to                                                                                                                                                   |
 
 **Usage examples:**
 
@@ -612,7 +601,7 @@ await inputinvoicemessagecontent.sendMediaGroup({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendMediaGroup({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendMediaGroup({ chatId: 'Response' });
 });
 ```
 
@@ -622,28 +611,27 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send point on the map. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `latitude` | `number` | Yes | Latitude of the location |
-| `longitude` | `number` | Yes | Longitude of the location |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
-| `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. |
-| `heading` | `number` | No | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
-| `proximityAlertRadius` | `number` | No | For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                         |
+| `latitude`                | `number`                                                                                 |   Yes    | Latitude of the location                                                                                                                                                                                                           |
+| `longitude`               | `number`                                                                                 |   Yes    | Longitude of the location                                                                                                                                                                                                          |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `horizontalAccuracy`      | `number`                                                                                 |    No    | The radius of uncertainty for the location, measured in meters; 0-1500                                                                                                                                                             |
+| `livePeriod`              | `number`                                                                                 |    No    | Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.                                                |
+| `heading`                 | `number`                                                                                 |    No    | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.                                                                                                                   |
+| `proximityAlertRadius`    | `number`                                                                                 |    No    | For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.                                                                           |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -662,7 +650,7 @@ await inputinvoicemessagecontent.sendLocation({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendLocation({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendLocation({ chatId: 'Response' });
 });
 ```
 
@@ -672,30 +660,29 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send information about a venue. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `latitude` | `number` | Yes | Latitude of the venue |
-| `longitude` | `number` | Yes | Longitude of the venue |
-| `title` | `string` | Yes | Name of the venue |
-| `address` | `string` | Yes | Address of the venue |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `foursquareId` | `string` | No | Foursquare identifier of the venue |
-| `foursquareType` | `string` | No | Foursquare type of the venue, if known. \(For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.\) |
-| `googlePlaceId` | `string` | No | Google Places identifier of the venue |
-| `googlePlaceType` | `string` | No | Google Places type of the venue. \(See supported types.\) |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                         |
+| `latitude`                | `number`                                                                                 |   Yes    | Latitude of the venue                                                                                                                                                                                                              |
+| `longitude`               | `number`                                                                                 |   Yes    | Longitude of the venue                                                                                                                                                                                                             |
+| `title`                   | `string`                                                                                 |   Yes    | Name of the venue                                                                                                                                                                                                                  |
+| `address`                 | `string`                                                                                 |   Yes    | Address of the venue                                                                                                                                                                                                               |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `foursquareId`            | `string`                                                                                 |    No    | Foursquare identifier of the venue                                                                                                                                                                                                 |
+| `foursquareType`          | `string`                                                                                 |    No    | Foursquare type of the venue, if known. \(For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.\)                                                                                           |
+| `googlePlaceId`           | `string`                                                                                 |    No    | Google Places identifier of the venue                                                                                                                                                                                              |
+| `googlePlaceType`         | `string`                                                                                 |    No    | Google Places type of the venue. \(See supported types.\)                                                                                                                                                                          |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -714,7 +701,7 @@ await inputinvoicemessagecontent.sendVenue({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendVenue({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendVenue({ chatId: 'Response' });
 });
 ```
 
@@ -724,26 +711,25 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send phone contacts. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `phoneNumber` | `string` | Yes | Contact's phone number |
-| `firstName` | `string` | Yes | Contact's first name |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `lastName` | `string` | No | Contact's last name |
-| `vcard` | `string` | No | Additional data about the contact in the form of a vCard, 0-2048 bytes |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                         |
+| `phoneNumber`             | `string`                                                                                 |   Yes    | Contact's phone number                                                                                                                                                                                                             |
+| `firstName`               | `string`                                                                                 |   Yes    | Contact's first name                                                                                                                                                                                                               |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `lastName`                | `string`                                                                                 |    No    | Contact's last name                                                                                                                                                                                                                |
+| `vcard`                   | `string`                                                                                 |    No    | Additional data about the contact in the form of a vCard, 0-2048 bytes                                                                                                                                                             |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                               |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -753,7 +739,7 @@ Use this method to send phone contacts. On success, the sent Message is returned
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendContact({
   chatId: 123,
-  phoneNumber: "example text",
+  phoneNumber: 'example text',
 });
 ```
 
@@ -762,7 +748,7 @@ await inputinvoicemessagecontent.sendContact({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendContact({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendContact({ chatId: 'Response' });
 });
 ```
 
@@ -772,34 +758,33 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send a native poll. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). Polls can't be sent to channel direct messages chats. |
-| `question` | `string` | Yes | Poll question, 1-300 characters |
-| `options` | `InputPollOption[]` | Yes | A JSON-serialized list of 2-12 answer options |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `questionParseMode` | `string` | No | Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed |
-| `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode |
-| `isAnonymous` | `boolean` | No | True, if the poll needs to be anonymous, defaults to True |
-| `type` | `string` | No | Poll type, “quiz” or “regular”, defaults to “regular” |
-| `allowsMultipleAnswers` | `boolean` | No | True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False |
-| `correctOptionId` | `number` | No | 0-based identifier of the correct answer option, required for polls in quiz mode |
-| `explanation` | `string` | No | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing |
-| `explanationParseMode` | `string` | No | Mode for parsing entities in the explanation. See formatting options for more details. |
-| `explanationEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode |
-| `openPeriod` | `number` | No | Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close\_date. |
-| `closeDate` | `number` | No | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open\_period. |
-| `isClosed` | `boolean` | No | Pass True if the poll needs to be immediately closed. This can be useful for poll preview. |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter               | Type                                                                                     | Required | Description                                                                                                                                                                              |
+| :---------------------- | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). Polls can't be sent to channel direct messages chats.                        |
+| `question`              | `string`                                                                                 |   Yes    | Poll question, 1-300 characters                                                                                                                                                          |
+| `options`               | `InputPollOption[]`                                                                      |   Yes    | A JSON-serialized list of 2-12 answer options                                                                                                                                            |
+| `businessConnectionId`  | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                 |
+| `messageThreadId`       | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                       |
+| `questionParseMode`     | `string`                                                                                 |    No    | Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed                                                    |
+| `questionEntities`      | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode                                                          |
+| `isAnonymous`           | `boolean`                                                                                |    No    | True, if the poll needs to be anonymous, defaults to True                                                                                                                                |
+| `type`                  | `string`                                                                                 |    No    | Poll type, “quiz” or “regular”, defaults to “regular”                                                                                                                                    |
+| `allowsMultipleAnswers` | `boolean`                                                                                |    No    | True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False                                                                                             |
+| `correctOptionId`       | `number`                                                                                 |    No    | 0-based identifier of the correct answer option, required for polls in quiz mode                                                                                                         |
+| `explanation`           | `string`                                                                                 |    No    | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing              |
+| `explanationParseMode`  | `string`                                                                                 |    No    | Mode for parsing entities in the explanation. See formatting options for more details.                                                                                                   |
+| `explanationEntities`   | `MessageEntity[]`                                                                        |    No    | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode                                                    |
+| `openPeriod`            | `number`                                                                                 |    No    | Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close_date.                                                                         |
+| `closeDate`             | `number`                                                                                 |    No    | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open_period.     |
+| `isClosed`              | `boolean`                                                                                |    No    | Pass True if the poll needs to be immediately closed. This can be useful for poll preview.                                                                                               |
+| `disableNotification`   | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                             |
+| `protectContent`        | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                     |
+| `allowPaidBroadcast`    | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `messageEffectId`       | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                               |
+| `replyParameters`       | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                   |
+| `replyMarkup`           | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user          |
 
 **Usage examples:**
 
@@ -809,7 +794,7 @@ Use this method to send a native poll. On success, the sent Message is returned.
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendPoll({
   chatId: 123,
-  question: "example text",
+  question: 'example text',
 });
 ```
 
@@ -818,7 +803,7 @@ await inputinvoicemessagecontent.sendPoll({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendPoll({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendPoll({ chatId: 'Response' });
 });
 ```
 
@@ -828,19 +813,18 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which the message will be sent |
-| `chatId` | `number` | Yes | Unique identifier for the target chat |
-| `checklist` | `InputChecklist` | Yes | A JSON-serialized object for the checklist to send |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message |
-| `replyParameters` | `ReplyParameters` | No | A JSON-serialized object for description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
+| Parameter              | Type                   | Required | Description                                                                              |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`               |   Yes    | Unique identifier of the business connection on behalf of which the message will be sent |
+| `chatId`               | `number`               |   Yes    | Unique identifier for the target chat                                                    |
+| `checklist`            | `InputChecklist`       |   Yes    | A JSON-serialized object for the checklist to send                                       |
+| `disableNotification`  | `boolean`              |    No    | Sends the message silently. Users will receive a notification with no sound.             |
+| `protectContent`       | `boolean`              |    No    | Protects the contents of the sent message from forwarding and saving                     |
+| `messageEffectId`      | `string`               |    No    | Unique identifier of the message effect to be added to the message                       |
+| `replyParameters`      | `ReplyParameters`      |    No    | A JSON-serialized object for description of the message to reply to                      |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard                                          |
 
 **Usage examples:**
 
@@ -849,7 +833,7 @@ Use this method to send a checklist on behalf of a connected business account. O
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendChecklist({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   chatId: 123,
 });
 ```
@@ -859,7 +843,7 @@ await inputinvoicemessagecontent.sendChecklist({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendChecklist({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.sendChecklist({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -869,23 +853,22 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `emoji` | `string` | No | Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, “”, or “”. Dice can have values 1-6 for “”, “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “” |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                        |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                         |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                           |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                 |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                               |
+| `emoji`                   | `string`                                                                                 |    No    | Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, “”, or “”. Dice can have values 1-6 for “”, “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”                |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                       |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding                                                                                                                                                                          |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                           |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                         |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                             |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                    |
 
 **Usage examples:**
 
@@ -895,7 +878,7 @@ Use this method to send an animated emoji that will display a random value. On s
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendDice({
   chatId: 123,
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
 });
 ```
 
@@ -904,7 +887,7 @@ await inputinvoicemessagecontent.sendDice({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendDice({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendDice({ chatId: 'Response' });
 });
 ```
 
@@ -914,15 +897,14 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported. |
-| `action` | `string` | Yes | Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes. |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the action will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread; for supergroups only |
+| Parameter              | Type                 | Required | Description                                                                                                                                                                                                                                                                                                                                                                                 |
+| :--------------------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chatId`               | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.                                                                                                                                                                                                         |
+| `action`               | `string`             |   Yes    | Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, choose_sticker for stickers, find_location for location data, record_video_note or upload_video_note for video notes. |
+| `businessConnectionId` | `string`             |    No    | Unique identifier of the business connection on behalf of which the action will be sent                                                                                                                                                                                                                                                                                                     |
+| `messageThreadId`      | `number`             |    No    | Unique identifier for the target message thread; for supergroups only                                                                                                                                                                                                                                                                                                                       |
 
 **Usage examples:**
 
@@ -930,10 +912,7 @@ Use this method when you need to tell the user that something is happening on th
 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
-await inputinvoicemessagecontent.sendChatAction(
-  123,
-  "example text",
-);
+await inputinvoicemessagecontent.sendChatAction(123, 'example text');
 ```
 
 2. In an event handler:
@@ -951,17 +930,16 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inviteLink` | `string` | Yes | The invite link to edit |
-| `name` | `string` | No | Invite link name; 0-32 characters |
-| `expireDate` | `number` | No | Point in time \(Unix timestamp\) when the link will expire |
-| `memberLimit` | `number` | No | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
-| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified |
+| Parameter            | Type                 | Required | Description                                                                                                                       |
+| :------------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`             | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                        |
+| `inviteLink`         | `string`             |   Yes    | The invite link to edit                                                                                                           |
+| `name`               | `string`             |    No    | Invite link name; 0-32 characters                                                                                                 |
+| `expireDate`         | `number`             |    No    | Point in time \(Unix timestamp\) when the link will expire                                                                        |
+| `memberLimit`        | `number`             |    No    | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999   |
+| `createsJoinRequest` | `boolean`            |    No    | True, if users joining the chat via the link need to be approved by chat administrators. If True, member_limit can't be specified |
 
 **Usage examples:**
 
@@ -971,7 +949,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editChatInviteLink({
   chatId: 123,
-  inviteLink: "example text",
+  inviteLink: 'example text',
 });
 ```
 
@@ -980,7 +958,7 @@ await inputinvoicemessagecontent.editChatInviteLink({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editChatInviteLink({ chatId: "Response" });
+  await inputinvoicemessagecontent.editChatInviteLink({ chatId: 'Response' });
 });
 ```
 
@@ -988,16 +966,15 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editChatSubscriptionInviteLink
 
-Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
-
+Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inviteLink` | `string` | Yes | The invite link to edit |
-| `name` | `string` | No | Invite link name; 0-32 characters |
+| Parameter    | Type                 | Required | Description                                                                                                |
+| :----------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------- |
+| `chatId`     | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `inviteLink` | `string`             |   Yes    | The invite link to edit                                                                                    |
+| `name`       | `string`             |    No    | Invite link name; 0-32 characters                                                                          |
 
 **Usage examples:**
 
@@ -1005,10 +982,7 @@ Use this method to edit a subscription invite link created by the bot. The bot m
 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
-await inputinvoicemessagecontent.editChatSubscriptionInviteLink(
-  123,
-  "example text",
-);
+await inputinvoicemessagecontent.editChatSubscriptionInviteLink(123, 'example text');
 ```
 
 2. In an event handler:
@@ -1024,17 +998,16 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editForumTopic
 
-Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-
+Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `messageThreadId` | `number` | Yes | Unique identifier for the target message thread of the forum topic |
-| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept |
-| `iconCustomEmojiId` | `string` | No | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept |
+| Parameter           | Type                 | Required | Description                                                                                                                                                                                                                            |
+| :------------------ | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`            | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)                                                                                                                       |
+| `messageThreadId`   | `number`             |   Yes    | Unique identifier for the target message thread of the forum topic                                                                                                                                                                     |
+| `name`              | `string`             |    No    | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept                                                                                                                                |
+| `iconCustomEmojiId` | `string`             |    No    | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept |
 
 **Usage examples:**
 
@@ -1042,10 +1015,7 @@ Use this method to edit name and icon of a topic in a forum supergroup chat. The
 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
-await inputinvoicemessagecontent.editForumTopic(
-  123,
-  123,
-);
+await inputinvoicemessagecontent.editForumTopic(123, 123);
 ```
 
 2. In an event handler:
@@ -1061,15 +1031,14 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editGeneralForumTopic
 
-Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-
+Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `name` | `string` | Yes | New topic name, 1-128 characters |
+| Parameter | Type                 | Required | Description                                                                                                      |
+| :-------- | :------------------- | :------: | :--------------------------------------------------------------------------------------------------------------- |
+| `chatId`  | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `name`    | `string`             |   Yes    | New topic name, 1-128 characters                                                                                 |
 
 **Usage examples:**
 
@@ -1077,10 +1046,7 @@ Use this method to edit the name of the &#39;General&#39; topic in a forum super
 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
-await inputinvoicemessagecontent.editGeneralForumTopic(
-  123,
-  "example text",
-);
+await inputinvoicemessagecontent.editGeneralForumTopic(123, 'example text');
 ```
 
 2. In an event handler:
@@ -1098,18 +1064,17 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `giftId` | `string` | Yes | Identifier of the gift |
-| `userId` | `number` | No | Required if chat\_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `number` \| `string` | No | Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift. |
-| `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
-| `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
+| Parameter       | Type                 | Required | Description                                                                                                                                                                                                                             |
+| :-------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `giftId`        | `string`             |   Yes    | Identifier of the gift                                                                                                                                                                                                                  |
+| `userId`        | `number`             |    No    | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.                                                                                                                                   |
+| `chatId`        | `number` \| `string` |    No    | Required if user_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift.                                                                          |
+| `payForUpgrade` | `boolean`            |    No    | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver                                                                                                                          |
+| `text`          | `string`             |    No    | Text that will be shown along with the gift; 0-128 characters                                                                                                                                                                           |
+| `textParseMode` | `string`             |    No    | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.                                          |
+| `textEntities`  | `MessageEntity[]`    |    No    | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored. |
 
 **Usage examples:**
 
@@ -1118,7 +1083,7 @@ Sends a gift to the given user or channel chat. The gift can&#39;t be converted 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendGift({
-  giftId: "example text",
+  giftId: 'example text',
   userId: 123,
 });
 ```
@@ -1128,7 +1093,7 @@ await inputinvoicemessagecontent.sendGift({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendGift({ giftId: "Response" });
+  await inputinvoicemessagecontent.sendGift({ giftId: 'Response' });
 });
 ```
 
@@ -1136,20 +1101,19 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editStory
 
-Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
-
+Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `storyId` | `number` | Yes | Unique identifier of the story to edit |
-| `content` | `InputStoryContent` | Yes | Content of the story |
-| `caption` | `string` | No | Caption of the story, 0-2048 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the story caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `areas` | `StoryArea[]` | No | A JSON-serialized list of clickable areas to be shown on the story |
+| Parameter              | Type                | Required | Description                                                                                                         |
+| :--------------------- | :------------------ | :------: | :------------------------------------------------------------------------------------------------------------------ |
+| `businessConnectionId` | `string`            |   Yes    | Unique identifier of the business connection                                                                        |
+| `storyId`              | `number`            |   Yes    | Unique identifier of the story to edit                                                                              |
+| `content`              | `InputStoryContent` |   Yes    | Content of the story                                                                                                |
+| `caption`              | `string`            |    No    | Caption of the story, 0-2048 characters after entities parsing                                                      |
+| `parseMode`            | `string`            |    No    | Mode for parsing entities in the story caption. See formatting options for more details.                            |
+| `captionEntities`      | `MessageEntity[]`   |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode |
+| `areas`                | `StoryArea[]`       |    No    | A JSON-serialized list of clickable areas to be shown on the story                                                  |
 
 **Usage examples:**
 
@@ -1158,7 +1122,7 @@ Edits a story previously posted by the bot on behalf of a managed business accou
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editStory({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   storyId: 123,
 });
 ```
@@ -1168,7 +1132,7 @@ await inputinvoicemessagecontent.editStory({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editStory({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editStory({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1180,22 +1144,22 @@ Use this method to edit text and game messages. On success, if the edited messag
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                                                       |
+| :---------- | :--------- | :-------------------------------------------------------------------------------- |
 | `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
-| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
-| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| Parameter              | Type                   | Required | Description                                                                                                                                                |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                 | `string`               |   Yes    | New text of the message, 1-4096 characters after entities parsing                                                                                          |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                          |
+| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                     |
+| `parseMode`            | `string`               |    No    | Mode for parsing entities in the message text. See formatting options for more details.                                                                    |
+| `entities`             | `MessageEntity[]`      |    No    | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode                                       |
+| `linkPreviewOptions`   | `LinkPreviewOptions`   |    No    | Link preview generation options for the message                                                                                                            |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard.                                                                                                           |
 
 **Usage examples:**
 
@@ -1204,8 +1168,8 @@ Use this method to edit text and game messages. On success, if the edited messag
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editMessageText({
-  text: "example text",
-  businessConnectionId: "example text",
+  text: 'example text',
+  businessConnectionId: 'example text',
 });
 ```
 
@@ -1214,7 +1178,7 @@ await inputinvoicemessagecontent.editMessageText({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageText({ text: "Response" });
+  await inputinvoicemessagecontent.editMessageText({ text: 'Response' });
 });
 ```
 
@@ -1226,22 +1190,22 @@ Use this method to edit captions of messages. On success, if the edited message 
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                                                       |
+| :---------- | :--------- | :-------------------------------------------------------------------------------- |
 | `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `caption` | `string` | No | New caption of the message, 0-1024 characters after entities parsing |
-| `parseMode` | `string` | No | Mode for parsing entities in the message caption. See formatting options for more details. |
-| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages. |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| Parameter               | Type                   | Required | Description                                                                                                                                                |
+| :---------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId`  | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                          |
+| `chatId`                | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `inlineMessageId`       | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                     |
+| `caption`               | `string`               |    No    | New caption of the message, 0-1024 characters after entities parsing                                                                                       |
+| `parseMode`             | `string`               |    No    | Mode for parsing entities in the message caption. See formatting options for more details.                                                                 |
+| `captionEntities`       | `MessageEntity[]`      |    No    | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode                                        |
+| `showCaptionAboveMedia` | `boolean`              |    No    | Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.                                   |
+| `replyMarkup`           | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard.                                                                                                           |
 
 **Usage examples:**
 
@@ -1250,7 +1214,7 @@ Use this method to edit captions of messages. On success, if the edited message 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editMessageCaption({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   chatId: 123,
 });
 ```
@@ -1260,7 +1224,7 @@ await inputinvoicemessagecontent.editMessageCaption({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageCaption({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editMessageCaption({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1268,23 +1232,23 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editMessageMedia
 
-Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                                                       |
+| :---------- | :--------- | :-------------------------------------------------------------------------------- |
 | `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `media` | `InputMedia` | Yes | A JSON-serialized object for a new media content of the message |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard. |
+| Parameter              | Type                   | Required | Description                                                                                                                                                |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `media`                | `InputMedia`           |   Yes    | A JSON-serialized object for a new media content of the message                                                                                            |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                          |
+| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                     |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for a new inline keyboard.                                                                                                        |
 
 **Usage examples:**
 
@@ -1294,7 +1258,7 @@ Use this method to edit animation, audio, document, photo, or video messages, or
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editMessageMedia({
   media: {} as any,
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
 });
 ```
 
@@ -1303,7 +1267,7 @@ await inputinvoicemessagecontent.editMessageMedia({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageMedia({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editMessageMedia({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1311,28 +1275,28 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 ### editMessageLiveLocation
 
-Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                                                       |
+| :---------- | :--------- | :-------------------------------------------------------------------------------- |
 | `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `latitude` | `number` | Yes | Latitude of new location |
-| `longitude` | `number` | Yes | Longitude of new location |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `livePeriod` | `number` | No | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged |
-| `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
-| `heading` | `number` | No | Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
-| `proximityAlertRadius` | `number` | No | The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard. |
+| Parameter              | Type                   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                     |
+| :--------------------- | :--------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `latitude`             | `number`               |   Yes    | Latitude of new location                                                                                                                                                                                                                                                                                                                                                                        |
+| `longitude`            | `number`               |   Yes    | Longitude of new location                                                                                                                                                                                                                                                                                                                                                                       |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                                                                                                                                                                                                                                                               |
+| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                      |
+| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                                                                                                                                                                                                                                                          |
+| `livePeriod`           | `number`               |    No    | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged |
+| `horizontalAccuracy`   | `number`               |    No    | The radius of uncertainty for the location, measured in meters; 0-1500                                                                                                                                                                                                                                                                                                                          |
+| `heading`              | `number`               |    No    | Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.                                                                                                                                                                                                                                                                                                      |
+| `proximityAlertRadius` | `number`               |    No    | The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.                                                                                                                                                                                                                                                          |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for a new inline keyboard.                                                                                                                                                                                                                                                                                                                                             |
 
 **Usage examples:**
 
@@ -1351,7 +1315,7 @@ await inputinvoicemessagecontent.editMessageLiveLocation({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageLiveLocation({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editMessageLiveLocation({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1363,18 +1327,18 @@ Use this method to edit a checklist on behalf of a connected business account. O
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                              |
+| :---------- | :--------- | :--------------------------------------- |
 | `messageId` | `this?.id` | Unique identifier for the target message |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which the message will be sent |
-| `chatId` | `number` | Yes | Unique identifier for the target chat |
-| `checklist` | `InputChecklist` | Yes | A JSON-serialized object for the new checklist |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for the new inline keyboard for the message |
+| Parameter              | Type                   | Required | Description                                                                              |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`               |   Yes    | Unique identifier of the business connection on behalf of which the message will be sent |
+| `chatId`               | `number`               |   Yes    | Unique identifier for the target chat                                                    |
+| `checklist`            | `InputChecklist`       |   Yes    | A JSON-serialized object for the new checklist                                           |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for the new inline keyboard for the message                     |
 
 **Usage examples:**
 
@@ -1383,7 +1347,7 @@ Use this method to edit a checklist on behalf of a connected business account. O
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editMessageChecklist({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   chatId: 123,
 });
 ```
@@ -1393,7 +1357,7 @@ await inputinvoicemessagecontent.editMessageChecklist({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageChecklist({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editMessageChecklist({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1405,18 +1369,18 @@ Use this method to edit only the reply markup of messages. On success, if the ed
 
 **Auto-filled parameters:**
 
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
+| Parameter   | Source     | Description                                                                       |
+| :---------- | :--------- | :-------------------------------------------------------------------------------- |
 | `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| Parameter              | Type                   | Required | Description                                                                                                                                                |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message to be edited was sent                                                          |
+| `chatId`               | `number` \| `string`   |    No    | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `inlineMessageId`      | `string`               |    No    | Required if chat_id and message_id are not specified. Identifier of the inline message                                                                     |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard.                                                                                                           |
 
 **Usage examples:**
 
@@ -1425,7 +1389,7 @@ Use this method to edit only the reply markup of messages. On success, if the ed
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.editMessageReplyMarkup({
-  businessConnectionId: "example text",
+  businessConnectionId: 'example text',
   chatId: 123,
 });
 ```
@@ -1435,7 +1399,7 @@ await inputinvoicemessagecontent.editMessageReplyMarkup({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.editMessageReplyMarkup({ businessConnectionId: "Response" });
+  await inputinvoicemessagecontent.editMessageReplyMarkup({ businessConnectionId: 'Response' });
 });
 ```
 
@@ -1445,24 +1409,23 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `sticker` | `InputFile` \| `string` | Yes | Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files ». Video and animated stickers can't be sent via an HTTP URL. |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `emoji` | `string` | No | Emoji associated with the sticker; only for just uploaded stickers |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| Parameter                 | Type                                                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                |
+| :------------------------ | :--------------------------------------------------------------------------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                  | `number` \| `string`                                                                     |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                 |
+| `sticker`                 | `InputFile` \| `string`                                                                  |   Yes    | Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files ». Video and animated stickers can't be sent via an HTTP URL. |
+| `businessConnectionId`    | `string`                                                                                 |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                                                                                                                                                                                                   |
+| `messageThreadId`         | `number`                                                                                 |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                         |
+| `directMessagesTopicId`   | `number`                                                                                 |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                       |
+| `emoji`                   | `string`                                                                                 |    No    | Emoji associated with the sticker; only for just uploaded stickers                                                                                                                                                                                                                                                                                                         |
+| `disableNotification`     | `boolean`                                                                                |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                               |
+| `protectContent`          | `boolean`                                                                                |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                       |
+| `allowPaidBroadcast`      | `boolean`                                                                                |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                   |
+| `messageEffectId`         | `string`                                                                                 |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                 |
+| `suggestedPostParameters` | `SuggestedPostParameters`                                                                |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                         |
+| `replyParameters`         | `ReplyParameters`                                                                        |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                     |
+| `replyMarkup`             | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` |    No    | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user                                                                                                                                                                                            |
 
 **Usage examples:**
 
@@ -1481,7 +1444,7 @@ await inputinvoicemessagecontent.sendSticker({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendSticker({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendSticker({ chatId: 'Response' });
 });
 ```
 
@@ -1491,42 +1454,41 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send invoices. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `title` | `string` | Yes | Product name, 1-32 characters |
-| `description` | `string` | Yes | Product description, 1-255 characters |
-| `payload` | `string` | Yes | Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes. |
-| `currency` | `string` | Yes | Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars. |
-| `prices` | `LabeledPrice[]` | Yes | Price breakdown, a JSON-serialized list of components \(e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.\). Must contain exactly one item for payments in Telegram Stars. |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `providerToken` | `string` | No | Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars. |
-| `maxTipAmount` | `number` | No | The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max\_tip\_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars. |
-| `suggestedTipAmounts` | `number[]` | No | A JSON-serialized array of suggested amounts of tips in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount. |
-| `startParameter` | `string` | No | Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot \(instead of a Pay button\), with the value used as the start parameter |
-| `providerData` | `string` | No | JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider. |
-| `photoUrl` | `string` | No | URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for. |
-| `photoSize` | `number` | No | Photo size in bytes |
-| `photoWidth` | `number` | No | Photo width |
-| `photoHeight` | `number` | No | Photo height |
-| `needName` | `boolean` | No | Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars. |
-| `needPhoneNumber` | `boolean` | No | Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars. |
-| `needEmail` | `boolean` | No | Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars. |
-| `needShippingAddress` | `boolean` | No | Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars. |
-| `sendPhoneNumberToProvider` | `boolean` | No | Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars. |
-| `sendEmailToProvider` | `boolean` | No | Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars. |
-| `isFlexible` | `boolean` | No | Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars. |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button. |
+| Parameter                   | Type                      | Required | Description                                                                                                                                                                                                                                                                                                                                                                                         |
+| :-------------------------- | :------------------------ | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`                    | `number` \| `string`      |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                                                                                                          |
+| `title`                     | `string`                  |   Yes    | Product name, 1-32 characters                                                                                                                                                                                                                                                                                                                                                                       |
+| `description`               | `string`                  |   Yes    | Product description, 1-255 characters                                                                                                                                                                                                                                                                                                                                                               |
+| `payload`                   | `string`                  |   Yes    | Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.                                                                                                                                                                                                                                                                               |
+| `currency`                  | `string`                  |   Yes    | Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.                                                                                                                                                                                                                                                                                             |
+| `prices`                    | `LabeledPrice[]`          |   Yes    | Price breakdown, a JSON-serialized list of components \(e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.\). Must contain exactly one item for payments in Telegram Stars.                                                                                                                                                                                                |
+| `messageThreadId`           | `number`                  |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                                                                                                                                                                                                                                  |
+| `directMessagesTopicId`     | `number`                  |    No    | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat                                                                                                                                                                                                                                                                |
+| `providerToken`             | `string`                  |    No    | Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.                                                                                                                                                                                                                                                                                               |
+| `maxTipAmount`              | `number`                  |    No    | The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars. |
+| `suggestedTipAmounts`       | `number[]`                |    No    | A JSON-serialized array of suggested amounts of tips in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.                                                                                                    |
+| `startParameter`            | `string`                  |    No    | Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot \(instead of a Pay button\), with the value used as the start parameter                |
+| `providerData`              | `string`                  |    No    | JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.                                                                                                                                                                                                                       |
+| `photoUrl`                  | `string`                  |    No    | URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.                                                                                                                                                                                                                             |
+| `photoSize`                 | `number`                  |    No    | Photo size in bytes                                                                                                                                                                                                                                                                                                                                                                                 |
+| `photoWidth`                | `number`                  |    No    | Photo width                                                                                                                                                                                                                                                                                                                                                                                         |
+| `photoHeight`               | `number`                  |    No    | Photo height                                                                                                                                                                                                                                                                                                                                                                                        |
+| `needName`                  | `boolean`                 |    No    | Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                        |
+| `needPhoneNumber`           | `boolean`                 |    No    | Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                     |
+| `needEmail`                 | `boolean`                 |    No    | Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                    |
+| `needShippingAddress`       | `boolean`                 |    No    | Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                 |
+| `sendPhoneNumberToProvider` | `boolean`                 |    No    | Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                        |
+| `sendEmailToProvider`       | `boolean`                 |    No    | Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                       |
+| `isFlexible`                | `boolean`                 |    No    | Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.                                                                                                                                                                                                                                                                                                |
+| `disableNotification`       | `boolean`                 |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                                                                                                                                                                                                                                        |
+| `protectContent`            | `boolean`                 |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                                                                                                                                                                                                                                |
+| `allowPaidBroadcast`        | `boolean`                 |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance                                                                                                                                                                                                            |
+| `messageEffectId`           | `string`                  |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                                                                                                                                                                                                                                          |
+| `suggestedPostParameters`   | `SuggestedPostParameters` |    No    | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.                                                                                                                                                                  |
+| `replyParameters`           | `ReplyParameters`         |    No    | Description of the message to reply to                                                                                                                                                                                                                                                                                                                                                              |
+| `replyMarkup`               | `InlineKeyboardMarkup`    |    No    | A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.                                                                                                                                                                                                                                         |
 
 **Usage examples:**
 
@@ -1536,7 +1498,7 @@ Use this method to send invoices. On success, the sent Message is returned.
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendInvoice({
   chatId: 123,
-  title: "example text",
+  title: 'example text',
 });
 ```
 
@@ -1545,7 +1507,7 @@ await inputinvoicemessagecontent.sendInvoice({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendInvoice({ chatId: "Response" });
+  await inputinvoicemessagecontent.sendInvoice({ chatId: 'Response' });
 });
 ```
 
@@ -1555,14 +1517,13 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `userId` | `number` | Yes | Identifier of the user whose subscription will be edited |
-| `telegramPaymentChargeId` | `string` | Yes | Telegram payment identifier for the subscription |
-| `isCanceled` | `boolean` | Yes | Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot. |
+| Parameter                 | Type      | Required | Description                                                                                                                                                                                                                                 |
+| :------------------------ | :-------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `userId`                  | `number`  |   Yes    | Identifier of the user whose subscription will be edited                                                                                                                                                                                    |
+| `telegramPaymentChargeId` | `string`  |   Yes    | Telegram payment identifier for the subscription                                                                                                                                                                                            |
+| `isCanceled`              | `boolean` |   Yes    | Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot. |
 
 **Usage examples:**
 
@@ -1570,10 +1531,7 @@ Allows the bot to cancel or re-enable extension of a subscription paid in Telegr
 
 ```typescript
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
-await inputinvoicemessagecontent.editUserStarSubscription(
-  123,
-  "example text",
-);
+await inputinvoicemessagecontent.editUserStarSubscription(123, 'example text');
 ```
 
 2. In an event handler:
@@ -1591,21 +1549,20 @@ bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoice
 
 Use this method to send a game. On success, the sent Message is returned.
 
-
 **Required parameters:**
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` | Yes | Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats. |
-| `gameShortName` | `string` | Yes | Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather. |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only |
-| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
-| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
-| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
-| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game. |
+| Parameter              | Type                   | Required | Description                                                                                                                                                                              |
+| :--------------------- | :--------------------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`               | `number`               |   Yes    | Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.                                                                           |
+| `gameShortName`        | `string`               |   Yes    | Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.                                                                                  |
+| `businessConnectionId` | `string`               |    No    | Unique identifier of the business connection on behalf of which the message will be sent                                                                                                 |
+| `messageThreadId`      | `number`               |    No    | Unique identifier for the target message thread \(topic\) of the forum; for forum supergroups only                                                                                       |
+| `disableNotification`  | `boolean`              |    No    | Sends the message silently. Users will receive a notification with no sound.                                                                                                             |
+| `protectContent`       | `boolean`              |    No    | Protects the contents of the sent message from forwarding and saving                                                                                                                     |
+| `allowPaidBroadcast`   | `boolean`              |    No    | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `messageEffectId`      | `string`               |    No    | Unique identifier of the message effect to be added to the message; for private chats only                                                                                               |
+| `replyParameters`      | `ReplyParameters`      |    No    | Description of the message to reply to                                                                                                                                                   |
+| `replyMarkup`          | `InlineKeyboardMarkup` |    No    | A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.                              |
 
 **Usage examples:**
 
@@ -1615,7 +1572,7 @@ Use this method to send a game. On success, the sent Message is returned.
 const inputinvoicemessagecontent = new InputInvoiceMessageContent(rawData, bot);
 await inputinvoicemessagecontent.sendGame({
   chatId: 123,
-  gameShortName: "example text",
+  gameShortName: 'example text',
 });
 ```
 
@@ -1624,12 +1581,11 @@ await inputinvoicemessagecontent.sendGame({
 ```typescript
 bot.onInputInvoiceMessageContent(async (inputinvoicemessagecontent: InputInvoiceMessageContent) => {
   // Auto-fills parameters from the inputinvoicemessagecontent instance
-  await inputinvoicemessagecontent.sendGame({ gameShortName: "Response" });
+  await inputinvoicemessagecontent.sendGame({ gameShortName: 'Response' });
 });
 ```
 
 **See also:** [sendGame API method](../methods/sendGame.md)
-
 
 ## Event Handlers
 

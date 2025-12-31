@@ -14,14 +14,12 @@ This method is available as a fluent method on the following types:
 
 [View Message documentation with fluent methods](../types/Message.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `messageIds` | `number[]` | Yes | A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted |
-
+| Parameter    | Type                 | Required | Description                                                                                                                           |
+| :----------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `chatId`     | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                            |
+| `messageIds` | `number[]`           |   Yes    | A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted |
 
 ## Usage Example
 
@@ -32,9 +30,12 @@ bot.onMessage(async (message: Message) => {
 });
 
 // With filtering
-bot.onMessage((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onMessage(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

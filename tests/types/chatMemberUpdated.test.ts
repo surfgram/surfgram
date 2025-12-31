@@ -20,7 +20,7 @@ describe('ChatMemberUpdated', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-    
+
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
     expect(instance.from ?? instance.raw?.from).toEqual({} as any);
     expect(instance.date ?? instance.raw?.date).toEqual(123);
@@ -28,6 +28,8 @@ describe('ChatMemberUpdated', () => {
     expect(instance.newChatMember ?? instance.raw?.new_chat_member).toEqual({} as any);
     expect(instance.inviteLink ?? instance.raw?.invite_link).toEqual({} as any);
     expect(instance.viaJoinRequest ?? instance.raw?.via_join_request).toEqual(true);
-    expect(instance.viaChatFolderInviteLink ?? instance.raw?.via_chat_folder_invite_link).toEqual(true);
+    expect(instance.viaChatFolderInviteLink ?? instance.raw?.via_chat_folder_invite_link).toEqual(
+      true
+    );
   });
 });

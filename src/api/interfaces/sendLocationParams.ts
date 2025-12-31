@@ -148,5 +148,4 @@ export interface SendLocationParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply;
-
 }

@@ -4,10 +4,9 @@ Represents a menu button, which opens the bot&#39;s list of commands.
 
 ## Fields
 
-| Name | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the button, must be commands |
-
+| Name | Type     | Required | Description                          |
+| :--- | :------- | :------: | :----------------------------------- |
+| type | `string` |   Yes    | Type of the button, must be commands |
 
 ## Event Handlers
 

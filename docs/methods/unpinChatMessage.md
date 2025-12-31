@@ -1,6 +1,6 @@
 # unpinChatMessage
 
-Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin messages in groups and channels respectively. Returns True on success.
+Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the &#39;can_pin_messages&#39; right or the &#39;can_edit_messages&#39; right to unpin messages in groups and channels respectively. Returns True on success.
 
 ## Fluent Usage
 
@@ -22,15 +22,13 @@ This method is available as a fluent method on the following types:
 
 [View Message documentation with fluent methods](../types/Message.md)
 
-
 ## Parameters
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be unpinned |
-| `messageId` | `number` | No | Identifier of the message to unpin. Required if business\_connection\_id is specified. If not specified, the most recent pinned message \(by sending date\) will be unpinned. |
-
+| Parameter              | Type                 | Required | Description                                                                                                                                                                 |
+| :--------------------- | :------------------- | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatId`               | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                  |
+| `businessConnectionId` | `string`             |    No    | Unique identifier of the business connection on behalf of which the message will be unpinned                                                                                |
+| `messageId`            | `number`             |    No    | Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message \(by sending date\) will be unpinned. |
 
 ## Usage Example
 
@@ -41,9 +39,12 @@ bot.onChat(async (chat: Chat) => {
 });
 
 // With filtering
-bot.onChat((data) => data.someProperty === "value", async (data) => {
-  // Filtered handler
-});
+bot.onChat(
+  (data) => data.someProperty === 'value',
+  async (data) => {
+    // Filtered handler
+  }
+);
 ```
 
 ## API Documentation

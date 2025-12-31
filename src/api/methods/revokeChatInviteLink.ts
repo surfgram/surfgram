@@ -22,7 +22,11 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.revokeChatInviteLink(...);
  */
-export async function revokeChatInviteLink(this: Bot, chatId: number | string, inviteLink: string): Promise<any> {
+export async function revokeChatInviteLink(
+  this: Bot,
+  chatId: number | string,
+  inviteLink: string
+): Promise<any> {
   const apiParams = {
     chatId: chatId,
     inviteLink: inviteLink,
