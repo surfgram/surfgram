@@ -23,11 +23,7 @@ import { InlineQueryResult } from '../types/inlineQueryResult';
  * // Direct parameters
  * await bot.answerWebAppQuery(...);
  */
-export async function answerWebAppQuery(
-  this: Bot,
-  webAppQueryId: string,
-  result: InlineQueryResult
-): Promise<any> {
+export async function answerWebAppQuery(this: Bot, webAppQueryId: string, result: InlineQueryResult): Promise<any> {
   const apiParams = {
     webAppQueryId: webAppQueryId,
     result: result,

@@ -22,11 +22,7 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.setBusinessAccountUsername(...);
  */
-export async function setBusinessAccountUsername(
-  this: Bot,
-  businessConnectionId: string,
-  username?: string
-): Promise<any> {
+export async function setBusinessAccountUsername(this: Bot, businessConnectionId: string, username?: string): Promise<any> {
   const apiParams = {
     businessConnectionId: businessConnectionId,
     username: username,

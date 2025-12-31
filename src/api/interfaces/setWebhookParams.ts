@@ -63,4 +63,5 @@ export interface SetWebhookParams {
    * @required No
    */
   secretToken?: string;
+
 }

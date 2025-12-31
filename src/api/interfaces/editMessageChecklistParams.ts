@@ -48,4 +48,5 @@ export interface EditMessageChecklistParams {
    * @required No
    */
   replyMarkup?: InlineKeyboardMarkup;
+
 }

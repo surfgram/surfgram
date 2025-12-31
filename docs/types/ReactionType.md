@@ -4,10 +4,10 @@ This object describes the type of a reaction. Currently, it can be one of
 
 ## Fields
 
-| Name  | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                    |
-| :---- | :------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type  | `string` |   Yes    | Type of the reaction, always “emoji”                                                                                                                                                                                                                                                                                                           |
-| emoji | `string` |   Yes    | Reaction emoji. Currently, it can be one of "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" |
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| type | `string` | Yes | Type of the reaction, always “emoji” |
+| emoji | `string` | Yes | Reaction emoji. Currently, it can be one of "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" |
 
 ## Fluent Methods
 
@@ -17,14 +17,15 @@ The `ReactionType` class has the following fluent methods that automatically inj
 
 Use this method to change the chosen reactions on a message. Service messages of some types can&#39;t be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can&#39;t use paid reactions. Returns True on success.
 
+
 **Required parameters:**
 
-| Parameter   | Type                 | Required | Description                                                                                                                                                                                                                                                                                                          |
-| :---------- | :------------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatId`    | `number` \| `string` |   Yes    | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)                                                                                                                                                                                                           |
-| `messageId` | `number`             |   Yes    | Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.                                                                                                                                                                |
-| `reaction`  | `ReactionType[]`     |    No    | A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots. |
-| `isBig`     | `boolean`            |    No    | Pass True to set the reaction with a big animation                                                                                                                                                                                                                                                                   |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `messageId` | `number` | Yes | Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead. |
+| `reaction` | `ReactionType[]` | No | A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots. |
+| `isBig` | `boolean` | No | Pass True to set the reaction with a big animation |
 
 **Usage examples:**
 
@@ -32,7 +33,10 @@ Use this method to change the chosen reactions on a message. Service messages of
 
 ```typescript
 const reactiontype = new ReactionType(rawData, bot);
-await reactiontype.setMessageReaction(123, 123);
+await reactiontype.setMessageReaction(
+  123,
+  123,
+);
 ```
 
 2. In an event handler:
@@ -45,6 +49,7 @@ bot.onReactionType(async (reactiontype: ReactionType) => {
 ```
 
 **See also:** [setMessageReaction API method](../methods/setMessageReaction.md)
+
 
 ## Event Handlers
 

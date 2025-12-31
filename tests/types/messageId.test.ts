@@ -13,7 +13,7 @@ describe('MessageId', () => {
 
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
-
+    
     expect(instance.messageId ?? instance.raw?.message_id).toEqual(123);
   });
 });

@@ -5,10 +5,10 @@ describe('deleteBusinessMessages', () => {
   it('should call callApi with correct parameters', async () => {
     const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
-    await deleteBusinessMessages.call(mockBot, 'example text', [123]);
+    await deleteBusinessMessages.call(mockBot, "example text", [123]);
 
     expect(mockBot.callApi).toHaveBeenCalledWith('deleteBusinessMessages', {
-      business_connection_id: 'example text',
+      business_connection_id: "example text",
       message_ids: [123],
     });
   });

@@ -18,14 +18,17 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `setChatStickerSet`, `deleteChatStickerSet`, `getStickerSet`, `createNewStickerSet`, `setStickerSetTitle`, `setStickerSetThumbnail`, `setCustomEmojiStickerSetThumbnail`, `deleteStickerSet`
 
+
 [View StickerSet documentation with fluent methods](../types/StickerSet.md)
+
 
 ## Parameters
 
-| Parameter       | Type     | Required | Description                                                                                                                                       |
-| :-------------- | :------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `name`          | `string` |   Yes    | Sticker set name                                                                                                                                  |
-| `customEmojiId` | `string` |    No    | Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail. |
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `name` | `string` | Yes | Sticker set name |
+| `customEmojiId` | `string` | No | Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail. |
+
 
 ## Usage Example
 
@@ -36,12 +39,9 @@ bot.onSticker(async (sticker: Sticker) => {
 });
 
 // With filtering
-bot.onSticker(
-  (data) => data.someProperty === 'value',
-  async (data) => {
-    // Filtered handler
-  }
-);
+bot.onSticker((data) => data.someProperty === "value", async (data) => {
+  // Filtered handler
+});
 ```
 
 ## API Documentation

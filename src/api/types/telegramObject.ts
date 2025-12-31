@@ -14,13 +14,13 @@
  * @example
  * // String value
  * const str: JsonValue = "hello";
- *
+ * 
  * // Array of numbers
  * const arr: JsonValue<number> = [1, 2, 3];
- *
+ * 
  * // Function returning string
  * const fn: JsonValue<string> = () => "result";
- *
+ * 
  * // Class constructor
  * const cls: JsonValue<MyClass> = MyClass;
  */
@@ -46,19 +46,19 @@ export type JsonValue<T = unknown> =
  * @example
  * // Basic usage with unknown types
  * const rawData: TelegramObject = { id: 123, text: "Hello" };
- *
+ * 
  * // Typed usage with functions
  * const withFunctions: TelegramObject<string> = {
  *   name: "getMessage",
  *   handler: () => "Message content"
  * };
- *
+ * 
  * // In class constructor:
  * constructor(raw: TelegramObject, bot: Bot) {
  *   this.raw = raw;
  *   // ... convert to typed properties
  * }
- *
+ * 
  * // Using with specific type
  * type MyReturnType = { id: number; name: string };
  * const typedObject: TelegramObject<MyReturnType> = {
