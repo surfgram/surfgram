@@ -6,6 +6,12 @@
 - [Plugins](plugins.md)
 - [Webhooks](webhooks.md)
 
+## Fluent API Overview
+
+- [Quick Start Guide](fluent/quick-start.md)
+- [Event Handling](fluent/event-handling.md)
+- [Best Practices](fluent/best-practices.md)
+
 ## Types
 
 ### Types with fluent methods:
@@ -292,12 +298,3 @@
 - [PassportElementErrorTranslationFiles](types/PassportElementErrorTranslationFiles.md)
 - [PassportElementErrorUnspecified](types/PassportElementErrorUnspecified.md)
 - [CallbackGame](types/CallbackGame.md)
-
-## API Methods
-
-
-## Fluent API Overview
-
-- [Quick Start Guide](fluent/quick-start.md)
-- [Event Handling](fluent/event-handling.md)
-- [Best Practices](fluent/best-practices.md)
