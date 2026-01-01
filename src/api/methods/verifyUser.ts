@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#verifyUser Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.
@@ -22,12 +22,16 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.verifyUser(...);
  */
-export async function verifyUser(this: Bot, userId: number, customDescription?: string): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    customDescription: customDescription,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('verifyUser', snakeParams);
-  return response;
+export async function verifyUser(
+	this: Bot,
+	userId: number,
+	customDescription?: string,
+): Promise<any> {
+	const apiParams = {
+		userId: userId,
+		customDescription: customDescription,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("verifyUser", snakeParams);
+	return response;
 }
