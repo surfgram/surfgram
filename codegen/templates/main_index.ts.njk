@@ -4,7 +4,6 @@
  * @description High-performance, fully typed SDK for Telegram Bot API with fluent interface.
  * Provides comprehensive type safety, automatic serialization, and seamless integration.
  *
- * @version 1.0.0
  * @license MIT
  * @see {@link https://core.telegram.org/bots/api Official Telegram Bot API Documentation}
  * @see {@link https://github.com/user-with-username/surfgram GitHub Repository}
