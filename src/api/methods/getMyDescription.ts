@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
@@ -21,11 +21,14 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getMyDescription(...);
  */
-export async function getMyDescription(this: Bot, languageCode?: string): Promise<any> {
-  const apiParams = {
-    languageCode: languageCode,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getMyDescription', snakeParams);
-  return response;
+export async function getMyDescription(
+	this: Bot,
+	languageCode?: string,
+): Promise<any> {
+	const apiParams = {
+		languageCode: languageCode,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("getMyDescription", snakeParams);
+	return response;
 }
