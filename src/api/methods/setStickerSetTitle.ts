@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#setStickerSetTitle Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to set the title of a created sticker set. Returns True on success.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.setStickerSetTitle(...);
  */
-export async function setStickerSetTitle(
-	this: Bot,
-	name: string,
-	title: string,
-): Promise<any> {
-	const apiParams = {
-		name: name,
-		title: title,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("setStickerSetTitle", snakeParams);
-	return response;
+export async function setStickerSetTitle(this: Bot, name: string, title: string): Promise<any> {
+  const apiParams = {
+    name: name,
+    title: title,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('setStickerSetTitle', snakeParams);
+  return response;
 }
