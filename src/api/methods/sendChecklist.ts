@@ -5,12 +5,12 @@
  * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { SendChecklistParams } from "../interfaces/sendChecklistParams";
-import { InputChecklist } from "../types/inputChecklist";
-import { ReplyParameters } from "../types/replyParameters";
-import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { SendChecklistParams } from '../interfaces/sendChecklistParams';
+import { InputChecklist } from '../types/inputChecklist';
+import { ReplyParameters } from '../types/replyParameters';
+import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 /**
  * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
@@ -27,11 +27,8 @@ import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
  * // ... params
  * });
  */
-export async function sendChecklist(
-	this: Bot,
-	params: SendChecklistParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("sendChecklist", snakeParams);
-	return response;
+export async function sendChecklist(this: Bot, params: SendChecklistParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('sendChecklist', snakeParams);
+  return response;
 }

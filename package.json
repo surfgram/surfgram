@@ -1,6 +1,6 @@
 {
 	"name": "surfgram",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"description": "High-performance, fully typed SDK for Telegram Bot API",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -48,7 +48,11 @@
 	"engines": {
 		"node": ">=18.0.0"
 	},
-	"files": ["dist", "README.md", "LICENSE"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
