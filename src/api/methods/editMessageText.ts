@@ -5,12 +5,12 @@
  * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { EditMessageTextParams } from '../interfaces/editMessageTextParams';
-import { MessageEntity } from '../types/messageEntity';
-import { LinkPreviewOptions } from '../types/linkPreviewOptions';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { EditMessageTextParams } from "../interfaces/editMessageTextParams";
+import { MessageEntity } from "../types/messageEntity";
+import { LinkPreviewOptions } from "../types/linkPreviewOptions";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
 
 /**
  * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
@@ -27,8 +27,11 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageText(this: Bot, params: EditMessageTextParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('editMessageText', snakeParams);
-  return response;
+export async function editMessageText(
+	this: Bot,
+	params: EditMessageTextParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("editMessageText", snakeParams);
+	return response;
 }

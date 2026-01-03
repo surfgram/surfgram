@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { SavePreparedInlineMessageParams } from '../interfaces/savePreparedInlineMessageParams';
-import { InlineQueryResult } from '../types/inlineQueryResult';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { SavePreparedInlineMessageParams } from "../interfaces/savePreparedInlineMessageParams";
+import { InlineQueryResult } from "../types/inlineQueryResult";
 
 /**
  * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
@@ -25,8 +25,14 @@ import { InlineQueryResult } from '../types/inlineQueryResult';
  * // ... params
  * });
  */
-export async function savePreparedInlineMessage(this: Bot, params: SavePreparedInlineMessageParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('savePreparedInlineMessage', snakeParams);
-  return response;
+export async function savePreparedInlineMessage(
+	this: Bot,
+	params: SavePreparedInlineMessageParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>(
+		"savePreparedInlineMessage",
+		snakeParams,
+	);
+	return response;
 }

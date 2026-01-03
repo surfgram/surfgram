@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#sendGift Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { SendGiftParams } from '../interfaces/sendGiftParams';
-import { MessageEntity } from '../types/messageEntity';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { SendGiftParams } from "../interfaces/sendGiftParams";
+import { MessageEntity } from "../types/messageEntity";
 
 /**
  * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
@@ -25,8 +25,11 @@ import { MessageEntity } from '../types/messageEntity';
  * // ... params
  * });
  */
-export async function sendGift(this: Bot, params: SendGiftParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('sendGift', snakeParams);
-  return response;
+export async function sendGift(
+	this: Bot,
+	params: SendGiftParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("sendGift", snakeParams);
+	return response;
 }
