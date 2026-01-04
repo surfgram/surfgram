@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { GetChatGiftsParams } from '../interfaces/getChatGiftsParams';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { GetChatGiftsParams } from "../interfaces/getChatGiftsParams";
 
 /**
  * Returns the gifts owned by a chat. Returns OwnedGifts on success.
@@ -24,8 +24,11 @@ import { GetChatGiftsParams } from '../interfaces/getChatGiftsParams';
  * // ... params
  * });
  */
-export async function getChatGifts(this: Bot, params: GetChatGiftsParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('getChatGifts', snakeParams);
-  return response;
+export async function getChatGifts(
+	this: Bot,
+	params: GetChatGiftsParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("getChatGifts", snakeParams);
+	return response;
 }

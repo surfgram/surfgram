@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { EditMessageReplyMarkupParams } from '../interfaces/editMessageReplyMarkupParams';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { EditMessageReplyMarkupParams } from "../interfaces/editMessageReplyMarkupParams";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
 
 /**
  * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
@@ -25,8 +25,14 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageReplyMarkup(this: Bot, params: EditMessageReplyMarkupParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('editMessageReplyMarkup', snakeParams);
-  return response;
+export async function editMessageReplyMarkup(
+	this: Bot,
+	params: EditMessageReplyMarkupParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>(
+		"editMessageReplyMarkup",
+		snakeParams,
+	);
+	return response;
 }

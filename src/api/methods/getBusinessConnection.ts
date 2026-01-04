@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
@@ -21,11 +21,17 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getBusinessConnection(...);
  */
-export async function getBusinessConnection(this: Bot, businessConnectionId: string): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getBusinessConnection', snakeParams);
-  return response;
+export async function getBusinessConnection(
+	this: Bot,
+	businessConnectionId: string,
+): Promise<any> {
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"getBusinessConnection",
+		snakeParams,
+	);
+	return response;
 }

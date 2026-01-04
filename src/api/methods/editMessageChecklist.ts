@@ -5,11 +5,11 @@
  * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { EditMessageChecklistParams } from '../interfaces/editMessageChecklistParams';
-import { InputChecklist } from '../types/inputChecklist';
-import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { EditMessageChecklistParams } from "../interfaces/editMessageChecklistParams";
+import { InputChecklist } from "../types/inputChecklist";
+import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
 
 /**
  * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
@@ -26,8 +26,11 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * // ... params
  * });
  */
-export async function editMessageChecklist(this: Bot, params: EditMessageChecklistParams): Promise<any> {
-  const snakeParams = camelToSnake(params);
-  const response = await this.callApi<any>('editMessageChecklist', snakeParams);
-  return response;
+export async function editMessageChecklist(
+	this: Bot,
+	params: EditMessageChecklistParams,
+): Promise<any> {
+	const snakeParams = camelToSnake(params);
+	const response = await this.callApi<any>("editMessageChecklist", snakeParams);
+	return response;
 }
