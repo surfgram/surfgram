@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
@@ -24,23 +24,14 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getForumTopicIconStickers(...);
  */
-export async function getForumTopicIconStickers(
-	this: Bot,
-	chatId: number | string,
-	name: string,
-	iconColor?: number,
-	iconCustomEmojiId?: string,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-		name: name,
-		iconColor: iconColor,
-		iconCustomEmojiId: iconCustomEmojiId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"getForumTopicIconStickers",
-		snakeParams,
-	);
-	return response;
+export async function getForumTopicIconStickers(this: Bot, chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+    name: name,
+    iconColor: iconColor,
+    iconCustomEmojiId: iconCustomEmojiId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getForumTopicIconStickers', snakeParams);
+  return response;
 }

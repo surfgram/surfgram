@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#removeUserVerification Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.
@@ -21,17 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.removeUserVerification(...);
  */
-export async function removeUserVerification(
-	this: Bot,
-	userId: number,
-): Promise<any> {
-	const apiParams = {
-		userId: userId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"removeUserVerification",
-		snakeParams,
-	);
-	return response;
+export async function removeUserVerification(this: Bot, userId: number): Promise<any> {
+  const apiParams = {
+    userId: userId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('removeUserVerification', snakeParams);
+  return response;
 }

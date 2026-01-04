@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getMyStarBalance(...);
  */
-export async function getMyStarBalance(
-	this: Bot,
-	offset?: number,
-	limit?: number,
-): Promise<any> {
-	const apiParams = {
-		offset: offset,
-		limit: limit,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getMyStarBalance", snakeParams);
-	return response;
+export async function getMyStarBalance(this: Bot, offset?: number, limit?: number): Promise<any> {
+  const apiParams = {
+    offset: offset,
+    limit: limit,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getMyStarBalance', snakeParams);
+  return response;
 }

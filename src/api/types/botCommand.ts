@@ -7,63 +7,66 @@
  * @extends TelegramObject
  */
 
-import { Bot } from "../../core/bot";
-import { snakeToCamel } from "../../core/utils";
-import { TelegramObject } from "./telegramObject";
+import { Bot } from '../../core/bot';
+import { snakeToCamel } from '../../core/utils';
+import { TelegramObject } from './telegramObject';
 
 /**
  * Represents a BotCommand object from the Telegram Bot API
  * @class BotCommand
  */
 export class BotCommand {
-	/**
-	 * Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
-	 * @type { string }
-	 * @memberof BotCommand
-	 * @instance
-	 * @public
-	 */
-	command!: string;
+  /**
+   * Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
+   * @type { string }
+   * @memberof BotCommand
+   * @instance
+   * @public
+   */
+  command!: string;
 
-	/**
-	 * Description of the command; 1-256 characters.
-	 * @type { string }
-	 * @memberof BotCommand
-	 * @instance
-	 * @public
-	 */
-	description!: string;
+  /**
+   * Description of the command; 1-256 characters.
+   * @type { string }
+   * @memberof BotCommand
+   * @instance
+   * @public
+   */
+  description!: string;
 
-	/**
-	 * Raw data from Telegram API in snake_case format
-	 * @type {TelegramObject}
-	 * @memberof BotCommand
-	 * @instance
-	 * @public
-	 */
-	public raw?: TelegramObject;
+  /**
+   * Raw data from Telegram API in snake_case format
+   * @type {TelegramObject}
+   * @memberof BotCommand
+   * @instance
+   * @public
+   */
+  public raw?: TelegramObject;
 
-	/**
-	 * Bot instance associated with this object
-	 * @type {Bot}
-	 * @memberof BotCommand
-	 * @instance
-	 * @public
-	 */
-	public bot?: Bot;
+  /**
+   * Bot instance associated with this object
+   * @type {Bot}
+   * @memberof BotCommand
+   * @instance
+   * @public
+   */
+  public bot?: Bot;
 
-	/**
-	 * Creates a new BotCommand instance from raw Telegram API data
-	 * @constructor
-	 * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
-	 * @param {Bot} bot - Bot instance for executing methods
-	 * @example
-	 * const message = new Message(rawData, botInstance);
-	 */
-	constructor(raw?: TelegramObject, bot?: Bot) {
-		this.raw = raw;
-		this.bot = bot;
-		const converted = snakeToCamel(raw);
-		Object.assign(this, converted);
-	}
+  /**
+   * Creates a new BotCommand instance from raw Telegram API data
+   * @constructor
+   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+   * @param {Bot} bot - Bot instance for executing methods
+   * @example
+   * const message = new Message(rawData, botInstance);
+   */
+  constructor(
+    raw?: TelegramObject,
+    bot?: Bot
+  ) {
+    this.raw = raw;
+    this.bot = bot;
+    const converted = snakeToCamel(raw);
+    Object.assign(this, converted);
+  }
 }

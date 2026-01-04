@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#restrictChatMember Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { RestrictChatMemberParams } from "../interfaces/restrictChatMemberParams";
-import { ChatPermissions } from "../types/chatPermissions";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { RestrictChatMemberParams } from '../interfaces/restrictChatMemberParams';
+import { ChatPermissions } from '../types/chatPermissions';
 
 /**
  * Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate administrator rights. Pass True for all permissions to lift restrictions from a user. Returns True on success.
@@ -25,11 +25,8 @@ import { ChatPermissions } from "../types/chatPermissions";
  * // ... params
  * });
  */
-export async function restrictChatMember(
-	this: Bot,
-	params: RestrictChatMemberParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("restrictChatMember", snakeParams);
-	return response;
+export async function restrictChatMember(this: Bot, params: RestrictChatMemberParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('restrictChatMember', snakeParams);
+  return response;
 }
