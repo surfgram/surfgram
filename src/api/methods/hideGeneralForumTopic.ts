@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#hideGeneralForumTopic Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.
@@ -21,17 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.hideGeneralForumTopic(...);
  */
-export async function hideGeneralForumTopic(
-	this: Bot,
-	chatId: number | string,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"hideGeneralForumTopic",
-		snakeParams,
-	);
-	return response;
+export async function hideGeneralForumTopic(this: Bot, chatId: number | string): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('hideGeneralForumTopic', snakeParams);
+  return response;
 }
