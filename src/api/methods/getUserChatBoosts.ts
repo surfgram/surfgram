@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
@@ -22,12 +22,16 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.getUserChatBoosts(...);
  */
-export async function getUserChatBoosts(this: Bot, chatId: number | string, userId: number): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    userId: userId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('getUserChatBoosts', snakeParams);
-  return response;
+export async function getUserChatBoosts(
+	this: Bot,
+	chatId: number | string,
+	userId: number,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		userId: userId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("getUserChatBoosts", snakeParams);
+	return response;
 }

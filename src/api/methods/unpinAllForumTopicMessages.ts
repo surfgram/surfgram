@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#unpinAllForumTopicMessages Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
@@ -22,12 +22,19 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.unpinAllForumTopicMessages(...);
  */
-export async function unpinAllForumTopicMessages(this: Bot, chatId: number | string, messageThreadId: number): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    messageThreadId: messageThreadId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('unpinAllForumTopicMessages', snakeParams);
-  return response;
+export async function unpinAllForumTopicMessages(
+	this: Bot,
+	chatId: number | string,
+	messageThreadId: number,
+): Promise<any> {
+	const apiParams = {
+		chatId: chatId,
+		messageThreadId: messageThreadId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"unpinAllForumTopicMessages",
+		snakeParams,
+	);
+	return response;
 }
