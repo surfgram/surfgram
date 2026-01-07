@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { GetUpdatesParams } from "../interfaces/getUpdatesParams";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { GetUpdatesParams } from '../interfaces/getUpdatesParams';
 
 /**
  * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
@@ -24,11 +24,8 @@ import { GetUpdatesParams } from "../interfaces/getUpdatesParams";
  * // ... params
  * });
  */
-export async function getUpdates(
-	this: Bot,
-	params: GetUpdatesParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("getUpdates", snakeParams);
-	return response;
+export async function getUpdates(this: Bot, params: GetUpdatesParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('getUpdates', snakeParams);
+  return response;
 }

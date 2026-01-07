@@ -5,16 +5,16 @@
  * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { SendStickerParams } from "../interfaces/sendStickerParams";
-import { InputFile } from "../types/inputFile";
-import { SuggestedPostParameters } from "../types/suggestedPostParameters";
-import { ReplyParameters } from "../types/replyParameters";
-import { InlineKeyboardMarkup } from "../types/inlineKeyboardMarkup";
-import { ReplyKeyboardMarkup } from "../types/replyKeyboardMarkup";
-import { ReplyKeyboardRemove } from "../types/replyKeyboardRemove";
-import { ForceReply } from "../types/forceReply";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { SendStickerParams } from '../interfaces/sendStickerParams';
+import { InputFile } from '../types/inputFile';
+import { SuggestedPostParameters } from '../types/suggestedPostParameters';
+import { ReplyParameters } from '../types/replyParameters';
+import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
+import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
+import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
+import { ForceReply } from '../types/forceReply';
 
 /**
  * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
@@ -31,11 +31,8 @@ import { ForceReply } from "../types/forceReply";
  * // ... params
  * });
  */
-export async function sendSticker(
-	this: Bot,
-	params: SendStickerParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("sendSticker", snakeParams);
-	return response;
+export async function sendSticker(this: Bot, params: SendStickerParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('sendSticker', snakeParams);
+  return response;
 }

@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#replaceStickerInSet Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { ReplaceStickerInSetParams } from "../interfaces/replaceStickerInSetParams";
-import { InputSticker } from "../types/inputSticker";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { ReplaceStickerInSetParams } from '../interfaces/replaceStickerInSetParams';
+import { InputSticker } from '../types/inputSticker';
 
 /**
  * Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling deleteStickerFromSet, then addStickerToSet, then setStickerPositionInSet. Returns True on success.
@@ -25,11 +25,8 @@ import { InputSticker } from "../types/inputSticker";
  * // ... params
  * });
  */
-export async function replaceStickerInSet(
-	this: Bot,
-	params: ReplaceStickerInSetParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("replaceStickerInSet", snakeParams);
-	return response;
+export async function replaceStickerInSet(this: Bot, params: ReplaceStickerInSetParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('replaceStickerInSet', snakeParams);
+  return response;
 }
