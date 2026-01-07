@@ -5,10 +5,10 @@
  * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { SendMediaGroupParams } from "../interfaces/sendMediaGroupParams";
-import { ReplyParameters } from "../types/replyParameters";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { SendMediaGroupParams } from '../interfaces/sendMediaGroupParams';
+import { ReplyParameters } from '../types/replyParameters';
 
 /**
  * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
@@ -25,11 +25,8 @@ import { ReplyParameters } from "../types/replyParameters";
  * // ... params
  * });
  */
-export async function sendMediaGroup(
-	this: Bot,
-	params: SendMediaGroupParams,
-): Promise<any> {
-	const snakeParams = camelToSnake(params);
-	const response = await this.callApi<any>("sendMediaGroup", snakeParams);
-	return response;
+export async function sendMediaGroup(this: Bot, params: SendMediaGroupParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
+  const response = await this.callApi<any>('sendMediaGroup', snakeParams);
+  return response;
 }

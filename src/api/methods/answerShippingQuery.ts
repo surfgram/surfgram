@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#answerShippingQuery Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { ShippingOption } from "../types/shippingOption";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { ShippingOption } from '../types/shippingOption';
 
 /**
  * If you sent an invoice requesting a shipping address and the parameter is\_flexible was specified, the Bot API will send an Update with a shipping\_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
@@ -25,20 +25,14 @@ import { ShippingOption } from "../types/shippingOption";
  * // Direct parameters
  * await bot.answerShippingQuery(...);
  */
-export async function answerShippingQuery(
-	this: Bot,
-	shippingQueryId: string,
-	ok: boolean,
-	shippingOptions?: ShippingOption[],
-	errorMessage?: string,
-): Promise<any> {
-	const apiParams = {
-		shippingQueryId: shippingQueryId,
-		ok: ok,
-		shippingOptions: shippingOptions,
-		errorMessage: errorMessage,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("answerShippingQuery", snakeParams);
-	return response;
+export async function answerShippingQuery(this: Bot, shippingQueryId: string, ok: boolean, shippingOptions?: ShippingOption[], errorMessage?: string): Promise<any> {
+  const apiParams = {
+    shippingQueryId: shippingQueryId,
+    ok: ok,
+    shippingOptions: shippingOptions,
+    errorMessage: errorMessage,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('answerShippingQuery', snakeParams);
+  return response;
 }
