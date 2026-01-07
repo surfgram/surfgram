@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#createChatSubscriptionInviteLink Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to create a subscription invite link for a channel chat. The bot must have the can\_invite\_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.
@@ -24,23 +24,14 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.createChatSubscriptionInviteLink(...);
  */
-export async function createChatSubscriptionInviteLink(
-	this: Bot,
-	chatId: number | string,
-	subscriptionPeriod: number,
-	subscriptionPrice: number,
-	name?: string,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-		subscriptionPeriod: subscriptionPeriod,
-		subscriptionPrice: subscriptionPrice,
-		name: name,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"createChatSubscriptionInviteLink",
-		snakeParams,
-	);
-	return response;
+export async function createChatSubscriptionInviteLink(this: Bot, chatId: number | string, subscriptionPeriod: number, subscriptionPrice: number, name?: string): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+    subscriptionPeriod: subscriptionPeriod,
+    subscriptionPrice: subscriptionPrice,
+    name: name,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('createChatSubscriptionInviteLink', snakeParams);
+  return response;
 }
