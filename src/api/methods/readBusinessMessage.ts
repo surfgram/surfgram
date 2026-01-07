@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#readBusinessMessage Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Marks incoming message as read on behalf of a business account. Requires the can\_read\_messages business bot right. Returns True on success.
@@ -23,13 +23,18 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.readBusinessMessage(...);
  */
-export async function readBusinessMessage(this: Bot, businessConnectionId: string, chatId: number, messageId: number): Promise<any> {
-  const apiParams = {
-    businessConnectionId: businessConnectionId,
-    chatId: chatId,
-    messageId: messageId,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('readBusinessMessage', snakeParams);
-  return response;
+export async function readBusinessMessage(
+	this: Bot,
+	businessConnectionId: string,
+	chatId: number,
+	messageId: number,
+): Promise<any> {
+	const apiParams = {
+		businessConnectionId: businessConnectionId,
+		chatId: chatId,
+		messageId: messageId,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("readBusinessMessage", snakeParams);
+	return response;
 }

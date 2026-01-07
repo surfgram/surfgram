@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#deleteMyCommands Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
-import { BotCommandScope } from '../types/botCommandScope';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
+import { BotCommandScope } from "../types/botCommandScope";
 
 /**
  * Use this method to delete the list of the bot&#39;s commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
@@ -23,12 +23,16 @@ import { BotCommandScope } from '../types/botCommandScope';
  * // Direct parameters
  * await bot.deleteMyCommands(...);
  */
-export async function deleteMyCommands(this: Bot, scope?: BotCommandScope, languageCode?: string): Promise<any> {
-  const apiParams = {
-    scope: scope,
-    languageCode: languageCode,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('deleteMyCommands', snakeParams);
-  return response;
+export async function deleteMyCommands(
+	this: Bot,
+	scope?: BotCommandScope,
+	languageCode?: string,
+): Promise<any> {
+	const apiParams = {
+		scope: scope,
+		languageCode: languageCode,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>("deleteMyCommands", snakeParams);
+	return response;
 }
