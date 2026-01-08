@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
@@ -24,20 +24,14 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.sendChatAction(...);
  */
-export async function sendChatAction(
-	this: Bot,
-	chatId: number | string,
-	action: string,
-	businessConnectionId?: string,
-	messageThreadId?: number,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-		action: action,
-		businessConnectionId: businessConnectionId,
-		messageThreadId: messageThreadId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("sendChatAction", snakeParams);
-	return response;
+export async function sendChatAction(this: Bot, chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+    action: action,
+    businessConnectionId: businessConnectionId,
+    messageThreadId: messageThreadId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('sendChatAction', snakeParams);
+  return response;
 }
