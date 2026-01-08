@@ -5,62 +5,60 @@
  * @see {@link https://core.telegram.org/bots/api#setGameScore Telegram API Documentation}
  */
 
-
 export interface SetGameScoreParams {
-  /**
-   * User identifier
-   * @type { number }
-   * @originalType Integer
-   * @required Yes
-   */
-  userId: number;
+	/**
+	 * User identifier
+	 * @type { number }
+	 * @originalType Integer
+	 * @required Yes
+	 */
+	userId: number;
 
-  /**
-   * New score, must be non-negative
-   * @type { number }
-   * @originalType Integer
-   * @required Yes
-   */
-  score: number;
+	/**
+	 * New score, must be non-negative
+	 * @type { number }
+	 * @originalType Integer
+	 * @required Yes
+	 */
+	score: number;
 
-  /**
-   * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
-   * @type { boolean }
-   * @originalType Boolean
-   * @required No
-   */
-  force?: boolean;
+	/**
+	 * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+	 * @type { boolean }
+	 * @originalType Boolean
+	 * @required No
+	 */
+	force?: boolean;
 
-  /**
-   * Pass True if the game message should not be automatically edited to include the current scoreboard
-   * @type { boolean }
-   * @originalType Boolean
-   * @required No
-   */
-  disableEditMessage?: boolean;
+	/**
+	 * Pass True if the game message should not be automatically edited to include the current scoreboard
+	 * @type { boolean }
+	 * @originalType Boolean
+	 * @required No
+	 */
+	disableEditMessage?: boolean;
 
-  /**
-   * Required if inline\_message\_id is not specified. Unique identifier for the target chat
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  chatId?: number;
+	/**
+	 * Required if inline\_message\_id is not specified. Unique identifier for the target chat
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	chatId?: number;
 
-  /**
-   * Required if inline\_message\_id is not specified. Identifier of the sent message
-   * @type { number }
-   * @originalType Integer
-   * @required No
-   */
-  messageId?: number;
+	/**
+	 * Required if inline\_message\_id is not specified. Identifier of the sent message
+	 * @type { number }
+	 * @originalType Integer
+	 * @required No
+	 */
+	messageId?: number;
 
-  /**
-   * Required if chat\_id and message\_id are not specified. Identifier of the inline message
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  inlineMessageId?: string;
-
+	/**
+	 * Required if chat\_id and message\_id are not specified. Identifier of the inline message
+	 * @type { string }
+	 * @originalType String
+	 * @required No
+	 */
+	inlineMessageId?: string;
 }
