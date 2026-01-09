@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get the number of members in a chat. Returns Int on success.
@@ -21,14 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getChatMemberCount(...);
  */
-export async function getChatMemberCount(
-	this: Bot,
-	chatId: number | string,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getChatMemberCount", snakeParams);
-	return response;
+export async function getChatMemberCount(this: Bot, chatId: number | string): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getChatMemberCount', snakeParams);
+  return response;
 }

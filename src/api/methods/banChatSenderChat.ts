@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#banChatSenderChat Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
@@ -22,16 +22,12 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.banChatSenderChat(...);
  */
-export async function banChatSenderChat(
-	this: Bot,
-	chatId: number | string,
-	senderChatId: number,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-		senderChatId: senderChatId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("banChatSenderChat", snakeParams);
-	return response;
+export async function banChatSenderChat(this: Bot, chatId: number | string, senderChatId: number): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+    senderChatId: senderChatId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('banChatSenderChat', snakeParams);
+  return response;
 }

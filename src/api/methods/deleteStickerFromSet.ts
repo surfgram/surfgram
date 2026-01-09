@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#deleteStickerFromSet Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to delete a sticker from a set created by the bot. Returns True on success.
@@ -21,14 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.deleteStickerFromSet(...);
  */
-export async function deleteStickerFromSet(
-	this: Bot,
-	sticker: string,
-): Promise<any> {
-	const apiParams = {
-		sticker: sticker,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("deleteStickerFromSet", snakeParams);
-	return response;
+export async function deleteStickerFromSet(this: Bot, sticker: string): Promise<any> {
+  const apiParams = {
+    sticker: sticker,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('deleteStickerFromSet', snakeParams);
+  return response;
 }
