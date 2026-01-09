@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getChat Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
@@ -21,14 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getChat(...);
  */
-export async function getChat(
-	this: Bot,
-	chatId: number | string,
-): Promise<any> {
-	const apiParams = {
-		chatId: chatId,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("getChat", snakeParams);
-	return response;
+export async function getChat(this: Bot, chatId: number | string): Promise<any> {
+  const apiParams = {
+    chatId: chatId,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getChat', snakeParams);
+  return response;
 }

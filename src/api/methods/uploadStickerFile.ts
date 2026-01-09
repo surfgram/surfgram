@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#uploadStickerFile Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { InputFile } from "../types/inputFile";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { InputFile } from '../types/inputFile';
 
 /**
  * Use this method to upload a file with a sticker for later use in the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods \(the file can be used multiple times\). Returns the uploaded File on success.
@@ -24,18 +24,13 @@ import { InputFile } from "../types/inputFile";
  * // Direct parameters
  * await bot.uploadStickerFile(...);
  */
-export async function uploadStickerFile(
-	this: Bot,
-	userId: number,
-	sticker: InputFile,
-	stickerFormat: string,
-): Promise<any> {
-	const apiParams = {
-		userId: userId,
-		sticker: sticker,
-		stickerFormat: stickerFormat,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>("uploadStickerFile", snakeParams);
-	return response;
+export async function uploadStickerFile(this: Bot, userId: number, sticker: InputFile, stickerFormat: string): Promise<any> {
+  const apiParams = {
+    userId: userId,
+    sticker: sticker,
+    stickerFormat: stickerFormat,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('uploadStickerFile', snakeParams);
+  return response;
 }
