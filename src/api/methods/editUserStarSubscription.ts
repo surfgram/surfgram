@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram API Documentation}
  */
 
-import { Bot } from '../../core/bot';
-import { camelToSnake } from '../../core/utils';
+import { Bot } from "../../core/bot";
+import { camelToSnake } from "../../core/utils";
 
 /**
  * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
@@ -23,13 +23,21 @@ import { camelToSnake } from '../../core/utils';
  * // Direct parameters
  * await bot.editUserStarSubscription(...);
  */
-export async function editUserStarSubscription(this: Bot, userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any> {
-  const apiParams = {
-    userId: userId,
-    telegramPaymentChargeId: telegramPaymentChargeId,
-    isCanceled: isCanceled,
-  };
-  const snakeParams = camelToSnake(apiParams);
-  const response = await this.callApi<any>('editUserStarSubscription', snakeParams);
-  return response;
+export async function editUserStarSubscription(
+	this: Bot,
+	userId: number,
+	telegramPaymentChargeId: string,
+	isCanceled: boolean,
+): Promise<any> {
+	const apiParams = {
+		userId: userId,
+		telegramPaymentChargeId: telegramPaymentChargeId,
+		isCanceled: isCanceled,
+	};
+	const snakeParams = camelToSnake(apiParams);
+	const response = await this.callApi<any>(
+		"editUserStarSubscription",
+		snakeParams,
+	);
+	return response;
 }

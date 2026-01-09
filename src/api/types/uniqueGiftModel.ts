@@ -7,76 +7,73 @@
  * @extends TelegramObject
  */
 
-import { Bot } from '../../core/bot';
-import { snakeToCamel } from '../../core/utils';
-import { TelegramObject } from './telegramObject';
-import { Sticker } from './sticker';
+import { Bot } from "../../core/bot";
+import { snakeToCamel } from "../../core/utils";
+import { TelegramObject } from "./telegramObject";
+import { Sticker } from "./sticker";
 
 /**
  * Represents a UniqueGiftModel object from the Telegram Bot API
  * @class UniqueGiftModel
  */
 export class UniqueGiftModel {
-  /**
-   * Name of the model
-   * @type { string }
-   * @memberof UniqueGiftModel
-   * @instance
-   * @public
-   */
-  name!: string;
+	/**
+	 * Name of the model
+	 * @type { string }
+	 * @memberof UniqueGiftModel
+	 * @instance
+	 * @public
+	 */
+	name!: string;
 
-  /**
-   * The sticker that represents the unique gift
-   * @type { Sticker }
-   * @memberof UniqueGiftModel
-   * @instance
-   * @public
-   */
-  sticker!: Sticker;
+	/**
+	 * The sticker that represents the unique gift
+	 * @type { Sticker }
+	 * @memberof UniqueGiftModel
+	 * @instance
+	 * @public
+	 */
+	sticker!: Sticker;
 
-  /**
-   * The number of unique gifts that receive this model for every 1000 gifts upgraded
-   * @type { number }
-   * @memberof UniqueGiftModel
-   * @instance
-   * @public
-   */
-  rarityPerMille!: number;
+	/**
+	 * The number of unique gifts that receive this model for every 1000 gifts upgraded
+	 * @type { number }
+	 * @memberof UniqueGiftModel
+	 * @instance
+	 * @public
+	 */
+	rarityPerMille!: number;
 
-  /**
-   * Raw data from Telegram API in snake_case format
-   * @type {TelegramObject}
-   * @memberof UniqueGiftModel
-   * @instance
-   * @public
-   */
-  public raw?: TelegramObject;
+	/**
+	 * Raw data from Telegram API in snake_case format
+	 * @type {TelegramObject}
+	 * @memberof UniqueGiftModel
+	 * @instance
+	 * @public
+	 */
+	public raw?: TelegramObject;
 
-  /**
-   * Bot instance associated with this object
-   * @type {Bot}
-   * @memberof UniqueGiftModel
-   * @instance
-   * @public
-   */
-  public bot?: Bot;
+	/**
+	 * Bot instance associated with this object
+	 * @type {Bot}
+	 * @memberof UniqueGiftModel
+	 * @instance
+	 * @public
+	 */
+	public bot?: Bot;
 
-  /**
-   * Creates a new UniqueGiftModel instance from raw Telegram API data
-   * @constructor
-   * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
-   * @param {Bot} bot - Bot instance for executing methods
-   * @example
-   * const message = new Message(rawData, botInstance);
-   */
-  constructor(
-    raw?: TelegramObject,
-    bot?: Bot
-  ) {
-    this.raw = raw;
-    this.bot = bot;
-    const converted = snakeToCamel(raw);
-    Object.assign(this, converted);
-  }
+	/**
+	 * Creates a new UniqueGiftModel instance from raw Telegram API data
+	 * @constructor
+	 * @param {TelegramObject} raw - Raw data from Telegram API in JSON format
+	 * @param {Bot} bot - Bot instance for executing methods
+	 * @example
+	 * const message = new Message(rawData, botInstance);
+	 */
+	constructor(raw?: TelegramObject, bot?: Bot) {
+		this.raw = raw;
+		this.bot = bot;
+		const converted = snakeToCamel(raw);
+		Object.assign(this, converted);
+	}
 }
