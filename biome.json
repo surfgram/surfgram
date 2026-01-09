@@ -6,7 +6,7 @@
 		"enabled": false
 	},
 	"files": {
-		"ignore": ["node_modules", "dist"],
+		"ignore": ["node_modules", "dist", "src/api"],
 		"ignoreUnknown": true
 	}
 }
