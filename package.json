@@ -60,8 +60,5 @@
 			"types": "./dist/index.d.ts"
 		},
 		"./package.json": "./package.json"
-	},
-	"dependencies": {
-		"express": "^5.2.1"
 	}
 }
