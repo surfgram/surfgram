@@ -87,6 +87,7 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
+**Auto-filled parameters:** fileId
 
 [View File documentation with fluent methods](../types/File.md)
 

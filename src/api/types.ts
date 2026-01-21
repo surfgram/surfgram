@@ -13157,10 +13157,10 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
      */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13175,10 +13175,10 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#copyMessage Telegram Bot API}
      */
-    copyMessage(params: Omit<Interfaces.CopyMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
+    copyMessage(params: Omit<Interfaces.CopyMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
     /**
      * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -13346,7 +13346,7 @@ declare module './types/message' {
      * @param reaction?: ReactionType[], isBig?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#setMessageReaction Telegram Bot API}
      */
     setMessageReaction(reaction?: ReactionType[], isBig?: boolean): Promise<any>;
@@ -13373,7 +13373,7 @@ declare module './types/message' {
      * @param disableNotification?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageId, businessConnectionId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId, businessConnectionId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#pinChatMessage Telegram Bot API}
      */
     pinChatMessage(disableNotification?: boolean): Promise<any>;
@@ -13382,7 +13382,7 @@ declare module './types/message' {
      * @param  - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId, businessConnectionId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#unpinChatMessage Telegram Bot API}
      */
     unpinChatMessage(): Promise<any>;
@@ -13445,7 +13445,7 @@ declare module './types/message' {
      * @param  - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#readBusinessMessage Telegram Bot API}
      */
     readBusinessMessage(): Promise<any>;
@@ -13472,70 +13472,70 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
      */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
      */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
      */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
      */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to stop updating a live location message before live\_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#stopMessageLiveLocation Telegram Bot API}
      */
-    stopMessageLiveLocation(params: Omit<Interfaces.StopMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    stopMessageLiveLocation(params: Omit<Interfaces.StopMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId' | 'businessConnectionId' | 'chatId'>): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any>;
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
      * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- Service messages about a supergroup, channel, or forum topic creation can&#39;t be deleted.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can\_post\_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can\_delete\_messages administrator right in a supergroup or a channel, it can delete any message there.- If the bot has can\_manage\_direct\_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.Returns True on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageId) are automatically filled from this Message instance
+     * @note Contextual parameters (messageId, chatId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#deleteMessage Telegram Bot API}
      */
     deleteMessage(): Promise<any>;

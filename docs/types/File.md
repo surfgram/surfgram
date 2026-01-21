@@ -55,12 +55,12 @@ bot.onFile(async (file: File) => {
 
 Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
 
+**Auto-filled parameters:**
 
-**Required parameters:**
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `fileId` | `this.id` | File identifier to get information about |
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `fileId` | `string` | Yes | File identifier to get information about |
 
 **Usage examples:**
 
@@ -68,9 +68,7 @@ Use this method to get basic information about a file and prepare it for downloa
 
 ```typescript
 const file = new File(rawData, bot);
-await file.getFile(
-  "example text",
-);
+await file.getFile();
 ```
 
 2. In an event handler:

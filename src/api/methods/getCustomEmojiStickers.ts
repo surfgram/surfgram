@@ -5,8 +5,8 @@
  * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
 
 /**
  * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
@@ -21,17 +21,11 @@ import { camelToSnake } from "../../core/utils";
  * // Direct parameters
  * await bot.getCustomEmojiStickers(...);
  */
-export async function getCustomEmojiStickers(
-	this: Bot,
-	customEmojiIds: string[],
-): Promise<any> {
-	const apiParams = {
-		customEmojiIds: customEmojiIds,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"getCustomEmojiStickers",
-		snakeParams,
-	);
-	return response;
+export async function getCustomEmojiStickers(this: Bot, customEmojiIds: string[]): Promise<any> {
+  const apiParams = {
+    customEmojiIds: customEmojiIds,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('getCustomEmojiStickers', snakeParams);
+  return response;
 }

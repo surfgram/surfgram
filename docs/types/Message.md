@@ -174,8 +174,8 @@ Use this method to forward messages of any kind. Service messages and messages w
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageId` | `this.id` | Message identifier in the chat specified in from_chat_id |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `this.directMessagesTopic?.id` | Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat |
 | `fromChatId` | `this.from?.id` | Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername) |
@@ -265,8 +265,8 @@ Use this method to copy messages of any kind. Service messages, paid media messa
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageId` | `this.id` | Message identifier in the chat specified in from_chat_id |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `this.directMessagesTopic?.id` | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 | `fromChatId` | `this.from?.id` | Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername) |
@@ -1252,8 +1252,8 @@ Use this method to change the chosen reactions on a message. Service messages of
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageId` | `this.id` | Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead. |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 
 **Required parameters:**
 
@@ -1376,8 +1376,8 @@ Use this method to add a message to the list of pinned messages in a chat. In pr
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageId` | `this.id` | Identifier of a message to pin |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be pinned |
 
 **Required parameters:**
@@ -1416,9 +1416,9 @@ Use this method to remove a message from the list of pinned messages in a chat. 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned. |
 | `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be unpinned |
-| `messageId` | `this.id` | Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned. |
 
 
 **Usage examples:**
@@ -1666,9 +1666,9 @@ Marks incoming message as read on behalf of a business account. Requires the can
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Unique identifier of the message to mark as read |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which to read the message |
 | `chatId` | `this.chat?.id` | Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours. |
-| `messageId` | `this.id` | Unique identifier of the message to mark as read |
 
 
 **Usage examples:**
@@ -1781,9 +1781,9 @@ Use this method to edit text and game messages. On success, if the edited messag
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -1827,9 +1827,9 @@ Use this method to edit captions of messages. On success, if the edited message 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -1873,9 +1873,9 @@ Use this method to edit animation, audio, document, photo, or video messages, or
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -1916,9 +1916,9 @@ Use this method to edit live location messages. A location can be edited until i
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -1964,9 +1964,9 @@ Use this method to stop updating a live location message before live\_period exp
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message with live location to stop |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message with live location to stop |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -2005,9 +2005,9 @@ Use this method to edit a checklist on behalf of a connected business account. O
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Unique identifier for the target message |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be sent |
 | `chatId` | `this.chat?.id` | Unique identifier for the target chat |
-| `messageId` | `this.id` | Unique identifier for the target message |
 
 **Required parameters:**
 
@@ -2047,9 +2047,9 @@ Use this method to edit only the reply markup of messages. On success, if the ed
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
+| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `this.chat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
 | `inlineMessageId` | `this.replyToMessage?.id` | Required if chat_id and message_id are not specified. Identifier of the inline message |
 
 **Required parameters:**
@@ -2088,8 +2088,8 @@ Use this method to delete a message, including service messages, with the follow
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 | `messageId` | `this.id` | Identifier of the message to delete |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
 
 
 **Usage examples:**

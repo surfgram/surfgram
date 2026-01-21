@@ -5,9 +5,9 @@
  * @see {@link https://core.telegram.org/bots/api#setBusinessAccountProfilePhoto Telegram API Documentation}
  */
 
-import { Bot } from "../../core/bot";
-import { camelToSnake } from "../../core/utils";
-import { InputProfilePhoto } from "../types/inputProfilePhoto";
+import { Bot } from '../../core/bot';
+import { camelToSnake } from '../../core/utils';
+import { InputProfilePhoto } from '../types/inputProfilePhoto';
 
 /**
  * Changes the profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
@@ -24,21 +24,13 @@ import { InputProfilePhoto } from "../types/inputProfilePhoto";
  * // Direct parameters
  * await bot.setBusinessAccountProfilePhoto(...);
  */
-export async function setBusinessAccountProfilePhoto(
-	this: Bot,
-	businessConnectionId: string,
-	photo: InputProfilePhoto,
-	isPublic?: boolean,
-): Promise<any> {
-	const apiParams = {
-		businessConnectionId: businessConnectionId,
-		photo: photo,
-		isPublic: isPublic,
-	};
-	const snakeParams = camelToSnake(apiParams);
-	const response = await this.callApi<any>(
-		"setBusinessAccountProfilePhoto",
-		snakeParams,
-	);
-	return response;
+export async function setBusinessAccountProfilePhoto(this: Bot, businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean): Promise<any> {
+  const apiParams = {
+    businessConnectionId: businessConnectionId,
+    photo: photo,
+    isPublic: isPublic,
+  };
+  const snakeParams = camelToSnake(apiParams);
+  const response = await this.callApi<any>('setBusinessAccountProfilePhoto', snakeParams);
+  return response;
 }

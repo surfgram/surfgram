@@ -18316,21 +18316,13 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function forwardMessage
- * @param {Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>} params - Method parameters
+ * @param {Omit<Interfaces.ForwardMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
  */
-(Message.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any> {
+(Message.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any> {
   const fullParams: any = { ...params };
-  try {
-    const value = this.chat?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.chatId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
   try {
     const value = this.id;
     if (value !== undefined && value !== null) {
@@ -18338,6 +18330,14 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill messageId from this.id:', e);
+  }
+  try {
+    const value = this.chat?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
   }
   try {
     const value = this.messageThreadId;
@@ -18418,21 +18418,13 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function copyMessage
- * @param {Omit<Interfaces.CopyMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>} params - Method parameters
+ * @param {Omit<Interfaces.CopyMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, messageId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId, messageThreadId, directMessagesTopicId, fromChatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#copyMessage Telegram Bot API}
  */
-(Message.prototype as any).copyMessage = function(params: Omit<Interfaces.CopyMessageParams, 'chatId' | 'messageId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any> {
+(Message.prototype as any).copyMessage = function(params: Omit<Interfaces.CopyMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any> {
   const fullParams: any = { ...params };
-  try {
-    const value = this.chat?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.chatId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
   try {
     const value = this.id;
     if (value !== undefined && value !== null) {
@@ -18440,6 +18432,14 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill messageId from this.id:', e);
+  }
+  try {
+    const value = this.chat?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
   }
   try {
     const value = this.messageThreadId;
@@ -19280,7 +19280,7 @@ import { GameHighScore } from '../types/gameHighScore';
  *  * @param { ReactionType[] } reaction? - A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
  * @param { boolean } isBig? - Pass True to set the reaction with a big animation
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, messageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#setMessageReaction Telegram Bot API}
  */
 (Message.prototype as any).setMessageReaction = function(
@@ -19294,20 +19294,20 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   try {
-    const value = this.chat?.id;
-    if (value !== undefined && value !== null) {
-      params.chatId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
     const value = this.id;
     if (value !== undefined && value !== null) {
       params.messageId = value;
     }
   } catch (e) {
     console.warn('Could not auto-fill messageId from this.id:', e);
+  }
+  try {
+    const value = this.chat?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
   }
 
   return this.bot.setMessageReaction(params);
@@ -19376,7 +19376,7 @@ import { GameHighScore } from '../types/gameHighScore';
  * @function pinChatMessage
  *  * @param { boolean } disableNotification? - Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, messageId, businessConnectionId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId, businessConnectionId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#pinChatMessage Telegram Bot API}
  */
 (Message.prototype as any).pinChatMessage = function(
@@ -19387,20 +19387,20 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   try {
-    const value = this.chat?.id;
-    if (value !== undefined && value !== null) {
-      params.chatId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
     const value = this.id;
     if (value !== undefined && value !== null) {
       params.messageId = value;
     }
   } catch (e) {
     console.warn('Could not auto-fill messageId from this.id:', e);
+  }
+  try {
+    const value = this.chat?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
   }
   try {
     const value = this.businessConnectionId;
@@ -19420,13 +19420,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @instance
  * @function unpinChatMessage
  *  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, businessConnectionId, messageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId, businessConnectionId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#unpinChatMessage Telegram Bot API}
  */
 (Message.prototype as any).unpinChatMessage = function(
 ): Promise<any> {
   const params: any = {};
 
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      params.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.chat?.id;
     if (value !== undefined && value !== null) {
@@ -19442,14 +19450,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill businessConnectionId from this.businessConnectionId:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      params.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
 
   return this.bot.unpinChatMessage(params);
@@ -19653,13 +19653,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @instance
  * @function readBusinessMessage
  *  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#readBusinessMessage Telegram Bot API}
  */
 (Message.prototype as any).readBusinessMessage = function(
 ): Promise<any> {
   const params: any = {};
 
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      params.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19675,14 +19683,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      params.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
 
   return this.bot.readBusinessMessage(params);
@@ -19753,13 +19753,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageText
- * @param {Omit<Interfaces.EditMessageTextParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageTextParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
  */
-(Message.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19775,14 +19783,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -19800,13 +19800,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageCaption
- * @param {Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
  */
-(Message.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19822,14 +19830,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -19847,13 +19847,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageMedia
- * @param {Omit<Interfaces.EditMessageMediaParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
  */
-(Message.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19869,14 +19877,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -19894,13 +19894,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageLiveLocation
- * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
  */
-(Message.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19916,14 +19924,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -19941,13 +19941,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function stopMessageLiveLocation
- * @param {Omit<Interfaces.StopMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.StopMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#stopMessageLiveLocation Telegram Bot API}
  */
-(Message.prototype as any).stopMessageLiveLocation = function(params: Omit<Interfaces.StopMessageLiveLocationParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).stopMessageLiveLocation = function(params: Omit<Interfaces.StopMessageLiveLocationParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -19963,14 +19971,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -19988,13 +19988,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageChecklist
- * @param {Omit<Interfaces.EditMessageChecklistParams, 'businessConnectionId' | 'chatId' | 'messageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageChecklistParams, 'messageId' | 'businessConnectionId' | 'chatId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
  */
-(Message.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any> {
+(Message.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId' | 'businessConnectionId' | 'chatId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -20010,14 +20018,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   return this.bot.editMessageChecklist(fullParams as Interfaces.EditMessageChecklistParams);
 };
@@ -20027,13 +20027,21 @@ import { GameHighScore } from '../types/gameHighScore';
  * @memberof Message.prototype
  * @instance
  * @function editMessageReplyMarkup
- * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>} params - Method parameters
  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (businessConnectionId, chatId, messageId, inlineMessageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, businessConnectionId, chatId, inlineMessageId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
  */
-(Message.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId' | 'inlineMessageId'>): Promise<any> {
+(Message.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any> {
   const fullParams: any = { ...params };
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.id:', e);
+  }
   try {
     const value = this.businessConnectionId;
     if (value !== undefined && value !== null) {
@@ -20049,14 +20057,6 @@ import { GameHighScore } from '../types/gameHighScore';
     }
   } catch (e) {
     console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
-    const value = this.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.id:', e);
   }
   try {
     const value = this.replyToMessage?.id;
@@ -20075,7 +20075,7 @@ import { GameHighScore } from '../types/gameHighScore';
  * @instance
  * @function deleteMessage
  *  * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (chatId, messageId) are automatically filled from this Message instance
+ * @description Contextual parameters (messageId, chatId) are automatically filled from this Message instance
  * @see {@link https://core.telegram.org/bots/api#deleteMessage Telegram Bot API}
  */
 (Message.prototype as any).deleteMessage = function(
@@ -20083,20 +20083,20 @@ import { GameHighScore } from '../types/gameHighScore';
   const params: any = {};
 
   try {
-    const value = this.chat?.id;
-    if (value !== undefined && value !== null) {
-      params.chatId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
-  }
-  try {
     const value = this.id;
     if (value !== undefined && value !== null) {
       params.messageId = value;
     }
   } catch (e) {
     console.warn('Could not auto-fill messageId from this.id:', e);
+  }
+  try {
+    const value = this.chat?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.chat?.id:', e);
   }
 
   return this.bot.deleteMessage(params);

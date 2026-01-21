@@ -43,12 +43,6 @@ export class TypeGenerator extends BaseGenerator {
 			}));
 		}
 
-		if (type.name === "InlineKeyboardMarkup") {
-			if (type.fields) {
-				type.fields.forEach((field, i) => {});
-			}
-		}
-
 		for (const field of type.fields) {
 			const tsType = TypeNormalizer.resolveTsType(field.types);
 

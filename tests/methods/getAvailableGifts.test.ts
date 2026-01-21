@@ -1,32 +1,30 @@
-import { getAvailableGifts } from "../../src/api";
-import { Bot } from "../../src/core/bot";
+import { getAvailableGifts } from '../../src/api';
+import { Bot } from '../../src/core/bot';
 
-describe("getAvailableGifts", () => {
-	it("should call callApi with correct parameters", async () => {
-		const mockBot = {
-			callApi: jest.fn().mockResolvedValue({} as any),
-		} as unknown as Bot;
+describe('getAvailableGifts', () => {
+  it('should call callApi with correct parameters', async () => {
+    const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
-		const params = {
-			giftId: "example text",
-			userId: 123,
-			chatId: 123,
-			payForUpgrade: true,
-			text: "example text",
-			textParseMode: "example text",
-			textEntities: [{} as any],
-		};
+    const params = {
+      giftId: "example text",
+      userId: 123,
+      chatId: 123,
+      payForUpgrade: true,
+      text: "example text",
+      textParseMode: "example text",
+      textEntities: [{} as any],
+    };
 
-		await getAvailableGifts.call(mockBot, params);
+    await getAvailableGifts.call(mockBot, params);
 
-		expect(mockBot.callApi).toHaveBeenCalledWith("getAvailableGifts", {
-			gift_id: "example text",
-			user_id: 123,
-			chat_id: 123,
-			pay_for_upgrade: true,
-			text: "example text",
-			text_parse_mode: "example text",
-			text_entities: [{} as any],
-		});
-	});
+    expect(mockBot.callApi).toHaveBeenCalledWith('getAvailableGifts', {
+      gift_id: "example text",
+      user_id: 123,
+      chat_id: 123,
+      pay_for_upgrade: true,
+      text: "example text",
+      text_parse_mode: "example text",
+      text_entities: [{} as any],
+    });
+  });
 });
