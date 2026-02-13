@@ -31,6 +31,7 @@ import { Animation } from './types/animation';
 import { Audio } from './types/audio';
 import { Document } from './types/document';
 import { Story } from './types/story';
+import { VideoQuality } from './types/videoQuality';
 import { Video } from './types/video';
 import { VideoNote } from './types/videoNote';
 import { Voice } from './types/voice';
@@ -98,6 +99,7 @@ import { SuggestedPostInfo } from './types/suggestedPostInfo';
 import { SuggestedPostParameters } from './types/suggestedPostParameters';
 import { DirectMessagesTopic } from './types/directMessagesTopic';
 import { UserProfilePhotos } from './types/userProfilePhotos';
+import { UserProfileAudios } from './types/userProfileAudios';
 import { File } from './types/file';
 import { WebAppInfo } from './types/webAppInfo';
 import { ReplyKeyboardMarkup } from './types/replyKeyboardMarkup';
@@ -190,6 +192,8 @@ import { ChatBoostSourceGiveaway } from './types/chatBoostSourceGiveaway';
 import { ChatBoost } from './types/chatBoost';
 import { ChatBoostUpdated } from './types/chatBoostUpdated';
 import { ChatBoostRemoved } from './types/chatBoostRemoved';
+import { ChatOwnerLeft } from './types/chatOwnerLeft';
+import { ChatOwnerChanged } from './types/chatOwnerChanged';
 import { UserChatBoosts } from './types/userChatBoosts';
 import { BusinessBotRights } from './types/businessBotRights';
 import { BusinessConnection } from './types/businessConnection';
@@ -787,6 +791,16 @@ declare module '../core/bot' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     *      * @param userId - Unique identifier of the target user
+     *      * @param offset - Sequential number of the first audio to be returned. By default, all audios are returned.
+     *      * @param limit - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
      *      * @param userId - Unique identifier of the target user
      *      * @param emojiStatusCustomEmojiId - Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
@@ -1121,7 +1135,7 @@ declare module '../core/bot' {
      */
     getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
     /**
-     * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
      *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
      *      * @param name - Topic name, 1-128 characters
      *      * @param iconColor - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\)
@@ -1340,6 +1354,23 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
      */
     getMyShortDescription(languageCode?: string): Promise<any>;
+    /**
+     * Changes the profile photo of the bot. Returns True on success.
+     *      * @param photo - The new profile photo to set
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#setMyProfilePhoto Telegram Bot API}
+     */
+    setMyProfilePhoto(photo: InputProfilePhoto): Promise<any>;
+    /**
+     * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+     *      * @param chatId - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
+     *      * @param menuButton - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
+     */
+    removeMyProfilePhoto(chatId?: number, menuButton?: MenuButton): Promise<any>;
     /**
      * Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
      *      * @param chatId - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
@@ -2612,6 +2643,24 @@ declare module '../core/bot' {
      */
     onStory(filter: string | ((data: any) => boolean), handler: (data: Story) => void | Promise<void>): this;
     /**
+     * Registers a handler for VideoQuality updates
+     * @overload
+     * @param handler - Async function to handle VideoQuality updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#videoquality Telegram Bot API}
+     */
+    onVideoQuality(handler: (data: VideoQuality) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for VideoQuality updates with filtering
+     * @overload
+     * @param filter - String or function to filter VideoQuality data
+     * @param handler - Async function to handle filtered VideoQuality updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#videoquality Telegram Bot API}
+     */
+    onVideoQuality(filter: string | ((data: any) => boolean), handler: (data: VideoQuality) => void | Promise<void>): this;
+    /**
      * Registers a handler for Video updates
      * @overload
      * @param handler - Async function to handle Video updates
@@ -3817,6 +3866,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
     onUserProfilePhotos(filter: string | ((data: any) => boolean), handler: (data: UserProfilePhotos) => void | Promise<void>): this;
+    /**
+     * Registers a handler for UserProfileAudios updates
+     * @overload
+     * @param handler - Async function to handle UserProfileAudios updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#userprofileaudios Telegram Bot API}
+     */
+    onUserProfileAudios(handler: (data: UserProfileAudios) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for UserProfileAudios updates with filtering
+     * @overload
+     * @param filter - String or function to filter UserProfileAudios data
+     * @param handler - Async function to handle filtered UserProfileAudios updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#userprofileaudios Telegram Bot API}
+     */
+    onUserProfileAudios(filter: string | ((data: any) => boolean), handler: (data: UserProfileAudios) => void | Promise<void>): this;
     /**
      * Registers a handler for File updates
      * @overload
@@ -5473,6 +5540,42 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
     onChatBoostRemoved(filter: string | ((data: any) => boolean), handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
+    /**
+     * Registers a handler for ChatOwnerLeft updates
+     * @overload
+     * @param handler - Async function to handle ChatOwnerLeft updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerleft Telegram Bot API}
+     */
+    onChatOwnerLeft(handler: (data: ChatOwnerLeft) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for ChatOwnerLeft updates with filtering
+     * @overload
+     * @param filter - String or function to filter ChatOwnerLeft data
+     * @param handler - Async function to handle filtered ChatOwnerLeft updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerleft Telegram Bot API}
+     */
+    onChatOwnerLeft(filter: string | ((data: any) => boolean), handler: (data: ChatOwnerLeft) => void | Promise<void>): this;
+    /**
+     * Registers a handler for ChatOwnerChanged updates
+     * @overload
+     * @param handler - Async function to handle ChatOwnerChanged updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerchanged Telegram Bot API}
+     */
+    onChatOwnerChanged(handler: (data: ChatOwnerChanged) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for ChatOwnerChanged updates with filtering
+     * @overload
+     * @param filter - String or function to filter ChatOwnerChanged data
+     * @param handler - Async function to handle filtered ChatOwnerChanged updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerchanged Telegram Bot API}
+     */
+    onChatOwnerChanged(filter: string | ((data: any) => boolean), handler: (data: ChatOwnerChanged) => void | Promise<void>): this;
     /**
      * Registers a handler for UserChatBoosts updates
      * @overload
@@ -7636,6 +7739,24 @@ declare module '../core/bot' {
      */
     on(event: 'story', filter: string | ((data: any) => boolean), handler: (data: Story) => void | Promise<void>): this;
     /**
+     * Generic handler for 'videoquality' event (strongly typed)
+     * @param event - Event name: 'videoquality'
+     * @param handler - Async function to handle videoquality events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#videoquality Telegram Bot API}
+     */
+    on(event: 'videoquality', handler: (data: VideoQuality) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'videoquality' event with filtering
+     * @param event - Event name: 'videoquality'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered videoquality events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#videoquality Telegram Bot API}
+     */
+    on(event: 'videoquality', filter: string | ((data: any) => boolean), handler: (data: VideoQuality) => void | Promise<void>): this;
+    /**
      * Generic handler for 'video' event (strongly typed)
      * @param event - Event name: 'video'
      * @param handler - Async function to handle video events
@@ -8841,6 +8962,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#userprofilephotos Telegram Bot API}
      */
     on(event: 'userprofilephotos', filter: string | ((data: any) => boolean), handler: (data: UserProfilePhotos) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'userprofileaudios' event (strongly typed)
+     * @param event - Event name: 'userprofileaudios'
+     * @param handler - Async function to handle userprofileaudios events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#userprofileaudios Telegram Bot API}
+     */
+    on(event: 'userprofileaudios', handler: (data: UserProfileAudios) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'userprofileaudios' event with filtering
+     * @param event - Event name: 'userprofileaudios'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered userprofileaudios events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#userprofileaudios Telegram Bot API}
+     */
+    on(event: 'userprofileaudios', filter: string | ((data: any) => boolean), handler: (data: UserProfileAudios) => void | Promise<void>): this;
     /**
      * Generic handler for 'file' event (strongly typed)
      * @param event - Event name: 'file'
@@ -10497,6 +10636,42 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#chatboostremoved Telegram Bot API}
      */
     on(event: 'chatboostremoved', filter: string | ((data: any) => boolean), handler: (data: ChatBoostRemoved) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'chatownerleft' event (strongly typed)
+     * @param event - Event name: 'chatownerleft'
+     * @param handler - Async function to handle chatownerleft events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerleft Telegram Bot API}
+     */
+    on(event: 'chatownerleft', handler: (data: ChatOwnerLeft) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'chatownerleft' event with filtering
+     * @param event - Event name: 'chatownerleft'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered chatownerleft events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerleft Telegram Bot API}
+     */
+    on(event: 'chatownerleft', filter: string | ((data: any) => boolean), handler: (data: ChatOwnerLeft) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'chatownerchanged' event (strongly typed)
+     * @param event - Event name: 'chatownerchanged'
+     * @param handler - Async function to handle chatownerchanged events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerchanged Telegram Bot API}
+     */
+    on(event: 'chatownerchanged', handler: (data: ChatOwnerChanged) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'chatownerchanged' event with filtering
+     * @param event - Event name: 'chatownerchanged'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered chatownerchanged events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#chatownerchanged Telegram Bot API}
+     */
+    on(event: 'chatownerchanged', filter: string | ((data: any) => boolean), handler: (data: ChatOwnerChanged) => void | Promise<void>): this;
     /**
      * Generic handler for 'userchatboosts' event (strongly typed)
      * @param event - Event name: 'userchatboosts'
@@ -12314,6 +12489,15 @@ declare module './types/user' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this User instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
      * @param emojiStatusCustomEmojiId?: string, emojiStatusExpirationDate?: number - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -12426,6 +12610,15 @@ declare module './types/chat' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Chat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -12932,6 +13125,15 @@ declare module './types/chatFullInfo' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -16247,6 +16449,14 @@ declare module './types/messageOriginChat' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -17136,6 +17346,14 @@ declare module './types/audio' {
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
     sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
   }
 }
 /**
@@ -17363,6 +17581,190 @@ declare module './types/story' {
      * @see {@link https://core.telegram.org/bots/api#deleteStory Telegram Bot API}
      */
     deleteStory(businessConnectionId: string): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for VideoQuality class
+ * @namespace VideoQualityExtensions
+ */
+declare module './types/videoQuality' {
+  interface VideoQuality {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
   }
 }
 /**
@@ -18661,6 +19063,14 @@ declare module './types/chatBoostAdded' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -18904,6 +19314,14 @@ declare module './types/backgroundTypeChatTheme' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -19146,6 +19564,14 @@ declare module './types/chatBackground' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -19406,6 +19832,15 @@ declare module './types/chatShared' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatShared instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -19812,6 +20247,14 @@ declare module './types/videoChatScheduled' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -20254,6 +20697,14 @@ declare module './types/videoChatStarted' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -20694,6 +21145,14 @@ declare module './types/videoChatEnded' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -21136,6 +21595,15 @@ declare module './types/videoChatParticipantsInvited' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -22716,6 +23184,23 @@ declare module './types/userProfilePhotos' {
   }
 }
 /**
+ * Declaration merging for UserProfileAudios class
+ * @namespace UserProfileAudiosExtensions
+ */
+declare module './types/userProfileAudios' {
+  interface UserProfileAudios {
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this UserProfileAudios instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+  }
+}
+/**
  * Declaration merging for File class
  * @namespace FileExtensions
  */
@@ -22730,6 +23215,14 @@ declare module './types/file' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param  - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -22738,6 +23231,22 @@ declare module './types/file' {
      * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
      */
     getFile(): Promise<any>;
+    /**
+     * Changes the profile photo of the bot. Returns True on success.
+     * @param photo: InputProfilePhoto - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#setMyProfilePhoto Telegram Bot API}
+     */
+    setMyProfilePhoto(photo: InputProfilePhoto): Promise<any>;
+    /**
+     * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+     * @param chatId?: number, menuButton?: MenuButton - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
+     */
+    removeMyProfilePhoto(chatId?: number, menuButton?: MenuButton): Promise<any>;
     /**
      * Changes the profile photo of a managed business account. Requires the can\_edit\_profile\_photo business bot right. Returns True on success.
      * @param businessConnectionId: string, photo: InputProfilePhoto, isPublic?: boolean - Method parameters
@@ -22964,6 +23473,15 @@ declare module './types/keyboardButtonRequestChat' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -23618,6 +24136,15 @@ declare module './types/switchInlineQueryChosenChat' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -24201,6 +24728,14 @@ declare module './types/chatPhoto' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -24499,6 +25034,15 @@ declare module './types/chatInviteLink' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -24780,6 +25324,15 @@ declare module './types/chatAdministratorRights' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -25033,6 +25586,15 @@ declare module './types/chatMemberUpdated' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -25277,6 +25839,15 @@ declare module './types/chatMember' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -25559,6 +26130,15 @@ declare module './types/chatMemberOwner' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -25803,6 +26383,15 @@ declare module './types/chatMemberAdministrator' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -26049,6 +26638,15 @@ declare module './types/chatMemberMember' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -26293,6 +26891,15 @@ declare module './types/chatMemberRestricted' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -26539,6 +27146,15 @@ declare module './types/chatMemberLeft' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -26784,6 +27400,15 @@ declare module './types/chatMemberBanned' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -27028,6 +27653,15 @@ declare module './types/chatJoinRequest' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -27291,6 +27925,15 @@ declare module './types/chatPermissions' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -27578,6 +28221,14 @@ declare module './types/chatLocation' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -28475,7 +29126,7 @@ declare module './types/forumTopic' {
      */
     getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number): Promise<any>;
     /**
-     * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
      * @param chatId: number | string, name: string, iconColor?: number - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -28825,6 +29476,14 @@ declare module './types/botCommandScopeAllPrivateChats' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -29067,6 +29726,14 @@ declare module './types/botCommandScopeAllGroupChats' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -29311,6 +29978,14 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -29554,6 +30229,14 @@ declare module './types/botCommandScopeChat' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -29796,6 +30479,14 @@ declare module './types/botCommandScopeChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -30041,6 +30732,15 @@ declare module './types/botCommandScopeChatMember' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -30252,6 +30952,14 @@ declare module './types/botCommandScopeChatMember' {
 declare module './types/menuButton' {
   interface MenuButton {
     /**
+     * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+     * @param chatId?: number, menuButton?: MenuButton - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
+     */
+    removeMyProfilePhoto(chatId?: number, menuButton?: MenuButton): Promise<any>;
+    /**
      * Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
      * @param chatId?: number, menuButton?: MenuButton - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -30309,6 +31017,15 @@ declare module './types/chatBoostSource' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -30555,6 +31272,15 @@ declare module './types/chatBoostSourcePremium' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -30799,6 +31525,15 @@ declare module './types/chatBoostSourceGiftCode' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -31045,6 +31780,15 @@ declare module './types/chatBoostSourceGiveaway' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -31289,6 +32033,14 @@ declare module './types/chatBoost' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -31531,6 +32283,14 @@ declare module './types/chatBoostUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -31775,6 +32535,14 @@ declare module './types/chatBoostRemoved' {
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -31979,6 +32747,514 @@ declare module './types/chatBoostRemoved' {
   }
 }
 /**
+ * Declaration merging for ChatOwnerLeft class
+ * @namespace ChatOwnerLeftExtensions
+ */
+declare module './types/chatOwnerLeft' {
+  interface ChatOwnerLeft {
+    /**
+     * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram Bot API}
+     */
+    getUpdates(params: Interfaces.GetUpdatesParams): Promise<any>;
+    /**
+     * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
+     */
+    getWebhookInfo(params: Interfaces.GetWebhookInfoParams): Promise<any>;
+    /**
+     * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+     */
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
+     */
+    getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+     * @param fileId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
+     */
+    getFile(fileId: string): Promise<any>;
+    /**
+     * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
+     */
+    getChat(): Promise<any>;
+    /**
+     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
+     */
+    getChatAdministrators(): Promise<any>;
+    /**
+     * Use this method to get the number of members in a chat. Returns Int on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
+     */
+    getChatMemberCount(): Promise<any>;
+    /**
+     * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
+     */
+    getChatMember(): Promise<any>;
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+     * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
+     */
+    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram Bot API}
+     */
+    getUserChatBoosts(): Promise<any>;
+    /**
+     * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
+     */
+    getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
+     * @param scope?: BotCommandScope, languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyCommands Telegram Bot API}
+     */
+    getMyCommands(scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot name for the given user language. Returns BotName on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyName Telegram Bot API}
+     */
+    getMyName(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram Bot API}
+     */
+    getMyDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
+     */
+    getMyShortDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
+     */
+    getChatMenuButton(): Promise<any>;
+    /**
+     * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+     * @param forChannels?: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram Bot API}
+     */
+    getMyDefaultAdministratorRights(forChannels?: boolean): Promise<any>;
+    /**
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
+     */
+    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    /**
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram Bot API}
+     */
+    getBusinessAccountStarBalance(businessConnectionId: string): Promise<any>;
+    /**
+     * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram Bot API}
+     */
+    getBusinessAccountGifts(params: Interfaces.GetBusinessAccountGiftsParams): Promise<any>;
+    /**
+     * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram Bot API}
+     */
+    getUserGifts(params: Omit<Interfaces.GetUserGiftsParams, 'userId'>): Promise<any>;
+    /**
+     * Returns the gifts owned by a chat. Returns OwnedGifts on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram Bot API}
+     */
+    getChatGifts(params: Omit<Interfaces.GetChatGiftsParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a sticker set. On success, a StickerSet object is returned.
+     * @param name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram Bot API}
+     */
+    getStickerSet(name: string): Promise<any>;
+    /**
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
+     * @param customEmojiIds: string[] - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram Bot API}
+     */
+    getCustomEmojiStickers(customEmojiIds: string[]): Promise<any>;
+    /**
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram Bot API}
+     */
+    getMyStarBalance(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram Bot API}
+     */
+    getStarTransactions(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+     * @param messageId?: number, inlineMessageId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
+     */
+    getGameHighScores(messageId?: number, inlineMessageId?: string): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for ChatOwnerChanged class
+ * @namespace ChatOwnerChangedExtensions
+ */
+declare module './types/chatOwnerChanged' {
+  interface ChatOwnerChanged {
+    /**
+     * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram Bot API}
+     */
+    getUpdates(params: Interfaces.GetUpdatesParams): Promise<any>;
+    /**
+     * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
+     */
+    getWebhookInfo(params: Interfaces.GetWebhookInfoParams): Promise<any>;
+    /**
+     * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+     */
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
+     */
+    getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+     * @param fileId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
+     */
+    getFile(fileId: string): Promise<any>;
+    /**
+     * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
+     */
+    getChat(): Promise<any>;
+    /**
+     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
+     */
+    getChatAdministrators(): Promise<any>;
+    /**
+     * Use this method to get the number of members in a chat. Returns Int on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
+     */
+    getChatMemberCount(): Promise<any>;
+    /**
+     * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
+     */
+    getChatMember(): Promise<any>;
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+     * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
+     */
+    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram Bot API}
+     */
+    getUserChatBoosts(): Promise<any>;
+    /**
+     * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
+     */
+    getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
+     * @param scope?: BotCommandScope, languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyCommands Telegram Bot API}
+     */
+    getMyCommands(scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot name for the given user language. Returns BotName on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyName Telegram Bot API}
+     */
+    getMyName(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram Bot API}
+     */
+    getMyDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
+     */
+    getMyShortDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
+     */
+    getChatMenuButton(): Promise<any>;
+    /**
+     * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+     * @param forChannels?: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram Bot API}
+     */
+    getMyDefaultAdministratorRights(forChannels?: boolean): Promise<any>;
+    /**
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
+     */
+    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any>;
+    /**
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram Bot API}
+     */
+    getBusinessAccountStarBalance(businessConnectionId: string): Promise<any>;
+    /**
+     * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram Bot API}
+     */
+    getBusinessAccountGifts(params: Interfaces.GetBusinessAccountGiftsParams): Promise<any>;
+    /**
+     * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram Bot API}
+     */
+    getUserGifts(params: Omit<Interfaces.GetUserGiftsParams, 'userId'>): Promise<any>;
+    /**
+     * Returns the gifts owned by a chat. Returns OwnedGifts on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram Bot API}
+     */
+    getChatGifts(params: Omit<Interfaces.GetChatGiftsParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a sticker set. On success, a StickerSet object is returned.
+     * @param name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram Bot API}
+     */
+    getStickerSet(name: string): Promise<any>;
+    /**
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
+     * @param customEmojiIds: string[] - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram Bot API}
+     */
+    getCustomEmojiStickers(customEmojiIds: string[]): Promise<any>;
+    /**
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram Bot API}
+     */
+    getMyStarBalance(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram Bot API}
+     */
+    getStarTransactions(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+     * @param messageId?: number, inlineMessageId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
+     */
+    getGameHighScores(messageId?: number, inlineMessageId?: string): Promise<any>;
+  }
+}
+/**
  * Declaration merging for UserChatBoosts class
  * @namespace UserChatBoostsExtensions
  */
@@ -32018,6 +33294,15 @@ declare module './types/userChatBoosts' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters
@@ -33777,6 +35062,14 @@ declare module './types/inputProfilePhoto' {
      * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Changes the profile photo of the bot. Returns True on success.
+     * @param photo: InputProfilePhoto - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#setMyProfilePhoto Telegram Bot API}
+     */
+    setMyProfilePhoto(photo: InputProfilePhoto): Promise<any>;
     /**
      * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
      * @param params - Method parameters object
@@ -38603,6 +39896,14 @@ declare module './types/transactionPartnerChat' {
      * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
      */
     getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
     /**
      * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
      * @param fileId: string - Method parameters

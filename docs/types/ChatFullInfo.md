@@ -54,6 +54,7 @@ This object contains full information about a chat.
 | linkedChatId | `number` | No | Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. |
 | location | `ChatLocation` | No | Optional. For supergroups, the location to which the supergroup is connected |
 | rating | `UserRating` | No | Optional. For private chats, the rating of the user if any |
+| firstProfileAudio | `Audio` | No | Optional. For private chats, the first audio added to the profile of the user |
 | uniqueGiftColors | `UniqueGiftColors` | No | Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews |
 | paidMessageStarCount | `number` | No | Optional. The number of Telegram Stars a general user have to pay to send a message to the chat |
 
@@ -231,6 +232,46 @@ bot.onChatFullInfo(async (chatfullinfo: ChatFullInfo) => {
 ```
 
 **See also:** [getUserProfilePhotos API method](../methods/getUserProfilePhotos.md)
+
+### getUserProfileAudios
+
+Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.username?.id` | Unique identifier of the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Sequential number of the first audio to be returned. By default, all audios are returned. |
+| `limit` | `number` | No | Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatfullinfo = new ChatFullInfo(rawData, bot);
+await chatfullinfo.getUserProfileAudios(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatFullInfo(async (chatfullinfo: ChatFullInfo) => {
+  // Auto-fills parameters from the chatfullinfo instance
+  await chatfullinfo.getUserProfileAudios();
+});
+```
+
+**See also:** [getUserProfileAudios API method](../methods/getUserProfileAudios.md)
 
 ### getFile
 

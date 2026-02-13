@@ -14,6 +14,7 @@ This object describes a unique gift that was upgraded from a regular gift.
 | symbol | `UniqueGiftSymbol` | Yes | Symbol of the gift |
 | backdrop | `UniqueGiftBackdrop` | Yes | Backdrop of the gift |
 | isPremium | `boolean` | No | Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers |
+| isBurned | `boolean` | No | Optional. True, if the gift was used to craft another gift and isn't available anymore |
 | isFromBlockchain | `boolean` | No | Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | colors | `UniqueGiftColors` | No | Optional. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only |
 | publisherChat | `Chat` | No | Optional. Information about the chat that published the gift |

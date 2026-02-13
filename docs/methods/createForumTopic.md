@@ -1,6 +1,6 @@
 # createForumTopic
 
-Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
 
 ## Fluent Usage
 

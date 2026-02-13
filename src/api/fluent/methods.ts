@@ -349,6 +349,17 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof Bot.prototype
+ * @instance
+ * @function getUserProfileAudios
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).getUserProfileAudios = function(...args: any[]) {
+  return (methods as any).getUserProfileAudios.apply(this, args);
+};
+
+/**
  * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
  * @memberof Bot.prototype
  * @instance
@@ -712,7 +723,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+ * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
  * @memberof Bot.prototype
  * @instance
  * @function createForumTopic
@@ -973,6 +984,28 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).getMyShortDescription = function(...args: any[]) {
   return (methods as any).getMyShortDescription.apply(this, args);
+};
+
+/**
+ * Changes the profile photo of the bot. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function setMyProfilePhoto
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).setMyProfilePhoto = function(...args: any[]) {
+  return (methods as any).setMyProfilePhoto.apply(this, args);
+};
+
+/**
+ * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function removeMyProfilePhoto
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).removeMyProfilePhoto = function(...args: any[]) {
+  return (methods as any).removeMyProfilePhoto.apply(this, args);
 };
 
 /**

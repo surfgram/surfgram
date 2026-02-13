@@ -6,16 +6,16 @@ Changes the profile photo of a managed business account. Requires the can\_edit\
 
 This method is available as a fluent method on the following types:
 
-### File (5 methods)
+### File (8 methods)
 
-**Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
+**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `getFile`, `setMyProfilePhoto`, `removeMyProfilePhoto`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
 
 [View File documentation with fluent methods](../types/File.md)
 
-### InputProfilePhoto (23 methods)
+### InputProfilePhoto (24 methods)
 
-**Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendMessageDraft`, `sendChatAction`, `sendGift`, `setBusinessAccountProfilePhoto`, `sendSticker`, `sendInvoice`, `sendGame`
+**Available methods:** `sendMessage`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `sendPaidMedia`, `sendMediaGroup`, `sendLocation`, `sendVenue`, `sendContact`, `sendPoll`, `sendChecklist`, `sendDice`, `sendMessageDraft`, `sendChatAction`, `setMyProfilePhoto`, `sendGift`, `setBusinessAccountProfilePhoto`, `sendSticker`, `sendInvoice`, `sendGame`
 
 
 [View InputProfilePhoto documentation with fluent methods](../types/InputProfilePhoto.md)

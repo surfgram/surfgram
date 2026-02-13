@@ -36,13 +36,22 @@ export class UniqueGiftModel {
   sticker!: Sticker;
 
   /**
-   * The number of unique gifts that receive this model for every 1000 gifts upgraded
+   * The number of unique gifts that receive this model for every 1000 gift upgrades. Always 0 for crafted gifts.
    * @type { number }
    * @memberof UniqueGiftModel
    * @instance
    * @public
    */
   rarityPerMille!: number;
+
+  /**
+   * Optional. Rarity of the model if it is a crafted model. Currently, can be “uncommon”, “rare”, “epic”, or “legendary”.
+   * @type { string }
+   * @memberof UniqueGiftModel
+   * @instance
+   * @public
+   */
+  rarity?: string;
 
   /**
    * Raw data from Telegram API in snake_case format

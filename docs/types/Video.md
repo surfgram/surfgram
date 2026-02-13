@@ -14,6 +14,7 @@ This object represents a video file.
 | thumbnail | `PhotoSize` | No | Optional. Video thumbnail |
 | cover | `PhotoSize[]` | No | Optional. Available sizes of the cover of the video in the message |
 | startTimestamp | `number` | No | Optional. Timestamp in seconds from which the video will play in the message |
+| qualities | `VideoQuality[]` | No | Optional. List of available qualities of the video |
 | fileName | `string` | No | Optional. Original filename as defined by the sender |
 | mimeType | `string` | No | Optional. MIME type of the file as defined by the sender |
 | fileSize | `number` | No | Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. |

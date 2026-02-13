@@ -32,6 +32,7 @@ import { Animation } from '../types/animation';
 import { Audio } from '../types/audio';
 import { Document } from '../types/document';
 import { Story } from '../types/story';
+import { VideoQuality } from '../types/videoQuality';
 import { Video } from '../types/video';
 import { VideoNote } from '../types/videoNote';
 import { Voice } from '../types/voice';
@@ -99,6 +100,7 @@ import { SuggestedPostInfo } from '../types/suggestedPostInfo';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { DirectMessagesTopic } from '../types/directMessagesTopic';
 import { UserProfilePhotos } from '../types/userProfilePhotos';
+import { UserProfileAudios } from '../types/userProfileAudios';
 import { File } from '../types/file';
 import { WebAppInfo } from '../types/webAppInfo';
 import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
@@ -191,6 +193,8 @@ import { ChatBoostSourceGiveaway } from '../types/chatBoostSourceGiveaway';
 import { ChatBoost } from '../types/chatBoost';
 import { ChatBoostUpdated } from '../types/chatBoostUpdated';
 import { ChatBoostRemoved } from '../types/chatBoostRemoved';
+import { ChatOwnerLeft } from '../types/chatOwnerLeft';
+import { ChatOwnerChanged } from '../types/chatOwnerChanged';
 import { UserChatBoosts } from '../types/userChatBoosts';
 import { BusinessBotRights } from '../types/businessBotRights';
 import { BusinessConnection } from '../types/businessConnection';
@@ -1580,6 +1584,61 @@ import { GameHighScore } from '../types/gameHighScore';
   } else {
     this.register('story', async (raw: any) => {
       const data = new Story(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for VideoQuality updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onVideoQuality
+ * @param {string | ((data: VideoQuality) => boolean) | ((data: VideoQuality) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: VideoQuality) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#videoquality Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onVideoQuality(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onVideoQuality("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onVideoQuality((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onVideoQuality = function(
+  filterOrHandler: string | ((data: VideoQuality) => boolean) | ((data: VideoQuality) => void | Promise<void>),
+  handler?: (data: VideoQuality) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: VideoQuality) => void | Promise<void>;
+    this.register('videoquality', async (raw: any) => {
+      const data = new VideoQuality(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: VideoQuality) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('videoquality', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new VideoQuality(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('videoquality', async (raw: any) => {
+      const data = new VideoQuality(raw, this);
       if (filterParam(data)) {
         await handlerFunc(data);
       }
@@ -5265,6 +5324,61 @@ import { GameHighScore } from '../types/gameHighScore';
   } else {
     this.register('userprofilephotos', async (raw: any) => {
       const data = new UserProfilePhotos(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for UserProfileAudios updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onUserProfileAudios
+ * @param {string | ((data: UserProfileAudios) => boolean) | ((data: UserProfileAudios) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: UserProfileAudios) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#userprofileaudios Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onUserProfileAudios(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onUserProfileAudios("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onUserProfileAudios((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onUserProfileAudios = function(
+  filterOrHandler: string | ((data: UserProfileAudios) => boolean) | ((data: UserProfileAudios) => void | Promise<void>),
+  handler?: (data: UserProfileAudios) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: UserProfileAudios) => void | Promise<void>;
+    this.register('userprofileaudios', async (raw: any) => {
+      const data = new UserProfileAudios(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: UserProfileAudios) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('userprofileaudios', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new UserProfileAudios(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('userprofileaudios', async (raw: any) => {
+      const data = new UserProfileAudios(raw, this);
       if (filterParam(data)) {
         await handlerFunc(data);
       }
@@ -10325,6 +10439,116 @@ import { GameHighScore } from '../types/gameHighScore';
   } else {
     this.register('chatboostremoved', async (raw: any) => {
       const data = new ChatBoostRemoved(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for ChatOwnerLeft updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onChatOwnerLeft
+ * @param {string | ((data: ChatOwnerLeft) => boolean) | ((data: ChatOwnerLeft) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: ChatOwnerLeft) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#chatownerleft Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onChatOwnerLeft(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onChatOwnerLeft("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onChatOwnerLeft((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onChatOwnerLeft = function(
+  filterOrHandler: string | ((data: ChatOwnerLeft) => boolean) | ((data: ChatOwnerLeft) => void | Promise<void>),
+  handler?: (data: ChatOwnerLeft) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: ChatOwnerLeft) => void | Promise<void>;
+    this.register('chatownerleft', async (raw: any) => {
+      const data = new ChatOwnerLeft(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: ChatOwnerLeft) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('chatownerleft', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new ChatOwnerLeft(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('chatownerleft', async (raw: any) => {
+      const data = new ChatOwnerLeft(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for ChatOwnerChanged updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onChatOwnerChanged
+ * @param {string | ((data: ChatOwnerChanged) => boolean) | ((data: ChatOwnerChanged) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: ChatOwnerChanged) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#chatownerchanged Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onChatOwnerChanged(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onChatOwnerChanged("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onChatOwnerChanged((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onChatOwnerChanged = function(
+  filterOrHandler: string | ((data: ChatOwnerChanged) => boolean) | ((data: ChatOwnerChanged) => void | Promise<void>),
+  handler?: (data: ChatOwnerChanged) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: ChatOwnerChanged) => void | Promise<void>;
+    this.register('chatownerchanged', async (raw: any) => {
+      const data = new ChatOwnerChanged(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: ChatOwnerChanged) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('chatownerchanged', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new ChatOwnerChanged(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('chatownerchanged', async (raw: any) => {
+      const data = new ChatOwnerChanged(raw, this);
       if (filterParam(data)) {
         await handlerFunc(data);
       }
@@ -15734,6 +15958,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof User.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this User instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(User.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
  * @memberof User.prototype
  * @instance
@@ -16051,6 +16308,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof Chat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this Chat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(Chat.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -17646,6 +17936,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatFullInfo.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatFullInfo.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -26621,6 +26944,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof MessageOriginChat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this MessageOriginChat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(MessageOriginChat.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof MessageOriginChat.prototype
  * @instance
@@ -28961,6 +29313,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof Audio.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this Audio instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(Audio.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to send text messages. On success, the sent Message is returned.
  * @memberof Document.prototype
  * @instance
@@ -29404,6 +29785,354 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.deleteStory(params);
+};
+
+/**
+ * Use this method to send text messages. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendMessage
+ * @param {Omit<Interfaces.SendMessageParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendMessage = function(params: Omit<Interfaces.SendMessageParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessage(fullParams as Interfaces.SendMessageParams);
+};
+
+/**
+ * Use this method to send photos. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendPhoto
+ * @param {Omit<Interfaces.SendPhotoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendPhoto = function(params: Omit<Interfaces.SendPhotoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPhoto(fullParams as Interfaces.SendPhotoParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendAudio
+ * @param {Omit<Interfaces.SendAudioParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendAudio = function(params: Omit<Interfaces.SendAudioParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAudio(fullParams as Interfaces.SendAudioParams);
+};
+
+/**
+ * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendDocument
+ * @param {Omit<Interfaces.SendDocumentParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendDocument = function(params: Omit<Interfaces.SendDocumentParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDocument(fullParams as Interfaces.SendDocumentParams);
+};
+
+/**
+ * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendVideo
+ * @param {Omit<Interfaces.SendVideoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendVideo = function(params: Omit<Interfaces.SendVideoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideo(fullParams as Interfaces.SendVideoParams);
+};
+
+/**
+ * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendAnimation
+ * @param {Omit<Interfaces.SendAnimationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendAnimation = function(params: Omit<Interfaces.SendAnimationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAnimation(fullParams as Interfaces.SendAnimationParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendVoice
+ * @param {Omit<Interfaces.SendVoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendVoice = function(params: Omit<Interfaces.SendVoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVoice(fullParams as Interfaces.SendVoiceParams);
+};
+
+/**
+ * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendVideoNote
+ * @param {Omit<Interfaces.SendVideoNoteParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendVideoNote = function(params: Omit<Interfaces.SendVideoNoteParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideoNote(fullParams as Interfaces.SendVideoNoteParams);
+};
+
+/**
+ * Use this method to send paid media. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendPaidMedia
+ * @param {Omit<Interfaces.SendPaidMediaParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendPaidMedia = function(params: Omit<Interfaces.SendPaidMediaParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPaidMedia(fullParams as Interfaces.SendPaidMediaParams);
+};
+
+/**
+ * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendMediaGroup
+ * @param {Omit<Interfaces.SendMediaGroupParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendMediaGroup = function(params: Omit<Interfaces.SendMediaGroupParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMediaGroup(fullParams as Interfaces.SendMediaGroupParams);
+};
+
+/**
+ * Use this method to send point on the map. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendLocation
+ * @param {Omit<Interfaces.SendLocationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendLocation = function(params: Omit<Interfaces.SendLocationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendLocation(fullParams as Interfaces.SendLocationParams);
+};
+
+/**
+ * Use this method to send information about a venue. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendVenue
+ * @param {Omit<Interfaces.SendVenueParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendVenue = function(params: Omit<Interfaces.SendVenueParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVenue(fullParams as Interfaces.SendVenueParams);
+};
+
+/**
+ * Use this method to send phone contacts. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendContact
+ * @param {Omit<Interfaces.SendContactParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendContact = function(params: Omit<Interfaces.SendContactParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendContact(fullParams as Interfaces.SendContactParams);
+};
+
+/**
+ * Use this method to send a native poll. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendPoll
+ * @param {Omit<Interfaces.SendPollParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendPoll = function(params: Omit<Interfaces.SendPollParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPoll(fullParams as Interfaces.SendPollParams);
+};
+
+/**
+ * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendChecklist
+ * @param {Omit<Interfaces.SendChecklistParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendChecklist = function(params: Omit<Interfaces.SendChecklistParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendChecklist(fullParams as Interfaces.SendChecklistParams);
+};
+
+/**
+ * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendDice
+ * @param {Omit<Interfaces.SendDiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendDice = function(params: Omit<Interfaces.SendDiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDice(fullParams as Interfaces.SendDiceParams);
+};
+
+/**
+ * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendMessageDraft
+ * @param {Omit<Interfaces.SendMessageDraftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendMessageDraft = function(params: Omit<Interfaces.SendMessageDraftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessageDraft(fullParams as Interfaces.SendMessageDraftParams);
+};
+
+/**
+ * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendChatAction
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
+ * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
+ * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
+ * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendChatAction = function(
+  chatId: number | string,   action: string,   businessConnectionId?: string,   messageThreadId?: number): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (action !== undefined) {
+    params.action = action;
+  }
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+  if (messageThreadId !== undefined) {
+    params.messageThreadId = messageThreadId;
+  }
+
+
+  return this.bot.sendChatAction(params);
+};
+
+/**
+ * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendGift
+ * @param {Omit<Interfaces.SendGiftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendGift = function(params: Omit<Interfaces.SendGiftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGift(fullParams as Interfaces.SendGiftParams);
+};
+
+/**
+ * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendSticker
+ * @param {Omit<Interfaces.SendStickerParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendSticker = function(params: Omit<Interfaces.SendStickerParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
+};
+
+/**
+ * Use this method to send invoices. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendInvoice
+ * @param {Omit<Interfaces.SendInvoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendInvoice = function(params: Omit<Interfaces.SendInvoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendInvoice(fullParams as Interfaces.SendInvoiceParams);
+};
+
+/**
+ * Use this method to send a game. On success, the sent Message is returned.
+ * @memberof VideoQuality.prototype
+ * @instance
+ * @function sendGame
+ * @param {Omit<Interfaces.SendGameParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoQuality instance
+ * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+ */
+(VideoQuality.prototype as any).sendGame = function(params: Omit<Interfaces.SendGameParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
 };
 
 /**
@@ -31840,6 +32569,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostAdded.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostAdded instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostAdded.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatBoostAdded.prototype
  * @instance
@@ -32494,6 +33252,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BackgroundTypeChatTheme.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BackgroundTypeChatTheme instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BackgroundTypeChatTheme.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof BackgroundTypeChatTheme.prototype
  * @instance
@@ -33145,6 +33932,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBackground.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBackground instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBackground.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -33818,6 +34634,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatShared.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatShared instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatShared.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -34928,6 +35777,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof VideoChatScheduled.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatScheduled instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(VideoChatScheduled.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -36105,6 +36983,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof VideoChatStarted.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatStarted instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(VideoChatStarted.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof VideoChatStarted.prototype
  * @instance
@@ -37276,6 +38183,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof VideoChatEnded.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatEnded instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(VideoChatEnded.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -38454,6 +39390,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof VideoChatParticipantsInvited.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(VideoChatParticipantsInvited.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.users?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.users?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -42087,6 +43056,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof UserProfileAudios.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this UserProfileAudios instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(UserProfileAudios.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
  * @memberof File.prototype
  * @instance
@@ -42116,6 +43118,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof File.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this File instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(File.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof File.prototype
  * @instance
@@ -42138,6 +43169,52 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getFile(params);
+};
+
+/**
+ * Changes the profile photo of the bot. Returns True on success.
+ * @memberof File.prototype
+ * @instance
+ * @function setMyProfilePhoto
+ *  * @param { InputProfilePhoto } photo - The new profile photo to set
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this File instance
+ * @see {@link https://core.telegram.org/bots/api#setMyProfilePhoto Telegram Bot API}
+ */
+(File.prototype as any).setMyProfilePhoto = function(
+  photo: InputProfilePhoto): Promise<any> {
+  const params: any = {};
+  if (photo !== undefined) {
+    params.photo = photo;
+  }
+
+
+  return this.bot.setMyProfilePhoto(params);
+};
+
+/**
+ * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+ * @memberof File.prototype
+ * @instance
+ * @function removeMyProfilePhoto
+ *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
+ * @param { MenuButton } menuButton? - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this File instance
+ * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
+ */
+(File.prototype as any).removeMyProfilePhoto = function(
+  chatId?: number,   menuButton?: MenuButton): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (menuButton !== undefined) {
+    params.menuButton = menuButton;
+  }
+
+
+  return this.bot.removeMyProfilePhoto(params);
 };
 
 /**
@@ -42592,6 +43669,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof KeyboardButtonRequestChat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(KeyboardButtonRequestChat.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.chatHasUsername?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.chatHasUsername?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -44034,6 +45144,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof SwitchInlineQueryChosenChat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(SwitchInlineQueryChosenChat.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.allowUserChats?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.allowUserChats?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof SwitchInlineQueryChosenChat.prototype
  * @instance
@@ -45452,6 +46595,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatPhoto.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatPhoto instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatPhoto.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatPhoto.prototype
  * @instance
@@ -46256,6 +47428,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatInviteLink.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatInviteLink.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.creator?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.creator?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatInviteLink.prototype
  * @instance
@@ -47042,6 +48247,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatAdministratorRights.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatAdministratorRights.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.canInviteUsers?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.canInviteUsers?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatAdministratorRights.prototype
  * @instance
@@ -47757,6 +48995,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberUpdated.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberUpdated.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.from?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.from?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatMemberUpdated.prototype
  * @instance
@@ -48440,6 +49711,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMember.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMember instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMember.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -49269,6 +50573,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberOwner.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberOwner.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatMemberOwner.prototype
  * @instance
@@ -49952,6 +51289,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberAdministrator.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberAdministrator.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -50645,6 +52015,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberMember.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberMember.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatMemberMember.prototype
  * @instance
@@ -51328,6 +52731,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberRestricted.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberRestricted.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -52021,6 +53457,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberLeft.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberLeft.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatMemberLeft.prototype
  * @instance
@@ -52707,6 +54176,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatMemberBanned.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatMemberBanned.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatMemberBanned.prototype
  * @instance
@@ -53390,6 +54892,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatJoinRequest.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatJoinRequest.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.userChatId?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.userChatId?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -54142,6 +55677,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatPermissions.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatPermissions.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.canInviteUsers?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.canInviteUsers?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -54930,6 +56498,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatLocation.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatLocation instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatLocation.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -57471,7 +59068,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+ * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
  * @memberof ForumTopic.prototype
  * @instance
  * @function createForumTopic
@@ -58377,6 +59974,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeAllPrivateChats.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllPrivateChats instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeAllPrivateChats.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof BotCommandScopeAllPrivateChats.prototype
  * @instance
@@ -59028,6 +60654,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeAllGroupChats.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllGroupChats instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeAllGroupChats.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -59685,6 +61340,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeAllChatAdministrators.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllChatAdministrators instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeAllChatAdministrators.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof BotCommandScopeAllChatAdministrators.prototype
  * @instance
@@ -60339,6 +62023,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeChat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeChat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeChat.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof BotCommandScopeChat.prototype
  * @instance
@@ -60990,6 +62703,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeChatAdministrators.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeChatAdministrators instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeChatAdministrators.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -61651,6 +63393,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof BotCommandScopeChatMember.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(BotCommandScopeChatMember.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.userId;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.userId:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof BotCommandScopeChatMember.prototype
  * @instance
@@ -62251,6 +64026,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+ * @memberof MenuButton.prototype
+ * @instance
+ * @function removeMyProfilePhoto
+ *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
+ * @param { MenuButton } menuButton? - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this MenuButton instance
+ * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
+ */
+(MenuButton.prototype as any).removeMyProfilePhoto = function(
+  chatId?: number,   menuButton?: MenuButton): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (menuButton !== undefined) {
+    params.menuButton = menuButton;
+  }
+
+
+  return this.bot.removeMyProfilePhoto(params);
+};
+
+/**
  * Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
  * @memberof MenuButton.prototype
  * @instance
@@ -62380,6 +64180,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostSource.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostSource.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -63069,6 +64902,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostSourcePremium.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostSourcePremium.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatBoostSourcePremium.prototype
  * @instance
@@ -63752,6 +65618,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostSourceGiftCode.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostSourceGiftCode.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -64449,6 +66348,39 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostSourceGiveaway.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostSourceGiveaway.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatBoostSourceGiveaway.prototype
  * @instance
@@ -65135,6 +67067,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoost.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoost instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoost.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatBoost.prototype
  * @instance
@@ -65786,6 +67747,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostUpdated.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostUpdated instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostUpdated.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -66443,6 +68433,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatBoostRemoved.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostRemoved instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatBoostRemoved.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
  * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
  * @memberof ChatBoostRemoved.prototype
  * @instance
@@ -67016,6 +69035,1444 @@ import { GameHighScore } from '../types/gameHighScore';
 
 /**
  * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getUpdates
+ * @param {Omit<Interfaces.GetUpdatesParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getUpdates = function(params: Omit<Interfaces.GetUpdatesParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getUpdates(fullParams as Interfaces.GetUpdatesParams);
+};
+
+/**
+ * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getWebhookInfo
+ * @param {Omit<Interfaces.GetWebhookInfoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getWebhookInfo = function(params: Omit<Interfaces.GetWebhookInfoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getWebhookInfo(fullParams as Interfaces.GetWebhookInfoParams);
+};
+
+/**
+ * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMe
+ * @param {Omit<Interfaces.GetMeParams, 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMe = function(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getMe(fullParams as Interfaces.GetMeParams);
+};
+
+/**
+ * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getUserProfilePhotos
+ *  * @param { number } offset? - Sequential number of the first photo to be returned. By default, all photos are returned.
+ * @param { number } limit? - Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getUserProfilePhotos = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
+ * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getFile
+ *  * @param { string } fileId - File identifier to get information about
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getFile = function(
+  fileId: string): Promise<any> {
+  const params: any = {};
+  if (fileId !== undefined) {
+    params.fileId = fileId;
+  }
+
+
+  return this.bot.getFile(params);
+};
+
+/**
+ * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChat
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChat = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChat(params);
+};
+
+/**
+ * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChatAdministrators
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChatAdministrators = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatAdministrators(params);
+};
+
+/**
+ * Use this method to get the number of members in a chat. Returns Int on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChatMemberCount
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChatMemberCount = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMemberCount(params);
+};
+
+/**
+ * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChatMember
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChatMember = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMember(params);
+};
+
+/**
+ * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getForumTopicIconStickers
+ *  * @param { string } name - Topic name, 1-128 characters
+ * @param { number } iconColor? - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\)
+ * @param { string } iconCustomEmojiId? - Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getForumTopicIconStickers = function(
+  name: string,   iconColor?: number,   iconCustomEmojiId?: string): Promise<any> {
+  const params: any = {};
+  if (name !== undefined) {
+    params.name = name;
+  }
+  if (iconColor !== undefined) {
+    params.iconColor = iconColor;
+  }
+  if (iconCustomEmojiId !== undefined) {
+    params.iconCustomEmojiId = iconCustomEmojiId;
+  }
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getForumTopicIconStickers(params);
+};
+
+/**
+ * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getUserChatBoosts
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getUserChatBoosts = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getUserChatBoosts(params);
+};
+
+/**
+ * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getBusinessConnection
+ *  * @param { string } businessConnectionId - Unique identifier of the business connection
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getBusinessConnection = function(
+  businessConnectionId: string): Promise<any> {
+  const params: any = {};
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+
+
+  return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyCommands
+ *  * @param { BotCommandScope } scope? - A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+ * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyCommands Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyCommands = function(
+  scope?: BotCommandScope,   languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (scope !== undefined) {
+    params.scope = scope;
+  }
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyCommands(params);
+};
+
+/**
+ * Use this method to get the current bot name for the given user language. Returns BotName on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyName
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyName Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyName = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyName(params);
+};
+
+/**
+ * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyDescription
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyDescription = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyDescription(params);
+};
+
+/**
+ * Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyShortDescription
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyShortDescription = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyShortDescription(params);
+};
+
+/**
+ * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChatMenuButton
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChatMenuButton = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMenuButton(params);
+};
+
+/**
+ * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyDefaultAdministratorRights
+ *  * @param { boolean } forChannels? - Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyDefaultAdministratorRights = function(
+  forChannels?: boolean): Promise<any> {
+  const params: any = {};
+  if (forChannels !== undefined) {
+    params.forChannels = forChannels;
+  }
+
+
+  return this.bot.getMyDefaultAdministratorRights(params);
+};
+
+/**
+ * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getAvailableGifts
+ * @param {Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getAvailableGifts = function(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getAvailableGifts(fullParams as Interfaces.GetAvailableGiftsParams);
+};
+
+/**
+ * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getBusinessAccountStarBalance
+ *  * @param { string } businessConnectionId - Unique identifier of the business connection
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getBusinessAccountStarBalance = function(
+  businessConnectionId: string): Promise<any> {
+  const params: any = {};
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+
+
+  return this.bot.getBusinessAccountStarBalance(params);
+};
+
+/**
+ * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getBusinessAccountGifts
+ * @param {Omit<Interfaces.GetBusinessAccountGiftsParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getBusinessAccountGifts = function(params: Omit<Interfaces.GetBusinessAccountGiftsParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getBusinessAccountGifts(fullParams as Interfaces.GetBusinessAccountGiftsParams);
+};
+
+/**
+ * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getUserGifts
+ * @param {Omit<Interfaces.GetUserGiftsParams, 'userId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getUserGifts = function(params: Omit<Interfaces.GetUserGiftsParams, 'userId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  return this.bot.getUserGifts(fullParams as Interfaces.GetUserGiftsParams);
+};
+
+/**
+ * Returns the gifts owned by a chat. Returns OwnedGifts on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getChatGifts
+ * @param {Omit<Interfaces.GetChatGiftsParams, 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getChatGifts = function(params: Omit<Interfaces.GetChatGiftsParams, 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getChatGifts(fullParams as Interfaces.GetChatGiftsParams);
+};
+
+/**
+ * Use this method to get a sticker set. On success, a StickerSet object is returned.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getStickerSet
+ *  * @param { string } name - Name of the sticker set
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getStickerSet = function(
+  name: string): Promise<any> {
+  const params: any = {};
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.getStickerSet(params);
+};
+
+/**
+ * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getCustomEmojiStickers
+ *  * @param { string[] } customEmojiIds - A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getCustomEmojiStickers = function(
+  customEmojiIds: string[]): Promise<any> {
+  const params: any = {};
+  if (customEmojiIds !== undefined) {
+    params.customEmojiIds = customEmojiIds;
+  }
+
+
+  return this.bot.getCustomEmojiStickers(params);
+};
+
+/**
+ * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getMyStarBalance
+ *  * @param { number } offset? - Number of transactions to skip in the response
+ * @param { number } limit? - The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getMyStarBalance = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getMyStarBalance(params);
+};
+
+/**
+ * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getStarTransactions
+ *  * @param { number } offset? - Number of transactions to skip in the response
+ * @param { number } limit? - The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getStarTransactions = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getStarTransactions(params);
+};
+
+/**
+ * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getGameHighScores
+ *  * @param { number } messageId? - Required if inline\_message\_id is not specified. Identifier of the sent message
+ * @param { string } inlineMessageId? - Required if chat\_id and message\_id are not specified. Identifier of the inline message
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getGameHighScores = function(
+  messageId?: number,   inlineMessageId?: string): Promise<any> {
+  const params: any = {};
+  if (messageId !== undefined) {
+    params.messageId = messageId;
+  }
+  if (inlineMessageId !== undefined) {
+    params.inlineMessageId = inlineMessageId;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getGameHighScores(params);
+};
+
+/**
+ * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getUpdates
+ * @param {Omit<Interfaces.GetUpdatesParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getUpdates = function(params: Omit<Interfaces.GetUpdatesParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getUpdates(fullParams as Interfaces.GetUpdatesParams);
+};
+
+/**
+ * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getWebhookInfo
+ * @param {Omit<Interfaces.GetWebhookInfoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getWebhookInfo = function(params: Omit<Interfaces.GetWebhookInfoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getWebhookInfo(fullParams as Interfaces.GetWebhookInfoParams);
+};
+
+/**
+ * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMe
+ * @param {Omit<Interfaces.GetMeParams, 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMe = function(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getMe(fullParams as Interfaces.GetMeParams);
+};
+
+/**
+ * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getUserProfilePhotos
+ *  * @param { number } offset? - Sequential number of the first photo to be returned. By default, all photos are returned.
+ * @param { number } limit? - Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getUserProfilePhotos = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
+};
+
+/**
+ * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getFile
+ *  * @param { string } fileId - File identifier to get information about
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getFile = function(
+  fileId: string): Promise<any> {
+  const params: any = {};
+  if (fileId !== undefined) {
+    params.fileId = fileId;
+  }
+
+
+  return this.bot.getFile(params);
+};
+
+/**
+ * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChat
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChat = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChat(params);
+};
+
+/**
+ * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChatAdministrators
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChatAdministrators = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatAdministrators(params);
+};
+
+/**
+ * Use this method to get the number of members in a chat. Returns Int on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChatMemberCount
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChatMemberCount = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMemberCount(params);
+};
+
+/**
+ * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChatMember
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChatMember = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMember(params);
+};
+
+/**
+ * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getForumTopicIconStickers
+ *  * @param { string } name - Topic name, 1-128 characters
+ * @param { number } iconColor? - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\)
+ * @param { string } iconCustomEmojiId? - Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getForumTopicIconStickers = function(
+  name: string,   iconColor?: number,   iconCustomEmojiId?: string): Promise<any> {
+  const params: any = {};
+  if (name !== undefined) {
+    params.name = name;
+  }
+  if (iconColor !== undefined) {
+    params.iconColor = iconColor;
+  }
+  if (iconCustomEmojiId !== undefined) {
+    params.iconCustomEmojiId = iconCustomEmojiId;
+  }
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getForumTopicIconStickers(params);
+};
+
+/**
+ * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getUserChatBoosts
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getUserChatBoosts = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getUserChatBoosts(params);
+};
+
+/**
+ * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getBusinessConnection
+ *  * @param { string } businessConnectionId - Unique identifier of the business connection
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getBusinessConnection = function(
+  businessConnectionId: string): Promise<any> {
+  const params: any = {};
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+
+
+  return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyCommands
+ *  * @param { BotCommandScope } scope? - A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+ * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyCommands Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyCommands = function(
+  scope?: BotCommandScope,   languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (scope !== undefined) {
+    params.scope = scope;
+  }
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyCommands(params);
+};
+
+/**
+ * Use this method to get the current bot name for the given user language. Returns BotName on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyName
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyName Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyName = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyName(params);
+};
+
+/**
+ * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyDescription
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyDescription = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyDescription(params);
+};
+
+/**
+ * Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyShortDescription
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code or an empty string
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyShortDescription = function(
+  languageCode?: string): Promise<any> {
+  const params: any = {};
+  if (languageCode !== undefined) {
+    params.languageCode = languageCode;
+  }
+
+
+  return this.bot.getMyShortDescription(params);
+};
+
+/**
+ * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChatMenuButton
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChatMenuButton = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getChatMenuButton(params);
+};
+
+/**
+ * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyDefaultAdministratorRights
+ *  * @param { boolean } forChannels? - Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyDefaultAdministratorRights = function(
+  forChannels?: boolean): Promise<any> {
+  const params: any = {};
+  if (forChannels !== undefined) {
+    params.forChannels = forChannels;
+  }
+
+
+  return this.bot.getMyDefaultAdministratorRights(params);
+};
+
+/**
+ * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getAvailableGifts
+ * @param {Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getAvailableGifts = function(params: Omit<Interfaces.GetAvailableGiftsParams, 'userId' | 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getAvailableGifts(fullParams as Interfaces.GetAvailableGiftsParams);
+};
+
+/**
+ * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getBusinessAccountStarBalance
+ *  * @param { string } businessConnectionId - Unique identifier of the business connection
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getBusinessAccountStarBalance = function(
+  businessConnectionId: string): Promise<any> {
+  const params: any = {};
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+
+
+  return this.bot.getBusinessAccountStarBalance(params);
+};
+
+/**
+ * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getBusinessAccountGifts
+ * @param {Omit<Interfaces.GetBusinessAccountGiftsParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getBusinessAccountGifts = function(params: Omit<Interfaces.GetBusinessAccountGiftsParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.getBusinessAccountGifts(fullParams as Interfaces.GetBusinessAccountGiftsParams);
+};
+
+/**
+ * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getUserGifts
+ * @param {Omit<Interfaces.GetUserGiftsParams, 'userId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getUserGifts = function(params: Omit<Interfaces.GetUserGiftsParams, 'userId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  return this.bot.getUserGifts(fullParams as Interfaces.GetUserGiftsParams);
+};
+
+/**
+ * Returns the gifts owned by a chat. Returns OwnedGifts on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getChatGifts
+ * @param {Omit<Interfaces.GetChatGiftsParams, 'chatId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getChatGifts = function(params: Omit<Interfaces.GetChatGiftsParams, 'chatId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+  return this.bot.getChatGifts(fullParams as Interfaces.GetChatGiftsParams);
+};
+
+/**
+ * Use this method to get a sticker set. On success, a StickerSet object is returned.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getStickerSet
+ *  * @param { string } name - Name of the sticker set
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getStickerSet = function(
+  name: string): Promise<any> {
+  const params: any = {};
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.getStickerSet(params);
+};
+
+/**
+ * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getCustomEmojiStickers
+ *  * @param { string[] } customEmojiIds - A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getCustomEmojiStickers = function(
+  customEmojiIds: string[]): Promise<any> {
+  const params: any = {};
+  if (customEmojiIds !== undefined) {
+    params.customEmojiIds = customEmojiIds;
+  }
+
+
+  return this.bot.getCustomEmojiStickers(params);
+};
+
+/**
+ * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getMyStarBalance
+ *  * @param { number } offset? - Number of transactions to skip in the response
+ * @param { number } limit? - The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getMyStarBalance = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getMyStarBalance(params);
+};
+
+/**
+ * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getStarTransactions
+ *  * @param { number } offset? - Number of transactions to skip in the response
+ * @param { number } limit? - The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getStarTransactions = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getStarTransactions(params);
+};
+
+/**
+ * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getGameHighScores
+ *  * @param { number } messageId? - Required if inline\_message\_id is not specified. Identifier of the sent message
+ * @param { string } inlineMessageId? - Required if chat\_id and message\_id are not specified. Identifier of the inline message
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getGameHighScores = function(
+  messageId?: number,   inlineMessageId?: string): Promise<any> {
+  const params: any = {};
+  if (messageId !== undefined) {
+    params.messageId = messageId;
+  }
+  if (inlineMessageId !== undefined) {
+    params.inlineMessageId = inlineMessageId;
+  }
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.getGameHighScores(params);
+};
+
+/**
+ * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
  * @memberof UserChatBoosts.prototype
  * @instance
  * @function getUpdates
@@ -67098,6 +70555,39 @@ import { GameHighScore } from '../types/gameHighScore';
   }
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof UserChatBoosts.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(UserChatBoosts.prototype as any).getUserProfileAudios = function(
+  offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this?.id:', e);
+  }
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**
@@ -71149,6 +74639,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.sendChatAction(params);
+};
+
+/**
+ * Changes the profile photo of the bot. Returns True on success.
+ * @memberof InputProfilePhoto.prototype
+ * @instance
+ * @function setMyProfilePhoto
+ *  * @param { InputProfilePhoto } photo - The new profile photo to set
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this InputProfilePhoto instance
+ * @see {@link https://core.telegram.org/bots/api#setMyProfilePhoto Telegram Bot API}
+ */
+(InputProfilePhoto.prototype as any).setMyProfilePhoto = function(
+  photo: InputProfilePhoto): Promise<any> {
+  const params: any = {};
+  if (photo !== undefined) {
+    params.photo = photo;
+  }
+
+
+  return this.bot.setMyProfilePhoto(params);
 };
 
 /**
@@ -81308,6 +84819,35 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getUserProfilePhotos(params);
+};
+
+/**
+ * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+ * @memberof TransactionPartnerChat.prototype
+ * @instance
+ * @function getUserProfileAudios
+ *  * @param { number } userId - Unique identifier of the target user
+ * @param { number } offset? - Sequential number of the first audio to be returned. By default, all audios are returned.
+ * @param { number } limit? - Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this TransactionPartnerChat instance
+ * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+ */
+(TransactionPartnerChat.prototype as any).getUserProfileAudios = function(
+  userId: number,   offset?: number,   limit?: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (offset !== undefined) {
+    params.offset = offset;
+  }
+  if (limit !== undefined) {
+    params.limit = limit;
+  }
+
+
+  return this.bot.getUserProfileAudios(params);
 };
 
 /**

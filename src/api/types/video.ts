@@ -11,6 +11,7 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { PhotoSize } from './photoSize';
+import { VideoQuality } from './videoQuality';
 
 /**
  * Represents a Video object from the Telegram Bot API
@@ -88,6 +89,15 @@ export class Video {
    * @public
    */
   startTimestamp?: number;
+
+  /**
+   * Optional. List of available qualities of the video
+   * @type { VideoQuality[] }
+   * @memberof Video
+   * @instance
+   * @public
+   */
+  qualities?: VideoQuality[];
 
   /**
    * Optional. Original filename as defined by the sender

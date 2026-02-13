@@ -6,9 +6,9 @@ Verifies a user on behalf of the organization which is represented by the bot. R
 
 This method is available as a fluent method on the following types:
 
-### User (8 methods)
+### User (9 methods)
 
-**Available methods:** `getUserProfilePhotos`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
+**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
 
 **Auto-filled parameters:** userId
 

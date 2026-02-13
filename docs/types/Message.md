@@ -60,6 +60,8 @@ This object represents a message.
 | location | `Location` | No | Optional. Message is a shared location, information about the location |
 | newChatMembers | `User[]` | No | Optional. New members that were added to the group or supergroup and information about them \(the bot itself may be one of these members\) |
 | leftChatMember | `User` | No | Optional. A member was removed from the group, information about them \(this member may be the bot itself\) |
+| chatOwnerLeft | `ChatOwnerLeft` | No | Optional. Service message: chat owner has left |
+| chatOwnerChanged | `ChatOwnerChanged` | No | Optional. Service message: chat owner has changed |
 | newChatTitle | `string` | No | Optional. A chat title was changed to this value |
 | newChatPhoto | `PhotoSize[]` | No | Optional. A chat photo was change to this value |
 | deleteChatPhoto | `boolean` | No | Optional. Service message: the chat photo was deleted |

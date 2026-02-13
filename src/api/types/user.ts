@@ -143,6 +143,15 @@ export class User {
   hasTopicsEnabled?: boolean;
 
   /**
+   * Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe.
+   * @type { boolean }
+   * @memberof User
+   * @instance
+   * @public
+   */
+  allowsUsersToCreateTopics?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof User

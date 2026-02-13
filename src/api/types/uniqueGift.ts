@@ -94,6 +94,15 @@ export class UniqueGift {
   isPremium?: boolean;
 
   /**
+   * Optional. True, if the gift was used to craft another gift and isn't available anymore
+   * @type { boolean }
+   * @memberof UniqueGift
+   * @instance
+   * @public
+   */
+  isBurned?: boolean;
+
+  /**
    * Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
    * @type { boolean }
    * @memberof UniqueGift

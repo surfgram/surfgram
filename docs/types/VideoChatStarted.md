@@ -1120,6 +1120,42 @@ bot.onVideoChatStarted(async (videochatstarted: VideoChatStarted) => {
 
 **See also:** [getUserProfilePhotos API method](../methods/getUserProfilePhotos.md)
 
+### getUserProfileAudios
+
+Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `offset` | `number` | No | Sequential number of the first audio to be returned. By default, all audios are returned. |
+| `limit` | `number` | No | Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const videochatstarted = new VideoChatStarted(rawData, bot);
+await videochatstarted.getUserProfileAudios(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onVideoChatStarted(async (videochatstarted: VideoChatStarted) => {
+  // Auto-fills parameters from the videochatstarted instance
+  await videochatstarted.getUserProfileAudios();
+});
+```
+
+**See also:** [getUserProfileAudios API method](../methods/getUserProfileAudios.md)
+
 ### getFile
 
 Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.

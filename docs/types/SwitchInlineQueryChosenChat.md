@@ -187,6 +187,46 @@ bot.onSwitchInlineQueryChosenChat(async (switchinlinequerychosenchat: SwitchInli
 
 **See also:** [getUserProfilePhotos API method](../methods/getUserProfilePhotos.md)
 
+### getUserProfileAudios
+
+Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.allowUserChats?.id` | Unique identifier of the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Sequential number of the first audio to be returned. By default, all audios are returned. |
+| `limit` | `number` | No | Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const switchinlinequerychosenchat = new SwitchInlineQueryChosenChat(rawData, bot);
+await switchinlinequerychosenchat.getUserProfileAudios(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onSwitchInlineQueryChosenChat(async (switchinlinequerychosenchat: SwitchInlineQueryChosenChat) => {
+  // Auto-fills parameters from the switchinlinequerychosenchat instance
+  await switchinlinequerychosenchat.getUserProfileAudios();
+});
+```
+
+**See also:** [getUserProfileAudios API method](../methods/getUserProfileAudios.md)
+
 ### getFile
 
 Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.

@@ -882,6 +882,39 @@ bot.onInputProfilePhoto(async (inputprofilephoto: InputProfilePhoto) => {
 
 **See also:** [sendChatAction API method](../methods/sendChatAction.md)
 
+### setMyProfilePhoto
+
+Changes the profile photo of the bot. Returns True on success.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `photo` | `InputProfilePhoto` | Yes | The new profile photo to set |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const inputprofilephoto = new InputProfilePhoto(rawData, bot);
+await inputprofilephoto.setMyProfilePhoto(
+  {} as any,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onInputProfilePhoto(async (inputprofilephoto: InputProfilePhoto) => {
+  // Auto-fills parameters from the inputprofilephoto instance
+  await inputprofilephoto.setMyProfilePhoto();
+});
+```
+
+**See also:** [setMyProfilePhoto API method](../methods/setMyProfilePhoto.md)
+
 ### sendGift
 
 Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.

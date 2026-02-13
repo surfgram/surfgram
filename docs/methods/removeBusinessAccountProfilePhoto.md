@@ -6,9 +6,9 @@ Removes the current profile photo of a managed business account. Requires the ca
 
 This method is available as a fluent method on the following types:
 
-### File (5 methods)
+### File (8 methods)
 
-**Available methods:** `getUserProfilePhotos`, `getFile`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
+**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `getFile`, `setMyProfilePhoto`, `removeMyProfilePhoto`, `setBusinessAccountProfilePhoto`, `removeBusinessAccountProfilePhoto`, `uploadStickerFile`
 
 
 [View File documentation with fluent methods](../types/File.md)

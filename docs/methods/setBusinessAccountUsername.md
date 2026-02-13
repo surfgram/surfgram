@@ -6,9 +6,9 @@ Changes the username of a managed business account. Requires the can\_change\_us
 
 This method is available as a fluent method on the following types:
 
-### User (8 methods)
+### User (9 methods)
 
-**Available methods:** `getUserProfilePhotos`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
+**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
 
 
 [View User documentation with fluent methods](../types/User.md)

@@ -20,6 +20,7 @@ This object represents a Telegram user or bot.
 | canConnectToBusiness | `boolean` | No | Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe. |
 | hasMainWebApp | `boolean` | No | Optional. True, if the bot has a main Web App. Returned only in getMe. |
 | hasTopicsEnabled | `boolean` | No | Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe. |
+| allowsUsersToCreateTopics | `boolean` | No | Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe. |
 
 ## Fluent Methods
 
@@ -64,6 +65,46 @@ bot.onUser(async (user: User) => {
 ```
 
 **See also:** [getUserProfilePhotos API method](../methods/getUserProfilePhotos.md)
+
+### getUserProfileAudios
+
+Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.id` | Unique identifier of the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `offset` | `number` | No | Sequential number of the first audio to be returned. By default, all audios are returned. |
+| `limit` | `number` | No | Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const user = new User(rawData, bot);
+await user.getUserProfileAudios(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onUser(async (user: User) => {
+  // Auto-fills parameters from the user instance
+  await user.getUserProfileAudios();
+});
+```
+
+**See also:** [getUserProfileAudios API method](../methods/getUserProfileAudios.md)
 
 ### setUserEmojiStatus
 

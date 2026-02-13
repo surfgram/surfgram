@@ -8,7 +8,8 @@ This object describes the model of a unique gift.
 | :--- | :--- | :---: | :--- |
 | name | `string` | Yes | Name of the model |
 | sticker | `Sticker` | Yes | The sticker that represents the unique gift |
-| rarityPerMille | `number` | Yes | The number of unique gifts that receive this model for every 1000 gifts upgraded |
+| rarityPerMille | `number` | Yes | The number of unique gifts that receive this model for every 1000 gift upgrades. Always 0 for crafted gifts. |
+| rarity | `string` | No | Optional. Rarity of the model if it is a crafted model. Currently, can be “uncommon”, “rare”, “epic”, or “legendary”. |
 
 
 ## Event Handlers

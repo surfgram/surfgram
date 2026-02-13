@@ -12,6 +12,41 @@ This object describes the bot&#39;s menu button in a private chat. It should be 
 
 The `MenuButton` class has the following fluent methods that automatically inject contextual parameters:
 
+### removeMyProfilePhoto
+
+Removes the profile photo of the bot. Requires no parameters. Returns True on success.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const menubutton = new MenuButton(rawData, bot);
+await menubutton.removeMyProfilePhoto(
+  123,
+  {} as any,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMenuButton(async (menubutton: MenuButton) => {
+  // Auto-fills parameters from the menubutton instance
+  await menubutton.removeMyProfilePhoto();
+});
+```
+
+**See also:** [removeMyProfilePhoto API method](../methods/removeMyProfilePhoto.md)
+
 ### setChatMenuButton
 
 Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
@@ -90,7 +125,7 @@ You can listen for MenuButton events using:
 bot.onMenuButton(async (menubutton: MenuButton) => {
   console.log('Received:', menubutton);
   // Use fluent methods
-  await menubutton.setChatMenuButton(...);
+  await menubutton.removeMyProfilePhoto(...);
 });
 
 // Generic handler

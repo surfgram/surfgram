@@ -72,6 +72,42 @@ bot.onAudio(async (audio: Audio) => {
 
 **See also:** [sendAudio API method](../methods/sendAudio.md)
 
+### getUserProfileAudios
+
+Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `offset` | `number` | No | Sequential number of the first audio to be returned. By default, all audios are returned. |
+| `limit` | `number` | No | Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const audio = new Audio(rawData, bot);
+await audio.getUserProfileAudios(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onAudio(async (audio: Audio) => {
+  // Auto-fills parameters from the audio instance
+  await audio.getUserProfileAudios();
+});
+```
+
+**See also:** [getUserProfileAudios API method](../methods/getUserProfileAudios.md)
+
 
 ## Event Handlers
 

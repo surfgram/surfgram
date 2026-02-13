@@ -36,6 +36,8 @@ import { Game } from './game';
 import { Poll } from './poll';
 import { Venue } from './venue';
 import { Location } from './location';
+import { ChatOwnerLeft } from './chatOwnerLeft';
+import { ChatOwnerChanged } from './chatOwnerChanged';
 import { MessageAutoDeleteTimerChanged } from './messageAutoDeleteTimerChanged';
 import { MaybeInaccessibleMessage } from './maybeInaccessibleMessage';
 import { Invoice } from './invoice';
@@ -566,6 +568,24 @@ export class Message {
    * @public
    */
   leftChatMember?: User;
+
+  /**
+   * Optional. Service message: chat owner has left
+   * @type { ChatOwnerLeft }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  chatOwnerLeft?: ChatOwnerLeft;
+
+  /**
+   * Optional. Service message: chat owner has changed
+   * @type { ChatOwnerChanged }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  chatOwnerChanged?: ChatOwnerChanged;
 
   /**
    * Optional. A chat title was changed to this value

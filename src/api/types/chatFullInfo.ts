@@ -22,6 +22,7 @@ import { ChatPermissions } from './chatPermissions';
 import { AcceptedGiftTypes } from './acceptedGiftTypes';
 import { ChatLocation } from './chatLocation';
 import { UserRating } from './userRating';
+import { Audio } from './audio';
 import { UniqueGiftColors } from './uniqueGiftColors';
 
 /**
@@ -460,6 +461,15 @@ export class ChatFullInfo {
    * @public
    */
   rating?: UserRating;
+
+  /**
+   * Optional. For private chats, the first audio added to the profile of the user
+   * @type { Audio }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  firstProfileAudio?: Audio;
 
   /**
    * Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
