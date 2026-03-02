@@ -1,6 +1,6 @@
-# setChatMenuButton
+# setChatMemberTag
 
-Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
+Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
 
 ## Fluent Usage
 
@@ -10,24 +10,26 @@ This method is available as a fluent method on the following types:
 
 **Available methods:** `getUpdates`, `getWebhookInfo`, `getMe`, `sendChatAction`, `getUserProfilePhotos`, `getUserProfileAudios`, `getFile`, `banChatMember`, `unbanChatMember`, `restrictChatMember`, `promoteChatMember`, `setChatAdministratorCustomTitle`, `setChatMemberTag`, `banChatSenderChat`, `unbanChatSenderChat`, `setChatPermissions`, `exportChatInviteLink`, `createChatInviteLink`, `editChatInviteLink`, `createChatSubscriptionInviteLink`, `editChatSubscriptionInviteLink`, `revokeChatInviteLink`, `approveChatJoinRequest`, `declineChatJoinRequest`, `setChatPhoto`, `deleteChatPhoto`, `setChatTitle`, `setChatDescription`, `pinChatMessage`, `unpinChatMessage`, `unpinAllChatMessages`, `leaveChat`, `getChat`, `getChatAdministrators`, `getChatMemberCount`, `getChatMember`, `setChatStickerSet`, `deleteChatStickerSet`, `getForumTopicIconStickers`, `getUserChatBoosts`, `getBusinessConnection`, `getMyCommands`, `getMyName`, `getMyDescription`, `getMyShortDescription`, `setChatMenuButton`, `getChatMenuButton`, `getMyDefaultAdministratorRights`, `getAvailableGifts`, `verifyChat`, `removeChatVerification`, `getBusinessAccountStarBalance`, `getBusinessAccountGifts`, `getUserGifts`, `getChatGifts`, `getStickerSet`, `getCustomEmojiStickers`, `getMyStarBalance`, `getStarTransactions`, `getGameHighScores`
 
-**Auto-filled parameters:** chatId
+**Auto-filled parameters:** chatId, userId
 
 [View Chat documentation with fluent methods](../types/Chat.md)
 
-### MenuButton (3 methods)
+### ChatMember (34 methods)
 
-**Available methods:** `removeMyProfilePhoto`, `setChatMenuButton`, `getChatMenuButton`
+**Available methods:** `getUpdates`, `getWebhookInfo`, `getMe`, `getUserProfilePhotos`, `getUserProfileAudios`, `getFile`, `banChatMember`, `unbanChatMember`, `restrictChatMember`, `promoteChatMember`, `setChatMemberTag`, `getChat`, `getChatAdministrators`, `getChatMemberCount`, `getChatMember`, `getForumTopicIconStickers`, `getUserChatBoosts`, `getBusinessConnection`, `getMyCommands`, `getMyName`, `getMyDescription`, `getMyShortDescription`, `getChatMenuButton`, `getMyDefaultAdministratorRights`, `getAvailableGifts`, `getBusinessAccountStarBalance`, `getBusinessAccountGifts`, `getUserGifts`, `getChatGifts`, `getStickerSet`, `getCustomEmojiStickers`, `getMyStarBalance`, `getStarTransactions`, `getGameHighScores`
 
+**Auto-filled parameters:** userId, chatId
 
-[View MenuButton documentation with fluent methods](../types/MenuButton.md)
+[View ChatMember documentation with fluent methods](../types/ChatMember.md)
 
 
 ## Parameters
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
-| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `userId` | `number` | Yes | Unique identifier of the target user |
+| `tag` | `string` | No | New tag for the member; 0-16 characters, emoji are not allowed |
 
 
 ## Usage Example
@@ -35,7 +37,7 @@ This method is available as a fluent method on the following types:
 ```typescript
 // When you already have a Chat instance
 bot.onChat(async (chat: Chat) => {
-  await chat.setChatMenuButton();
+  await chat.setChatMemberTag();
 });
 
 // With filtering
@@ -46,4 +48,4 @@ bot.onChat((data) => data.someProperty === "value", async (data) => {
 
 ## API Documentation
 
-For more details, see the official [Telegram Bot API documentation](https://core.telegram.org/bots/api#setChatMenuButton).
+For more details, see the official [Telegram Bot API documentation](https://core.telegram.org/bots/api#setChatMemberTag).

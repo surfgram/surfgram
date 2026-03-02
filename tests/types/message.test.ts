@@ -13,6 +13,7 @@ describe('Message', () => {
       sender_chat: {} as any,
       sender_boost_count: 123,
       sender_business_bot: {} as any,
+      sender_tag: "example text",
       date: 123,
       business_connection_id: "example text",
       chat: {} as any,
@@ -125,6 +126,7 @@ describe('Message', () => {
     expect(instance.senderChat ?? instance.raw?.sender_chat).toEqual({} as any);
     expect(instance.senderBoostCount ?? instance.raw?.sender_boost_count).toEqual(123);
     expect(instance.senderBusinessBot ?? instance.raw?.sender_business_bot).toEqual({} as any);
+    expect(instance.senderTag ?? instance.raw?.sender_tag).toEqual("example text");
     expect(instance.date ?? instance.raw?.date).toEqual(123);
     expect(instance.businessConnectionId ?? instance.raw?.business_connection_id).toEqual("example text");
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);

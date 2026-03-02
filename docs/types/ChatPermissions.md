@@ -16,6 +16,7 @@ Describes actions that a non-administrator user is allowed to take in a chat.
 | canSendPolls | `boolean` | No | Optional. True, if the user is allowed to send polls and checklists |
 | canSendOtherMessages | `boolean` | No | Optional. True, if the user is allowed to send animations, games, stickers and use inline bots |
 | canAddWebPagePreviews | `boolean` | No | Optional. True, if the user is allowed to add web page previews to their messages |
+| canEditTag | `boolean` | No | Optional. True, if the user is allowed to edit their own tag |
 | canChangeInfo | `boolean` | No | Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups |
 | canInviteUsers | `boolean` | No | Optional. True, if the user is allowed to invite new users to the chat |
 | canPinMessages | `boolean` | No | Optional. True, if the user is allowed to pin messages. Ignored in public supergroups |

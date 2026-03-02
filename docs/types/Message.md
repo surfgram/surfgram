@@ -13,6 +13,7 @@ This object represents a message.
 | senderChat | `Chat` | No | Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats. |
 | senderBoostCount | `number` | No | Optional. If the sender of the message boosted the chat, the number of boosts added by the user |
 | senderBusinessBot | `User` | No | Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account. |
+| senderTag | `string` | No | Optional. Tag or custom title of the sender of the message; for supergroups only |
 | date | `number` | Yes | Date the message was sent in Unix time. It is always a positive number, representing a valid date. |
 | businessConnectionId | `string` | No | Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier. |
 | chat | `Chat` | Yes | Chat the message belongs to |
@@ -29,7 +30,7 @@ This object represents a message.
 | hasProtectedContent | `boolean` | No | Optional. True, if the message can't be forwarded |
 | isFromOffline | `boolean` | No | Optional. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message |
 | isPaidPost | `boolean` | No | Optional. True, if the message is a paid post. Note that such posts must not be deleted for 24 hours to receive the payment and can't be edited. |
-| mediaGroupId | `string` | No | Optional. The unique identifier of a media message group this message belongs to |
+| mediaGroupId | `string` | No | Optional. The unique identifier inside this chat of a media message group this message belongs to |
 | authorSignature | `string` | No | Optional. Signature of the post author for messages in channels, or the custom title of an anonymous group administrator |
 | paidStarCount | `number` | No | Optional. The number of Telegram Stars that were paid by the sender of the message to send it |
 | text | `string` | No | Optional. For text messages, the actual UTF-8 text of the message |
@@ -1165,7 +1166,7 @@ bot.onMessage(async (message: Message) => {
 
 ### sendMessageDraft
 
-Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
 
 **Auto-filled parameters:**
 

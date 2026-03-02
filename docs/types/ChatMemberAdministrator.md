@@ -25,6 +25,7 @@ Represents a chat member that has some additional privileges.
 | canPinMessages | `boolean` | No | Optional. True, if the user is allowed to pin messages; for groups and supergroups only |
 | canManageTopics | `boolean` | No | Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
 | canManageDirectMessages | `boolean` | No | Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only |
+| canManageTags | `boolean` | No | Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can\_pin\_messages. |
 | customTitle | `string` | No | Optional. Custom title for this user |
 
 ## Fluent Methods

@@ -7,6 +7,7 @@ Represents a chat member that is under certain restrictions in the chat. Supergr
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | status | `string` | Yes | The member's status in the chat, always “restricted” |
+| tag | `string` | No | Optional. Tag of the member |
 | user | `User` | Yes | Information about the user |
 | isMember | `boolean` | Yes | True, if the user is a member of the chat at the moment of the request |
 | canSendMessages | `boolean` | Yes | True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
@@ -19,6 +20,7 @@ Represents a chat member that is under certain restrictions in the chat. Supergr
 | canSendPolls | `boolean` | Yes | True, if the user is allowed to send polls and checklists |
 | canSendOtherMessages | `boolean` | Yes | True, if the user is allowed to send animations, games, stickers and use inline bots |
 | canAddWebPagePreviews | `boolean` | Yes | True, if the user is allowed to add web page previews to their messages |
+| canEditTag | `boolean` | Yes | True, if the user is allowed to edit their own tag |
 | canChangeInfo | `boolean` | Yes | True, if the user is allowed to change the chat title, photo and other settings |
 | canInviteUsers | `boolean` | Yes | True, if the user is allowed to invite new users to the chat |
 | canPinMessages | `boolean` | Yes | True, if the user is allowed to pin messages |

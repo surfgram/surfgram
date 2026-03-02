@@ -742,7 +742,7 @@ declare module '../core/bot' {
      */
     sendDice(chatId: number | string): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -751,7 +751,7 @@ declare module '../core/bot' {
      */
     sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param chatId, draftId, text - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -883,6 +883,16 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#setChatAdministratorCustomTitle Telegram Bot API}
      */
     setChatAdministratorCustomTitle(chatId: number | string, userId: number, customTitle: string): Promise<any>;
+    /**
+     * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param userId - Unique identifier of the target user
+     *      * @param tag - New tag for the member; 0-16 characters, emoji are not allowed
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#setChatMemberTag Telegram Bot API}
+     */
+    setChatMemberTag(chatId: number | string, userId: number, tag?: string): Promise<any>;
     /**
      * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
      *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
@@ -12673,6 +12683,15 @@ declare module './types/chat' {
      */
     setChatAdministratorCustomTitle(customTitle: string): Promise<any>;
     /**
+     * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+     * @param tag?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, userId) are automatically filled from this Chat instance
+     * @see {@link https://core.telegram.org/bots/api#setChatMemberTag Telegram Bot API}
+     */
+    setChatMemberTag(tag?: string): Promise<any>;
+    /**
      * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -13526,7 +13545,7 @@ declare module './types/message' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -13949,7 +13968,7 @@ declare module './types/messageId' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14269,7 +14288,7 @@ declare module './types/inaccessibleMessage' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14582,7 +14601,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14920,7 +14939,7 @@ declare module './types/messageEntity' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15466,7 +15485,7 @@ declare module './types/messageOrigin' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15771,7 +15790,7 @@ declare module './types/messageOriginUser' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16076,7 +16095,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16423,7 +16442,7 @@ declare module './types/messageOriginChat' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16971,7 +16990,7 @@ declare module './types/messageOriginChannel' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17267,7 +17286,7 @@ declare module './types/photoSize' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17491,7 +17510,7 @@ declare module './types/document' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17718,7 +17737,7 @@ declare module './types/videoQuality' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17902,7 +17921,7 @@ declare module './types/video' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18086,7 +18105,7 @@ declare module './types/videoNote' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18318,7 +18337,7 @@ declare module './types/paidMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18502,7 +18521,7 @@ declare module './types/paidMediaVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18872,7 +18891,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20222,7 +20241,7 @@ declare module './types/videoChatScheduled' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20671,7 +20690,7 @@ declare module './types/videoChatStarted' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21120,7 +21139,7 @@ declare module './types/videoChatEnded' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21569,7 +21588,7 @@ declare module './types/videoChatParticipantsInvited' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21997,7 +22016,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22300,7 +22319,7 @@ declare module './types/directMessagePriceChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22834,7 +22853,7 @@ declare module './types/directMessagesTopic' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23124,7 +23143,7 @@ declare module './types/userProfilePhotos' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24702,7 +24721,7 @@ declare module './types/chatPhoto' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -25892,6 +25911,15 @@ declare module './types/chatMember' {
      * @see {@link https://core.telegram.org/bots/api#promoteChatMember Telegram Bot API}
      */
     promoteChatMember(params: Omit<Interfaces.PromoteChatMemberParams, 'userId' | 'chatId'>): Promise<any>;
+    /**
+     * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+     * @param tag?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId, chatId) are automatically filled from this ChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#setChatMemberTag Telegram Bot API}
+     */
+    setChatMemberTag(tag?: string): Promise<any>;
     /**
      * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -28618,7 +28646,7 @@ declare module './types/messageReactionUpdated' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -28949,7 +28977,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -33694,7 +33722,7 @@ declare module './types/businessMessagesDeleted' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34007,7 +34035,7 @@ declare module './types/inputMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34191,7 +34219,7 @@ declare module './types/inputMediaVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34375,7 +34403,7 @@ declare module './types/inputMediaDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34679,7 +34707,7 @@ declare module './types/inputPaidMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34863,7 +34891,7 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35047,7 +35075,7 @@ declare module './types/inputProfilePhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35247,7 +35275,7 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35431,7 +35459,7 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35640,7 +35668,7 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35824,7 +35852,7 @@ declare module './types/inputStoryContentVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36357,7 +36385,7 @@ declare module './types/inlineQueryResultPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36541,7 +36569,7 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36725,7 +36753,7 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36909,7 +36937,7 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37093,7 +37121,7 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37277,7 +37305,7 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37478,7 +37506,7 @@ declare module './types/inputMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37781,7 +37809,7 @@ declare module './types/inputTextMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38084,7 +38112,7 @@ declare module './types/inputLocationMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38388,7 +38416,7 @@ declare module './types/inputVenueMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38691,7 +38719,7 @@ declare module './types/inputContactMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38994,7 +39022,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39297,7 +39325,7 @@ declare module './types/sentWebAppMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39600,7 +39628,7 @@ declare module './types/preparedInlineMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error

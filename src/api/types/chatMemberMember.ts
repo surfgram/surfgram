@@ -27,6 +27,15 @@ export class ChatMemberMember {
   status!: string;
 
   /**
+   * Optional. Tag of the member
+   * @type { string }
+   * @memberof ChatMemberMember
+   * @instance
+   * @public
+   */
+  tag?: string;
+
+  /**
    * Information about the user
    * @type { User }
    * @memberof ChatMemberMember

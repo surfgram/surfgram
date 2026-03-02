@@ -27,6 +27,15 @@ export class ChatMemberRestricted {
   status!: string;
 
   /**
+   * Optional. Tag of the member
+   * @type { string }
+   * @memberof ChatMemberRestricted
+   * @instance
+   * @public
+   */
+  tag?: string;
+
+  /**
    * Information about the user
    * @type { User }
    * @memberof ChatMemberRestricted
@@ -133,6 +142,15 @@ export class ChatMemberRestricted {
    * @public
    */
   canAddWebPagePreviews!: boolean;
+
+  /**
+   * True, if the user is allowed to edit their own tag
+   * @type { boolean }
+   * @memberof ChatMemberRestricted
+   * @instance
+   * @public
+   */
+  canEditTag!: boolean;
 
   /**
    * True, if the user is allowed to change the chat title, photo and other settings

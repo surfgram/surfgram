@@ -147,6 +147,15 @@ export class Message {
   senderBusinessBot?: User;
 
   /**
+   * Optional. Tag or custom title of the sender of the message; for supergroups only
+   * @type { string }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  senderTag?: string;
+
+  /**
    * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
    * @type { number }
    * @memberof Message
@@ -291,7 +300,7 @@ export class Message {
   isPaidPost?: boolean;
 
   /**
-   * Optional. The unique identifier of a media message group this message belongs to
+   * Optional. The unique identifier inside this chat of a media message group this message belongs to
    * @type { string }
    * @memberof Message
    * @instance

@@ -1,7 +1,7 @@
 /**
  * sendMessageDraft method implementation for Surfgram Telegram Bot SDK
  * @module methods/sendMessageDraft
- * @description Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * @description Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram API Documentation}
  */
 
@@ -11,7 +11,7 @@ import { SendMessageDraftParams } from '../interfaces/sendMessageDraftParams';
 import { MessageEntity } from '../types/messageEntity';
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof methods
  * @async
  * @function sendMessageDraft

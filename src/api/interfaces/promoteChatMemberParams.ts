@@ -151,4 +151,12 @@ export interface PromoteChatMemberParams {
    */
   canManageDirectMessages?: boolean;
 
+  /**
+   * Pass True if the administrator can edit the tags of regular members; for groups and supergroups only
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  canManageTags?: boolean;
+
 }

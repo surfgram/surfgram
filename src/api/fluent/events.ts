@@ -16542,6 +16542,43 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+ * @memberof Chat.prototype
+ * @instance
+ * @function setChatMemberTag
+ *  * @param { string } tag? - New tag for the member; 0-16 characters, emoji are not allowed
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (chatId, userId) are automatically filled from this Chat instance
+ * @see {@link https://core.telegram.org/bots/api#setChatMemberTag Telegram Bot API}
+ */
+(Chat.prototype as any).setChatMemberTag = function(
+  tag?: string): Promise<any> {
+  const params: any = {};
+  if (tag !== undefined) {
+    params.tag = tag;
+  }
+
+  try {
+    const value = this.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this.id:', e);
+  }
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.setChatMemberTag(params);
+};
+
+/**
  * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
  * @memberof Chat.prototype
  * @instance
@@ -19520,7 +19557,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof Message.prototype
  * @instance
  * @function sendMessageDraft
@@ -20914,7 +20951,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageId.prototype
  * @instance
  * @function sendMessageDraft
@@ -21784,7 +21821,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InaccessibleMessage.prototype
  * @instance
  * @function sendMessageDraft
@@ -22566,7 +22603,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MaybeInaccessibleMessage.prototype
  * @instance
  * @function sendMessageDraft
@@ -23316,7 +23353,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageEntity.prototype
  * @instance
  * @function sendMessageDraft
@@ -24596,7 +24633,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageOrigin.prototype
  * @instance
  * @function sendMessageDraft
@@ -25278,7 +25315,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageOriginUser.prototype
  * @instance
  * @function sendMessageDraft
@@ -25960,7 +25997,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageOriginHiddenUser.prototype
  * @instance
  * @function sendMessageDraft
@@ -26855,7 +26892,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageOriginChat.prototype
  * @instance
  * @function sendMessageDraft
@@ -28431,7 +28468,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageOriginChannel.prototype
  * @instance
  * @function sendMessageDraft
@@ -29175,7 +29212,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof PhotoSize.prototype
  * @instance
  * @function sendMessageDraft
@@ -29582,7 +29619,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof Document.prototype
  * @instance
  * @function sendMessageDraft
@@ -30028,7 +30065,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoQuality.prototype
  * @instance
  * @function sendMessageDraft
@@ -30376,7 +30413,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof Video.prototype
  * @instance
  * @function sendMessageDraft
@@ -30724,7 +30761,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoNote.prototype
  * @instance
  * @function sendMessageDraft
@@ -31132,7 +31169,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof PaidMediaPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -31480,7 +31517,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof PaidMediaVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -32095,7 +32132,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageAutoDeleteTimerChanged.prototype
  * @instance
  * @function sendMessageDraft
@@ -35691,7 +35728,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoChatScheduled.prototype
  * @instance
  * @function sendMessageDraft
@@ -36894,7 +36931,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoChatStarted.prototype
  * @instance
  * @function sendMessageDraft
@@ -38097,7 +38134,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoChatEnded.prototype
  * @instance
  * @function sendMessageDraft
@@ -39300,7 +39337,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof VideoChatParticipantsInvited.prototype
  * @instance
  * @function sendMessageDraft
@@ -40404,7 +40441,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof PaidMessagePriceChanged.prototype
  * @instance
  * @function sendMessageDraft
@@ -41074,7 +41111,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof DirectMessagePriceChanged.prototype
  * @instance
  * @function sendMessageDraft
@@ -42247,7 +42284,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof DirectMessagesTopic.prototype
  * @instance
  * @function sendMessageDraft
@@ -42907,7 +42944,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof UserProfilePhotos.prototype
  * @instance
  * @function sendMessageDraft
@@ -46506,7 +46543,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof ChatPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -49905,6 +49942,43 @@ import { GameHighScore } from '../types/gameHighScore';
     console.warn('Could not auto-fill chatId from this?.id:', e);
   }
   return this.bot.promoteChatMember(fullParams as Interfaces.PromoteChatMemberParams);
+};
+
+/**
+ * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+ * @memberof ChatMember.prototype
+ * @instance
+ * @function setChatMemberTag
+ *  * @param { string } tag? - New tag for the member; 0-16 characters, emoji are not allowed
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId, chatId) are automatically filled from this ChatMember instance
+ * @see {@link https://core.telegram.org/bots/api#setChatMemberTag Telegram Bot API}
+ */
+(ChatMember.prototype as any).setChatMemberTag = function(
+  tag?: string): Promise<any> {
+  const params: any = {};
+  if (tag !== undefined) {
+    params.tag = tag;
+  }
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.chatId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill chatId from this?.id:', e);
+  }
+
+  return this.bot.setChatMemberTag(params);
 };
 
 /**
@@ -57573,7 +57647,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageReactionUpdated.prototype
  * @instance
  * @function sendMessageDraft
@@ -58527,7 +58601,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof MessageReactionCountUpdated.prototype
  * @instance
  * @function sendMessageDraft
@@ -71782,7 +71856,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof BusinessMessagesDeleted.prototype
  * @instance
  * @function sendMessageDraft
@@ -72617,7 +72691,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputMediaPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -72965,7 +73039,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputMediaVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -73313,7 +73387,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputMediaDocument.prototype
  * @instance
  * @function sendMessageDraft
@@ -73898,7 +73972,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputPaidMediaPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -74246,7 +74320,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputPaidMediaVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -74594,7 +74668,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputProfilePhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -74992,7 +75066,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputProfilePhotoStatic.prototype
  * @instance
  * @function sendMessageDraft
@@ -75340,7 +75414,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputProfilePhotoAnimated.prototype
  * @instance
  * @function sendMessageDraft
@@ -75726,7 +75800,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputStoryContentPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -76074,7 +76148,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputStoryContentVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -77258,7 +77332,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -77606,7 +77680,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -77954,7 +78028,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultDocument.prototype
  * @instance
  * @function sendMessageDraft
@@ -78302,7 +78376,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultCachedPhoto.prototype
  * @instance
  * @function sendMessageDraft
@@ -78650,7 +78724,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultCachedDocument.prototype
  * @instance
  * @function sendMessageDraft
@@ -78998,7 +79072,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InlineQueryResultCachedVideo.prototype
  * @instance
  * @function sendMessageDraft
@@ -79384,7 +79458,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -80054,7 +80128,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputTextMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -80724,7 +80798,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputLocationMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -81410,7 +81484,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputVenueMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -82080,7 +82154,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputContactMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -82750,7 +82824,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof InputInvoiceMessageContent.prototype
  * @instance
  * @function sendMessageDraft
@@ -83420,7 +83494,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof SentWebAppMessage.prototype
  * @instance
  * @function sendMessageDraft
@@ -84130,7 +84204,7 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
  * @memberof PreparedInlineMessage.prototype
  * @instance
  * @function sendMessageDraft

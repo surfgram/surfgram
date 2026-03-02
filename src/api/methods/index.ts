@@ -46,6 +46,7 @@ export { unbanChatMember } from './unbanChatMember';
 export { restrictChatMember } from './restrictChatMember';
 export { promoteChatMember } from './promoteChatMember';
 export { setChatAdministratorCustomTitle } from './setChatAdministratorCustomTitle';
+export { setChatMemberTag } from './setChatMemberTag';
 export { banChatSenderChat } from './banChatSenderChat';
 export { unbanChatSenderChat } from './unbanChatSenderChat';
 export { setChatPermissions } from './setChatPermissions';

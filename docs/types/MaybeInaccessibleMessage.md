@@ -6,13 +6,15 @@ This object describes a message that can be inaccessible to the bot. It can be o
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the entity. Currently, can be “mention” \(@username\), “hashtag” \(#hashtag or #hashtag@chatusername\), “cashtag” \($USD or $USD@chatusername\), “bot\_command” \(/start@jobs\_bot\), “url” \(https://telegram.org\), “email” \(do-not-reply@telegram.org\), “phone\_number” \(+1-212-555-0123\), “bold” \(bold text\), “italic” \(italic text\), “underline” \(underlined text\), “strikethrough” \(strikethrough text\), “spoiler” \(spoiler message\), “blockquote” \(block quotation\), “expandable\_blockquote” \(collapsed-by-default block quotation\), “code” \(monowidth string\), “pre” \(monowidth block\), “text\_link” \(for clickable text URLs\), “text\_mention” \(for users without usernames\), “custom\_emoji” \(for inline custom emoji stickers\) |
+| type | `string` | Yes | Type of the entity. Currently, can be “mention” \(@username\), “hashtag” \(#hashtag or #hashtag@chatusername\), “cashtag” \($USD or $USD@chatusername\), “bot\_command” \(/start@jobs\_bot\), “url” \(https://telegram.org\), “email” \(do-not-reply@telegram.org\), “phone\_number” \(+1-212-555-0123\), “bold” \(bold text\), “italic” \(italic text\), “underline” \(underlined text\), “strikethrough” \(strikethrough text\), “spoiler” \(spoiler message\), “blockquote” \(block quotation\), “expandable\_blockquote” \(collapsed-by-default block quotation\), “code” \(monowidth string\), “pre” \(monowidth block\), “text\_link” \(for clickable text URLs\), “text\_mention” \(for users without usernames\), “custom\_emoji” \(for inline custom emoji stickers\), or “date\_time” \(for formatted date and time\) |
 | offset | `number` | Yes | Offset in UTF-16 code units to the start of the entity |
 | length | `number` | Yes | Length of the entity in UTF-16 code units |
 | url | `string` | No | Optional. For “text\_link” only, URL that will be opened after user taps on the text |
 | user | `User` | No | Optional. For “text\_mention” only, the mentioned user |
 | language | `string` | No | Optional. For “pre” only, the programming language of the entity text |
 | customEmojiId | `string` | No | Optional. For “custom\_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker |
+| unixTime | `number` | No | Optional. For “date\_time” only, the Unix time associated with the entity |
+| dateTimeFormat | `string` | No | Optional. For “date\_time” only, the string that defines the formatting of the date and time. See date-time entity formatting for more details. |
 
 ## Fluent Methods
 
@@ -900,7 +902,7 @@ bot.onMaybeInaccessibleMessage(async (maybeinaccessiblemessage: MaybeInaccessibl
 
 ### sendMessageDraft
 
-Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
 
 
 **Required parameters:**

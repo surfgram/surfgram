@@ -189,6 +189,15 @@ export class ChatMemberAdministrator {
   canManageDirectMessages?: boolean;
 
   /**
+   * Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can\_pin\_messages.
+   * @type { boolean }
+   * @memberof ChatMemberAdministrator
+   * @instance
+   * @public
+   */
+  canManageTags?: boolean;
+
+  /**
    * Optional. Custom title for this user
    * @type { string }
    * @memberof ChatMemberAdministrator

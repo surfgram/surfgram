@@ -1005,7 +1005,7 @@ bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
 
 ### sendMessageDraft
 
-Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.
+Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
 
 **Auto-filled parameters:**
 

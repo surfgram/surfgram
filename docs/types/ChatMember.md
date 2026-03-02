@@ -412,6 +412,7 @@ Use this method to promote or demote a user in a supergroup or a channel. The bo
 | `canPinMessages` | `boolean` | No | Pass True if the administrator can pin messages; for supergroups only |
 | `canManageTopics` | `boolean` | No | Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
 | `canManageDirectMessages` | `boolean` | No | Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only |
+| `canManageTags` | `boolean` | No | Pass True if the administrator can edit the tags of regular members; for groups and supergroups only |
 
 **Usage examples:**
 
@@ -435,6 +436,45 @@ bot.onChatMember(async (chatmember: ChatMember) => {
 ```
 
 **See also:** [promoteChatMember API method](../methods/promoteChatMember.md)
+
+### setChatMemberTag
+
+Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.user?.id` | Unique identifier of the target user |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `tag` | `string` | No | New tag for the member; 0-16 characters, emoji are not allowed |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatmember = new ChatMember(rawData, bot);
+await chatmember.setChatMemberTag(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatMember(async (chatmember: ChatMember) => {
+  // Auto-fills parameters from the chatmember instance
+  await chatmember.setChatMemberTag();
+});
+```
+
+**See also:** [setChatMemberTag API method](../methods/setChatMemberTag.md)
 
 ### getChat
 

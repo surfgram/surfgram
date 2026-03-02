@@ -24,6 +24,7 @@ describe('promoteChatMember', () => {
       canPinMessages: true,
       canManageTopics: true,
       canManageDirectMessages: true,
+      canManageTags: true,
     };
 
     await promoteChatMember.call(mockBot, params);
@@ -47,6 +48,7 @@ describe('promoteChatMember', () => {
       can_pin_messages: true,
       can_manage_topics: true,
       can_manage_direct_messages: true,
+      can_manage_tags: true,
     });
   });
 });

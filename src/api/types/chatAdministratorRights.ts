@@ -161,6 +161,15 @@ export class ChatAdministratorRights {
   canManageDirectMessages?: boolean;
 
   /**
+   * Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can\_pin\_messages.
+   * @type { boolean }
+   * @memberof ChatAdministratorRights
+   * @instance
+   * @public
+   */
+  canManageTags?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof ChatAdministratorRights

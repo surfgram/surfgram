@@ -107,6 +107,15 @@ export class ChatPermissions {
   canAddWebPagePreviews?: boolean;
 
   /**
+   * Optional. True, if the user is allowed to edit their own tag
+   * @type { boolean }
+   * @memberof ChatPermissions
+   * @instance
+   * @public
+   */
+  canEditTag?: boolean;
+
+  /**
    * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
    * @type { boolean }
    * @memberof ChatPermissions

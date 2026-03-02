@@ -13,6 +13,8 @@ describe('MaybeInaccessibleMessage', () => {
       user: {} as any,
       language: "example text",
       custom_emoji_id: "example text",
+      unix_time: 123,
+      date_time_format: "example text",
     };
 
     const instance = new MaybeInaccessibleMessage(raw, mockBot);
@@ -27,5 +29,7 @@ describe('MaybeInaccessibleMessage', () => {
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.language ?? instance.raw?.language).toEqual("example text");
     expect(instance.customEmojiId ?? instance.raw?.custom_emoji_id).toEqual("example text");
+    expect(instance.unixTime ?? instance.raw?.unix_time).toEqual(123);
+    expect(instance.dateTimeFormat ?? instance.raw?.date_time_format).toEqual("example text");
   });
 });

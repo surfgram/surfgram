@@ -7,6 +7,7 @@ Represents a chat member that has no additional privileges or restrictions.
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | status | `string` | Yes | The member's status in the chat, always “member” |
+| tag | `string` | No | Optional. Tag of the member |
 | user | `User` | Yes | Information about the user |
 | untilDate | `number` | No | Optional. Date when the user's subscription will expire; Unix time |
 
