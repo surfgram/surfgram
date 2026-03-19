@@ -5,7 +5,7 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"generate": "cd codegen && pnpm run start",
+		"generate": "cd codegen && pnpm i && pnpm run start",
 		"build": "tsc",
 		"build:watch": "tsc --watch",
 		"dev": "npm run generate && npm run build",
