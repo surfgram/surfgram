@@ -35,6 +35,9 @@ importers:
 
   codegen:
     dependencies:
+      '@types/nunjucks':
+        specifier: ^3.2.0
+        version: 3.2.6
       nunjucks:
         specifier: ^3.2.0
         version: 3.2.4(chokidar@3.6.0)
@@ -45,9 +48,6 @@ importers:
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.33
-      '@types/nunjucks':
-        specifier: ^3.2.0
-        version: 3.2.6
       nodemon:
         specifier: ^3.0.0
         version: 3.1.14

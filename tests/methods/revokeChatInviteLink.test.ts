@@ -1,17 +1,15 @@
-import { revokeChatInviteLink } from "../../src/api";
-import { Bot } from "../../src/core/bot";
+import { revokeChatInviteLink } from '../../src/api';
+import { Bot } from '../../src/core/bot';
 
-describe("revokeChatInviteLink", () => {
-	it("should call callApi with correct parameters", async () => {
-		const mockBot = {
-			callApi: jest.fn().mockResolvedValue({} as any),
-		} as unknown as Bot;
+describe('revokeChatInviteLink', () => {
+  it('should call callApi with correct parameters', async () => {
+    const mockBot = { callApi: jest.fn().mockResolvedValue({} as any) } as unknown as Bot;
 
-		await revokeChatInviteLink.call(mockBot, 123, "example text");
+    await revokeChatInviteLink.call(mockBot, 123, "example text");
 
-		expect(mockBot.callApi).toHaveBeenCalledWith("revokeChatInviteLink", {
-			chat_id: 123,
-			invite_link: "example text",
-		});
-	});
+    expect(mockBot.callApi).toHaveBeenCalledWith('revokeChatInviteLink', {
+      chat_id: 123,
+      invite_link: "example text",
+    });
+  });
 });
