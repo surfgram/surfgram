@@ -1,2 +1,6 @@
 ignoredBuiltDependencies:
   - '@biomejs/biome'
+
+packages:
+  - "."
+  - "codegen"
