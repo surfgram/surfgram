@@ -58,6 +58,10 @@ import { Venue } from '../types/venue';
 import { WebAppData } from '../types/webAppData';
 import { ProximityAlertTriggered } from '../types/proximityAlertTriggered';
 import { MessageAutoDeleteTimerChanged } from '../types/messageAutoDeleteTimerChanged';
+import { ManagedBotCreated } from '../types/managedBotCreated';
+import { ManagedBotUpdated } from '../types/managedBotUpdated';
+import { PollOptionAdded } from '../types/pollOptionAdded';
+import { PollOptionDeleted } from '../types/pollOptionDeleted';
 import { ChatBoostAdded } from '../types/chatBoostAdded';
 import { BackgroundFill } from '../types/backgroundFill';
 import { BackgroundFillSolid } from '../types/backgroundFillSolid';
@@ -107,6 +111,7 @@ import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
 import { KeyboardButton } from '../types/keyboardButton';
 import { KeyboardButtonRequestUsers } from '../types/keyboardButtonRequestUsers';
 import { KeyboardButtonRequestChat } from '../types/keyboardButtonRequestChat';
+import { KeyboardButtonRequestManagedBot } from '../types/keyboardButtonRequestManagedBot';
 import { KeyboardButtonPollType } from '../types/keyboardButtonPollType';
 import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -199,6 +204,9 @@ import { UserChatBoosts } from '../types/userChatBoosts';
 import { BusinessBotRights } from '../types/businessBotRights';
 import { BusinessConnection } from '../types/businessConnection';
 import { BusinessMessagesDeleted } from '../types/businessMessagesDeleted';
+import { SentWebAppMessage } from '../types/sentWebAppMessage';
+import { PreparedInlineMessage } from '../types/preparedInlineMessage';
+import { PreparedKeyboardButton } from '../types/preparedKeyboardButton';
 import { ResponseParameters } from '../types/responseParameters';
 import { InputMedia } from '../types/inputMedia';
 import { InputMediaPhoto } from '../types/inputMediaPhoto';
@@ -248,8 +256,6 @@ import { InputVenueMessageContent } from '../types/inputVenueMessageContent';
 import { InputContactMessageContent } from '../types/inputContactMessageContent';
 import { InputInvoiceMessageContent } from '../types/inputInvoiceMessageContent';
 import { ChosenInlineResult } from '../types/chosenInlineResult';
-import { SentWebAppMessage } from '../types/sentWebAppMessage';
-import { PreparedInlineMessage } from '../types/preparedInlineMessage';
 import { LabeledPrice } from '../types/labeledPrice';
 import { Invoice } from '../types/invoice';
 import { ShippingAddress } from '../types/shippingAddress';
@@ -3024,6 +3030,226 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Registers a handler for ManagedBotCreated updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onManagedBotCreated
+ * @param {string | ((data: ManagedBotCreated) => boolean) | ((data: ManagedBotCreated) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: ManagedBotCreated) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#managedbotcreated Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onManagedBotCreated(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onManagedBotCreated("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onManagedBotCreated((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onManagedBotCreated = function(
+  filterOrHandler: string | ((data: ManagedBotCreated) => boolean) | ((data: ManagedBotCreated) => void | Promise<void>),
+  handler?: (data: ManagedBotCreated) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: ManagedBotCreated) => void | Promise<void>;
+    this.register('managedbotcreated', async (raw: any) => {
+      const data = new ManagedBotCreated(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: ManagedBotCreated) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('managedbotcreated', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new ManagedBotCreated(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('managedbotcreated', async (raw: any) => {
+      const data = new ManagedBotCreated(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for ManagedBotUpdated updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onManagedBotUpdated
+ * @param {string | ((data: ManagedBotUpdated) => boolean) | ((data: ManagedBotUpdated) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: ManagedBotUpdated) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onManagedBotUpdated(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onManagedBotUpdated("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onManagedBotUpdated((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onManagedBotUpdated = function(
+  filterOrHandler: string | ((data: ManagedBotUpdated) => boolean) | ((data: ManagedBotUpdated) => void | Promise<void>),
+  handler?: (data: ManagedBotUpdated) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: ManagedBotUpdated) => void | Promise<void>;
+    this.register('managedbotupdated', async (raw: any) => {
+      const data = new ManagedBotUpdated(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: ManagedBotUpdated) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('managedbotupdated', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new ManagedBotUpdated(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('managedbotupdated', async (raw: any) => {
+      const data = new ManagedBotUpdated(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for PollOptionAdded updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onPollOptionAdded
+ * @param {string | ((data: PollOptionAdded) => boolean) | ((data: PollOptionAdded) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: PollOptionAdded) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#polloptionadded Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onPollOptionAdded(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onPollOptionAdded("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onPollOptionAdded((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onPollOptionAdded = function(
+  filterOrHandler: string | ((data: PollOptionAdded) => boolean) | ((data: PollOptionAdded) => void | Promise<void>),
+  handler?: (data: PollOptionAdded) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: PollOptionAdded) => void | Promise<void>;
+    this.register('polloptionadded', async (raw: any) => {
+      const data = new PollOptionAdded(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: PollOptionAdded) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('polloptionadded', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new PollOptionAdded(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('polloptionadded', async (raw: any) => {
+      const data = new PollOptionAdded(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for PollOptionDeleted updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onPollOptionDeleted
+ * @param {string | ((data: PollOptionDeleted) => boolean) | ((data: PollOptionDeleted) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: PollOptionDeleted) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#polloptiondeleted Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onPollOptionDeleted(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onPollOptionDeleted("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onPollOptionDeleted((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onPollOptionDeleted = function(
+  filterOrHandler: string | ((data: PollOptionDeleted) => boolean) | ((data: PollOptionDeleted) => void | Promise<void>),
+  handler?: (data: PollOptionDeleted) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: PollOptionDeleted) => void | Promise<void>;
+    this.register('polloptiondeleted', async (raw: any) => {
+      const data = new PollOptionDeleted(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: PollOptionDeleted) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('polloptiondeleted', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new PollOptionDeleted(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('polloptiondeleted', async (raw: any) => {
+      const data = new PollOptionDeleted(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
  * Registers a handler for ChatBoostAdded updates with optional filtering
  * @memberof Bot.prototype
  * @instance
@@ -5709,6 +5935,61 @@ import { GameHighScore } from '../types/gameHighScore';
   } else {
     this.register('keyboardbuttonrequestchat', async (raw: any) => {
       const data = new KeyboardButtonRequestChat(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for KeyboardButtonRequestManagedBot updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onKeyboardButtonRequestManagedBot
+ * @param {string | ((data: KeyboardButtonRequestManagedBot) => boolean) | ((data: KeyboardButtonRequestManagedBot) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: KeyboardButtonRequestManagedBot) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestmanagedbot Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onKeyboardButtonRequestManagedBot(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onKeyboardButtonRequestManagedBot("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onKeyboardButtonRequestManagedBot((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onKeyboardButtonRequestManagedBot = function(
+  filterOrHandler: string | ((data: KeyboardButtonRequestManagedBot) => boolean) | ((data: KeyboardButtonRequestManagedBot) => void | Promise<void>),
+  handler?: (data: KeyboardButtonRequestManagedBot) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: KeyboardButtonRequestManagedBot) => void | Promise<void>;
+    this.register('keyboardbuttonrequestmanagedbot', async (raw: any) => {
+      const data = new KeyboardButtonRequestManagedBot(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: KeyboardButtonRequestManagedBot) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('keyboardbuttonrequestmanagedbot', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new KeyboardButtonRequestManagedBot(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('keyboardbuttonrequestmanagedbot', async (raw: any) => {
+      const data = new KeyboardButtonRequestManagedBot(raw, this);
       if (filterParam(data)) {
         await handlerFunc(data);
       }
@@ -10779,6 +11060,171 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Registers a handler for SentWebAppMessage updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onSentWebAppMessage
+ * @param {string | ((data: SentWebAppMessage) => boolean) | ((data: SentWebAppMessage) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: SentWebAppMessage) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onSentWebAppMessage(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onSentWebAppMessage("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onSentWebAppMessage((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onSentWebAppMessage = function(
+  filterOrHandler: string | ((data: SentWebAppMessage) => boolean) | ((data: SentWebAppMessage) => void | Promise<void>),
+  handler?: (data: SentWebAppMessage) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: SentWebAppMessage) => void | Promise<void>;
+    this.register('sentwebappmessage', async (raw: any) => {
+      const data = new SentWebAppMessage(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: SentWebAppMessage) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('sentwebappmessage', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new SentWebAppMessage(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('sentwebappmessage', async (raw: any) => {
+      const data = new SentWebAppMessage(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for PreparedInlineMessage updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onPreparedInlineMessage
+ * @param {string | ((data: PreparedInlineMessage) => boolean) | ((data: PreparedInlineMessage) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: PreparedInlineMessage) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onPreparedInlineMessage(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onPreparedInlineMessage("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onPreparedInlineMessage((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onPreparedInlineMessage = function(
+  filterOrHandler: string | ((data: PreparedInlineMessage) => boolean) | ((data: PreparedInlineMessage) => void | Promise<void>),
+  handler?: (data: PreparedInlineMessage) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: PreparedInlineMessage) => void | Promise<void>;
+    this.register('preparedinlinemessage', async (raw: any) => {
+      const data = new PreparedInlineMessage(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: PreparedInlineMessage) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('preparedinlinemessage', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new PreparedInlineMessage(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('preparedinlinemessage', async (raw: any) => {
+      const data = new PreparedInlineMessage(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
+ * Registers a handler for PreparedKeyboardButton updates with optional filtering
+ * @memberof Bot.prototype
+ * @instance
+ * @function onPreparedKeyboardButton
+ * @param {string | ((data: PreparedKeyboardButton) => boolean) | ((data: PreparedKeyboardButton) => void | Promise<void>)} filterOrHandler - Filter or handler function
+ * @param {(data: PreparedKeyboardButton) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
+ * @returns {Bot} Bot instance for chaining
+ * @see {@link https://core.telegram.org/bots/api#preparedkeyboardbutton Telegram Bot API}
+ * @example
+ * // Without filter
+ * bot.onPreparedKeyboardButton(async (data) => { ... });
+ * 
+ * // With string filter (value exists in raw data)
+ * bot.onPreparedKeyboardButton("start", async (data) => { ... });
+ * 
+ * // With function filter (works with typed object)
+ * bot.onPreparedKeyboardButton((obj) => obj.someProperty === "value", async (obj) => { ... });
+ */
+(Bot.prototype as any).onPreparedKeyboardButton = function(
+  filterOrHandler: string | ((data: PreparedKeyboardButton) => boolean) | ((data: PreparedKeyboardButton) => void | Promise<void>),
+  handler?: (data: PreparedKeyboardButton) => void | Promise<void>
+) {
+  if (typeof filterOrHandler === 'function' && handler === undefined) {
+    const handlerFunc = filterOrHandler as (data: PreparedKeyboardButton) => void | Promise<void>;
+    this.register('preparedkeyboardbutton', async (raw: any) => {
+      const data = new PreparedKeyboardButton(raw, this);
+      await handlerFunc(data);
+    });
+    return this;
+  }
+  
+  const filterParam = filterOrHandler as string | ((data: PreparedKeyboardButton) => boolean);
+  const handlerFunc = handler!;
+  
+  if (typeof filterParam === 'string') {
+    this.register('preparedkeyboardbutton', {
+      filter: (raw: any) => valueExists(raw, filterParam),
+      handler: async (raw: any) => {
+        const data = new PreparedKeyboardButton(raw, this);
+        await handlerFunc(data);
+      }
+    });
+  } else {
+    this.register('preparedkeyboardbutton', async (raw: any) => {
+      const data = new PreparedKeyboardButton(raw, this);
+      if (filterParam(data)) {
+        await handlerFunc(data);
+      }
+    });
+  }
+  
+  return this;
+};
+
+/**
  * Registers a handler for ResponseParameters updates with optional filtering
  * @memberof Bot.prototype
  * @instance
@@ -13464,116 +13910,6 @@ import { GameHighScore } from '../types/gameHighScore';
   } else {
     this.register('choseninlineresult', async (raw: any) => {
       const data = new ChosenInlineResult(raw, this);
-      if (filterParam(data)) {
-        await handlerFunc(data);
-      }
-    });
-  }
-  
-  return this;
-};
-
-/**
- * Registers a handler for SentWebAppMessage updates with optional filtering
- * @memberof Bot.prototype
- * @instance
- * @function onSentWebAppMessage
- * @param {string | ((data: SentWebAppMessage) => boolean) | ((data: SentWebAppMessage) => void | Promise<void>)} filterOrHandler - Filter or handler function
- * @param {(data: SentWebAppMessage) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
- * @returns {Bot} Bot instance for chaining
- * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
- * @example
- * // Without filter
- * bot.onSentWebAppMessage(async (data) => { ... });
- * 
- * // With string filter (value exists in raw data)
- * bot.onSentWebAppMessage("start", async (data) => { ... });
- * 
- * // With function filter (works with typed object)
- * bot.onSentWebAppMessage((obj) => obj.someProperty === "value", async (obj) => { ... });
- */
-(Bot.prototype as any).onSentWebAppMessage = function(
-  filterOrHandler: string | ((data: SentWebAppMessage) => boolean) | ((data: SentWebAppMessage) => void | Promise<void>),
-  handler?: (data: SentWebAppMessage) => void | Promise<void>
-) {
-  if (typeof filterOrHandler === 'function' && handler === undefined) {
-    const handlerFunc = filterOrHandler as (data: SentWebAppMessage) => void | Promise<void>;
-    this.register('sentwebappmessage', async (raw: any) => {
-      const data = new SentWebAppMessage(raw, this);
-      await handlerFunc(data);
-    });
-    return this;
-  }
-  
-  const filterParam = filterOrHandler as string | ((data: SentWebAppMessage) => boolean);
-  const handlerFunc = handler!;
-  
-  if (typeof filterParam === 'string') {
-    this.register('sentwebappmessage', {
-      filter: (raw: any) => valueExists(raw, filterParam),
-      handler: async (raw: any) => {
-        const data = new SentWebAppMessage(raw, this);
-        await handlerFunc(data);
-      }
-    });
-  } else {
-    this.register('sentwebappmessage', async (raw: any) => {
-      const data = new SentWebAppMessage(raw, this);
-      if (filterParam(data)) {
-        await handlerFunc(data);
-      }
-    });
-  }
-  
-  return this;
-};
-
-/**
- * Registers a handler for PreparedInlineMessage updates with optional filtering
- * @memberof Bot.prototype
- * @instance
- * @function onPreparedInlineMessage
- * @param {string | ((data: PreparedInlineMessage) => boolean) | ((data: PreparedInlineMessage) => void | Promise<void>)} filterOrHandler - Filter or handler function
- * @param {(data: PreparedInlineMessage) => void | Promise<void>} [handler] - Async handler function (if first param is filter)
- * @returns {Bot} Bot instance for chaining
- * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
- * @example
- * // Without filter
- * bot.onPreparedInlineMessage(async (data) => { ... });
- * 
- * // With string filter (value exists in raw data)
- * bot.onPreparedInlineMessage("start", async (data) => { ... });
- * 
- * // With function filter (works with typed object)
- * bot.onPreparedInlineMessage((obj) => obj.someProperty === "value", async (obj) => { ... });
- */
-(Bot.prototype as any).onPreparedInlineMessage = function(
-  filterOrHandler: string | ((data: PreparedInlineMessage) => boolean) | ((data: PreparedInlineMessage) => void | Promise<void>),
-  handler?: (data: PreparedInlineMessage) => void | Promise<void>
-) {
-  if (typeof filterOrHandler === 'function' && handler === undefined) {
-    const handlerFunc = filterOrHandler as (data: PreparedInlineMessage) => void | Promise<void>;
-    this.register('preparedinlinemessage', async (raw: any) => {
-      const data = new PreparedInlineMessage(raw, this);
-      await handlerFunc(data);
-    });
-    return this;
-  }
-  
-  const filterParam = filterOrHandler as string | ((data: PreparedInlineMessage) => boolean);
-  const handlerFunc = handler!;
-  
-  if (typeof filterParam === 'string') {
-    this.register('preparedinlinemessage', {
-      filter: (raw: any) => valueExists(raw, filterParam),
-      handler: async (raw: any) => {
-        const data = new PreparedInlineMessage(raw, this);
-        await handlerFunc(data);
-      }
-    });
-  } else {
-    this.register('preparedinlinemessage', async (raw: any) => {
-      const data = new PreparedInlineMessage(raw, this);
       if (filterParam(data)) {
         await handlerFunc(data);
       }
@@ -17407,6 +17743,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof Chat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this Chat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(Chat.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof Chat.prototype
  * @instance
@@ -18226,6 +18587,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatFullInfo.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatFullInfo.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -20109,6 +20495,29 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+ * @memberof Message.prototype
+ * @instance
+ * @function savePreparedInlineMessage
+ * @param {Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this Message instance
+ * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+ */
+(Message.prototype as any).savePreparedInlineMessage = function(params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.usersShared?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.usersShared?.id:', e);
+  }
+  return this.bot.savePreparedInlineMessage(fullParams as Interfaces.SavePreparedInlineMessageParams);
+};
+
+/**
  * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @memberof Message.prototype
  * @instance
@@ -20536,29 +20945,6 @@ import { GameHighScore } from '../types/gameHighScore';
     console.warn('Could not auto-fill directMessagesTopicId from this.directMessagesTopic?.id:', e);
   }
   return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
-};
-
-/**
- * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
- * @memberof Message.prototype
- * @instance
- * @function savePreparedInlineMessage
- * @param {Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (userId) are automatically filled from this Message instance
- * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
- */
-(Message.prototype as any).savePreparedInlineMessage = function(params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.usersShared?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.userId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill userId from this.usersShared?.id:', e);
-  }
-  return this.bot.savePreparedInlineMessage(fullParams as Interfaces.SavePreparedInlineMessageParams);
 };
 
 /**
@@ -27344,6 +27730,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof MessageOriginChat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this MessageOriginChat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(MessageOriginChat.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof MessageOriginChat.prototype
  * @instance
@@ -32847,6 +33254,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostAdded.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostAdded instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostAdded.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoostAdded.prototype
  * @instance
@@ -33530,6 +33958,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BackgroundTypeChatTheme.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BackgroundTypeChatTheme instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BackgroundTypeChatTheme.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof BackgroundTypeChatTheme.prototype
  * @instance
@@ -34210,6 +34659,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBackground.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBackground instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBackground.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -34924,6 +35394,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatShared.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatShared instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatShared.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.username?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.username?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -36055,6 +36550,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof VideoChatScheduled.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatScheduled instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(VideoChatScheduled.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -37261,6 +37777,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof VideoChatStarted.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatStarted instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(VideoChatStarted.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof VideoChatStarted.prototype
  * @instance
@@ -38461,6 +38998,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof VideoChatEnded.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this VideoChatEnded instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(VideoChatEnded.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -39680,6 +40238,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof VideoChatParticipantsInvited.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(VideoChatParticipantsInvited.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.users?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.users?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -43623,6 +44206,35 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+ * @memberof KeyboardButton.prototype
+ * @instance
+ * @function savePreparedKeyboardButton
+ *  * @param { KeyboardButton } button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this KeyboardButton instance
+ * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
+ */
+(KeyboardButton.prototype as any).savePreparedKeyboardButton = function(
+  button: KeyboardButton): Promise<any> {
+  const params: any = {};
+  if (button !== undefined) {
+    params.button = button;
+  }
+
+  try {
+    const value = this.requestUsers?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.requestUsers?.id:', e);
+  }
+
+  return this.bot.savePreparedKeyboardButton(params);
+};
+
+/**
  * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
  * @memberof KeyboardButtonRequestChat.prototype
  * @instance
@@ -43959,6 +44571,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof KeyboardButtonRequestChat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(KeyboardButtonRequestChat.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.chatHasUsername?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.chatHasUsername?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -45431,6 +46068,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof SwitchInlineQueryChosenChat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(SwitchInlineQueryChosenChat.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.allowUserChats?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.allowUserChats?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -46927,6 +47589,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatPhoto.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatPhoto instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatPhoto.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatPhoto.prototype
  * @instance
@@ -47818,6 +48501,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatInviteLink.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatInviteLink.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.creator?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.creator?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatInviteLink.prototype
  * @instance
@@ -48534,6 +49242,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatAdministratorRights.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatAdministratorRights.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.canInviteUsers?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.canInviteUsers?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -49282,6 +50015,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberUpdated.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberUpdated.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.from?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.from?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -50181,6 +50939,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMember.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMember instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMember.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatMember.prototype
  * @instance
@@ -50900,6 +51683,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberOwner.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberOwner.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatMemberOwner.prototype
  * @instance
@@ -51616,6 +52424,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberAdministrator.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberAdministrator.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -52342,6 +53175,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberMember.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberMember.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatMemberMember.prototype
  * @instance
@@ -53058,6 +53916,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberRestricted.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberRestricted.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -53784,6 +54667,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberLeft.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberLeft.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatMemberLeft.prototype
  * @instance
@@ -54500,6 +55408,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatMemberBanned.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatMemberBanned.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -55288,6 +56221,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatJoinRequest.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatJoinRequest.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.userChatId?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.userChatId?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatJoinRequest.prototype
  * @instance
@@ -56071,6 +57029,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatPermissions.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatPermissions.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.canInviteUsers?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.canInviteUsers?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatPermissions.prototype
  * @instance
@@ -56813,6 +57796,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatLocation.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatLocation instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatLocation.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -60289,6 +61293,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeAllPrivateChats.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllPrivateChats instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeAllPrivateChats.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof BotCommandScopeAllPrivateChats.prototype
  * @instance
@@ -60969,6 +61994,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeAllGroupChats.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllGroupChats instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeAllGroupChats.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -61655,6 +62701,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeAllChatAdministrators.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeAllChatAdministrators instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeAllChatAdministrators.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof BotCommandScopeAllChatAdministrators.prototype
  * @instance
@@ -62338,6 +63405,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeChat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeChat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeChat.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof BotCommandScopeChat.prototype
  * @instance
@@ -63018,6 +64106,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeChatAdministrators.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this BotCommandScopeChatAdministrators instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeChatAdministrators.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -63717,6 +64826,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof BotCommandScopeChatMember.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(BotCommandScopeChatMember.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.userId;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.userId:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -64510,6 +65644,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostSource.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostSource.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoostSource.prototype
  * @instance
@@ -65229,6 +66388,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostSourcePremium.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostSourcePremium.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoostSourcePremium.prototype
  * @instance
@@ -65945,6 +67129,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostSourceGiftCode.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostSourceGiftCode.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -66675,6 +67884,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostSourceGiveaway.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostSourceGiveaway.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.user?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.user?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoostSourceGiveaway.prototype
  * @instance
@@ -67382,6 +68616,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoost.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoost instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoost.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoost.prototype
  * @instance
@@ -68065,6 +69320,27 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostUpdated.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostUpdated instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostUpdated.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatBoostUpdated.prototype
  * @instance
@@ -68745,6 +70021,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatBoostRemoved.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this ChatBoostRemoved instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatBoostRemoved.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -69444,6 +70741,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatOwnerLeft.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatOwnerLeft.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -70166,6 +71488,31 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof ChatOwnerChanged.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(ChatOwnerChanged.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this.newOwner?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this.newOwner?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
+};
+
+/**
  * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
  * @memberof ChatOwnerChanged.prototype
  * @instance
@@ -70882,6 +72229,31 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof UserChatBoosts.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(UserChatBoosts.prototype as any).getManagedBotToken = function(
+): Promise<any> {
+  const params: any = {};
+
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      params.userId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill userId from this?.id:', e);
+  }
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**
@@ -72433,6 +73805,1466 @@ import { GameHighScore } from '../types/gameHighScore';
     console.warn('Could not auto-fill businessConnectionId from this.businessConnectionId:', e);
   }
   return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
+};
+
+/**
+ * Use this method to send text messages. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendMessage
+ * @param {Omit<Interfaces.SendMessageParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendMessage = function(params: Omit<Interfaces.SendMessageParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessage(fullParams as Interfaces.SendMessageParams);
+};
+
+/**
+ * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function forwardMessage
+ * @param {Omit<Interfaces.ForwardMessageParams, 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.forwardMessage(fullParams as Interfaces.ForwardMessageParams);
+};
+
+/**
+ * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function forwardMessages
+ * @param {Omit<Interfaces.ForwardMessagesParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).forwardMessages = function(params: Omit<Interfaces.ForwardMessagesParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.forwardMessages(fullParams as Interfaces.ForwardMessagesParams);
+};
+
+/**
+ * Use this method to send photos. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendPhoto
+ * @param {Omit<Interfaces.SendPhotoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendPhoto = function(params: Omit<Interfaces.SendPhotoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPhoto(fullParams as Interfaces.SendPhotoParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendAudio
+ * @param {Omit<Interfaces.SendAudioParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendAudio = function(params: Omit<Interfaces.SendAudioParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAudio(fullParams as Interfaces.SendAudioParams);
+};
+
+/**
+ * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendDocument
+ * @param {Omit<Interfaces.SendDocumentParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendDocument = function(params: Omit<Interfaces.SendDocumentParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDocument(fullParams as Interfaces.SendDocumentParams);
+};
+
+/**
+ * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendVideo
+ * @param {Omit<Interfaces.SendVideoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendVideo = function(params: Omit<Interfaces.SendVideoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideo(fullParams as Interfaces.SendVideoParams);
+};
+
+/**
+ * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendAnimation
+ * @param {Omit<Interfaces.SendAnimationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendAnimation = function(params: Omit<Interfaces.SendAnimationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAnimation(fullParams as Interfaces.SendAnimationParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendVoice
+ * @param {Omit<Interfaces.SendVoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendVoice = function(params: Omit<Interfaces.SendVoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVoice(fullParams as Interfaces.SendVoiceParams);
+};
+
+/**
+ * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendVideoNote
+ * @param {Omit<Interfaces.SendVideoNoteParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendVideoNote = function(params: Omit<Interfaces.SendVideoNoteParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideoNote(fullParams as Interfaces.SendVideoNoteParams);
+};
+
+/**
+ * Use this method to send paid media. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendPaidMedia
+ * @param {Omit<Interfaces.SendPaidMediaParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendPaidMedia = function(params: Omit<Interfaces.SendPaidMediaParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPaidMedia(fullParams as Interfaces.SendPaidMediaParams);
+};
+
+/**
+ * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendMediaGroup
+ * @param {Omit<Interfaces.SendMediaGroupParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendMediaGroup = function(params: Omit<Interfaces.SendMediaGroupParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMediaGroup(fullParams as Interfaces.SendMediaGroupParams);
+};
+
+/**
+ * Use this method to send point on the map. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendLocation
+ * @param {Omit<Interfaces.SendLocationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendLocation = function(params: Omit<Interfaces.SendLocationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendLocation(fullParams as Interfaces.SendLocationParams);
+};
+
+/**
+ * Use this method to send information about a venue. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendVenue
+ * @param {Omit<Interfaces.SendVenueParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendVenue = function(params: Omit<Interfaces.SendVenueParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVenue(fullParams as Interfaces.SendVenueParams);
+};
+
+/**
+ * Use this method to send phone contacts. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendContact
+ * @param {Omit<Interfaces.SendContactParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendContact = function(params: Omit<Interfaces.SendContactParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendContact(fullParams as Interfaces.SendContactParams);
+};
+
+/**
+ * Use this method to send a native poll. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendPoll
+ * @param {Omit<Interfaces.SendPollParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendPoll = function(params: Omit<Interfaces.SendPollParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPoll(fullParams as Interfaces.SendPollParams);
+};
+
+/**
+ * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendChecklist
+ * @param {Omit<Interfaces.SendChecklistParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendChecklist = function(params: Omit<Interfaces.SendChecklistParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendChecklist(fullParams as Interfaces.SendChecklistParams);
+};
+
+/**
+ * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendDice
+ * @param {Omit<Interfaces.SendDiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendDice = function(params: Omit<Interfaces.SendDiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDice(fullParams as Interfaces.SendDiceParams);
+};
+
+/**
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendMessageDraft
+ * @param {Omit<Interfaces.SendMessageDraftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendMessageDraft = function(params: Omit<Interfaces.SendMessageDraftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessageDraft(fullParams as Interfaces.SendMessageDraftParams);
+};
+
+/**
+ * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendChatAction
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
+ * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
+ * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
+ * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendChatAction = function(
+  chatId: number | string,   action: string,   businessConnectionId?: string,   messageThreadId?: number): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (action !== undefined) {
+    params.action = action;
+  }
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+  if (messageThreadId !== undefined) {
+    params.messageThreadId = messageThreadId;
+  }
+
+
+  return this.bot.sendChatAction(params);
+};
+
+/**
+ * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editChatInviteLink
+ * @param {Omit<Interfaces.EditChatInviteLinkParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editChatInviteLink = function(params: Omit<Interfaces.EditChatInviteLinkParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.editChatInviteLink(fullParams as Interfaces.EditChatInviteLinkParams);
+};
+
+/**
+ * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editChatSubscriptionInviteLink
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ * @param { string } inviteLink - The invite link to edit
+ * @param { string } name? - Invite link name; 0-32 characters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editChatSubscriptionInviteLink = function(
+  chatId: number | string,   inviteLink: string,   name?: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (inviteLink !== undefined) {
+    params.inviteLink = inviteLink;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.editChatSubscriptionInviteLink(params);
+};
+
+/**
+ * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editForumTopic
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
+ * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
+ * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editForumTopic = function(
+  chatId: number | string,   messageThreadId: number,   name?: string,   iconCustomEmojiId?: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (messageThreadId !== undefined) {
+    params.messageThreadId = messageThreadId;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+  if (iconCustomEmojiId !== undefined) {
+    params.iconCustomEmojiId = iconCustomEmojiId;
+  }
+
+
+  return this.bot.editForumTopic(params);
+};
+
+/**
+ * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editGeneralForumTopic
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ * @param { string } name - New topic name, 1-128 characters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editGeneralForumTopic = function(
+  chatId: number | string,   name: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.editGeneralForumTopic(params);
+};
+
+/**
+ * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendGift
+ * @param {Omit<Interfaces.SendGiftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendGift = function(params: Omit<Interfaces.SendGiftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGift(fullParams as Interfaces.SendGiftParams);
+};
+
+/**
+ * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editStory
+ * @param {Omit<Interfaces.EditStoryParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editStory = function(params: Omit<Interfaces.EditStoryParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.editStory(fullParams as Interfaces.EditStoryParams);
+};
+
+/**
+ * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageText
+ * @param {Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
+  }
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageText(fullParams as Interfaces.EditMessageTextParams);
+};
+
+/**
+ * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageCaption
+ * @param {Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
+  }
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageCaption(fullParams as Interfaces.EditMessageCaptionParams);
+};
+
+/**
+ * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageMedia
+ * @param {Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
+  }
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageMedia(fullParams as Interfaces.EditMessageMediaParams);
+};
+
+/**
+ * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageLiveLocation
+ * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
+  }
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageLiveLocation(fullParams as Interfaces.EditMessageLiveLocationParams);
+};
+
+/**
+ * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageChecklist
+ * @param {Omit<Interfaces.EditMessageChecklistParams, 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageChecklist(fullParams as Interfaces.EditMessageChecklistParams);
+};
+
+/**
+ * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editMessageReplyMarkup
+ * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this.inlineMessageId;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
+  }
+  try {
+    const value = this.inlineMessageId?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
+  }
+  return this.bot.editMessageReplyMarkup(fullParams as Interfaces.EditMessageReplyMarkupParams);
+};
+
+/**
+ * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendSticker
+ * @param {Omit<Interfaces.SendStickerParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendSticker = function(params: Omit<Interfaces.SendStickerParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
+};
+
+/**
+ * Use this method to send invoices. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendInvoice
+ * @param {Omit<Interfaces.SendInvoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendInvoice = function(params: Omit<Interfaces.SendInvoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendInvoice(fullParams as Interfaces.SendInvoiceParams);
+};
+
+/**
+ * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function editUserStarSubscription
+ *  * @param { number } userId - Identifier of the user whose subscription will be edited
+ * @param { string } telegramPaymentChargeId - Telegram payment identifier for the subscription
+ * @param { boolean } isCanceled - Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).editUserStarSubscription = function(
+  userId: number,   telegramPaymentChargeId: string,   isCanceled: boolean): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (telegramPaymentChargeId !== undefined) {
+    params.telegramPaymentChargeId = telegramPaymentChargeId;
+  }
+  if (isCanceled !== undefined) {
+    params.isCanceled = isCanceled;
+  }
+
+
+  return this.bot.editUserStarSubscription(params);
+};
+
+/**
+ * Use this method to send a game. On success, the sent Message is returned.
+ * @memberof SentWebAppMessage.prototype
+ * @instance
+ * @function sendGame
+ * @param {Omit<Interfaces.SendGameParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+ */
+(SentWebAppMessage.prototype as any).sendGame = function(params: Omit<Interfaces.SendGameParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
+};
+
+/**
+ * Use this method to send text messages. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendMessage
+ * @param {Omit<Interfaces.SendMessageParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendMessage = function(params: Omit<Interfaces.SendMessageParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessage(fullParams as Interfaces.SendMessageParams);
+};
+
+/**
+ * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function forwardMessage
+ * @param {Omit<Interfaces.ForwardMessageParams, 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  return this.bot.forwardMessage(fullParams as Interfaces.ForwardMessageParams);
+};
+
+/**
+ * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function forwardMessages
+ * @param {Omit<Interfaces.ForwardMessagesParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).forwardMessages = function(params: Omit<Interfaces.ForwardMessagesParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.forwardMessages(fullParams as Interfaces.ForwardMessagesParams);
+};
+
+/**
+ * Use this method to send photos. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendPhoto
+ * @param {Omit<Interfaces.SendPhotoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendPhoto = function(params: Omit<Interfaces.SendPhotoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPhoto(fullParams as Interfaces.SendPhotoParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendAudio
+ * @param {Omit<Interfaces.SendAudioParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendAudio = function(params: Omit<Interfaces.SendAudioParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAudio(fullParams as Interfaces.SendAudioParams);
+};
+
+/**
+ * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendDocument
+ * @param {Omit<Interfaces.SendDocumentParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendDocument = function(params: Omit<Interfaces.SendDocumentParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDocument(fullParams as Interfaces.SendDocumentParams);
+};
+
+/**
+ * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendVideo
+ * @param {Omit<Interfaces.SendVideoParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendVideo = function(params: Omit<Interfaces.SendVideoParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideo(fullParams as Interfaces.SendVideoParams);
+};
+
+/**
+ * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendAnimation
+ * @param {Omit<Interfaces.SendAnimationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendAnimation = function(params: Omit<Interfaces.SendAnimationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendAnimation(fullParams as Interfaces.SendAnimationParams);
+};
+
+/**
+ * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendVoice
+ * @param {Omit<Interfaces.SendVoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendVoice = function(params: Omit<Interfaces.SendVoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVoice(fullParams as Interfaces.SendVoiceParams);
+};
+
+/**
+ * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendVideoNote
+ * @param {Omit<Interfaces.SendVideoNoteParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendVideoNote = function(params: Omit<Interfaces.SendVideoNoteParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVideoNote(fullParams as Interfaces.SendVideoNoteParams);
+};
+
+/**
+ * Use this method to send paid media. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendPaidMedia
+ * @param {Omit<Interfaces.SendPaidMediaParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendPaidMedia = function(params: Omit<Interfaces.SendPaidMediaParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPaidMedia(fullParams as Interfaces.SendPaidMediaParams);
+};
+
+/**
+ * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendMediaGroup
+ * @param {Omit<Interfaces.SendMediaGroupParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendMediaGroup = function(params: Omit<Interfaces.SendMediaGroupParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMediaGroup(fullParams as Interfaces.SendMediaGroupParams);
+};
+
+/**
+ * Use this method to send point on the map. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendLocation
+ * @param {Omit<Interfaces.SendLocationParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendLocation = function(params: Omit<Interfaces.SendLocationParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendLocation(fullParams as Interfaces.SendLocationParams);
+};
+
+/**
+ * Use this method to send information about a venue. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendVenue
+ * @param {Omit<Interfaces.SendVenueParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendVenue = function(params: Omit<Interfaces.SendVenueParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendVenue(fullParams as Interfaces.SendVenueParams);
+};
+
+/**
+ * Use this method to send phone contacts. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendContact
+ * @param {Omit<Interfaces.SendContactParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendContact = function(params: Omit<Interfaces.SendContactParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendContact(fullParams as Interfaces.SendContactParams);
+};
+
+/**
+ * Use this method to send a native poll. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendPoll
+ * @param {Omit<Interfaces.SendPollParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendPoll = function(params: Omit<Interfaces.SendPollParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendPoll(fullParams as Interfaces.SendPollParams);
+};
+
+/**
+ * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendChecklist
+ * @param {Omit<Interfaces.SendChecklistParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendChecklist = function(params: Omit<Interfaces.SendChecklistParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendChecklist(fullParams as Interfaces.SendChecklistParams);
+};
+
+/**
+ * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendDice
+ * @param {Omit<Interfaces.SendDiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendDice = function(params: Omit<Interfaces.SendDiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendDice(fullParams as Interfaces.SendDiceParams);
+};
+
+/**
+ * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendMessageDraft
+ * @param {Omit<Interfaces.SendMessageDraftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendMessageDraft = function(params: Omit<Interfaces.SendMessageDraftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendMessageDraft(fullParams as Interfaces.SendMessageDraftParams);
+};
+
+/**
+ * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendChatAction
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
+ * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
+ * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
+ * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendChatAction = function(
+  chatId: number | string,   action: string,   businessConnectionId?: string,   messageThreadId?: number): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (action !== undefined) {
+    params.action = action;
+  }
+  if (businessConnectionId !== undefined) {
+    params.businessConnectionId = businessConnectionId;
+  }
+  if (messageThreadId !== undefined) {
+    params.messageThreadId = messageThreadId;
+  }
+
+
+  return this.bot.sendChatAction(params);
+};
+
+/**
+ * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editChatInviteLink
+ * @param {Omit<Interfaces.EditChatInviteLinkParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editChatInviteLink = function(params: Omit<Interfaces.EditChatInviteLinkParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.editChatInviteLink(fullParams as Interfaces.EditChatInviteLinkParams);
+};
+
+/**
+ * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editChatSubscriptionInviteLink
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ * @param { string } inviteLink - The invite link to edit
+ * @param { string } name? - Invite link name; 0-32 characters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editChatSubscriptionInviteLink = function(
+  chatId: number | string,   inviteLink: string,   name?: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (inviteLink !== undefined) {
+    params.inviteLink = inviteLink;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.editChatSubscriptionInviteLink(params);
+};
+
+/**
+ * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editForumTopic
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
+ * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
+ * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editForumTopic = function(
+  chatId: number | string,   messageThreadId: number,   name?: string,   iconCustomEmojiId?: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (messageThreadId !== undefined) {
+    params.messageThreadId = messageThreadId;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+  if (iconCustomEmojiId !== undefined) {
+    params.iconCustomEmojiId = iconCustomEmojiId;
+  }
+
+
+  return this.bot.editForumTopic(params);
+};
+
+/**
+ * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editGeneralForumTopic
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ * @param { string } name - New topic name, 1-128 characters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editGeneralForumTopic = function(
+  chatId: number | string,   name: string): Promise<any> {
+  const params: any = {};
+  if (chatId !== undefined) {
+    params.chatId = chatId;
+  }
+  if (name !== undefined) {
+    params.name = name;
+  }
+
+
+  return this.bot.editGeneralForumTopic(params);
+};
+
+/**
+ * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendGift
+ * @param {Omit<Interfaces.SendGiftParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendGift = function(params: Omit<Interfaces.SendGiftParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGift(fullParams as Interfaces.SendGiftParams);
+};
+
+/**
+ * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editStory
+ * @param {Omit<Interfaces.EditStoryParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editStory = function(params: Omit<Interfaces.EditStoryParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.editStory(fullParams as Interfaces.EditStoryParams);
+};
+
+/**
+ * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function savePreparedInlineMessage
+ * @param {Omit<Interfaces.SavePreparedInlineMessageParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).savePreparedInlineMessage = function(params: Omit<Interfaces.SavePreparedInlineMessageParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.savePreparedInlineMessage(fullParams as Interfaces.SavePreparedInlineMessageParams);
+};
+
+/**
+ * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageText
+ * @param {Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
+  }
+  return this.bot.editMessageText(fullParams as Interfaces.EditMessageTextParams);
+};
+
+/**
+ * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageCaption
+ * @param {Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
+  }
+  return this.bot.editMessageCaption(fullParams as Interfaces.EditMessageCaptionParams);
+};
+
+/**
+ * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageMedia
+ * @param {Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
+  }
+  return this.bot.editMessageMedia(fullParams as Interfaces.EditMessageMediaParams);
+};
+
+/**
+ * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageLiveLocation
+ * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
+  }
+  return this.bot.editMessageLiveLocation(fullParams as Interfaces.EditMessageLiveLocationParams);
+};
+
+/**
+ * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageChecklist
+ * @param {Omit<Interfaces.EditMessageChecklistParams, 'messageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  return this.bot.editMessageChecklist(fullParams as Interfaces.EditMessageChecklistParams);
+};
+
+/**
+ * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editMessageReplyMarkup
+ * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.messageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill messageId from this?.id:', e);
+  }
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineMessageId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
+  }
+  return this.bot.editMessageReplyMarkup(fullParams as Interfaces.EditMessageReplyMarkupParams);
+};
+
+/**
+ * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendSticker
+ * @param {Omit<Interfaces.SendStickerParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendSticker = function(params: Omit<Interfaces.SendStickerParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
+};
+
+/**
+ * Use this method to send invoices. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendInvoice
+ * @param {Omit<Interfaces.SendInvoiceParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendInvoice = function(params: Omit<Interfaces.SendInvoiceParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendInvoice(fullParams as Interfaces.SendInvoiceParams);
+};
+
+/**
+ * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function editUserStarSubscription
+ *  * @param { number } userId - Identifier of the user whose subscription will be edited
+ * @param { string } telegramPaymentChargeId - Telegram payment identifier for the subscription
+ * @param { boolean } isCanceled - Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).editUserStarSubscription = function(
+  userId: number,   telegramPaymentChargeId: string,   isCanceled: boolean): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (telegramPaymentChargeId !== undefined) {
+    params.telegramPaymentChargeId = telegramPaymentChargeId;
+  }
+  if (isCanceled !== undefined) {
+    params.isCanceled = isCanceled;
+  }
+
+
+  return this.bot.editUserStarSubscription(params);
+};
+
+/**
+ * Use this method to send a game. On success, the sent Message is returned.
+ * @memberof PreparedInlineMessage.prototype
+ * @instance
+ * @function sendGame
+ * @param {Omit<Interfaces.SendGameParams, never>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
+ * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+ */
+(PreparedInlineMessage.prototype as any).sendGame = function(params: Omit<Interfaces.SendGameParams, never>): Promise<any> {
+  const fullParams: any = { ...params };
+  return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
+};
+
+/**
+ * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+ * @memberof PreparedKeyboardButton.prototype
+ * @instance
+ * @function savePreparedKeyboardButton
+ *  * @param { number } userId - Unique identifier of the target user that can use the button
+ * @param { KeyboardButton } button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this PreparedKeyboardButton instance
+ * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
+ */
+(PreparedKeyboardButton.prototype as any).savePreparedKeyboardButton = function(
+  userId: number,   button: KeyboardButton): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+  if (button !== undefined) {
+    params.button = button;
+  }
+
+
+  return this.bot.savePreparedKeyboardButton(params);
 };
 
 /**
@@ -77029,29 +79861,6 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
- * @memberof InlineQueryResult.prototype
- * @instance
- * @function answerInlineQuery
- * @param {Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResult instance
- * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
- */
-(InlineQueryResult.prototype as any).answerInlineQuery = function(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineQueryId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineQueryId from this?.id:', e);
-  }
-  return this.bot.answerInlineQuery(fullParams as Interfaces.AnswerInlineQueryParams);
-};
-
-/**
  * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
  * @memberof InlineQueryResult.prototype
  * @instance
@@ -77089,6 +79898,29 @@ import { GameHighScore } from '../types/gameHighScore';
 (InlineQueryResult.prototype as any).savePreparedInlineMessage = function(params: Omit<Interfaces.SavePreparedInlineMessageParams, never>): Promise<any> {
   const fullParams: any = { ...params };
   return this.bot.savePreparedInlineMessage(fullParams as Interfaces.SavePreparedInlineMessageParams);
+};
+
+/**
+ * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
+ * @memberof InlineQueryResult.prototype
+ * @instance
+ * @function answerInlineQuery
+ * @param {Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>} params - Method parameters
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResult instance
+ * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
+ */
+(InlineQueryResult.prototype as any).answerInlineQuery = function(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any> {
+  const fullParams: any = { ...params };
+  try {
+    const value = this?.id;
+    if (value !== undefined && value !== null) {
+      fullParams.inlineQueryId = value;
+    }
+  } catch (e) {
+    console.warn('Could not auto-fill inlineQueryId from this?.id:', e);
+  }
+  return this.bot.answerInlineQuery(fullParams as Interfaces.AnswerInlineQueryParams);
 };
 
 /**
@@ -83216,1441 +86048,6 @@ import { GameHighScore } from '../types/gameHighScore';
 };
 
 /**
- * Use this method to send text messages. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendMessage
- * @param {Omit<Interfaces.SendMessageParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendMessage = function(params: Omit<Interfaces.SendMessageParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMessage(fullParams as Interfaces.SendMessageParams);
-};
-
-/**
- * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function forwardMessage
- * @param {Omit<Interfaces.ForwardMessageParams, 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.forwardMessage(fullParams as Interfaces.ForwardMessageParams);
-};
-
-/**
- * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function forwardMessages
- * @param {Omit<Interfaces.ForwardMessagesParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).forwardMessages = function(params: Omit<Interfaces.ForwardMessagesParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.forwardMessages(fullParams as Interfaces.ForwardMessagesParams);
-};
-
-/**
- * Use this method to send photos. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendPhoto
- * @param {Omit<Interfaces.SendPhotoParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendPhoto = function(params: Omit<Interfaces.SendPhotoParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPhoto(fullParams as Interfaces.SendPhotoParams);
-};
-
-/**
- * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendAudio
- * @param {Omit<Interfaces.SendAudioParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendAudio = function(params: Omit<Interfaces.SendAudioParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendAudio(fullParams as Interfaces.SendAudioParams);
-};
-
-/**
- * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendDocument
- * @param {Omit<Interfaces.SendDocumentParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendDocument = function(params: Omit<Interfaces.SendDocumentParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendDocument(fullParams as Interfaces.SendDocumentParams);
-};
-
-/**
- * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendVideo
- * @param {Omit<Interfaces.SendVideoParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendVideo = function(params: Omit<Interfaces.SendVideoParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVideo(fullParams as Interfaces.SendVideoParams);
-};
-
-/**
- * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendAnimation
- * @param {Omit<Interfaces.SendAnimationParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendAnimation = function(params: Omit<Interfaces.SendAnimationParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendAnimation(fullParams as Interfaces.SendAnimationParams);
-};
-
-/**
- * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendVoice
- * @param {Omit<Interfaces.SendVoiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendVoice = function(params: Omit<Interfaces.SendVoiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVoice(fullParams as Interfaces.SendVoiceParams);
-};
-
-/**
- * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendVideoNote
- * @param {Omit<Interfaces.SendVideoNoteParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendVideoNote = function(params: Omit<Interfaces.SendVideoNoteParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVideoNote(fullParams as Interfaces.SendVideoNoteParams);
-};
-
-/**
- * Use this method to send paid media. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendPaidMedia
- * @param {Omit<Interfaces.SendPaidMediaParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendPaidMedia = function(params: Omit<Interfaces.SendPaidMediaParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPaidMedia(fullParams as Interfaces.SendPaidMediaParams);
-};
-
-/**
- * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendMediaGroup
- * @param {Omit<Interfaces.SendMediaGroupParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendMediaGroup = function(params: Omit<Interfaces.SendMediaGroupParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMediaGroup(fullParams as Interfaces.SendMediaGroupParams);
-};
-
-/**
- * Use this method to send point on the map. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendLocation
- * @param {Omit<Interfaces.SendLocationParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendLocation = function(params: Omit<Interfaces.SendLocationParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendLocation(fullParams as Interfaces.SendLocationParams);
-};
-
-/**
- * Use this method to send information about a venue. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendVenue
- * @param {Omit<Interfaces.SendVenueParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendVenue = function(params: Omit<Interfaces.SendVenueParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVenue(fullParams as Interfaces.SendVenueParams);
-};
-
-/**
- * Use this method to send phone contacts. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendContact
- * @param {Omit<Interfaces.SendContactParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendContact = function(params: Omit<Interfaces.SendContactParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendContact(fullParams as Interfaces.SendContactParams);
-};
-
-/**
- * Use this method to send a native poll. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendPoll
- * @param {Omit<Interfaces.SendPollParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendPoll = function(params: Omit<Interfaces.SendPollParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPoll(fullParams as Interfaces.SendPollParams);
-};
-
-/**
- * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendChecklist
- * @param {Omit<Interfaces.SendChecklistParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendChecklist = function(params: Omit<Interfaces.SendChecklistParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendChecklist(fullParams as Interfaces.SendChecklistParams);
-};
-
-/**
- * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendDice
- * @param {Omit<Interfaces.SendDiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendDice = function(params: Omit<Interfaces.SendDiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendDice(fullParams as Interfaces.SendDiceParams);
-};
-
-/**
- * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendMessageDraft
- * @param {Omit<Interfaces.SendMessageDraftParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendMessageDraft = function(params: Omit<Interfaces.SendMessageDraftParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMessageDraft(fullParams as Interfaces.SendMessageDraftParams);
-};
-
-/**
- * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendChatAction
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
- * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
- * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
- * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendChatAction = function(
-  chatId: number | string,   action: string,   businessConnectionId?: string,   messageThreadId?: number): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (action !== undefined) {
-    params.action = action;
-  }
-  if (businessConnectionId !== undefined) {
-    params.businessConnectionId = businessConnectionId;
-  }
-  if (messageThreadId !== undefined) {
-    params.messageThreadId = messageThreadId;
-  }
-
-
-  return this.bot.sendChatAction(params);
-};
-
-/**
- * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editChatInviteLink
- * @param {Omit<Interfaces.EditChatInviteLinkParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editChatInviteLink = function(params: Omit<Interfaces.EditChatInviteLinkParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.editChatInviteLink(fullParams as Interfaces.EditChatInviteLinkParams);
-};
-
-/**
- * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editChatSubscriptionInviteLink
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
- * @param { string } inviteLink - The invite link to edit
- * @param { string } name? - Invite link name; 0-32 characters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editChatSubscriptionInviteLink = function(
-  chatId: number | string,   inviteLink: string,   name?: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (inviteLink !== undefined) {
-    params.inviteLink = inviteLink;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-
-
-  return this.bot.editChatSubscriptionInviteLink(params);
-};
-
-/**
- * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editForumTopic
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
- * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
- * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
- * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editForumTopic = function(
-  chatId: number | string,   messageThreadId: number,   name?: string,   iconCustomEmojiId?: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (messageThreadId !== undefined) {
-    params.messageThreadId = messageThreadId;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-  if (iconCustomEmojiId !== undefined) {
-    params.iconCustomEmojiId = iconCustomEmojiId;
-  }
-
-
-  return this.bot.editForumTopic(params);
-};
-
-/**
- * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editGeneralForumTopic
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
- * @param { string } name - New topic name, 1-128 characters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editGeneralForumTopic = function(
-  chatId: number | string,   name: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-
-
-  return this.bot.editGeneralForumTopic(params);
-};
-
-/**
- * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendGift
- * @param {Omit<Interfaces.SendGiftParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendGift = function(params: Omit<Interfaces.SendGiftParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendGift(fullParams as Interfaces.SendGiftParams);
-};
-
-/**
- * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editStory
- * @param {Omit<Interfaces.EditStoryParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editStory = function(params: Omit<Interfaces.EditStoryParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.editStory(fullParams as Interfaces.EditStoryParams);
-};
-
-/**
- * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageText
- * @param {Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
-  }
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageText(fullParams as Interfaces.EditMessageTextParams);
-};
-
-/**
- * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageCaption
- * @param {Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
-  }
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageCaption(fullParams as Interfaces.EditMessageCaptionParams);
-};
-
-/**
- * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageMedia
- * @param {Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
-  }
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageMedia(fullParams as Interfaces.EditMessageMediaParams);
-};
-
-/**
- * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageLiveLocation
- * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
-  }
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageLiveLocation(fullParams as Interfaces.EditMessageLiveLocationParams);
-};
-
-/**
- * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageChecklist
- * @param {Omit<Interfaces.EditMessageChecklistParams, 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageChecklist(fullParams as Interfaces.EditMessageChecklistParams);
-};
-
-/**
- * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editMessageReplyMarkup
- * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this.inlineMessageId;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this.inlineMessageId:', e);
-  }
-  try {
-    const value = this.inlineMessageId?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this.inlineMessageId?.id:', e);
-  }
-  return this.bot.editMessageReplyMarkup(fullParams as Interfaces.EditMessageReplyMarkupParams);
-};
-
-/**
- * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendSticker
- * @param {Omit<Interfaces.SendStickerParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendSticker = function(params: Omit<Interfaces.SendStickerParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
-};
-
-/**
- * Use this method to send invoices. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendInvoice
- * @param {Omit<Interfaces.SendInvoiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendInvoice = function(params: Omit<Interfaces.SendInvoiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendInvoice(fullParams as Interfaces.SendInvoiceParams);
-};
-
-/**
- * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function editUserStarSubscription
- *  * @param { number } userId - Identifier of the user whose subscription will be edited
- * @param { string } telegramPaymentChargeId - Telegram payment identifier for the subscription
- * @param { boolean } isCanceled - Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).editUserStarSubscription = function(
-  userId: number,   telegramPaymentChargeId: string,   isCanceled: boolean): Promise<any> {
-  const params: any = {};
-  if (userId !== undefined) {
-    params.userId = userId;
-  }
-  if (telegramPaymentChargeId !== undefined) {
-    params.telegramPaymentChargeId = telegramPaymentChargeId;
-  }
-  if (isCanceled !== undefined) {
-    params.isCanceled = isCanceled;
-  }
-
-
-  return this.bot.editUserStarSubscription(params);
-};
-
-/**
- * Use this method to send a game. On success, the sent Message is returned.
- * @memberof SentWebAppMessage.prototype
- * @instance
- * @function sendGame
- * @param {Omit<Interfaces.SendGameParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this SentWebAppMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
- */
-(SentWebAppMessage.prototype as any).sendGame = function(params: Omit<Interfaces.SendGameParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
-};
-
-/**
- * Use this method to send text messages. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendMessage
- * @param {Omit<Interfaces.SendMessageParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendMessage = function(params: Omit<Interfaces.SendMessageParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMessage(fullParams as Interfaces.SendMessageParams);
-};
-
-/**
- * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function forwardMessage
- * @param {Omit<Interfaces.ForwardMessageParams, 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).forwardMessage = function(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  return this.bot.forwardMessage(fullParams as Interfaces.ForwardMessageParams);
-};
-
-/**
- * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function forwardMessages
- * @param {Omit<Interfaces.ForwardMessagesParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).forwardMessages = function(params: Omit<Interfaces.ForwardMessagesParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.forwardMessages(fullParams as Interfaces.ForwardMessagesParams);
-};
-
-/**
- * Use this method to send photos. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendPhoto
- * @param {Omit<Interfaces.SendPhotoParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendPhoto = function(params: Omit<Interfaces.SendPhotoParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPhoto(fullParams as Interfaces.SendPhotoParams);
-};
-
-/**
- * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendAudio
- * @param {Omit<Interfaces.SendAudioParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendAudio = function(params: Omit<Interfaces.SendAudioParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendAudio(fullParams as Interfaces.SendAudioParams);
-};
-
-/**
- * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendDocument
- * @param {Omit<Interfaces.SendDocumentParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendDocument = function(params: Omit<Interfaces.SendDocumentParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendDocument(fullParams as Interfaces.SendDocumentParams);
-};
-
-/**
- * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendVideo
- * @param {Omit<Interfaces.SendVideoParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendVideo = function(params: Omit<Interfaces.SendVideoParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVideo(fullParams as Interfaces.SendVideoParams);
-};
-
-/**
- * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendAnimation
- * @param {Omit<Interfaces.SendAnimationParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendAnimation = function(params: Omit<Interfaces.SendAnimationParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendAnimation(fullParams as Interfaces.SendAnimationParams);
-};
-
-/**
- * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendVoice
- * @param {Omit<Interfaces.SendVoiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendVoice = function(params: Omit<Interfaces.SendVoiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVoice(fullParams as Interfaces.SendVoiceParams);
-};
-
-/**
- * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendVideoNote
- * @param {Omit<Interfaces.SendVideoNoteParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendVideoNote = function(params: Omit<Interfaces.SendVideoNoteParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVideoNote(fullParams as Interfaces.SendVideoNoteParams);
-};
-
-/**
- * Use this method to send paid media. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendPaidMedia
- * @param {Omit<Interfaces.SendPaidMediaParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendPaidMedia = function(params: Omit<Interfaces.SendPaidMediaParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPaidMedia(fullParams as Interfaces.SendPaidMediaParams);
-};
-
-/**
- * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendMediaGroup
- * @param {Omit<Interfaces.SendMediaGroupParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendMediaGroup = function(params: Omit<Interfaces.SendMediaGroupParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMediaGroup(fullParams as Interfaces.SendMediaGroupParams);
-};
-
-/**
- * Use this method to send point on the map. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendLocation
- * @param {Omit<Interfaces.SendLocationParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendLocation = function(params: Omit<Interfaces.SendLocationParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendLocation(fullParams as Interfaces.SendLocationParams);
-};
-
-/**
- * Use this method to send information about a venue. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendVenue
- * @param {Omit<Interfaces.SendVenueParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendVenue = function(params: Omit<Interfaces.SendVenueParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendVenue(fullParams as Interfaces.SendVenueParams);
-};
-
-/**
- * Use this method to send phone contacts. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendContact
- * @param {Omit<Interfaces.SendContactParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendContact = function(params: Omit<Interfaces.SendContactParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendContact(fullParams as Interfaces.SendContactParams);
-};
-
-/**
- * Use this method to send a native poll. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendPoll
- * @param {Omit<Interfaces.SendPollParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendPoll = function(params: Omit<Interfaces.SendPollParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendPoll(fullParams as Interfaces.SendPollParams);
-};
-
-/**
- * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendChecklist
- * @param {Omit<Interfaces.SendChecklistParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendChecklist = function(params: Omit<Interfaces.SendChecklistParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendChecklist(fullParams as Interfaces.SendChecklistParams);
-};
-
-/**
- * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendDice
- * @param {Omit<Interfaces.SendDiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendDice = function(params: Omit<Interfaces.SendDiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendDice(fullParams as Interfaces.SendDiceParams);
-};
-
-/**
- * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendMessageDraft
- * @param {Omit<Interfaces.SendMessageDraftParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendMessageDraft = function(params: Omit<Interfaces.SendMessageDraftParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendMessageDraft(fullParams as Interfaces.SendMessageDraftParams);
-};
-
-/**
- * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendChatAction
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
- * @param { string } action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
- * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the action will be sent
- * @param { number } messageThreadId? - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendChatAction = function(
-  chatId: number | string,   action: string,   businessConnectionId?: string,   messageThreadId?: number): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (action !== undefined) {
-    params.action = action;
-  }
-  if (businessConnectionId !== undefined) {
-    params.businessConnectionId = businessConnectionId;
-  }
-  if (messageThreadId !== undefined) {
-    params.messageThreadId = messageThreadId;
-  }
-
-
-  return this.bot.sendChatAction(params);
-};
-
-/**
- * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editChatInviteLink
- * @param {Omit<Interfaces.EditChatInviteLinkParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editChatInviteLink = function(params: Omit<Interfaces.EditChatInviteLinkParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.editChatInviteLink(fullParams as Interfaces.EditChatInviteLinkParams);
-};
-
-/**
- * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editChatSubscriptionInviteLink
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
- * @param { string } inviteLink - The invite link to edit
- * @param { string } name? - Invite link name; 0-32 characters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editChatSubscriptionInviteLink = function(
-  chatId: number | string,   inviteLink: string,   name?: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (inviteLink !== undefined) {
-    params.inviteLink = inviteLink;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-
-
-  return this.bot.editChatSubscriptionInviteLink(params);
-};
-
-/**
- * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editForumTopic
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
- * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
- * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
- * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editForumTopic = function(
-  chatId: number | string,   messageThreadId: number,   name?: string,   iconCustomEmojiId?: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (messageThreadId !== undefined) {
-    params.messageThreadId = messageThreadId;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-  if (iconCustomEmojiId !== undefined) {
-    params.iconCustomEmojiId = iconCustomEmojiId;
-  }
-
-
-  return this.bot.editForumTopic(params);
-};
-
-/**
- * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editGeneralForumTopic
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
- * @param { string } name - New topic name, 1-128 characters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editGeneralForumTopic = function(
-  chatId: number | string,   name: string): Promise<any> {
-  const params: any = {};
-  if (chatId !== undefined) {
-    params.chatId = chatId;
-  }
-  if (name !== undefined) {
-    params.name = name;
-  }
-
-
-  return this.bot.editGeneralForumTopic(params);
-};
-
-/**
- * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendGift
- * @param {Omit<Interfaces.SendGiftParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendGift = function(params: Omit<Interfaces.SendGiftParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendGift(fullParams as Interfaces.SendGiftParams);
-};
-
-/**
- * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editStory
- * @param {Omit<Interfaces.EditStoryParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editStory = function(params: Omit<Interfaces.EditStoryParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.editStory(fullParams as Interfaces.EditStoryParams);
-};
-
-/**
- * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageText
- * @param {Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageText = function(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
-  }
-  return this.bot.editMessageText(fullParams as Interfaces.EditMessageTextParams);
-};
-
-/**
- * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageCaption
- * @param {Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageCaption = function(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
-  }
-  return this.bot.editMessageCaption(fullParams as Interfaces.EditMessageCaptionParams);
-};
-
-/**
- * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageMedia
- * @param {Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageMedia = function(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
-  }
-  return this.bot.editMessageMedia(fullParams as Interfaces.EditMessageMediaParams);
-};
-
-/**
- * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageLiveLocation
- * @param {Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageLiveLocation = function(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
-  }
-  return this.bot.editMessageLiveLocation(fullParams as Interfaces.EditMessageLiveLocationParams);
-};
-
-/**
- * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageChecklist
- * @param {Omit<Interfaces.EditMessageChecklistParams, 'messageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageChecklist = function(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  return this.bot.editMessageChecklist(fullParams as Interfaces.EditMessageChecklistParams);
-};
-
-/**
- * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editMessageReplyMarkup
- * @param {Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editMessageReplyMarkup = function(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any> {
-  const fullParams: any = { ...params };
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.messageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill messageId from this?.id:', e);
-  }
-  try {
-    const value = this?.id;
-    if (value !== undefined && value !== null) {
-      fullParams.inlineMessageId = value;
-    }
-  } catch (e) {
-    console.warn('Could not auto-fill inlineMessageId from this?.id:', e);
-  }
-  return this.bot.editMessageReplyMarkup(fullParams as Interfaces.EditMessageReplyMarkupParams);
-};
-
-/**
- * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendSticker
- * @param {Omit<Interfaces.SendStickerParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendSticker = function(params: Omit<Interfaces.SendStickerParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendSticker(fullParams as Interfaces.SendStickerParams);
-};
-
-/**
- * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function savePreparedInlineMessage
- * @param {Omit<Interfaces.SavePreparedInlineMessageParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).savePreparedInlineMessage = function(params: Omit<Interfaces.SavePreparedInlineMessageParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.savePreparedInlineMessage(fullParams as Interfaces.SavePreparedInlineMessageParams);
-};
-
-/**
- * Use this method to send invoices. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendInvoice
- * @param {Omit<Interfaces.SendInvoiceParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendInvoice = function(params: Omit<Interfaces.SendInvoiceParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendInvoice(fullParams as Interfaces.SendInvoiceParams);
-};
-
-/**
- * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function editUserStarSubscription
- *  * @param { number } userId - Identifier of the user whose subscription will be edited
- * @param { string } telegramPaymentChargeId - Telegram payment identifier for the subscription
- * @param { boolean } isCanceled - Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).editUserStarSubscription = function(
-  userId: number,   telegramPaymentChargeId: string,   isCanceled: boolean): Promise<any> {
-  const params: any = {};
-  if (userId !== undefined) {
-    params.userId = userId;
-  }
-  if (telegramPaymentChargeId !== undefined) {
-    params.telegramPaymentChargeId = telegramPaymentChargeId;
-  }
-  if (isCanceled !== undefined) {
-    params.isCanceled = isCanceled;
-  }
-
-
-  return this.bot.editUserStarSubscription(params);
-};
-
-/**
- * Use this method to send a game. On success, the sent Message is returned.
- * @memberof PreparedInlineMessage.prototype
- * @instance
- * @function sendGame
- * @param {Omit<Interfaces.SendGameParams, never>} params - Method parameters
- * @returns {Promise<any>} Promise resolving to method result
- * @description Contextual parameters () are automatically filled from this PreparedInlineMessage instance
- * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
- */
-(PreparedInlineMessage.prototype as any).sendGame = function(params: Omit<Interfaces.SendGameParams, never>): Promise<any> {
-  const fullParams: any = { ...params };
-  return this.bot.sendGame(fullParams as Interfaces.SendGameParams);
-};
-
-/**
  * Use this method to send invoices. On success, the sent Message is returned.
  * @memberof LabeledPrice.prototype
  * @instance
@@ -85134,6 +86531,27 @@ import { GameHighScore } from '../types/gameHighScore';
 
 
   return this.bot.getBusinessConnection(params);
+};
+
+/**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof TransactionPartnerChat.prototype
+ * @instance
+ * @function getManagedBotToken
+ *  * @param { number } userId - User identifier of the managed bot whose token will be returned
+ * @returns {Promise<any>} Promise resolving to method result
+ * @description Contextual parameters () are automatically filled from this TransactionPartnerChat instance
+ * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+ */
+(TransactionPartnerChat.prototype as any).getManagedBotToken = function(
+  userId: number): Promise<any> {
+  const params: any = {};
+  if (userId !== undefined) {
+    params.userId = userId;
+  }
+
+
+  return this.bot.getManagedBotToken(params);
 };
 
 /**

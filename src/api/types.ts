@@ -57,6 +57,10 @@ import { Venue } from './types/venue';
 import { WebAppData } from './types/webAppData';
 import { ProximityAlertTriggered } from './types/proximityAlertTriggered';
 import { MessageAutoDeleteTimerChanged } from './types/messageAutoDeleteTimerChanged';
+import { ManagedBotCreated } from './types/managedBotCreated';
+import { ManagedBotUpdated } from './types/managedBotUpdated';
+import { PollOptionAdded } from './types/pollOptionAdded';
+import { PollOptionDeleted } from './types/pollOptionDeleted';
 import { ChatBoostAdded } from './types/chatBoostAdded';
 import { BackgroundFill } from './types/backgroundFill';
 import { BackgroundFillSolid } from './types/backgroundFillSolid';
@@ -106,6 +110,7 @@ import { ReplyKeyboardMarkup } from './types/replyKeyboardMarkup';
 import { KeyboardButton } from './types/keyboardButton';
 import { KeyboardButtonRequestUsers } from './types/keyboardButtonRequestUsers';
 import { KeyboardButtonRequestChat } from './types/keyboardButtonRequestChat';
+import { KeyboardButtonRequestManagedBot } from './types/keyboardButtonRequestManagedBot';
 import { KeyboardButtonPollType } from './types/keyboardButtonPollType';
 import { ReplyKeyboardRemove } from './types/replyKeyboardRemove';
 import { InlineKeyboardMarkup } from './types/inlineKeyboardMarkup';
@@ -198,6 +203,9 @@ import { UserChatBoosts } from './types/userChatBoosts';
 import { BusinessBotRights } from './types/businessBotRights';
 import { BusinessConnection } from './types/businessConnection';
 import { BusinessMessagesDeleted } from './types/businessMessagesDeleted';
+import { SentWebAppMessage } from './types/sentWebAppMessage';
+import { PreparedInlineMessage } from './types/preparedInlineMessage';
+import { PreparedKeyboardButton } from './types/preparedKeyboardButton';
 import { ResponseParameters } from './types/responseParameters';
 import { InputMedia } from './types/inputMedia';
 import { InputMediaPhoto } from './types/inputMediaPhoto';
@@ -247,8 +255,6 @@ import { InputVenueMessageContent } from './types/inputVenueMessageContent';
 import { InputContactMessageContent } from './types/inputContactMessageContent';
 import { InputInvoiceMessageContent } from './types/inputInvoiceMessageContent';
 import { ChosenInlineResult } from './types/chosenInlineResult';
-import { SentWebAppMessage } from './types/sentWebAppMessage';
-import { PreparedInlineMessage } from './types/preparedInlineMessage';
 import { LabeledPrice } from './types/labeledPrice';
 import { Invoice } from './types/invoice';
 import { ShippingAddress } from './types/shippingAddress';
@@ -1286,6 +1292,22 @@ declare module '../core/bot' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     *      * @param userId - User identifier of the managed bot whose token will be returned
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to revoke the current token of a managed bot and generate a new one. Returns the new token as String on success.
+     *      * @param userId - User identifier of the managed bot whose token will be replaced
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#replaceManagedBotToken Telegram Bot API}
+     */
+    replaceManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to change the list of the bot&#39;s commands. See this manual for more details about bot commands. Returns True on success.
      *      * @param commands - A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
      *      * @param scope - A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
@@ -1736,6 +1758,41 @@ declare module '../core/bot' {
      */
     deleteStory(businessConnectionId: string, storyId: number): Promise<any>;
     /**
+     * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
+     *      * @param webAppQueryId - Unique identifier for the query to be answered
+     *      * @param result - A JSON-serialized object describing the message to be sent
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
+     */
+    answerWebAppQuery(webAppQueryId: string, result: InlineQueryResult): Promise<any>;
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link Interfaces.SavePreparedInlineMessageParams} for parameter details
+     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+     */
+    savePreparedInlineMessage(params: Interfaces.SavePreparedInlineMessageParams): Promise<any>;
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+     * @param userId, result - Required parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+     */
+    savePreparedInlineMessage(userId: number, result: InlineQueryResult): Promise<any>;
+    /**
+     * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+     *      * @param userId - Unique identifier of the target user that can use the button
+     *      * @param button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
+     */
+    savePreparedKeyboardButton(userId: number, button: KeyboardButton): Promise<any>;
+    /**
      * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -2064,32 +2121,6 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
      */
     answerInlineQuery(inlineQueryId: string, results: InlineQueryResult[]): Promise<any>;
-    /**
-     * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
-     *      * @param webAppQueryId - Unique identifier for the query to be answered
-     *      * @param result - A JSON-serialized object describing the message to be sent
-     *      * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#answerWebAppQuery Telegram Bot API}
-     */
-    answerWebAppQuery(webAppQueryId: string, result: InlineQueryResult): Promise<any>;
-    /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link Interfaces.SavePreparedInlineMessageParams} for parameter details
-     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
-     */
-    savePreparedInlineMessage(params: Interfaces.SavePreparedInlineMessageParams): Promise<any>;
-    /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
-     * @param userId, result - Required parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
-     */
-    savePreparedInlineMessage(userId: number, result: InlineQueryResult): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -3121,6 +3152,78 @@ declare module '../core/bot' {
      */
     onMessageAutoDeleteTimerChanged(filter: string | ((data: any) => boolean), handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
     /**
+     * Registers a handler for ManagedBotCreated updates
+     * @overload
+     * @param handler - Async function to handle ManagedBotCreated updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotcreated Telegram Bot API}
+     */
+    onManagedBotCreated(handler: (data: ManagedBotCreated) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for ManagedBotCreated updates with filtering
+     * @overload
+     * @param filter - String or function to filter ManagedBotCreated data
+     * @param handler - Async function to handle filtered ManagedBotCreated updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotcreated Telegram Bot API}
+     */
+    onManagedBotCreated(filter: string | ((data: any) => boolean), handler: (data: ManagedBotCreated) => void | Promise<void>): this;
+    /**
+     * Registers a handler for ManagedBotUpdated updates
+     * @overload
+     * @param handler - Async function to handle ManagedBotUpdated updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram Bot API}
+     */
+    onManagedBotUpdated(handler: (data: ManagedBotUpdated) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for ManagedBotUpdated updates with filtering
+     * @overload
+     * @param filter - String or function to filter ManagedBotUpdated data
+     * @param handler - Async function to handle filtered ManagedBotUpdated updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram Bot API}
+     */
+    onManagedBotUpdated(filter: string | ((data: any) => boolean), handler: (data: ManagedBotUpdated) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PollOptionAdded updates
+     * @overload
+     * @param handler - Async function to handle PollOptionAdded updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptionadded Telegram Bot API}
+     */
+    onPollOptionAdded(handler: (data: PollOptionAdded) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PollOptionAdded updates with filtering
+     * @overload
+     * @param filter - String or function to filter PollOptionAdded data
+     * @param handler - Async function to handle filtered PollOptionAdded updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptionadded Telegram Bot API}
+     */
+    onPollOptionAdded(filter: string | ((data: any) => boolean), handler: (data: PollOptionAdded) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PollOptionDeleted updates
+     * @overload
+     * @param handler - Async function to handle PollOptionDeleted updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptiondeleted Telegram Bot API}
+     */
+    onPollOptionDeleted(handler: (data: PollOptionDeleted) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PollOptionDeleted updates with filtering
+     * @overload
+     * @param filter - String or function to filter PollOptionDeleted data
+     * @param handler - Async function to handle filtered PollOptionDeleted updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptiondeleted Telegram Bot API}
+     */
+    onPollOptionDeleted(filter: string | ((data: any) => boolean), handler: (data: PollOptionDeleted) => void | Promise<void>): this;
+    /**
      * Registers a handler for ChatBoostAdded updates
      * @overload
      * @param handler - Async function to handle ChatBoostAdded updates
@@ -4002,6 +4105,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
     onKeyboardButtonRequestChat(filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
+    /**
+     * Registers a handler for KeyboardButtonRequestManagedBot updates
+     * @overload
+     * @param handler - Async function to handle KeyboardButtonRequestManagedBot updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestmanagedbot Telegram Bot API}
+     */
+    onKeyboardButtonRequestManagedBot(handler: (data: KeyboardButtonRequestManagedBot) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for KeyboardButtonRequestManagedBot updates with filtering
+     * @overload
+     * @param filter - String or function to filter KeyboardButtonRequestManagedBot data
+     * @param handler - Async function to handle filtered KeyboardButtonRequestManagedBot updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestmanagedbot Telegram Bot API}
+     */
+    onKeyboardButtonRequestManagedBot(filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestManagedBot) => void | Promise<void>): this;
     /**
      * Registers a handler for KeyboardButtonPollType updates
      * @overload
@@ -5659,6 +5780,60 @@ declare module '../core/bot' {
      */
     onBusinessMessagesDeleted(filter: string | ((data: any) => boolean), handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
     /**
+     * Registers a handler for SentWebAppMessage updates
+     * @overload
+     * @param handler - Async function to handle SentWebAppMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
+     */
+    onSentWebAppMessage(handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for SentWebAppMessage updates with filtering
+     * @overload
+     * @param filter - String or function to filter SentWebAppMessage data
+     * @param handler - Async function to handle filtered SentWebAppMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
+     */
+    onSentWebAppMessage(filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PreparedInlineMessage updates
+     * @overload
+     * @param handler - Async function to handle PreparedInlineMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
+     */
+    onPreparedInlineMessage(handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PreparedInlineMessage updates with filtering
+     * @overload
+     * @param filter - String or function to filter PreparedInlineMessage data
+     * @param handler - Async function to handle filtered PreparedInlineMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
+     */
+    onPreparedInlineMessage(filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PreparedKeyboardButton updates
+     * @overload
+     * @param handler - Async function to handle PreparedKeyboardButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedkeyboardbutton Telegram Bot API}
+     */
+    onPreparedKeyboardButton(handler: (data: PreparedKeyboardButton) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PreparedKeyboardButton updates with filtering
+     * @overload
+     * @param filter - String or function to filter PreparedKeyboardButton data
+     * @param handler - Async function to handle filtered PreparedKeyboardButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedkeyboardbutton Telegram Bot API}
+     */
+    onPreparedKeyboardButton(filter: string | ((data: any) => boolean), handler: (data: PreparedKeyboardButton) => void | Promise<void>): this;
+    /**
      * Registers a handler for ResponseParameters updates
      * @overload
      * @param handler - Async function to handle ResponseParameters updates
@@ -6540,42 +6715,6 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
     onChosenInlineResult(filter: string | ((data: any) => boolean), handler: (data: ChosenInlineResult) => void | Promise<void>): this;
-    /**
-     * Registers a handler for SentWebAppMessage updates
-     * @overload
-     * @param handler - Async function to handle SentWebAppMessage updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
-     */
-    onSentWebAppMessage(handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    
-    /**
-     * Registers a handler for SentWebAppMessage updates with filtering
-     * @overload
-     * @param filter - String or function to filter SentWebAppMessage data
-     * @param handler - Async function to handle filtered SentWebAppMessage updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
-     */
-    onSentWebAppMessage(filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    /**
-     * Registers a handler for PreparedInlineMessage updates
-     * @overload
-     * @param handler - Async function to handle PreparedInlineMessage updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
-     */
-    onPreparedInlineMessage(handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
-    
-    /**
-     * Registers a handler for PreparedInlineMessage updates with filtering
-     * @overload
-     * @param filter - String or function to filter PreparedInlineMessage data
-     * @param handler - Async function to handle filtered PreparedInlineMessage updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
-     */
-    onPreparedInlineMessage(filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
     /**
      * Registers a handler for LabeledPrice updates
      * @overload
@@ -8217,6 +8356,78 @@ declare module '../core/bot' {
      */
     on(event: 'messageautodeletetimerchanged', filter: string | ((data: any) => boolean), handler: (data: MessageAutoDeleteTimerChanged) => void | Promise<void>): this;
     /**
+     * Generic handler for 'managedbotcreated' event (strongly typed)
+     * @param event - Event name: 'managedbotcreated'
+     * @param handler - Async function to handle managedbotcreated events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotcreated Telegram Bot API}
+     */
+    on(event: 'managedbotcreated', handler: (data: ManagedBotCreated) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'managedbotcreated' event with filtering
+     * @param event - Event name: 'managedbotcreated'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered managedbotcreated events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotcreated Telegram Bot API}
+     */
+    on(event: 'managedbotcreated', filter: string | ((data: any) => boolean), handler: (data: ManagedBotCreated) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'managedbotupdated' event (strongly typed)
+     * @param event - Event name: 'managedbotupdated'
+     * @param handler - Async function to handle managedbotupdated events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram Bot API}
+     */
+    on(event: 'managedbotupdated', handler: (data: ManagedBotUpdated) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'managedbotupdated' event with filtering
+     * @param event - Event name: 'managedbotupdated'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered managedbotupdated events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram Bot API}
+     */
+    on(event: 'managedbotupdated', filter: string | ((data: any) => boolean), handler: (data: ManagedBotUpdated) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'polloptionadded' event (strongly typed)
+     * @param event - Event name: 'polloptionadded'
+     * @param handler - Async function to handle polloptionadded events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptionadded Telegram Bot API}
+     */
+    on(event: 'polloptionadded', handler: (data: PollOptionAdded) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'polloptionadded' event with filtering
+     * @param event - Event name: 'polloptionadded'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered polloptionadded events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptionadded Telegram Bot API}
+     */
+    on(event: 'polloptionadded', filter: string | ((data: any) => boolean), handler: (data: PollOptionAdded) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'polloptiondeleted' event (strongly typed)
+     * @param event - Event name: 'polloptiondeleted'
+     * @param handler - Async function to handle polloptiondeleted events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptiondeleted Telegram Bot API}
+     */
+    on(event: 'polloptiondeleted', handler: (data: PollOptionDeleted) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'polloptiondeleted' event with filtering
+     * @param event - Event name: 'polloptiondeleted'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered polloptiondeleted events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#polloptiondeleted Telegram Bot API}
+     */
+    on(event: 'polloptiondeleted', filter: string | ((data: any) => boolean), handler: (data: PollOptionDeleted) => void | Promise<void>): this;
+    /**
      * Generic handler for 'chatboostadded' event (strongly typed)
      * @param event - Event name: 'chatboostadded'
      * @param handler - Async function to handle chatboostadded events
@@ -9098,6 +9309,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestchat Telegram Bot API}
      */
     on(event: 'keyboardbuttonrequestchat', filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestChat) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'keyboardbuttonrequestmanagedbot' event (strongly typed)
+     * @param event - Event name: 'keyboardbuttonrequestmanagedbot'
+     * @param handler - Async function to handle keyboardbuttonrequestmanagedbot events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestmanagedbot Telegram Bot API}
+     */
+    on(event: 'keyboardbuttonrequestmanagedbot', handler: (data: KeyboardButtonRequestManagedBot) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'keyboardbuttonrequestmanagedbot' event with filtering
+     * @param event - Event name: 'keyboardbuttonrequestmanagedbot'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered keyboardbuttonrequestmanagedbot events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#keyboardbuttonrequestmanagedbot Telegram Bot API}
+     */
+    on(event: 'keyboardbuttonrequestmanagedbot', filter: string | ((data: any) => boolean), handler: (data: KeyboardButtonRequestManagedBot) => void | Promise<void>): this;
     /**
      * Generic handler for 'keyboardbuttonpolltype' event (strongly typed)
      * @param event - Event name: 'keyboardbuttonpolltype'
@@ -10755,6 +10984,60 @@ declare module '../core/bot' {
      */
     on(event: 'businessmessagesdeleted', filter: string | ((data: any) => boolean), handler: (data: BusinessMessagesDeleted) => void | Promise<void>): this;
     /**
+     * Generic handler for 'sentwebappmessage' event (strongly typed)
+     * @param event - Event name: 'sentwebappmessage'
+     * @param handler - Async function to handle sentwebappmessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
+     */
+    on(event: 'sentwebappmessage', handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'sentwebappmessage' event with filtering
+     * @param event - Event name: 'sentwebappmessage'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered sentwebappmessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
+     */
+    on(event: 'sentwebappmessage', filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'preparedinlinemessage' event (strongly typed)
+     * @param event - Event name: 'preparedinlinemessage'
+     * @param handler - Async function to handle preparedinlinemessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
+     */
+    on(event: 'preparedinlinemessage', handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'preparedinlinemessage' event with filtering
+     * @param event - Event name: 'preparedinlinemessage'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered preparedinlinemessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
+     */
+    on(event: 'preparedinlinemessage', filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'preparedkeyboardbutton' event (strongly typed)
+     * @param event - Event name: 'preparedkeyboardbutton'
+     * @param handler - Async function to handle preparedkeyboardbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedkeyboardbutton Telegram Bot API}
+     */
+    on(event: 'preparedkeyboardbutton', handler: (data: PreparedKeyboardButton) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'preparedkeyboardbutton' event with filtering
+     * @param event - Event name: 'preparedkeyboardbutton'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered preparedkeyboardbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#preparedkeyboardbutton Telegram Bot API}
+     */
+    on(event: 'preparedkeyboardbutton', filter: string | ((data: any) => boolean), handler: (data: PreparedKeyboardButton) => void | Promise<void>): this;
+    /**
      * Generic handler for 'responseparameters' event (strongly typed)
      * @param event - Event name: 'responseparameters'
      * @param handler - Async function to handle responseparameters events
@@ -11636,42 +11919,6 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#choseninlineresult Telegram Bot API}
      */
     on(event: 'choseninlineresult', filter: string | ((data: any) => boolean), handler: (data: ChosenInlineResult) => void | Promise<void>): this;
-    /**
-     * Generic handler for 'sentwebappmessage' event (strongly typed)
-     * @param event - Event name: 'sentwebappmessage'
-     * @param handler - Async function to handle sentwebappmessage events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
-     */
-    on(event: 'sentwebappmessage', handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    
-    /**
-     * Generic handler for 'sentwebappmessage' event with filtering
-     * @param event - Event name: 'sentwebappmessage'
-     * @param filter - Filter string or function
-     * @param handler - Async function to handle filtered sentwebappmessage events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#sentwebappmessage Telegram Bot API}
-     */
-    on(event: 'sentwebappmessage', filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
-    /**
-     * Generic handler for 'preparedinlinemessage' event (strongly typed)
-     * @param event - Event name: 'preparedinlinemessage'
-     * @param handler - Async function to handle preparedinlinemessage events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
-     */
-    on(event: 'preparedinlinemessage', handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
-    
-    /**
-     * Generic handler for 'preparedinlinemessage' event with filtering
-     * @param event - Event name: 'preparedinlinemessage'
-     * @param filter - Filter string or function
-     * @param handler - Async function to handle filtered preparedinlinemessage events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#preparedinlinemessage Telegram Bot API}
-     */
-    on(event: 'preparedinlinemessage', filter: string | ((data: any) => boolean), handler: (data: PreparedInlineMessage) => void | Promise<void>): this;
     /**
      * Generic handler for 'labeledprice' event (strongly typed)
      * @param event - Event name: 'labeledprice'
@@ -12943,6 +13190,15 @@ declare module './types/chat' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Chat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -13223,6 +13479,15 @@ declare module './types/chatFullInfo' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -13689,6 +13954,15 @@ declare module './types/message' {
      */
     editStory(params: Omit<Interfaces.EditStoryParams, 'businessConnectionId' | 'storyId'>): Promise<any>;
     /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Message instance
+     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+     */
+    savePreparedInlineMessage(params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>): Promise<any>;
+    /**
      * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -13778,15 +14052,6 @@ declare module './types/message' {
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
     sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
-    /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (userId) are automatically filled from this Message instance
-     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
-     */
-    savePreparedInlineMessage(params: Omit<Interfaces.SavePreparedInlineMessageParams, 'userId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -16582,6 +16847,14 @@ declare module './types/messageOriginChat' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -19160,6 +19433,14 @@ declare module './types/chatBoostAdded' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -19411,6 +19692,14 @@ declare module './types/backgroundTypeChatTheme' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -19661,6 +19950,14 @@ declare module './types/chatBackground' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -19930,6 +20227,15 @@ declare module './types/chatShared' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatShared instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -20344,6 +20650,14 @@ declare module './types/videoChatScheduled' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -20794,6 +21108,14 @@ declare module './types/videoChatStarted' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -21242,6 +21564,14 @@ declare module './types/videoChatEnded' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -21693,6 +22023,15 @@ declare module './types/videoChatParticipantsInvited' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -23453,6 +23792,23 @@ declare module './types/replyKeyboardMarkup' {
   }
 }
 /**
+ * Declaration merging for KeyboardButton class
+ * @namespace KeyboardButtonExtensions
+ */
+declare module './types/keyboardButton' {
+  interface KeyboardButton {
+    /**
+     * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+     * @param button: KeyboardButton - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this KeyboardButton instance
+     * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
+     */
+    savePreparedKeyboardButton(button: KeyboardButton): Promise<any>;
+  }
+}
+/**
  * Declaration merging for KeyboardButtonRequestChat class
  * @namespace KeyboardButtonRequestChatExtensions
  */
@@ -23571,6 +23927,15 @@ declare module './types/keyboardButtonRequestChat' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -24234,6 +24599,15 @@ declare module './types/switchInlineQueryChosenChat' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -24843,6 +25217,14 @@ declare module './types/chatPhoto' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -25168,6 +25550,15 @@ declare module './types/chatInviteLink' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -25421,6 +25812,15 @@ declare module './types/chatAdministratorRights' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -25683,6 +26083,15 @@ declare module './types/chatMemberUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -25983,6 +26392,15 @@ declare module './types/chatMember' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -26236,6 +26654,15 @@ declare module './types/chatMemberOwner' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26491,6 +26918,15 @@ declare module './types/chatMemberAdministrator' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -26744,6 +27180,15 @@ declare module './types/chatMemberMember' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26999,6 +27444,15 @@ declare module './types/chatMemberRestricted' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -27253,6 +27707,15 @@ declare module './types/chatMemberLeft' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -27506,6 +27969,15 @@ declare module './types/chatMemberBanned' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27779,6 +28251,15 @@ declare module './types/chatJoinRequest' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -28050,6 +28531,15 @@ declare module './types/chatPermissions' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -28327,6 +28817,14 @@ declare module './types/chatLocation' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -29582,6 +30080,14 @@ declare module './types/botCommandScopeAllPrivateChats' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -29832,6 +30338,14 @@ declare module './types/botCommandScopeAllGroupChats' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -30084,6 +30598,14 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -30335,6 +30857,14 @@ declare module './types/botCommandScopeChat' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -30585,6 +31115,14 @@ declare module './types/botCommandScopeChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -30838,6 +31376,15 @@ declare module './types/botCommandScopeChatMember' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31125,6 +31672,15 @@ declare module './types/chatBoostSource' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -31378,6 +31934,15 @@ declare module './types/chatBoostSourcePremium' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31633,6 +32198,15 @@ declare module './types/chatBoostSourceGiftCode' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -31887,6 +32461,15 @@ declare module './types/chatBoostSourceGiveaway' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -32139,6 +32722,14 @@ declare module './types/chatBoost' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -32390,6 +32981,14 @@ declare module './types/chatBoostUpdated' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -32640,6 +33239,14 @@ declare module './types/chatBoostRemoved' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -32893,6 +33500,15 @@ declare module './types/chatOwnerLeft' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33148,6 +33764,15 @@ declare module './types/chatOwnerChanged' {
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
     /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
+    /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -33401,6 +34026,15 @@ declare module './types/userChatBoosts' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33882,6 +34516,636 @@ declare module './types/businessMessagesDeleted' {
      * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
      */
     sendGame(params: Omit<Interfaces.SendGameParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for SentWebAppMessage class
+ * @namespace SentWebAppMessageExtensions
+ */
+declare module './types/sentWebAppMessage' {
+  interface SentWebAppMessage {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param chatId: number | string, name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for PreparedInlineMessage class
+ * @namespace PreparedInlineMessageExtensions
+ */
+declare module './types/preparedInlineMessage' {
+  interface PreparedInlineMessage {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param chatId: number | string, name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
+     */
+    savePreparedInlineMessage(params: Interfaces.SavePreparedInlineMessageParams): Promise<any>;
+    /**
+     * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for PreparedKeyboardButton class
+ * @namespace PreparedKeyboardButtonExtensions
+ */
+declare module './types/preparedKeyboardButton' {
+  interface PreparedKeyboardButton {
+    /**
+     * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+     * @param userId: number, button: KeyboardButton - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
+     */
+    savePreparedKeyboardButton(userId: number, button: KeyboardButton): Promise<any>;
   }
 }
 /**
@@ -36224,15 +37488,6 @@ declare module './types/inlineQueryResultsButton' {
 declare module './types/inlineQueryResult' {
   interface InlineQueryResult {
     /**
-     * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResult instance
-     * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
-     */
-    answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
-    /**
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
      * @param webAppQueryId: string, result: InlineQueryResult - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -36248,6 +37503,15 @@ declare module './types/inlineQueryResult' {
      * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
      */
     savePreparedInlineMessage(params: Interfaces.SavePreparedInlineMessageParams): Promise<any>;
+    /**
+     * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineQueryId) are automatically filled from this InlineQueryResult instance
+     * @see {@link https://core.telegram.org/bots/api#answerInlineQuery Telegram Bot API}
+     */
+    answerInlineQuery(params: Omit<Interfaces.AnswerInlineQueryParams, 'inlineQueryId'>): Promise<any>;
   }
 }
 /**
@@ -39174,620 +40438,6 @@ declare module './types/inputInvoiceMessageContent' {
   }
 }
 /**
- * Declaration merging for SentWebAppMessage class
- * @namespace SentWebAppMessageExtensions
- */
-declare module './types/sentWebAppMessage' {
-  interface SentWebAppMessage {
-    /**
-     * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
-     */
-    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
-    /**
-     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
-     */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
-    /**
-     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
-     */
-    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
-    /**
-     * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
-     */
-    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
-    /**
-     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
-     */
-    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
-    /**
-     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
-     */
-    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
-    /**
-     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
-     */
-    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
-    /**
-     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
-     */
-    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
-    /**
-     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
-     */
-    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
-    /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
-     */
-    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
-    /**
-     * Use this method to send paid media. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
-     */
-    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
-    /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
-     */
-    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
-    /**
-     * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
-     */
-    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
-    /**
-     * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
-     */
-    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
-    /**
-     * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
-     */
-    sendContact(params: Interfaces.SendContactParams): Promise<any>;
-    /**
-     * Use this method to send a native poll. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
-     */
-    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
-    /**
-     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
-     */
-    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
-    /**
-     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
-     */
-    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
-    /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
-     */
-    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
-    /**
-     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
-     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
-     */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
-    /**
-     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
-     */
-    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
-    /**
-     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
-     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
-     */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
-    /**
-     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
-     */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
-    /**
-     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-     * @param chatId: number | string, name: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
-     */
-    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
-    /**
-     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
-     */
-    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
-    /**
-     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
-     */
-    editStory(params: Interfaces.EditStoryParams): Promise<any>;
-    /**
-     * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
-     */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
-     */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
-     */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
-     */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
-     */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
-     */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
-    /**
-     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
-     */
-    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
-    /**
-     * Use this method to send invoices. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
-     */
-    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
-    /**
-     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
-     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
-     */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
-    /**
-     * Use this method to send a game. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
-     */
-    sendGame(params: Interfaces.SendGameParams): Promise<any>;
-  }
-}
-/**
- * Declaration merging for PreparedInlineMessage class
- * @namespace PreparedInlineMessageExtensions
- */
-declare module './types/preparedInlineMessage' {
-  interface PreparedInlineMessage {
-    /**
-     * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
-     */
-    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
-    /**
-     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
-     */
-    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
-    /**
-     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
-     */
-    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
-    /**
-     * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
-     */
-    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
-    /**
-     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
-     */
-    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
-    /**
-     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
-     */
-    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
-    /**
-     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
-     */
-    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
-    /**
-     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
-     */
-    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
-    /**
-     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
-     */
-    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
-    /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
-     */
-    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
-    /**
-     * Use this method to send paid media. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
-     */
-    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
-    /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
-     */
-    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
-    /**
-     * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
-     */
-    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
-    /**
-     * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
-     */
-    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
-    /**
-     * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
-     */
-    sendContact(params: Interfaces.SendContactParams): Promise<any>;
-    /**
-     * Use this method to send a native poll. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
-     */
-    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
-    /**
-     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
-     */
-    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
-    /**
-     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
-     */
-    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
-    /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
-     */
-    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
-    /**
-     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
-     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
-     */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
-    /**
-     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
-     */
-    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
-    /**
-     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
-     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
-     */
-    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
-    /**
-     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
-     */
-    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
-    /**
-     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-     * @param chatId: number | string, name: string - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
-     */
-    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
-    /**
-     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
-     */
-    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
-    /**
-     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
-     */
-    editStory(params: Interfaces.EditStoryParams): Promise<any>;
-    /**
-     * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
-     */
-    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
-    /**
-     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
-     */
-    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
-    /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
-     */
-    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
-    /**
-     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
-     */
-    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
-    /**
-     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
-     */
-    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
-    /**
-     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (messageId, inlineMessageId) are automatically filled from this PreparedInlineMessage instance
-     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
-     */
-    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
-    /**
-     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
-     */
-    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
-    /**
-     * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#savePreparedInlineMessage Telegram Bot API}
-     */
-    savePreparedInlineMessage(params: Interfaces.SavePreparedInlineMessageParams): Promise<any>;
-    /**
-     * Use this method to send invoices. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
-     */
-    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
-    /**
-     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
-     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
-     */
-    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
-    /**
-     * Use this method to send a game. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
-     */
-    sendGame(params: Interfaces.SendGameParams): Promise<any>;
-  }
-}
-/**
  * Declaration merging for LabeledPrice class
  * @namespace LabeledPriceExtensions
  */
@@ -40002,6 +40652,14 @@ declare module './types/transactionPartnerChat' {
      * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
      */
     getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters

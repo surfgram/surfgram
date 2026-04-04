@@ -8,7 +8,7 @@ Describes a checklist to create.
 | :--- | :--- | :---: | :--- |
 | title | `string` | Yes | Title of the checklist; 1-255 characters after entities parsing |
 | parseMode | `string` | No | Optional. Mode for parsing entities in the title. See formatting options for more details. |
-| titleEntities | `MessageEntity[]` | No | Optional. List of special entities that appear in the title, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are allowed. |
+| titleEntities | `MessageEntity[]` | No | Optional. List of special entities that appear in the title, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, custom\_emoji, and date\_time entities are allowed. |
 | tasks | `InputChecklistTask[]` | Yes | List of 1-30 tasks in the checklist |
 | othersCanAddTasks | `boolean` | No | Optional. Pass True if other users can add tasks to the checklist |
 | othersCanMarkTasksAsDone | `boolean` | No | Optional. Pass True if other users can mark tasks as done or not done in the checklist |

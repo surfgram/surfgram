@@ -55,6 +55,15 @@ export class PollAnswer {
   optionIds!: number[];
 
   /**
+   * Persistent identifiers of the chosen answer options. May be empty if the vote was retracted.
+   * @type { string[] }
+   * @memberof PollAnswer
+   * @instance
+   * @public
+   */
+  optionPersistentIds!: string[];
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof PollAnswer

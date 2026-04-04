@@ -152,6 +152,15 @@ export class User {
   allowsUsersToCreateTopics?: boolean;
 
   /**
+   * Optional. True, if other bots can be created to be controlled by the bot. Returned only in getMe.
+   * @type { boolean }
+   * @memberof User
+   * @instance
+   * @public
+   */
+  canManageBots?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof User

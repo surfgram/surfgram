@@ -21,6 +21,7 @@ describe('User', () => {
       has_main_web_app: true,
       has_topics_enabled: true,
       allows_users_to_create_topics: true,
+      can_manage_bots: true,
     };
 
     const instance = new User(raw, mockBot);
@@ -43,5 +44,6 @@ describe('User', () => {
     expect(instance.hasMainWebApp ?? instance.raw?.has_main_web_app).toEqual(true);
     expect(instance.hasTopicsEnabled ?? instance.raw?.has_topics_enabled).toEqual(true);
     expect(instance.allowsUsersToCreateTopics ?? instance.raw?.allows_users_to_create_topics).toEqual(true);
+    expect(instance.canManageBots ?? instance.raw?.can_manage_bots).toEqual(true);
   });
 });

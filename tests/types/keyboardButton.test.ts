@@ -11,6 +11,7 @@ describe('KeyboardButton', () => {
       style: "example text",
       request_users: {} as any,
       request_chat: {} as any,
+      request_managed_bot: {} as any,
       request_contact: true,
       request_location: true,
       request_poll: {} as any,
@@ -27,6 +28,7 @@ describe('KeyboardButton', () => {
     expect(instance.style ?? instance.raw?.style).toEqual("example text");
     expect(instance.requestUsers ?? instance.raw?.request_users).toEqual({} as any);
     expect(instance.requestChat ?? instance.raw?.request_chat).toEqual({} as any);
+    expect(instance.requestManagedBot ?? instance.raw?.request_managed_bot).toEqual({} as any);
     expect(instance.requestContact ?? instance.raw?.request_contact).toEqual(true);
     expect(instance.requestLocation ?? instance.raw?.request_location).toEqual(true);
     expect(instance.requestPoll ?? instance.raw?.request_poll).toEqual({} as any);

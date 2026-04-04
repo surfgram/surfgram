@@ -10,6 +10,7 @@ describe('PollAnswer', () => {
       voter_chat: {} as any,
       user: {} as any,
       option_ids: [123],
+      option_persistent_ids: ["example text"],
     };
 
     const instance = new PollAnswer(raw, mockBot);
@@ -21,5 +22,6 @@ describe('PollAnswer', () => {
     expect(instance.voterChat ?? instance.raw?.voter_chat).toEqual({} as any);
     expect(instance.user ?? instance.raw?.user).toEqual({} as any);
     expect(instance.optionIds ?? instance.raw?.option_ids).toEqual([123]);
+    expect(instance.optionPersistentIds ?? instance.raw?.option_persistent_ids).toEqual(["example text"]);
   });
 });

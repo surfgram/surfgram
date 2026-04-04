@@ -10,6 +10,7 @@ This object represents an answer of a user in a non-anonymous poll.
 | voterChat | `Chat` | No | Optional. The chat that changed the answer to the poll, if the voter is anonymous |
 | user | `User` | No | Optional. The user that changed the answer to the poll, if the voter isn't anonymous |
 | optionIds | `number[]` | Yes | 0-based identifiers of chosen answer options. May be empty if the vote was retracted. |
+| optionPersistentIds | `string[]` | Yes | Persistent identifiers of the chosen answer options. May be empty if the vote was retracted. |
 
 
 ## Event Handlers

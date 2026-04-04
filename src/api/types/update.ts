@@ -27,6 +27,7 @@ import { ChatMemberUpdated } from './chatMemberUpdated';
 import { ChatJoinRequest } from './chatJoinRequest';
 import { ChatBoostUpdated } from './chatBoostUpdated';
 import { ChatBoostRemoved } from './chatBoostRemoved';
+import { ManagedBotUpdated } from './managedBotUpdated';
 
 /**
  * Represents a Update object from the Telegram Bot API
@@ -248,6 +249,15 @@ export class Update {
    * @public
    */
   removedChatBoost?: ChatBoostRemoved;
+
+  /**
+   * Optional. A new bot was created to be managed by the bot or token of a bot was changed
+   * @type { ManagedBotUpdated }
+   * @memberof Update
+   * @instance
+   * @public
+   */
+  managedBot?: ManagedBotUpdated;
 
   /**
    * Raw data from Telegram API in snake_case format

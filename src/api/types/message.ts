@@ -65,7 +65,10 @@ import { GiveawayCreated } from './giveawayCreated';
 import { Giveaway } from './giveaway';
 import { GiveawayWinners } from './giveawayWinners';
 import { GiveawayCompleted } from './giveawayCompleted';
+import { ManagedBotCreated } from './managedBotCreated';
 import { PaidMessagePriceChanged } from './paidMessagePriceChanged';
+import { PollOptionAdded } from './pollOptionAdded';
+import { PollOptionDeleted } from './pollOptionDeleted';
 import { SuggestedPostApproved } from './suggestedPostApproved';
 import { SuggestedPostApprovalFailed } from './suggestedPostApprovalFailed';
 import { SuggestedPostDeclined } from './suggestedPostDeclined';
@@ -253,6 +256,15 @@ export class Message {
    * @public
    */
   replyToChecklistTaskId?: number;
+
+  /**
+   * Optional. Persistent identifier of the specific poll option that is being replied to
+   * @type { string }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  replyToPollOptionId?: string;
 
   /**
    * Optional. Bot through which the message was sent
@@ -930,6 +942,15 @@ export class Message {
   giveawayCompleted?: GiveawayCompleted;
 
   /**
+   * Optional. Service message: user created a bot that will be managed by the current bot
+   * @type { ManagedBotCreated }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  managedBotCreated?: ManagedBotCreated;
+
+  /**
    * Optional. Service message: the price for paid messages has changed in the chat
    * @type { PaidMessagePriceChanged }
    * @memberof Message
@@ -937,6 +958,24 @@ export class Message {
    * @public
    */
   paidMessagePriceChanged?: PaidMessagePriceChanged;
+
+  /**
+   * Optional. Service message: answer option was added to a poll
+   * @type { PollOptionAdded }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  pollOptionAdded?: PollOptionAdded;
+
+  /**
+   * Optional. Service message: answer option was deleted from a poll
+   * @type { PollOptionDeleted }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  pollOptionDeleted?: PollOptionDeleted;
 
   /**
    * Optional. Service message: a suggested post was approved

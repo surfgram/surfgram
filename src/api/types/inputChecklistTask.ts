@@ -45,7 +45,7 @@ export class InputChecklistTask {
   parseMode?: string;
 
   /**
-   * Optional. List of special entities that appear in the text, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are allowed.
+   * Optional. List of special entities that appear in the text, which can be specified instead of parse\_mode. Currently, only bold, italic, underline, strikethrough, spoiler, custom\_emoji, and date\_time entities are allowed.
    * @type { MessageEntity[] }
    * @memberof InputChecklistTask
    * @instance

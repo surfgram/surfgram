@@ -899,6 +899,28 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to get the token of a managed bot. Returns the token as String on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function getManagedBotToken
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).getManagedBotToken = function(...args: any[]) {
+  return (methods as any).getManagedBotToken.apply(this, args);
+};
+
+/**
+ * Use this method to revoke the current token of a managed bot and generate a new one. Returns the new token as String on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function replaceManagedBotToken
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).replaceManagedBotToken = function(...args: any[]) {
+  return (methods as any).replaceManagedBotToken.apply(this, args);
+};
+
+/**
  * Use this method to change the list of the bot&#39;s commands. See this manual for more details about bot commands. Returns True on success.
  * @memberof Bot.prototype
  * @instance
@@ -1361,6 +1383,39 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function answerWebAppQuery
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).answerWebAppQuery = function(...args: any[]) {
+  return (methods as any).answerWebAppQuery.apply(this, args);
+};
+
+/**
+ * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+ * @memberof Bot.prototype
+ * @instance
+ * @function savePreparedInlineMessage
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).savePreparedInlineMessage = function(...args: any[]) {
+  return (methods as any).savePreparedInlineMessage.apply(this, args);
+};
+
+/**
+ * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
+ * @memberof Bot.prototype
+ * @instance
+ * @function savePreparedKeyboardButton
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).savePreparedKeyboardButton = function(...args: any[]) {
+  return (methods as any).savePreparedKeyboardButton.apply(this, args);
+};
+
+/**
  * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @memberof Bot.prototype
  * @instance
@@ -1677,28 +1732,6 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).answerInlineQuery = function(...args: any[]) {
   return (methods as any).answerInlineQuery.apply(this, args);
-};
-
-/**
- * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
- * @memberof Bot.prototype
- * @instance
- * @function answerWebAppQuery
- * @returns {Promise<any>} Method result
- */
-(Bot.prototype as any).answerWebAppQuery = function(...args: any[]) {
-  return (methods as any).answerWebAppQuery.apply(this, args);
-};
-
-/**
- * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
- * @memberof Bot.prototype
- * @instance
- * @function savePreparedInlineMessage
- * @returns {Promise<any>} Method result
- */
-(Bot.prototype as any).savePreparedInlineMessage = function(...args: any[]) {
-  return (methods as any).savePreparedInlineMessage.apply(this, args);
 };
 
 /**

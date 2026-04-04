@@ -25,6 +25,7 @@ This object represents a message.
 | quote | `TextQuote` | No | Optional. For replies that quote part of the original message, the quoted part of the message |
 | replyToStory | `Story` | No | Optional. For replies to a story, the original story |
 | replyToChecklistTaskId | `number` | No | Optional. Identifier of the specific checklist task that is being replied to |
+| replyToPollOptionId | `string` | No | Optional. Persistent identifier of the specific poll option that is being replied to |
 | viaBot | `User` | No | Optional. Bot through which the message was sent |
 | editDate | `number` | No | Optional. Date the message was last edited in Unix time |
 | hasProtectedContent | `boolean` | No | Optional. True, if the message can't be forwarded |
@@ -100,7 +101,10 @@ This object represents a message.
 | giveaway | `Giveaway` | No | Optional. The message is a scheduled giveaway message |
 | giveawayWinners | `GiveawayWinners` | No | Optional. A giveaway with public winners was completed |
 | giveawayCompleted | `GiveawayCompleted` | No | Optional. Service message: a giveaway without public winners was completed |
+| managedBotCreated | `ManagedBotCreated` | No | Optional. Service message: user created a bot that will be managed by the current bot |
 | paidMessagePriceChanged | `PaidMessagePriceChanged` | No | Optional. Service message: the price for paid messages has changed in the chat |
+| pollOptionAdded | `PollOptionAdded` | No | Optional. Service message: answer option was added to a poll |
+| pollOptionDeleted | `PollOptionDeleted` | No | Optional. Service message: answer option was deleted from a poll |
 | suggestedPostApproved | `SuggestedPostApproved` | No | Optional. Service message: a suggested post was approved |
 | suggestedPostApprovalFailed | `SuggestedPostApprovalFailed` | No | Optional. Service message: approval of a suggested post has failed |
 | suggestedPostDeclined | `SuggestedPostDeclined` | No | Optional. Service message: a suggested post was declined |
@@ -1032,14 +1036,21 @@ Use this method to send a native poll. On success, the sent Message is returned.
 | `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode |
 | `isAnonymous` | `boolean` | No | True, if the poll needs to be anonymous, defaults to True |
 | `type` | `string` | No | Poll type, “quiz” or “regular”, defaults to “regular” |
-| `allowsMultipleAnswers` | `boolean` | No | True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False |
-| `correctOptionId` | `number` | No | 0-based identifier of the correct answer option, required for polls in quiz mode |
+| `allowsMultipleAnswers` | `boolean` | No | Pass True, if the poll allows multiple answers, defaults to False |
+| `allowsRevoting` | `boolean` | No | Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls |
+| `shuffleOptions` | `boolean` | No | Pass True, if the poll options must be shown in random order |
+| `allowAddingOptions` | `boolean` | No | Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes |
+| `hideResultsUntilCloses` | `boolean` | No | Pass True, if poll results must be shown only after the poll closes |
+| `correctOptionIds` | `number[]` | No | A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode |
 | `explanation` | `string` | No | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing |
 | `explanationParseMode` | `string` | No | Mode for parsing entities in the explanation. See formatting options for more details. |
 | `explanationEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode |
-| `openPeriod` | `number` | No | Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close\_date. |
-| `closeDate` | `number` | No | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open\_period. |
+| `openPeriod` | `number` | No | Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close\_date. |
+| `closeDate` | `number` | No | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with open\_period. |
 | `isClosed` | `boolean` | No | Pass True if the poll needs to be immediately closed. This can be useful for poll preview. |
+| `description` | `string` | No | Description of the poll to be sent, 0-1024 characters after entities parsing |
+| `descriptionParseMode` | `string` | No | Mode for parsing entities in the poll description. See formatting options for more details. |
+| `descriptionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of description\_parse\_mode |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
 | `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
@@ -1635,8 +1646,8 @@ Sends a gift to the given user or channel chat. The gift can&#39;t be converted 
 | :--- | :--- | :---: | :--- |
 | `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
 | `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
+| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored. |
+| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored. |
 
 **Usage examples:**
 
@@ -1775,6 +1786,49 @@ bot.onMessage(async (message: Message) => {
 ```
 
 **See also:** [editStory API method](../methods/editStory.md)
+
+### savePreparedInlineMessage
+
+Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.usersShared?.id` | Unique identifier of the target user that can use the prepared message |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `result` | `InlineQueryResult` | Yes | A JSON-serialized object describing the message to be sent |
+| `allowUserChats` | `boolean` | No | Pass True if the message can be sent to private chats with users |
+| `allowBotChats` | `boolean` | No | Pass True if the message can be sent to private chats with bots |
+| `allowGroupChats` | `boolean` | No | Pass True if the message can be sent to group and supergroup chats |
+| `allowChannelChats` | `boolean` | No | Pass True if the message can be sent to channel chats |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const message = new Message(rawData, bot);
+await message.savePreparedInlineMessage({
+  result: {} as any,
+  allowUserChats: true,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessage(async (message: Message) => {
+  // Auto-fills parameters from the message instance
+  await message.savePreparedInlineMessage({});
+});
+```
+
+**See also:** [savePreparedInlineMessage API method](../methods/savePreparedInlineMessage.md)
 
 ### editMessageText
 
@@ -2202,49 +2256,6 @@ bot.onMessage(async (message: Message) => {
 ```
 
 **See also:** [sendSticker API method](../methods/sendSticker.md)
-
-### savePreparedInlineMessage
-
-Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
-
-**Auto-filled parameters:**
-
-| Parameter | Source | Description |
-| :--- | :--- | :--- |
-| `userId` | `this.usersShared?.id` | Unique identifier of the target user that can use the prepared message |
-
-**Required parameters:**
-
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `result` | `InlineQueryResult` | Yes | A JSON-serialized object describing the message to be sent |
-| `allowUserChats` | `boolean` | No | Pass True if the message can be sent to private chats with users |
-| `allowBotChats` | `boolean` | No | Pass True if the message can be sent to private chats with bots |
-| `allowGroupChats` | `boolean` | No | Pass True if the message can be sent to group and supergroup chats |
-| `allowChannelChats` | `boolean` | No | Pass True if the message can be sent to channel chats |
-
-**Usage examples:**
-
-1. Basic usage:
-
-```typescript
-const message = new Message(rawData, bot);
-await message.savePreparedInlineMessage({
-  result: {} as any,
-  allowUserChats: true,
-});
-```
-
-2. In an event handler:
-
-```typescript
-bot.onMessage(async (message: Message) => {
-  // Auto-fills parameters from the message instance
-  await message.savePreparedInlineMessage({});
-});
-```
-
-**See also:** [savePreparedInlineMessage API method](../methods/savePreparedInlineMessage.md)
 
 ### sendInvoice
 

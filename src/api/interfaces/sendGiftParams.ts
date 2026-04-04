@@ -49,7 +49,7 @@ export interface SendGiftParams {
   text?: string;
 
   /**
-   * Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+   * Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
    * @type { string }
    * @originalType String
    * @required No
@@ -57,7 +57,7 @@ export interface SendGiftParams {
   textParseMode?: string;
 
   /**
-   * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored.
+   * A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored.
    * @type { MessageEntity[] }
    * @originalType Array of MessageEntity
    * @required No

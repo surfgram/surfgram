@@ -488,6 +488,37 @@ bot.onChatMemberLeft(async (chatmemberleft: ChatMemberLeft) => {
 
 **See also:** [getBusinessConnection API method](../methods/getBusinessConnection.md)
 
+### getManagedBotToken
+
+Use this method to get the token of a managed bot. Returns the token as String on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.user?.id` | User identifier of the managed bot whose token will be returned |
+
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatmemberleft = new ChatMemberLeft(rawData, bot);
+await chatmemberleft.getManagedBotToken();
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatMemberLeft(async (chatmemberleft: ChatMemberLeft) => {
+  // Auto-fills parameters from the chatmemberleft instance
+  await chatmemberleft.getManagedBotToken();
+});
+```
+
+**See also:** [getManagedBotToken API method](../methods/getManagedBotToken.md)
+
 ### getMyCommands
 
 Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
@@ -704,8 +735,8 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 | `giftId` | `string` | Yes | Identifier of the gift; limited gifts can't be sent to channel chats |
 | `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
 | `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
-| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
-| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom\_emoji” are ignored. |
+| `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored. |
+| `textEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text\_parse\_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored. |
 
 **Usage examples:**
 

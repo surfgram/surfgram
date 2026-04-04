@@ -30,6 +30,7 @@ This object represents an incoming update.At most one of the optional parameters
 | chatJoinRequest | `ChatJoinRequest` | No | Optional. A request to join the chat has been sent. The bot must have the can\_invite\_users administrator right in the chat to receive these updates. |
 | chatBoost | `ChatBoostUpdated` | No | Optional. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates. |
 | removedChatBoost | `ChatBoostRemoved` | No | Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates. |
+| managedBot | `ManagedBotUpdated` | No | Optional. A new bot was created to be managed by the bot or token of a bot was changed |
 
 ## Fluent Methods
 

@@ -14,6 +14,7 @@ describe('ReplyParameters', () => {
       quote_entities: [{} as any],
       quote_position: 123,
       checklist_task_id: 123,
+      poll_option_id: "example text",
     };
 
     const instance = new ReplyParameters(raw, mockBot);
@@ -29,5 +30,6 @@ describe('ReplyParameters', () => {
     expect(instance.quoteEntities ?? instance.raw?.quote_entities).toEqual([{} as any]);
     expect(instance.quotePosition ?? instance.raw?.quote_position).toEqual(123);
     expect(instance.checklistTaskId ?? instance.raw?.checklist_task_id).toEqual(123);
+    expect(instance.pollOptionId ?? instance.raw?.poll_option_id).toEqual("example text");
   });
 });

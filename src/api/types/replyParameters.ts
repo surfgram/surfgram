@@ -45,7 +45,7 @@ export class ReplyParameters {
   allowSendingWithoutReply?: boolean;
 
   /**
-   * Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities. The message will fail to send if the quote isn't found in the original message.
+   * Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, custom\_emoji, and date\_time entities. The message will fail to send if the quote isn't found in the original message.
    * @type { string }
    * @memberof ReplyParameters
    * @instance
@@ -88,6 +88,15 @@ export class ReplyParameters {
    * @public
    */
   checklistTaskId?: number;
+
+  /**
+   * Optional. Persistent identifier of the specific poll option to be replied to
+   * @type { string }
+   * @memberof ReplyParameters
+   * @instance
+   * @public
+   */
+  pollOptionId?: string;
 
   /**
    * Raw data from Telegram API in snake_case format

@@ -100,13 +100,22 @@ export class Poll {
   allowsMultipleAnswers!: boolean;
 
   /**
-   * Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent \(not forwarded\) by the bot or to the private chat with the bot.
-   * @type { number }
+   * True, if the poll allows to change the chosen answer options
+   * @type { boolean }
    * @memberof Poll
    * @instance
    * @public
    */
-  correctOptionId?: number;
+  allowsRevoting!: boolean;
+
+  /**
+   * Optional. Array of 0-based identifiers of the correct answer options. Available only for polls in quiz mode which are closed or were sent \(not forwarded\) by the bot or to the private chat with the bot.
+   * @type { number[] }
+   * @memberof Poll
+   * @instance
+   * @public
+   */
+  correctOptionIds?: number[];
 
   /**
    * Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
@@ -143,6 +152,24 @@ export class Poll {
    * @public
    */
   closeDate?: number;
+
+  /**
+   * Optional. Description of the poll; for polls inside the Message object only
+   * @type { string }
+   * @memberof Poll
+   * @instance
+   * @public
+   */
+  description?: string;
+
+  /**
+   * Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the description
+   * @type { MessageEntity[] }
+   * @memberof Poll
+   * @instance
+   * @public
+   */
+  descriptionEntities?: MessageEntity[];
 
   /**
    * Raw data from Telegram API in snake_case format

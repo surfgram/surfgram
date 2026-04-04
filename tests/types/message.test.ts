@@ -25,6 +25,7 @@ describe('Message', () => {
       quote: {} as any,
       reply_to_story: {} as any,
       reply_to_checklist_task_id: 123,
+      reply_to_poll_option_id: "example text",
       via_bot: {} as any,
       edit_date: 123,
       has_protected_content: true,
@@ -100,7 +101,10 @@ describe('Message', () => {
       giveaway: {} as any,
       giveaway_winners: {} as any,
       giveaway_completed: {} as any,
+      managed_bot_created: {} as any,
       paid_message_price_changed: {} as any,
+      poll_option_added: {} as any,
+      poll_option_deleted: {} as any,
       suggested_post_approved: {} as any,
       suggested_post_approval_failed: {} as any,
       suggested_post_declined: {} as any,
@@ -138,6 +142,7 @@ describe('Message', () => {
     expect(instance.quote ?? instance.raw?.quote).toEqual({} as any);
     expect(instance.replyToStory ?? instance.raw?.reply_to_story).toEqual({} as any);
     expect(instance.replyToChecklistTaskId ?? instance.raw?.reply_to_checklist_task_id).toEqual(123);
+    expect(instance.replyToPollOptionId ?? instance.raw?.reply_to_poll_option_id).toEqual("example text");
     expect(instance.viaBot ?? instance.raw?.via_bot).toEqual({} as any);
     expect(instance.editDate ?? instance.raw?.edit_date).toEqual(123);
     expect(instance.hasProtectedContent ?? instance.raw?.has_protected_content).toEqual(true);
@@ -213,7 +218,10 @@ describe('Message', () => {
     expect(instance.giveaway ?? instance.raw?.giveaway).toEqual({} as any);
     expect(instance.giveawayWinners ?? instance.raw?.giveaway_winners).toEqual({} as any);
     expect(instance.giveawayCompleted ?? instance.raw?.giveaway_completed).toEqual({} as any);
+    expect(instance.managedBotCreated ?? instance.raw?.managed_bot_created).toEqual({} as any);
     expect(instance.paidMessagePriceChanged ?? instance.raw?.paid_message_price_changed).toEqual({} as any);
+    expect(instance.pollOptionAdded ?? instance.raw?.poll_option_added).toEqual({} as any);
+    expect(instance.pollOptionDeleted ?? instance.raw?.poll_option_deleted).toEqual({} as any);
     expect(instance.suggestedPostApproved ?? instance.raw?.suggested_post_approved).toEqual({} as any);
     expect(instance.suggestedPostApprovalFailed ?? instance.raw?.suggested_post_approval_failed).toEqual({} as any);
     expect(instance.suggestedPostDeclined ?? instance.raw?.suggested_post_declined).toEqual({} as any);

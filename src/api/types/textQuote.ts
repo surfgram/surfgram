@@ -27,7 +27,7 @@ export class TextQuote {
   text!: string;
 
   /**
-   * Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom\_emoji entities are kept in quotes.
+   * Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, custom\_emoji, and date\_time entities are kept in quotes.
    * @type { MessageEntity[] }
    * @memberof TextQuote
    * @instance

@@ -11,12 +11,23 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { MessageEntity } from './messageEntity';
+import { User } from './user';
+import { Chat } from './chat';
 
 /**
  * Represents a PollOption object from the Telegram Bot API
  * @class PollOption
  */
 export class PollOption {
+  /**
+   * Unique identifier of the option, persistent on option addition and deletion
+   * @type { string }
+   * @memberof PollOption
+   * @instance
+   * @public
+   */
+  persistentId!: string;
+
   /**
    * Option text, 1-100 characters
    * @type { string }
@@ -36,13 +47,40 @@ export class PollOption {
   textEntities?: MessageEntity[];
 
   /**
-   * Number of users that voted for this option
+   * Number of users who voted for this option; may be 0 if unknown
    * @type { number }
    * @memberof PollOption
    * @instance
    * @public
    */
   voterCount!: number;
+
+  /**
+   * Optional. User who added the option; omitted if the option wasn't added by a user after poll creation
+   * @type { User }
+   * @memberof PollOption
+   * @instance
+   * @public
+   */
+  addedByUser?: User;
+
+  /**
+   * Optional. Chat that added the option; omitted if the option wasn't added by a chat after poll creation
+   * @type { Chat }
+   * @memberof PollOption
+   * @instance
+   * @public
+   */
+  addedByChat?: Chat;
+
+  /**
+   * Optional. Point in time \(Unix timestamp\) when the option was added; omitted if the option existed in the original poll
+   * @type { number }
+   * @memberof PollOption
+   * @instance
+   * @public
+   */
+  additionDate?: number;
 
   /**
    * Raw data from Telegram API in snake_case format

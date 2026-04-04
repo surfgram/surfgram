@@ -8,7 +8,7 @@ This method is available as a fluent method on the following types:
 
 ### InlineQueryResult (3 methods)
 
-**Available methods:** `answerInlineQuery`, `answerWebAppQuery`, `savePreparedInlineMessage`
+**Available methods:** `answerWebAppQuery`, `savePreparedInlineMessage`, `answerInlineQuery`
 
 
 [View InlineQueryResult documentation with fluent methods](../types/InlineQueryResult.md)
