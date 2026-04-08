@@ -33,7 +33,7 @@ export class ManagedBotUpdated {
    * @instance
    * @public
    */
-  bot!: User;
+  // bot!: User;
 
   /**
    * Raw data from Telegram API in snake_case format
