@@ -24,7 +24,7 @@ export class ManagedBotCreated {
    * @instance
    * @public
    */
-  // bot!: User; // deleted for now, will regenerated
+  managedBot!: User;
 
   /**
    * Raw data from Telegram API in snake_case format

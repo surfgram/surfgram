@@ -1,7 +1,7 @@
 /**
  * ManagedBotUpdated class for Surfgram Telegram Bot SDK
  * @module types/managedBotUpdated
- * @description This object contains information about the creation or token update of a bot that is managed by the current bot.
+ * @description This object contains information about the creation, token update, or owner update of a bot that is managed by the current bot.
  * @see {@link https://core.telegram.org/bots/api#managedbotupdated Telegram API Documentation}
  * @class ManagedBotUpdated
  * @extends TelegramObject
@@ -33,7 +33,7 @@ export class ManagedBotUpdated {
    * @instance
    * @public
    */
-  // bot!: User;
+  managedBot!: User;
 
   /**
    * Raw data from Telegram API in snake_case format

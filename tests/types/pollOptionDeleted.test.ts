@@ -1,33 +1,25 @@
-import { PollOptionDeleted } from "../../src/api";
-import { Bot } from "../../src/core/bot";
+import { PollOptionDeleted } from '../../src/api';
+import { Bot } from '../../src/core/bot';
 
-describe("PollOptionDeleted", () => {
-	const mockBot = { callApi: jest.fn() } as unknown as Bot;
+describe('PollOptionDeleted', () => {
+  const mockBot = { callApi: jest.fn() } as unknown as Bot;
 
-	it("should correctly instantiate from raw data", () => {
-		const raw = {
-			poll_message: {} as any,
-			option_persistent_id: "example text",
-			option_text: "example text",
-			option_text_entities: [{} as any],
-		};
+  it('should correctly instantiate from raw data', () => {
+    const raw = {
+      poll_message: {} as any,
+      option_persistent_id: "example text",
+      option_text: "example text",
+      option_text_entities: [{} as any],
+    };
 
-		const instance = new PollOptionDeleted(raw, mockBot);
+    const instance = new PollOptionDeleted(raw, mockBot);
 
-		expect(instance.raw).toEqual(raw);
-		expect(instance.bot).toBe(mockBot);
-
-		expect(instance.pollMessage ?? instance.raw?.poll_message).toEqual(
-			{} as any,
-		);
-		expect(
-			instance.optionPersistentId ?? instance.raw?.option_persistent_id,
-		).toEqual("example text");
-		expect(instance.optionText ?? instance.raw?.option_text).toEqual(
-			"example text",
-		);
-		expect(
-			instance.optionTextEntities ?? instance.raw?.option_text_entities,
-		).toEqual([{} as any]);
-	});
+    expect(instance.raw).toEqual(raw);
+    expect(instance.bot).toBe(mockBot);
+    
+    expect(instance.pollMessage ?? instance.raw?.poll_message).toEqual({} as any);
+    expect(instance.optionPersistentId ?? instance.raw?.option_persistent_id).toEqual("example text");
+    expect(instance.optionText ?? instance.raw?.option_text).toEqual("example text");
+    expect(instance.optionTextEntities ?? instance.raw?.option_text_entities).toEqual([{} as any]);
+  });
 });

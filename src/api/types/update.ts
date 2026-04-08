@@ -251,7 +251,7 @@ export class Update {
   removedChatBoost?: ChatBoostRemoved;
 
   /**
-   * Optional. A new bot was created to be managed by the bot or token of a bot was changed
+   * Optional. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed
    * @type { ManagedBotUpdated }
    * @memberof Update
    * @instance
