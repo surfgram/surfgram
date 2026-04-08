@@ -1,21 +1,23 @@
-import { ForumTopicClosed } from '../../src/api';
-import { Bot } from '../../src/core/bot';
+import { ForumTopicClosed } from "../../src/api";
+import { Bot } from "../../src/core/bot";
 
-describe('ForumTopicClosed', () => {
-  const mockBot = { callApi: jest.fn() } as unknown as Bot;
+describe("ForumTopicClosed", () => {
+	const mockBot = { callApi: jest.fn() } as unknown as Bot;
 
-  it('should correctly instantiate from raw data', () => {
-    const raw = {
-      name: "example text",
-      icon_custom_emoji_id: "example text",
-    };
+	it("should correctly instantiate from raw data", () => {
+		const raw = {
+			name: "example text",
+			icon_custom_emoji_id: "example text",
+		};
 
-    const instance = new ForumTopicClosed(raw, mockBot);
+		const instance = new ForumTopicClosed(raw, mockBot);
 
-    expect(instance.raw).toEqual(raw);
-    expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.name ?? instance.raw?.name).toEqual("example text");
-    expect(instance.iconCustomEmojiId ?? instance.raw?.icon_custom_emoji_id).toEqual("example text");
-  });
+		expect(instance.raw).toEqual(raw);
+		expect(instance.bot).toBe(mockBot);
+
+		expect(instance.name ?? instance.raw?.name).toEqual("example text");
+		expect(
+			instance.iconCustomEmojiId ?? instance.raw?.icon_custom_emoji_id,
+		).toEqual("example text");
+	});
 });
