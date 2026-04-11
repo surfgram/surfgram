@@ -1,4 +1,4 @@
-# Contributing to Quillion
+# Contributing to Surfgram
 
 We welcome contributions! Please follow these guidelines:
 
