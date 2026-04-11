@@ -1,19 +1,19 @@
-import { BotCommandScopeDefault } from '../../src/api';
-import { Bot } from '../../src/core/bot';
+import { BotCommandScopeDefault } from "../../src/api";
+import { Bot } from "../../src/core/bot";
 
-describe('BotCommandScopeDefault', () => {
-  const mockBot = { callApi: jest.fn() } as unknown as Bot;
+describe("BotCommandScopeDefault", () => {
+	const mockBot = { callApi: jest.fn() } as unknown as Bot;
 
-  it('should correctly instantiate from raw data', () => {
-    const raw = {
-      type: "example text",
-    };
+	it("should correctly instantiate from raw data", () => {
+		const raw = {
+			type: "example text",
+		};
 
-    const instance = new BotCommandScopeDefault(raw, mockBot);
+		const instance = new BotCommandScopeDefault(raw, mockBot);
 
-    expect(instance.raw).toEqual(raw);
-    expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.type ?? instance.raw?.type).toEqual("example text");
-  });
+		expect(instance.raw).toEqual(raw);
+		expect(instance.bot).toBe(mockBot);
+
+		expect(instance.type ?? instance.raw?.type).toEqual("example text");
+	});
 });
