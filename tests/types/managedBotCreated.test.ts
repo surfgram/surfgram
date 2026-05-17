@@ -11,9 +11,9 @@ describe("ManagedBotCreated", () => {
 
 		const instance = new ManagedBotCreated(raw, mockBot);
 
-    expect(instance.raw).toEqual(raw);
-    expect(instance.bot).toBe(mockBot);
-    
-    expect(instance.raw?.bot).toEqual({} as any);
-  });
+		expect(instance.raw).toEqual(raw);
+		expect(instance.bot).toBe(mockBot);
+
+		expect(instance.raw?.bot).toEqual({} as any);
+	});
 });
