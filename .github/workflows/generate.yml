@@ -30,7 +30,9 @@ jobs:
         cache: 'pnpm'
 
     - name: Install dependencies
-      run: pnpm install --no-frozen-lockfile --no-ignored-builds
+      run: pnpm install --no-frozen-lockfile
+      env:
+        PNPM_IGNORE_SCRIPTS: false
 
     - name: Generate
       run: pnpm run generate
