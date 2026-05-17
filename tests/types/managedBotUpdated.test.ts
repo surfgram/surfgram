@@ -15,7 +15,7 @@ describe('ManagedBotUpdated', () => {
     expect(instance.raw).toEqual(raw);
     expect(instance.bot).toBe(mockBot);
     
-    expect(instance.user ?? instance.raw?.user).toEqual({} as any);
-    expect(instance.bot ?? instance.raw?.bot).toEqual({} as any);
+    expect(instance.raw?.user).toEqual({} as any);
+    expect(instance.raw?.bot).toEqual({} as any);
   });
 });
