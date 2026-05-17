@@ -29,9 +29,6 @@ jobs:
         node-version: '22'
         cache: 'pnpm'
 
-    - name: Approve build scripts
-      run: echo "@biomejs/biome" | pnpm approve-builds
-
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
