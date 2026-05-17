@@ -51,7 +51,7 @@ jobs:
       id: bump_version
       if: steps.check.outputs.changed == 'true'
       run: |
-        pnpm version patch --no-git-tag-version
+        pnpm version patch --no-git-tag-version --no-git-checks
         NEW_VERSION=$(node -p "require('./package.json').version")
         echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
     
