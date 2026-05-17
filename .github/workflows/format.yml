@@ -21,7 +21,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: 11
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,6 +33,9 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+
+      - name: Approve build scripts
+        run: pnpm approve-builds --all
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
