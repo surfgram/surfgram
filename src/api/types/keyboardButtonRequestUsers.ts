@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class KeyboardButtonRequestUsers {
   /**
-   * Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message
+   * Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message.
    * @type { number }
    * @memberof KeyboardButtonRequestUsers
    * @instance

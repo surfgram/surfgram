@@ -6,7 +6,7 @@ This object defines the parameters for the creation of a managed bot. Informatio
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| requestId | `number` | Yes | Signed 32-bit identifier of the request. Must be unique within the message |
+| requestId | `number` | Yes | Signed 32-bit identifier of the request. Must be unique within the message. |
 | suggestedName | `string` | No | Optional. Suggested name for the bot |
 | suggestedUsername | `string` | No | Optional. Suggested username for the bot |
 

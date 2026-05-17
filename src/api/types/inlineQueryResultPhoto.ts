@@ -38,7 +38,7 @@ export class InlineQueryResultPhoto {
   id!: string;
 
   /**
-   * A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB
+   * A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB.
    * @type { string }
    * @memberof InlineQueryResultPhoto
    * @instance

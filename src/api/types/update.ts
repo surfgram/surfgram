@@ -1,7 +1,7 @@
 /**
  * Update class for Surfgram Telegram Bot SDK
  * @module types/update
- * @description This object represents an incoming update.At most one of the optional parameters can be present in any given update.
+ * @description This object represents an incoming update.At most one of the optional fields can be present in any given update.
  * @see {@link https://core.telegram.org/bots/api#update Telegram API Documentation}
  * @class Update
  * @extends TelegramObject
@@ -116,6 +116,15 @@ export class Update {
   deletedBusinessMessages?: BusinessMessagesDeleted;
 
   /**
+   * Optional. New guest message. The bot can use the field Message.guest\_query\_id and the method answerGuestQuery to send a message in response.
+   * @type { Message }
+   * @memberof Update
+   * @instance
+   * @public
+   */
+  guestMessage?: Message;
+
+  /**
    * Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message\_reaction" in the list of allowed\_updates to receive these updates. The update isn't received for reactions set by bots.
    * @type { MessageReactionUpdated }
    * @memberof Update
@@ -161,7 +170,7 @@ export class Update {
   callbackQuery?: CallbackQuery;
 
   /**
-   * Optional. New incoming shipping query. Only for invoices with flexible price
+   * Optional. New incoming shipping query. Only for invoices with flexible price.
    * @type { ShippingQuery }
    * @memberof Update
    * @instance
@@ -170,7 +179,7 @@ export class Update {
   shippingQuery?: ShippingQuery;
 
   /**
-   * Optional. New incoming pre-checkout query. Contains full information about checkout
+   * Optional. New incoming pre-checkout query. Contains full information about checkout.
    * @type { PreCheckoutQuery }
    * @memberof Update
    * @instance
@@ -188,7 +197,7 @@ export class Update {
   purchasedPaidMedia?: PaidMediaPurchased;
 
   /**
-   * Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
+   * Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.
    * @type { Poll }
    * @memberof Update
    * @instance

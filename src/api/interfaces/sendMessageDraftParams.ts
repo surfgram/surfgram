@@ -1,7 +1,7 @@
 /**
  * Parameters interface for the sendMessageDraft method
  * @interface SendMessageDraftParams
- * @description Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+ * @description Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
  * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram API Documentation}
  */
 
@@ -17,20 +17,12 @@ export interface SendMessageDraftParams {
   chatId: number;
 
   /**
-   * Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated
+   * Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated.
    * @type { number }
    * @originalType Integer
    * @required Yes
    */
   draftId: number;
-
-  /**
-   * Text of the message to be sent, 1-4096 characters after entities parsing
-   * @type { string }
-   * @originalType String
-   * @required Yes
-   */
-  text: string;
 
   /**
    * Unique identifier for the target message thread
@@ -39,6 +31,14 @@ export interface SendMessageDraftParams {
    * @required No
    */
   messageThreadId?: number;
+
+  /**
+   * Text of the message to be sent, 0-4096 characters after entities parsing. Pass an empty text to show a “Thinking…” placeholder.
+   * @type { string }
+   * @originalType String
+   * @required No
+   */
+  text?: string;
 
   /**
    * Mode for parsing entities in the message text. See formatting options for more details.

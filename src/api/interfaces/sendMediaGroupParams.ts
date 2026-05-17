@@ -1,7 +1,7 @@
 /**
  * Parameters interface for the sendMediaGroup method
  * @interface SendMediaGroupParams
- * @description Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @description Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
  * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram API Documentation}
  */
 
@@ -9,7 +9,7 @@ import { ReplyParameters } from '../types/replyParameters';
 
 export interface SendMediaGroupParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -19,7 +19,7 @@ export interface SendMediaGroupParams {
   /**
    * A JSON-serialized array describing messages to be sent, must include 2-10 items
    * @type { any[] }
-   * @originalType Array of InputMediaAudio, InputMediaDocument, InputMediaPhoto and InputMediaVideo
+   * @originalType Array of InputMediaAudio, InputMediaDocument, InputMediaLivePhoto, InputMediaPhoto and InputMediaVideo
    * @required Yes
    */
   media: any[];
@@ -65,7 +65,7 @@ export interface SendMediaGroupParams {
   protectContent?: boolean;
 
   /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
    * @type { boolean }
    * @originalType Boolean
    * @required No

@@ -8,8 +8,8 @@ describe('sendMessageDraft', () => {
     const params = {
       chatId: 123,
       draftId: 123,
-      text: "example text",
       messageThreadId: 123,
+      text: "example text",
       parseMode: "example text",
       entities: [{} as any],
     };
@@ -19,8 +19,8 @@ describe('sendMessageDraft', () => {
     expect(mockBot.callApi).toHaveBeenCalledWith('sendMessageDraft', {
       chat_id: 123,
       draft_id: 123,
-      text: "example text",
       message_thread_id: 123,
+      text: "example text",
       parse_mode: "example text",
       entities: [{} as any],
     });

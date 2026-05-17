@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function setChatMemberTag
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
  *  * @param { number } userId - Unique identifier of the target user
  *  * @param { string } tag? - New tag for the member; 0-16 characters, emoji are not allowed
  *  * @returns {Promise<any>} Promise resolving to method result

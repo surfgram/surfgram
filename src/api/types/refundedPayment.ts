@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class RefundedPayment {
   /**
-   * Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”
+   * Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”.
    * @type { string }
    * @memberof RefundedPayment
    * @instance

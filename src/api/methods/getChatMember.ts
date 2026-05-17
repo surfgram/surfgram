@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function getChatMember
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username
  *  * @param { number } userId - Unique identifier of the target user
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

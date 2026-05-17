@@ -30,9 +30,9 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\). |
 
 **Usage examples:**
 
@@ -71,9 +71,9 @@ Use this method to create a topic in a forum supergroup chat or a private chat w
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\). |
 
 **Usage examples:**
 
@@ -107,14 +107,14 @@ Use this method to edit name and icon of a topic in a forum supergroup chat or a
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread of the forum topic |
-| `iconCustomEmojiId` | `this.iconCustomEmojiId` | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept |
+| `iconCustomEmojiId` | `this.iconCustomEmojiId` | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
-| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
+| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept. |
 
 **Usage examples:**
 
@@ -153,7 +153,7 @@ Use this method to close an open topic in a forum supergroup chat. The bot must 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -191,7 +191,7 @@ Use this method to reopen a closed topic in a forum supergroup chat. The bot mus
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -229,7 +229,7 @@ Use this method to delete a forum topic along with all its messages in a forum s
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -267,7 +267,7 @@ Use this method to clear the list of pinned messages in a forum topic in a forum
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -300,7 +300,7 @@ Use this method to edit the name of the &#39;General&#39; topic in a forum super
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `name` | `string` | Yes | New topic name, 1-128 characters |
 
 **Usage examples:**
@@ -335,7 +335,7 @@ Use this method to close an open &#39;General&#39; topic in a forum supergroup c
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -368,7 +368,7 @@ Use this method to reopen a closed &#39;General&#39; topic in a forum supergroup
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -401,7 +401,7 @@ Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -434,7 +434,7 @@ Use this method to unhide the &#39;General&#39; topic in a forum supergroup chat
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -467,7 +467,7 @@ Use this method to clear the list of pinned messages in a General forum topic. T
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 

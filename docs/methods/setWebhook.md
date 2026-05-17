@@ -6,9 +6,9 @@ Use this method to specify a URL and receive incoming updates via an outgoing we
 
 This method is available as a fluent method on the following types:
 
-### InputFile (12 methods)
+### InputFile (13 methods)
 
-**Available methods:** `setWebhook`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
+**Available methods:** `setWebhook`, `sendPhoto`, `sendLivePhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
 
 
 [View InputFile documentation with fluent methods](../types/InputFile.md)
@@ -18,7 +18,7 @@ This method is available as a fluent method on the following types:
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `url` | `string` | Yes | HTTPS URL to send updates to. Use an empty string to remove webhook integration |
+| `url` | `string` | Yes | HTTPS URL to send updates to. Use an empty string to remove webhook integration. |
 | `certificate` | `InputFile` | No | Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details. |
 | `ipAddress` | `string` | No | The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS |
 | `maxConnections` | `number` | No | The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput. |

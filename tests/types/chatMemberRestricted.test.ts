@@ -20,6 +20,7 @@ describe('ChatMemberRestricted', () => {
       can_send_polls: true,
       can_send_other_messages: true,
       can_add_web_page_previews: true,
+      can_react_to_messages: true,
       can_edit_tag: true,
       can_change_info: true,
       can_invite_users: true,
@@ -47,6 +48,7 @@ describe('ChatMemberRestricted', () => {
     expect(instance.canSendPolls ?? instance.raw?.can_send_polls).toEqual(true);
     expect(instance.canSendOtherMessages ?? instance.raw?.can_send_other_messages).toEqual(true);
     expect(instance.canAddWebPagePreviews ?? instance.raw?.can_add_web_page_previews).toEqual(true);
+    expect(instance.canReactToMessages ?? instance.raw?.can_react_to_messages).toEqual(true);
     expect(instance.canEditTag ?? instance.raw?.can_edit_tag).toEqual(true);
     expect(instance.canChangeInfo ?? instance.raw?.can_change_info).toEqual(true);
     expect(instance.canInviteUsers ?? instance.raw?.can_invite_users).toEqual(true);

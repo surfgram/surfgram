@@ -16,8 +16,9 @@ This object represents a Telegram user or bot.
 | addedToAttachmentMenu | `boolean` | No | Optional. True, if this user added the bot to the attachment menu |
 | canJoinGroups | `boolean` | No | Optional. True, if the bot can be invited to groups. Returned only in getMe. |
 | canReadAllGroupMessages | `boolean` | No | Optional. True, if privacy mode is disabled for the bot. Returned only in getMe. |
+| supportsGuestQueries | `boolean` | No | Optional. True, if the bot supports guest queries from chats it is not a member of. Returned only in getMe. |
 | supportsInlineQueries | `boolean` | No | Optional. True, if the bot supports inline queries. Returned only in getMe. |
-| canConnectToBusiness | `boolean` | No | Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe. |
+| canConnectToBusiness | `boolean` | No | Optional. True, if the bot can be connected to a user account to manage it. Returned only in getMe. |
 | hasMainWebApp | `boolean` | No | Optional. True, if the bot has a main Web App. Returned only in getMe. |
 | hasTopicsEnabled | `boolean` | No | Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe. |
 | allowsUsersToCreateTopics | `boolean` | No | Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe. |
@@ -147,6 +148,44 @@ bot.onUser(async (user: User) => {
 
 **See also:** [setUserEmojiStatus API method](../methods/setUserEmojiStatus.md)
 
+### getUserPersonalChatMessages
+
+Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.id` | Unique identifier for the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `limit` | `number` | Yes | The maximum number of messages to return; 1-20 |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const user = new User(rawData, bot);
+await user.getUserPersonalChatMessages(
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onUser(async (user: User) => {
+  // Auto-fills parameters from the user instance
+  await user.getUserPersonalChatMessages();
+});
+```
+
+**See also:** [getUserPersonalChatMessages API method](../methods/getUserPersonalChatMessages.md)
+
 ### getUserChatBoosts
 
 Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
@@ -161,7 +200,7 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the chat or username of the channel \(in the format @channelusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the chat or username of the channel in the format @username |
 
 **Usage examples:**
 
@@ -310,7 +349,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 

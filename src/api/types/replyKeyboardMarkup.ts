@@ -1,7 +1,7 @@
 /**
  * ReplyKeyboardMarkup class for Surfgram Telegram Bot SDK
  * @module types/replyKeyboardMarkup
- * @description This object represents a custom keyboard with reply options \(see Introduction to bots for details and examples\). Not supported in channels and for messages sent on behalf of a Telegram Business account.
+ * @description This object represents a custom keyboard with reply options \(see Introduction to bots for details and examples\). Not supported in channels and for messages sent on behalf of a business account.
  * @see {@link https://core.telegram.org/bots/api#replykeyboardmarkup Telegram API Documentation}
  * @class ReplyKeyboardMarkup
  * @extends TelegramObject

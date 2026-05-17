@@ -36,7 +36,7 @@ export class OwnedGifts {
   gifts!: OwnedGift[];
 
   /**
-   * Optional. Offset for the next request. If empty, then there are no more results
+   * Optional. Offset for the next request. If empty, then there are no more results.
    * @type { string }
    * @memberof OwnedGifts
    * @instance

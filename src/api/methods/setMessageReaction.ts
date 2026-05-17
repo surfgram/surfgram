@@ -15,7 +15,7 @@ import { ReactionType } from '../types/reactionType';
  * @async
  * @function setMessageReaction
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
  *  * @param { number } messageId - Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
  *  * @param { ReactionType[] } reaction? - A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
  *  * @param { boolean } isBig? - Pass True to set the reaction with a big animation

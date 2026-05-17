@@ -15,6 +15,7 @@ describe('Update', () => {
       business_message: {} as any,
       edited_business_message: {} as any,
       deleted_business_messages: {} as any,
+      guest_message: {} as any,
       message_reaction: {} as any,
       message_reaction_count: {} as any,
       inline_query: {} as any,
@@ -47,6 +48,7 @@ describe('Update', () => {
     expect(instance.businessMessage ?? instance.raw?.business_message).toEqual({} as any);
     expect(instance.editedBusinessMessage ?? instance.raw?.edited_business_message).toEqual({} as any);
     expect(instance.deletedBusinessMessages ?? instance.raw?.deleted_business_messages).toEqual({} as any);
+    expect(instance.guestMessage ?? instance.raw?.guest_message).toEqual({} as any);
     expect(instance.messageReaction ?? instance.raw?.message_reaction).toEqual({} as any);
     expect(instance.messageReactionCount ?? instance.raw?.message_reaction_count).toEqual({} as any);
     expect(instance.inlineQuery ?? instance.raw?.inline_query).toEqual({} as any);

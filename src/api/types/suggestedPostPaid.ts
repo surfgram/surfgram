@@ -28,7 +28,7 @@ export class SuggestedPostPaid {
   suggestedPostMessage?: Message;
 
   /**
-   * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins
+   * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
    * @type { string }
    * @memberof SuggestedPostPaid
    * @instance

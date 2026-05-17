@@ -8,7 +8,7 @@
 
 export interface CopyMessagesParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -16,7 +16,7 @@ export interface CopyMessagesParams {
   chatId: number | string;
 
   /**
-   * Unique identifier for the chat where the original messages were sent \(or channel username in the format @channelusername\)
+   * Unique identifier for the chat where the original messages were sent \(or username of the target bot, supergroup or channel in the format @username\)
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes

@@ -6,9 +6,9 @@ Use this method to set the result of an interaction with a Web App and send a co
 
 This method is available as a fluent method on the following types:
 
-### InlineQueryResult (3 methods)
+### InlineQueryResult (4 methods)
 
-**Available methods:** `answerWebAppQuery`, `savePreparedInlineMessage`, `answerInlineQuery`
+**Available methods:** `answerGuestQuery`, `answerWebAppQuery`, `savePreparedInlineMessage`, `answerInlineQuery`
 
 
 [View InlineQueryResult documentation with fluent methods](../types/InlineQueryResult.md)

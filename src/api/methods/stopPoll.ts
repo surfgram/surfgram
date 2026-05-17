@@ -15,10 +15,10 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
  * @async
  * @function stopPoll
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
  *  * @param { number } messageId - Identifier of the original message with the poll
  *  * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the message to be edited was sent
- *  * @param { InlineKeyboardMarkup } replyMarkup? - A JSON-serialized object for a new message inline keyboard.
+ *  * @param { InlineKeyboardMarkup } replyMarkup? - A JSON-serialized object for a new message inline keyboard
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

@@ -11,6 +11,7 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { MessageEntity } from './messageEntity';
+import { InputPollOptionMedia } from './inputPollOptionMedia';
 
 /**
  * Represents a InputPollOption object from the Telegram Bot API
@@ -27,7 +28,7 @@ export class InputPollOption {
   text!: string;
 
   /**
-   * Optional. Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed
+   * Optional. Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed.
    * @type { string }
    * @memberof InputPollOption
    * @instance
@@ -36,13 +37,22 @@ export class InputPollOption {
   textParseMode?: string;
 
   /**
-   * Optional. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of text\_parse\_mode
+   * Optional. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of text\_parse\_mode.
    * @type { MessageEntity[] }
    * @memberof InputPollOption
    * @instance
    * @public
    */
   textEntities?: MessageEntity[];
+
+  /**
+   * Optional. Media added to the poll option
+   * @type { InputPollOptionMedia }
+   * @memberof InputPollOption
+   * @instance
+   * @public
+   */
+  media?: InputPollOptionMedia;
 
   /**
    * Raw data from Telegram API in snake_case format

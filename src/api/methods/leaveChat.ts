@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function leaveChat
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\). Channel direct messages chats aren't supported; leave the corresponding channel instead.
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username. Channel direct messages chats aren't supported; leave the corresponding channel instead.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

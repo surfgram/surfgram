@@ -66,7 +66,7 @@ export class ChatMemberUpdated {
   newChatMember!: ChatMember;
 
   /**
-   * Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
+   * Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only
    * @type { ChatInviteLink }
    * @memberof ChatMemberUpdated
    * @instance

@@ -44,7 +44,7 @@ export class InputLocationMessageContent {
   horizontalAccuracy?: number;
 
   /**
-   * Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+   * Optional. Period in seconds during which the location can be updated, must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
    * @type { number }
    * @memberof InputLocationMessageContent
    * @instance

@@ -14,7 +14,7 @@ Describes the current status of a webhook.
 | lastErrorMessage | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
 | lastSynchronizationErrorDate | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
 | maxConnections | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| allowedUpdates | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| allowedUpdates | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count. |
 
 ## Fluent Methods
 
@@ -37,7 +37,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 | `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
 | `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
 | `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count. |
 
 **Usage examples:**
 

@@ -56,7 +56,7 @@ export class ChatJoinRequest {
   date!: number;
 
   /**
-   * Optional. Bio of the user.
+   * Optional. Bio of the user
    * @type { string }
    * @memberof ChatJoinRequest
    * @instance

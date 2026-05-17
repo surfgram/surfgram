@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class KeyboardButtonRequestManagedBot {
   /**
-   * Signed 32-bit identifier of the request. Must be unique within the message
+   * Signed 32-bit identifier of the request. Must be unique within the message.
    * @type { number }
    * @memberof KeyboardButtonRequestManagedBot
    * @instance

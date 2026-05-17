@@ -13,6 +13,7 @@ This object contains information about a message that is being replied to, which
 | animation | `Animation` | No | Optional. Message is an animation, information about the animation |
 | audio | `Audio` | No | Optional. Message is an audio file, information about the file |
 | document | `Document` | No | Optional. Message is a general file, information about the file |
+| livePhoto | `LivePhoto` | No | Optional. Message is a live photo, information about the live photo |
 | paidMedia | `PaidMediaInfo` | No | Optional. Message contains paid media; information about the paid media |
 | photo | `PhotoSize[]` | No | Optional. Message is a photo, available sizes of the photo |
 | sticker | `Sticker` | No | Optional. Message is a sticker, information about the sticker |

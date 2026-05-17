@@ -151,6 +151,17 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to send live photos. On success, the sent Message is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function sendLivePhoto
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).sendLivePhoto = function(...args: any[]) {
+  return (methods as any).sendLivePhoto.apply(this, args);
+};
+
+/**
  * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
  * @memberof Bot.prototype
  * @instance
@@ -228,7 +239,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
  * @memberof Bot.prototype
  * @instance
  * @function sendMediaGroup
@@ -305,7 +316,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+ * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
  * @memberof Bot.prototype
  * @instance
  * @function sendMessageDraft
@@ -668,7 +679,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+ * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
  * @memberof Bot.prototype
  * @instance
  * @function getChatAdministrators
@@ -698,6 +709,17 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).getChatMember = function(...args: any[]) {
   return (methods as any).getChatMember.apply(this, args);
+};
+
+/**
+ * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function getUserPersonalChatMessages
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).getUserPersonalChatMessages = function(...args: any[]) {
+  return (methods as any).getUserPersonalChatMessages.apply(this, args);
 };
 
 /**
@@ -877,6 +899,17 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to reply to a received guest message. On success, a SentGuestMessage object is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function answerGuestQuery
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).answerGuestQuery = function(...args: any[]) {
+  return (methods as any).answerGuestQuery.apply(this, args);
+};
+
+/**
  * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
  * @memberof Bot.prototype
  * @instance
@@ -918,6 +951,28 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).replaceManagedBotToken = function(...args: any[]) {
   return (methods as any).replaceManagedBotToken.apply(this, args);
+};
+
+/**
+ * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function getManagedBotAccessSettings
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).getManagedBotAccessSettings = function(...args: any[]) {
+  return (methods as any).getManagedBotAccessSettings.apply(this, args);
+};
+
+/**
+ * Use this method to change the access settings of a managed bot. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function setManagedBotAccessSettings
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).setManagedBotAccessSettings = function(...args: any[]) {
+  return (methods as any).setManagedBotAccessSettings.apply(this, args);
 };
 
 /**
@@ -1438,7 +1493,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @memberof Bot.prototype
  * @instance
  * @function editMessageMedia
@@ -1545,6 +1600,28 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).deleteMessages = function(...args: any[]) {
   return (methods as any).deleteMessages.apply(this, args);
+};
+
+/**
+ * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function deleteMessageReaction
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).deleteMessageReaction = function(...args: any[]) {
+  return (methods as any).deleteMessageReaction.apply(this, args);
+};
+
+/**
+ * Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function deleteAllMessageReactions
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).deleteAllMessageReactions = function(...args: any[]) {
+  return (methods as any).deleteAllMessageReactions.apply(this, args);
 };
 
 /**

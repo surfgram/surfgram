@@ -10,6 +10,7 @@ import { camelToSnake } from '../../core/utils';
 import { SendPollParams } from '../interfaces/sendPollParams';
 import { InputPollOption } from '../types/inputPollOption';
 import { MessageEntity } from '../types/messageEntity';
+import { InputPollMedia } from '../types/inputPollMedia';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';

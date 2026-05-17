@@ -13,9 +13,9 @@ This method is available as a fluent method on the following types:
 
 [View File documentation with fluent methods](../types/File.md)
 
-### InputFile (12 methods)
+### InputFile (13 methods)
 
-**Available methods:** `setWebhook`, `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
+**Available methods:** `setWebhook`, `sendPhoto`, `sendLivePhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`, `sendVoice`, `sendVideoNote`, `setChatPhoto`, `sendSticker`, `uploadStickerFile`, `setStickerSetThumbnail`
 
 
 [View InputFile documentation with fluent methods](../types/InputFile.md)

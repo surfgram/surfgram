@@ -16,7 +16,7 @@ export interface AnswerCallbackQueryParams {
   callbackQueryId: string;
 
   /**
-   * Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
+   * Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
    * @type { string }
    * @originalType String
    * @required No

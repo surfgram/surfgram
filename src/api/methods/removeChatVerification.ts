@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function removeChatVerification
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target bot or channel in the format @username
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

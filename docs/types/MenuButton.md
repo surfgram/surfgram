@@ -21,8 +21,8 @@ Removes the profile photo of the bot. Requires no parameters. Returns True on su
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
-| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed. |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault. |
 
 **Usage examples:**
 
@@ -56,8 +56,8 @@ Use this method to change the bot&#39;s menu button in a private chat, or the de
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
-| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed. |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault. |
 
 **Usage examples:**
 
@@ -91,7 +91,7 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| `chatId` | `number` | No | Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned. |
 
 **Usage examples:**
 

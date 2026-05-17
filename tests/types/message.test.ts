@@ -15,6 +15,7 @@ describe('Message', () => {
       sender_business_bot: {} as any,
       sender_tag: "example text",
       date: 123,
+      guest_query_id: "example text",
       business_connection_id: "example text",
       chat: {} as any,
       forward_origin: {} as any,
@@ -27,6 +28,8 @@ describe('Message', () => {
       reply_to_checklist_task_id: 123,
       reply_to_poll_option_id: "example text",
       via_bot: {} as any,
+      guest_bot_caller_user: {} as any,
+      guest_bot_caller_chat: {} as any,
       edit_date: 123,
       has_protected_content: true,
       is_from_offline: true,
@@ -42,6 +45,7 @@ describe('Message', () => {
       animation: {} as any,
       audio: {} as any,
       document: {} as any,
+      live_photo: {} as any,
       paid_media: {} as any,
       photo: [{} as any],
       sticker: {} as any,
@@ -132,6 +136,7 @@ describe('Message', () => {
     expect(instance.senderBusinessBot ?? instance.raw?.sender_business_bot).toEqual({} as any);
     expect(instance.senderTag ?? instance.raw?.sender_tag).toEqual("example text");
     expect(instance.date ?? instance.raw?.date).toEqual(123);
+    expect(instance.guestQueryId ?? instance.raw?.guest_query_id).toEqual("example text");
     expect(instance.businessConnectionId ?? instance.raw?.business_connection_id).toEqual("example text");
     expect(instance.chat ?? instance.raw?.chat).toEqual({} as any);
     expect(instance.forwardOrigin ?? instance.raw?.forward_origin).toEqual({} as any);
@@ -144,6 +149,8 @@ describe('Message', () => {
     expect(instance.replyToChecklistTaskId ?? instance.raw?.reply_to_checklist_task_id).toEqual(123);
     expect(instance.replyToPollOptionId ?? instance.raw?.reply_to_poll_option_id).toEqual("example text");
     expect(instance.viaBot ?? instance.raw?.via_bot).toEqual({} as any);
+    expect(instance.guestBotCallerUser ?? instance.raw?.guest_bot_caller_user).toEqual({} as any);
+    expect(instance.guestBotCallerChat ?? instance.raw?.guest_bot_caller_chat).toEqual({} as any);
     expect(instance.editDate ?? instance.raw?.edit_date).toEqual(123);
     expect(instance.hasProtectedContent ?? instance.raw?.has_protected_content).toEqual(true);
     expect(instance.isFromOffline ?? instance.raw?.is_from_offline).toEqual(true);
@@ -159,6 +166,7 @@ describe('Message', () => {
     expect(instance.animation ?? instance.raw?.animation).toEqual({} as any);
     expect(instance.audio ?? instance.raw?.audio).toEqual({} as any);
     expect(instance.document ?? instance.raw?.document).toEqual({} as any);
+    expect(instance.livePhoto ?? instance.raw?.live_photo).toEqual({} as any);
     expect(instance.paidMedia ?? instance.raw?.paid_media).toEqual({} as any);
     expect(instance.photo ?? instance.raw?.photo).toEqual([{} as any]);
     expect(instance.sticker ?? instance.raw?.sticker).toEqual({} as any);

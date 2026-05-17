@@ -16,6 +16,7 @@ import { LinkPreviewOptions } from './linkPreviewOptions';
 import { Animation } from './animation';
 import { Audio } from './audio';
 import { Document } from './document';
+import { LivePhoto } from './livePhoto';
 import { PaidMediaInfo } from './paidMediaInfo';
 import { PhotoSize } from './photoSize';
 import { Sticker } from './sticker';
@@ -101,6 +102,15 @@ export class ExternalReplyInfo {
    * @public
    */
   document?: Document;
+
+  /**
+   * Optional. Message is a live photo, information about the live photo
+   * @type { LivePhoto }
+   * @memberof ExternalReplyInfo
+   * @instance
+   * @public
+   */
+  livePhoto?: LivePhoto;
 
   /**
    * Optional. Message contains paid media; information about the paid media

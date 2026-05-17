@@ -21,6 +21,41 @@ This object represents one result of an inline query. Telegram clients currently
 
 The `InlineQueryResult` class has the following fluent methods that automatically inject contextual parameters:
 
+### answerGuestQuery
+
+Use this method to reply to a received guest message. On success, a SentGuestMessage object is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `guestQueryId` | `string` | Yes | Unique identifier for the query to be answered |
+| `result` | `InlineQueryResult` | Yes | A JSON-serialized object describing the message to be sent |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const inlinequeryresult = new InlineQueryResult(rawData, bot);
+await inlinequeryresult.answerGuestQuery(
+  "example text",
+  {} as any,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onInlineQueryResult(async (inlinequeryresult: InlineQueryResult) => {
+  // Auto-fills parameters from the inlinequeryresult instance
+  await inlinequeryresult.answerGuestQuery();
+});
+```
+
+**See also:** [answerGuestQuery API method](../methods/answerGuestQuery.md)
+
 ### answerWebAppQuery
 
 Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
@@ -148,7 +183,7 @@ You can listen for InlineQueryResult events using:
 bot.onInlineQueryResult(async (inlinequeryresult: InlineQueryResult) => {
   console.log('Received:', inlinequeryresult);
   // Use fluent methods
-  await inlinequeryresult.answerWebAppQuery(...);
+  await inlinequeryresult.answerGuestQuery(...);
 });
 
 // Generic handler

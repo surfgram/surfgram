@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class InputFile {
   /**
-   * Type of the media, must be photo
+   * Type of the media, must be live\_photo
    * @type { string }
    * @memberof InputFile
    * @instance
@@ -26,13 +26,22 @@ export class InputFile {
   type!: string;
 
   /**
-   * File to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files »
+   * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
    * @type { string }
    * @memberof InputFile
    * @instance
    * @public
    */
   media!: string;
+
+  /**
+   * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
+   * @type { string }
+   * @memberof InputFile
+   * @instance
+   * @public
+   */
+  photo!: string;
 
   /**
    * Raw data from Telegram API in snake_case format

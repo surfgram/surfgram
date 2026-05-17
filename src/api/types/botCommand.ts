@@ -26,7 +26,7 @@ export class BotCommand {
   command!: string;
 
   /**
-   * Description of the command; 1-256 characters.
+   * Description of the command; 1-256 characters
    * @type { string }
    * @memberof BotCommand
    * @instance

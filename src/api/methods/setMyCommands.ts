@@ -18,7 +18,7 @@ import { BotCommandScope } from '../types/botCommandScope';
  * @this {Bot} Bot instance
  *  * @param { BotCommand[] } commands - A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
  *  * @param { BotCommandScope } scope? - A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
- *  * @param { string } languageCode? - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+ *  * @param { string } languageCode? - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

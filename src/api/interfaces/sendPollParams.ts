@@ -7,6 +7,7 @@
 
 import { InputPollOption } from '../types/inputPollOption';
 import { MessageEntity } from '../types/messageEntity';
+import { InputPollMedia } from '../types/inputPollMedia';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 import { ReplyKeyboardMarkup } from '../types/replyKeyboardMarkup';
@@ -15,7 +16,7 @@ import { ForceReply } from '../types/forceReply';
 
 export interface SendPollParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). Polls can't be sent to channel direct messages chats.
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Polls can't be sent to channel direct messages chats.
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -31,7 +32,7 @@ export interface SendPollParams {
   question: string;
 
   /**
-   * A JSON-serialized list of 2-12 answer options
+   * A JSON-serialized list of 1-12 answer options
    * @type { InputPollOption[] }
    * @originalType Array of InputPollOption
    * @required Yes
@@ -55,7 +56,7 @@ export interface SendPollParams {
   messageThreadId?: number;
 
   /**
-   * Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed
+   * Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed.
    * @type { string }
    * @originalType String
    * @required No
@@ -63,7 +64,7 @@ export interface SendPollParams {
   questionParseMode?: string;
 
   /**
-   * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode
+   * A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode.
    * @type { MessageEntity[] }
    * @originalType Array of MessageEntity
    * @required No
@@ -127,6 +128,22 @@ export interface SendPollParams {
   hideResultsUntilCloses?: boolean;
 
   /**
+   * Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  membersOnly?: boolean;
+
+  /**
+   * A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll.
+   * @type { string[] }
+   * @originalType Array of String
+   * @required No
+   */
+  countryCodes?: string[];
+
+  /**
    * A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
    * @type { number[] }
    * @originalType Array of Integer
@@ -151,12 +168,20 @@ export interface SendPollParams {
   explanationParseMode?: string;
 
   /**
-   * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode
+   * A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode.
    * @type { MessageEntity[] }
    * @originalType Array of MessageEntity
    * @required No
    */
   explanationEntities?: MessageEntity[];
+
+  /**
+   * Media added to the quiz explanation
+   * @type { InputPollMedia }
+   * @originalType InputPollMedia
+   * @required No
+   */
+  explanationMedia?: InputPollMedia;
 
   /**
    * Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close\_date.
@@ -207,6 +232,14 @@ export interface SendPollParams {
   descriptionEntities?: MessageEntity[];
 
   /**
+   * Media added to the poll description
+   * @type { InputPollMedia }
+   * @originalType InputPollMedia
+   * @required No
+   */
+  media?: InputPollMedia;
+
+  /**
    * Sends the message silently. Users will receive a notification with no sound.
    * @type { boolean }
    * @originalType Boolean
@@ -223,7 +256,7 @@ export interface SendPollParams {
   protectContent?: boolean;
 
   /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
    * @type { boolean }
    * @originalType Boolean
    * @required No
@@ -247,7 +280,7 @@ export interface SendPollParams {
   replyParameters?: ReplyParameters;
 
   /**
-   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.
    * @type { InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply }
    * @originalType InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply
    * @required No

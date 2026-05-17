@@ -10,6 +10,7 @@
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
+import { LivePhoto } from './livePhoto';
 
 /**
  * Represents a PaidMedia object from the Telegram Bot API
@@ -17,7 +18,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class PaidMedia {
   /**
-   * Type of the paid media, always “preview”
+   * Type of the paid media, always “live\_photo”
    * @type { string }
    * @memberof PaidMedia
    * @instance
@@ -26,31 +27,13 @@ export class PaidMedia {
   type!: string;
 
   /**
-   * Optional. Media width as defined by the sender
-   * @type { number }
+   * The photo
+   * @type { LivePhoto }
    * @memberof PaidMedia
    * @instance
    * @public
    */
-  width?: number;
-
-  /**
-   * Optional. Media height as defined by the sender
-   * @type { number }
-   * @memberof PaidMedia
-   * @instance
-   * @public
-   */
-  height?: number;
-
-  /**
-   * Optional. Duration of the media in seconds as defined by the sender
-   * @type { number }
-   * @memberof PaidMedia
-   * @instance
-   * @public
-   */
-  duration?: number;
+  livePhoto!: LivePhoto;
 
   /**
    * Raw data from Telegram API in snake_case format

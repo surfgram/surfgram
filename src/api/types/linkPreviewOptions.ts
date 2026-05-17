@@ -26,7 +26,7 @@ export class LinkPreviewOptions {
   isDisabled?: boolean;
 
   /**
-   * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
+   * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used.
    * @type { string }
    * @memberof LinkPreviewOptions
    * @instance

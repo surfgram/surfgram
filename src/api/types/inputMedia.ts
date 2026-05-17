@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMedia {
   /**
-   * Type of the result, must be photo
+   * Type of the result, must be animation
    * @type { string }
    * @memberof InputMedia
    * @instance
@@ -36,7 +36,16 @@ export class InputMedia {
   media!: string;
 
   /**
-   * Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
+   * Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
+   * @type { string }
+   * @memberof InputMedia
+   * @instance
+   * @public
+   */
+  thumbnail?: string;
+
+  /**
+   * Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
    * @type { string }
    * @memberof InputMedia
    * @instance
@@ -45,7 +54,7 @@ export class InputMedia {
   caption?: string;
 
   /**
-   * Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
+   * Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
    * @type { string }
    * @memberof InputMedia
    * @instance
@@ -72,7 +81,34 @@ export class InputMedia {
   showCaptionAboveMedia?: boolean;
 
   /**
-   * Optional. Pass True if the photo needs to be covered with a spoiler animation
+   * Optional. Animation width
+   * @type { number }
+   * @memberof InputMedia
+   * @instance
+   * @public
+   */
+  width?: number;
+
+  /**
+   * Optional. Animation height
+   * @type { number }
+   * @memberof InputMedia
+   * @instance
+   * @public
+   */
+  height?: number;
+
+  /**
+   * Optional. Animation duration in seconds
+   * @type { number }
+   * @memberof InputMedia
+   * @instance
+   * @public
+   */
+  duration?: number;
+
+  /**
+   * Optional. Pass True if the animation needs to be covered with a spoiler animation
    * @type { boolean }
    * @memberof InputMedia
    * @instance

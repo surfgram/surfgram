@@ -40,7 +40,7 @@ export class UniqueGift {
   baseName!: string;
 
   /**
-   * Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas
+   * Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas.
    * @type { string }
    * @memberof UniqueGift
    * @instance

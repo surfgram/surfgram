@@ -15,6 +15,7 @@ export * from './forwardMessagesParams';
 export * from './copyMessageParams';
 export * from './copyMessagesParams';
 export * from './sendPhotoParams';
+export * from './sendLivePhotoParams';
 export * from './sendAudioParams';
 export * from './sendDocumentParams';
 export * from './sendVideoParams';

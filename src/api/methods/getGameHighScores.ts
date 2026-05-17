@@ -15,9 +15,9 @@ import { camelToSnake } from '../../core/utils';
  * @function getGameHighScores
  * @this {Bot} Bot instance
  *  * @param { number } userId - Target user id
- *  * @param { number } chatId? - Required if inline\_message\_id is not specified. Unique identifier for the target chat
- *  * @param { number } messageId? - Required if inline\_message\_id is not specified. Identifier of the sent message
- *  * @param { string } inlineMessageId? - Required if chat\_id and message\_id are not specified. Identifier of the inline message
+ *  * @param { number } chatId? - Required if inline\_message\_id is not specified. Unique identifier for the target chat.
+ *  * @param { number } messageId? - Required if inline\_message\_id is not specified. Identifier of the sent message.
+ *  * @param { string } inlineMessageId? - Required if chat\_id and message\_id are not specified. Identifier of the inline message.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

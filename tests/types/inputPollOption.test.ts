@@ -9,6 +9,7 @@ describe('InputPollOption', () => {
       text: "example text",
       text_parse_mode: "example text",
       text_entities: [{} as any],
+      media: {} as any,
     };
 
     const instance = new InputPollOption(raw, mockBot);
@@ -19,5 +20,6 @@ describe('InputPollOption', () => {
     expect(instance.text ?? instance.raw?.text).toEqual("example text");
     expect(instance.textParseMode ?? instance.raw?.text_parse_mode).toEqual("example text");
     expect(instance.textEntities ?? instance.raw?.text_entities).toEqual([{} as any]);
+    expect(instance.media ?? instance.raw?.media).toEqual({} as any);
   });
 });

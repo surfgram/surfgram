@@ -8,7 +8,7 @@
 
 export interface PromoteChatMemberParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -56,7 +56,7 @@ export interface PromoteChatMemberParams {
   canManageVideoChats?: boolean;
 
   /**
-   * Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators
+   * Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators.
    * @type { boolean }
    * @originalType Boolean
    * @required No

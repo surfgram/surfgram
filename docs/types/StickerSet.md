@@ -25,7 +25,7 @@ Use this method to set a new group sticker set for a supergroup. The bot must be
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `stickerSetName` | `string` | Yes | Name of the sticker set to be set as the group sticker set |
 
 **Usage examples:**
@@ -60,7 +60,7 @@ Use this method to delete a group sticker set from a supergroup. The bot must be
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Usage examples:**
 
@@ -238,7 +238,7 @@ Use this method to set the thumbnail of a custom emoji sticker set. Returns True
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `name` | `string` | Yes | Sticker set name |
-| `customEmojiId` | `string` | No | Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail. |
+| `customEmojiId` | `string` | No | Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail |
 
 **Usage examples:**
 

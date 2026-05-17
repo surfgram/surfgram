@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function pinChatMessage
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel in the format @username
  *  * @param { number } messageId - Identifier of a message to pin
  *  * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the message will be pinned
  *  * @param { boolean } disableNotification? - Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.

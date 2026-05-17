@@ -22,7 +22,7 @@ Stores a keyboard button that can be used by a user within a Mini App. Returns a
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `userId` | `number` | Yes | Unique identifier of the target user that can use the button |
-| `button` | `KeyboardButton` | Yes | A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot |
+| `button` | `KeyboardButton` | Yes | A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot. |
 
 **Usage examples:**
 

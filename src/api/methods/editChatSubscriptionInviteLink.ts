@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function editChatSubscriptionInviteLink
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel in the format @username
  *  * @param { string } inviteLink - The invite link to edit
  *  * @param { string } name? - Invite link name; 0-32 characters
  *  * @returns {Promise<any>} Promise resolving to method result

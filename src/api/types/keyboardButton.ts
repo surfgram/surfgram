@@ -22,7 +22,7 @@ import { WebAppInfo } from './webAppInfo';
  */
 export class KeyboardButton {
   /**
-   * Text of the button. If none of the fields other than text, icon\_custom\_emoji\_id, and style are used, it will be sent as a message when the button is pressed
+   * Text of the button. If none of the fields other than text, icon\_custom\_emoji\_id, and style are used, it will be sent as a message when the button is pressed.
    * @type { string }
    * @memberof KeyboardButton
    * @instance

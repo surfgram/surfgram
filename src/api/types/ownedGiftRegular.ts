@@ -146,7 +146,7 @@ export class OwnedGiftRegular {
   isUpgradeSeparate?: boolean;
 
   /**
-   * Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift
+   * Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift.
    * @type { number }
    * @memberof OwnedGiftRegular
    * @instance

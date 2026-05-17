@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class SwitchInlineQueryChosenChat {
   /**
-   * Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+   * Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted.
    * @type { string }
    * @memberof SwitchInlineQueryChosenChat
    * @instance

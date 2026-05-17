@@ -35,7 +35,7 @@ export class CallbackGame {
   score!: number;
 
   /**
-   * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+   * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters.
    * @type { boolean }
    * @memberof CallbackGame
    * @instance
@@ -53,7 +53,7 @@ export class CallbackGame {
   disableEditMessage?: boolean;
 
   /**
-   * Required if inline\_message\_id is not specified. Unique identifier for the target chat
+   * Required if inline\_message\_id is not specified. Unique identifier for the target chat.
    * @type { number }
    * @memberof CallbackGame
    * @instance
@@ -62,7 +62,7 @@ export class CallbackGame {
   chatId?: number;
 
   /**
-   * Required if inline\_message\_id is not specified. Identifier of the sent message
+   * Required if inline\_message\_id is not specified. Identifier of the sent message.
    * @type { number }
    * @memberof CallbackGame
    * @instance
@@ -71,7 +71,7 @@ export class CallbackGame {
   messageId?: number;
 
   /**
-   * Required if chat\_id and message\_id are not specified. Identifier of the inline message
+   * Required if chat\_id and message\_id are not specified. Identifier of the inline message.
    * @type { string }
    * @memberof CallbackGame
    * @instance

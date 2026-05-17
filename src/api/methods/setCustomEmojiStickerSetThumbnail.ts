@@ -15,7 +15,7 @@ import { camelToSnake } from '../../core/utils';
  * @function setCustomEmojiStickerSetThumbnail
  * @this {Bot} Bot instance
  *  * @param { string } name - Sticker set name
- *  * @param { string } customEmojiId? - Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.
+ *  * @param { string } customEmojiId? - Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

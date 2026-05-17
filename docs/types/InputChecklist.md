@@ -27,7 +27,7 @@ Use this method to send a checklist on behalf of a connected business account. O
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which the message will be sent |
-| `chatId` | `number` | Yes | Unique identifier for the target chat |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target bot in the format @username |
 | `checklist` | `InputChecklist` | Yes | A JSON-serialized object for the checklist to send |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
@@ -68,7 +68,7 @@ Use this method to edit a checklist on behalf of a connected business account. O
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `businessConnectionId` | `string` | Yes | Unique identifier of the business connection on behalf of which the message will be sent |
-| `chatId` | `number` | Yes | Unique identifier for the target chat |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target bot in the format @username |
 | `messageId` | `number` | Yes | Unique identifier for the target message |
 | `checklist` | `InputChecklist` | Yes | A JSON-serialized object for the new checklist |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for the new inline keyboard for the message |

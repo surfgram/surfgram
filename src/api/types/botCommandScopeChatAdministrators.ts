@@ -26,7 +26,7 @@ export class BotCommandScopeChatAdministrators {
   type!: string;
 
   /**
-   * Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel direct messages chats and channel chats aren't supported.
+   * Unique identifier for the target chat or username of the target supergroup in the format @username. Channel direct messages chats and channel chats aren't supported.
    * @type { number | string }
    * @memberof BotCommandScopeChatAdministrators
    * @instance

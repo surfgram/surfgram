@@ -16,7 +16,7 @@ import { camelToSnake } from '../../core/utils';
  * @this {Bot} Bot instance
  *  * @param { number } chatId - Unique identifier for the target direct messages chat
  *  * @param { number } messageId - Identifier of a suggested post message to approve
- *  * @param { number } sendDate? - Point in time \(Unix timestamp\) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds \(30 days\) in the future
+ *  * @param { number } sendDate? - Point in time \(Unix timestamp\) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds \(30 days\) in the future.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

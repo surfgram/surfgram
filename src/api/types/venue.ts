@@ -18,7 +18,7 @@ import { Location } from './location';
  */
 export class Venue {
   /**
-   * Venue location. Can't be a live location
+   * Venue location. Can't be a live location.
    * @type { Location }
    * @memberof Venue
    * @instance

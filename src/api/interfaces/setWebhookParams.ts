@@ -9,7 +9,7 @@ import { InputFile } from '../types/inputFile';
 
 export interface SetWebhookParams {
   /**
-   * HTTPS URL to send updates to. Use an empty string to remove webhook integration
+   * HTTPS URL to send updates to. Use an empty string to remove webhook integration.
    * @type { string }
    * @originalType String
    * @required Yes

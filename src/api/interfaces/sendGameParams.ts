@@ -10,12 +10,12 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 export interface SendGameParams {
   /**
-   * Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.
-   * @type { number }
-   * @originalType Integer
+   * Unique identifier for the target chat or username of the target bot in the format @username. Games can't be sent to channel direct messages chats and channel chats.
+   * @type { number | string }
+   * @originalType Integer or String
    * @required Yes
    */
-  chatId: number;
+  chatId: number | string;
 
   /**
    * Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
@@ -58,7 +58,7 @@ export interface SendGameParams {
   protectContent?: boolean;
 
   /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
    * @type { boolean }
    * @originalType Boolean
    * @required No

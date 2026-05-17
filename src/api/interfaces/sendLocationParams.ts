@@ -14,7 +14,7 @@ import { ForceReply } from '../types/forceReply';
 
 export interface SendLocationParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -70,7 +70,7 @@ export interface SendLocationParams {
   horizontalAccuracy?: number;
 
   /**
-   * Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+   * Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
    * @type { number }
    * @originalType Integer
    * @required No
@@ -110,7 +110,7 @@ export interface SendLocationParams {
   protectContent?: boolean;
 
   /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
    * @type { boolean }
    * @originalType Boolean
    * @required No
@@ -142,7 +142,7 @@ export interface SendLocationParams {
   replyParameters?: ReplyParameters;
 
   /**
-   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.
    * @type { InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply }
    * @originalType InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply
    * @required No

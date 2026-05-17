@@ -55,7 +55,7 @@ export class BackgroundTypePattern {
   intensity!: number;
 
   /**
-   * Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only
+   * Optional. True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only.
    * @type { boolean }
    * @memberof BackgroundTypePattern
    * @instance

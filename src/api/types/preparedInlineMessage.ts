@@ -26,7 +26,7 @@ export class PreparedInlineMessage {
   id!: string;
 
   /**
-   * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
+   * Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used.
    * @type { number }
    * @memberof PreparedInlineMessage
    * @instance

@@ -26,7 +26,7 @@ export class LoginUrl {
   url!: string;
 
   /**
-   * Optional. New text of the button in forwarded messages.
+   * Optional. New text of the button in forwarded messages
    * @type { string }
    * @memberof LoginUrl
    * @instance
@@ -44,7 +44,7 @@ export class LoginUrl {
   botUsername?: string;
 
   /**
-   * Optional. Pass True to request the permission for your bot to send messages to the user.
+   * Optional. Pass True to request the permission for your bot to send messages to the user
    * @type { boolean }
    * @memberof LoginUrl
    * @instance

@@ -82,7 +82,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 | `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
 | `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
 | `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count. |
 
 **Usage examples:**
 
@@ -115,7 +115,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -130,11 +130,11 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -280,7 +280,7 @@ Use this method to get up-to-date information about the chat. Returns a ChatFull
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -305,14 +305,19 @@ bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorR
 
 ### getChatAdministrators
 
-Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
 
 **Auto-filled parameters:**
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `returnBots` | `boolean` | No | Pass True to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted. |
 
 **Usage examples:**
 
@@ -320,7 +325,9 @@ Use this method to get a list of administrators in a chat, which aren&#39;t bots
 
 ```typescript
 const chatadministratorrights = new ChatAdministratorRights(rawData, bot);
-await chatadministratorrights.getChatAdministrators();
+await chatadministratorrights.getChatAdministrators(
+  true,
+);
 ```
 
 2. In an event handler:
@@ -342,7 +349,7 @@ Use this method to get the number of members in a chat. Returns Int on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -373,7 +380,7 @@ Use this method to get information about a member of a chat. The method is only 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 | `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
 
 
@@ -397,6 +404,44 @@ bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorR
 
 **See also:** [getChatMember API method](../methods/getChatMember.md)
 
+### getUserPersonalChatMessages
+
+Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | Unique identifier for the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `limit` | `number` | Yes | The maximum number of messages to return; 1-20 |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatadministratorrights = new ChatAdministratorRights(rawData, bot);
+await chatadministratorrights.getUserPersonalChatMessages(
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorRights) => {
+  // Auto-fills parameters from the chatadministratorrights instance
+  await chatadministratorrights.getUserPersonalChatMessages();
+});
+```
+
+**See also:** [getUserPersonalChatMessages API method](../methods/getUserPersonalChatMessages.md)
+
 ### getForumTopicIconStickers
 
 Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
@@ -405,14 +450,14 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\). |
 | `iconCustomEmojiId` | `string` | No | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Usage examples:**
@@ -446,7 +491,7 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the chat or username of the channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the chat or username of the channel in the format @username |
 | `userId` | `this.canInviteUsers?.id` | Unique identifier of the target user |
 
 
@@ -533,6 +578,37 @@ bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorR
 ```
 
 **See also:** [getManagedBotToken API method](../methods/getManagedBotToken.md)
+
+### getManagedBotAccessSettings
+
+Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.canInviteUsers?.id` | User identifier of the managed bot whose access settings will be returned |
+
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatadministratorrights = new ChatAdministratorRights(rawData, bot);
+await chatadministratorrights.getManagedBotAccessSettings();
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatAdministratorRights(async (chatadministratorrights: ChatAdministratorRights) => {
+  // Auto-fills parameters from the chatadministratorrights instance
+  await chatadministratorrights.getManagedBotAccessSettings();
+});
+```
+
+**See also:** [getManagedBotAccessSettings API method](../methods/getManagedBotAccessSettings.md)
 
 ### getMyCommands
 
@@ -676,7 +752,7 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned. |
 
 
 **Usage examples:**
@@ -776,7 +852,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `userId` | `this.canInviteUsers?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `this.canManageChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.canManageChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 
 **Required parameters:**
 
@@ -863,7 +939,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 | `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -909,7 +985,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -942,7 +1018,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.canManageChat?.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -957,7 +1033,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -1127,14 +1203,14 @@ Use this method to get data for high score tables. Will return the score of the 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `userId` | `this.canInviteUsers?.id` | Target user id |
-| `chatId` | `this.canManageChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat |
-| `messageId` | `this.canDeleteMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message |
+| `chatId` | `this.canManageChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat. |
+| `messageId` | `this.canDeleteMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 
 **Usage examples:**
 

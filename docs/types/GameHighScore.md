@@ -28,9 +28,9 @@ Use this method to get data for high score tables. Will return the score of the 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat |
-| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `chatId` | `number` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat. |
+| `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the sent message. |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 
 **Usage examples:**
 

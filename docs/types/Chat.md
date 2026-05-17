@@ -73,7 +73,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 | `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
 | `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
 | `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count. |
 
 **Usage examples:**
 
@@ -106,7 +106,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -121,11 +121,11 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -158,7 +158,7 @@ Use this method when you need to tell the user that something is happening on th
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel chats and channel direct messages chats aren't supported. |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target bot or supergroup in the format @username. Channel chats and channel direct messages chats aren't supported. |
 
 **Required parameters:**
 
@@ -312,7 +312,7 @@ Use this method to ban a user in a group, a supergroup or a channel. In the case
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target group or username of the target supergroup or channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -353,7 +353,7 @@ Use this method to unban a previously banned user in a supergroup or channel. Th
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target group or username of the target supergroup or channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -392,7 +392,7 @@ Use this method to restrict a user in a supergroup. The bot must be an administr
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -401,7 +401,7 @@ Use this method to restrict a user in a supergroup. The bot must be an administr
 | :--- | :--- | :---: | :--- |
 | `permissions` | `ChatPermissions` | Yes | A JSON-serialized object for new user permissions |
 | `useIndependentChatPermissions` | `boolean` | No | Pass True if chat permissions are set independently. Otherwise, the can\_send\_other\_messages and can\_add\_web\_page\_previews permissions will imply the can\_send\_messages, can\_send\_audios, can\_send\_documents, can\_send\_photos, can\_send\_videos, can\_send\_video\_notes, and can\_send\_voice\_notes permissions; the can\_send\_polls permission will imply the can\_send\_messages permission. |
-| `untilDate` | `number` | No | Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever |
+| `untilDate` | `number` | No | Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever. |
 
 **Usage examples:**
 
@@ -434,7 +434,7 @@ Use this method to promote or demote a user in a supergroup or a channel. The bo
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -445,7 +445,7 @@ Use this method to promote or demote a user in a supergroup or a channel. The bo
 | `canManageChat` | `boolean` | No | Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege. |
 | `canDeleteMessages` | `boolean` | No | Pass True if the administrator can delete messages of other users |
 | `canManageVideoChats` | `boolean` | No | Pass True if the administrator can manage video chats |
-| `canRestrictMembers` | `boolean` | No | Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators |
+| `canRestrictMembers` | `boolean` | No | Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators. |
 | `canPromoteMembers` | `boolean` | No | Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly \(promoted by administrators that were appointed by him\) |
 | `canChangeInfo` | `boolean` | No | Pass True if the administrator can change chat title, photo and other settings |
 | `canInviteUsers` | `boolean` | No | Pass True if the administrator can invite new users to the chat |
@@ -490,7 +490,7 @@ Use this method to set a custom title for an administrator in a supergroup promo
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -529,7 +529,7 @@ Use this method to set a tag for a regular member in a group or a supergroup. Th
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 **Required parameters:**
@@ -568,7 +568,7 @@ Use this method to ban a channel chat in a supergroup or a channel. Until the ch
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `senderChatId` | `this?.id` | Unique identifier of the target sender chat |
 
 
@@ -600,7 +600,7 @@ Use this method to unban a previously banned channel chat in a supergroup or cha
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `senderChatId` | `this?.id` | Unique identifier of the target sender chat |
 
 
@@ -632,7 +632,7 @@ Use this method to set default chat permissions for all members. The bot must be
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
@@ -672,7 +672,7 @@ Use this method to generate a new primary invite link for a chat; any previously
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 
 **Usage examples:**
@@ -703,7 +703,7 @@ Use this method to create an additional invite link for a chat. The bot must be 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -712,7 +712,7 @@ Use this method to create an additional invite link for a chat. The bot must be 
 | `name` | `string` | No | Invite link name; 0-32 characters |
 | `expireDate` | `number` | No | Point in time \(Unix timestamp\) when the link will expire |
 | `memberLimit` | `number` | No | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
-| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified |
+| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified. |
 
 **Usage examples:**
 
@@ -745,7 +745,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -755,7 +755,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 | `name` | `string` | No | Invite link name; 0-32 characters |
 | `expireDate` | `number` | No | Point in time \(Unix timestamp\) when the link will expire |
 | `memberLimit` | `number` | No | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
-| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified |
+| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified. |
 
 **Usage examples:**
 
@@ -788,7 +788,7 @@ Use this method to create a subscription invite link for a channel chat. The bot
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target channel chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target channel chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -829,7 +829,7 @@ Use this method to edit a subscription invite link created by the bot. The bot m
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -869,7 +869,7 @@ Use this method to revoke an invite link created by the bot. If the primary link
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier of the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier of the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -907,7 +907,7 @@ Use this method to approve a chat join request. The bot must be an administrator
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 
@@ -939,7 +939,7 @@ Use this method to decline a chat join request. The bot must be an administrator
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 
@@ -971,7 +971,7 @@ Use this method to set a new profile photo for the chat. Photos can&#39;t be cha
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -1009,7 +1009,7 @@ Use this method to delete a chat photo. Photos can&#39;t be changed for private 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 
 **Usage examples:**
@@ -1040,7 +1040,7 @@ Use this method to change the title of a chat. Titles can&#39;t be changed for p
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -1078,7 +1078,7 @@ Use this method to change the description of a group, a supergroup or a channel.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -1116,7 +1116,7 @@ Use this method to add a message to the list of pinned messages in a chat. In pr
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `messageId` | `this.isDirectMessages?.id` | Identifier of a message to pin |
 
 **Required parameters:**
@@ -1157,7 +1157,7 @@ Use this method to remove a message from the list of pinned messages in a chat. 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 | `messageId` | `this.isDirectMessages?.id` | Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned. |
 
 **Required parameters:**
@@ -1196,7 +1196,7 @@ Use this method to clear the list of pinned messages in a chat. In private chats
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 
 **Usage examples:**
@@ -1227,7 +1227,7 @@ Use this method for your bot to leave a group, supergroup or channel. Returns Tr
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername). Channel direct messages chats aren't supported; leave the corresponding channel instead. |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username. Channel direct messages chats aren't supported; leave the corresponding channel instead. |
 
 
 **Usage examples:**
@@ -1258,7 +1258,7 @@ Use this method to get up-to-date information about the chat. Returns a ChatFull
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -1283,14 +1283,19 @@ bot.onChat(async (chat: Chat) => {
 
 ### getChatAdministrators
 
-Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
 
 **Auto-filled parameters:**
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `returnBots` | `boolean` | No | Pass True to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted. |
 
 **Usage examples:**
 
@@ -1298,7 +1303,9 @@ Use this method to get a list of administrators in a chat, which aren&#39;t bots
 
 ```typescript
 const chat = new Chat(rawData, bot);
-await chat.getChatAdministrators();
+await chat.getChatAdministrators(
+  true,
+);
 ```
 
 2. In an event handler:
@@ -1320,7 +1327,7 @@ Use this method to get the number of members in a chat. Returns Int on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -1351,7 +1358,7 @@ Use this method to get information about a member of a chat. The method is only 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 
@@ -1375,6 +1382,44 @@ bot.onChat(async (chat: Chat) => {
 
 **See also:** [getChatMember API method](../methods/getChatMember.md)
 
+### getUserPersonalChatMessages
+
+Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.username?.id` | Unique identifier for the target user |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `limit` | `number` | Yes | The maximum number of messages to return; 1-20 |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chat = new Chat(rawData, bot);
+await chat.getUserPersonalChatMessages(
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChat(async (chat: Chat) => {
+  // Auto-fills parameters from the chat instance
+  await chat.getUserPersonalChatMessages();
+});
+```
+
+**See also:** [getUserPersonalChatMessages API method](../methods/getUserPersonalChatMessages.md)
+
 ### setChatStickerSet
 
 Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can\_set\_sticker\_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
@@ -1383,7 +1428,7 @@ Use this method to set a new group sticker set for a supergroup. The bot must be
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
@@ -1421,7 +1466,7 @@ Use this method to delete a group sticker set from a supergroup. The bot must be
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 
 **Usage examples:**
@@ -1452,14 +1497,14 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\). |
 | `iconCustomEmojiId` | `string` | No | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Usage examples:**
@@ -1493,7 +1538,7 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the chat or username of the channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the chat or username of the channel in the format @username |
 | `userId` | `this.username?.id` | Unique identifier of the target user |
 
 
@@ -1580,6 +1625,37 @@ bot.onChat(async (chat: Chat) => {
 ```
 
 **See also:** [getManagedBotToken API method](../methods/getManagedBotToken.md)
+
+### getManagedBotAccessSettings
+
+Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `userId` | `this.username?.id` | User identifier of the managed bot whose access settings will be returned |
+
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chat = new Chat(rawData, bot);
+await chat.getManagedBotAccessSettings();
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChat(async (chat: Chat) => {
+  // Auto-fills parameters from the chat instance
+  await chat.getManagedBotAccessSettings();
+});
+```
+
+**See also:** [getManagedBotAccessSettings API method](../methods/getManagedBotAccessSettings.md)
 
 ### getMyCommands
 
@@ -1723,13 +1799,13 @@ Use this method to change the bot&#39;s menu button in a private chat, or the de
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be changed |
+| `chatId` | `this.id` | Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault |
+| `menuButton` | `MenuButton` | No | A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault. |
 
 **Usage examples:**
 
@@ -1761,7 +1837,7 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| `chatId` | `this.id` | Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned. |
 
 
 **Usage examples:**
@@ -1825,7 +1901,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 | `userId` | `this.username?.id` | Required if chat_id is not specified. Unique identifier of the target user who will receive the gift. |
 
 **Required parameters:**
@@ -1869,7 +1945,7 @@ Verifies a chat on behalf of the organization which is represented by the bot. R
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername). Channel direct messages chats can't be verified. |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Channel direct messages chats can't be verified. |
 
 **Required parameters:**
 
@@ -1907,7 +1983,7 @@ Removes verification from a chat that is currently verified on behalf of the org
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target bot or channel in the format @username |
 
 
 **Usage examples:**
@@ -1982,7 +2058,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 | `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2028,7 +2104,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2061,7 +2137,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -2076,7 +2152,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2245,15 +2321,15 @@ Use this method to get data for high score tables. Will return the score of the 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.id` | Required if inline_message_id is not specified. Unique identifier for the target chat |
+| `chatId` | `this.id` | Required if inline_message_id is not specified. Unique identifier for the target chat. |
 | `userId` | `this.username?.id` | Target user id |
-| `messageId` | `this.isDirectMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message |
+| `messageId` | `this.isDirectMessages?.id` | Required if inline_message_id is not specified. Identifier of the sent message. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 
 **Usage examples:**
 

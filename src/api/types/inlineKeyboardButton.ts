@@ -67,7 +67,7 @@ export class InlineKeyboardButton {
   callbackData?: string;
 
   /**
-   * Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a Telegram Business account.
+   * Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a business account.
    * @type { WebAppInfo }
    * @memberof InlineKeyboardButton
    * @instance
@@ -85,7 +85,7 @@ export class InlineKeyboardButton {
   loginUrl?: LoginUrl;
 
   /**
-   * Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
+   * Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a business account.
    * @type { string }
    * @memberof InlineKeyboardButton
    * @instance
@@ -94,7 +94,7 @@ export class InlineKeyboardButton {
   switchInlineQuery?: string;
 
   /**
-   * Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
+   * Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a business account.
    * @type { string }
    * @memberof InlineKeyboardButton
    * @instance
@@ -103,7 +103,7 @@ export class InlineKeyboardButton {
   switchInlineQueryCurrentChat?: string;
 
   /**
-   * Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.
+   * Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a business account.
    * @type { SwitchInlineQueryChosenChat }
    * @memberof InlineKeyboardButton
    * @instance
@@ -112,7 +112,7 @@ export class InlineKeyboardButton {
   switchInlineQueryChosenChat?: SwitchInlineQueryChosenChat;
 
   /**
-   * Optional. Description of the button that copies the specified text to the clipboard.
+   * Optional. Description of the button that copies the specified text to the clipboard
    * @type { CopyTextButton }
    * @memberof InlineKeyboardButton
    * @instance

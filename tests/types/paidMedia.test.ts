@@ -7,9 +7,7 @@ describe('PaidMedia', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       type: "example text",
-      width: 123,
-      height: 123,
-      duration: 123,
+      live_photo: {} as any,
     };
 
     const instance = new PaidMedia(raw, mockBot);
@@ -18,8 +16,6 @@ describe('PaidMedia', () => {
     expect(instance.bot).toBe(mockBot);
     
     expect(instance.type ?? instance.raw?.type).toEqual("example text");
-    expect(instance.width ?? instance.raw?.width).toEqual(123);
-    expect(instance.height ?? instance.raw?.height).toEqual(123);
-    expect(instance.duration ?? instance.raw?.duration).toEqual(123);
+    expect(instance.livePhoto ?? instance.raw?.live_photo).toEqual({} as any);
   });
 });

@@ -72,7 +72,7 @@ export interface GetUserGiftsParams {
   offset?: string;
 
   /**
-   * The maximum number of gifts to be returned; 1-100. Defaults to 100
+   * The maximum number of gifts to be returned; 1-100. Defaults to 100.
    * @type { number }
    * @originalType Integer
    * @required No

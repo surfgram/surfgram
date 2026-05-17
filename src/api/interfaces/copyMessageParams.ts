@@ -15,7 +15,7 @@ import { ForceReply } from '../types/forceReply';
 
 export interface CopyMessageParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -23,7 +23,7 @@ export interface CopyMessageParams {
   chatId: number | string;
 
   /**
-   * Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\)
+   * Unique identifier for the chat where the original message was sent \(or username of the target bot, supergroup or channel in the format @username\)
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -63,7 +63,7 @@ export interface CopyMessageParams {
   videoStartTimestamp?: number;
 
   /**
-   * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
+   * New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept.
    * @type { string }
    * @originalType String
    * @required No
@@ -111,7 +111,7 @@ export interface CopyMessageParams {
   protectContent?: boolean;
 
   /**
-   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+   * Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.
    * @type { boolean }
    * @originalType Boolean
    * @required No
@@ -143,7 +143,7 @@ export interface CopyMessageParams {
   replyParameters?: ReplyParameters;
 
   /**
-   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+   * Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.
    * @type { InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply }
    * @originalType InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply
    * @required No

@@ -27,7 +27,7 @@ export class ReplyParameters {
   messageId!: number;
 
   /**
-   * Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel \(in the format @channelusername\). Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.
+   * Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format @username. Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.
    * @type { number | string }
    * @memberof ReplyParameters
    * @instance

@@ -15,7 +15,7 @@ import { camelToSnake } from '../../core/utils';
  * @function deleteBusinessMessages
  * @this {Bot} Bot instance
  *  * @param { string } businessConnectionId - Unique identifier of the business connection on behalf of which to delete the messages
- *  * @param { number[] } messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted
+ *  * @param { number[] } messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

@@ -1,7 +1,7 @@
 /**
  * ForceReply class for Surfgram Telegram Bot SDK
  * @module types/forceReply
- * @description Upon receiving a message with this object, Telegram clients will display a reply interface to the user \(act as if the user has selected the bot&#39;s message and tapped &#39;Reply&#39;\). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode. Not supported in channels and for messages sent on behalf of a Telegram Business account.
+ * @description Upon receiving a message with this object, Telegram clients will display a reply interface to the user \(act as if the user has selected the bot&#39;s message and tapped &#39;Reply&#39;\). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode. Not supported in channels and for messages sent on behalf of a user account.
  * @see {@link https://core.telegram.org/bots/api#forcereply Telegram API Documentation}
  * @class ForceReply
  * @extends TelegramObject

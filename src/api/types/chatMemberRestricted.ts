@@ -144,6 +144,15 @@ export class ChatMemberRestricted {
   canAddWebPagePreviews!: boolean;
 
   /**
+   * True, if the user is allowed to react to messages
+   * @type { boolean }
+   * @memberof ChatMemberRestricted
+   * @instance
+   * @public
+   */
+  canReactToMessages!: boolean;
+
+  /**
    * True, if the user is allowed to edit their own tag
    * @type { boolean }
    * @memberof ChatMemberRestricted
@@ -189,7 +198,7 @@ export class ChatMemberRestricted {
   canManageTopics!: boolean;
 
   /**
-   * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
+   * Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever.
    * @type { number }
    * @memberof ChatMemberRestricted
    * @instance

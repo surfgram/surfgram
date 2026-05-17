@@ -9,7 +9,7 @@ import { ChatPermissions } from '../types/chatPermissions';
 
 export interface RestrictChatMemberParams {
   /**
-   * Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+   * Unique identifier for the target chat or username of the target supergroup in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -41,7 +41,7 @@ export interface RestrictChatMemberParams {
   useIndependentChatPermissions?: boolean;
 
   /**
-   * Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever
+   * Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.
    * @type { number }
    * @originalType Integer
    * @required No

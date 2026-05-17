@@ -16,13 +16,17 @@ describe('Poll', () => {
       type: "example text",
       allows_multiple_answers: true,
       allows_revoting: true,
+      members_only: true,
+      country_codes: ["example text"],
       correct_option_ids: [123],
       explanation: "example text",
       explanation_entities: [{} as any],
+      explanation_media: {} as any,
       open_period: 123,
       close_date: 123,
       description: "example text",
       description_entities: [{} as any],
+      media: {} as any,
     };
 
     const instance = new Poll(raw, mockBot);
@@ -40,12 +44,16 @@ describe('Poll', () => {
     expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.allowsMultipleAnswers ?? instance.raw?.allows_multiple_answers).toEqual(true);
     expect(instance.allowsRevoting ?? instance.raw?.allows_revoting).toEqual(true);
+    expect(instance.membersOnly ?? instance.raw?.members_only).toEqual(true);
+    expect(instance.countryCodes ?? instance.raw?.country_codes).toEqual(["example text"]);
     expect(instance.correctOptionIds ?? instance.raw?.correct_option_ids).toEqual([123]);
     expect(instance.explanation ?? instance.raw?.explanation).toEqual("example text");
     expect(instance.explanationEntities ?? instance.raw?.explanation_entities).toEqual([{} as any]);
+    expect(instance.explanationMedia ?? instance.raw?.explanation_media).toEqual({} as any);
     expect(instance.openPeriod ?? instance.raw?.open_period).toEqual(123);
     expect(instance.closeDate ?? instance.raw?.close_date).toEqual(123);
     expect(instance.description ?? instance.raw?.description).toEqual("example text");
     expect(instance.descriptionEntities ?? instance.raw?.description_entities).toEqual([{} as any]);
+    expect(instance.media ?? instance.raw?.media).toEqual({} as any);
   });
 });

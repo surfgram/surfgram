@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function reopenForumTopic
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
  *  * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

@@ -15,8 +15,8 @@ import { MenuButton } from '../types/menuButton';
  * @async
  * @function removeMyProfilePhoto
  * @this {Bot} Bot instance
- *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
- *  * @param { MenuButton } menuButton? - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+ *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed.
+ *  * @param { MenuButton } menuButton? - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

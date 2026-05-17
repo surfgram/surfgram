@@ -8,7 +8,7 @@
 
 export interface GetChatGiftsParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -88,7 +88,7 @@ export interface GetChatGiftsParams {
   offset?: string;
 
   /**
-   * The maximum number of gifts to be returned; 1-100. Defaults to 100
+   * The maximum number of gifts to be returned; 1-100. Defaults to 100.
    * @type { number }
    * @originalType Integer
    * @required No

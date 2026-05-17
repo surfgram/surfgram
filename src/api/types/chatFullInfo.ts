@@ -481,7 +481,7 @@ export class ChatFullInfo {
   uniqueGiftColors?: UniqueGiftColors;
 
   /**
-   * Optional. The number of Telegram Stars a general user have to pay to send a message to the chat
+   * Optional. The number of Telegram Stars a general user has to pay to send a message to the chat
    * @type { number }
    * @memberof ChatFullInfo
    * @instance

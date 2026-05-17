@@ -13,7 +13,7 @@ Represents a link to an animated GIF file. By default, this animated GIF file wi
 | gifHeight | `number` | No | Optional. Height of the GIF |
 | gifDuration | `number` | No | Optional. Duration of the GIF in seconds |
 | thumbnailUrl | `string` | Yes | URL of the static \(JPEG or GIF\) or animated \(MPEG4\) thumbnail for the result |
-| thumbnailMimeType | `string` | No | Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg” |
+| thumbnailMimeType | `string` | No | Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”. |
 | title | `string` | No | Optional. Title for the result |
 | caption | `string` | No | Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing |
 | parseMode | `string` | No | Optional. Mode for parsing entities in the caption. See formatting options for more details. |

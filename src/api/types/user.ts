@@ -107,6 +107,15 @@ export class User {
   canReadAllGroupMessages?: boolean;
 
   /**
+   * Optional. True, if the bot supports guest queries from chats it is not a member of. Returned only in getMe.
+   * @type { boolean }
+   * @memberof User
+   * @instance
+   * @public
+   */
+  supportsGuestQueries?: boolean;
+
+  /**
    * Optional. True, if the bot supports inline queries. Returned only in getMe.
    * @type { boolean }
    * @memberof User
@@ -116,7 +125,7 @@ export class User {
   supportsInlineQueries?: boolean;
 
   /**
-   * Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
+   * Optional. True, if the bot can be connected to a user account to manage it. Returned only in getMe.
    * @type { boolean }
    * @memberof User
    * @instance

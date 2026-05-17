@@ -27,7 +27,7 @@ export class DirectMessagesTopic {
   topicId!: number;
 
   /**
-   * Optional. Information about the user that created the topic. Currently, it is always present
+   * Optional. Information about the user that created the topic. Currently, it is always present.
    * @type { User }
    * @memberof DirectMessagesTopic
    * @instance

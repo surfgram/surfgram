@@ -72,7 +72,7 @@ export interface GetWebhookInfoParams {
   maxConnections?: number;
 
   /**
-   * Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member
+   * Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count.
    * @type { string[] }
    * @originalType Array of String
    * @required No

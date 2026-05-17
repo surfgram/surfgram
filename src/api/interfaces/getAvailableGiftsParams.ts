@@ -25,7 +25,7 @@ export interface GetAvailableGiftsParams {
   userId?: number;
 
   /**
-   * Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift.
+   * Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @username\) that will receive the gift.
    * @type { number | string }
    * @originalType Integer or String
    * @required No

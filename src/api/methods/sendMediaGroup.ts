@@ -1,7 +1,7 @@
 /**
  * sendMediaGroup method implementation for Surfgram Telegram Bot SDK
  * @module methods/sendMediaGroup
- * @description Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @description Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
  * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram API Documentation}
  */
 
@@ -11,7 +11,7 @@ import { SendMediaGroupParams } from '../interfaces/sendMediaGroupParams';
 import { ReplyParameters } from '../types/replyParameters';
 
 /**
- * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
  * @memberof methods
  * @async
  * @function sendMediaGroup

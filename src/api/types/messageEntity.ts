@@ -18,7 +18,7 @@ import { User } from './user';
  */
 export class MessageEntity {
   /**
-   * Type of the entity. Currently, can be “mention” \(@username\), “hashtag” \(#hashtag or #hashtag@chatusername\), “cashtag” \($USD or $USD@chatusername\), “bot\_command” \(/start@jobs\_bot\), “url” \(https://telegram.org\), “email” \(do-not-reply@telegram.org\), “phone\_number” \(+1-212-555-0123\), “bold” \(bold text\), “italic” \(italic text\), “underline” \(underlined text\), “strikethrough” \(strikethrough text\), “spoiler” \(spoiler message\), “blockquote” \(block quotation\), “expandable\_blockquote” \(collapsed-by-default block quotation\), “code” \(monowidth string\), “pre” \(monowidth block\), “text\_link” \(for clickable text URLs\), “text\_mention” \(for users without usernames\), “custom\_emoji” \(for inline custom emoji stickers\), or “date\_time” \(for formatted date and time\)
+   * Type of the entity. Currently, can be “mention” \(@username\), “hashtag” \(#hashtag or #hashtag@chatusername\), “cashtag” \($USD or $USD@chatusername\), “bot\_command” \(/start@jobs\_bot\), “url” \(https://telegram.org\), “email” \(do-not-reply@telegram.org\), “phone\_number” \(+1-212-555-0123\), “bold” \(bold text\), “italic” \(italic text\), “underline” \(underlined text\), “strikethrough” \(strikethrough text\), “spoiler” \(spoiler message\), “blockquote” \(block quotation\), “expandable\_blockquote” \(collapsed-by-default block quotation\), “code” \(monowidth string\), “pre” \(monowidth block\), “text\_link” \(for clickable text URLs\), “text\_mention” \(for users without usernames\), “custom\_emoji” \(for inline custom emoji stickers\), or “date\_time” \(for formatted date and time\).
    * @type { string }
    * @memberof MessageEntity
    * @instance
@@ -72,7 +72,7 @@ export class MessageEntity {
   language?: string;
 
   /**
-   * Optional. For “custom\_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker
+   * Optional. For “custom\_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker.
    * @type { string }
    * @memberof MessageEntity
    * @instance

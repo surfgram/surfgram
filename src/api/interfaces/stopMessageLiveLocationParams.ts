@@ -17,7 +17,7 @@ export interface StopMessageLiveLocationParams {
   businessConnectionId?: string;
 
   /**
-   * Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
    * @type { number | string }
    * @originalType Integer or String
    * @required No
@@ -25,7 +25,7 @@ export interface StopMessageLiveLocationParams {
   chatId?: number | string;
 
   /**
-   * Required if inline\_message\_id is not specified. Identifier of the message with live location to stop
+   * Required if inline\_message\_id is not specified. Identifier of the message with live location to stop.
    * @type { number }
    * @originalType Integer
    * @required No
@@ -33,7 +33,7 @@ export interface StopMessageLiveLocationParams {
   messageId?: number;
 
   /**
-   * Required if chat\_id and message\_id are not specified. Identifier of the inline message
+   * Required if chat\_id and message\_id are not specified. Identifier of the inline message.
    * @type { string }
    * @originalType String
    * @required No
@@ -41,7 +41,7 @@ export interface StopMessageLiveLocationParams {
   inlineMessageId?: string;
 
   /**
-   * A JSON-serialized object for a new inline keyboard.
+   * A JSON-serialized object for a new inline keyboard
    * @type { InlineKeyboardMarkup }
    * @originalType InlineKeyboardMarkup
    * @required No

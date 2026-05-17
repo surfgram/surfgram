@@ -1,0 +1,114 @@
+# InputPollMedia
+
+This object represents the content of a poll description or a quiz explanation to be sent. It should be one of
+
+## Fields
+
+| Name | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| persistentId | `string` | Yes | Unique identifier of the option, persistent on option addition and deletion |
+| text | `string` | Yes | Option text, 1-100 characters |
+| textEntities | `MessageEntity[]` | No | Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts |
+| media | `PollMedia` | No | Optional. Media added to the poll option |
+| voterCount | `number` | Yes | Number of users who voted for this option; may be 0 if unknown |
+| addedByUser | `User` | No | Optional. User who added the option; omitted if the option wasn't added by a user after poll creation |
+| addedByChat | `Chat` | No | Optional. Chat that added the option; omitted if the option wasn't added by a chat after poll creation |
+| additionDate | `number` | No | Optional. Point in time \(Unix timestamp\) when the option was added; omitted if the option existed in the original poll |
+
+## Fluent Methods
+
+The `InputPollMedia` class has the following fluent methods that automatically inject contextual parameters:
+
+### sendPoll
+
+Use this method to send a native poll. On success, the sent Message is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this.addedByChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Polls can't be sent to channel direct messages chats. |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `question` | `string` | Yes | Poll question, 1-300 characters |
+| `options` | `InputPollOption[]` | Yes | A JSON-serialized list of 1-12 answer options |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `questionParseMode` | `string` | No | Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed. |
+| `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode. |
+| `isAnonymous` | `boolean` | No | True, if the poll needs to be anonymous, defaults to True |
+| `type` | `string` | No | Poll type, “quiz” or “regular”, defaults to “regular” |
+| `allowsMultipleAnswers` | `boolean` | No | Pass True, if the poll allows multiple answers, defaults to False |
+| `allowsRevoting` | `boolean` | No | Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls |
+| `shuffleOptions` | `boolean` | No | Pass True, if the poll options must be shown in random order |
+| `allowAddingOptions` | `boolean` | No | Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes |
+| `hideResultsUntilCloses` | `boolean` | No | Pass True, if poll results must be shown only after the poll closes |
+| `membersOnly` | `boolean` | No | Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only |
+| `countryCodes` | `string[]` | No | A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll. |
+| `correctOptionIds` | `number[]` | No | A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode |
+| `explanation` | `string` | No | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing |
+| `explanationParseMode` | `string` | No | Mode for parsing entities in the explanation. See formatting options for more details. |
+| `explanationEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode. |
+| `explanationMedia` | `InputPollMedia` | No | Media added to the quiz explanation |
+| `openPeriod` | `number` | No | Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close\_date. |
+| `closeDate` | `number` | No | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with open\_period. |
+| `isClosed` | `boolean` | No | Pass True if the poll needs to be immediately closed. This can be useful for poll preview. |
+| `description` | `string` | No | Description of the poll to be sent, 0-1024 characters after entities parsing |
+| `descriptionParseMode` | `string` | No | Mode for parsing entities in the poll description. See formatting options for more details. |
+| `descriptionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of description\_parse\_mode |
+| `media` | `InputPollMedia` | No | Media added to the poll description |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const inputpollmedia = new InputPollMedia(rawData, bot);
+await inputpollmedia.sendPoll({
+  question: "example text",
+  options: [{} as any],
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onInputPollMedia(async (inputpollmedia: InputPollMedia) => {
+  // Auto-fills parameters from the inputpollmedia instance
+  await inputpollmedia.sendPoll({ question: "Response" });
+});
+```
+
+**See also:** [sendPoll API method](../methods/sendPoll.md)
+
+
+## Event Handlers
+
+You can listen for InputPollMedia events using:
+
+```typescript
+// Type-specific handler
+bot.onInputPollMedia(async (inputpollmedia: InputPollMedia) => {
+  console.log('Received:', inputpollmedia);
+  // Use fluent methods
+  await inputpollmedia.sendPoll(...);
+});
+
+// Generic handler
+bot.on('inputpollmedia', async (data: InputPollMedia) => {
+  // Same as above
+});
+```
+
+## API Documentation
+
+For more details, see the official [Telegram Bot API documentation](https://core.telegram.org/bots/api#InputPollMedia).

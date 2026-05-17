@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function setChatStickerSet
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
  *  * @param { string } stickerSetName - Name of the sticker set to be set as the group sticker set
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

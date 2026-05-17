@@ -15,7 +15,7 @@ import { InputFile } from '../types/inputFile';
  * @async
  * @function setChatPhoto
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel in the format @username
  *  * @param { InputFile } photo - New chat photo, uploaded using multipart/form-data
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

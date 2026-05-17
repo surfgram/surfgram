@@ -15,7 +15,7 @@ Describes a service message about a regular gift that was sent or received.
 | text | `string` | No | Optional. Text of the message that was added to the gift |
 | entities | `MessageEntity[]` | No | Optional. Special entities that appear in the text |
 | isPrivate | `boolean` | No | Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them |
-| uniqueGiftNumber | `number` | No | Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift |
+| uniqueGiftNumber | `number` | No | Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift. |
 
 
 ## Event Handlers

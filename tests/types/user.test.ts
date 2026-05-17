@@ -16,6 +16,7 @@ describe('User', () => {
       added_to_attachment_menu: true,
       can_join_groups: true,
       can_read_all_group_messages: true,
+      supports_guest_queries: true,
       supports_inline_queries: true,
       can_connect_to_business: true,
       has_main_web_app: true,
@@ -39,6 +40,7 @@ describe('User', () => {
     expect(instance.addedToAttachmentMenu ?? instance.raw?.added_to_attachment_menu).toEqual(true);
     expect(instance.canJoinGroups ?? instance.raw?.can_join_groups).toEqual(true);
     expect(instance.canReadAllGroupMessages ?? instance.raw?.can_read_all_group_messages).toEqual(true);
+    expect(instance.supportsGuestQueries ?? instance.raw?.supports_guest_queries).toEqual(true);
     expect(instance.supportsInlineQueries ?? instance.raw?.supports_inline_queries).toEqual(true);
     expect(instance.canConnectToBusiness ?? instance.raw?.can_connect_to_business).toEqual(true);
     expect(instance.hasMainWebApp ?? instance.raw?.has_main_web_app).toEqual(true);

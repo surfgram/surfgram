@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class SuggestedPostPrice {
   /**
-   * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins
+   * Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins.
    * @type { string }
    * @memberof SuggestedPostPrice
    * @instance

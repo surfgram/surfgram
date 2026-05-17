@@ -54,7 +54,7 @@ export class StarTransaction {
   date!: number;
 
   /**
-   * Optional. Source of an incoming transaction \(e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal\). Only for incoming transactions
+   * Optional. Source of an incoming transaction \(e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal\). Only for incoming transactions.
    * @type { TransactionPartner }
    * @memberof StarTransaction
    * @instance
@@ -63,7 +63,7 @@ export class StarTransaction {
   source?: TransactionPartner;
 
   /**
-   * Optional. Receiver of an outgoing transaction \(e.g., a user for a purchase refund, Fragment for a withdrawal\). Only for outgoing transactions
+   * Optional. Receiver of an outgoing transaction \(e.g., a user for a purchase refund, Fragment for a withdrawal\). Only for outgoing transactions.
    * @type { TransactionPartner }
    * @memberof StarTransaction
    * @instance

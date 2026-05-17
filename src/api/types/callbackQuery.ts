@@ -46,7 +46,7 @@ export class CallbackQuery {
   message?: MaybeInaccessibleMessage;
 
   /**
-   * Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
+   * Optional. Identifier of the message sent via the bot in inline mode, that originated the query
    * @type { string }
    * @memberof CallbackQuery
    * @instance

@@ -14,8 +14,8 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function deleteMessages
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
- *  * @param { number[] } messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+ *  * @param { number[] } messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function getChatMenuButton
  * @this {Bot} Bot instance
- *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, default bot's menu button will be returned
+ *  * @param { number } chatId? - Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

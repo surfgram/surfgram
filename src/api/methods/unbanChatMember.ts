@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function unbanChatMember
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target group or username of the target supergroup or channel in the format @username
  *  * @param { number } userId - Unique identifier of the target user
  *  * @param { boolean } onlyIfBanned? - Do nothing if the user is not banned
  *  * @returns {Promise<any>} Promise resolving to method result

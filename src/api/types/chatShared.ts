@@ -36,7 +36,7 @@ export class ChatShared {
   chatId!: number;
 
   /**
-   * Optional. Title of the chat, if the title was requested by the bot.
+   * Optional. Title of the chat, if the title was requested by the bot
    * @type { string }
    * @memberof ChatShared
    * @instance
@@ -45,7 +45,7 @@ export class ChatShared {
   title?: string;
 
   /**
-   * Optional. Username of the chat, if the username was requested by the bot and available.
+   * Optional. Username of the chat, if the username was requested by the bot and available
    * @type { string }
    * @memberof ChatShared
    * @instance

@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function unpinChatMessage
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target channel in the format @username
  *  * @param { string } businessConnectionId? - Unique identifier of the business connection on behalf of which the message will be unpinned
  *  * @param { number } messageId? - Identifier of the message to unpin. Required if business\_connection\_id is specified. If not specified, the most recent pinned message \(by sending date\) will be unpinned.
  *  * @returns {Promise<any>} Promise resolving to method result

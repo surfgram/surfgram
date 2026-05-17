@@ -107,7 +107,16 @@ export class ChatPermissions {
   canAddWebPagePreviews?: boolean;
 
   /**
-   * Optional. True, if the user is allowed to edit their own tag
+   * Optional. True, if the user is allowed to react to messages. If omitted, defaults to the value of can\_send\_messages.
+   * @type { boolean }
+   * @memberof ChatPermissions
+   * @instance
+   * @public
+   */
+  canReactToMessages?: boolean;
+
+  /**
+   * Optional. True, if the user is allowed to edit their own tag. If omitted, defaults to the value of can\_pin\_messages.
    * @type { boolean }
    * @memberof ChatPermissions
    * @instance
@@ -116,7 +125,7 @@ export class ChatPermissions {
   canEditTag?: boolean;
 
   /**
-   * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+   * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups.
    * @type { boolean }
    * @memberof ChatPermissions
    * @instance
@@ -134,7 +143,7 @@ export class ChatPermissions {
   canInviteUsers?: boolean;
 
   /**
-   * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
+   * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups.
    * @type { boolean }
    * @memberof ChatPermissions
    * @instance
@@ -143,7 +152,7 @@ export class ChatPermissions {
   canPinMessages?: boolean;
 
   /**
-   * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages
+   * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages.
    * @type { boolean }
    * @memberof ChatPermissions
    * @instance

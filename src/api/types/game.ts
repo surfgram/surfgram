@@ -38,7 +38,7 @@ export class Game {
   description!: string;
 
   /**
-   * Photo that will be displayed in the game message in chats.
+   * Photo that will be displayed in the game message in chats
    * @type { PhotoSize[] }
    * @memberof Game
    * @instance
@@ -65,7 +65,7 @@ export class Game {
   textEntities?: MessageEntity[];
 
   /**
-   * Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
+   * Optional. Animation that will be displayed in the game message in chats. Upload via BotFather.
    * @type { Animation }
    * @memberof Game
    * @instance

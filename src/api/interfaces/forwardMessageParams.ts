@@ -9,7 +9,7 @@ import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 
 export interface ForwardMessageParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -17,7 +17,7 @@ export interface ForwardMessageParams {
   chatId: number | string;
 
   /**
-   * Unique identifier for the chat where the original message was sent \(or channel username in the format @channelusername\)
+   * Unique identifier for the chat where the original message was sent \(or username of the target bot, supergroup or channel in the format @username\)
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes

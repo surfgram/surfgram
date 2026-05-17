@@ -8,6 +8,7 @@ describe('InputFile', () => {
     const raw = {
       type: "example text",
       media: "example text",
+      photo: "example text",
     };
 
     const instance = new InputFile(raw, mockBot);
@@ -17,5 +18,6 @@ describe('InputFile', () => {
     
     expect(instance.type ?? instance.raw?.type).toEqual("example text");
     expect(instance.media ?? instance.raw?.media).toEqual("example text");
+    expect(instance.photo ?? instance.raw?.photo).toEqual("example text");
   });
 });

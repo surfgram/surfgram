@@ -14,10 +14,10 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function editForumTopic
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
  *  * @param { number } messageThreadId - Unique identifier for the target message thread of the forum topic
- *  * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
- *  * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+ *  * @param { string } name? - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
+ *  * @param { string } iconCustomEmojiId? - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

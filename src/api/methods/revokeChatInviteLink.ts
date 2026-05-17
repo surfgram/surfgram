@@ -14,7 +14,7 @@ import { camelToSnake } from '../../core/utils';
  * @async
  * @function revokeChatInviteLink
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier of the target chat or username of the target channel \(in the format @channelusername\)
+ *  * @param { number | string } chatId - Unique identifier of the target chat or username of the target channel in the format @username
  *  * @param { string } inviteLink - The invite link to revoke
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

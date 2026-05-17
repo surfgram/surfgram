@@ -13,6 +13,7 @@ describe('ExternalReplyInfo', () => {
       animation: {} as any,
       audio: {} as any,
       document: {} as any,
+      live_photo: {} as any,
       paid_media: {} as any,
       photo: [{} as any],
       sticker: {} as any,
@@ -45,6 +46,7 @@ describe('ExternalReplyInfo', () => {
     expect(instance.animation ?? instance.raw?.animation).toEqual({} as any);
     expect(instance.audio ?? instance.raw?.audio).toEqual({} as any);
     expect(instance.document ?? instance.raw?.document).toEqual({} as any);
+    expect(instance.livePhoto ?? instance.raw?.live_photo).toEqual({} as any);
     expect(instance.paidMedia ?? instance.raw?.paid_media).toEqual({} as any);
     expect(instance.photo ?? instance.raw?.photo).toEqual([{} as any]);
     expect(instance.sticker ?? instance.raw?.sticker).toEqual({} as any);

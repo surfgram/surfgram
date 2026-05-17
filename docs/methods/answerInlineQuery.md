@@ -22,9 +22,9 @@ This method is available as a fluent method on the following types:
 
 [View InlineQueryResultsButton documentation with fluent methods](../types/InlineQueryResultsButton.md)
 
-### InlineQueryResult (3 methods)
+### InlineQueryResult (4 methods)
 
-**Available methods:** `answerWebAppQuery`, `savePreparedInlineMessage`, `answerInlineQuery`
+**Available methods:** `answerGuestQuery`, `answerWebAppQuery`, `savePreparedInlineMessage`, `answerInlineQuery`
 
 **Auto-filled parameters:** inlineQueryId
 

@@ -33,7 +33,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `giftId` | `this.id` | Identifier of the gift; limited gifts can't be sent to channel chats |
-| `chatId` | `this.publisherChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.publisherChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 
 **Required parameters:**
 
@@ -77,7 +77,7 @@ Sends a gift to the given user or channel chat. The gift can&#39;t be converted 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `giftId` | `this.id` | Identifier of the gift; limited gifts can't be sent to channel chats |
-| `chatId` | `this.publisherChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.publisherChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 
 **Required parameters:**
 
@@ -206,7 +206,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 | `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -248,7 +248,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -281,7 +281,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.publisherChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.publisherChat?.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -296,7 +296,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 

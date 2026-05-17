@@ -16,7 +16,7 @@ import { KeyboardButton } from '../types/keyboardButton';
  * @function savePreparedKeyboardButton
  * @this {Bot} Bot instance
  *  * @param { number } userId - Unique identifier of the target user that can use the button
- *  * @param { KeyboardButton } button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot
+ *  * @param { KeyboardButton } button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot.
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

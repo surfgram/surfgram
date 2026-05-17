@@ -27,7 +27,7 @@ export class UsersShared {
   requestId!: number;
 
   /**
-   * Information about users shared with the bot.
+   * Information about users shared with the bot
    * @type { SharedUser[] }
    * @memberof UsersShared
    * @instance

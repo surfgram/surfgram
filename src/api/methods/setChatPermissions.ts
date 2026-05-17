@@ -15,7 +15,7 @@ import { ChatPermissions } from '../types/chatPermissions';
  * @async
  * @function setChatPermissions
  * @this {Bot} Bot instance
- *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+ *  * @param { number | string } chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
  *  * @param { ChatPermissions } permissions - A JSON-serialized object for new default chat permissions
  *  * @param { boolean } useIndependentChatPermissions? - Pass True if chat permissions are set independently. Otherwise, the can\_send\_other\_messages and can\_add\_web\_page\_previews permissions will imply the can\_send\_messages, can\_send\_audios, can\_send\_documents, can\_send\_photos, can\_send\_videos, can\_send\_video\_notes, and can\_send\_voice\_notes permissions; the can\_send\_polls permission will imply the can\_send\_messages permission.
  *  * @returns {Promise<any>} Promise resolving to method result

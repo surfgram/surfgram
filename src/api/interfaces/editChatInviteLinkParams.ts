@@ -8,7 +8,7 @@
 
 export interface EditChatInviteLinkParams {
   /**
-   * Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Unique identifier for the target chat or username of the target channel in the format @username
    * @type { number | string }
    * @originalType Integer or String
    * @required Yes
@@ -48,7 +48,7 @@ export interface EditChatInviteLinkParams {
   memberLimit?: number;
 
   /**
-   * True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified
+   * True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified.
    * @type { boolean }
    * @originalType Boolean
    * @required No

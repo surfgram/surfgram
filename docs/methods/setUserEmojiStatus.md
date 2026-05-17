@@ -6,9 +6,9 @@ Changes the emoji status for a given user that previously allowed the bot to man
 
 This method is available as a fluent method on the following types:
 
-### User (9 methods)
+### User (10 methods)
 
-**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `setUserEmojiStatus`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
+**Available methods:** `getUserProfilePhotos`, `getUserProfileAudios`, `setUserEmojiStatus`, `getUserPersonalChatMessages`, `getUserChatBoosts`, `verifyUser`, `removeUserVerification`, `setBusinessAccountUsername`, `getUserGifts`, `editUserStarSubscription`
 
 **Auto-filled parameters:** userId
 

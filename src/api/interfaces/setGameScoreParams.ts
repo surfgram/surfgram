@@ -24,7 +24,7 @@ export interface SetGameScoreParams {
   score: number;
 
   /**
-   * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+   * Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters.
    * @type { boolean }
    * @originalType Boolean
    * @required No
@@ -40,7 +40,7 @@ export interface SetGameScoreParams {
   disableEditMessage?: boolean;
 
   /**
-   * Required if inline\_message\_id is not specified. Unique identifier for the target chat
+   * Required if inline\_message\_id is not specified. Unique identifier for the target chat.
    * @type { number }
    * @originalType Integer
    * @required No
@@ -48,7 +48,7 @@ export interface SetGameScoreParams {
   chatId?: number;
 
   /**
-   * Required if inline\_message\_id is not specified. Identifier of the sent message
+   * Required if inline\_message\_id is not specified. Identifier of the sent message.
    * @type { number }
    * @originalType Integer
    * @required No
@@ -56,7 +56,7 @@ export interface SetGameScoreParams {
   messageId?: number;
 
   /**
-   * Required if chat\_id and message\_id are not specified. Identifier of the inline message
+   * Required if chat\_id and message\_id are not specified. Identifier of the inline message.
    * @type { string }
    * @originalType String
    * @required No

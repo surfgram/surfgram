@@ -27,7 +27,7 @@ export class UniqueGiftInfo {
   gift!: UniqueGift;
 
   /**
-   * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers
+   * Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted\_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers.
    * @type { string }
    * @memberof UniqueGiftInfo
    * @instance
@@ -72,7 +72,7 @@ export class UniqueGiftInfo {
   transferStarCount?: number;
 
   /**
-   * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+   * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now.
    * @type { number }
    * @memberof UniqueGiftInfo
    * @instance

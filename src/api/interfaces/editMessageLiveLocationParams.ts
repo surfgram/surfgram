@@ -33,7 +33,7 @@ export interface EditMessageLiveLocationParams {
   businessConnectionId?: string;
 
   /**
-   * Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+   * Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username.
    * @type { number | string }
    * @originalType Integer or String
    * @required No
@@ -41,7 +41,7 @@ export interface EditMessageLiveLocationParams {
   chatId?: number | string;
 
   /**
-   * Required if inline\_message\_id is not specified. Identifier of the message to edit
+   * Required if inline\_message\_id is not specified. Identifier of the message to edit.
    * @type { number }
    * @originalType Integer
    * @required No
@@ -49,7 +49,7 @@ export interface EditMessageLiveLocationParams {
   messageId?: number;
 
   /**
-   * Required if chat\_id and message\_id are not specified. Identifier of the inline message
+   * Required if chat\_id and message\_id are not specified. Identifier of the inline message.
    * @type { string }
    * @originalType String
    * @required No
@@ -57,7 +57,7 @@ export interface EditMessageLiveLocationParams {
   inlineMessageId?: string;
 
   /**
-   * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged
+   * New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged.
    * @type { number }
    * @originalType Integer
    * @required No
@@ -89,7 +89,7 @@ export interface EditMessageLiveLocationParams {
   proximityAlertRadius?: number;
 
   /**
-   * A JSON-serialized object for a new inline keyboard.
+   * A JSON-serialized object for a new inline keyboard
    * @type { InlineKeyboardMarkup }
    * @originalType InlineKeyboardMarkup
    * @required No

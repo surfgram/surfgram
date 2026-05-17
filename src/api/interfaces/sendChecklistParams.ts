@@ -19,12 +19,12 @@ export interface SendChecklistParams {
   businessConnectionId: string;
 
   /**
-   * Unique identifier for the target chat
-   * @type { number }
-   * @originalType Integer
+   * Unique identifier for the target chat or username of the target bot in the format @username
+   * @type { number | string }
+   * @originalType Integer or String
    * @required Yes
    */
-  chatId: number;
+  chatId: number | string;
 
   /**
    * A JSON-serialized object for the checklist to send

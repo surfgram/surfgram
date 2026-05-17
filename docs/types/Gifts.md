@@ -27,7 +27,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `userId` | `number` | No | Required if chat\_id is not specified. Unique identifier of the target user who will receive the gift. |
-| `chatId` | `number` \| `string` | No | Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @channelusername\) that will receive the gift. |
+| `chatId` | `number` \| `string` | No | Required if user\_id is not specified. Unique identifier for the chat or username of the channel \(in the format @username\) that will receive the gift. |
 | `payForUpgrade` | `boolean` | No | Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver |
 | `text` | `string` | No | Text that will be shown along with the gift; 0-128 characters |
 | `textParseMode` | `string` | No | Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom\_emoji”, and “date\_time” are ignored. |
@@ -111,7 +111,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 | `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -153,7 +153,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -187,7 +187,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel \(in the format @channelusername\) |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target channel in the format @username |
 | `excludeUnsaved` | `boolean` | No | Pass True to exclude gifts that aren't saved to the chat's profile page. Always True, unless the bot has the can\_post\_messages administrator right in the channel. |
 | `excludeSaved` | `boolean` | No | Pass True to exclude gifts that are saved to the chat's profile page. Always False, unless the bot has the can\_post\_messages administrator right in the channel. |
 | `excludeUnlimited` | `boolean` | No | Pass True to exclude gifts that can be purchased an unlimited number of times |
@@ -197,7 +197,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 

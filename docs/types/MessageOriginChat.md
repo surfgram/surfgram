@@ -69,7 +69,7 @@ Use this method to get current webhook status. Requires no parameters. On succes
 | `lastErrorMessage` | `string` | No | Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook |
 | `lastSynchronizationErrorDate` | `number` | No | Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters |
 | `maxConnections` | `number` | No | Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery |
-| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member |
+| `allowedUpdates` | `string[]` | No | Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat\_member, message\_reaction, and message\_reaction\_count. |
 
 **Usage examples:**
 
@@ -102,7 +102,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -117,11 +117,11 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -154,7 +154,7 @@ Use this method to send text messages. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -169,11 +169,11 @@ Use this method to send text messages. On success, the sent Message is returned.
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -206,8 +206,8 @@ Use this method to forward messages of any kind. Service messages and messages w
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `fromChatId` | `this.senderChat?.id` | Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+| `fromChatId` | `this.senderChat?.id` | Unique identifier for the chat where the original message was sent (or username of the target bot, supergroup or channel in the format @username) |
 | `messageId` | `this?.id` | Message identifier in the chat specified in from_chat_id |
 
 **Required parameters:**
@@ -253,8 +253,8 @@ Use this method to forward multiple messages of any kind. If some of the specifi
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `fromChatId` | `this.senderChat?.id` | Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+| `fromChatId` | `this.senderChat?.id` | Unique identifier for the chat where the original messages were sent (or username of the target bot, supergroup or channel in the format @username) |
 
 **Required parameters:**
 
@@ -297,7 +297,7 @@ Use this method to send photos. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -314,11 +314,11 @@ Use this method to send photos. On success, the sent Message is returned.
 | `hasSpoiler` | `boolean` | No | Pass True if the photo needs to be covered with a spoiler animation |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -343,6 +343,61 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 **See also:** [sendPhoto API method](../methods/sendPhoto.md)
 
+### sendLivePhoto
+
+Use this method to send live photos. On success, the sent Message is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `livePhoto` | `InputFile` \| `string` | Yes | Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file\_id as String to send a video that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
+| `photo` | `InputFile` \| `string` | Yes | The static photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `caption` | `string` | No | Video caption \(may also be used when resending videos by file\_id\), 0-1024 characters after entities parsing |
+| `parseMode` | `string` | No | Mode for parsing entities in the video caption. See formatting options for more details. |
+| `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
+| `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
+| `hasSpoiler` | `boolean` | No | Pass True if the video needs to be covered with a spoiler animation |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const messageoriginchat = new MessageOriginChat(rawData, bot);
+await messageoriginchat.sendLivePhoto({
+  livePhoto: {} as any,
+  photo: {} as any,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
+  // Auto-fills parameters from the messageoriginchat instance
+  await messageoriginchat.sendLivePhoto({ livePhoto: "Response" });
+});
+```
+
+**See also:** [sendLivePhoto API method](../methods/sendLivePhoto.md)
+
 ### sendAudio
 
 Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
@@ -351,7 +406,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -370,11 +425,11 @@ Use this method to send audio files, if you want Telegram clients to display the
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -407,7 +462,7 @@ Use this method to send general files. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -424,11 +479,11 @@ Use this method to send general files. On success, the sent Message is returned.
 | `disableContentTypeDetection` | `boolean` | No | Disables automatic server-side content type detection for files uploaded using multipart/form-data |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -461,7 +516,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos \(oth
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -485,11 +540,11 @@ Use this method to send video files, Telegram clients support MPEG4 videos \(oth
 | `supportsStreaming` | `boolean` | No | Pass True if the uploaded video is suitable for streaming |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -522,7 +577,7 @@ Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -543,11 +598,11 @@ Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without 
 | `hasSpoiler` | `boolean` | No | Pass True if the animation needs to be covered with a spoiler animation |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -580,7 +635,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -596,11 +651,11 @@ Use this method to send audio files, if you want Telegram clients to display the
 | `duration` | `number` | No | Duration of the voice message in seconds |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -633,13 +688,13 @@ As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 min
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `videoNote` | `InputFile` \| `string` | Yes | Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported |
+| `videoNote` | `InputFile` \| `string` | Yes | Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported. |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
@@ -648,11 +703,11 @@ As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 min
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -685,7 +740,7 @@ Use this method to send paid media. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance. |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance. |
 
 **Required parameters:**
 
@@ -703,10 +758,10 @@ Use this method to send paid media. On success, the sent Message is returned.
 | `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -733,13 +788,13 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 ### sendMediaGroup
 
-Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
 
 **Auto-filled parameters:**
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -751,7 +806,7 @@ Use this method to send a group of photos, videos, documents or audios as an alb
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat |
 | `disableNotification` | `boolean` | No | Sends messages silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent messages from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
 
@@ -786,7 +841,7 @@ Use this method to send point on the map. On success, the sent Message is return
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -798,16 +853,16 @@ Use this method to send point on the map. On success, the sent Message is return
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 | `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
-| `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. |
+| `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely |
 | `heading` | `number` | No | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
 | `proximityAlertRadius` | `number` | No | For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -840,7 +895,7 @@ Use this method to send information about a venue. On success, the sent Message 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -859,11 +914,11 @@ Use this method to send information about a venue. On success, the sent Message 
 | `googlePlaceType` | `string` | No | Google Places type of the venue. \(See supported types.\) |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -896,7 +951,7 @@ Use this method to send phone contacts. On success, the sent Message is returned
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -911,11 +966,11 @@ Use this method to send phone contacts. On success, the sent Message is returned
 | `vcard` | `string` | No | Additional data about the contact in the form of a vCard, 0-2048 bytes |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -948,18 +1003,18 @@ Use this method to send a native poll. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername). Polls can't be sent to channel direct messages chats. |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Polls can't be sent to channel direct messages chats. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `question` | `string` | Yes | Poll question, 1-300 characters |
-| `options` | `InputPollOption[]` | Yes | A JSON-serialized list of 2-12 answer options |
+| `options` | `InputPollOption[]` | Yes | A JSON-serialized list of 1-12 answer options |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
-| `questionParseMode` | `string` | No | Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed |
-| `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode |
+| `questionParseMode` | `string` | No | Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed. |
+| `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode. |
 | `isAnonymous` | `boolean` | No | True, if the poll needs to be anonymous, defaults to True |
 | `type` | `string` | No | Poll type, “quiz” or “regular”, defaults to “regular” |
 | `allowsMultipleAnswers` | `boolean` | No | Pass True, if the poll allows multiple answers, defaults to False |
@@ -967,22 +1022,26 @@ Use this method to send a native poll. On success, the sent Message is returned.
 | `shuffleOptions` | `boolean` | No | Pass True, if the poll options must be shown in random order |
 | `allowAddingOptions` | `boolean` | No | Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes |
 | `hideResultsUntilCloses` | `boolean` | No | Pass True, if poll results must be shown only after the poll closes |
+| `membersOnly` | `boolean` | No | Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only |
+| `countryCodes` | `string[]` | No | A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll. |
 | `correctOptionIds` | `number[]` | No | A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode |
 | `explanation` | `string` | No | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing |
 | `explanationParseMode` | `string` | No | Mode for parsing entities in the explanation. See formatting options for more details. |
-| `explanationEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode |
+| `explanationEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation\_parse\_mode. |
+| `explanationMedia` | `InputPollMedia` | No | Media added to the quiz explanation |
 | `openPeriod` | `number` | No | Amount of time in seconds the poll will be active after creation, 5-2628000. Can't be used together with close\_date. |
 | `closeDate` | `number` | No | Point in time \(Unix timestamp\) when the poll will be automatically closed. Must be at least 5 and no more than 2628000 seconds in the future. Can't be used together with open\_period. |
 | `isClosed` | `boolean` | No | Pass True if the poll needs to be immediately closed. This can be useful for poll preview. |
 | `description` | `string` | No | Description of the poll to be sent, 0-1024 characters after entities parsing |
 | `descriptionParseMode` | `string` | No | Mode for parsing entities in the poll description. See formatting options for more details. |
 | `descriptionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of description\_parse\_mode |
+| `media` | `InputPollMedia` | No | Media added to the poll description |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -1015,7 +1074,7 @@ Use this method to send a checklist on behalf of a connected business account. O
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot in the format @username |
 
 **Required parameters:**
 
@@ -1060,7 +1119,7 @@ Use this method to send an animated emoji that will display a random value. On s
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -1069,14 +1128,14 @@ Use this method to send an animated emoji that will display a random value. On s
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `emoji` | `string` | No | Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, “”, or “”. Dice can have values 1-6 for “”, “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “” |
+| `emoji` | `string` | No | Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, “”, or “”. Dice can have values 1-6 for “”, “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”. |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -1103,7 +1162,7 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 ### sendMessageDraft
 
-Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
 
 **Auto-filled parameters:**
 
@@ -1115,9 +1174,9 @@ Use this method to stream a partial message to a user while the message is being
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated |
-| `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
+| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated. |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread |
+| `text` | `string` | No | Text of the message to be sent, 0-4096 characters after entities parsing. Pass an empty text to show a “Thinking…” placeholder. |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 
@@ -1129,7 +1188,7 @@ Use this method to stream a partial message to a user while the message is being
 const messageoriginchat = new MessageOriginChat(rawData, bot);
 await messageoriginchat.sendMessageDraft({
   draftId: 123,
-  text: "example text",
+  messageThreadId: 123,
 });
 ```
 
@@ -1152,7 +1211,7 @@ Use this method when you need to tell the user that something is happening on th
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel chats and channel direct messages chats aren't supported. |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot or supergroup in the format @username. Channel chats and channel direct messages chats aren't supported. |
 
 **Required parameters:**
 
@@ -1298,7 +1357,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -1308,7 +1367,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 | `name` | `string` | No | Invite link name; 0-32 characters |
 | `expireDate` | `number` | No | Point in time \(Unix timestamp\) when the link will expire |
 | `memberLimit` | `number` | No | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
-| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified |
+| `createsJoinRequest` | `boolean` | No | True, if users joining the chat via the link need to be approved by chat administrators. If True, member\_limit can't be specified. |
 
 **Usage examples:**
 
@@ -1341,7 +1400,7 @@ Use this method to edit a subscription invite link created by the bot. The bot m
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -1381,7 +1440,7 @@ Use this method to get up-to-date information about the chat. Returns a ChatFull
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -1406,14 +1465,19 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 ### getChatAdministrators
 
-Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
+Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
 
 **Auto-filled parameters:**
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `returnBots` | `boolean` | No | Pass True to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted. |
 
 **Usage examples:**
 
@@ -1421,7 +1485,9 @@ Use this method to get a list of administrators in a chat, which aren&#39;t bots
 
 ```typescript
 const messageoriginchat = new MessageOriginChat(rawData, bot);
-await messageoriginchat.getChatAdministrators();
+await messageoriginchat.getChatAdministrators(
+  true,
+);
 ```
 
 2. In an event handler:
@@ -1443,7 +1509,7 @@ Use this method to get the number of members in a chat. Returns Int on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 
 **Usage examples:**
@@ -1474,7 +1540,7 @@ Use this method to get information about a member of a chat. The method is only 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -1504,6 +1570,41 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 **See also:** [getChatMember API method](../methods/getChatMember.md)
 
+### getUserPersonalChatMessages
+
+Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | Unique identifier for the target user |
+| `limit` | `number` | Yes | The maximum number of messages to return; 1-20 |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const messageoriginchat = new MessageOriginChat(rawData, bot);
+await messageoriginchat.getUserPersonalChatMessages(
+  123,
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
+  // Auto-fills parameters from the messageoriginchat instance
+  await messageoriginchat.getUserPersonalChatMessages();
+});
+```
+
+**See also:** [getUserPersonalChatMessages API method](../methods/getUserPersonalChatMessages.md)
+
 ### getForumTopicIconStickers
 
 Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
@@ -1512,14 +1613,14 @@ Use this method to get custom emoji stickers, which can be used as a forum topic
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `name` | `string` | Yes | Topic name, 1-128 characters |
-| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\) |
+| `iconColor` | `number` | No | Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\). |
 | `iconCustomEmojiId` | `string` | No | Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. |
 
 **Usage examples:**
@@ -1553,15 +1654,15 @@ Use this method to edit name and icon of a topic in a forum supergroup chat or a
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `messageThreadId` | `number` | Yes | Unique identifier for the target message thread of the forum topic |
-| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept |
-| `iconCustomEmojiId` | `string` | No | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept |
+| `name` | `string` | No | New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept. |
+| `iconCustomEmojiId` | `string` | No | New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept. |
 
 **Usage examples:**
 
@@ -1594,7 +1695,7 @@ Use this method to edit the name of the &#39;General&#39; topic in a forum super
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target supergroup in the format @username |
 
 **Required parameters:**
 
@@ -1632,7 +1733,7 @@ Use this method to get the list of boosts added to a chat by a user. Requires ad
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the chat or username of the channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the chat or username of the channel in the format @username |
 
 **Required parameters:**
 
@@ -1727,6 +1828,39 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 ```
 
 **See also:** [getManagedBotToken API method](../methods/getManagedBotToken.md)
+
+### getManagedBotAccessSettings
+
+Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `userId` | `number` | Yes | User identifier of the managed bot whose access settings will be returned |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const messageoriginchat = new MessageOriginChat(rawData, bot);
+await messageoriginchat.getManagedBotAccessSettings(
+  123,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
+  // Auto-fills parameters from the messageoriginchat instance
+  await messageoriginchat.getManagedBotAccessSettings();
+});
+```
+
+**See also:** [getManagedBotAccessSettings API method](../methods/getManagedBotAccessSettings.md)
 
 ### getMyCommands
 
@@ -1870,7 +2004,7 @@ Use this method to get the current value of the bot&#39;s menu button in a priva
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target private chat. If not specified, default bot's menu button will be returned |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned. |
 
 
 **Usage examples:**
@@ -1934,7 +2068,7 @@ Returns the list of gifts that can be sent by the bot to users and channel chats
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.senderChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 
 **Required parameters:**
 
@@ -1978,7 +2112,7 @@ Sends a gift to the given user or channel chat. The gift can&#39;t be converted 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift. |
+| `chatId` | `this.senderChat?.id` | Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @username) that will receive the gift. |
 
 **Required parameters:**
 
@@ -2066,7 +2200,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 | `excludeFromBlockchain` | `boolean` | No | Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2108,7 +2242,7 @@ Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2141,7 +2275,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel in the format @username |
 
 **Required parameters:**
 
@@ -2156,7 +2290,7 @@ Returns the gifts owned by a chat. Returns OwnedGifts on success.
 | `excludeUnique` | `boolean` | No | Pass True to exclude unique gifts |
 | `sortByPrice` | `boolean` | No | Pass True to sort results by gift price instead of send date. Sorting is applied before pagination. |
 | `offset` | `string` | No | Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results |
-| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100 |
+| `limit` | `number` | No | The maximum number of gifts to be returned; 1-100. Defaults to 100. |
 
 **Usage examples:**
 
@@ -2229,8 +2363,8 @@ Use this method to edit text and game messages. On success, if the edited messag
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit. |
 
 **Required parameters:**
 
@@ -2238,11 +2372,11 @@ Use this method to edit text and game messages. On success, if the edited messag
 | :--- | :--- | :---: | :--- |
 | `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
 
@@ -2275,20 +2409,20 @@ Use this method to edit captions of messages. On success, if the edited message 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 | `caption` | `string` | No | New caption of the message, 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the message caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
 | `showCaptionAboveMedia` | `boolean` | No | Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages. |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
 
@@ -2315,14 +2449,14 @@ bot.onMessageOriginChat(async (messageoriginchat: MessageOriginChat) => {
 
 ### editMessageMedia
 
-Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 **Auto-filled parameters:**
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit. |
 
 **Required parameters:**
 
@@ -2330,8 +2464,8 @@ Use this method to edit animation, audio, document, photo, or video messages, or
 | :--- | :--- | :---: | :--- |
 | `media` | `InputMedia` | Yes | A JSON-serialized object for a new media content of the message |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard. |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard |
 
 **Usage examples:**
 
@@ -2364,8 +2498,8 @@ Use this method to edit live location messages. A location can be edited until i
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit. |
 
 **Required parameters:**
 
@@ -2374,12 +2508,12 @@ Use this method to edit live location messages. A location can be edited until i
 | `latitude` | `number` | Yes | Latitude of new location |
 | `longitude` | `number` | Yes | Longitude of new location |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `livePeriod` | `number` | No | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
+| `livePeriod` | `number` | No | New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live\_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live\_period remains unchanged. |
 | `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
 | `heading` | `number` | No | Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
 | `proximityAlertRadius` | `number` | No | The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard |
 
 **Usage examples:**
 
@@ -2412,7 +2546,7 @@ Use this method to edit a checklist on behalf of a connected business account. O
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot in the format @username |
 | `messageId` | `this?.id` | Unique identifier for the target message |
 
 **Required parameters:**
@@ -2454,16 +2588,16 @@ Use this method to edit only the reply markup of messages. On success, if the ed
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the message to edit. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
-| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
 
@@ -2496,7 +2630,7 @@ Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -2509,11 +2643,11 @@ Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On
 | `emoji` | `string` | No | Emoji associated with the sticker; only for just uploaded stickers |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
-| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
 
 **Usage examples:**
 
@@ -2612,7 +2746,7 @@ Use this method to send invoices. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target channel (in the format @channelusername) |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
 
@@ -2628,7 +2762,7 @@ Use this method to send invoices. On success, the sent Message is returned.
 | `providerToken` | `string` | No | Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars. |
 | `maxTipAmount` | `number` | No | The maximum accepted amount for tips in the smallest units of the currency \(integer, not float/double\). For example, for a maximum tip of US$ 1.45 pass max\_tip\_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency \(2 for the majority of currencies\). Defaults to 0. Not supported for payments in Telegram Stars. |
 | `suggestedTipAmounts` | `number[]` | No | A JSON-serialized array of suggested amounts of tips in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount. |
-| `startParameter` | `string` | No | Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot \(instead of a Pay button\), with the value used as the start parameter |
+| `startParameter` | `string` | No | Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot \(instead of a Pay button\), with the value used as the start parameter. |
 | `providerData` | `string` | No | JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider. |
 | `photoUrl` | `string` | No | URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for. |
 | `photoSize` | `number` | No | Photo size in bytes |
@@ -2643,7 +2777,7 @@ Use this method to send invoices. On success, the sent Message is returned.
 | `isFlexible` | `boolean` | No | Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars. |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
@@ -2786,7 +2920,7 @@ Use this method to send a game. On success, the sent Message is returned.
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats. |
+| `chatId` | `this.senderChat?.id` | Unique identifier for the target chat or username of the target bot in the format @username. Games can't be sent to channel direct messages chats and channel chats. |
 
 **Required parameters:**
 
@@ -2797,7 +2931,7 @@ Use this method to send a game. On success, the sent Message is returned.
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
-| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
 | `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
 | `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard. If empty, one 'Play game\_title' button will be shown. If not empty, the first button must launch the game. |
@@ -2833,15 +2967,15 @@ Use this method to get data for high score tables. Will return the score of the 
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat |
-| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the sent message |
+| `chatId` | `this.senderChat?.id` | Required if inline_message_id is not specified. Unique identifier for the target chat. |
+| `messageId` | `this?.id` | Required if inline_message_id is not specified. Identifier of the sent message. |
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `userId` | `number` | Yes | Target user id |
-| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message |
+| `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
 
 **Usage examples:**
 

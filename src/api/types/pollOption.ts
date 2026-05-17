@@ -11,6 +11,7 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { MessageEntity } from './messageEntity';
+import { PollMedia } from './pollMedia';
 import { User } from './user';
 import { Chat } from './chat';
 
@@ -45,6 +46,15 @@ export class PollOption {
    * @public
    */
   textEntities?: MessageEntity[];
+
+  /**
+   * Optional. Media added to the poll option
+   * @type { PollMedia }
+   * @memberof PollOption
+   * @instance
+   * @public
+   */
+  media?: PollMedia;
 
   /**
    * Number of users who voted for this option; may be 0 if unknown

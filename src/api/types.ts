@@ -30,6 +30,7 @@ import { PhotoSize } from './types/photoSize';
 import { Animation } from './types/animation';
 import { Audio } from './types/audio';
 import { Document } from './types/document';
+import { LivePhoto } from './types/livePhoto';
 import { Story } from './types/story';
 import { VideoQuality } from './types/videoQuality';
 import { Video } from './types/video';
@@ -37,11 +38,15 @@ import { VideoNote } from './types/videoNote';
 import { Voice } from './types/voice';
 import { PaidMediaInfo } from './types/paidMediaInfo';
 import { PaidMedia } from './types/paidMedia';
-import { PaidMediaPreview } from './types/paidMediaPreview';
+import { PaidMediaLivePhoto } from './types/paidMediaLivePhoto';
 import { PaidMediaPhoto } from './types/paidMediaPhoto';
+import { PaidMediaPreview } from './types/paidMediaPreview';
 import { PaidMediaVideo } from './types/paidMediaVideo';
 import { Contact } from './types/contact';
 import { Dice } from './types/dice';
+import { PollMedia } from './types/pollMedia';
+import { InputPollMedia } from './types/inputPollMedia';
+import { InputPollOptionMedia } from './types/inputPollOptionMedia';
 import { PollOption } from './types/pollOption';
 import { InputPollOption } from './types/inputPollOption';
 import { PollAnswer } from './types/pollAnswer';
@@ -172,6 +177,7 @@ import { OwnedGift } from './types/ownedGift';
 import { OwnedGiftRegular } from './types/ownedGiftRegular';
 import { OwnedGiftUnique } from './types/ownedGiftUnique';
 import { OwnedGifts } from './types/ownedGifts';
+import { BotAccessSettings } from './types/botAccessSettings';
 import { AcceptedGiftTypes } from './types/acceptedGiftTypes';
 import { StarAmount } from './types/starAmount';
 import { BotCommand } from './types/botCommand';
@@ -204,17 +210,23 @@ import { BusinessBotRights } from './types/businessBotRights';
 import { BusinessConnection } from './types/businessConnection';
 import { BusinessMessagesDeleted } from './types/businessMessagesDeleted';
 import { SentWebAppMessage } from './types/sentWebAppMessage';
+import { SentGuestMessage } from './types/sentGuestMessage';
 import { PreparedInlineMessage } from './types/preparedInlineMessage';
 import { PreparedKeyboardButton } from './types/preparedKeyboardButton';
 import { ResponseParameters } from './types/responseParameters';
 import { InputMedia } from './types/inputMedia';
-import { InputMediaPhoto } from './types/inputMediaPhoto';
-import { InputMediaVideo } from './types/inputMediaVideo';
 import { InputMediaAnimation } from './types/inputMediaAnimation';
 import { InputMediaAudio } from './types/inputMediaAudio';
 import { InputMediaDocument } from './types/inputMediaDocument';
+import { InputMediaLivePhoto } from './types/inputMediaLivePhoto';
+import { InputMediaLocation } from './types/inputMediaLocation';
+import { InputMediaPhoto } from './types/inputMediaPhoto';
+import { InputMediaSticker } from './types/inputMediaSticker';
+import { InputMediaVenue } from './types/inputMediaVenue';
+import { InputMediaVideo } from './types/inputMediaVideo';
 import { InputFile } from './types/inputFile';
 import { InputPaidMedia } from './types/inputPaidMedia';
+import { InputPaidMediaLivePhoto } from './types/inputPaidMediaLivePhoto';
 import { InputPaidMediaPhoto } from './types/inputPaidMediaPhoto';
 import { InputPaidMediaVideo } from './types/inputPaidMediaVideo';
 import { InputProfilePhoto } from './types/inputProfilePhoto';
@@ -510,6 +522,23 @@ declare module '../core/bot' {
      */
     sendPhoto(chatId: number | string, photo: InputFile | string): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link Interfaces.SendLivePhotoParams} for parameter details
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param chatId, livePhoto, photo - Required parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(chatId: number | string, livePhoto: InputFile | string, photo: InputFile | string): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -629,7 +658,7 @@ declare module '../core/bot' {
      */
     sendPaidMedia(chatId: number | string, starCount: number, media: InputPaidMedia[]): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -638,7 +667,7 @@ declare module '../core/bot' {
      */
     sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param chatId, media - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -729,7 +758,7 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
      */
-    sendChecklist(businessConnectionId: string, chatId: number, checklist: InputChecklist): Promise<any>;
+    sendChecklist(businessConnectionId: string, chatId: number | string, checklist: InputChecklist): Promise<any>;
     /**
      * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -748,7 +777,7 @@ declare module '../core/bot' {
      */
     sendDice(chatId: number | string): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -757,16 +786,16 @@ declare module '../core/bot' {
      */
     sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
-     * @param chatId, draftId, text - Required parameters
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param chatId, draftId - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
      */
-    sendMessageDraft(chatId: number, draftId: number, text: string): Promise<any>;
+    sendMessageDraft(chatId: number, draftId: number): Promise<any>;
     /**
      * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\). Channel chats and channel direct messages chats aren't supported.
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot or supergroup in the format @username. Channel chats and channel direct messages chats aren't supported.
      *      * @param action - Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload\_photo for photos, record\_video or upload\_video for videos, record\_voice or upload\_voice for voice notes, upload\_document for general files, choose\_sticker for stickers, find\_location for location data, record\_video\_note or upload\_video\_note for video notes.
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which the action will be sent
      *      * @param messageThreadId - Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
@@ -777,7 +806,7 @@ declare module '../core/bot' {
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
      * Use this method to change the chosen reactions on a message. Service messages of some types can&#39;t be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can&#39;t use paid reactions. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
      *      * @param messageId - Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
      *      * @param reaction - A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
      *      * @param isBig - Pass True to set the reaction with a big animation
@@ -826,7 +855,7 @@ declare module '../core/bot' {
     getFile(fileId: string): Promise<any>;
     /**
      * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target group or username of the target supergroup or channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @param untilDate - Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
      *      * @param revokeMessages - Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels.
@@ -837,7 +866,7 @@ declare module '../core/bot' {
     banChatMember(chatId: number | string, userId: number, untilDate?: number, revokeMessages?: boolean): Promise<any>;
     /**
      * Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don&#39;t want this, use the parameter only\_if\_banned. Returns True on success.
-     *      * @param chatId - Unique identifier for the target group or username of the target supergroup or channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target group or username of the target supergroup or channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @param onlyIfBanned - Do nothing if the user is not banned
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -881,7 +910,7 @@ declare module '../core/bot' {
     promoteChatMember(chatId: number | string, userId: number): Promise<any>;
     /**
      * Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @param customTitle - New custom title for the administrator; 0-16 characters, emoji are not allowed
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -891,7 +920,7 @@ declare module '../core/bot' {
     setChatAdministratorCustomTitle(chatId: number | string, userId: number, customTitle: string): Promise<any>;
     /**
      * Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the can\_manage\_tags administrator right. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @param tag - New tag for the member; 0-16 characters, emoji are not allowed
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -901,7 +930,7 @@ declare module '../core/bot' {
     setChatMemberTag(chatId: number | string, userId: number, tag?: string): Promise<any>;
     /**
      * Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won&#39;t be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param senderChatId - Unique identifier of the target sender chat
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -910,7 +939,7 @@ declare module '../core/bot' {
     banChatSenderChat(chatId: number | string, senderChatId: number): Promise<any>;
     /**
      * Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param senderChatId - Unique identifier of the target sender chat
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -919,7 +948,7 @@ declare module '../core/bot' {
     unbanChatSenderChat(chatId: number | string, senderChatId: number): Promise<any>;
     /**
      * Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can\_restrict\_members administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param permissions - A JSON-serialized object for new default chat permissions
      *      * @param useIndependentChatPermissions - Pass True if chat permissions are set independently. Otherwise, the can\_send\_other\_messages and can\_add\_web\_page\_previews permissions will imply the can\_send\_messages, can\_send\_audios, can\_send\_documents, can\_send\_photos, can\_send\_videos, can\_send\_video\_notes, and can\_send\_voice\_notes permissions; the can\_send\_polls permission will imply the can\_send\_messages permission.
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -929,7 +958,7 @@ declare module '../core/bot' {
     setChatPermissions(chatId: number | string, permissions: ChatPermissions, useIndependentChatPermissions?: boolean): Promise<any>;
     /**
      * Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#exportChatInviteLink Telegram Bot API}
@@ -971,7 +1000,7 @@ declare module '../core/bot' {
     editChatInviteLink(chatId: number | string, inviteLink: string): Promise<any>;
     /**
      * Use this method to create a subscription invite link for a channel chat. The bot must have the can\_invite\_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.
-     *      * @param chatId - Unique identifier for the target channel chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target channel chat or username of the target channel in the format @username
      *      * @param subscriptionPeriod - The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 \(30 days\).
      *      * @param subscriptionPrice - The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
      *      * @param name - Invite link name; 0-32 characters
@@ -982,7 +1011,7 @@ declare module '../core/bot' {
     createChatSubscriptionInviteLink(chatId: number | string, subscriptionPeriod: number, subscriptionPrice: number, name?: string): Promise<any>;
     /**
      * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param inviteLink - The invite link to edit
      *      * @param name - Invite link name; 0-32 characters
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -992,7 +1021,7 @@ declare module '../core/bot' {
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
      * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
-     *      * @param chatId - Unique identifier of the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier of the target chat or username of the target channel in the format @username
      *      * @param inviteLink - The invite link to revoke
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1001,7 +1030,7 @@ declare module '../core/bot' {
     revokeChatInviteLink(chatId: number | string, inviteLink: string): Promise<any>;
     /**
      * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can\_invite\_users administrator right. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1010,7 +1039,7 @@ declare module '../core/bot' {
     approveChatJoinRequest(chatId: number | string, userId: number): Promise<any>;
     /**
      * Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can\_invite\_users administrator right. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1019,7 +1048,7 @@ declare module '../core/bot' {
     declineChatJoinRequest(chatId: number | string, userId: number): Promise<any>;
     /**
      * Use this method to set a new profile photo for the chat. Photos can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param photo - New chat photo, uploaded using multipart/form-data
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1028,7 +1057,7 @@ declare module '../core/bot' {
     setChatPhoto(chatId: number | string, photo: InputFile): Promise<any>;
     /**
      * Use this method to delete a chat photo. Photos can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#deleteChatPhoto Telegram Bot API}
@@ -1036,7 +1065,7 @@ declare module '../core/bot' {
     deleteChatPhoto(chatId: number | string): Promise<any>;
     /**
      * Use this method to change the title of a chat. Titles can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param title - New chat title, 1-128 characters
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1045,7 +1074,7 @@ declare module '../core/bot' {
     setChatTitle(chatId: number | string, title: string): Promise<any>;
     /**
      * Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param description - New chat description, 0-255 characters
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1054,7 +1083,7 @@ declare module '../core/bot' {
     setChatDescription(chatId: number | string, description?: string): Promise<any>;
     /**
      * Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to pin messages in groups and channels respectively. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param messageId - Identifier of a message to pin
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which the message will be pinned
      *      * @param disableNotification - Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
@@ -1065,7 +1094,7 @@ declare module '../core/bot' {
     pinChatMessage(chatId: number | string, messageId: number, businessConnectionId?: string, disableNotification?: boolean): Promise<any>;
     /**
      * Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin messages in groups and channels respectively. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which the message will be unpinned
      *      * @param messageId - Identifier of the message to unpin. Required if business\_connection\_id is specified. If not specified, the most recent pinned message \(by sending date\) will be unpinned.
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -1075,7 +1104,7 @@ declare module '../core/bot' {
     unpinChatMessage(chatId: number | string, businessConnectionId?: string, messageId?: number): Promise<any>;
     /**
      * Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to unpin all pinned messages in groups and channels respectively. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#unpinAllChatMessages Telegram Bot API}
@@ -1083,7 +1112,7 @@ declare module '../core/bot' {
     unpinAllChatMessages(chatId: number | string): Promise<any>;
     /**
      * Use this method for your bot to leave a group, supergroup or channel. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\). Channel direct messages chats aren't supported; leave the corresponding channel instead.
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username. Channel direct messages chats aren't supported; leave the corresponding channel instead.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#leaveChat Telegram Bot API}
@@ -1091,23 +1120,24 @@ declare module '../core/bot' {
     leaveChat(chatId: number | string): Promise<any>;
     /**
      * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
      */
     getChat(chatId: number | string): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username
+     *      * @param returnBots - Pass True to additionally receive all bots that are administrators of the chat. By default, bots other than the current bot are omitted.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(chatId: number | string): Promise<any>;
+    getChatAdministrators(chatId: number | string, returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
@@ -1115,7 +1145,7 @@ declare module '../core/bot' {
     getChatMemberCount(chatId: number | string): Promise<any>;
     /**
      * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup or channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1123,8 +1153,17 @@ declare module '../core/bot' {
      */
     getChatMember(chatId: number | string, userId: number): Promise<any>;
     /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     *      * @param userId - Unique identifier for the target user
+     *      * @param limit - The maximum number of messages to return; 1-20
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
+    /**
      * Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can\_set\_sticker\_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param stickerSetName - Name of the sticker set to be set as the group sticker set
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1133,7 +1172,7 @@ declare module '../core/bot' {
     setChatStickerSet(chatId: number | string, stickerSetName: string): Promise<any>;
     /**
      * Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can\_set\_sticker\_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#deleteChatStickerSet Telegram Bot API}
@@ -1141,9 +1180,9 @@ declare module '../core/bot' {
     deleteChatStickerSet(chatId: number | string): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param name - Topic name, 1-128 characters
-     *      * @param iconColor - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\)
+     *      * @param iconColor - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\).
      *      * @param iconCustomEmojiId - Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1152,9 +1191,9 @@ declare module '../core/bot' {
     getForumTopicIconStickers(chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
     /**
      * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator right. Returns information about the created topic as a ForumTopic object.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param name - Topic name, 1-128 characters
-     *      * @param iconColor - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\)
+     *      * @param iconColor - Color of the topic icon in RGB format. Currently, must be one of 7322096 \(0x6FB9F0\), 16766590 \(0xFFD67E\), 13338331 \(0xCB86DB\), 9367192 \(0x8EEE98\), 16749490 \(0xFF93B2\), or 16478047 \(0xFB6F5F\).
      *      * @param iconCustomEmojiId - Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1163,10 +1202,10 @@ declare module '../core/bot' {
     createForumTopic(chatId: number | string, name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param messageThreadId - Unique identifier for the target message thread of the forum topic
-     *      * @param name - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
-     *      * @param iconCustomEmojiId - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+     *      * @param name - New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
+     *      * @param iconCustomEmojiId - New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
@@ -1174,7 +1213,7 @@ declare module '../core/bot' {
     editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
     /**
      * Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param messageThreadId - Unique identifier for the target message thread of the forum topic
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1183,7 +1222,7 @@ declare module '../core/bot' {
     closeForumTopic(chatId: number | string, messageThreadId: number): Promise<any>;
     /**
      * Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param messageThreadId - Unique identifier for the target message thread of the forum topic
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1192,7 +1231,7 @@ declare module '../core/bot' {
     reopenForumTopic(chatId: number | string, messageThreadId: number): Promise<any>;
     /**
      * Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_delete\_messages administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param messageThreadId - Unique identifier for the target message thread of the forum topic
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1201,7 +1240,7 @@ declare module '../core/bot' {
     deleteForumTopic(chatId: number | string, messageThreadId: number): Promise<any>;
     /**
      * Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param messageThreadId - Unique identifier for the target message thread of the forum topic
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1210,7 +1249,7 @@ declare module '../core/bot' {
     unpinAllForumTopicMessages(chatId: number | string, messageThreadId: number): Promise<any>;
     /**
      * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @param name - New topic name, 1-128 characters
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1219,7 +1258,7 @@ declare module '../core/bot' {
     editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
     /**
      * Use this method to close an open &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#closeGeneralForumTopic Telegram Bot API}
@@ -1227,7 +1266,7 @@ declare module '../core/bot' {
     closeGeneralForumTopic(chatId: number | string): Promise<any>;
     /**
      * Use this method to reopen a closed &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#reopenGeneralForumTopic Telegram Bot API}
@@ -1235,7 +1274,7 @@ declare module '../core/bot' {
     reopenGeneralForumTopic(chatId: number | string): Promise<any>;
     /**
      * Use this method to hide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#hideGeneralForumTopic Telegram Bot API}
@@ -1243,7 +1282,7 @@ declare module '../core/bot' {
     hideGeneralForumTopic(chatId: number | string): Promise<any>;
     /**
      * Use this method to unhide the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#unhideGeneralForumTopic Telegram Bot API}
@@ -1251,7 +1290,7 @@ declare module '../core/bot' {
     unhideGeneralForumTopic(chatId: number | string): Promise<any>;
     /**
      * Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can\_pin\_messages administrator right in the supergroup. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup \(in the format @supergroupusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#unpinAllGeneralForumTopicMessages Telegram Bot API}
@@ -1275,8 +1314,17 @@ declare module '../core/bot' {
      */
     answerCallbackQuery(callbackQueryId: string): Promise<any>;
     /**
+     * Use this method to reply to a received guest message. On success, a SentGuestMessage object is returned.
+     *      * @param guestQueryId - Unique identifier for the query to be answered
+     *      * @param result - A JSON-serialized object describing the message to be sent
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#answerGuestQuery Telegram Bot API}
+     */
+    answerGuestQuery(guestQueryId: string, result: InlineQueryResult): Promise<any>;
+    /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
-     *      * @param chatId - Unique identifier for the chat or username of the channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the chat or username of the channel in the format @username
      *      * @param userId - Unique identifier of the target user
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1308,10 +1356,28 @@ declare module '../core/bot' {
      */
     replaceManagedBotToken(userId: number): Promise<any>;
     /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     *      * @param userId - User identifier of the managed bot whose access settings will be returned
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
+    /**
+     * Use this method to change the access settings of a managed bot. Returns True on success.
+     *      * @param userId - User identifier of the managed bot whose access settings will be changed
+     *      * @param isAccessRestricted - Pass True, if only selected users can access the bot. The bot's owner can always access it.
+     *      * @param addedUserIds - A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is\_access\_restricted is false.
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#setManagedBotAccessSettings Telegram Bot API}
+     */
+    setManagedBotAccessSettings(userId: number, isAccessRestricted: boolean, addedUserIds?: number[]): Promise<any>;
+    /**
      * Use this method to change the list of the bot&#39;s commands. See this manual for more details about bot commands. Returns True on success.
      *      * @param commands - A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
      *      * @param scope - A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
-     *      * @param languageCode - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+     *      * @param languageCode - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setMyCommands Telegram Bot API}
@@ -1320,7 +1386,7 @@ declare module '../core/bot' {
     /**
      * Use this method to delete the list of the bot&#39;s commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
      *      * @param scope - A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
-     *      * @param languageCode - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+     *      * @param languageCode - A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#deleteMyCommands Telegram Bot API}
@@ -1396,8 +1462,8 @@ declare module '../core/bot' {
     setMyProfilePhoto(photo: InputProfilePhoto): Promise<any>;
     /**
      * Removes the profile photo of the bot. Requires no parameters. Returns True on success.
-     *      * @param chatId - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
-     *      * @param menuButton - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+     *      * @param chatId - Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed.
+     *      * @param menuButton - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#removeMyProfilePhoto Telegram Bot API}
@@ -1405,8 +1471,8 @@ declare module '../core/bot' {
     removeMyProfilePhoto(chatId?: number, menuButton?: MenuButton): Promise<any>;
     /**
      * Use this method to change the bot&#39;s menu button in a private chat, or the default menu button. Returns True on success.
-     *      * @param chatId - Unique identifier for the target private chat. If not specified, default bot's menu button will be changed
-     *      * @param menuButton - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault
+     *      * @param chatId - Unique identifier for the target private chat. If not specified, the bot's default menu button will be changed.
+     *      * @param menuButton - A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setChatMenuButton Telegram Bot API}
@@ -1414,7 +1480,7 @@ declare module '../core/bot' {
     setChatMenuButton(chatId?: number, menuButton?: MenuButton): Promise<any>;
     /**
      * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
-     *      * @param chatId - Unique identifier for the target private chat. If not specified, default bot's menu button will be returned
+     *      * @param chatId - Unique identifier for the target private chat. If not specified, the bot's default menu button will be returned.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
@@ -1499,7 +1565,7 @@ declare module '../core/bot' {
     verifyUser(userId: number, customDescription?: string): Promise<any>;
     /**
      * Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\). Channel direct messages chats can't be verified.
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. Channel direct messages chats can't be verified.
      *      * @param customDescription - Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1516,7 +1582,7 @@ declare module '../core/bot' {
     removeUserVerification(userId: number): Promise<any>;
     /**
      * Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot or channel in the format @username
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#removeChatVerification Telegram Bot API}
@@ -1535,7 +1601,7 @@ declare module '../core/bot' {
     /**
      * Delete messages on behalf of a business account. Requires the can\_delete\_sent\_messages business bot right to delete messages sent by the bot itself, or the can\_delete\_all\_messages business bot right to delete any message. Returns True on success.
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which to delete the messages
-     *      * @param messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted
+     *      * @param messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#deleteBusinessMessages Telegram Bot API}
@@ -1786,7 +1852,7 @@ declare module '../core/bot' {
     /**
      * Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.
      *      * @param userId - Unique identifier of the target user that can use the button
-     *      * @param button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot
+     *      * @param button - A JSON-serialized object describing the button to be saved. The button must be of the type request\_users, request\_chat, or request\_managed\_bot.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#savePreparedKeyboardButton Telegram Bot API}
@@ -1819,7 +1885,7 @@ declare module '../core/bot' {
      */
     editMessageCaption(params: Interfaces.EditMessageCaptionParams): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1828,7 +1894,7 @@ declare module '../core/bot' {
      */
     editMessageMedia(params: Interfaces.EditMessageMediaParams): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param media - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1877,7 +1943,7 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
      */
-    editMessageChecklist(businessConnectionId: string, chatId: number, messageId: number): Promise<any>;
+    editMessageChecklist(businessConnectionId: string, chatId: number | string, messageId: number): Promise<any>;
     /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
@@ -1889,10 +1955,10 @@ declare module '../core/bot' {
     editMessageReplyMarkup(params: Interfaces.EditMessageReplyMarkupParams): Promise<any>;
     /**
      * Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
      *      * @param messageId - Identifier of the original message with the poll
      *      * @param businessConnectionId - Unique identifier of the business connection on behalf of which the message to be edited was sent
-     *      * @param replyMarkup - A JSON-serialized object for a new message inline keyboard.
+     *      * @param replyMarkup - A JSON-serialized object for a new message inline keyboard
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#stopPoll Telegram Bot API}
@@ -1902,7 +1968,7 @@ declare module '../core/bot' {
      * Use this method to approve a suggested post in a direct messages chat. The bot must have the &#39;can\_post\_messages&#39; administrator right in the corresponding channel chat. Returns True on success.
      *      * @param chatId - Unique identifier for the target direct messages chat
      *      * @param messageId - Identifier of a suggested post message to approve
-     *      * @param sendDate - Point in time \(Unix timestamp\) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds \(30 days\) in the future
+     *      * @param sendDate - Point in time \(Unix timestamp\) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds \(30 days\) in the future.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#approveSuggestedPost Telegram Bot API}
@@ -1920,7 +1986,7 @@ declare module '../core/bot' {
     declineSuggestedPost(chatId: number, messageId: number, comment?: string): Promise<any>;
     /**
      * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- Service messages about a supergroup, channel, or forum topic creation can&#39;t be deleted.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can\_post\_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can\_delete\_messages administrator right in a supergroup or a channel, it can delete any message there.- If the bot has can\_manage\_direct\_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
      *      * @param messageId - Identifier of the message to delete
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -1929,13 +1995,34 @@ declare module '../core/bot' {
     deleteMessage(chatId: number | string, messageId: number): Promise<any>;
     /**
      * Use this method to delete multiple messages simultaneously. If some of the specified messages can&#39;t be found, they are skipped. Returns True on success.
-     *      * @param chatId - Unique identifier for the target chat or username of the target channel \(in the format @channelusername\)
-     *      * @param messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted
+     *      * @param chatId - Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+     *      * @param messageIds - A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#deleteMessages Telegram Bot API}
      */
     deleteMessages(chatId: number | string, messageIds: number[]): Promise<any>;
+    /**
+     * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
+     *      * @param messageId - Identifier of the target message
+     *      * @param userId - Identifier of the user whose reaction will be removed, if the reaction was added by a user
+     *      * @param actorChatId - Identifier of the chat whose reaction will be removed, if the reaction was added by a chat
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#deleteMessageReaction Telegram Bot API}
+     */
+    deleteMessageReaction(chatId: number | string, messageId: number, userId?: number, actorChatId?: number): Promise<any>;
+    /**
+     * Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+     *      * @param chatId - Unique identifier for the target chat or username of the target supergroup in the format @username
+     *      * @param userId - Identifier of the user whose reactions will be removed, if the reactions were added by a user
+     *      * @param actorChatId - Identifier of the chat whose reactions will be removed, if the reactions were added by a chat
+     *      * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#deleteAllMessageReactions Telegram Bot API}
+     */
+    deleteAllMessageReactions(chatId: number | string, userId?: number, actorChatId?: number): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -2090,7 +2177,7 @@ declare module '../core/bot' {
     /**
      * Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
      *      * @param name - Sticker set name
-     *      * @param customEmojiId - Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.
+     *      * @param customEmojiId - Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#setCustomEmojiStickerSetThumbnail Telegram Bot API}
@@ -2238,7 +2325,7 @@ declare module '../core/bot' {
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
      */
-    sendGame(chatId: number, gameShortName: string): Promise<any>;
+    sendGame(chatId: number | string, gameShortName: string): Promise<any>;
     /**
      * Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user&#39;s current score in the chat and force is False.
      * @param params - Method parameters object
@@ -2259,9 +2346,9 @@ declare module '../core/bot' {
     /**
      * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
      *      * @param userId - Target user id
-     *      * @param chatId - Required if inline\_message\_id is not specified. Unique identifier for the target chat
-     *      * @param messageId - Required if inline\_message\_id is not specified. Identifier of the sent message
-     *      * @param inlineMessageId - Required if chat\_id and message\_id are not specified. Identifier of the inline message
+     *      * @param chatId - Required if inline\_message\_id is not specified. Unique identifier for the target chat.
+     *      * @param messageId - Required if inline\_message\_id is not specified. Identifier of the sent message.
+     *      * @param inlineMessageId - Required if chat\_id and message\_id are not specified. Identifier of the inline message.
      *      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
@@ -2666,6 +2753,24 @@ declare module '../core/bot' {
      */
     onDocument(filter: string | ((data: any) => boolean), handler: (data: Document) => void | Promise<void>): this;
     /**
+     * Registers a handler for LivePhoto updates
+     * @overload
+     * @param handler - Async function to handle LivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#livephoto Telegram Bot API}
+     */
+    onLivePhoto(handler: (data: LivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for LivePhoto updates with filtering
+     * @overload
+     * @param filter - String or function to filter LivePhoto data
+     * @param handler - Async function to handle filtered LivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#livephoto Telegram Bot API}
+     */
+    onLivePhoto(filter: string | ((data: any) => boolean), handler: (data: LivePhoto) => void | Promise<void>): this;
+    /**
      * Registers a handler for Story updates
      * @overload
      * @param handler - Async function to handle Story updates
@@ -2792,23 +2897,23 @@ declare module '../core/bot' {
      */
     onPaidMedia(filter: string | ((data: any) => boolean), handler: (data: PaidMedia) => void | Promise<void>): this;
     /**
-     * Registers a handler for PaidMediaPreview updates
+     * Registers a handler for PaidMediaLivePhoto updates
      * @overload
-     * @param handler - Async function to handle PaidMediaPreview updates
+     * @param handler - Async function to handle PaidMediaLivePhoto updates
      * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     * @see {@link https://core.telegram.org/bots/api#paidmedialivephoto Telegram Bot API}
      */
-    onPaidMediaPreview(handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    onPaidMediaLivePhoto(handler: (data: PaidMediaLivePhoto) => void | Promise<void>): this;
     
     /**
-     * Registers a handler for PaidMediaPreview updates with filtering
+     * Registers a handler for PaidMediaLivePhoto updates with filtering
      * @overload
-     * @param filter - String or function to filter PaidMediaPreview data
-     * @param handler - Async function to handle filtered PaidMediaPreview updates
+     * @param filter - String or function to filter PaidMediaLivePhoto data
+     * @param handler - Async function to handle filtered PaidMediaLivePhoto updates
      * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     * @see {@link https://core.telegram.org/bots/api#paidmedialivephoto Telegram Bot API}
      */
-    onPaidMediaPreview(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    onPaidMediaLivePhoto(filter: string | ((data: any) => boolean), handler: (data: PaidMediaLivePhoto) => void | Promise<void>): this;
     /**
      * Registers a handler for PaidMediaPhoto updates
      * @overload
@@ -2827,6 +2932,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
     onPaidMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PaidMediaPreview updates
+     * @overload
+     * @param handler - Async function to handle PaidMediaPreview updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     */
+    onPaidMediaPreview(handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PaidMediaPreview updates with filtering
+     * @overload
+     * @param filter - String or function to filter PaidMediaPreview data
+     * @param handler - Async function to handle filtered PaidMediaPreview updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     */
+    onPaidMediaPreview(filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
     /**
      * Registers a handler for PaidMediaVideo updates
      * @overload
@@ -2881,6 +3004,60 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
     onDice(filter: string | ((data: any) => boolean), handler: (data: Dice) => void | Promise<void>): this;
+    /**
+     * Registers a handler for PollMedia updates
+     * @overload
+     * @param handler - Async function to handle PollMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#pollmedia Telegram Bot API}
+     */
+    onPollMedia(handler: (data: PollMedia) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for PollMedia updates with filtering
+     * @overload
+     * @param filter - String or function to filter PollMedia data
+     * @param handler - Async function to handle filtered PollMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#pollmedia Telegram Bot API}
+     */
+    onPollMedia(filter: string | ((data: any) => boolean), handler: (data: PollMedia) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputPollMedia updates
+     * @overload
+     * @param handler - Async function to handle InputPollMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpollmedia Telegram Bot API}
+     */
+    onInputPollMedia(handler: (data: InputPollMedia) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputPollMedia updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputPollMedia data
+     * @param handler - Async function to handle filtered InputPollMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpollmedia Telegram Bot API}
+     */
+    onInputPollMedia(filter: string | ((data: any) => boolean), handler: (data: InputPollMedia) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputPollOptionMedia updates
+     * @overload
+     * @param handler - Async function to handle InputPollOptionMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpolloptionmedia Telegram Bot API}
+     */
+    onInputPollOptionMedia(handler: (data: InputPollOptionMedia) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputPollOptionMedia updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputPollOptionMedia data
+     * @param handler - Async function to handle filtered InputPollOptionMedia updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpolloptionmedia Telegram Bot API}
+     */
+    onInputPollOptionMedia(filter: string | ((data: any) => boolean), handler: (data: InputPollOptionMedia) => void | Promise<void>): this;
     /**
      * Registers a handler for PollOption updates
      * @overload
@@ -5222,6 +5399,24 @@ declare module '../core/bot' {
      */
     onOwnedGifts(filter: string | ((data: any) => boolean), handler: (data: OwnedGifts) => void | Promise<void>): this;
     /**
+     * Registers a handler for BotAccessSettings updates
+     * @overload
+     * @param handler - Async function to handle BotAccessSettings updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#botaccesssettings Telegram Bot API}
+     */
+    onBotAccessSettings(handler: (data: BotAccessSettings) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for BotAccessSettings updates with filtering
+     * @overload
+     * @param filter - String or function to filter BotAccessSettings data
+     * @param handler - Async function to handle filtered BotAccessSettings updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#botaccesssettings Telegram Bot API}
+     */
+    onBotAccessSettings(filter: string | ((data: any) => boolean), handler: (data: BotAccessSettings) => void | Promise<void>): this;
+    /**
      * Registers a handler for AcceptedGiftTypes updates
      * @overload
      * @param handler - Async function to handle AcceptedGiftTypes updates
@@ -5798,6 +5993,24 @@ declare module '../core/bot' {
      */
     onSentWebAppMessage(filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
     /**
+     * Registers a handler for SentGuestMessage updates
+     * @overload
+     * @param handler - Async function to handle SentGuestMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentguestmessage Telegram Bot API}
+     */
+    onSentGuestMessage(handler: (data: SentGuestMessage) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for SentGuestMessage updates with filtering
+     * @overload
+     * @param filter - String or function to filter SentGuestMessage data
+     * @param handler - Async function to handle filtered SentGuestMessage updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentguestmessage Telegram Bot API}
+     */
+    onSentGuestMessage(filter: string | ((data: any) => boolean), handler: (data: SentGuestMessage) => void | Promise<void>): this;
+    /**
      * Registers a handler for PreparedInlineMessage updates
      * @overload
      * @param handler - Async function to handle PreparedInlineMessage updates
@@ -5870,42 +6083,6 @@ declare module '../core/bot' {
      */
     onInputMedia(filter: string | ((data: any) => boolean), handler: (data: InputMedia) => void | Promise<void>): this;
     /**
-     * Registers a handler for InputMediaPhoto updates
-     * @overload
-     * @param handler - Async function to handle InputMediaPhoto updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
-     */
-    onInputMediaPhoto(handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    
-    /**
-     * Registers a handler for InputMediaPhoto updates with filtering
-     * @overload
-     * @param filter - String or function to filter InputMediaPhoto data
-     * @param handler - Async function to handle filtered InputMediaPhoto updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
-     */
-    onInputMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    /**
-     * Registers a handler for InputMediaVideo updates
-     * @overload
-     * @param handler - Async function to handle InputMediaVideo updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
-     */
-    onInputMediaVideo(handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    
-    /**
-     * Registers a handler for InputMediaVideo updates with filtering
-     * @overload
-     * @param filter - String or function to filter InputMediaVideo data
-     * @param handler - Async function to handle filtered InputMediaVideo updates
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
-     */
-    onInputMediaVideo(filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    /**
      * Registers a handler for InputMediaAnimation updates
      * @overload
      * @param handler - Async function to handle InputMediaAnimation updates
@@ -5960,6 +6137,114 @@ declare module '../core/bot' {
      */
     onInputMediaDocument(filter: string | ((data: any) => boolean), handler: (data: InputMediaDocument) => void | Promise<void>): this;
     /**
+     * Registers a handler for InputMediaLivePhoto updates
+     * @overload
+     * @param handler - Async function to handle InputMediaLivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialivephoto Telegram Bot API}
+     */
+    onInputMediaLivePhoto(handler: (data: InputMediaLivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaLivePhoto updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaLivePhoto data
+     * @param handler - Async function to handle filtered InputMediaLivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialivephoto Telegram Bot API}
+     */
+    onInputMediaLivePhoto(filter: string | ((data: any) => boolean), handler: (data: InputMediaLivePhoto) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputMediaLocation updates
+     * @overload
+     * @param handler - Async function to handle InputMediaLocation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialocation Telegram Bot API}
+     */
+    onInputMediaLocation(handler: (data: InputMediaLocation) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaLocation updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaLocation data
+     * @param handler - Async function to handle filtered InputMediaLocation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialocation Telegram Bot API}
+     */
+    onInputMediaLocation(filter: string | ((data: any) => boolean), handler: (data: InputMediaLocation) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputMediaPhoto updates
+     * @overload
+     * @param handler - Async function to handle InputMediaPhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
+     */
+    onInputMediaPhoto(handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaPhoto updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaPhoto data
+     * @param handler - Async function to handle filtered InputMediaPhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
+     */
+    onInputMediaPhoto(filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputMediaSticker updates
+     * @overload
+     * @param handler - Async function to handle InputMediaSticker updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediasticker Telegram Bot API}
+     */
+    onInputMediaSticker(handler: (data: InputMediaSticker) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaSticker updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaSticker data
+     * @param handler - Async function to handle filtered InputMediaSticker updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediasticker Telegram Bot API}
+     */
+    onInputMediaSticker(filter: string | ((data: any) => boolean), handler: (data: InputMediaSticker) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputMediaVenue updates
+     * @overload
+     * @param handler - Async function to handle InputMediaVenue updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavenue Telegram Bot API}
+     */
+    onInputMediaVenue(handler: (data: InputMediaVenue) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaVenue updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaVenue data
+     * @param handler - Async function to handle filtered InputMediaVenue updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavenue Telegram Bot API}
+     */
+    onInputMediaVenue(filter: string | ((data: any) => boolean), handler: (data: InputMediaVenue) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputMediaVideo updates
+     * @overload
+     * @param handler - Async function to handle InputMediaVideo updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
+     */
+    onInputMediaVideo(handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputMediaVideo updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputMediaVideo data
+     * @param handler - Async function to handle filtered InputMediaVideo updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
+     */
+    onInputMediaVideo(filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    /**
      * Registers a handler for InputFile updates
      * @overload
      * @param handler - Async function to handle InputFile updates
@@ -5995,6 +6280,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
     onInputPaidMedia(filter: string | ((data: any) => boolean), handler: (data: InputPaidMedia) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputPaidMediaLivePhoto updates
+     * @overload
+     * @param handler - Async function to handle InputPaidMediaLivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpaidmedialivephoto Telegram Bot API}
+     */
+    onInputPaidMediaLivePhoto(handler: (data: InputPaidMediaLivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputPaidMediaLivePhoto updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputPaidMediaLivePhoto data
+     * @param handler - Async function to handle filtered InputPaidMediaLivePhoto updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpaidmedialivephoto Telegram Bot API}
+     */
+    onInputPaidMediaLivePhoto(filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaLivePhoto) => void | Promise<void>): this;
     /**
      * Registers a handler for InputPaidMediaPhoto updates
      * @overload
@@ -7870,6 +8173,24 @@ declare module '../core/bot' {
      */
     on(event: 'document', filter: string | ((data: any) => boolean), handler: (data: Document) => void | Promise<void>): this;
     /**
+     * Generic handler for 'livephoto' event (strongly typed)
+     * @param event - Event name: 'livephoto'
+     * @param handler - Async function to handle livephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#livephoto Telegram Bot API}
+     */
+    on(event: 'livephoto', handler: (data: LivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'livephoto' event with filtering
+     * @param event - Event name: 'livephoto'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered livephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#livephoto Telegram Bot API}
+     */
+    on(event: 'livephoto', filter: string | ((data: any) => boolean), handler: (data: LivePhoto) => void | Promise<void>): this;
+    /**
      * Generic handler for 'story' event (strongly typed)
      * @param event - Event name: 'story'
      * @param handler - Async function to handle story events
@@ -7996,23 +8317,23 @@ declare module '../core/bot' {
      */
     on(event: 'paidmedia', filter: string | ((data: any) => boolean), handler: (data: PaidMedia) => void | Promise<void>): this;
     /**
-     * Generic handler for 'paidmediapreview' event (strongly typed)
-     * @param event - Event name: 'paidmediapreview'
-     * @param handler - Async function to handle paidmediapreview events
+     * Generic handler for 'paidmedialivephoto' event (strongly typed)
+     * @param event - Event name: 'paidmedialivephoto'
+     * @param handler - Async function to handle paidmedialivephoto events
      * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     * @see {@link https://core.telegram.org/bots/api#paidmedialivephoto Telegram Bot API}
      */
-    on(event: 'paidmediapreview', handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    on(event: 'paidmedialivephoto', handler: (data: PaidMediaLivePhoto) => void | Promise<void>): this;
     
     /**
-     * Generic handler for 'paidmediapreview' event with filtering
-     * @param event - Event name: 'paidmediapreview'
+     * Generic handler for 'paidmedialivephoto' event with filtering
+     * @param event - Event name: 'paidmedialivephoto'
      * @param filter - Filter string or function
-     * @param handler - Async function to handle filtered paidmediapreview events
+     * @param handler - Async function to handle filtered paidmedialivephoto events
      * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     * @see {@link https://core.telegram.org/bots/api#paidmedialivephoto Telegram Bot API}
      */
-    on(event: 'paidmediapreview', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    on(event: 'paidmedialivephoto', filter: string | ((data: any) => boolean), handler: (data: PaidMediaLivePhoto) => void | Promise<void>): this;
     /**
      * Generic handler for 'paidmediaphoto' event (strongly typed)
      * @param event - Event name: 'paidmediaphoto'
@@ -8031,6 +8352,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#paidmediaphoto Telegram Bot API}
      */
     on(event: 'paidmediaphoto', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPhoto) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'paidmediapreview' event (strongly typed)
+     * @param event - Event name: 'paidmediapreview'
+     * @param handler - Async function to handle paidmediapreview events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     */
+    on(event: 'paidmediapreview', handler: (data: PaidMediaPreview) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'paidmediapreview' event with filtering
+     * @param event - Event name: 'paidmediapreview'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered paidmediapreview events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#paidmediapreview Telegram Bot API}
+     */
+    on(event: 'paidmediapreview', filter: string | ((data: any) => boolean), handler: (data: PaidMediaPreview) => void | Promise<void>): this;
     /**
      * Generic handler for 'paidmediavideo' event (strongly typed)
      * @param event - Event name: 'paidmediavideo'
@@ -8085,6 +8424,60 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#dice Telegram Bot API}
      */
     on(event: 'dice', filter: string | ((data: any) => boolean), handler: (data: Dice) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'pollmedia' event (strongly typed)
+     * @param event - Event name: 'pollmedia'
+     * @param handler - Async function to handle pollmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#pollmedia Telegram Bot API}
+     */
+    on(event: 'pollmedia', handler: (data: PollMedia) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'pollmedia' event with filtering
+     * @param event - Event name: 'pollmedia'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered pollmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#pollmedia Telegram Bot API}
+     */
+    on(event: 'pollmedia', filter: string | ((data: any) => boolean), handler: (data: PollMedia) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputpollmedia' event (strongly typed)
+     * @param event - Event name: 'inputpollmedia'
+     * @param handler - Async function to handle inputpollmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpollmedia Telegram Bot API}
+     */
+    on(event: 'inputpollmedia', handler: (data: InputPollMedia) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputpollmedia' event with filtering
+     * @param event - Event name: 'inputpollmedia'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputpollmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpollmedia Telegram Bot API}
+     */
+    on(event: 'inputpollmedia', filter: string | ((data: any) => boolean), handler: (data: InputPollMedia) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputpolloptionmedia' event (strongly typed)
+     * @param event - Event name: 'inputpolloptionmedia'
+     * @param handler - Async function to handle inputpolloptionmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpolloptionmedia Telegram Bot API}
+     */
+    on(event: 'inputpolloptionmedia', handler: (data: InputPollOptionMedia) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputpolloptionmedia' event with filtering
+     * @param event - Event name: 'inputpolloptionmedia'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputpolloptionmedia events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpolloptionmedia Telegram Bot API}
+     */
+    on(event: 'inputpolloptionmedia', filter: string | ((data: any) => boolean), handler: (data: InputPollOptionMedia) => void | Promise<void>): this;
     /**
      * Generic handler for 'polloption' event (strongly typed)
      * @param event - Event name: 'polloption'
@@ -10426,6 +10819,24 @@ declare module '../core/bot' {
      */
     on(event: 'ownedgifts', filter: string | ((data: any) => boolean), handler: (data: OwnedGifts) => void | Promise<void>): this;
     /**
+     * Generic handler for 'botaccesssettings' event (strongly typed)
+     * @param event - Event name: 'botaccesssettings'
+     * @param handler - Async function to handle botaccesssettings events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#botaccesssettings Telegram Bot API}
+     */
+    on(event: 'botaccesssettings', handler: (data: BotAccessSettings) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'botaccesssettings' event with filtering
+     * @param event - Event name: 'botaccesssettings'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered botaccesssettings events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#botaccesssettings Telegram Bot API}
+     */
+    on(event: 'botaccesssettings', filter: string | ((data: any) => boolean), handler: (data: BotAccessSettings) => void | Promise<void>): this;
+    /**
      * Generic handler for 'acceptedgifttypes' event (strongly typed)
      * @param event - Event name: 'acceptedgifttypes'
      * @param handler - Async function to handle acceptedgifttypes events
@@ -11002,6 +11413,24 @@ declare module '../core/bot' {
      */
     on(event: 'sentwebappmessage', filter: string | ((data: any) => boolean), handler: (data: SentWebAppMessage) => void | Promise<void>): this;
     /**
+     * Generic handler for 'sentguestmessage' event (strongly typed)
+     * @param event - Event name: 'sentguestmessage'
+     * @param handler - Async function to handle sentguestmessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentguestmessage Telegram Bot API}
+     */
+    on(event: 'sentguestmessage', handler: (data: SentGuestMessage) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'sentguestmessage' event with filtering
+     * @param event - Event name: 'sentguestmessage'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered sentguestmessage events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#sentguestmessage Telegram Bot API}
+     */
+    on(event: 'sentguestmessage', filter: string | ((data: any) => boolean), handler: (data: SentGuestMessage) => void | Promise<void>): this;
+    /**
      * Generic handler for 'preparedinlinemessage' event (strongly typed)
      * @param event - Event name: 'preparedinlinemessage'
      * @param handler - Async function to handle preparedinlinemessage events
@@ -11074,42 +11503,6 @@ declare module '../core/bot' {
      */
     on(event: 'inputmedia', filter: string | ((data: any) => boolean), handler: (data: InputMedia) => void | Promise<void>): this;
     /**
-     * Generic handler for 'inputmediaphoto' event (strongly typed)
-     * @param event - Event name: 'inputmediaphoto'
-     * @param handler - Async function to handle inputmediaphoto events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
-     */
-    on(event: 'inputmediaphoto', handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    
-    /**
-     * Generic handler for 'inputmediaphoto' event with filtering
-     * @param event - Event name: 'inputmediaphoto'
-     * @param filter - Filter string or function
-     * @param handler - Async function to handle filtered inputmediaphoto events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
-     */
-    on(event: 'inputmediaphoto', filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
-    /**
-     * Generic handler for 'inputmediavideo' event (strongly typed)
-     * @param event - Event name: 'inputmediavideo'
-     * @param handler - Async function to handle inputmediavideo events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
-     */
-    on(event: 'inputmediavideo', handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    
-    /**
-     * Generic handler for 'inputmediavideo' event with filtering
-     * @param event - Event name: 'inputmediavideo'
-     * @param filter - Filter string or function
-     * @param handler - Async function to handle filtered inputmediavideo events
-     * @returns {this} Bot instance for chaining
-     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
-     */
-    on(event: 'inputmediavideo', filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
-    /**
      * Generic handler for 'inputmediaanimation' event (strongly typed)
      * @param event - Event name: 'inputmediaanimation'
      * @param handler - Async function to handle inputmediaanimation events
@@ -11164,6 +11557,114 @@ declare module '../core/bot' {
      */
     on(event: 'inputmediadocument', filter: string | ((data: any) => boolean), handler: (data: InputMediaDocument) => void | Promise<void>): this;
     /**
+     * Generic handler for 'inputmedialivephoto' event (strongly typed)
+     * @param event - Event name: 'inputmedialivephoto'
+     * @param handler - Async function to handle inputmedialivephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialivephoto Telegram Bot API}
+     */
+    on(event: 'inputmedialivephoto', handler: (data: InputMediaLivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmedialivephoto' event with filtering
+     * @param event - Event name: 'inputmedialivephoto'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmedialivephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialivephoto Telegram Bot API}
+     */
+    on(event: 'inputmedialivephoto', filter: string | ((data: any) => boolean), handler: (data: InputMediaLivePhoto) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputmedialocation' event (strongly typed)
+     * @param event - Event name: 'inputmedialocation'
+     * @param handler - Async function to handle inputmedialocation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialocation Telegram Bot API}
+     */
+    on(event: 'inputmedialocation', handler: (data: InputMediaLocation) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmedialocation' event with filtering
+     * @param event - Event name: 'inputmedialocation'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmedialocation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmedialocation Telegram Bot API}
+     */
+    on(event: 'inputmedialocation', filter: string | ((data: any) => boolean), handler: (data: InputMediaLocation) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputmediaphoto' event (strongly typed)
+     * @param event - Event name: 'inputmediaphoto'
+     * @param handler - Async function to handle inputmediaphoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
+     */
+    on(event: 'inputmediaphoto', handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmediaphoto' event with filtering
+     * @param event - Event name: 'inputmediaphoto'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmediaphoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediaphoto Telegram Bot API}
+     */
+    on(event: 'inputmediaphoto', filter: string | ((data: any) => boolean), handler: (data: InputMediaPhoto) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputmediasticker' event (strongly typed)
+     * @param event - Event name: 'inputmediasticker'
+     * @param handler - Async function to handle inputmediasticker events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediasticker Telegram Bot API}
+     */
+    on(event: 'inputmediasticker', handler: (data: InputMediaSticker) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmediasticker' event with filtering
+     * @param event - Event name: 'inputmediasticker'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmediasticker events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediasticker Telegram Bot API}
+     */
+    on(event: 'inputmediasticker', filter: string | ((data: any) => boolean), handler: (data: InputMediaSticker) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputmediavenue' event (strongly typed)
+     * @param event - Event name: 'inputmediavenue'
+     * @param handler - Async function to handle inputmediavenue events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavenue Telegram Bot API}
+     */
+    on(event: 'inputmediavenue', handler: (data: InputMediaVenue) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmediavenue' event with filtering
+     * @param event - Event name: 'inputmediavenue'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmediavenue events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavenue Telegram Bot API}
+     */
+    on(event: 'inputmediavenue', filter: string | ((data: any) => boolean), handler: (data: InputMediaVenue) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputmediavideo' event (strongly typed)
+     * @param event - Event name: 'inputmediavideo'
+     * @param handler - Async function to handle inputmediavideo events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
+     */
+    on(event: 'inputmediavideo', handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputmediavideo' event with filtering
+     * @param event - Event name: 'inputmediavideo'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputmediavideo events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputmediavideo Telegram Bot API}
+     */
+    on(event: 'inputmediavideo', filter: string | ((data: any) => boolean), handler: (data: InputMediaVideo) => void | Promise<void>): this;
+    /**
      * Generic handler for 'inputfile' event (strongly typed)
      * @param event - Event name: 'inputfile'
      * @param handler - Async function to handle inputfile events
@@ -11199,6 +11700,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputpaidmedia Telegram Bot API}
      */
     on(event: 'inputpaidmedia', filter: string | ((data: any) => boolean), handler: (data: InputPaidMedia) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputpaidmedialivephoto' event (strongly typed)
+     * @param event - Event name: 'inputpaidmedialivephoto'
+     * @param handler - Async function to handle inputpaidmedialivephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpaidmedialivephoto Telegram Bot API}
+     */
+    on(event: 'inputpaidmedialivephoto', handler: (data: InputPaidMediaLivePhoto) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputpaidmedialivephoto' event with filtering
+     * @param event - Event name: 'inputpaidmedialivephoto'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputpaidmedialivephoto events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputpaidmedialivephoto Telegram Bot API}
+     */
+    on(event: 'inputpaidmedialivephoto', filter: string | ((data: any) => boolean), handler: (data: InputPaidMediaLivePhoto) => void | Promise<void>): this;
     /**
      * Generic handler for 'inputpaidmediaphoto' event (strongly typed)
      * @param event - Event name: 'inputpaidmediaphoto'
@@ -12764,6 +13283,15 @@ declare module './types/user' {
      */
     setUserEmojiStatus(emojiStatusCustomEmojiId?: string, emojiStatusExpirationDate?: number): Promise<any>;
     /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this User instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
+    /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
      * @param chatId: number | string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -13119,14 +13647,14 @@ declare module './types/chat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this Chat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -13145,6 +13673,15 @@ declare module './types/chat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Chat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can\_set\_sticker\_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
      * @param stickerSetName: string - Method parameters (contextual parameters are auto-filled)
@@ -13198,6 +13735,15 @@ declare module './types/chat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Chat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -13427,14 +13973,14 @@ declare module './types/chatFullInfo' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatFullInfo instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -13453,6 +13999,15 @@ declare module './types/chatFullInfo' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -13488,6 +14043,15 @@ declare module './types/chatFullInfo' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatFullInfo instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -13684,6 +14248,15 @@ declare module './types/message' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -13747,7 +14320,7 @@ declare module './types/message' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -13810,7 +14383,7 @@ declare module './types/message' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -13881,6 +14454,15 @@ declare module './types/message' {
      * @see {@link https://core.telegram.org/bots/api#unpinAllChatMessages Telegram Bot API}
      */
     unpinAllChatMessages(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this Message instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
      * @param name?: string, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -13981,7 +14563,7 @@ declare module './types/message' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14043,6 +14625,24 @@ declare module './types/message' {
      * @see {@link https://core.telegram.org/bots/api#deleteMessages Telegram Bot API}
      */
     deleteMessages(messageIds: number[]): Promise<any>;
+    /**
+     * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId, chatId, userId, actorChatId) are automatically filled from this Message instance
+     * @see {@link https://core.telegram.org/bots/api#deleteMessageReaction Telegram Bot API}
+     */
+    deleteMessageReaction(): Promise<any>;
+    /**
+     * Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the &#39;can\_delete\_messages&#39; administrator right in the chat. Returns True on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, userId, actorChatId) are automatically filled from this Message instance
+     * @see {@link https://core.telegram.org/bots/api#deleteAllMessageReactions Telegram Bot API}
+     */
+    deleteAllMessageReactions(): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -14121,6 +14721,14 @@ declare module './types/messageId' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -14177,7 +14785,7 @@ declare module './types/messageId' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14233,7 +14841,7 @@ declare module './types/messageId' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14315,7 +14923,7 @@ declare module './types/messageId' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14427,6 +15035,15 @@ declare module './types/inaccessibleMessage' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this InaccessibleMessage instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -14490,7 +15107,7 @@ declare module './types/inaccessibleMessage' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14553,7 +15170,7 @@ declare module './types/inaccessibleMessage' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14642,7 +15259,7 @@ declare module './types/inaccessibleMessage' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14754,6 +15371,14 @@ declare module './types/maybeInaccessibleMessage' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -14810,7 +15435,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14866,7 +15491,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -14949,7 +15574,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15092,6 +15717,14 @@ declare module './types/messageEntity' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -15148,7 +15781,7 @@ declare module './types/messageEntity' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15204,7 +15837,7 @@ declare module './types/messageEntity' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15313,7 +15946,7 @@ declare module './types/messageEntity' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15444,6 +16077,15 @@ declare module './types/replyParameters' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ReplyParameters instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -15507,7 +16149,7 @@ declare module './types/replyParameters' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15638,6 +16280,14 @@ declare module './types/messageOrigin' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -15694,7 +16344,7 @@ declare module './types/messageOrigin' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15750,7 +16400,7 @@ declare module './types/messageOrigin' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15833,7 +16483,7 @@ declare module './types/messageOrigin' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -15943,6 +16593,14 @@ declare module './types/messageOriginUser' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -15999,7 +16657,7 @@ declare module './types/messageOriginUser' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16055,7 +16713,7 @@ declare module './types/messageOriginUser' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16138,7 +16796,7 @@ declare module './types/messageOriginUser' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16248,6 +16906,14 @@ declare module './types/messageOriginHiddenUser' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -16304,7 +16970,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16360,7 +17026,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16443,7 +17109,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16581,6 +17247,15 @@ declare module './types/messageOriginChat' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -16644,7 +17319,7 @@ declare module './types/messageOriginChat' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16707,7 +17382,7 @@ declare module './types/messageOriginChat' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16776,14 +17451,14 @@ declare module './types/messageOriginChat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -16802,6 +17477,14 @@ declare module './types/messageOriginChat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -16854,6 +17537,14 @@ declare module './types/messageOriginChat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -16981,7 +17672,7 @@ declare module './types/messageOriginChat' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17137,6 +17828,15 @@ declare module './types/messageOriginChannel' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChannel instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -17200,7 +17900,7 @@ declare module './types/messageOriginChannel' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17263,7 +17963,7 @@ declare module './types/messageOriginChannel' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17352,7 +18052,7 @@ declare module './types/messageOriginChannel' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17447,6 +18147,14 @@ declare module './types/photoSize' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -17503,7 +18211,7 @@ declare module './types/photoSize' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17559,7 +18267,7 @@ declare module './types/photoSize' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17671,6 +18379,14 @@ declare module './types/document' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -17727,7 +18443,7 @@ declare module './types/document' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17783,7 +18499,199 @@ declare module './types/document' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for LivePhoto class
+ * @namespace LivePhotoExtensions
+ */
+declare module './types/livePhoto' {
+  interface LivePhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17898,6 +18806,14 @@ declare module './types/videoQuality' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -17954,7 +18870,7 @@ declare module './types/videoQuality' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18010,7 +18926,7 @@ declare module './types/videoQuality' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18082,6 +18998,14 @@ declare module './types/video' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -18138,7 +19062,7 @@ declare module './types/video' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18194,7 +19118,7 @@ declare module './types/video' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18266,6 +19190,14 @@ declare module './types/videoNote' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -18322,7 +19254,7 @@ declare module './types/videoNote' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18378,7 +19310,7 @@ declare module './types/videoNote' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18476,11 +19408,11 @@ declare module './types/paidMedia' {
   }
 }
 /**
- * Declaration merging for PaidMediaPhoto class
- * @namespace PaidMediaPhotoExtensions
+ * Declaration merging for PaidMediaLivePhoto class
+ * @namespace PaidMediaLivePhotoExtensions
  */
-declare module './types/paidMediaPhoto' {
-  interface PaidMediaPhoto {
+declare module './types/paidMediaLivePhoto' {
+  interface PaidMediaLivePhoto {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -18497,6 +19429,14 @@ declare module './types/paidMediaPhoto' {
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -18554,7 +19494,7 @@ declare module './types/paidMediaPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18610,7 +19550,199 @@ declare module './types/paidMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for PaidMediaPhoto class
+ * @namespace PaidMediaPhotoExtensions
+ */
+declare module './types/paidMediaPhoto' {
+  interface PaidMediaPhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18682,6 +19814,14 @@ declare module './types/paidMediaVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -18738,7 +19878,7 @@ declare module './types/paidMediaVideo' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18794,7 +19934,7 @@ declare module './types/paidMediaVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18873,6 +20013,23 @@ declare module './types/dice' {
      * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for InputPollMedia class
+ * @namespace InputPollMediaExtensions
+ */
+declare module './types/inputPollMedia' {
+  interface InputPollMedia {
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this InputPollMedia instance
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Omit<Interfaces.SendPollParams, 'chatId'>): Promise<any>;
   }
 }
 /**
@@ -19052,6 +20209,14 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -19108,7 +20273,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19164,7 +20329,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19246,7 +20411,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19380,14 +20545,14 @@ declare module './types/chatBoostAdded' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostAdded instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -19406,6 +20571,14 @@ declare module './types/chatBoostAdded' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -19440,6 +20613,14 @@ declare module './types/chatBoostAdded' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -19639,14 +20820,14 @@ declare module './types/backgroundTypeChatTheme' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BackgroundTypeChatTheme instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -19665,6 +20846,14 @@ declare module './types/backgroundTypeChatTheme' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -19699,6 +20888,14 @@ declare module './types/backgroundTypeChatTheme' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -19898,14 +21095,14 @@ declare module './types/chatBackground' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBackground instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -19924,6 +21121,14 @@ declare module './types/chatBackground' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -19958,6 +21163,14 @@ declare module './types/chatBackground' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -20175,14 +21388,14 @@ declare module './types/chatShared' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatShared instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -20201,6 +21414,15 @@ declare module './types/chatShared' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatShared instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -20236,6 +21458,15 @@ declare module './types/chatShared' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatShared instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -20421,6 +21652,15 @@ declare module './types/videoChatScheduled' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatScheduled instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -20484,7 +21724,7 @@ declare module './types/videoChatScheduled' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20547,7 +21787,7 @@ declare module './types/videoChatScheduled' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20598,14 +21838,14 @@ declare module './types/videoChatScheduled' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatScheduled instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -20624,6 +21864,14 @@ declare module './types/videoChatScheduled' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -20658,6 +21906,14 @@ declare module './types/videoChatScheduled' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -20878,6 +22134,15 @@ declare module './types/videoChatStarted' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatStarted instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -20941,7 +22206,7 @@ declare module './types/videoChatStarted' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21004,7 +22269,7 @@ declare module './types/videoChatStarted' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21055,14 +22320,14 @@ declare module './types/videoChatStarted' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatStarted instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -21081,6 +22346,14 @@ declare module './types/videoChatStarted' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -21115,6 +22388,14 @@ declare module './types/videoChatStarted' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -21335,6 +22616,15 @@ declare module './types/videoChatEnded' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatEnded instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -21398,7 +22688,7 @@ declare module './types/videoChatEnded' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21461,7 +22751,7 @@ declare module './types/videoChatEnded' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21512,14 +22802,14 @@ declare module './types/videoChatEnded' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatEnded instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -21538,6 +22828,14 @@ declare module './types/videoChatEnded' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -21572,6 +22870,14 @@ declare module './types/videoChatEnded' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -21792,6 +23098,15 @@ declare module './types/videoChatParticipantsInvited' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -21855,7 +23170,7 @@ declare module './types/videoChatParticipantsInvited' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21918,7 +23233,7 @@ declare module './types/videoChatParticipantsInvited' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21971,14 +23286,14 @@ declare module './types/videoChatParticipantsInvited' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -21997,6 +23312,15 @@ declare module './types/videoChatParticipantsInvited' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -22032,6 +23356,15 @@ declare module './types/videoChatParticipantsInvited' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -22243,6 +23576,14 @@ declare module './types/paidMessagePriceChanged' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -22299,7 +23640,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22355,7 +23696,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22437,7 +23778,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22546,6 +23887,14 @@ declare module './types/directMessagePriceChanged' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -22602,7 +23951,7 @@ declare module './types/directMessagePriceChanged' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22658,7 +24007,7 @@ declare module './types/directMessagePriceChanged' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22740,7 +24089,7 @@ declare module './types/directMessagePriceChanged' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22920,6 +24269,14 @@ declare module './types/suggestedPostParameters' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -23068,6 +24425,15 @@ declare module './types/directMessagesTopic' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'directMessagesTopicId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'directMessagesTopicId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -23131,7 +24497,7 @@ declare module './types/directMessagesTopic' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23192,7 +24558,7 @@ declare module './types/directMessagesTopic' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'directMessagesTopicId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23275,7 +24641,7 @@ declare module './types/directMessagesTopic' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23370,6 +24736,14 @@ declare module './types/userProfilePhotos' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -23426,7 +24800,7 @@ declare module './types/userProfilePhotos' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23482,7 +24856,7 @@ declare module './types/userProfilePhotos' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23686,6 +25060,14 @@ declare module './types/replyKeyboardMarkup' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -23875,14 +25257,14 @@ declare module './types/keyboardButtonRequestChat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this KeyboardButtonRequestChat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -23901,6 +25283,15 @@ declare module './types/keyboardButtonRequestChat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -23936,6 +25327,15 @@ declare module './types/keyboardButtonRequestChat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this KeyboardButtonRequestChat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -24126,6 +25526,14 @@ declare module './types/replyKeyboardRemove' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -24286,6 +25694,14 @@ declare module './types/inlineKeyboardMarkup' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -24406,7 +25822,7 @@ declare module './types/inlineKeyboardMarkup' {
      */
     editMessageCaption(params: Interfaces.EditMessageCaptionParams): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24546,14 +25962,14 @@ declare module './types/switchInlineQueryChosenChat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this SwitchInlineQueryChosenChat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -24572,6 +25988,15 @@ declare module './types/switchInlineQueryChosenChat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -24607,6 +26032,15 @@ declare module './types/switchInlineQueryChosenChat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this SwitchInlineQueryChosenChat instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -24814,6 +26248,14 @@ declare module './types/forceReply' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -24969,6 +26411,15 @@ declare module './types/chatPhoto' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this ChatPhoto instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -25032,7 +26483,7 @@ declare module './types/chatPhoto' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -25095,7 +26546,7 @@ declare module './types/chatPhoto' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -25164,14 +26615,14 @@ declare module './types/chatPhoto' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatPhoto instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25190,6 +26641,14 @@ declare module './types/chatPhoto' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -25224,6 +26683,14 @@ declare module './types/chatPhoto' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -25497,14 +26964,14 @@ declare module './types/chatInviteLink' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatInviteLink instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25523,6 +26990,15 @@ declare module './types/chatInviteLink' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -25558,6 +27034,15 @@ declare module './types/chatInviteLink' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatInviteLink instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -25760,14 +27245,14 @@ declare module './types/chatAdministratorRights' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatAdministratorRights instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -25786,6 +27271,15 @@ declare module './types/chatAdministratorRights' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -25821,6 +27315,15 @@ declare module './types/chatAdministratorRights' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatAdministratorRights instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26031,14 +27534,14 @@ declare module './types/chatMemberUpdated' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26057,6 +27560,15 @@ declare module './types/chatMemberUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -26092,6 +27604,15 @@ declare module './types/chatMemberUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26339,14 +27860,14 @@ declare module './types/chatMember' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26365,6 +27886,15 @@ declare module './types/chatMember' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -26400,6 +27930,15 @@ declare module './types/chatMember' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26602,14 +28141,14 @@ declare module './types/chatMemberOwner' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberOwner instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26628,6 +28167,15 @@ declare module './types/chatMemberOwner' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -26663,6 +28211,15 @@ declare module './types/chatMemberOwner' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberOwner instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -26865,14 +28422,14 @@ declare module './types/chatMemberAdministrator' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberAdministrator instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -26891,6 +28448,15 @@ declare module './types/chatMemberAdministrator' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -26926,6 +28492,15 @@ declare module './types/chatMemberAdministrator' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberAdministrator instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27128,14 +28703,14 @@ declare module './types/chatMemberMember' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberMember instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -27154,6 +28729,15 @@ declare module './types/chatMemberMember' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -27189,6 +28773,15 @@ declare module './types/chatMemberMember' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27391,14 +28984,14 @@ declare module './types/chatMemberRestricted' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberRestricted instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -27417,6 +29010,15 @@ declare module './types/chatMemberRestricted' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -27452,6 +29054,15 @@ declare module './types/chatMemberRestricted' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberRestricted instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27654,14 +29265,14 @@ declare module './types/chatMemberLeft' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberLeft instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -27680,6 +29291,15 @@ declare module './types/chatMemberLeft' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -27715,6 +29335,15 @@ declare module './types/chatMemberLeft' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -27917,14 +29546,14 @@ declare module './types/chatMemberBanned' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatMemberBanned instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -27943,6 +29572,15 @@ declare module './types/chatMemberBanned' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -27978,6 +29616,15 @@ declare module './types/chatMemberBanned' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatMemberBanned instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -28198,14 +29845,14 @@ declare module './types/chatJoinRequest' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatJoinRequest instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -28224,6 +29871,15 @@ declare module './types/chatJoinRequest' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -28259,6 +29915,15 @@ declare module './types/chatJoinRequest' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatJoinRequest instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -28479,14 +30144,14 @@ declare module './types/chatPermissions' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatPermissions instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -28505,6 +30170,15 @@ declare module './types/chatPermissions' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -28540,6 +30214,15 @@ declare module './types/chatPermissions' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatPermissions instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -28765,14 +30448,14 @@ declare module './types/chatLocation' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatLocation instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -28791,6 +30474,14 @@ declare module './types/chatLocation' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -28825,6 +30516,14 @@ declare module './types/chatLocation' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -29018,6 +30717,15 @@ declare module './types/messageReactionUpdated' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -29081,7 +30789,7 @@ declare module './types/messageReactionUpdated' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29144,7 +30852,7 @@ declare module './types/messageReactionUpdated' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29233,7 +30941,7 @@ declare module './types/messageReactionUpdated' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29349,6 +31057,15 @@ declare module './types/messageReactionCountUpdated' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionCountUpdated instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -29412,7 +31129,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29475,7 +31192,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29564,7 +31281,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29899,6 +31616,32 @@ declare module './types/gifts' {
   }
 }
 /**
+ * Declaration merging for BotAccessSettings class
+ * @namespace BotAccessSettingsExtensions
+ */
+declare module './types/botAccessSettings' {
+  interface BotAccessSettings {
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotAccessSettings instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
+    /**
+     * Use this method to change the access settings of a managed bot. Returns True on success.
+     * @param isAccessRestricted: boolean, addedUserIds?: number[] - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotAccessSettings instance
+     * @see {@link https://core.telegram.org/bots/api#setManagedBotAccessSettings Telegram Bot API}
+     */
+    setManagedBotAccessSettings(isAccessRestricted: boolean, addedUserIds?: number[]): Promise<any>;
+  }
+}
+/**
  * Declaration merging for AcceptedGiftTypes class
  * @namespace AcceptedGiftTypesExtensions
  */
@@ -30027,14 +31770,14 @@ declare module './types/botCommandScopeAllPrivateChats' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllPrivateChats instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30053,6 +31796,14 @@ declare module './types/botCommandScopeAllPrivateChats' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -30087,6 +31838,14 @@ declare module './types/botCommandScopeAllPrivateChats' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -30286,14 +32045,14 @@ declare module './types/botCommandScopeAllGroupChats' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllGroupChats instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30312,6 +32071,14 @@ declare module './types/botCommandScopeAllGroupChats' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -30346,6 +32113,14 @@ declare module './types/botCommandScopeAllGroupChats' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -30545,14 +32320,14 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeAllChatAdministrators instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30571,6 +32346,14 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -30605,6 +32388,14 @@ declare module './types/botCommandScopeAllChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -30804,14 +32595,14 @@ declare module './types/botCommandScopeChat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -30830,6 +32621,14 @@ declare module './types/botCommandScopeChat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -30864,6 +32663,14 @@ declare module './types/botCommandScopeChat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31063,14 +32870,14 @@ declare module './types/botCommandScopeChatAdministrators' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChatAdministrators instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -31089,6 +32896,14 @@ declare module './types/botCommandScopeChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -31123,6 +32938,14 @@ declare module './types/botCommandScopeChatAdministrators' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31324,14 +33147,14 @@ declare module './types/botCommandScopeChatMember' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BotCommandScopeChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -31350,6 +33173,15 @@ declare module './types/botCommandScopeChatMember' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -31385,6 +33217,15 @@ declare module './types/botCommandScopeChatMember' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this BotCommandScopeChatMember instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31619,14 +33460,14 @@ declare module './types/chatBoostSource' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSource instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -31645,6 +33486,15 @@ declare module './types/chatBoostSource' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -31680,6 +33530,15 @@ declare module './types/chatBoostSource' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSource instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -31882,14 +33741,14 @@ declare module './types/chatBoostSourcePremium' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourcePremium instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -31908,6 +33767,15 @@ declare module './types/chatBoostSourcePremium' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -31943,6 +33811,15 @@ declare module './types/chatBoostSourcePremium' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourcePremium instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -32145,14 +34022,14 @@ declare module './types/chatBoostSourceGiftCode' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiftCode instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -32171,6 +34048,15 @@ declare module './types/chatBoostSourceGiftCode' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -32206,6 +34092,15 @@ declare module './types/chatBoostSourceGiftCode' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiftCode instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -32408,14 +34303,14 @@ declare module './types/chatBoostSourceGiveaway' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiveaway instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -32434,6 +34329,15 @@ declare module './types/chatBoostSourceGiveaway' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -32469,6 +34373,15 @@ declare module './types/chatBoostSourceGiveaway' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatBoostSourceGiveaway instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -32669,14 +34582,14 @@ declare module './types/chatBoost' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoost instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -32695,6 +34608,14 @@ declare module './types/chatBoost' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -32729,6 +34650,14 @@ declare module './types/chatBoost' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -32928,14 +34857,14 @@ declare module './types/chatBoostUpdated' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -32954,6 +34883,14 @@ declare module './types/chatBoostUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -32988,6 +34925,14 @@ declare module './types/chatBoostUpdated' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33187,14 +35132,14 @@ declare module './types/chatBoostRemoved' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatBoostRemoved instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -33213,6 +35158,14 @@ declare module './types/chatBoostRemoved' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -33247,6 +35200,14 @@ declare module './types/chatBoostRemoved' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33448,14 +35409,14 @@ declare module './types/chatOwnerLeft' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -33474,6 +35435,15 @@ declare module './types/chatOwnerLeft' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -33509,6 +35479,15 @@ declare module './types/chatOwnerLeft' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerLeft instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33711,14 +35690,14 @@ declare module './types/chatOwnerChanged' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -33737,6 +35716,15 @@ declare module './types/chatOwnerChanged' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -33772,6 +35760,15 @@ declare module './types/chatOwnerChanged' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this ChatOwnerChanged instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -33974,14 +35971,14 @@ declare module './types/userChatBoosts' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this UserChatBoosts instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -34000,6 +35997,15 @@ declare module './types/userChatBoosts' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param limit: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -34035,6 +36041,15 @@ declare module './types/userChatBoosts' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this UserChatBoosts instance
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters
@@ -34230,6 +36245,15 @@ declare module './types/businessMessagesDeleted' {
      */
     sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, businessConnectionId) are automatically filled from this BusinessMessagesDeleted instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
@@ -34293,7 +36317,7 @@ declare module './types/businessMessagesDeleted' {
      */
     sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34356,7 +36380,7 @@ declare module './types/businessMessagesDeleted' {
      */
     sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34446,7 +36470,7 @@ declare module './types/businessMessagesDeleted' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34558,6 +36582,14 @@ declare module './types/sentWebAppMessage' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -34614,7 +36646,7 @@ declare module './types/sentWebAppMessage' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34670,7 +36702,7 @@ declare module './types/sentWebAppMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34752,7 +36784,7 @@ declare module './types/sentWebAppMessage' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34784,6 +36816,317 @@ declare module './types/sentWebAppMessage' {
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentWebAppMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for SentGuestMessage class
+ * @namespace SentGuestMessageExtensions
+ */
+declare module './types/sentGuestMessage' {
+  interface SentGuestMessage {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param chatId: number | string, name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this SentGuestMessage instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (inlineMessageId, messageId) are automatically filled from this SentGuestMessage instance
      * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
@@ -34861,6 +37204,14 @@ declare module './types/preparedInlineMessage' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -34917,7 +37268,7 @@ declare module './types/preparedInlineMessage' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34973,7 +37324,7 @@ declare module './types/preparedInlineMessage' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35063,7 +37414,7 @@ declare module './types/preparedInlineMessage' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35155,7 +37506,7 @@ declare module './types/preparedKeyboardButton' {
 declare module './types/inputMedia' {
   interface InputMedia {
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35165,11 +37516,11 @@ declare module './types/inputMedia' {
   }
 }
 /**
- * Declaration merging for InputMediaPhoto class
- * @namespace InputMediaPhotoExtensions
+ * Declaration merging for InputMediaDocument class
+ * @namespace InputMediaDocumentExtensions
  */
-declare module './types/inputMediaPhoto' {
-  interface InputMediaPhoto {
+declare module './types/inputMediaDocument' {
+  interface InputMediaDocument {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35186,6 +37537,14 @@ declare module './types/inputMediaPhoto' {
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -35243,7 +37602,7 @@ declare module './types/inputMediaPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35299,7 +37658,391 @@ declare module './types/inputMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for InputMediaLivePhoto class
+ * @namespace InputMediaLivePhotoExtensions
+ */
+declare module './types/inputMediaLivePhoto' {
+  interface InputMediaLivePhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for InputMediaPhoto class
+ * @namespace InputMediaPhotoExtensions
+ */
+declare module './types/inputMediaPhoto' {
+  interface InputMediaPhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35371,189 +38114,13 @@ declare module './types/inputMediaVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
-     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * Use this method to send live photos. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
-    /**
-     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
-     */
-    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
-    /**
-     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
-     */
-    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
-    /**
-     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
-     */
-    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
-    /**
-     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
-     */
-    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
-    /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
-     */
-    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
-    /**
-     * Use this method to send paid media. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
-     */
-    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
-    /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
-     */
-    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
-    /**
-     * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
-     */
-    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
-    /**
-     * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
-     */
-    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
-    /**
-     * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
-     */
-    sendContact(params: Interfaces.SendContactParams): Promise<any>;
-    /**
-     * Use this method to send a native poll. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
-     */
-    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
-    /**
-     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
-     */
-    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
-    /**
-     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
-     */
-    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
-    /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
-     */
-    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
-    /**
-     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
-     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
-     */
-    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
-    /**
-     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
-     */
-    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
-    /**
-     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
-     */
-    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
-    /**
-     * Use this method to send invoices. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
-     */
-    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
-    /**
-     * Use this method to send a game. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
-     */
-    sendGame(params: Interfaces.SendGameParams): Promise<any>;
-  }
-}
-/**
- * Declaration merging for InputMediaDocument class
- * @namespace InputMediaDocumentExtensions
- */
-declare module './types/inputMediaDocument' {
-  interface InputMediaDocument {
-    /**
-     * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
-     */
-    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
-    /**
-     * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object
-     * @returns {Promise<any>} Promise resolving to method result
-     * @throws {Error} If API call fails or returns error
-     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
-     */
-    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -35611,7 +38178,7 @@ declare module './types/inputMediaDocument' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35667,7 +38234,7 @@ declare module './types/inputMediaDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35738,6 +38305,14 @@ declare module './types/inputFile' {
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -35837,11 +38412,11 @@ declare module './types/inputPaidMedia' {
   }
 }
 /**
- * Declaration merging for InputPaidMediaPhoto class
- * @namespace InputPaidMediaPhotoExtensions
+ * Declaration merging for InputPaidMediaLivePhoto class
+ * @namespace InputPaidMediaLivePhotoExtensions
  */
-declare module './types/inputPaidMediaPhoto' {
-  interface InputPaidMediaPhoto {
+declare module './types/inputPaidMediaLivePhoto' {
+  interface InputPaidMediaLivePhoto {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -35858,6 +38433,14 @@ declare module './types/inputPaidMediaPhoto' {
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -35915,7 +38498,7 @@ declare module './types/inputPaidMediaPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -35971,7 +38554,199 @@ declare module './types/inputPaidMediaPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for InputPaidMediaPhoto class
+ * @namespace InputPaidMediaPhotoExtensions
+ */
+declare module './types/inputPaidMediaPhoto' {
+  interface InputPaidMediaPhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36043,6 +38818,14 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -36099,7 +38882,7 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36155,7 +38938,7 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36227,6 +39010,14 @@ declare module './types/inputProfilePhoto' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -36283,7 +39074,7 @@ declare module './types/inputProfilePhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36339,7 +39130,7 @@ declare module './types/inputProfilePhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36427,6 +39218,14 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -36483,7 +39282,7 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36539,7 +39338,7 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36611,6 +39410,14 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -36667,7 +39474,7 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36723,7 +39530,7 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36820,6 +39627,14 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -36876,7 +39691,7 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36932,7 +39747,7 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37004,6 +39819,14 @@ declare module './types/inputStoryContentVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -37060,7 +39883,7 @@ declare module './types/inputStoryContentVideo' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37116,7 +39939,7 @@ declare module './types/inputStoryContentVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37488,6 +40311,14 @@ declare module './types/inlineQueryResultsButton' {
 declare module './types/inlineQueryResult' {
   interface InlineQueryResult {
     /**
+     * Use this method to reply to a received guest message. On success, a SentGuestMessage object is returned.
+     * @param guestQueryId: string, result: InlineQueryResult - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#answerGuestQuery Telegram Bot API}
+     */
+    answerGuestQuery(guestQueryId: string, result: InlineQueryResult): Promise<any>;
+    /**
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
      * @param webAppQueryId: string, result: InlineQueryResult - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
@@ -37536,6 +40367,14 @@ declare module './types/inlineQueryResultPhoto' {
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
@@ -37593,7 +40432,7 @@ declare module './types/inlineQueryResultPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37649,7 +40488,7 @@ declare module './types/inlineQueryResultPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37721,6 +40560,14 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -37777,7 +40624,7 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37833,7 +40680,7 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -37905,6 +40752,14 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -37961,7 +40816,7 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38017,7 +40872,7 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38089,6 +40944,14 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -38145,7 +41008,7 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38201,7 +41064,7 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38273,6 +41136,14 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -38329,7 +41200,7 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38385,7 +41256,7 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38457,6 +41328,14 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -38513,7 +41392,7 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38569,7 +41448,7 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38658,6 +41537,14 @@ declare module './types/inputMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -38714,7 +41601,7 @@ declare module './types/inputMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38770,7 +41657,7 @@ declare module './types/inputMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38852,7 +41739,7 @@ declare module './types/inputMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -38961,6 +41848,14 @@ declare module './types/inputTextMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -39017,7 +41912,7 @@ declare module './types/inputTextMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39073,7 +41968,7 @@ declare module './types/inputTextMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39155,7 +42050,7 @@ declare module './types/inputTextMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39264,6 +42159,14 @@ declare module './types/inputLocationMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -39320,7 +42223,7 @@ declare module './types/inputLocationMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39376,7 +42279,7 @@ declare module './types/inputLocationMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39458,7 +42361,7 @@ declare module './types/inputLocationMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39567,6 +42470,14 @@ declare module './types/inputVenueMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -39623,7 +42534,7 @@ declare module './types/inputVenueMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39680,7 +42591,7 @@ declare module './types/inputVenueMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39762,7 +42673,7 @@ declare module './types/inputVenueMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39871,6 +42782,14 @@ declare module './types/inputContactMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -39927,7 +42846,7 @@ declare module './types/inputContactMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39983,7 +42902,7 @@ declare module './types/inputContactMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40065,7 +42984,7 @@ declare module './types/inputContactMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40174,6 +43093,14 @@ declare module './types/inputInvoiceMessageContent' {
      */
     sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
@@ -40230,7 +43157,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
     /**
-     * Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40286,7 +43213,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     sendDice(params: Interfaces.SendDiceParams): Promise<any>;
     /**
-     * Use this method to stream a partial message to a user while the message is being generated. Returns True on success.
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40368,7 +43295,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40600,14 +43527,14 @@ declare module './types/transactionPartnerChat' {
      */
     getChat(): Promise<any>;
     /**
-     * Use this method to get a list of administrators in a chat, which aren&#39;t bots. Returns an Array of ChatMember objects.
-     * @param  - Method parameters (contextual parameters are auto-filled)
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this TransactionPartnerChat instance
      * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
      */
-    getChatAdministrators(): Promise<any>;
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
     /**
      * Use this method to get the number of members in a chat. Returns Int on success.
      * @param  - Method parameters (contextual parameters are auto-filled)
@@ -40626,6 +43553,14 @@ declare module './types/transactionPartnerChat' {
      * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
      */
     getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
@@ -40660,6 +43595,14 @@ declare module './types/transactionPartnerChat' {
      * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
      */
     getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
     /**
      * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
      * @param scope?: BotCommandScope, languageCode?: string - Method parameters

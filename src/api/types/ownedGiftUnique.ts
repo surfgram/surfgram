@@ -91,7 +91,7 @@ export class OwnedGiftUnique {
   transferStarCount?: number;
 
   /**
-   * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now
+   * Optional. Point in time \(Unix timestamp\) when the gift can be transferred. If it is in the past, then the gift can be transferred now.
    * @type { number }
    * @memberof OwnedGiftUnique
    * @instance
