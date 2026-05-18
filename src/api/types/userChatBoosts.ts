@@ -57,8 +57,8 @@ export class UserChatBoosts {
     bot?: Bot
   ) {
     this.raw = raw;
-    this.bot = bot;
     const converted = snakeToCamel(raw);
     Object.assign(this, converted);
+    this.bot = bot;
   }
 }
