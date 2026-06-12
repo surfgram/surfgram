@@ -210,21 +210,22 @@ bot.onLinkPreviewOptions(async (linkpreviewoptions: LinkPreviewOptions) => {
 
 ### editMessageText
 
-Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
 | `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the message to edit. |
 | `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
+| `text` | `string` | No | New text of the message, 1-4096 characters after entity parsing; required if rich\_message isn't specified |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
+| `richMessage` | `InputRichMessage` | No | New rich content of the message; required if text isn't specified |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
@@ -234,8 +235,8 @@ Use this method to edit text and game messages. On success, if the edited messag
 ```typescript
 const linkpreviewoptions = new LinkPreviewOptions(rawData, bot);
 await linkpreviewoptions.editMessageText({
-  text: "example text",
   businessConnectionId: "example text",
+  chatId: 123,
 });
 ```
 
@@ -244,7 +245,7 @@ await linkpreviewoptions.editMessageText({
 ```typescript
 bot.onLinkPreviewOptions(async (linkpreviewoptions: LinkPreviewOptions) => {
   // Auto-fills parameters from the linkpreviewoptions instance
-  await linkpreviewoptions.editMessageText({ text: "Response" });
+  await linkpreviewoptions.editMessageText({ businessConnectionId: "Response" });
 });
 ```
 

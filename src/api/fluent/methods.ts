@@ -580,6 +580,28 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to process a received chat join request query. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function answerChatJoinRequestQuery
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).answerChatJoinRequestQuery = function(...args: any[]) {
+  return (methods as any).answerChatJoinRequestQuery.apply(this, args);
+};
+
+/**
+ * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function sendChatJoinRequestWebApp
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).sendChatJoinRequestWebApp = function(...args: any[]) {
+  return (methods as any).sendChatJoinRequestWebApp.apply(this, args);
+};
+
+/**
  * Use this method to set a new profile photo for the chat. Photos can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
  * @memberof Bot.prototype
  * @instance
@@ -1471,7 +1493,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @memberof Bot.prototype
  * @instance
  * @function editMessageText
@@ -1493,7 +1515,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @memberof Bot.prototype
  * @instance
  * @function editMessageMedia
@@ -1798,6 +1820,28 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).deleteStickerSet = function(...args: any[]) {
   return (methods as any).deleteStickerSet.apply(this, args);
+};
+
+/**
+ * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function sendRichMessage
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).sendRichMessage = function(...args: any[]) {
+  return (methods as any).sendRichMessage.apply(this, args);
+};
+
+/**
+ * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function sendRichMessageDraft
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).sendRichMessageDraft = function(...args: any[]) {
+  return (methods as any).sendRichMessageDraft.apply(this, args);
 };
 
 /**

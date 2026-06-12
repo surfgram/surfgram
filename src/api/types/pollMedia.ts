@@ -13,6 +13,7 @@ import { TelegramObject } from './telegramObject';
 import { Animation } from './animation';
 import { Audio } from './audio';
 import { Document } from './document';
+import { Link } from './link';
 import { LivePhoto } from './livePhoto';
 import { Location } from './location';
 import { PhotoSize } from './photoSize';
@@ -51,6 +52,15 @@ export class PollMedia {
    * @public
    */
   document?: Document;
+
+  /**
+   * Optional. The HTTP link attached to the poll option
+   * @type { Link }
+   * @memberof PollMedia
+   * @instance
+   * @public
+   */
+  link?: Link;
 
   /**
    * Optional. Media is a live photo, information about the live photo

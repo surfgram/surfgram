@@ -9,6 +9,7 @@ describe('PollMedia', () => {
       animation: {} as any,
       audio: {} as any,
       document: {} as any,
+      link: {} as any,
       live_photo: {} as any,
       location: {} as any,
       photo: [{} as any],
@@ -25,6 +26,7 @@ describe('PollMedia', () => {
     expect(instance.animation ?? instance.raw?.animation).toEqual({} as any);
     expect(instance.audio ?? instance.raw?.audio).toEqual({} as any);
     expect(instance.document ?? instance.raw?.document).toEqual({} as any);
+    expect(instance.link ?? instance.raw?.link).toEqual({} as any);
     expect(instance.livePhoto ?? instance.raw?.live_photo).toEqual({} as any);
     expect(instance.location ?? instance.raw?.location).toEqual({} as any);
     expect(instance.photo ?? instance.raw?.photo).toEqual([{} as any]);

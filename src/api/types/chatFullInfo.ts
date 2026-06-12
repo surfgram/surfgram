@@ -24,6 +24,7 @@ import { ChatLocation } from './chatLocation';
 import { UserRating } from './userRating';
 import { Audio } from './audio';
 import { UniqueGiftColors } from './uniqueGiftColors';
+import { User } from './user';
 
 /**
  * Represents a ChatFullInfo object from the Telegram Bot API
@@ -488,6 +489,15 @@ export class ChatFullInfo {
    * @public
    */
   paidMessageStarCount?: number;
+
+  /**
+   * Optional. The bot that processes join request queries in the chat. The field is only available to chat administrators.
+   * @type { User }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  guardBot?: User;
 
   /**
    * Raw data from Telegram API in snake_case format

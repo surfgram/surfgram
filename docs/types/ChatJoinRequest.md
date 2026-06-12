@@ -12,6 +12,7 @@ Represents a join request sent to a chat.
 | date | `number` | Yes | Date the request was sent in Unix time |
 | bio | `string` | No | Optional. Bio of the user |
 | inviteLink | `ChatInviteLink` | No | Optional. Chat invite link that was used by the user to send the join request |
+| queryId | `string` | No | Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds. |
 
 ## Fluent Methods
 
@@ -324,6 +325,82 @@ bot.onChatJoinRequest(async (chatjoinrequest: ChatJoinRequest) => {
 ```
 
 **See also:** [declineChatJoinRequest API method](../methods/declineChatJoinRequest.md)
+
+### answerChatJoinRequestQuery
+
+Use this method to process a received chat join request query. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatJoinRequestQueryId` | `this.chat?.id` | Unique identifier of the join request query |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `result` | `string` | Yes | Result of the query. Must be either “approve” to allow the user to join the chat, “decline” to disallow the user to join the chat, or “queue” to leave the decision to other administrators. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatjoinrequest = new ChatJoinRequest(rawData, bot);
+await chatjoinrequest.answerChatJoinRequestQuery(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatJoinRequest(async (chatjoinrequest: ChatJoinRequest) => {
+  // Auto-fills parameters from the chatjoinrequest instance
+  await chatjoinrequest.answerChatJoinRequestQuery();
+});
+```
+
+**See also:** [answerChatJoinRequestQuery API method](../methods/answerChatJoinRequestQuery.md)
+
+### sendChatJoinRequestWebApp
+
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatJoinRequestQueryId` | `this.chat?.id` | Unique identifier of the join request query |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `webAppUrl` | `string` | Yes | The URL of the Mini App to be opened |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatjoinrequest = new ChatJoinRequest(rawData, bot);
+await chatjoinrequest.sendChatJoinRequestWebApp(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatJoinRequest(async (chatjoinrequest: ChatJoinRequest) => {
+  // Auto-fills parameters from the chatjoinrequest instance
+  await chatjoinrequest.sendChatJoinRequestWebApp();
+});
+```
+
+**See also:** [sendChatJoinRequestWebApp API method](../methods/sendChatJoinRequestWebApp.md)
 
 ### getChat
 

@@ -12,6 +12,7 @@ describe('ChatJoinRequest', () => {
       date: 123,
       bio: "example text",
       invite_link: {} as any,
+      query_id: "example text",
     };
 
     const instance = new ChatJoinRequest(raw, mockBot);
@@ -25,5 +26,6 @@ describe('ChatJoinRequest', () => {
     expect(instance.date ?? instance.raw?.date).toEqual(123);
     expect(instance.bio ?? instance.raw?.bio).toEqual("example text");
     expect(instance.inviteLink ?? instance.raw?.invite_link).toEqual({} as any);
+    expect(instance.queryId ?? instance.raw?.query_id).toEqual("example text");
   });
 });

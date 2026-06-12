@@ -1020,21 +1020,22 @@ bot.onInlineKeyboardMarkup(async (inlinekeyboardmarkup: InlineKeyboardMarkup) =>
 
 ### editMessageText
 
-Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 
 **Required parameters:**
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
 | `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the message to edit. |
 | `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |
+| `text` | `string` | No | New text of the message, 1-4096 characters after entity parsing; required if rich\_message isn't specified |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
+| `richMessage` | `InputRichMessage` | No | New rich content of the message; required if text isn't specified |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
@@ -1044,8 +1045,8 @@ Use this method to edit text and game messages. On success, if the edited messag
 ```typescript
 const inlinekeyboardmarkup = new InlineKeyboardMarkup(rawData, bot);
 await inlinekeyboardmarkup.editMessageText({
-  text: "example text",
   businessConnectionId: "example text",
+  chatId: 123,
 });
 ```
 
@@ -1054,7 +1055,7 @@ await inlinekeyboardmarkup.editMessageText({
 ```typescript
 bot.onInlineKeyboardMarkup(async (inlinekeyboardmarkup: InlineKeyboardMarkup) => {
   // Auto-fills parameters from the inlinekeyboardmarkup instance
-  await inlinekeyboardmarkup.editMessageText({ text: "Response" });
+  await inlinekeyboardmarkup.editMessageText({ businessConnectionId: "Response" });
 });
 ```
 
@@ -1104,7 +1105,7 @@ bot.onInlineKeyboardMarkup(async (inlinekeyboardmarkup: InlineKeyboardMarkup) =>
 
 ### editMessageMedia
 
-Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 
 **Required parameters:**
@@ -1381,6 +1382,51 @@ bot.onInlineKeyboardMarkup(async (inlinekeyboardmarkup: InlineKeyboardMarkup) =>
 ```
 
 **See also:** [sendSticker API method](../methods/sendSticker.md)
+
+### sendRichMessage
+
+Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+| `richMessage` | `InputRichMessage` | Yes | The message to be sent |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const inlinekeyboardmarkup = new InlineKeyboardMarkup(rawData, bot);
+await inlinekeyboardmarkup.sendRichMessage({
+  chatId: 123,
+  richMessage: {} as any,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onInlineKeyboardMarkup(async (inlinekeyboardmarkup: InlineKeyboardMarkup) => {
+  // Auto-fills parameters from the inlinekeyboardmarkup instance
+  await inlinekeyboardmarkup.sendRichMessage({ chatId: "Response" });
+});
+```
+
+**See also:** [sendRichMessage API method](../methods/sendRichMessage.md)
 
 ### sendInvoice
 

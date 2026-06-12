@@ -56,6 +56,7 @@ export * from './editMessageReplyMarkupParams';
 export * from './sendStickerParams';
 export * from './createNewStickerSetParams';
 export * from './replaceStickerInSetParams';
+export * from './sendRichMessageParams';
 export * from './answerInlineQueryParams';
 export * from './sendInvoiceParams';
 export * from './createInvoiceLinkParams';

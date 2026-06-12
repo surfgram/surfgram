@@ -13,6 +13,13 @@ This method is available as a fluent method on the following types:
 
 [View Voice documentation with fluent methods](../types/Voice.md)
 
+### Link (7 methods)
+
+**Available methods:** `exportChatInviteLink`, `createChatInviteLink`, `editChatInviteLink`, `createChatSubscriptionInviteLink`, `editChatSubscriptionInviteLink`, `revokeChatInviteLink`, `createInvoiceLink`
+
+
+[View Link documentation with fluent methods](../types/Link.md)
+
 ### LabeledPrice (2 methods)
 
 **Available methods:** `sendInvoice`, `createInvoiceLink`

@@ -10,7 +10,7 @@ Represents a chat member that is under certain restrictions in the chat. Supergr
 | tag | `string` | No | Optional. Tag of the member |
 | user | `User` | Yes | Information about the user |
 | isMember | `boolean` | Yes | True, if the user is a member of the chat at the moment of the request |
-| canSendMessages | `boolean` | Yes | True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
+| canSendMessages | `boolean` | Yes | True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
 | canSendAudios | `boolean` | Yes | True, if the user is allowed to send audios |
 | canSendDocuments | `boolean` | Yes | True, if the user is allowed to send documents |
 | canSendPhotos | `boolean` | Yes | True, if the user is allowed to send photos |

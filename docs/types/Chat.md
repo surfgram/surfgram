@@ -963,6 +963,82 @@ bot.onChat(async (chat: Chat) => {
 
 **See also:** [declineChatJoinRequest API method](../methods/declineChatJoinRequest.md)
 
+### answerChatJoinRequestQuery
+
+Use this method to process a received chat join request query. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatJoinRequestQueryId` | `this?.id` | Unique identifier of the join request query |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `result` | `string` | Yes | Result of the query. Must be either “approve” to allow the user to join the chat, “decline” to disallow the user to join the chat, or “queue” to leave the decision to other administrators. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chat = new Chat(rawData, bot);
+await chat.answerChatJoinRequestQuery(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChat(async (chat: Chat) => {
+  // Auto-fills parameters from the chat instance
+  await chat.answerChatJoinRequestQuery();
+});
+```
+
+**See also:** [answerChatJoinRequestQuery API method](../methods/answerChatJoinRequestQuery.md)
+
+### sendChatJoinRequestWebApp
+
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatJoinRequestQueryId` | `this?.id` | Unique identifier of the join request query |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `webAppUrl` | `string` | Yes | The URL of the Mini App to be opened |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chat = new Chat(rawData, bot);
+await chat.sendChatJoinRequestWebApp(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChat(async (chat: Chat) => {
+  // Auto-fills parameters from the chat instance
+  await chat.sendChatJoinRequestWebApp();
+});
+```
+
+**See also:** [sendChatJoinRequestWebApp API method](../methods/sendChatJoinRequestWebApp.md)
+
 ### setChatPhoto
 
 Use this method to set a new profile photo for the chat. Photos can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.

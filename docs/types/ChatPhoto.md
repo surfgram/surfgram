@@ -1258,6 +1258,41 @@ bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
 
 **See also:** [getFile API method](../methods/getFile.md)
 
+### sendChatJoinRequestWebApp
+
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatJoinRequestQueryId` | `string` | Yes | Unique identifier of the join request query |
+| `webAppUrl` | `string` | Yes | The URL of the Mini App to be opened |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatphoto = new ChatPhoto(rawData, bot);
+await chatphoto.sendChatJoinRequestWebApp(
+  "example text",
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
+  // Auto-fills parameters from the chatphoto instance
+  await chatphoto.sendChatJoinRequestWebApp();
+});
+```
+
+**See also:** [sendChatJoinRequestWebApp API method](../methods/sendChatJoinRequestWebApp.md)
+
 ### setChatPhoto
 
 Use this method to set a new profile photo for the chat. Photos can&#39;t be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
@@ -2246,6 +2281,96 @@ bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
 ```
 
 **See also:** [getCustomEmojiStickers API method](../methods/getCustomEmojiStickers.md)
+
+### sendRichMessage
+
+Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `richMessage` | `InputRichMessage` | Yes | The message to be sent |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatphoto = new ChatPhoto(rawData, bot);
+await chatphoto.sendRichMessage({
+  richMessage: {} as any,
+  businessConnectionId: "example text",
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
+  // Auto-fills parameters from the chatphoto instance
+  await chatphoto.sendRichMessage({ businessConnectionId: "Response" });
+});
+```
+
+**See also:** [sendRichMessage API method](../methods/sendRichMessage.md)
+
+### sendRichMessageDraft
+
+Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this?.id` | Unique identifier for the target private chat |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. |
+| `richMessage` | `InputRichMessage` | Yes | The partial message to be streamed |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const chatphoto = new ChatPhoto(rawData, bot);
+await chatphoto.sendRichMessageDraft(
+  123,
+  {} as any,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onChatPhoto(async (chatphoto: ChatPhoto) => {
+  // Auto-fills parameters from the chatphoto instance
+  await chatphoto.sendRichMessageDraft();
+});
+```
+
+**See also:** [sendRichMessageDraft API method](../methods/sendRichMessageDraft.md)
 
 ### sendInvoice
 

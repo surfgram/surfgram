@@ -170,6 +170,15 @@ export class User {
   canManageBots?: boolean;
 
   /**
+   * Optional. True, if the bot supports join request queries and can be assigned to process them. Returned only in getMe.
+   * @type { boolean }
+   * @memberof User
+   * @instance
+   * @public
+   */
+  supportsJoinRequestQueries?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof User

@@ -42,6 +42,7 @@ This object represents a message.
 | linkPreviewOptions | `LinkPreviewOptions` | No | Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed |
 | suggestedPostInfo | `SuggestedPostInfo` | No | Optional. Information about suggested post parameters if the message is a suggested post in a channel direct messages chat. If the message is an approved or declined suggested post, then it can't be edited. |
 | effectId | `string` | No | Optional. Unique identifier of the message effect added to the message |
+| richMessage | `RichMessage` | No | Optional. Message is a rich formatted message |
 | animation | `Animation` | No | Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set. |
 | audio | `Audio` | No | Optional. Message is an audio file, information about the file |
 | document | `Document` | No | Optional. Message is a general file, information about the file |
@@ -1445,6 +1446,44 @@ bot.onMessage(async (message: Message) => {
 
 **See also:** [editChatSubscriptionInviteLink API method](../methods/editChatSubscriptionInviteLink.md)
 
+### sendChatJoinRequestWebApp
+
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatJoinRequestQueryId` | `this.chat?.id` | Unique identifier of the join request query |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `webAppUrl` | `string` | Yes | The URL of the Mini App to be opened |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const message = new Message(rawData, bot);
+await message.sendChatJoinRequestWebApp(
+  "example text",
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessage(async (message: Message) => {
+  // Auto-fills parameters from the message instance
+  await message.sendChatJoinRequestWebApp();
+});
+```
+
+**See also:** [sendChatJoinRequestWebApp API method](../methods/sendChatJoinRequestWebApp.md)
+
 ### pinChatMessage
 
 Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the &#39;can\_pin\_messages&#39; right or the &#39;can\_edit\_messages&#39; right to pin messages in groups and channels respectively. Returns True on success.
@@ -1933,7 +1972,7 @@ bot.onMessage(async (message: Message) => {
 
 ### editMessageText
 
-Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 **Auto-filled parameters:**
 
@@ -1948,10 +1987,11 @@ Use this method to edit text and game messages. On success, if the edited messag
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `text` | `string` | Yes | New text of the message, 1-4096 characters after entities parsing |
+| `text` | `string` | No | New text of the message, 1-4096 characters after entity parsing; required if rich\_message isn't specified |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
+| `richMessage` | `InputRichMessage` | No | New rich content of the message; required if text isn't specified |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
@@ -2025,7 +2065,7 @@ bot.onMessage(async (message: Message) => {
 
 ### editMessageMedia
 
-Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
 
 **Auto-filled parameters:**
 
@@ -2424,6 +2464,96 @@ bot.onMessage(async (message: Message) => {
 ```
 
 **See also:** [sendSticker API method](../methods/sendSticker.md)
+
+### sendRichMessage
+
+Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+| `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `this.directMessagesTopic?.id` | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `richMessage` | `InputRichMessage` | Yes | The message to be sent |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const message = new Message(rawData, bot);
+await message.sendRichMessage({
+  richMessage: {} as any,
+  disableNotification: true,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessage(async (message: Message) => {
+  // Auto-fills parameters from the message instance
+  await message.sendRichMessage({ messageEffectId: "Response" });
+});
+```
+
+**See also:** [sendRichMessage API method](../methods/sendRichMessage.md)
+
+### sendRichMessageDraft
+
+Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+
+**Auto-filled parameters:**
+
+| Parameter | Source | Description |
+| :--- | :--- | :--- |
+| `chatId` | `this.chat?.id` | Unique identifier for the target private chat |
+| `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread |
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. |
+| `richMessage` | `InputRichMessage` | Yes | The partial message to be streamed |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const message = new Message(rawData, bot);
+await message.sendRichMessageDraft(
+  123,
+  {} as any,
+);
+```
+
+2. In an event handler:
+
+```typescript
+bot.onMessage(async (message: Message) => {
+  // Auto-fills parameters from the message instance
+  await message.sendRichMessageDraft();
+});
+```
+
+**See also:** [sendRichMessageDraft API method](../methods/sendRichMessageDraft.md)
 
 ### sendInvoice
 

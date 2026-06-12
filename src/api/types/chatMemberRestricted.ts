@@ -54,7 +54,7 @@ export class ChatMemberRestricted {
   isMember!: boolean;
 
   /**
-   * True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+   * True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues
    * @type { boolean }
    * @memberof ChatMemberRestricted
    * @instance

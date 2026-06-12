@@ -23,6 +23,7 @@ This object represents a Telegram user or bot.
 | hasTopicsEnabled | `boolean` | No | Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe. |
 | allowsUsersToCreateTopics | `boolean` | No | Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe. |
 | canManageBots | `boolean` | No | Optional. True, if other bots can be created to be controlled by the bot. Returned only in getMe. |
+| supportsJoinRequestQueries | `boolean` | No | Optional. True, if the bot supports join request queries and can be assigned to process them. Returned only in getMe. |
 
 ## Fluent Methods
 

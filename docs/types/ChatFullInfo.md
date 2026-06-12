@@ -57,6 +57,7 @@ This object contains full information about a chat.
 | firstProfileAudio | `Audio` | No | Optional. For private chats, the first audio added to the profile of the user |
 | uniqueGiftColors | `UniqueGiftColors` | No | Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews |
 | paidMessageStarCount | `number` | No | Optional. The number of Telegram Stars a general user has to pay to send a message to the chat |
+| guardBot | `User` | No | Optional. The bot that processes join request queries in the chat. The field is only available to chat administrators. |
 
 ## Fluent Methods
 

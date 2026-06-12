@@ -59,6 +59,8 @@ export { editChatSubscriptionInviteLink } from './editChatSubscriptionInviteLink
 export { revokeChatInviteLink } from './revokeChatInviteLink';
 export { approveChatJoinRequest } from './approveChatJoinRequest';
 export { declineChatJoinRequest } from './declineChatJoinRequest';
+export { answerChatJoinRequestQuery } from './answerChatJoinRequestQuery';
+export { sendChatJoinRequestWebApp } from './sendChatJoinRequestWebApp';
 export { setChatPhoto } from './setChatPhoto';
 export { deleteChatPhoto } from './deleteChatPhoto';
 export { setChatTitle } from './setChatTitle';
@@ -170,6 +172,8 @@ export { setStickerSetTitle } from './setStickerSetTitle';
 export { setStickerSetThumbnail } from './setStickerSetThumbnail';
 export { setCustomEmojiStickerSetThumbnail } from './setCustomEmojiStickerSetThumbnail';
 export { deleteStickerSet } from './deleteStickerSet';
+export { sendRichMessage } from './sendRichMessage';
+export { sendRichMessageDraft } from './sendRichMessageDraft';
 export { answerInlineQuery } from './answerInlineQuery';
 export { sendInvoice } from './sendInvoice';
 export { createInvoiceLink } from './createInvoiceLink';

@@ -20,6 +20,7 @@ import { Story } from './story';
 import { MessageEntity } from './messageEntity';
 import { LinkPreviewOptions } from './linkPreviewOptions';
 import { SuggestedPostInfo } from './suggestedPostInfo';
+import { RichMessage } from './richMessage';
 import { Animation } from './animation';
 import { Audio } from './audio';
 import { Document } from './document';
@@ -410,6 +411,15 @@ export class Message {
    * @public
    */
   effectId?: string;
+
+  /**
+   * Optional. Message is a rich formatted message
+   * @type { RichMessage }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  richMessage?: RichMessage;
 
   /**
    * Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set.

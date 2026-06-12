@@ -1,23 +1,16 @@
 /**
  * Parameters interface for the editMessageText method
  * @interface EditMessageTextParams
- * @description Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * @description Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram API Documentation}
  */
 
 import { MessageEntity } from '../types/messageEntity';
 import { LinkPreviewOptions } from '../types/linkPreviewOptions';
+import { InputRichMessage } from '../types/inputRichMessage';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 export interface EditMessageTextParams {
-  /**
-   * New text of the message, 1-4096 characters after entities parsing
-   * @type { string }
-   * @originalType String
-   * @required Yes
-   */
-  text: string;
-
   /**
    * Unique identifier of the business connection on behalf of which the message to be edited was sent
    * @type { string }
@@ -51,6 +44,14 @@ export interface EditMessageTextParams {
   inlineMessageId?: string;
 
   /**
+   * New text of the message, 1-4096 characters after entity parsing; required if rich\_message isn't specified
+   * @type { string }
+   * @originalType String
+   * @required No
+   */
+  text?: string;
+
+  /**
    * Mode for parsing entities in the message text. See formatting options for more details.
    * @type { string }
    * @originalType String
@@ -73,6 +74,14 @@ export interface EditMessageTextParams {
    * @required No
    */
   linkPreviewOptions?: LinkPreviewOptions;
+
+  /**
+   * New rich content of the message; required if text isn't specified
+   * @type { InputRichMessage }
+   * @originalType InputRichMessage
+   * @required No
+   */
+  richMessage?: InputRichMessage;
 
   /**
    * A JSON-serialized object for an inline keyboard

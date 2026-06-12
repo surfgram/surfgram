@@ -74,6 +74,15 @@ export class ChatJoinRequest {
   inviteLink?: ChatInviteLink;
 
   /**
+   * Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.
+   * @type { string }
+   * @memberof ChatJoinRequest
+   * @instance
+   * @public
+   */
+  queryId?: string;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof ChatJoinRequest

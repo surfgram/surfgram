@@ -9,6 +9,7 @@ At most one of the optional fields can be present in any given object.
 | animation | `Animation` | No | Optional. Media is an animation, information about the animation |
 | audio | `Audio` | No | Optional. Media is an audio file, information about the file; currently, can't be received in a poll option |
 | document | `Document` | No | Optional. Media is a general file, information about the file; currently, can't be received in a poll option |
+| link | `Link` | No | Optional. The HTTP link attached to the poll option |
 | livePhoto | `LivePhoto` | No | Optional. Media is a live photo, information about the live photo |
 | location | `Location` | No | Optional. Media is a shared location, information about the location |
 | photo | `PhotoSize[]` | No | Optional. Media is a photo, available sizes of the photo |

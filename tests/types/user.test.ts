@@ -23,6 +23,7 @@ describe('User', () => {
       has_topics_enabled: true,
       allows_users_to_create_topics: true,
       can_manage_bots: true,
+      supports_join_request_queries: true,
     };
 
     const instance = new User(raw, mockBot);
@@ -47,5 +48,6 @@ describe('User', () => {
     expect(instance.hasTopicsEnabled ?? instance.raw?.has_topics_enabled).toEqual(true);
     expect(instance.allowsUsersToCreateTopics ?? instance.raw?.allows_users_to_create_topics).toEqual(true);
     expect(instance.canManageBots ?? instance.raw?.can_manage_bots).toEqual(true);
+    expect(instance.supportsJoinRequestQueries ?? instance.raw?.supports_join_request_queries).toEqual(true);
   });
 });

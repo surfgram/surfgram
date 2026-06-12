@@ -57,6 +57,7 @@ describe('ChatFullInfo', () => {
       first_profile_audio: {} as any,
       unique_gift_colors: {} as any,
       paid_message_star_count: 123,
+      guard_bot: {} as any,
     };
 
     const instance = new ChatFullInfo(raw, mockBot);
@@ -115,5 +116,6 @@ describe('ChatFullInfo', () => {
     expect(instance.firstProfileAudio ?? instance.raw?.first_profile_audio).toEqual({} as any);
     expect(instance.uniqueGiftColors ?? instance.raw?.unique_gift_colors).toEqual({} as any);
     expect(instance.paidMessageStarCount ?? instance.raw?.paid_message_star_count).toEqual(123);
+    expect(instance.guardBot ?? instance.raw?.guard_bot).toEqual({} as any);
   });
 });

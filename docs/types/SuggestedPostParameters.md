@@ -1000,6 +1000,51 @@ bot.onSuggestedPostParameters(async (suggestedpostparameters: SuggestedPostParam
 
 **See also:** [sendSticker API method](../methods/sendSticker.md)
 
+### sendRichMessage
+
+Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
+| `richMessage` | `InputRichMessage` | Yes | The message to be sent |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
+| `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
+| `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
+| `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
+| `messageEffectId` | `string` | No | Unique identifier of the message effect to be added to the message; for private chats only |
+| `suggestedPostParameters` | `SuggestedPostParameters` | No | A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. |
+| `replyParameters` | `ReplyParameters` | No | Description of the message to reply to |
+| `replyMarkup` | `InlineKeyboardMarkup` \| `ReplyKeyboardMarkup` \| `ReplyKeyboardRemove` \| `ForceReply` | No | Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const suggestedpostparameters = new SuggestedPostParameters(rawData, bot);
+await suggestedpostparameters.sendRichMessage({
+  chatId: 123,
+  richMessage: {} as any,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onSuggestedPostParameters(async (suggestedpostparameters: SuggestedPostParameters) => {
+  // Auto-fills parameters from the suggestedpostparameters instance
+  await suggestedpostparameters.sendRichMessage({ chatId: "Response" });
+});
+```
+
+**See also:** [sendRichMessage API method](../methods/sendRichMessage.md)
+
 ### sendInvoice
 
 Use this method to send invoices. On success, the sent Message is returned.

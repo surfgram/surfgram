@@ -42,6 +42,7 @@ describe('Message', () => {
       link_preview_options: {} as any,
       suggested_post_info: {} as any,
       effect_id: "example text",
+      rich_message: {} as any,
       animation: {} as any,
       audio: {} as any,
       document: {} as any,
@@ -163,6 +164,7 @@ describe('Message', () => {
     expect(instance.linkPreviewOptions ?? instance.raw?.link_preview_options).toEqual({} as any);
     expect(instance.suggestedPostInfo ?? instance.raw?.suggested_post_info).toEqual({} as any);
     expect(instance.effectId ?? instance.raw?.effect_id).toEqual("example text");
+    expect(instance.richMessage ?? instance.raw?.rich_message).toEqual({} as any);
     expect(instance.animation ?? instance.raw?.animation).toEqual({} as any);
     expect(instance.audio ?? instance.raw?.audio).toEqual({} as any);
     expect(instance.document ?? instance.raw?.document).toEqual({} as any);

@@ -6,7 +6,7 @@ Describes actions that a non-administrator user is allowed to take in a chat.
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| canSendMessages | `boolean` | No | Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
+| canSendMessages | `boolean` | No | Optional. True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
 | canSendAudios | `boolean` | No | Optional. True, if the user is allowed to send audios |
 | canSendDocuments | `boolean` | No | Optional. True, if the user is allowed to send documents |
 | canSendPhotos | `boolean` | No | Optional. True, if the user is allowed to send photos |
