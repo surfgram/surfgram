@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMediaDocument {
   /**
-   * Type of the result, must be document
+   * Type of the media, must be document
    * @type { string }
    * @memberof InputMediaDocument
    * @instance

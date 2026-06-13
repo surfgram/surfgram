@@ -6,7 +6,7 @@ Represents a location to be sent.
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the result, must be location |
+| type | `string` | Yes | Type of the media, must be location |
 | latitude | `number` | Yes | Latitude of the location |
 | longitude | `number` | Yes | Longitude of the location |
 | horizontalAccuracy | `number` | No | Optional. The radius of uncertainty for the location, measured in meters; 0-1500 |

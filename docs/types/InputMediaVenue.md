@@ -6,7 +6,7 @@ Represents a venue to be sent.
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the result, must be venue |
+| type | `string` | Yes | Type of the media, must be venue |
 | latitude | `number` | Yes | Latitude of the location |
 | longitude | `number` | Yes | Longitude of the location |
 | title | `string` | Yes | Name of the venue |

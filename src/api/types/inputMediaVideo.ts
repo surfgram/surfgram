@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMediaVideo {
   /**
-   * Type of the result, must be video
+   * Type of the media, must be video
    * @type { string }
    * @memberof InputMediaVideo
    * @instance

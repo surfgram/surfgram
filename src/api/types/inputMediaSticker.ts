@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class InputMediaSticker {
   /**
-   * Type of the result, must be sticker
+   * Type of the media, must be sticker
    * @type { string }
    * @memberof InputMediaSticker
    * @instance

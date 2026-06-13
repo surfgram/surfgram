@@ -6,7 +6,7 @@ Represents an HTTP link to be sent.
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| type | `string` | Yes | Type of the result, must be link |
+| type | `string` | Yes | Type of the media, must be link |
 | url | `string` | Yes | HTTP URL of the link |
 
 

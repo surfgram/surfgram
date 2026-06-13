@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMediaLivePhoto {
   /**
-   * Type of the result, must be live\_photo
+   * Type of the media, must be live\_photo
    * @type { string }
    * @memberof InputMediaLivePhoto
    * @instance

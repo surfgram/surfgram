@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMedia {
   /**
-   * Type of the result, must be animation
+   * Type of the media, must be animation
    * @type { string }
    * @memberof InputMedia
    * @instance

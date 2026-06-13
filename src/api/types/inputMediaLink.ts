@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class InputMediaLink {
   /**
-   * Type of the result, must be link
+   * Type of the media, must be link
    * @type { string }
    * @memberof InputMediaLink
    * @instance

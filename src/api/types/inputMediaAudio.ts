@@ -18,7 +18,7 @@ import { MessageEntity } from './messageEntity';
  */
 export class InputMediaAudio {
   /**
-   * Type of the result, must be audio
+   * Type of the media, must be audio
    * @type { string }
    * @memberof InputMediaAudio
    * @instance

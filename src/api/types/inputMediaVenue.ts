@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class InputMediaVenue {
   /**
-   * Type of the result, must be venue
+   * Type of the media, must be venue
    * @type { string }
    * @memberof InputMediaVenue
    * @instance

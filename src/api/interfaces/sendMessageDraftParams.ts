@@ -17,7 +17,7 @@ export interface SendMessageDraftParams {
   chatId: number;
 
   /**
-   * Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated.
+   * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
    * @type { number }
    * @originalType Integer
    * @required Yes
