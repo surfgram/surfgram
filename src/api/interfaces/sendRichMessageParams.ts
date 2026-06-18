@@ -31,7 +31,7 @@ export interface SendRichMessageParams {
   richMessage: InputRichMessage;
 
   /**
-   * Unique identifier of the business connection on behalf of which the message will be sent
+   * Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages.
    * @type { string }
    * @originalType String
    * @required No

@@ -1107,7 +1107,7 @@ bot.onSentGuestMessage(async (sentguestmessage: SentGuestMessage) => {
 
 ### sendChatJoinRequestWebApp
 
-Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
 
 **Required parameters:**
@@ -1617,7 +1617,7 @@ Use this method to send rich messages. If the message contains a block with a me
 | :--- | :--- | :---: | :--- |
 | `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 | `richMessage` | `InputRichMessage` | Yes | The message to be sent |
-| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
+| `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages. |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |

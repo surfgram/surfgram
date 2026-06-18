@@ -1,6 +1,6 @@
 # sendChatJoinRequestWebApp
 
-Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
 ## Fluent Usage
 

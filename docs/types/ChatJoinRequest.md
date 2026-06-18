@@ -12,7 +12,7 @@ Represents a join request sent to a chat.
 | date | `number` | Yes | Date the request was sent in Unix time |
 | bio | `string` | No | Optional. Bio of the user |
 | inviteLink | `ChatInviteLink` | No | Optional. Chat invite link that was used by the user to send the join request |
-| queryId | `string` | No | Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds. |
+| queryId | `string` | No | Optional. Identifier of the join request query; for bots assigned to process join request only. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds. |
 
 ## Fluent Methods
 
@@ -366,7 +366,7 @@ bot.onChatJoinRequest(async (chatjoinrequest: ChatJoinRequest) => {
 
 ### sendChatJoinRequestWebApp
 
-Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
 **Auto-filled parameters:**
 

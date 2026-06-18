@@ -1,7 +1,7 @@
 /**
  * RichBlockPhoto class for Surfgram Telegram Bot SDK
  * @module types/richBlockPhoto
- * @description A block with a photo, corresponding to the HTML tag &lt;photo&gt;.
+ * @description A block with a photo, corresponding to the HTML tag &lt;img&gt;.
  * @see {@link https://core.telegram.org/bots/api#richblockphoto Telegram API Documentation}
  * @class RichBlockPhoto
  * @extends TelegramObject

@@ -1,7 +1,7 @@
 /**
  * sendChatJoinRequestWebApp method implementation for Surfgram Telegram Bot SDK
  * @module methods/sendChatJoinRequestWebApp
- * @description Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+ * @description Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
  * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram API Documentation}
  */
 
@@ -9,7 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 
 /**
- * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+ * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
  * @memberof methods
  * @async
  * @function sendChatJoinRequestWebApp

@@ -1112,7 +1112,7 @@ declare module '../core/bot' {
      */
     answerChatJoinRequestQuery(chatJoinRequestQueryId: string, result: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      *      * @param chatJoinRequestQueryId - Unique identifier of the join request query
      *      * @param webAppUrl - The URL of the Mini App to be opened
      *      * @returns {Promise<any>} Promise resolving to method result
@@ -15685,7 +15685,7 @@ declare module './types/chat' {
      */
     answerChatJoinRequestQuery(result: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -16556,7 +16556,7 @@ declare module './types/message' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17028,7 +17028,7 @@ declare module './types/messageId' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17385,7 +17385,7 @@ declare module './types/inaccessibleMessage' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17729,7 +17729,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18099,7 +18099,7 @@ declare module './types/messageEntity' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18695,7 +18695,7 @@ declare module './types/messageOrigin' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19032,7 +19032,7 @@ declare module './types/messageOriginUser' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19369,7 +19369,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19777,7 +19777,7 @@ declare module './types/messageOriginChat' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20361,7 +20361,7 @@ declare module './types/messageOriginChannel' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20672,7 +20672,7 @@ declare module './types/photoSize' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20928,7 +20928,7 @@ declare module './types/document' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21144,7 +21144,7 @@ declare module './types/livePhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21403,7 +21403,7 @@ declare module './types/videoQuality' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21619,7 +21619,7 @@ declare module './types/video' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21835,7 +21835,7 @@ declare module './types/videoNote' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22099,7 +22099,7 @@ declare module './types/paidMediaLivePhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22315,7 +22315,7 @@ declare module './types/paidMediaPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22531,7 +22531,7 @@ declare module './types/paidMediaVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23030,7 +23030,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24522,7 +24522,7 @@ declare module './types/videoChatScheduled' {
      */
     getFile(fileId: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -25030,7 +25030,7 @@ declare module './types/videoChatStarted' {
      */
     getFile(fileId: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -25538,7 +25538,7 @@ declare module './types/videoChatEnded' {
      */
     getFile(fileId: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -26048,7 +26048,7 @@ declare module './types/videoChatParticipantsInvited' {
      */
     getFile(fileId: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -26525,7 +26525,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -26860,7 +26860,7 @@ declare module './types/directMessagePriceChanged' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -27443,7 +27443,7 @@ declare module './types/directMessagesTopic' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -27759,7 +27759,7 @@ declare module './types/userProfilePhotos' {
      */
     getUserProfilePhotos(offset?: number, limit?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29522,7 +29522,7 @@ declare module './types/chatPhoto' {
      */
     getFile(fileId: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -32805,7 +32805,7 @@ declare module './types/chatJoinRequest' {
      */
     answerChatJoinRequestQuery(result: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -33866,7 +33866,7 @@ declare module './types/messageReactionUpdated' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -34233,7 +34233,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39448,7 +39448,7 @@ declare module './types/businessMessagesDeleted' {
      */
     editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -39793,7 +39793,7 @@ declare module './types/sentWebAppMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40128,7 +40128,7 @@ declare module './types/sentGuestMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40463,7 +40463,7 @@ declare module './types/preparedInlineMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -40805,7 +40805,7 @@ declare module './types/inputMediaDocument' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41021,7 +41021,7 @@ declare module './types/inputMediaLivePhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41237,7 +41237,7 @@ declare module './types/inputMediaPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41453,7 +41453,7 @@ declare module './types/inputMediaVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41797,7 +41797,7 @@ declare module './types/inputPaidMediaLivePhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42013,7 +42013,7 @@ declare module './types/inputPaidMediaPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42229,7 +42229,7 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42445,7 +42445,7 @@ declare module './types/inputProfilePhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42677,7 +42677,7 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42893,7 +42893,7 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43134,7 +43134,7 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43350,7 +43350,7 @@ declare module './types/inputStoryContentVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43881,7 +43881,7 @@ declare module './types/richMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44216,7 +44216,7 @@ declare module './types/inputRichMessage' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44518,7 +44518,7 @@ declare module './types/richBlockPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44734,7 +44734,7 @@ declare module './types/richBlockVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45025,7 +45025,7 @@ declare module './types/inlineQueryResultPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45241,7 +45241,7 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45457,7 +45457,7 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45673,7 +45673,7 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45889,7 +45889,7 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46105,7 +46105,7 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46354,7 +46354,7 @@ declare module './types/inputMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46689,7 +46689,7 @@ declare module './types/inputTextMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47024,7 +47024,7 @@ declare module './types/inputRichMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47359,7 +47359,7 @@ declare module './types/inputLocationMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47695,7 +47695,7 @@ declare module './types/inputVenueMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48030,7 +48030,7 @@ declare module './types/inputContactMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48365,7 +48365,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
     /**
-     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
      * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error

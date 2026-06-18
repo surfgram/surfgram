@@ -1448,7 +1448,7 @@ bot.onMessage(async (message: Message) => {
 
 ### sendChatJoinRequestWebApp
 
-Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.
+Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
 
 **Auto-filled parameters:**
 
@@ -2474,7 +2474,7 @@ Use this method to send rich messages. If the message contains a block with a me
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `chatId` | `this.chat?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
-| `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be sent |
+| `businessConnectionId` | `this.businessConnectionId` | Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages. |
 | `messageThreadId` | `this.messageThreadId` | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `this.directMessagesTopic?.id` | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 
