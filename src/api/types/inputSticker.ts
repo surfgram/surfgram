@@ -18,7 +18,7 @@ import { MaskPosition } from './maskPosition';
  */
 export class InputSticker {
   /**
-   * The added sticker. Pass a file\_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new file using multipart/form-data under &lt;file\_attach\_name&gt; name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files »
+   * The added sticker. Pass a file\_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass "attach://&lt;file\_attach\_name&gt;" to upload a new file using multipart/form-data under &lt;file\_attach\_name&gt; name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files »
    * @type { string }
    * @memberof InputSticker
    * @instance

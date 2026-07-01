@@ -26,7 +26,7 @@ export class InputMediaSticker {
   type!: string;
 
   /**
-   * File to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a .WEBP sticker from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files »
+   * File to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL for Telegram to get a .WEBP sticker from the Internet, or pass "attach://&lt;file\_attach\_name&gt;" to upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files »
    * @type { string }
    * @memberof InputMediaSticker
    * @instance

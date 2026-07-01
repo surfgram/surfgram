@@ -6,7 +6,7 @@ This object describes a sticker to be added to a sticker set.
 
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| sticker | `string` | Yes | The added sticker. Pass a file\_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://&lt;file\_attach\_name&gt;” to upload a new file using multipart/form-data under &lt;file\_attach\_name&gt; name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files » |
+| sticker | `string` | Yes | The added sticker. Pass a file\_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass "attach://&lt;file\_attach\_name&gt;" to upload a new file using multipart/form-data under &lt;file\_attach\_name&gt; name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files » |
 | format | `string` | Yes | Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a .WEBM video |
 | emojiList | `string[]` | Yes | List of 1-20 emoji associated with the sticker |
 | maskPosition | `MaskPosition` | No | Optional. Position where the mask should be placed on faces. For “mask” stickers only. |

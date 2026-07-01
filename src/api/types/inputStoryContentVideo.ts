@@ -26,7 +26,7 @@ export class InputStoryContentVideo {
   type!: string;
 
   /**
-   * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the video was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
+   * The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file\_attach\_name&gt;" if the video was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
    * @type { string }
    * @memberof InputStoryContentVideo
    * @instance
