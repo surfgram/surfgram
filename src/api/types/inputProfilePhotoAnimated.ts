@@ -26,7 +26,7 @@ export class InputProfilePhotoAnimated {
   type!: string;
 
   /**
-   * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file\_attach\_name&gt;" if the photo was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
+   * The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the photo was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files »
    * @type { string }
    * @memberof InputProfilePhotoAnimated
    * @instance

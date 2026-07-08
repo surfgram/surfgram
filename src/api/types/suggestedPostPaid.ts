@@ -28,7 +28,7 @@ export class SuggestedPostPaid {
   suggestedPostMessage?: Message;
 
   /**
-   * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+   * Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
    * @type { string }
    * @memberof SuggestedPostPaid
    * @instance
@@ -37,7 +37,7 @@ export class SuggestedPostPaid {
   currency!: string;
 
   /**
-   * Optional. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only
+   * Optional. The amount of the currency that was received by the channel in nanograms; for payments in TON grams only
    * @type { number }
    * @memberof SuggestedPostPaid
    * @instance

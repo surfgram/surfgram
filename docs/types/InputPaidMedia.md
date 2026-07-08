@@ -7,8 +7,8 @@ This object describes the paid media to be sent. Currently, it can be one of
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | type | `string` | Yes | Type of the media, must be live\_photo |
-| media | `string` | Yes | Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass "attach://&lt;file\_attach\_name&gt;" to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
-| photo | `string` | Yes | The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass "attach://&lt;file\_attach\_name&gt;" to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
+| media | `string` | Yes | Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
+| photo | `string` | Yes | The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
 
 ## Fluent Methods
 

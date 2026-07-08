@@ -36,7 +36,7 @@ export class UniqueGiftInfo {
   origin!: string;
 
   /**
-   * Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
+   * Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.
    * @type { string }
    * @memberof UniqueGiftInfo
    * @instance
@@ -45,7 +45,7 @@ export class UniqueGiftInfo {
   lastResaleCurrency?: string;
 
   /**
-   * Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins
+   * Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanograms
    * @type { number }
    * @memberof UniqueGiftInfo
    * @instance

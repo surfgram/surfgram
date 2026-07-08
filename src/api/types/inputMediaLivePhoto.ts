@@ -27,7 +27,7 @@ export class InputMediaLivePhoto {
   type!: string;
 
   /**
-   * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass "attach://&lt;file\_attach\_name&gt;" to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
+   * Video of the live photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
    * @type { string }
    * @memberof InputMediaLivePhoto
    * @instance
@@ -36,7 +36,7 @@ export class InputMediaLivePhoto {
   media!: string;
 
   /**
-   * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass "attach://&lt;file\_attach\_name&gt;" to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
+   * The static photo to send. Pass a file\_id to send a file that exists on the Telegram servers \(recommended\) or pass “attach://&lt;file\_attach\_name&gt;” to upload a new one using multipart/form-data under &lt;file\_attach\_name&gt; name. More information on Sending Files ». Sending live photos by a URL is currently unsupported.
    * @type { string }
    * @memberof InputMediaLivePhoto
    * @instance
