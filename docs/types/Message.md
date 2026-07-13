@@ -2080,7 +2080,7 @@ Use this method to edit animation, audio, document, live photo, photo, or video 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `media` | `InputMedia` | Yes | A JSON-serialized object for a new media content of the message |
+| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for a new inline keyboard |
 
 **Usage examples:**

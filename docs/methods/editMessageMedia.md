@@ -257,7 +257,7 @@ This method is available as a fluent method on the following types:
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `media` | `InputMedia` | Yes | A JSON-serialized object for a new media content of the message |
+| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
 | `messageId` | `number` | No | Required if inline\_message\_id is not specified. Identifier of the message to edit. |

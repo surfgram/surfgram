@@ -1411,7 +1411,7 @@ Use this method to edit animation, audio, document, live photo, photo, or video 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `media` | `InputMedia` | Yes | A JSON-serialized object for a new media content of the message |
+| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message to be edited was sent |
 | `chatId` | `number` \| `string` | No | Required if inline\_message\_id is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username. |
 | `inlineMessageId` | `string` | No | Required if chat\_id and message\_id are not specified. Identifier of the inline message. |

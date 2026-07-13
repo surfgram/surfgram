@@ -10,7 +10,7 @@ import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 export interface EditMessageMediaParams {
   /**
-   * A JSON-serialized object for a new media content of the message
+   * A JSON-serialized object for the new media content of the message
    * @type { InputMedia }
    * @originalType InputMedia
    * @required Yes
