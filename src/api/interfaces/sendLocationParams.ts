@@ -62,6 +62,22 @@ export interface SendLocationParams {
   directMessagesTopicId?: number;
 
   /**
+   * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
+   * @type { number }
+   * @originalType Integer
+   * @required No
+   */
+  receiverUserId?: number;
+
+  /**
+   * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+   * @type { string }
+   * @originalType String
+   * @required No
+   */
+  callbackQueryId?: string;
+
+  /**
    * The radius of uncertainty for the location, measured in meters; 0-1500
    * @type { number }
    * @originalType Float
@@ -70,7 +86,7 @@ export interface SendLocationParams {
   horizontalAccuracy?: number;
 
   /**
-   * Period in seconds during which the location will be updated \(see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely
+   * Period in seconds during which the location will be updated \(see Live Locations\), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages.
    * @type { number }
    * @originalType Integer
    * @required No

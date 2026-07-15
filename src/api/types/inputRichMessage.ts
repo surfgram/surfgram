@@ -1,7 +1,7 @@
 /**
  * InputRichMessage class for Surfgram Telegram Bot SDK
  * @module types/inputRichMessage
- * @description Describes a rich message to be sent. Exactly one of the fields html or markdown must be used.
+ * @description Describes a rich message to be sent. Exactly one of the fields html, markdown, or blocks must be used.
  * @see {@link https://core.telegram.org/bots/api#inputrichmessage Telegram API Documentation}
  * @class InputRichMessage
  * @extends TelegramObject
@@ -10,6 +10,8 @@
 import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
+import { InputRichBlock } from './inputRichBlock';
+import { InputRichMessageMedia } from './inputRichMessageMedia';
 
 /**
  * Represents a InputRichMessage object from the Telegram Bot API
@@ -17,7 +19,16 @@ import { TelegramObject } from './telegramObject';
  */
 export class InputRichMessage {
   /**
-   * Optional. Content of the rich message to send described using HTML formatting. See rich message formatting options for more details.
+   * Optional. Content of the rich message to send described as a list of blocks
+   * @type { InputRichBlock[] }
+   * @memberof InputRichMessage
+   * @instance
+   * @public
+   */
+  blocks?: InputRichBlock[];
+
+  /**
+   * Optional. Content of the rich message to send described using HTML formatting. See rich message formatting options for more details. Use media field to specify the media used in the message.
    * @type { string }
    * @memberof InputRichMessage
    * @instance
@@ -26,13 +37,22 @@ export class InputRichMessage {
   html?: string;
 
   /**
-   * Optional. Content of the rich message to send described using Markdown formatting. See rich message formatting options for more details.
+   * Optional. Content of the rich message to send described using Markdown formatting. See rich message formatting options for more details. Use media field to specify the media used in the message.
    * @type { string }
    * @memberof InputRichMessage
    * @instance
    * @public
    */
   markdown?: string;
+
+  /**
+   * Optional. List of media that are specified in the markdown or html fields using tg://photo?id=, tg://video?id=, and tg://audio?id= links
+   * @type { InputRichMessageMedia[] }
+   * @memberof InputRichMessage
+   * @instance
+   * @public
+   */
+  media?: InputRichMessageMedia[];
 
   /**
    * Optional. Pass True if the rich message must be shown right-to-left

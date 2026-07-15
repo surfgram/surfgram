@@ -1,7 +1,7 @@
 /**
  * Parameters interface for the sendMediaGroup method
  * @interface SendMediaGroupParams
- * @description Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * @description Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
  * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram API Documentation}
  */
 
@@ -17,7 +17,7 @@ export interface SendMediaGroupParams {
   chatId: number | string;
 
   /**
-   * A JSON-serialized array describing messages to be sent, must include 2-10 items
+   * A JSON-serialized Array describing messages to be sent, must include 2-10 items
    * @type { any[] }
    * @originalType Array of InputMediaAudio, InputMediaDocument, InputMediaLivePhoto, InputMediaPhoto and InputMediaVideo
    * @required Yes

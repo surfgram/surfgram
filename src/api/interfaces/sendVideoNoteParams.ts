@@ -55,6 +55,22 @@ export interface SendVideoNoteParams {
   directMessagesTopicId?: number;
 
   /**
+   * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
+   * @type { number }
+   * @originalType Integer
+   * @required No
+   */
+  receiverUserId?: number;
+
+  /**
+   * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+   * @type { string }
+   * @originalType String
+   * @required No
+   */
+  callbackQueryId?: string;
+
+  /**
    * Duration of sent video in seconds
    * @type { number }
    * @originalType Integer

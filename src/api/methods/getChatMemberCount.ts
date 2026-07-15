@@ -1,7 +1,7 @@
 /**
  * getChatMemberCount method implementation for Surfgram Telegram Bot SDK
  * @module methods/getChatMemberCount
- * @description Use this method to get the number of members in a chat. Returns Int on success.
+ * @description Use this method to get the number of members in a chat. Returns Integer on success.
  * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram API Documentation}
  */
 
@@ -9,7 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 
 /**
- * Use this method to get the number of members in a chat. Returns Int on success.
+ * Use this method to get the number of members in a chat. Returns Integer on success.
  * @memberof methods
  * @async
  * @function getChatMemberCount

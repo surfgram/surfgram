@@ -107,7 +107,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+ * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
  * @memberof Bot.prototype
  * @instance
  * @function forwardMessages
@@ -129,7 +129,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
+ * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
  * @memberof Bot.prototype
  * @instance
  * @function copyMessages
@@ -239,7 +239,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.
+ * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
  * @memberof Bot.prototype
  * @instance
  * @function sendMediaGroup
@@ -712,7 +712,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to get the number of members in a chat. Returns Int on success.
+ * Use this method to get the number of members in a chat. Returns Integer on success.
  * @memberof Bot.prototype
  * @instance
  * @function getChatMemberCount
@@ -734,7 +734,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+ * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an Array of Message objects is returned.
  * @memberof Bot.prototype
  * @instance
  * @function getUserPersonalChatMessages
@@ -1581,6 +1581,50 @@ import * as methods from '../methods';
 };
 
 /**
+ * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function editEphemeralMessageText
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).editEphemeralMessageText = function(...args: any[]) {
+  return (methods as any).editEphemeralMessageText.apply(this, args);
+};
+
+/**
+ * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function editEphemeralMessageMedia
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).editEphemeralMessageMedia = function(...args: any[]) {
+  return (methods as any).editEphemeralMessageMedia.apply(this, args);
+};
+
+/**
+ * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function editEphemeralMessageCaption
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).editEphemeralMessageCaption = function(...args: any[]) {
+  return (methods as any).editEphemeralMessageCaption.apply(this, args);
+};
+
+/**
+ * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @memberof Bot.prototype
+ * @instance
+ * @function editEphemeralMessageReplyMarkup
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).editEphemeralMessageReplyMarkup = function(...args: any[]) {
+  return (methods as any).editEphemeralMessageReplyMarkup.apply(this, args);
+};
+
+/**
  * Use this method to approve a suggested post in a direct messages chat. The bot must have the &#39;can\_post\_messages&#39; administrator right in the corresponding channel chat. Returns True on success.
  * @memberof Bot.prototype
  * @instance
@@ -1622,6 +1666,17 @@ import * as methods from '../methods';
  */
 (Bot.prototype as any).deleteMessages = function(...args: any[]) {
   return (methods as any).deleteMessages.apply(this, args);
+};
+
+/**
+ * Use this method to delete an ephemeral message. Note that it is not guaranteed that the user will receive the message deletion event, especially if they are offline. Returns True on success.
+ * @memberof Bot.prototype
+ * @instance
+ * @function deleteEphemeralMessage
+ * @returns {Promise<any>} Method result
+ */
+(Bot.prototype as any).deleteEphemeralMessage = function(...args: any[]) {
+  return (methods as any).deleteEphemeralMessage.apply(this, args);
 };
 
 /**

@@ -14,6 +14,8 @@ describe('Message', () => {
       sender_boost_count: 123,
       sender_business_bot: {} as any,
       sender_tag: "example text",
+      receiver_user: {} as any,
+      ephemeral_message_id: 123,
       date: 123,
       guest_query_id: "example text",
       business_connection_id: "example text",
@@ -95,6 +97,8 @@ describe('Message', () => {
       chat_background_set: {} as any,
       checklist_tasks_done: {} as any,
       checklist_tasks_added: {} as any,
+      community_chat_added: {} as any,
+      community_chat_removed: {} as any,
       direct_message_price_changed: {} as any,
       forum_topic_created: {} as any,
       forum_topic_edited: {} as any,
@@ -136,6 +140,8 @@ describe('Message', () => {
     expect(instance.senderBoostCount ?? instance.raw?.sender_boost_count).toEqual(123);
     expect(instance.senderBusinessBot ?? instance.raw?.sender_business_bot).toEqual({} as any);
     expect(instance.senderTag ?? instance.raw?.sender_tag).toEqual("example text");
+    expect(instance.receiverUser ?? instance.raw?.receiver_user).toEqual({} as any);
+    expect(instance.ephemeralMessageId ?? instance.raw?.ephemeral_message_id).toEqual(123);
     expect(instance.date ?? instance.raw?.date).toEqual(123);
     expect(instance.guestQueryId ?? instance.raw?.guest_query_id).toEqual("example text");
     expect(instance.businessConnectionId ?? instance.raw?.business_connection_id).toEqual("example text");
@@ -217,6 +223,8 @@ describe('Message', () => {
     expect(instance.chatBackgroundSet ?? instance.raw?.chat_background_set).toEqual({} as any);
     expect(instance.checklistTasksDone ?? instance.raw?.checklist_tasks_done).toEqual({} as any);
     expect(instance.checklistTasksAdded ?? instance.raw?.checklist_tasks_added).toEqual({} as any);
+    expect(instance.communityChatAdded ?? instance.raw?.community_chat_added).toEqual({} as any);
+    expect(instance.communityChatRemoved ?? instance.raw?.community_chat_removed).toEqual({} as any);
     expect(instance.directMessagePriceChanged ?? instance.raw?.direct_message_price_changed).toEqual({} as any);
     expect(instance.forumTopicCreated ?? instance.raw?.forum_topic_created).toEqual({} as any);
     expect(instance.forumTopicEdited ?? instance.raw?.forum_topic_edited).toEqual({} as any);

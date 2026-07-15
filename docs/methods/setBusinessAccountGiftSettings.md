@@ -33,7 +33,7 @@ This method is available as a fluent method on the following types:
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `businessConnectionId` | `string` | Yes | Unique identifier of the business connection |
-| `showGiftButton` | `boolean` | Yes | Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field |
+| `showGiftButton` | `boolean` | Yes | Pass True if a button for sending a gift to the user or by the business account must always be shown in the input field |
 | `acceptedGiftTypes` | `AcceptedGiftTypes` | Yes | Types of gifts accepted by the business account |
 
 

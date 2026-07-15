@@ -12,7 +12,7 @@ This object represents the content of a media message to be sent. It should be o
 | caption | `string` | No | Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing |
 | parseMode | `string` | No | Optional. Mode for parsing entities in the animation caption. See formatting options for more details. |
 | captionEntities | `MessageEntity[]` | No | Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| showCaptionAboveMedia | `boolean` | No | Optional. Pass True, if the caption must be shown above the message media |
+| showCaptionAboveMedia | `boolean` | No | Optional. Pass True if the caption must be shown above the message media |
 | width | `number` | No | Optional. Animation width |
 | height | `number` | No | Optional. Animation height |
 | duration | `number` | No | Optional. Animation duration in seconds |
@@ -60,6 +60,44 @@ bot.onInputMedia(async (inputmedia: InputMedia) => {
 ```
 
 **See also:** [editMessageMedia API method](../methods/editMessageMedia.md)
+
+### editEphemeralMessageMedia
+
+Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
+| `receiverUserId` | `number` | Yes | Identifier of the user who received the message |
+| `ephemeralMessageId` | `number` | Yes | Identifier of the ephemeral message to edit |
+| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const inputmedia = new InputMedia(rawData, bot);
+await inputmedia.editEphemeralMessageMedia({
+  chatId: 123,
+  receiverUserId: 123,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onInputMedia(async (inputmedia: InputMedia) => {
+  // Auto-fills parameters from the inputmedia instance
+  await inputmedia.editEphemeralMessageMedia({ chatId: "Response" });
+});
+```
+
+**See also:** [editEphemeralMessageMedia API method](../methods/editEphemeralMessageMedia.md)
 
 
 ## Event Handlers

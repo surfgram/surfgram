@@ -72,7 +72,7 @@ export class InputMediaLivePhoto {
   captionEntities?: MessageEntity[];
 
   /**
-   * Optional. Pass True, if the caption must be shown above the message media
+   * Optional. Pass True if the caption must be shown above the message media
    * @type { boolean }
    * @memberof InputMediaLivePhoto
    * @instance

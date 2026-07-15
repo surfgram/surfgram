@@ -17,7 +17,7 @@ import { InputRichMessage } from '../types/inputRichMessage';
  * @this {Bot} Bot instance
  *  * @param { number } chatId - Unique identifier for the target private chat
  *  * @param { number } draftId - Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
- *  * @param { InputRichMessage } richMessage - The partial message to be streamed
+ *  * @param { InputRichMessage } richMessage - The partial message to be streamed. Direct upload of new files isn't supported.
  *  * @param { number } messageThreadId? - Unique identifier for the target message thread
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

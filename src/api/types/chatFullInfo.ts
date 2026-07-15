@@ -25,6 +25,7 @@ import { UserRating } from './userRating';
 import { Audio } from './audio';
 import { UniqueGiftColors } from './uniqueGiftColors';
 import { User } from './user';
+import { Community } from './community';
 
 /**
  * Represents a ChatFullInfo object from the Telegram Bot API
@@ -498,6 +499,15 @@ export class ChatFullInfo {
    * @public
    */
   guardBot?: User;
+
+  /**
+   * Optional. The Community to which the chat belongs
+   * @type { Community }
+   * @memberof ChatFullInfo
+   * @instance
+   * @public
+   */
+  community?: Community;
 
   /**
    * Raw data from Telegram API in snake_case format

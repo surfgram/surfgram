@@ -1,7 +1,7 @@
 /**
  * getUserPersonalChatMessages method implementation for Surfgram Telegram Bot SDK
  * @module methods/getUserPersonalChatMessages
- * @description Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+ * @description Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an Array of Message objects is returned.
  * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram API Documentation}
  */
 
@@ -9,7 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 
 /**
- * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an array of Message objects is returned.
+ * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an Array of Message objects is returned.
  * @memberof methods
  * @async
  * @function getUserPersonalChatMessages

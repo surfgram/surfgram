@@ -83,7 +83,7 @@ export class InlineQueryResultCachedGif {
   captionEntities?: MessageEntity[];
 
   /**
-   * Optional. Pass True, if the caption must be shown above the message media
+   * Optional. Pass True if the caption must be shown above the message media
    * @type { boolean }
    * @memberof InlineQueryResultCachedGif
    * @instance

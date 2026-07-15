@@ -1,7 +1,7 @@
 /**
  * RichBlockThinking class for Surfgram Telegram Bot SDK
  * @module types/richBlockThinking
- * @description A block with a “Thinking…” placeholder, corresponding to the custom HTML tag &lt;tg-thinking&gt;. The block may be used only in sendRichMessageDraft, therefore it can&#39;t be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
+ * @description A block with a “Thinking…” placeholder, corresponding to the custom HTML tag &lt;tg-thinking&gt;. The block may be used only in sendRichMessageDraft, therefore it can&#39;t be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.
  * @see {@link https://core.telegram.org/bots/api#richblockthinking Telegram API Documentation}
  * @class RichBlockThinking
  * @extends TelegramObject
@@ -27,7 +27,7 @@ export class RichBlockThinking {
   type!: string;
 
   /**
-   * Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.
+   * Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.
    * @type { RichText }
    * @memberof RichBlockThinking
    * @instance

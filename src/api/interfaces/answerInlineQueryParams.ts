@@ -18,7 +18,7 @@ export interface AnswerInlineQueryParams {
   inlineQueryId: string;
 
   /**
-   * A JSON-serialized array of results for the inline query
+   * A JSON-serialized Array of results for the inline query
    * @type { InlineQueryResult[] }
    * @originalType Array of InlineQueryResult
    * @required Yes

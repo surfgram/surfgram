@@ -8,6 +8,7 @@ describe('ReplyParameters', () => {
     const raw = {
       message_id: 123,
       chat_id: 123,
+      ephemeral_message_id: 123,
       allow_sending_without_reply: true,
       quote: "example text",
       quote_parse_mode: "example text",
@@ -24,6 +25,7 @@ describe('ReplyParameters', () => {
     
     expect(instance.messageId ?? instance.raw?.message_id).toEqual(123);
     expect(instance.chatId ?? instance.raw?.chat_id).toEqual(123);
+    expect(instance.ephemeralMessageId ?? instance.raw?.ephemeral_message_id).toEqual(123);
     expect(instance.allowSendingWithoutReply ?? instance.raw?.allow_sending_without_reply).toEqual(true);
     expect(instance.quote ?? instance.raw?.quote).toEqual("example text");
     expect(instance.quoteParseMode ?? instance.raw?.quote_parse_mode).toEqual("example text");

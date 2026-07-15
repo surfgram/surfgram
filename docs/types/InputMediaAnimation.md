@@ -12,7 +12,7 @@ Represents an animation file \(GIF or H.264/MPEG-4 AVC video without sound\) to 
 | caption | `string` | No | Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing |
 | parseMode | `string` | No | Optional. Mode for parsing entities in the animation caption. See formatting options for more details. |
 | captionEntities | `MessageEntity[]` | No | Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| showCaptionAboveMedia | `boolean` | No | Optional. Pass True, if the caption must be shown above the message media |
+| showCaptionAboveMedia | `boolean` | No | Optional. Pass True if the caption must be shown above the message media |
 | width | `number` | No | Optional. Animation width |
 | height | `number` | No | Optional. Animation height |
 | duration | `number` | No | Optional. Animation duration in seconds |

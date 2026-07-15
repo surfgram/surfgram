@@ -152,7 +152,7 @@ export class ChatPermissions {
   canPinMessages?: boolean;
 
   /**
-   * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can\_pin\_messages.
+   * Optional. True, if the user is allowed to create forum topics. If omitted, defaults to the value of can\_pin\_messages.
    * @type { boolean }
    * @memberof ChatPermissions
    * @instance

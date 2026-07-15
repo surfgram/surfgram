@@ -66,7 +66,7 @@ export interface EditMessageCaptionParams {
   captionEntities?: MessageEntity[];
 
   /**
-   * Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+   * Pass True if the caption must be shown above the message media. Supported only for animation, photo and video messages.
    * @type { boolean }
    * @originalType Boolean
    * @required No

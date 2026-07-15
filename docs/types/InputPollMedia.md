@@ -41,12 +41,12 @@ Use this method to send a native poll. On success, the sent Message is returned.
 | `questionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question\_parse\_mode. |
 | `isAnonymous` | `boolean` | No | True, if the poll needs to be anonymous, defaults to True |
 | `type` | `string` | No | Poll type, “quiz” or “regular”, defaults to “regular” |
-| `allowsMultipleAnswers` | `boolean` | No | Pass True, if the poll allows multiple answers, defaults to False |
-| `allowsRevoting` | `boolean` | No | Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls |
-| `shuffleOptions` | `boolean` | No | Pass True, if the poll options must be shown in random order |
-| `allowAddingOptions` | `boolean` | No | Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes |
-| `hideResultsUntilCloses` | `boolean` | No | Pass True, if poll results must be shown only after the poll closes |
-| `membersOnly` | `boolean` | No | Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only |
+| `allowsMultipleAnswers` | `boolean` | No | Pass True if the poll allows multiple answers, defaults to False |
+| `allowsRevoting` | `boolean` | No | Pass True if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls |
+| `shuffleOptions` | `boolean` | No | Pass True if the poll options must be shown in random order |
+| `allowAddingOptions` | `boolean` | No | Pass True if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes |
+| `hideResultsUntilCloses` | `boolean` | No | Pass True if poll results must be shown only after the poll closes |
+| `membersOnly` | `boolean` | No | Pass True if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only |
 | `countryCodes` | `string[]` | No | A JSON-serialized list of 0-12 two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which users can vote in the poll; for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll. |
 | `correctOptionIds` | `number[]` | No | A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode |
 | `explanation` | `string` | No | Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing |

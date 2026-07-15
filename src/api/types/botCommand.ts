@@ -35,6 +35,15 @@ export class BotCommand {
   description!: string;
 
   /**
+   * Optional. True, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot
+   * @type { boolean }
+   * @memberof BotCommand
+   * @instance
+   * @public
+   */
+  isEphemeral?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof BotCommand

@@ -32,7 +32,7 @@ export interface SendPaidMediaParams {
   starCount: number;
 
   /**
-   * A JSON-serialized array describing the media to be sent; up to 10 items
+   * A JSON-serialized Array describing the media to be sent; up to 10 items
    * @type { InputPaidMedia[] }
    * @originalType Array of InputPaidMedia
    * @required Yes
@@ -96,7 +96,7 @@ export interface SendPaidMediaParams {
   captionEntities?: MessageEntity[];
 
   /**
-   * Pass True, if the caption must be shown above the message media
+   * Pass True if the caption must be shown above the message media
    * @type { boolean }
    * @originalType Boolean
    * @required No

@@ -26,7 +26,7 @@ This method is available as a fluent method on the following types:
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `userId` | `number` | Yes | User identifier |
-| `errors` | `PassportElementError[]` | Yes | A JSON-serialized array describing the errors |
+| `errors` | `PassportElementError[]` | Yes | A JSON-serialized Array describing the errors |
 
 
 ## Usage Example

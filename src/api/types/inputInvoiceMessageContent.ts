@@ -81,7 +81,7 @@ export class InputInvoiceMessageContent {
   maxTipAmount?: number;
 
   /**
-   * Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount.
+   * Optional. A JSON-serialized Array of suggested amounts of tip in the smallest units of the currency \(integer, not float/double\). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max\_tip\_amount.
    * @type { number[] }
    * @memberof InputInvoiceMessageContent
    * @instance

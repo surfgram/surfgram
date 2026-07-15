@@ -16,7 +16,7 @@ import { AcceptedGiftTypes } from '../types/acceptedGiftTypes';
  * @function setBusinessAccountGiftSettings
  * @this {Bot} Bot instance
  *  * @param { string } businessConnectionId - Unique identifier of the business connection
- *  * @param { boolean } showGiftButton - Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+ *  * @param { boolean } showGiftButton - Pass True if a button for sending a gift to the user or by the business account must always be shown in the input field
  *  * @param { AcceptedGiftTypes } acceptedGiftTypes - Types of gifts accepted by the business account
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error

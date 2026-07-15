@@ -1,7 +1,7 @@
 /**
  * forwardMessages method implementation for Surfgram Telegram Bot SDK
  * @module methods/forwardMessages
- * @description Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+ * @description Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
  * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram API Documentation}
  */
 
@@ -10,7 +10,7 @@ import { camelToSnake } from '../../core/utils';
 import { ForwardMessagesParams } from '../interfaces/forwardMessagesParams';
 
 /**
- * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+ * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
  * @memberof methods
  * @async
  * @function forwardMessages

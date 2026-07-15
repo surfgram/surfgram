@@ -16,7 +16,7 @@ import { PassportElementError } from '../types/passportElementError';
  * @function setPassportDataErrors
  * @this {Bot} Bot instance
  *  * @param { number } userId - User identifier
- *  * @param { PassportElementError[] } errors - A JSON-serialized array describing the errors
+ *  * @param { PassportElementError[] } errors - A JSON-serialized Array describing the errors
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

@@ -18,7 +18,7 @@ Represents a link to an animated GIF file. By default, this animated GIF file wi
 | caption | `string` | No | Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing |
 | parseMode | `string` | No | Optional. Mode for parsing entities in the caption. See formatting options for more details. |
 | captionEntities | `MessageEntity[]` | No | Optional. List of special entities that appear in the caption, which can be specified instead of parse\_mode |
-| showCaptionAboveMedia | `boolean` | No | Optional. Pass True, if the caption must be shown above the message media |
+| showCaptionAboveMedia | `boolean` | No | Optional. Pass True if the caption must be shown above the message media |
 | replyMarkup | `InlineKeyboardMarkup` | No | Optional. Inline keyboard attached to the message |
 | inputMessageContent | `InputMessageContent` | No | Optional. Content of the message to be sent instead of the GIF animation |
 

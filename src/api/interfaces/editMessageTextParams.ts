@@ -76,7 +76,7 @@ export interface EditMessageTextParams {
   linkPreviewOptions?: LinkPreviewOptions;
 
   /**
-   * New rich content of the message; required if text isn't specified
+   * New rich content of the message; required if text isn't specified. Direct upload of new files isn't supported when an inline message is edited.
    * @type { InputRichMessage }
    * @originalType InputRichMessage
    * @required No

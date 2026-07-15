@@ -30,6 +30,8 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -78,6 +80,8 @@ Use this method to log out from the cloud Bot API server before launching the bo
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -126,6 +130,8 @@ Use this method to close the bot instance before moving it from one local server
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -174,6 +180,8 @@ Use this method to send text messages. On success, the sent Message is returned.
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -225,7 +233,7 @@ Use this method to edit text, rich and game messages. On success, if the edited 
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
-| `richMessage` | `InputRichMessage` | No | New rich content of the message; required if text isn't specified |
+| `richMessage` | `InputRichMessage` | No | New rich content of the message; required if text isn't specified. Direct upload of new files isn't supported when an inline message is edited. |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**
@@ -250,6 +258,47 @@ bot.onLinkPreviewOptions(async (linkpreviewoptions: LinkPreviewOptions) => {
 ```
 
 **See also:** [editMessageText API method](../methods/editMessageText.md)
+
+### editEphemeralMessageText
+
+Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+
+
+**Required parameters:**
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :---: | :--- |
+| `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
+| `receiverUserId` | `number` | Yes | Identifier of the user who received the message |
+| `ephemeralMessageId` | `number` | Yes | Identifier of the ephemeral message to edit |
+| `text` | `string` | Yes | New text of the message, 1-4096 characters after entity parsing |
+| `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
+| `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
+| `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
+| `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
+
+**Usage examples:**
+
+1. Basic usage:
+
+```typescript
+const linkpreviewoptions = new LinkPreviewOptions(rawData, bot);
+await linkpreviewoptions.editEphemeralMessageText({
+  chatId: 123,
+  receiverUserId: 123,
+});
+```
+
+2. In an event handler:
+
+```typescript
+bot.onLinkPreviewOptions(async (linkpreviewoptions: LinkPreviewOptions) => {
+  // Auto-fills parameters from the linkpreviewoptions instance
+  await linkpreviewoptions.editEphemeralMessageText({ chatId: "Response" });
+});
+```
+
+**See also:** [editEphemeralMessageText API method](../methods/editEphemeralMessageText.md)
 
 
 ## Event Handlers

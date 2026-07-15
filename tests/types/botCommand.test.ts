@@ -8,6 +8,7 @@ describe('BotCommand', () => {
     const raw = {
       command: "example text",
       description: "example text",
+      is_ephemeral: true,
     };
 
     const instance = new BotCommand(raw, mockBot);
@@ -17,5 +18,6 @@ describe('BotCommand', () => {
     
     expect(instance.command ?? instance.raw?.command).toEqual("example text");
     expect(instance.description ?? instance.raw?.description).toEqual("example text");
+    expect(instance.isEphemeral ?? instance.raw?.is_ephemeral).toEqual(true);
   });
 });

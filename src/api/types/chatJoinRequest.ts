@@ -74,7 +74,7 @@ export class ChatJoinRequest {
   inviteLink?: ChatInviteLink;
 
   /**
-   * Optional. Identifier of the join request query; for bots assigned to process join request only. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.
+   * Optional. Identifier of the join request query; for bots assigned to process join requests only. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.
    * @type { string }
    * @memberof ChatJoinRequest
    * @instance

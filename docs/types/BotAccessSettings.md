@@ -58,8 +58,8 @@ Use this method to change the access settings of a managed bot. Returns True on 
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
-| `isAccessRestricted` | `boolean` | Yes | Pass True, if only selected users can access the bot. The bot's owner can always access it. |
-| `addedUserIds` | `number[]` | No | A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is\_access\_restricted is false. |
+| `isAccessRestricted` | `boolean` | Yes | Pass True if only selected users can access the bot. The bot's owner can always access it. |
+| `addedUserIds` | `number[]` | No | A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is\_access\_restricted is False. |
 
 **Usage examples:**
 

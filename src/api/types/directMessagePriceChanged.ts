@@ -17,7 +17,7 @@ import { TelegramObject } from './telegramObject';
  */
 export class DirectMessagePriceChanged {
   /**
-   * True, if direct messages are enabled for the channel chat; false otherwise
+   * True, if direct messages are enabled for the channel chat; False otherwise
    * @type { boolean }
    * @memberof DirectMessagePriceChanged
    * @instance

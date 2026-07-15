@@ -87,7 +87,7 @@ export interface CopyMessageParams {
   captionEntities?: MessageEntity[];
 
   /**
-   * Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
+   * Pass True if the caption must be shown above the message media. Ignored if a new caption isn't specified.
    * @type { boolean }
    * @originalType Boolean
    * @required No

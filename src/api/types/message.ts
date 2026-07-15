@@ -56,6 +56,8 @@ import { ChatBoostAdded } from './chatBoostAdded';
 import { ChatBackground } from './chatBackground';
 import { ChecklistTasksDone } from './checklistTasksDone';
 import { ChecklistTasksAdded } from './checklistTasksAdded';
+import { CommunityChatAdded } from './communityChatAdded';
+import { CommunityChatRemoved } from './communityChatRemoved';
 import { DirectMessagePriceChanged } from './directMessagePriceChanged';
 import { ForumTopicCreated } from './forumTopicCreated';
 import { ForumTopicEdited } from './forumTopicEdited';
@@ -89,7 +91,7 @@ import { InlineKeyboardMarkup } from './inlineKeyboardMarkup';
  */
 export class Message {
   /**
-   * Unique message identifier inside this chat. In specific instances \(e.g., message containing a video sent to a big chat\), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
+   * Unique message identifier inside this chat; 0 for ephemeral messages. In specific instances \(e.g., a message containing a video sent to a big chat\), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.
    * @type { number }
    * @memberof Message
    * @instance
@@ -161,6 +163,24 @@ export class Message {
   senderTag?: string;
 
   /**
+   * Optional. For ephemeral messages, the user who received the message
+   * @type { User }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  receiverUser?: User;
+
+  /**
+   * Optional. For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.
+   * @type { number }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  ephemeralMessageId?: number;
+
+  /**
    * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
    * @type { number }
    * @memberof Message
@@ -224,7 +244,7 @@ export class Message {
   isAutomaticForward?: boolean;
 
   /**
-   * Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply\_to\_message fields even if it itself is a reply.
+   * Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply\_to\_message fields even if it itself is a reply. If the message is a reply to an ephemeral message, then this field may be omitted.
    * @type { Message }
    * @memberof Message
    * @instance
@@ -888,6 +908,24 @@ export class Message {
    * @public
    */
   checklistTasksAdded?: ChecklistTasksAdded;
+
+  /**
+   * Optional. Service message: chat added to a Community
+   * @type { CommunityChatAdded }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  communityChatAdded?: CommunityChatAdded;
+
+  /**
+   * Optional. Service message: chat removed from a Community
+   * @type { CommunityChatRemoved }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  communityChatRemoved?: CommunityChatRemoved;
 
   /**
    * Optional. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed

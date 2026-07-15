@@ -15,7 +15,7 @@ import { camelToSnake } from '../../core/utils';
  * @function sendChatJoinRequestWebApp
  * @this {Bot} Bot instance
  *  * @param { string } chatJoinRequestQueryId - Unique identifier of the join request query
- *  * @param { string } webAppUrl - The URL of the Mini App to be opened
+ *  * @param { string } webAppUrl - An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
  *  * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example

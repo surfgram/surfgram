@@ -26,7 +26,7 @@ Informs a user that some of the Telegram Passport elements they provided contain
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `userId` | `number` | Yes | User identifier |
-| `errors` | `PassportElementError[]` | Yes | A JSON-serialized array describing the errors |
+| `errors` | `PassportElementError[]` | Yes | A JSON-serialized Array describing the errors |
 
 **Usage examples:**
 
