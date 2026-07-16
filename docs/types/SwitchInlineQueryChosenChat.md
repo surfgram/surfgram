@@ -104,7 +104,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
 | `chatId` | `this.allowUserChats?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
-| `callbackQueryId` | `this.query?.id` | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `this.query?.id` | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 
 **Required parameters:**
 

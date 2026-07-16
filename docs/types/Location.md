@@ -33,7 +33,7 @@ Use this method to send point on the map. On success, the sent Message is return
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 | `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
 | `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations\), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages. |
 | `heading` | `number` | No | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |

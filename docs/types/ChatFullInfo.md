@@ -162,7 +162,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | :--- | :--- | :---: | :--- |
 | `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |

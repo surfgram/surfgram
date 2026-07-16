@@ -865,7 +865,7 @@ export class Message {
   passportData?: PassportData;
 
   /**
-   * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
+   * Optional. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location
    * @type { ProximityAlertTriggered }
    * @memberof Message
    * @instance

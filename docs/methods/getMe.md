@@ -443,7 +443,7 @@ This method is available as a fluent method on the following types:
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
 | `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |

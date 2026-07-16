@@ -63,7 +63,7 @@ export interface SendStickerParams {
   receiverUserId?: number;
 
   /**
-   * For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any
+   * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
    * @type { string }
    * @originalType String
    * @required No

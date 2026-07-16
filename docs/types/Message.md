@@ -92,7 +92,7 @@ This object represents a message.
 | connectedWebsite | `string` | No | Optional. The domain name of the website on which the user has logged in. More about Telegram Login » |
 | writeAccessAllowed | `WriteAccessAllowed` | No | Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess |
 | passportData | `PassportData` | No | Optional. Telegram Passport data |
-| proximityAlertTriggered | `ProximityAlertTriggered` | No | Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location. |
+| proximityAlertTriggered | `ProximityAlertTriggered` | No | Optional. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location |
 | boostAdded | `ChatBoostAdded` | No | Optional. Service message: user boosted the chat |
 | chatBackgroundSet | `ChatBackground` | No | Optional. Service message: chat background set |
 | checklistTasksDone | `ChecklistTasksDone` | No | Optional. Service message: some tasks in a checklist were marked as done or not done |
@@ -149,7 +149,7 @@ Use this method to send text messages. On success, the sent Message is returned.
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `text` | `string` | Yes | Text of the message to be sent, 1-4096 characters after entities parsing |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -393,7 +393,7 @@ Use this method to send photos. On success, the sent Message is returned.
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `photo` | `InputFile` \| `string` | Yes | Photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `caption` | `string` | No | Photo caption \(may also be used when resending photos by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the photo caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -450,7 +450,7 @@ Use this method to send live photos. On success, the sent Message is returned.
 | :--- | :--- | :---: | :--- |
 | `livePhoto` | `InputFile` \| `string` | Yes | Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file\_id as String to send a video that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
 | `photo` | `InputFile` \| `string` | Yes | The static photo to send. Pass a file\_id as String to send a photo that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending live photos by a URL is currently unsupported. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `caption` | `string` | No | Video caption \(may also be used when resending videos by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the video caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -506,7 +506,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `audio` | `InputFile` \| `string` | Yes | Audio file to send. Pass a file\_id as String to send an audio file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `caption` | `string` | No | Audio caption, 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the audio caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -564,7 +564,7 @@ Use this method to send general files. On success, the sent Message is returned.
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `document` | `InputFile` \| `string` | Yes | File to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
 | `caption` | `string` | No | Document caption \(may also be used when resending documents by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the document caption. See formatting options for more details. |
@@ -620,7 +620,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos \(oth
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `video` | `InputFile` \| `string` | Yes | Video to send. Pass a file\_id as String to send a video that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `duration` | `number` | No | Duration of sent video in seconds |
 | `width` | `number` | No | Video width |
 | `height` | `number` | No | Video height |
@@ -683,7 +683,7 @@ Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `animation` | `InputFile` \| `string` | Yes | Animation to send. Pass a file\_id as String to send an animation that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `duration` | `number` | No | Duration of sent animation in seconds |
 | `width` | `number` | No | Animation width |
 | `height` | `number` | No | Animation height |
@@ -743,7 +743,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `voice` | `InputFile` \| `string` | Yes | Audio file to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files » |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `caption` | `string` | No | Voice message caption, 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the voice message caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -798,7 +798,7 @@ As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 min
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `videoNote` | `InputFile` \| `string` | Yes | Video note to send. Pass a file\_id as String to send a video note that exists on the Telegram servers \(recommended\) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `duration` | `number` | No | Duration of sent video in seconds |
 | `length` | `number` | No | Video width and height, i.e. diameter of the video message |
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
@@ -954,7 +954,7 @@ Use this method to send point on the map. On success, the sent Message is return
 | :--- | :--- | :---: | :--- |
 | `latitude` | `number` | Yes | Latitude of the location |
 | `longitude` | `number` | Yes | Longitude of the location |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
 | `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations\), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages. |
 | `heading` | `number` | No | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
@@ -1012,7 +1012,7 @@ Use this method to send information about a venue. On success, the sent Message 
 | `longitude` | `number` | Yes | Longitude of the venue |
 | `title` | `string` | Yes | Name of the venue |
 | `address` | `string` | Yes | Address of the venue |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `foursquareId` | `string` | No | Foursquare identifier of the venue |
 | `foursquareType` | `string` | No | Foursquare type of the venue, if known. \(For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.\) |
 | `googlePlaceId` | `string` | No | Google Places identifier of the venue |
@@ -1068,7 +1068,7 @@ Use this method to send phone contacts. On success, the sent Message is returned
 | :--- | :--- | :---: | :--- |
 | `phoneNumber` | `string` | Yes | Contact's phone number |
 | `firstName` | `string` | Yes | Contact's first name |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `lastName` | `string` | No | Contact's last name |
 | `vcard` | `string` | No | Additional data about the contact in the form of a vCard, 0-2048 bytes |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
@@ -2666,7 +2666,7 @@ Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `sticker` | `InputFile` \| `string` | Yes | Sticker to send. Pass a file\_id as String to send a file that exists on the Telegram servers \(recommended\), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files ». Video and animated stickers can't be sent via an HTTP URL. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
 | `emoji` | `string` | No | Emoji associated with the sticker; only for just uploaded stickers |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
