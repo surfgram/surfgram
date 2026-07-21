@@ -556,7 +556,7 @@ declare module '../core/bot' {
      */
     forwardMessages(chatId: number | string, fromChatId: number | string, messageIds: number[]): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -565,7 +565,7 @@ declare module '../core/bot' {
      */
     copyMessage(params: Interfaces.CopyMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param chatId, fromChatId, messageId - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -573,7 +573,7 @@ declare module '../core/bot' {
      */
     copyMessage(chatId: number | string, fromChatId: number | string, messageId: number): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -582,7 +582,7 @@ declare module '../core/bot' {
      */
     copyMessages(params: Interfaces.CopyMessagesParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
      * @param chatId, fromChatId, messageIds - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17494,7 +17494,7 @@ declare module './types/message' {
      */
     forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17503,7 +17503,7 @@ declare module './types/message' {
      */
     copyMessage(params: Omit<Interfaces.CopyMessageParams, 'messageId' | 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'fromChatId'>): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can&#39;t be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don&#39;t have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19245,7 +19245,7 @@ declare module './types/messageEntity' {
      */
     forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19676,7 +19676,7 @@ declare module './types/replyParameters' {
      */
     sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId'>): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29317,7 +29317,7 @@ declare module './types/suggestedPostParameters' {
      */
     forwardMessage(params: Interfaces.ForwardMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30201,7 +30201,7 @@ declare module './types/replyKeyboardMarkup' {
      */
     sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30675,7 +30675,7 @@ declare module './types/replyKeyboardRemove' {
      */
     sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30851,7 +30851,7 @@ declare module './types/inlineKeyboardMarkup' {
      */
     sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -31445,7 +31445,7 @@ declare module './types/forceReply' {
      */
     sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can&#39;t be copied. A quiz poll can be copied only if the value of the field correct\_option\_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn&#39;t have a link to the original message. Returns the MessageId of the sent message on success.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
