@@ -10,6 +10,7 @@ A table, corresponding to the HTML tag &lt;table&gt;.
 | cells | `RichBlockTableCell[][]` | Yes | Cells of the table |
 | isBordered | `boolean` | No | Optional. Pass True if the table has borders |
 | isStriped | `boolean` | No | Optional. Pass True if the table is striped |
+| isCompact | `boolean` | No | Optional. Pass True if table cells must have smaller indents |
 | caption | `RichText` | No | Optional. Caption of the table |
 
 

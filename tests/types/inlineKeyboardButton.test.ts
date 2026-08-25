@@ -19,6 +19,7 @@ describe('InlineKeyboardButton', () => {
       copy_text: {} as any,
       callback_game: {} as any,
       pay: true,
+      disabled: {} as any,
     };
 
     const instance = new InlineKeyboardButton(raw, mockBot);
@@ -39,5 +40,6 @@ describe('InlineKeyboardButton', () => {
     expect(instance.copyText ?? instance.raw?.copy_text).toEqual({} as any);
     expect(instance.callbackGame ?? instance.raw?.callback_game).toEqual({} as any);
     expect(instance.pay ?? instance.raw?.pay).toEqual(true);
+    expect(instance.disabled ?? instance.raw?.disabled).toEqual({} as any);
   });
 });

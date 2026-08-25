@@ -11,6 +11,7 @@ import { Bot } from '../../core/bot';
 import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { UniqueGift } from './uniqueGift';
+import { MessageEntity } from './messageEntity';
 
 /**
  * Represents a UniqueGiftInfo object from the Telegram Bot API
@@ -34,6 +35,33 @@ export class UniqueGiftInfo {
    * @public
    */
   origin!: string;
+
+  /**
+   * Optional. Text of the message that was added to the gift
+   * @type { string }
+   * @memberof UniqueGiftInfo
+   * @instance
+   * @public
+   */
+  text?: string;
+
+  /**
+   * Optional. Special entities that appear in the text
+   * @type { MessageEntity[] }
+   * @memberof UniqueGiftInfo
+   * @instance
+   * @public
+   */
+  entities?: MessageEntity[];
+
+  /**
+   * Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them
+   * @type { boolean }
+   * @memberof UniqueGiftInfo
+   * @instance
+   * @public
+   */
+  isPrivate?: boolean;
 
   /**
    * Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.

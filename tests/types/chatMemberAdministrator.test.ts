@@ -26,6 +26,7 @@ describe('ChatMemberAdministrator', () => {
       can_manage_topics: true,
       can_manage_direct_messages: true,
       can_manage_tags: true,
+      can_send_welcome_messages: true,
       custom_title: "example text",
     };
 
@@ -54,6 +55,7 @@ describe('ChatMemberAdministrator', () => {
     expect(instance.canManageTopics ?? instance.raw?.can_manage_topics).toEqual(true);
     expect(instance.canManageDirectMessages ?? instance.raw?.can_manage_direct_messages).toEqual(true);
     expect(instance.canManageTags ?? instance.raw?.can_manage_tags).toEqual(true);
+    expect(instance.canSendWelcomeMessages ?? instance.raw?.can_send_welcome_messages).toEqual(true);
     expect(instance.customTitle ?? instance.raw?.custom_title).toEqual("example text");
   });
 });

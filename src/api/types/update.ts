@@ -29,6 +29,7 @@ import { ChatBoostUpdated } from './chatBoostUpdated';
 import { ChatBoostRemoved } from './chatBoostRemoved';
 import { ManagedBotUpdated } from './managedBotUpdated';
 import { BotSubscriptionUpdated } from './botSubscriptionUpdated';
+import { MessageGenerationStopped } from './messageGenerationStopped';
 
 /**
  * Represents a Update object from the Telegram Bot API
@@ -277,6 +278,15 @@ export class Update {
    * @public
    */
   subscription?: BotSubscriptionUpdated;
+
+  /**
+   * Optional. A user asked the bot to stop the generation of a message
+   * @type { MessageGenerationStopped }
+   * @memberof Update
+   * @instance
+   * @public
+   */
+  stoppedMessageGeneration?: MessageGenerationStopped;
 
   /**
    * Raw data from Telegram API in snake_case format

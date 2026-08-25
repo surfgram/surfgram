@@ -102,7 +102,6 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 
 | Parameter | Source | Description |
 | :--- | :--- | :--- |
-| `receiverUserId` | `this.user?.id` | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
 | `chatId` | `this?.id` | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username |
 
 **Required parameters:**
@@ -113,7 +112,7 @@ A simple method for testing your bot&#39;s authentication token. Requires no par
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -415,6 +414,7 @@ Use this method to promote or demote a user in a supergroup or a channel. The bo
 | `canManageTopics` | `boolean` | No | Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
 | `canManageDirectMessages` | `boolean` | No | Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only |
 | `canManageTags` | `boolean` | No | Pass True if the administrator can edit the tags of regular members; for groups and supergroups only |
+| `canSendWelcomeMessages` | `boolean` | No | Pass True if the administrator can manage chat welcome messages or directly send them in the case of bots |
 
 **Usage examples:**
 

@@ -1,7 +1,7 @@
 /**
  * CommunityChatAdded class for Surfgram Telegram Bot SDK
  * @module types/communityChatAdded
- * @description Describes a service message about a chat being added to a community.
+ * @description Describes a service message about a chat or a bot being added to a community.
  * @see {@link https://core.telegram.org/bots/api#communitychatadded Telegram API Documentation}
  * @class CommunityChatAdded
  * @extends TelegramObject
@@ -18,7 +18,7 @@ import { Community } from './community';
  */
 export class CommunityChatAdded {
   /**
-   * The new community to which the chat belongs
+   * The new community to which the chat or the bot belongs
    * @type { Community }
    * @memberof CommunityChatAdded
    * @instance

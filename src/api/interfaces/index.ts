@@ -60,6 +60,7 @@ export * from './sendStickerParams';
 export * from './createNewStickerSetParams';
 export * from './replaceStickerInSetParams';
 export * from './sendRichMessageParams';
+export * from './sendRichMessageDraftParams';
 export * from './answerInlineQueryParams';
 export * from './sendInvoiceParams';
 export * from './createInvoiceLinkParams';

@@ -9,6 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { SendVoiceParams } from '../interfaces/sendVoiceParams';
 import { InputFile } from '../types/inputFile';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { MessageEntity } from '../types/messageEntity';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';

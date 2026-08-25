@@ -1,11 +1,12 @@
 /**
  * Parameters interface for the editEphemeralMessageText method
  * @interface EditEphemeralMessageTextParams
- * @description Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @description Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
  * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageText Telegram API Documentation}
  */
 
 import { MessageEntity } from '../types/messageEntity';
+import { InputRichMessage } from '../types/inputRichMessage';
 import { LinkPreviewOptions } from '../types/linkPreviewOptions';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
@@ -35,12 +36,12 @@ export interface EditEphemeralMessageTextParams {
   ephemeralMessageId: number;
 
   /**
-   * New text of the message, 1-4096 characters after entity parsing
+   * New text of the message, 1-4096 characters after entity parsing; required if rich\_message isn't specified
    * @type { string }
    * @originalType String
-   * @required Yes
+   * @required No
    */
-  text: string;
+  text?: string;
 
   /**
    * Mode for parsing entities in the message text. See formatting options for more details.
@@ -57,6 +58,14 @@ export interface EditEphemeralMessageTextParams {
    * @required No
    */
   entities?: MessageEntity[];
+
+  /**
+   * New rich content of the message; required if text isn't specified
+   * @type { InputRichMessage }
+   * @originalType InputRichMessage
+   * @required No
+   */
+  richMessage?: InputRichMessage;
 
   /**
    * Link preview generation options for the message

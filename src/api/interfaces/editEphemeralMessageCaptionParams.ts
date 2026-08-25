@@ -58,6 +58,14 @@ export interface EditEphemeralMessageCaptionParams {
   captionEntities?: MessageEntity[];
 
   /**
+   * Pass True if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  showCaptionAboveMedia?: boolean;
+
+  /**
    * A JSON-serialized object for an inline keyboard
    * @type { InlineKeyboardMarkup }
    * @originalType InlineKeyboardMarkup

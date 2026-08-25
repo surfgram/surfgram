@@ -1,11 +1,12 @@
 /**
  * Parameters interface for the sendVideoNote method
  * @interface SendVideoNoteParams
- * @description As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * @description Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
  * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram API Documentation}
  */
 
 import { InputFile } from '../types/inputFile';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -55,20 +56,12 @@ export interface SendVideoNoteParams {
   directMessagesTopicId?: number;
 
   /**
-   * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
-   * @type { number }
-   * @originalType Integer
+   * A JSON-serialized object containing the parameters of the ephemeral message to send
+   * @type { EphemeralMessageParameters }
+   * @originalType EphemeralMessageParameters
    * @required No
    */
-  receiverUserId?: number;
-
-  /**
-   * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  callbackQueryId?: string;
+  ephemeralMessageParameters?: EphemeralMessageParameters;
 
   /**
    * Duration of sent video in seconds

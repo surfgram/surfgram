@@ -159,4 +159,12 @@ export interface PromoteChatMemberParams {
    */
   canManageTags?: boolean;
 
+  /**
+   * Pass True if the administrator can manage chat welcome messages or directly send them in the case of bots
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  canSendWelcomeMessages?: boolean;
+
 }

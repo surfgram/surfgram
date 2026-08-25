@@ -37,7 +37,7 @@ export class RichBlockMap {
   location!: Location;
 
   /**
-   * Map zoom level; 13-20
+   * Map zoom level
    * @type { number }
    * @memberof RichBlockMap
    * @instance

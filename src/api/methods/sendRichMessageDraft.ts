@@ -7,6 +7,7 @@
 
 import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
+import { SendRichMessageDraftParams } from '../interfaces/sendRichMessageDraftParams';
 import { InputRichMessage } from '../types/inputRichMessage';
 
 /**
@@ -15,24 +16,17 @@ import { InputRichMessage } from '../types/inputRichMessage';
  * @async
  * @function sendRichMessageDraft
  * @this {Bot} Bot instance
- *  * @param { number } chatId - Unique identifier for the target private chat
- *  * @param { number } draftId - Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
- *  * @param { InputRichMessage } richMessage - The partial message to be streamed. Direct upload of new files isn't supported.
- *  * @param { number } messageThreadId? - Unique identifier for the target message thread
- *  * @returns {Promise<any>} Promise resolving to method result
+ * @param { SendRichMessageDraftParams } params - Method parameters object
+ * @returns {Promise<any>} Promise resolving to method result
  * @throws {Error} If API call fails or returns error
  * @example
- * // Direct parameters
- * await bot.sendRichMessageDraft(...);
+ * // Using params object
+ * await bot.sendRichMessageDraft({
+ * // ... params
+ * });
  */
-export async function sendRichMessageDraft(this: Bot, chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any> {
-  const apiParams = {
-    chatId: chatId,
-    draftId: draftId,
-    richMessage: richMessage,
-    messageThreadId: messageThreadId,
-  };
-  const snakeParams = camelToSnake(apiParams);
+export async function sendRichMessageDraft(this: Bot, params: SendRichMessageDraftParams): Promise<any> {
+  const snakeParams = camelToSnake(params);
   const response = await this.callApi<any>('sendRichMessageDraft', snakeParams);
   return response;
 }

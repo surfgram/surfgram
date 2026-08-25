@@ -39,8 +39,7 @@ Use this method to send text messages. On success, the sent Message is returned.
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
 | `linkPreviewOptions` | `LinkPreviewOptions` | No | Link preview generation options for the message |
@@ -89,8 +88,7 @@ Use this method to send photos. On success, the sent Message is returned.
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `caption` | `string` | No | Photo caption \(may also be used when resending photos by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the photo caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -142,8 +140,7 @@ Use this method to send live photos. On success, the sent Message is returned.
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `caption` | `string` | No | Video caption \(may also be used when resending videos by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the video caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -194,8 +191,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `caption` | `string` | No | Audio caption, 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the audio caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -248,8 +244,7 @@ Use this method to send general files. On success, the sent Message is returned.
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
 | `caption` | `string` | No | Document caption \(may also be used when resending documents by file\_id\), 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the document caption. See formatting options for more details. |
@@ -300,8 +295,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos \(oth
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `duration` | `number` | No | Duration of sent video in seconds |
 | `width` | `number` | No | Video width |
 | `height` | `number` | No | Video height |
@@ -359,8 +353,7 @@ Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without 
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `duration` | `number` | No | Duration of sent animation in seconds |
 | `width` | `number` | No | Animation width |
 | `height` | `number` | No | Animation height |
@@ -415,8 +408,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `caption` | `string` | No | Voice message caption, 0-1024 characters after entities parsing |
 | `parseMode` | `string` | No | Mode for parsing entities in the voice message caption. See formatting options for more details. |
 | `captionEntities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse\_mode |
@@ -454,7 +446,7 @@ bot.onInputMediaVideo(async (inputmediavideo: InputMediaVideo) => {
 
 ### sendVideoNote
 
-As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
 
 
 **Required parameters:**
@@ -466,8 +458,7 @@ As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 min
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `duration` | `number` | No | Duration of sent video in seconds |
 | `length` | `number` | No | Video width and height, i.e. diameter of the video message |
 | `thumbnail` | `InputFile` \| `string` | No | Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file\_attach\_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file\_attach\_name&gt;. More information on Sending Files » |
@@ -610,8 +601,7 @@ Use this method to send point on the map. On success, the sent Message is return
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `horizontalAccuracy` | `number` | No | The radius of uncertainty for the location, measured in meters; 0-1500 |
 | `livePeriod` | `number` | No | Period in seconds during which the location will be updated \(see Live Locations\), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages. |
 | `heading` | `number` | No | For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. |
@@ -664,8 +654,7 @@ Use this method to send information about a venue. On success, the sent Message 
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `foursquareId` | `string` | No | Foursquare identifier of the venue |
 | `foursquareType` | `string` | No | Foursquare type of the venue, if known. \(For example, “arts\_entertainment/default”, “arts\_entertainment/aquarium” or “food/icecream”.\) |
 | `googlePlaceId` | `string` | No | Google Places identifier of the venue |
@@ -716,8 +705,7 @@ Use this method to send phone contacts. On success, the sent Message is returned
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `lastName` | `string` | No | Contact's last name |
 | `vcard` | `string` | No | Additional data about the contact in the form of a vCard, 0-2048 bytes |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
@@ -914,11 +902,13 @@ Use this method to stream a partial message to a user while the message is being
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `chatId` | `number` | Yes | Unique identifier for the target private chat |
-| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. |
+| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation. |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread |
 | `text` | `string` | No | Text of the message to be sent, 0-4096 characters after entities parsing. Pass an empty text to show a “Thinking…” placeholder. |
 | `parseMode` | `string` | No | Mode for parsing entities in the message text. See formatting options for more details. |
 | `entities` | `MessageEntity[]` | No | A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse\_mode |
+| `canStop` | `boolean` | No | Pass True to show the user a button to stop further drafts. The bot will receive an Update “stopped\_message\_generation” if the user presses the button. |
+| `keepOnStop` | `boolean` | No | Pass True to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message. |
 
 **Usage examples:**
 
@@ -1069,8 +1059,7 @@ Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| `receiverUserId` | `number` | No | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details. |
-| `callbackQueryId` | `string` | No | For outgoing ephemeral messages, identifier of the callback query which triggered the message if any |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `emoji` | `string` | No | Emoji associated with the sticker; only for just uploaded stickers |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
@@ -1117,6 +1106,7 @@ Use this method to send rich messages. If the message contains a block with a me
 | `businessConnectionId` | `string` | No | Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages. |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread \(topic\) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | `directMessagesTopicId` | `number` | No | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| `ephemeralMessageParameters` | `EphemeralMessageParameters` | No | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | `disableNotification` | `boolean` | No | Sends the message silently. Users will receive a notification with no sound. |
 | `protectContent` | `boolean` | No | Protects the contents of the sent message from forwarding and saving |
 | `allowPaidBroadcast` | `boolean` | No | Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |
@@ -1158,9 +1148,11 @@ Use this method to stream a partial rich message to a user while the message is 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | `chatId` | `number` | Yes | Unique identifier for the target private chat |
-| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. |
-| `richMessage` | `InputRichMessage` | Yes | The partial message to be streamed. Direct upload of new files isn't supported. |
+| `draftId` | `number` | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation. |
+| `richMessage` | `InputRichMessage` | Yes | The partial message to be streamed. Direct upload of new files and explicit upload of files by a URL isn't supported. |
 | `messageThreadId` | `number` | No | Unique identifier for the target message thread |
+| `canStop` | `boolean` | No | Pass True to show the user a button to stop further drafts. The bot will receive an Update “stopped\_message\_generation” if the user presses the button. |
+| `keepOnStop` | `boolean` | No | Pass True to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message. |
 
 **Usage examples:**
 
@@ -1168,10 +1160,10 @@ Use this method to stream a partial rich message to a user while the message is 
 
 ```typescript
 const inputmediavideo = new InputMediaVideo(rawData, bot);
-await inputmediavideo.sendRichMessageDraft(
-  123,
-  123,
-);
+await inputmediavideo.sendRichMessageDraft({
+  chatId: 123,
+  draftId: 123,
+});
 ```
 
 2. In an event handler:
@@ -1179,7 +1171,7 @@ await inputmediavideo.sendRichMessageDraft(
 ```typescript
 bot.onInputMediaVideo(async (inputmediavideo: InputMediaVideo) => {
   // Auto-fills parameters from the inputmediavideo instance
-  await inputmediavideo.sendRichMessageDraft();
+  await inputmediavideo.sendRichMessageDraft({});
 });
 ```
 

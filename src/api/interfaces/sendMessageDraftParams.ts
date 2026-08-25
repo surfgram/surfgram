@@ -17,7 +17,7 @@ export interface SendMessageDraftParams {
   chatId: number;
 
   /**
-   * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
+   * Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation.
    * @type { number }
    * @originalType Integer
    * @required Yes
@@ -55,5 +55,21 @@ export interface SendMessageDraftParams {
    * @required No
    */
   entities?: MessageEntity[];
+
+  /**
+   * Pass True to show the user a button to stop further drafts. The bot will receive an Update “stopped\_message\_generation” if the user presses the button.
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  canStop?: boolean;
+
+  /**
+   * Pass True to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message.
+   * @type { boolean }
+   * @originalType Boolean
+   * @required No
+   */
+  keepOnStop?: boolean;
 
 }

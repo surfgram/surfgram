@@ -57,6 +57,7 @@ import { ChatBackground } from './chatBackground';
 import { ChecklistTasksDone } from './checklistTasksDone';
 import { ChecklistTasksAdded } from './checklistTasksAdded';
 import { CommunityChatAdded } from './communityChatAdded';
+import { CommunityChatJoined } from './communityChatJoined';
 import { CommunityChatRemoved } from './communityChatRemoved';
 import { DirectMessagePriceChanged } from './directMessagePriceChanged';
 import { ForumTopicCreated } from './forumTopicCreated';
@@ -910,7 +911,7 @@ export class Message {
   checklistTasksAdded?: ChecklistTasksAdded;
 
   /**
-   * Optional. Service message: chat added to a Community
+   * Optional. Service message: chat or bot added to a Community
    * @type { CommunityChatAdded }
    * @memberof Message
    * @instance
@@ -919,7 +920,16 @@ export class Message {
   communityChatAdded?: CommunityChatAdded;
 
   /**
-   * Optional. Service message: chat removed from a Community
+   * Optional. Service message: chat was joined by a user from a Community
+   * @type { CommunityChatJoined }
+   * @memberof Message
+   * @instance
+   * @public
+   */
+  communityChatJoined?: CommunityChatJoined;
+
+  /**
+   * Optional. Service message: chat or bot removed from a Community
    * @type { CommunityChatRemoved }
    * @memberof Message
    * @instance

@@ -46,7 +46,7 @@ export class InputRichMessage {
   markdown?: string;
 
   /**
-   * Optional. List of media that are specified in the markdown or html fields using tg://photo?id=, tg://video?id=, and tg://audio?id= links
+   * Optional. List of media that are specified in the markdown or html fields using tg://photo?id=, tg://video?id=, tg://document?id=, and tg://audio?id= links
    * @type { InputRichMessageMedia[] }
    * @memberof InputRichMessage
    * @instance

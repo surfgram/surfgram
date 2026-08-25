@@ -8,7 +8,7 @@ A block with a map, corresponding to the custom HTML tag &lt;tg-map&gt;.
 | :--- | :--- | :---: | :--- |
 | type | `string` | Yes | Type of the block, always “map” |
 | location | `Location` | Yes | Location of the center of the map |
-| zoom | `number` | Yes | Map zoom level; 13-20 |
+| zoom | `number` | Yes | Map zoom level |
 | width | `number` | Yes | Expected width of the map |
 | height | `number` | Yes | Expected height of the map |
 | caption | `RichBlockCaption` | No | Optional. Caption of the block |

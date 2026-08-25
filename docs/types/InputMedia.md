@@ -73,7 +73,7 @@ Use this method to edit the media of an ephemeral message. Note that it is not g
 | `chatId` | `number` \| `string` | Yes | Unique identifier for the target chat or username of the target supergroup in the format @username |
 | `receiverUserId` | `number` | Yes | Identifier of the user who received the message |
 | `ephemeralMessageId` | `number` | Yes | Identifier of the ephemeral message to edit |
-| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL. |
+| `media` | `InputMedia` | Yes | A JSON-serialized object for the new media content of the message |
 | `replyMarkup` | `InlineKeyboardMarkup` | No | A JSON-serialized object for an inline keyboard |
 
 **Usage examples:**

@@ -12,6 +12,7 @@ describe('editEphemeralMessageText', () => {
       text: "example text",
       parseMode: "example text",
       entities: [{} as any],
+      richMessage: {} as any,
       linkPreviewOptions: {} as any,
       replyMarkup: {} as any,
     };
@@ -25,6 +26,7 @@ describe('editEphemeralMessageText', () => {
       text: "example text",
       parse_mode: "example text",
       entities: [{} as any],
+      rich_message: {} as any,
       link_preview_options: {} as any,
       reply_markup: {} as any,
     });

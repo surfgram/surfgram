@@ -12,6 +12,7 @@ import { snakeToCamel } from '../../core/utils';
 import { TelegramObject } from './telegramObject';
 import { InputMediaAnimation } from './inputMediaAnimation';
 import { InputMediaAudio } from './inputMediaAudio';
+import { InputMediaDocument } from './inputMediaDocument';
 import { InputMediaPhoto } from './inputMediaPhoto';
 import { InputMediaVideo } from './inputMediaVideo';
 import { InputMediaVoiceNote } from './inputMediaVoiceNote';
@@ -22,7 +23,7 @@ import { InputMediaVoiceNote } from './inputMediaVoiceNote';
  */
 export class InputRichMessageMedia {
   /**
-   * Unique identifier of the media used in a tg://photo?id=, tg://video?id=, or tg://audio?id= link. 1-64 characters, only A-Z, a-z, 0-9, \_ and - are allowed.
+   * Unique identifier of the media used in a tg://photo?id=, tg://video?id=, tg://document?id=, or tg://audio?id= link. 1-64 characters, only A-Z, a-z, 0-9, \_ and - are allowed.
    * @type { string }
    * @memberof InputRichMessageMedia
    * @instance
@@ -32,12 +33,12 @@ export class InputRichMessageMedia {
 
   /**
    * The media to be sent. Everything except the media itself and its properties is ignored.
-   * @type { InputMediaAnimation | InputMediaAudio | InputMediaPhoto | InputMediaVideo | InputMediaVoiceNote }
+   * @type { InputMediaAnimation | InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo | InputMediaVoiceNote }
    * @memberof InputRichMessageMedia
    * @instance
    * @public
    */
-  media!: InputMediaAnimation | InputMediaAudio | InputMediaPhoto | InputMediaVideo | InputMediaVoiceNote;
+  media!: InputMediaAnimation | InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo | InputMediaVoiceNote;
 
   /**
    * Raw data from Telegram API in snake_case format

@@ -21,6 +21,7 @@ import { MessageEntity } from './types/messageEntity';
 import { TextQuote } from './types/textQuote';
 import { ExternalReplyInfo } from './types/externalReplyInfo';
 import { ReplyParameters } from './types/replyParameters';
+import { EphemeralMessageParameters } from './types/ephemeralMessageParameters';
 import { MessageOrigin } from './types/messageOrigin';
 import { MessageOriginUser } from './types/messageOriginUser';
 import { MessageOriginHiddenUser } from './types/messageOriginHiddenUser';
@@ -64,6 +65,7 @@ import { MessageAutoDeleteTimerChanged } from './types/messageAutoDeleteTimerCha
 import { ManagedBotCreated } from './types/managedBotCreated';
 import { ManagedBotUpdated } from './types/managedBotUpdated';
 import { BotSubscriptionUpdated } from './types/botSubscriptionUpdated';
+import { MessageGenerationStopped } from './types/messageGenerationStopped';
 import { PollOptionAdded } from './types/pollOptionAdded';
 import { PollOptionDeleted } from './types/pollOptionDeleted';
 import { ChatBoostAdded } from './types/chatBoostAdded';
@@ -80,6 +82,7 @@ import { ChatBackground } from './types/chatBackground';
 import { ChecklistTasksDone } from './types/checklistTasksDone';
 import { ChecklistTasksAdded } from './types/checklistTasksAdded';
 import { CommunityChatAdded } from './types/communityChatAdded';
+import { CommunityChatJoined } from './types/communityChatJoined';
 import { CommunityChatRemoved } from './types/communityChatRemoved';
 import { ForumTopicCreated } from './types/forumTopicCreated';
 import { ForumTopicClosed } from './types/forumTopicClosed';
@@ -127,6 +130,7 @@ import { InlineKeyboardButton } from './types/inlineKeyboardButton';
 import { LoginUrl } from './types/loginUrl';
 import { SwitchInlineQueryChosenChat } from './types/switchInlineQueryChosenChat';
 import { CopyTextButton } from './types/copyTextButton';
+import { DisabledButton } from './types/disabledButton';
 import { CallbackQuery } from './types/callbackQuery';
 import { ForceReply } from './types/forceReply';
 import { Community } from './types/community';
@@ -249,6 +253,7 @@ import { InputSticker } from './types/inputSticker';
 import { RichMessage } from './types/richMessage';
 import { InputRichMessage } from './types/inputRichMessage';
 import { InputRichMessageMedia } from './types/inputRichMessageMedia';
+import { RichMessageButton } from './types/richMessageButton';
 import { RichText } from './types/richText';
 import { RichTextBold } from './types/richTextBold';
 import { RichTextItalic } from './types/richTextItalic';
@@ -271,6 +276,7 @@ import { RichTextMention } from './types/richTextMention';
 import { RichTextHashtag } from './types/richTextHashtag';
 import { RichTextCashtag } from './types/richTextCashtag';
 import { RichTextBotCommand } from './types/richTextBotCommand';
+import { RichTextButton } from './types/richTextButton';
 import { RichTextAnchor } from './types/richTextAnchor';
 import { RichTextAnchorLink } from './types/richTextAnchorLink';
 import { RichTextReference } from './types/richTextReference';
@@ -288,14 +294,17 @@ import { RichBlockMathematicalExpression } from './types/richBlockMathematicalEx
 import { RichBlockAnchor } from './types/richBlockAnchor';
 import { RichBlockList } from './types/richBlockList';
 import { RichBlockBlockQuotation } from './types/richBlockBlockQuotation';
+import { RichBlockExpandableBlockQuotation } from './types/richBlockExpandableBlockQuotation';
 import { RichBlockPullQuotation } from './types/richBlockPullQuotation';
 import { RichBlockCollage } from './types/richBlockCollage';
 import { RichBlockSlideshow } from './types/richBlockSlideshow';
 import { RichBlockTable } from './types/richBlockTable';
 import { RichBlockDetails } from './types/richBlockDetails';
 import { RichBlockMap } from './types/richBlockMap';
+import { RichBlockButtons } from './types/richBlockButtons';
 import { RichBlockAnimation } from './types/richBlockAnimation';
 import { RichBlockAudio } from './types/richBlockAudio';
+import { RichBlockDocument } from './types/richBlockDocument';
 import { RichBlockPhoto } from './types/richBlockPhoto';
 import { RichBlockVideo } from './types/richBlockVideo';
 import { RichBlockVoiceNote } from './types/richBlockVoiceNote';
@@ -311,14 +320,17 @@ import { InputRichBlockMathematicalExpression } from './types/inputRichBlockMath
 import { InputRichBlockAnchor } from './types/inputRichBlockAnchor';
 import { InputRichBlockList } from './types/inputRichBlockList';
 import { InputRichBlockBlockQuotation } from './types/inputRichBlockBlockQuotation';
+import { InputRichBlockExpandableBlockQuotation } from './types/inputRichBlockExpandableBlockQuotation';
 import { InputRichBlockPullQuotation } from './types/inputRichBlockPullQuotation';
 import { InputRichBlockCollage } from './types/inputRichBlockCollage';
 import { InputRichBlockSlideshow } from './types/inputRichBlockSlideshow';
 import { InputRichBlockTable } from './types/inputRichBlockTable';
 import { InputRichBlockDetails } from './types/inputRichBlockDetails';
 import { InputRichBlockMap } from './types/inputRichBlockMap';
+import { InputRichBlockButtons } from './types/inputRichBlockButtons';
 import { InputRichBlockAnimation } from './types/inputRichBlockAnimation';
 import { InputRichBlockAudio } from './types/inputRichBlockAudio';
+import { InputRichBlockDocument } from './types/inputRichBlockDocument';
 import { InputRichBlockPhoto } from './types/inputRichBlockPhoto';
 import { InputRichBlockVideo } from './types/inputRichBlockVideo';
 import { InputRichBlockVoiceNote } from './types/inputRichBlockVoiceNote';
@@ -709,7 +721,7 @@ declare module '../core/bot' {
      */
     sendVoice(chatId: number | string, voice: InputFile | string): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -718,7 +730,7 @@ declare module '../core/bot' {
      */
     sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param chatId, videoNote - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -2060,7 +2072,7 @@ declare module '../core/bot' {
      */
     stopPoll(chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -2069,7 +2081,7 @@ declare module '../core/bot' {
      */
     editEphemeralMessageText(params: Interfaces.EditEphemeralMessageTextParams): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param chatId, receiverUserId, ephemeralMessageId - Required parameters
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -2377,15 +2389,21 @@ declare module '../core/bot' {
     sendRichMessage(chatId: number | string, richMessage: InputRichMessage): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     *      * @param chatId - Unique identifier for the target private chat
-     *      * @param draftId - Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
-     *      * @param richMessage - The partial message to be streamed. Direct upload of new files isn't supported.
-     *      * @param messageThreadId - Unique identifier for the target message thread
-     *      * @returns {Promise<any>} Promise resolving to method result
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link Interfaces.SendRichMessageDraftParams} for parameter details
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param chatId, draftId, richMessage - Required parameters
+     * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage): Promise<any>;
     /**
      * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
      * @param params - Method parameters object
@@ -2785,6 +2803,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#replyparameters Telegram Bot API}
      */
     onReplyParameters(filter: string | ((data: any) => boolean), handler: (data: ReplyParameters) => void | Promise<void>): this;
+    /**
+     * Registers a handler for EphemeralMessageParameters updates
+     * @overload
+     * @param handler - Async function to handle EphemeralMessageParameters updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#ephemeralmessageparameters Telegram Bot API}
+     */
+    onEphemeralMessageParameters(handler: (data: EphemeralMessageParameters) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for EphemeralMessageParameters updates with filtering
+     * @overload
+     * @param filter - String or function to filter EphemeralMessageParameters data
+     * @param handler - Async function to handle filtered EphemeralMessageParameters updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#ephemeralmessageparameters Telegram Bot API}
+     */
+    onEphemeralMessageParameters(filter: string | ((data: any) => boolean), handler: (data: EphemeralMessageParameters) => void | Promise<void>): this;
     /**
      * Registers a handler for MessageOrigin updates
      * @overload
@@ -3560,6 +3596,24 @@ declare module '../core/bot' {
      */
     onBotSubscriptionUpdated(filter: string | ((data: any) => boolean), handler: (data: BotSubscriptionUpdated) => void | Promise<void>): this;
     /**
+     * Registers a handler for MessageGenerationStopped updates
+     * @overload
+     * @param handler - Async function to handle MessageGenerationStopped updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#messagegenerationstopped Telegram Bot API}
+     */
+    onMessageGenerationStopped(handler: (data: MessageGenerationStopped) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for MessageGenerationStopped updates with filtering
+     * @overload
+     * @param filter - String or function to filter MessageGenerationStopped data
+     * @param handler - Async function to handle filtered MessageGenerationStopped updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#messagegenerationstopped Telegram Bot API}
+     */
+    onMessageGenerationStopped(filter: string | ((data: any) => boolean), handler: (data: MessageGenerationStopped) => void | Promise<void>): this;
+    /**
      * Registers a handler for PollOptionAdded updates
      * @overload
      * @param handler - Async function to handle PollOptionAdded updates
@@ -3847,6 +3901,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#communitychatadded Telegram Bot API}
      */
     onCommunityChatAdded(filter: string | ((data: any) => boolean), handler: (data: CommunityChatAdded) => void | Promise<void>): this;
+    /**
+     * Registers a handler for CommunityChatJoined updates
+     * @overload
+     * @param handler - Async function to handle CommunityChatJoined updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#communitychatjoined Telegram Bot API}
+     */
+    onCommunityChatJoined(handler: (data: CommunityChatJoined) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for CommunityChatJoined updates with filtering
+     * @overload
+     * @param filter - String or function to filter CommunityChatJoined data
+     * @param handler - Async function to handle filtered CommunityChatJoined updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#communitychatjoined Telegram Bot API}
+     */
+    onCommunityChatJoined(filter: string | ((data: any) => boolean), handler: (data: CommunityChatJoined) => void | Promise<void>): this;
     /**
      * Registers a handler for CommunityChatRemoved updates
      * @overload
@@ -4693,6 +4765,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
     onCopyTextButton(filter: string | ((data: any) => boolean), handler: (data: CopyTextButton) => void | Promise<void>): this;
+    /**
+     * Registers a handler for DisabledButton updates
+     * @overload
+     * @param handler - Async function to handle DisabledButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#disabledbutton Telegram Bot API}
+     */
+    onDisabledButton(handler: (data: DisabledButton) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for DisabledButton updates with filtering
+     * @overload
+     * @param filter - String or function to filter DisabledButton data
+     * @param handler - Async function to handle filtered DisabledButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#disabledbutton Telegram Bot API}
+     */
+    onDisabledButton(filter: string | ((data: any) => boolean), handler: (data: DisabledButton) => void | Promise<void>): this;
     /**
      * Registers a handler for CallbackQuery updates
      * @overload
@@ -6890,6 +6980,24 @@ declare module '../core/bot' {
      */
     onInputRichMessageMedia(filter: string | ((data: any) => boolean), handler: (data: InputRichMessageMedia) => void | Promise<void>): this;
     /**
+     * Registers a handler for RichMessageButton updates
+     * @overload
+     * @param handler - Async function to handle RichMessageButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richmessagebutton Telegram Bot API}
+     */
+    onRichMessageButton(handler: (data: RichMessageButton) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for RichMessageButton updates with filtering
+     * @overload
+     * @param filter - String or function to filter RichMessageButton data
+     * @param handler - Async function to handle filtered RichMessageButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richmessagebutton Telegram Bot API}
+     */
+    onRichMessageButton(filter: string | ((data: any) => boolean), handler: (data: RichMessageButton) => void | Promise<void>): this;
+    /**
      * Registers a handler for RichText updates
      * @overload
      * @param handler - Async function to handle RichText updates
@@ -7286,6 +7394,24 @@ declare module '../core/bot' {
      */
     onRichTextBotCommand(filter: string | ((data: any) => boolean), handler: (data: RichTextBotCommand) => void | Promise<void>): this;
     /**
+     * Registers a handler for RichTextButton updates
+     * @overload
+     * @param handler - Async function to handle RichTextButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richtextbutton Telegram Bot API}
+     */
+    onRichTextButton(handler: (data: RichTextButton) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for RichTextButton updates with filtering
+     * @overload
+     * @param filter - String or function to filter RichTextButton data
+     * @param handler - Async function to handle filtered RichTextButton updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richtextbutton Telegram Bot API}
+     */
+    onRichTextButton(filter: string | ((data: any) => boolean), handler: (data: RichTextButton) => void | Promise<void>): this;
+    /**
      * Registers a handler for RichTextAnchor updates
      * @overload
      * @param handler - Async function to handle RichTextAnchor updates
@@ -7592,6 +7718,24 @@ declare module '../core/bot' {
      */
     onRichBlockBlockQuotation(filter: string | ((data: any) => boolean), handler: (data: RichBlockBlockQuotation) => void | Promise<void>): this;
     /**
+     * Registers a handler for RichBlockExpandableBlockQuotation updates
+     * @overload
+     * @param handler - Async function to handle RichBlockExpandableBlockQuotation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockexpandableblockquotation Telegram Bot API}
+     */
+    onRichBlockExpandableBlockQuotation(handler: (data: RichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for RichBlockExpandableBlockQuotation updates with filtering
+     * @overload
+     * @param filter - String or function to filter RichBlockExpandableBlockQuotation data
+     * @param handler - Async function to handle filtered RichBlockExpandableBlockQuotation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockexpandableblockquotation Telegram Bot API}
+     */
+    onRichBlockExpandableBlockQuotation(filter: string | ((data: any) => boolean), handler: (data: RichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    /**
      * Registers a handler for RichBlockPullQuotation updates
      * @overload
      * @param handler - Async function to handle RichBlockPullQuotation updates
@@ -7700,6 +7844,24 @@ declare module '../core/bot' {
      */
     onRichBlockMap(filter: string | ((data: any) => boolean), handler: (data: RichBlockMap) => void | Promise<void>): this;
     /**
+     * Registers a handler for RichBlockButtons updates
+     * @overload
+     * @param handler - Async function to handle RichBlockButtons updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockbuttons Telegram Bot API}
+     */
+    onRichBlockButtons(handler: (data: RichBlockButtons) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for RichBlockButtons updates with filtering
+     * @overload
+     * @param filter - String or function to filter RichBlockButtons data
+     * @param handler - Async function to handle filtered RichBlockButtons updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockbuttons Telegram Bot API}
+     */
+    onRichBlockButtons(filter: string | ((data: any) => boolean), handler: (data: RichBlockButtons) => void | Promise<void>): this;
+    /**
      * Registers a handler for RichBlockAnimation updates
      * @overload
      * @param handler - Async function to handle RichBlockAnimation updates
@@ -7735,6 +7897,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#richblockaudio Telegram Bot API}
      */
     onRichBlockAudio(filter: string | ((data: any) => boolean), handler: (data: RichBlockAudio) => void | Promise<void>): this;
+    /**
+     * Registers a handler for RichBlockDocument updates
+     * @overload
+     * @param handler - Async function to handle RichBlockDocument updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockdocument Telegram Bot API}
+     */
+    onRichBlockDocument(handler: (data: RichBlockDocument) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for RichBlockDocument updates with filtering
+     * @overload
+     * @param filter - String or function to filter RichBlockDocument data
+     * @param handler - Async function to handle filtered RichBlockDocument updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockdocument Telegram Bot API}
+     */
+    onRichBlockDocument(filter: string | ((data: any) => boolean), handler: (data: RichBlockDocument) => void | Promise<void>): this;
     /**
      * Registers a handler for RichBlockPhoto updates
      * @overload
@@ -8006,6 +8186,24 @@ declare module '../core/bot' {
      */
     onInputRichBlockBlockQuotation(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockBlockQuotation) => void | Promise<void>): this;
     /**
+     * Registers a handler for InputRichBlockExpandableBlockQuotation updates
+     * @overload
+     * @param handler - Async function to handle InputRichBlockExpandableBlockQuotation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockexpandableblockquotation Telegram Bot API}
+     */
+    onInputRichBlockExpandableBlockQuotation(handler: (data: InputRichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputRichBlockExpandableBlockQuotation updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputRichBlockExpandableBlockQuotation data
+     * @param handler - Async function to handle filtered InputRichBlockExpandableBlockQuotation updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockexpandableblockquotation Telegram Bot API}
+     */
+    onInputRichBlockExpandableBlockQuotation(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    /**
      * Registers a handler for InputRichBlockPullQuotation updates
      * @overload
      * @param handler - Async function to handle InputRichBlockPullQuotation updates
@@ -8114,6 +8312,24 @@ declare module '../core/bot' {
      */
     onInputRichBlockMap(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockMap) => void | Promise<void>): this;
     /**
+     * Registers a handler for InputRichBlockButtons updates
+     * @overload
+     * @param handler - Async function to handle InputRichBlockButtons updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockbuttons Telegram Bot API}
+     */
+    onInputRichBlockButtons(handler: (data: InputRichBlockButtons) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputRichBlockButtons updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputRichBlockButtons data
+     * @param handler - Async function to handle filtered InputRichBlockButtons updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockbuttons Telegram Bot API}
+     */
+    onInputRichBlockButtons(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockButtons) => void | Promise<void>): this;
+    /**
      * Registers a handler for InputRichBlockAnimation updates
      * @overload
      * @param handler - Async function to handle InputRichBlockAnimation updates
@@ -8149,6 +8365,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputrichblockaudio Telegram Bot API}
      */
     onInputRichBlockAudio(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockAudio) => void | Promise<void>): this;
+    /**
+     * Registers a handler for InputRichBlockDocument updates
+     * @overload
+     * @param handler - Async function to handle InputRichBlockDocument updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockdocument Telegram Bot API}
+     */
+    onInputRichBlockDocument(handler: (data: InputRichBlockDocument) => void | Promise<void>): this;
+    
+    /**
+     * Registers a handler for InputRichBlockDocument updates with filtering
+     * @overload
+     * @param filter - String or function to filter InputRichBlockDocument data
+     * @param handler - Async function to handle filtered InputRichBlockDocument updates
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockdocument Telegram Bot API}
+     */
+    onInputRichBlockDocument(filter: string | ((data: any) => boolean), handler: (data: InputRichBlockDocument) => void | Promise<void>): this;
     /**
      * Registers a handler for InputRichBlockPhoto updates
      * @overload
@@ -9736,6 +9970,24 @@ declare module '../core/bot' {
      */
     on(event: 'replyparameters', filter: string | ((data: any) => boolean), handler: (data: ReplyParameters) => void | Promise<void>): this;
     /**
+     * Generic handler for 'ephemeralmessageparameters' event (strongly typed)
+     * @param event - Event name: 'ephemeralmessageparameters'
+     * @param handler - Async function to handle ephemeralmessageparameters events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#ephemeralmessageparameters Telegram Bot API}
+     */
+    on(event: 'ephemeralmessageparameters', handler: (data: EphemeralMessageParameters) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'ephemeralmessageparameters' event with filtering
+     * @param event - Event name: 'ephemeralmessageparameters'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered ephemeralmessageparameters events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#ephemeralmessageparameters Telegram Bot API}
+     */
+    on(event: 'ephemeralmessageparameters', filter: string | ((data: any) => boolean), handler: (data: EphemeralMessageParameters) => void | Promise<void>): this;
+    /**
      * Generic handler for 'messageorigin' event (strongly typed)
      * @param event - Event name: 'messageorigin'
      * @param handler - Async function to handle messageorigin events
@@ -10510,6 +10762,24 @@ declare module '../core/bot' {
      */
     on(event: 'botsubscriptionupdated', filter: string | ((data: any) => boolean), handler: (data: BotSubscriptionUpdated) => void | Promise<void>): this;
     /**
+     * Generic handler for 'messagegenerationstopped' event (strongly typed)
+     * @param event - Event name: 'messagegenerationstopped'
+     * @param handler - Async function to handle messagegenerationstopped events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#messagegenerationstopped Telegram Bot API}
+     */
+    on(event: 'messagegenerationstopped', handler: (data: MessageGenerationStopped) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'messagegenerationstopped' event with filtering
+     * @param event - Event name: 'messagegenerationstopped'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered messagegenerationstopped events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#messagegenerationstopped Telegram Bot API}
+     */
+    on(event: 'messagegenerationstopped', filter: string | ((data: any) => boolean), handler: (data: MessageGenerationStopped) => void | Promise<void>): this;
+    /**
      * Generic handler for 'polloptionadded' event (strongly typed)
      * @param event - Event name: 'polloptionadded'
      * @param handler - Async function to handle polloptionadded events
@@ -10797,6 +11067,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#communitychatadded Telegram Bot API}
      */
     on(event: 'communitychatadded', filter: string | ((data: any) => boolean), handler: (data: CommunityChatAdded) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'communitychatjoined' event (strongly typed)
+     * @param event - Event name: 'communitychatjoined'
+     * @param handler - Async function to handle communitychatjoined events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#communitychatjoined Telegram Bot API}
+     */
+    on(event: 'communitychatjoined', handler: (data: CommunityChatJoined) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'communitychatjoined' event with filtering
+     * @param event - Event name: 'communitychatjoined'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered communitychatjoined events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#communitychatjoined Telegram Bot API}
+     */
+    on(event: 'communitychatjoined', filter: string | ((data: any) => boolean), handler: (data: CommunityChatJoined) => void | Promise<void>): this;
     /**
      * Generic handler for 'communitychatremoved' event (strongly typed)
      * @param event - Event name: 'communitychatremoved'
@@ -11643,6 +11931,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#copytextbutton Telegram Bot API}
      */
     on(event: 'copytextbutton', filter: string | ((data: any) => boolean), handler: (data: CopyTextButton) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'disabledbutton' event (strongly typed)
+     * @param event - Event name: 'disabledbutton'
+     * @param handler - Async function to handle disabledbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#disabledbutton Telegram Bot API}
+     */
+    on(event: 'disabledbutton', handler: (data: DisabledButton) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'disabledbutton' event with filtering
+     * @param event - Event name: 'disabledbutton'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered disabledbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#disabledbutton Telegram Bot API}
+     */
+    on(event: 'disabledbutton', filter: string | ((data: any) => boolean), handler: (data: DisabledButton) => void | Promise<void>): this;
     /**
      * Generic handler for 'callbackquery' event (strongly typed)
      * @param event - Event name: 'callbackquery'
@@ -13840,6 +14146,24 @@ declare module '../core/bot' {
      */
     on(event: 'inputrichmessagemedia', filter: string | ((data: any) => boolean), handler: (data: InputRichMessageMedia) => void | Promise<void>): this;
     /**
+     * Generic handler for 'richmessagebutton' event (strongly typed)
+     * @param event - Event name: 'richmessagebutton'
+     * @param handler - Async function to handle richmessagebutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richmessagebutton Telegram Bot API}
+     */
+    on(event: 'richmessagebutton', handler: (data: RichMessageButton) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'richmessagebutton' event with filtering
+     * @param event - Event name: 'richmessagebutton'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered richmessagebutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richmessagebutton Telegram Bot API}
+     */
+    on(event: 'richmessagebutton', filter: string | ((data: any) => boolean), handler: (data: RichMessageButton) => void | Promise<void>): this;
+    /**
      * Generic handler for 'richtext' event (strongly typed)
      * @param event - Event name: 'richtext'
      * @param handler - Async function to handle richtext events
@@ -14236,6 +14560,24 @@ declare module '../core/bot' {
      */
     on(event: 'richtextbotcommand', filter: string | ((data: any) => boolean), handler: (data: RichTextBotCommand) => void | Promise<void>): this;
     /**
+     * Generic handler for 'richtextbutton' event (strongly typed)
+     * @param event - Event name: 'richtextbutton'
+     * @param handler - Async function to handle richtextbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richtextbutton Telegram Bot API}
+     */
+    on(event: 'richtextbutton', handler: (data: RichTextButton) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'richtextbutton' event with filtering
+     * @param event - Event name: 'richtextbutton'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered richtextbutton events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richtextbutton Telegram Bot API}
+     */
+    on(event: 'richtextbutton', filter: string | ((data: any) => boolean), handler: (data: RichTextButton) => void | Promise<void>): this;
+    /**
      * Generic handler for 'richtextanchor' event (strongly typed)
      * @param event - Event name: 'richtextanchor'
      * @param handler - Async function to handle richtextanchor events
@@ -14542,6 +14884,24 @@ declare module '../core/bot' {
      */
     on(event: 'richblockblockquotation', filter: string | ((data: any) => boolean), handler: (data: RichBlockBlockQuotation) => void | Promise<void>): this;
     /**
+     * Generic handler for 'richblockexpandableblockquotation' event (strongly typed)
+     * @param event - Event name: 'richblockexpandableblockquotation'
+     * @param handler - Async function to handle richblockexpandableblockquotation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockexpandableblockquotation Telegram Bot API}
+     */
+    on(event: 'richblockexpandableblockquotation', handler: (data: RichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'richblockexpandableblockquotation' event with filtering
+     * @param event - Event name: 'richblockexpandableblockquotation'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered richblockexpandableblockquotation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockexpandableblockquotation Telegram Bot API}
+     */
+    on(event: 'richblockexpandableblockquotation', filter: string | ((data: any) => boolean), handler: (data: RichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    /**
      * Generic handler for 'richblockpullquotation' event (strongly typed)
      * @param event - Event name: 'richblockpullquotation'
      * @param handler - Async function to handle richblockpullquotation events
@@ -14650,6 +15010,24 @@ declare module '../core/bot' {
      */
     on(event: 'richblockmap', filter: string | ((data: any) => boolean), handler: (data: RichBlockMap) => void | Promise<void>): this;
     /**
+     * Generic handler for 'richblockbuttons' event (strongly typed)
+     * @param event - Event name: 'richblockbuttons'
+     * @param handler - Async function to handle richblockbuttons events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockbuttons Telegram Bot API}
+     */
+    on(event: 'richblockbuttons', handler: (data: RichBlockButtons) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'richblockbuttons' event with filtering
+     * @param event - Event name: 'richblockbuttons'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered richblockbuttons events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockbuttons Telegram Bot API}
+     */
+    on(event: 'richblockbuttons', filter: string | ((data: any) => boolean), handler: (data: RichBlockButtons) => void | Promise<void>): this;
+    /**
      * Generic handler for 'richblockanimation' event (strongly typed)
      * @param event - Event name: 'richblockanimation'
      * @param handler - Async function to handle richblockanimation events
@@ -14685,6 +15063,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#richblockaudio Telegram Bot API}
      */
     on(event: 'richblockaudio', filter: string | ((data: any) => boolean), handler: (data: RichBlockAudio) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'richblockdocument' event (strongly typed)
+     * @param event - Event name: 'richblockdocument'
+     * @param handler - Async function to handle richblockdocument events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockdocument Telegram Bot API}
+     */
+    on(event: 'richblockdocument', handler: (data: RichBlockDocument) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'richblockdocument' event with filtering
+     * @param event - Event name: 'richblockdocument'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered richblockdocument events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#richblockdocument Telegram Bot API}
+     */
+    on(event: 'richblockdocument', filter: string | ((data: any) => boolean), handler: (data: RichBlockDocument) => void | Promise<void>): this;
     /**
      * Generic handler for 'richblockphoto' event (strongly typed)
      * @param event - Event name: 'richblockphoto'
@@ -14956,6 +15352,24 @@ declare module '../core/bot' {
      */
     on(event: 'inputrichblockblockquotation', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockBlockQuotation) => void | Promise<void>): this;
     /**
+     * Generic handler for 'inputrichblockexpandableblockquotation' event (strongly typed)
+     * @param event - Event name: 'inputrichblockexpandableblockquotation'
+     * @param handler - Async function to handle inputrichblockexpandableblockquotation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockexpandableblockquotation Telegram Bot API}
+     */
+    on(event: 'inputrichblockexpandableblockquotation', handler: (data: InputRichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputrichblockexpandableblockquotation' event with filtering
+     * @param event - Event name: 'inputrichblockexpandableblockquotation'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputrichblockexpandableblockquotation events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockexpandableblockquotation Telegram Bot API}
+     */
+    on(event: 'inputrichblockexpandableblockquotation', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockExpandableBlockQuotation) => void | Promise<void>): this;
+    /**
      * Generic handler for 'inputrichblockpullquotation' event (strongly typed)
      * @param event - Event name: 'inputrichblockpullquotation'
      * @param handler - Async function to handle inputrichblockpullquotation events
@@ -15064,6 +15478,24 @@ declare module '../core/bot' {
      */
     on(event: 'inputrichblockmap', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockMap) => void | Promise<void>): this;
     /**
+     * Generic handler for 'inputrichblockbuttons' event (strongly typed)
+     * @param event - Event name: 'inputrichblockbuttons'
+     * @param handler - Async function to handle inputrichblockbuttons events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockbuttons Telegram Bot API}
+     */
+    on(event: 'inputrichblockbuttons', handler: (data: InputRichBlockButtons) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputrichblockbuttons' event with filtering
+     * @param event - Event name: 'inputrichblockbuttons'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputrichblockbuttons events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockbuttons Telegram Bot API}
+     */
+    on(event: 'inputrichblockbuttons', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockButtons) => void | Promise<void>): this;
+    /**
      * Generic handler for 'inputrichblockanimation' event (strongly typed)
      * @param event - Event name: 'inputrichblockanimation'
      * @param handler - Async function to handle inputrichblockanimation events
@@ -15099,6 +15531,24 @@ declare module '../core/bot' {
      * @see {@link https://core.telegram.org/bots/api#inputrichblockaudio Telegram Bot API}
      */
     on(event: 'inputrichblockaudio', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockAudio) => void | Promise<void>): this;
+    /**
+     * Generic handler for 'inputrichblockdocument' event (strongly typed)
+     * @param event - Event name: 'inputrichblockdocument'
+     * @param handler - Async function to handle inputrichblockdocument events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockdocument Telegram Bot API}
+     */
+    on(event: 'inputrichblockdocument', handler: (data: InputRichBlockDocument) => void | Promise<void>): this;
+    
+    /**
+     * Generic handler for 'inputrichblockdocument' event with filtering
+     * @param event - Event name: 'inputrichblockdocument'
+     * @param filter - Filter string or function
+     * @param handler - Async function to handle filtered inputrichblockdocument events
+     * @returns {this} Bot instance for chaining
+     * @see {@link https://core.telegram.org/bots/api#inputrichblockdocument Telegram Bot API}
+     */
+    on(event: 'inputrichblockdocument', filter: string | ((data: any) => boolean), handler: (data: InputRichBlockDocument) => void | Promise<void>): this;
     /**
      * Generic handler for 'inputrichblockphoto' event (strongly typed)
      * @param event - Event name: 'inputrichblockphoto'
@@ -17206,10 +17656,10 @@ declare module './types/chatFullInfo' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this ChatFullInfo instance
+     * @note Contextual parameters (chatId, messageThreadId, directMessagesTopicId) are automatically filled from this ChatFullInfo instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -17471,10 +17921,10 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -17516,73 +17966,73 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -17606,28 +18056,28 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -17890,7 +18340,7 @@ declare module './types/message' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'businessConnectionId' | 'chatId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -17975,10 +18425,10 @@ declare module './types/message' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId, receiverUserId) are automatically filled from this Message instance
+     * @note Contextual parameters (chatId, businessConnectionId, messageThreadId, directMessagesTopicId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -17990,13 +18440,13 @@ declare module './types/message' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId' | 'businessConnectionId' | 'messageThreadId' | 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this Message instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId' | 'messageThreadId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18114,7 +18564,7 @@ declare module './types/messageId' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18312,7 +18762,7 @@ declare module './types/messageId' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18365,12 +18815,12 @@ declare module './types/messageId' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -18494,7 +18944,7 @@ declare module './types/inaccessibleMessage' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18709,7 +19159,7 @@ declare module './types/inaccessibleMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -18764,13 +19214,13 @@ declare module './types/inaccessibleMessage' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this InaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18807,13 +19257,12 @@ declare module './types/maybeInaccessibleMessage' {
   interface MaybeInaccessibleMessage {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -18833,76 +19282,68 @@ declare module './types/maybeInaccessibleMessage' {
     forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -18921,31 +19362,28 @@ declare module './types/maybeInaccessibleMessage' {
     sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'receiverUserId'>): Promise<any>;
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19098,7 +19536,7 @@ declare module './types/maybeInaccessibleMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19135,13 +19573,12 @@ declare module './types/maybeInaccessibleMessage' {
     editEphemeralMessageReplyMarkup(chatId: number | string, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MaybeInaccessibleMessage instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19152,12 +19589,12 @@ declare module './types/maybeInaccessibleMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19193,40 +19630,36 @@ declare module './types/messageEntity' {
   interface MessageEntity {
     /**
      * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId'>): Promise<any>;
+    getMe(params: Interfaces.GetMeParams): Promise<any>;
     /**
      * Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#logOut Telegram Bot API}
      */
-    logOut(params: Omit<Interfaces.LogOutParams, 'receiverUserId'>): Promise<any>;
+    logOut(params: Interfaces.LogOutParams): Promise<any>;
     /**
      * Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn&#39;t launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#close Telegram Bot API}
      */
-    close(params: Omit<Interfaces.CloseParams, 'receiverUserId'>): Promise<any>;
+    close(params: Interfaces.CloseParams): Promise<any>;
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -19255,76 +19688,68 @@ declare module './types/messageEntity' {
     copyMessage(params: Omit<Interfaces.CopyMessageParams, 'messageId'>): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19343,31 +19768,28 @@ declare module './types/messageEntity' {
     sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'receiverUserId'>): Promise<any>;
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19546,7 +19968,7 @@ declare module './types/messageEntity' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19583,13 +20005,12 @@ declare module './types/messageEntity' {
     editEphemeralMessageReplyMarkup(chatId: number | string, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageEntity instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19600,12 +20021,12 @@ declare module './types/messageEntity' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19748,7 +20169,7 @@ declare module './types/replyParameters' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -19867,6 +20288,403 @@ declare module './types/replyParameters' {
   }
 }
 /**
+ * Declaration merging for EphemeralMessageParameters class
+ * @namespace EphemeralMessageParametersExtensions
+ */
+declare module './types/ephemeralMessageParameters' {
+  interface EphemeralMessageParameters {
+    /**
+     * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+     */
+    getMe(params: Interfaces.GetMeParams): Promise<any>;
+    /**
+     * Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#logOut Telegram Bot API}
+     */
+    logOut(params: Interfaces.LogOutParams): Promise<any>;
+    /**
+     * Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn&#39;t launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#close Telegram Bot API}
+     */
+    close(params: Interfaces.CloseParams): Promise<any>;
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Interfaces.EditChatInviteLinkParams): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param chatId: number | string, inviteLink: string, name?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(chatId: number | string, inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
+     * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram Bot API}
+     */
+    sendChatJoinRequestWebApp(chatJoinRequestQueryId: string, webAppUrl: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(chatId: number | string, messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param chatId: number | string, name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(chatId: number | string, name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Omit<Interfaces.SendGiftParams, 'userId'>): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (messageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (receiverUserId, ephemeralMessageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageText Telegram Bot API}
+     */
+    editEphemeralMessageText(params: Omit<Interfaces.EditEphemeralMessageTextParams, 'receiverUserId' | 'ephemeralMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (receiverUserId, ephemeralMessageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageMedia Telegram Bot API}
+     */
+    editEphemeralMessageMedia(params: Omit<Interfaces.EditEphemeralMessageMediaParams, 'receiverUserId' | 'ephemeralMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (receiverUserId, ephemeralMessageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageCaption Telegram Bot API}
+     */
+    editEphemeralMessageCaption(params: Omit<Interfaces.EditEphemeralMessageCaptionParams, 'receiverUserId' | 'ephemeralMessageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param chatId: number | string, replyMarkup?: InlineKeyboardMarkup - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (receiverUserId, ephemeralMessageId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageReplyMarkup Telegram Bot API}
+     */
+    editEphemeralMessageReplyMarkup(chatId: number | string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessage Telegram Bot API}
+     */
+    sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param telegramPaymentChargeId: string, isCanceled: boolean - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (userId) are automatically filled from this EphemeralMessageParameters instance
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
  * Declaration merging for MessageOrigin class
  * @namespace MessageOriginExtensions
  */
@@ -19874,13 +20692,12 @@ declare module './types/messageOrigin' {
   interface MessageOrigin {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -19900,76 +20717,68 @@ declare module './types/messageOrigin' {
     forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -19988,31 +20797,28 @@ declare module './types/messageOrigin' {
     sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'receiverUserId'>): Promise<any>;
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20165,7 +20971,7 @@ declare module './types/messageOrigin' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20202,13 +21008,12 @@ declare module './types/messageOrigin' {
     editEphemeralMessageReplyMarkup(chatId: number | string, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOrigin instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20219,12 +21024,12 @@ declare module './types/messageOrigin' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20260,13 +21065,12 @@ declare module './types/messageOriginUser' {
   interface MessageOriginUser {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -20286,76 +21090,68 @@ declare module './types/messageOriginUser' {
     forwardMessages(params: Interfaces.ForwardMessagesParams): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20374,31 +21170,28 @@ declare module './types/messageOriginUser' {
     sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'receiverUserId'>): Promise<any>;
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20551,7 +21344,7 @@ declare module './types/messageOriginUser' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20588,13 +21381,12 @@ declare module './types/messageOriginUser' {
     editEphemeralMessageReplyMarkup(chatId: number | string, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
-     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId) are automatically filled from this MessageOriginUser instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20605,12 +21397,12 @@ declare module './types/messageOriginUser' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -20726,7 +21518,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20925,7 +21717,7 @@ declare module './types/messageOriginHiddenUser' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -20974,12 +21766,12 @@ declare module './types/messageOriginHiddenUser' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -21129,7 +21921,7 @@ declare module './types/messageOriginChat' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21545,7 +22337,7 @@ declare module './types/messageOriginChat' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21616,13 +22408,13 @@ declare module './types/messageOriginChat' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChat instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -21773,7 +22565,7 @@ declare module './types/messageOriginChannel' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -21988,7 +22780,7 @@ declare module './types/messageOriginChannel' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22043,13 +22835,13 @@ declare module './types/messageOriginChannel' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this MessageOriginChannel instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -22149,7 +22941,7 @@ declare module './types/photoSize' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22270,12 +23062,12 @@ declare module './types/photoSize' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -22405,7 +23197,7 @@ declare module './types/document' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22526,12 +23318,12 @@ declare module './types/document' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -22621,7 +23413,7 @@ declare module './types/livePhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -22742,12 +23534,12 @@ declare module './types/livePhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -22880,7 +23672,7 @@ declare module './types/videoQuality' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23001,12 +23793,12 @@ declare module './types/videoQuality' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -23096,7 +23888,7 @@ declare module './types/video' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23217,12 +24009,12 @@ declare module './types/video' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -23312,7 +24104,7 @@ declare module './types/videoNote' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23433,12 +24225,12 @@ declare module './types/videoNote' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -23576,7 +24368,7 @@ declare module './types/paidMediaLivePhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23697,12 +24489,12 @@ declare module './types/paidMediaLivePhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -23792,7 +24584,7 @@ declare module './types/paidMediaPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -23913,12 +24705,12 @@ declare module './types/paidMediaPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -24008,7 +24800,7 @@ declare module './types/paidMediaVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24129,12 +24921,12 @@ declare module './types/paidMediaVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -24491,7 +25283,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24689,7 +25481,7 @@ declare module './types/messageAutoDeleteTimerChanged' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -24738,12 +25530,12 @@ declare module './types/messageAutoDeleteTimerChanged' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -24768,6 +25560,408 @@ declare module './types/messageAutoDeleteTimerChanged' {
      * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
      */
     sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for MessageGenerationStopped class
+ * @namespace MessageGenerationStoppedExtensions
+ */
+declare module './types/messageGenerationStopped' {
+  interface MessageGenerationStopped {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId, fromChatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageThreadId' | 'fromChatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId, fromChatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId' | 'messageThreadId' | 'fromChatId'>): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Omit<Interfaces.SendMediaGroupParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Omit<Interfaces.SendPollParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Omit<Interfaces.SendChecklistParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, draftId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Omit<Interfaces.SendMessageDraftParams, 'chatId' | 'draftId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param action: string, businessConnectionId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(action: string, businessConnectionId?: string): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Omit<Interfaces.EditChatInviteLinkParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param inviteLink: string, name?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
+     * @param webAppUrl: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatJoinRequestQueryId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram Bot API}
+     */
+    sendChatJoinRequestWebApp(webAppUrl: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param name?: string, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param name: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Omit<Interfaces.SendGiftParams, 'chatId'>): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageText Telegram Bot API}
+     */
+    editEphemeralMessageText(params: Omit<Interfaces.EditEphemeralMessageTextParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageMedia Telegram Bot API}
+     */
+    editEphemeralMessageMedia(params: Omit<Interfaces.EditEphemeralMessageMediaParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageCaption Telegram Bot API}
+     */
+    editEphemeralMessageCaption(params: Omit<Interfaces.EditEphemeralMessageCaptionParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param receiverUserId: number, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageReplyMarkup Telegram Bot API}
+     */
+    editEphemeralMessageReplyMarkup(receiverUserId: number, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessage Telegram Bot API}
+     */
+    sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, draftId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId' | 'draftId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Omit<Interfaces.SendInvoiceParams, 'chatId' | 'messageThreadId'>): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageThreadId) are automatically filled from this MessageGenerationStopped instance
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Omit<Interfaces.SendGameParams, 'chatId' | 'messageThreadId'>): Promise<any>;
   }
 }
 /**
@@ -25871,6 +27065,281 @@ declare module './types/communityChatAdded' {
   }
 }
 /**
+ * Declaration merging for CommunityChatJoined class
+ * @namespace CommunityChatJoinedExtensions
+ */
+declare module './types/communityChatJoined' {
+  interface CommunityChatJoined {
+    /**
+     * Use this method to receive incoming updates using long polling \(wiki\). Returns an Array of Update objects.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUpdates Telegram Bot API}
+     */
+    getUpdates(params: Interfaces.GetUpdatesParams): Promise<any>;
+    /**
+     * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getWebhookInfo Telegram Bot API}
+     */
+    getWebhookInfo(params: Interfaces.GetWebhookInfoParams): Promise<any>;
+    /**
+     * A simple method for testing your bot&#39;s authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
+     */
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfilePhotos Telegram Bot API}
+     */
+    getUserProfilePhotos(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.
+     * @param userId: number, offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserProfileAudios Telegram Bot API}
+     */
+    getUserProfileAudios(userId: number, offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot&lt;token&gt;/&lt;file\_path&gt;, where &lt;file\_path&gt; is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
+     * @param fileId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getFile Telegram Bot API}
+     */
+    getFile(fileId: string): Promise<any>;
+    /**
+     * Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChat Telegram Bot API}
+     */
+    getChat(): Promise<any>;
+    /**
+     * Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.
+     * @param returnBots?: boolean - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChatAdministrators Telegram Bot API}
+     */
+    getChatAdministrators(returnBots?: boolean): Promise<any>;
+    /**
+     * Use this method to get the number of members in a chat. Returns Integer on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMemberCount Telegram Bot API}
+     */
+    getChatMemberCount(): Promise<any>;
+    /**
+     * Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+     * @param userId: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMember Telegram Bot API}
+     */
+    getChatMember(userId: number): Promise<any>;
+    /**
+     * Use this method to get the last messages from the personal chat \(i.e., the chat currently added to their profile\) of a given user. On success, an Array of Message objects is returned.
+     * @param userId: number, limit: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserPersonalChatMessages Telegram Bot API}
+     */
+    getUserPersonalChatMessages(userId: number, limit: number): Promise<any>;
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+     * @param name: string, iconColor?: number, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getForumTopicIconStickers Telegram Bot API}
+     */
+    getForumTopicIconStickers(name: string, iconColor?: number, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.
+     * @param userId: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getUserChatBoosts Telegram Bot API}
+     */
+    getUserChatBoosts(userId: number): Promise<any>;
+    /**
+     * Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessConnection Telegram Bot API}
+     */
+    getBusinessConnection(businessConnectionId: string): Promise<any>;
+    /**
+     * Use this method to get the token of a managed bot. Returns the token as String on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotToken Telegram Bot API}
+     */
+    getManagedBotToken(userId: number): Promise<any>;
+    /**
+     * Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.
+     * @param userId: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getManagedBotAccessSettings Telegram Bot API}
+     */
+    getManagedBotAccessSettings(userId: number): Promise<any>;
+    /**
+     * Use this method to get the current list of the bot&#39;s commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren&#39;t set, an empty list is returned.
+     * @param scope?: BotCommandScope, languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyCommands Telegram Bot API}
+     */
+    getMyCommands(scope?: BotCommandScope, languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot name for the given user language. Returns BotName on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyName Telegram Bot API}
+     */
+    getMyName(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot description for the given user language. Returns BotDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDescription Telegram Bot API}
+     */
+    getMyDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.
+     * @param languageCode?: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyShortDescription Telegram Bot API}
+     */
+    getMyShortDescription(languageCode?: string): Promise<any>;
+    /**
+     * Use this method to get the current value of the bot&#39;s menu button in a private chat, or the default menu button. Returns MenuButton on success.
+     * @param  - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChatMenuButton Telegram Bot API}
+     */
+    getChatMenuButton(): Promise<any>;
+    /**
+     * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+     * @param forChannels?: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyDefaultAdministratorRights Telegram Bot API}
+     */
+    getMyDefaultAdministratorRights(forChannels?: boolean): Promise<any>;
+    /**
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getAvailableGifts Telegram Bot API}
+     */
+    getAvailableGifts(params: Omit<Interfaces.GetAvailableGiftsParams, 'chatId'>): Promise<any>;
+    /**
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns StarAmount on success.
+     * @param businessConnectionId: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountStarBalance Telegram Bot API}
+     */
+    getBusinessAccountStarBalance(businessConnectionId: string): Promise<any>;
+    /**
+     * Returns the gifts received and owned by a managed business account. Requires the can\_view\_gifts\_and\_stars business bot right. Returns OwnedGifts on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getBusinessAccountGifts Telegram Bot API}
+     */
+    getBusinessAccountGifts(params: Interfaces.GetBusinessAccountGiftsParams): Promise<any>;
+    /**
+     * Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getUserGifts Telegram Bot API}
+     */
+    getUserGifts(params: Interfaces.GetUserGiftsParams): Promise<any>;
+    /**
+     * Returns the gifts owned by a chat. Returns OwnedGifts on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getChatGifts Telegram Bot API}
+     */
+    getChatGifts(params: Omit<Interfaces.GetChatGiftsParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to get a sticker set. On success, a StickerSet object is returned.
+     * @param name: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStickerSet Telegram Bot API}
+     */
+    getStickerSet(name: string): Promise<any>;
+    /**
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
+     * @param customEmojiIds: string[] - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getCustomEmojiStickers Telegram Bot API}
+     */
+    getCustomEmojiStickers(customEmojiIds: string[]): Promise<any>;
+    /**
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getMyStarBalance Telegram Bot API}
+     */
+    getMyStarBalance(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Returns the bot&#39;s Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+     * @param offset?: number, limit?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#getStarTransactions Telegram Bot API}
+     */
+    getStarTransactions(offset?: number, limit?: number): Promise<any>;
+    /**
+     * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+     * @param userId: number, messageId?: number, inlineMessageId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this CommunityChatJoined instance
+     * @see {@link https://core.telegram.org/bots/api#getGameHighScores Telegram Bot API}
+     */
+    getGameHighScores(userId: number, messageId?: number, inlineMessageId?: string): Promise<any>;
+  }
+}
+/**
  * Declaration merging for CommunityChatRemoved class
  * @namespace CommunityChatRemovedExtensions
  */
@@ -26546,7 +28015,7 @@ declare module './types/videoChatScheduled' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -26898,13 +28367,13 @@ declare module './types/videoChatScheduled' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatScheduled instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27054,7 +28523,7 @@ declare module './types/videoChatStarted' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -27406,13 +28875,13 @@ declare module './types/videoChatStarted' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatStarted instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27562,7 +29031,7 @@ declare module './types/videoChatEnded' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -27914,13 +29383,13 @@ declare module './types/videoChatEnded' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatEnded instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -27993,91 +29462,91 @@ declare module './types/videoChatParticipantsInvited' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -28101,28 +29570,28 @@ declare module './types/videoChatParticipantsInvited' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -28397,10 +29866,10 @@ declare module './types/videoChatParticipantsInvited' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this VideoChatParticipantsInvited instance
+     * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a sticker set. On success, a StickerSet object is returned.
      * @param name: string - Method parameters
@@ -28428,13 +29897,13 @@ declare module './types/videoChatParticipantsInvited' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this VideoChatParticipantsInvited instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -28568,7 +30037,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -28766,7 +30235,7 @@ declare module './types/paidMessagePriceChanged' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -28815,12 +30284,12 @@ declare module './types/paidMessagePriceChanged' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -28935,7 +30404,7 @@ declare module './types/directMessagePriceChanged' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29133,7 +30602,7 @@ declare module './types/directMessagePriceChanged' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29182,12 +30651,12 @@ declare module './types/directMessagePriceChanged' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -29261,7 +30730,7 @@ declare module './types/linkPreviewOptions' {
      */
     editMessageText(params: Interfaces.EditMessageTextParams): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29381,7 +30850,7 @@ declare module './types/suggestedPostParameters' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29465,10 +30934,10 @@ declare module './types/directMessagesTopic' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -29492,73 +30961,73 @@ declare module './types/directMessagesTopic' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'directMessagesTopicId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -29582,28 +31051,28 @@ declare module './types/directMessagesTopic' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendContact(params: Omit<Interfaces.SendContactParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -29757,7 +31226,7 @@ declare module './types/directMessagesTopic' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -29797,10 +31266,10 @@ declare module './types/directMessagesTopic' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (directMessagesTopicId, receiverUserId) are automatically filled from this DirectMessagesTopic instance
+     * @note Contextual parameters (directMessagesTopicId) are automatically filled from this DirectMessagesTopic instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'directMessagesTopicId' | 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -29812,12 +31281,12 @@ declare module './types/directMessagesTopic' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'directMessagesTopicId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -29917,7 +31386,7 @@ declare module './types/userProfilePhotos' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30048,12 +31517,12 @@ declare module './types/userProfilePhotos' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -30265,7 +31734,7 @@ declare module './types/replyKeyboardMarkup' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30739,7 +32208,7 @@ declare module './types/replyKeyboardRemove' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -30915,7 +32384,7 @@ declare module './types/inlineKeyboardMarkup' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -31043,7 +32512,7 @@ declare module './types/inlineKeyboardMarkup' {
      */
     stopPoll(chatId: number | string, messageId: number, businessConnectionId?: string, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -31135,10 +32604,10 @@ declare module './types/switchInlineQueryChosenChat' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, callbackQueryId) are automatically filled from this SwitchInlineQueryChosenChat instance
+     * @note Contextual parameters (chatId) are automatically filled from this SwitchInlineQueryChosenChat instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'callbackQueryId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -31509,7 +32978,7 @@ declare module './types/forceReply' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -31686,7 +33155,7 @@ declare module './types/chatPhoto' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -32056,13 +33525,13 @@ declare module './types/chatPhoto' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this ChatPhoto instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -32135,10 +33604,10 @@ declare module './types/chatInviteLink' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatInviteLink instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatInviteLink instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -32741,10 +34210,10 @@ declare module './types/chatMemberUpdated' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this ChatMemberUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberUpdated instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -33022,10 +34491,10 @@ declare module './types/chatMember' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMember instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMember instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -33348,10 +34817,10 @@ declare module './types/chatMemberOwner' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMemberOwner instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberOwner instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -33629,10 +35098,10 @@ declare module './types/chatMemberAdministrator' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this ChatMemberAdministrator instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberAdministrator instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -33910,10 +35379,10 @@ declare module './types/chatMemberMember' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMemberMember instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberMember instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -34191,10 +35660,10 @@ declare module './types/chatMemberRestricted' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMemberRestricted instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberRestricted instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -34472,10 +35941,10 @@ declare module './types/chatMemberLeft' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMemberLeft instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberLeft instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -34753,10 +36222,10 @@ declare module './types/chatMemberBanned' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatMemberBanned instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatMemberBanned instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -35034,10 +36503,10 @@ declare module './types/chatJoinRequest' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this ChatJoinRequest instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatJoinRequest instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -35950,10 +37419,10 @@ declare module './types/messageReactionUpdated' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
      */
-    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -35977,73 +37446,73 @@ declare module './types/messageReactionUpdated' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
      */
-    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send live photos. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
      */
-    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
      */
-    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
      */
-    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
      */
-    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
      */
-    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
      */
-    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
      */
-    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send paid media. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36067,28 +37536,28 @@ declare module './types/messageReactionUpdated' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
      */
-    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
      */
-    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send phone contacts. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
      */
-    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send a native poll. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36251,7 +37720,7 @@ declare module './types/messageReactionUpdated' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36291,10 +37760,10 @@ declare module './types/messageReactionUpdated' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (chatId, receiverUserId) are automatically filled from this MessageReactionUpdated instance
+     * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
      */
-    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId' | 'receiverUserId'>): Promise<any>;
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36306,13 +37775,13 @@ declare module './types/messageReactionUpdated' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -36439,7 +37908,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36654,7 +38123,7 @@ declare module './types/messageReactionCountUpdated' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -36709,13 +38178,13 @@ declare module './types/messageReactionCountUpdated' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this MessageReactionCountUpdated instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -38811,10 +40280,10 @@ declare module './types/chatBoostSource' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatBoostSource instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSource instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -39092,10 +40561,10 @@ declare module './types/chatBoostSourcePremium' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatBoostSourcePremium instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourcePremium instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -39373,10 +40842,10 @@ declare module './types/chatBoostSourceGiftCode' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatBoostSourceGiftCode instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiftCode instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -39654,10 +41123,10 @@ declare module './types/chatBoostSourceGiveaway' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatBoostSourceGiveaway instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatBoostSourceGiveaway instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -40760,10 +42229,10 @@ declare module './types/chatOwnerLeft' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatOwnerLeft instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerLeft instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -41041,10 +42510,10 @@ declare module './types/chatOwnerChanged' {
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
-     * @note Contextual parameters (receiverUserId, chatId) are automatically filled from this ChatOwnerChanged instance
+     * @note Contextual parameters (chatId) are automatically filled from this ChatOwnerChanged instance
      * @see {@link https://core.telegram.org/bots/api#getMe Telegram Bot API}
      */
-    getMe(params: Omit<Interfaces.GetMeParams, 'receiverUserId' | 'chatId'>): Promise<any>;
+    getMe(params: Omit<Interfaces.GetMeParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
      * @param offset?: number, limit?: number - Method parameters (contextual parameters are auto-filled)
@@ -41690,7 +43159,7 @@ declare module './types/businessMessagesDeleted' {
      */
     sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41906,7 +43375,7 @@ declare module './types/businessMessagesDeleted' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'businessConnectionId' | 'chatId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -41961,13 +43430,13 @@ declare module './types/businessMessagesDeleted' {
     sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId' | 'businessConnectionId'>): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @param params - Method parameters object (contextual parameters are auto-filled)
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @note Contextual parameters (chatId) are automatically filled from this BusinessMessagesDeleted instance
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object (contextual parameters are auto-filled)
@@ -42084,7 +43553,7 @@ declare module './types/sentWebAppMessage' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42282,7 +43751,7 @@ declare module './types/sentWebAppMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42331,12 +43800,12 @@ declare module './types/sentWebAppMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -42451,7 +43920,7 @@ declare module './types/sentGuestMessage' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42649,7 +44118,7 @@ declare module './types/sentGuestMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'inlineMessageId' | 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -42698,12 +44167,12 @@ declare module './types/sentGuestMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -42818,7 +44287,7 @@ declare module './types/preparedInlineMessage' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43024,7 +44493,7 @@ declare module './types/preparedInlineMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId' | 'inlineMessageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43073,12 +44542,12 @@ declare module './types/preparedInlineMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -43216,7 +44685,7 @@ declare module './types/inputMediaDocument' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43337,12 +44806,12 @@ declare module './types/inputMediaDocument' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -43432,7 +44901,7 @@ declare module './types/inputMediaLivePhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43553,12 +45022,12 @@ declare module './types/inputMediaLivePhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -43648,7 +45117,7 @@ declare module './types/inputMediaPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43769,12 +45238,12 @@ declare module './types/inputMediaPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -43864,7 +45333,7 @@ declare module './types/inputMediaVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -43985,12 +45454,12 @@ declare module './types/inputMediaVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -44080,7 +45549,7 @@ declare module './types/inputFile' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44208,7 +45677,7 @@ declare module './types/inputPaidMediaLivePhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44329,12 +45798,12 @@ declare module './types/inputPaidMediaLivePhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -44424,7 +45893,7 @@ declare module './types/inputPaidMediaPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44545,12 +46014,12 @@ declare module './types/inputPaidMediaPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -44640,7 +46109,7 @@ declare module './types/inputPaidMediaVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44761,12 +46230,12 @@ declare module './types/inputPaidMediaVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -44856,7 +46325,7 @@ declare module './types/inputProfilePhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -44993,12 +46462,12 @@ declare module './types/inputProfilePhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -45088,7 +46557,7 @@ declare module './types/inputProfilePhotoStatic' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45209,12 +46678,12 @@ declare module './types/inputProfilePhotoStatic' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -45304,7 +46773,7 @@ declare module './types/inputProfilePhotoAnimated' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45425,12 +46894,12 @@ declare module './types/inputProfilePhotoAnimated' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -45545,7 +47014,7 @@ declare module './types/inputStoryContentPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45666,12 +47135,12 @@ declare module './types/inputStoryContentPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -45761,7 +47230,7 @@ declare module './types/inputStoryContentVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -45882,12 +47351,12 @@ declare module './types/inputStoryContentVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -46276,7 +47745,7 @@ declare module './types/richMessage' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46474,7 +47943,7 @@ declare module './types/richMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46523,12 +47992,12 @@ declare module './types/richMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -46643,7 +48112,7 @@ declare module './types/inputRichMessage' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46841,7 +48310,7 @@ declare module './types/inputRichMessage' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -46890,12 +48359,12 @@ declare module './types/inputRichMessage' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -47010,7 +48479,7 @@ declare module './types/inputRichMessageMedia' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47208,7 +48677,7 @@ declare module './types/inputRichMessageMedia' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47257,12 +48726,12 @@ declare module './types/inputRichMessageMedia' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -47290,11 +48759,412 @@ declare module './types/inputRichMessageMedia' {
   }
 }
 /**
- * Declaration merging for RichBlockPhoto class
- * @namespace RichBlockPhotoExtensions
+ * Declaration merging for RichMessageButton class
+ * @namespace RichMessageButtonExtensions
  */
-declare module './types/richBlockPhoto' {
-  interface RichBlockPhoto {
+declare module './types/richMessageButton' {
+  interface RichMessageButton {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Omit<Interfaces.SendMessageParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to forward messages of any kind. Service messages and messages with protected content can&#39;t be forwarded. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessage Telegram Bot API}
+     */
+    forwardMessage(params: Omit<Interfaces.ForwardMessageParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to forward multiple messages of any kind. If some of the specified messages can&#39;t be found or forwarded, they are skipped. Service messages and messages with protected content can&#39;t be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#forwardMessages Telegram Bot API}
+     */
+    forwardMessages(params: Omit<Interfaces.ForwardMessagesParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Omit<Interfaces.SendPhotoParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Omit<Interfaces.SendLivePhotoParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Omit<Interfaces.SendAudioParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Omit<Interfaces.SendDocumentParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Omit<Interfaces.SendVideoParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Omit<Interfaces.SendAnimationParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Omit<Interfaces.SendVoiceParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Omit<Interfaces.SendVideoNoteParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Omit<Interfaces.SendPaidMediaParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Omit<Interfaces.SendMediaGroupParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Omit<Interfaces.SendLocationParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Omit<Interfaces.SendVenueParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Omit<Interfaces.SendContactParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Omit<Interfaces.SendPollParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Omit<Interfaces.SendChecklistParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Omit<Interfaces.SendDiceParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Omit<Interfaces.SendMessageDraftParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editChatInviteLink Telegram Bot API}
+     */
+    editChatInviteLink(params: Omit<Interfaces.EditChatInviteLinkParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit a subscription invite link created by the bot. The bot must have the can\_invite\_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+     * @param inviteLink: string, name?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editChatSubscriptionInviteLink Telegram Bot API}
+     */
+    editChatSubscriptionInviteLink(inviteLink: string, name?: string): Promise<any>;
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
+     * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram Bot API}
+     */
+    sendChatJoinRequestWebApp(chatJoinRequestQueryId: string, webAppUrl: string): Promise<any>;
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     * @param messageThreadId: number, name?: string, iconCustomEmojiId?: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editForumTopic Telegram Bot API}
+     */
+    editForumTopic(messageThreadId: number, name?: string, iconCustomEmojiId?: string): Promise<any>;
+    /**
+     * Use this method to edit the name of the &#39;General&#39; topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can\_manage\_topics administrator rights. Returns True on success.
+     * @param name: string - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editGeneralForumTopic Telegram Bot API}
+     */
+    editGeneralForumTopic(name: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Omit<Interfaces.SendGiftParams, 'chatId'>): Promise<any>;
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can\_manage\_stories business bot right. Returns Story on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editStory Telegram Bot API}
+     */
+    editStory(params: Interfaces.EditStoryParams): Promise<any>;
+    /**
+     * Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageText Telegram Bot API}
+     */
+    editMessageText(params: Omit<Interfaces.EditMessageTextParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageCaption Telegram Bot API}
+     */
+    editMessageCaption(params: Omit<Interfaces.EditMessageCaptionParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file\_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageMedia Telegram Bot API}
+     */
+    editMessageMedia(params: Omit<Interfaces.EditMessageMediaParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit live location messages. A location can be edited until its live\_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageLiveLocation Telegram Bot API}
+     */
+    editMessageLiveLocation(params: Omit<Interfaces.EditMessageLiveLocationParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageChecklist Telegram Bot API}
+     */
+    editMessageChecklist(params: Omit<Interfaces.EditMessageChecklistParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId, messageId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editMessageReplyMarkup Telegram Bot API}
+     */
+    editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'chatId' | 'messageId'>): Promise<any>;
+    /**
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageText Telegram Bot API}
+     */
+    editEphemeralMessageText(params: Omit<Interfaces.EditEphemeralMessageTextParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageMedia Telegram Bot API}
+     */
+    editEphemeralMessageMedia(params: Omit<Interfaces.EditEphemeralMessageMediaParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageCaption Telegram Bot API}
+     */
+    editEphemeralMessageCaption(params: Omit<Interfaces.EditEphemeralMessageCaptionParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * @param receiverUserId: number, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup - Method parameters (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageReplyMarkup Telegram Bot API}
+     */
+    editEphemeralMessageReplyMarkup(receiverUserId: number, ephemeralMessageId: number, replyMarkup?: InlineKeyboardMarkup): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Omit<Interfaces.SendStickerParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessage Telegram Bot API}
+     */
+    sendRichMessage(params: Omit<Interfaces.SendRichMessageParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Omit<Interfaces.SendRichMessageDraftParams, 'chatId'>): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Omit<Interfaces.SendInvoiceParams, 'chatId'>): Promise<any>;
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+     * @param userId: number, telegramPaymentChargeId: string, isCanceled: boolean - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#editUserStarSubscription Telegram Bot API}
+     */
+    editUserStarSubscription(userId: number, telegramPaymentChargeId: string, isCanceled: boolean): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object (contextual parameters are auto-filled)
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @note Contextual parameters (chatId) are automatically filled from this RichMessageButton instance
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Omit<Interfaces.SendGameParams, 'chatId'>): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for RichBlockDocument class
+ * @namespace RichBlockDocumentExtensions
+ */
+declare module './types/richBlockDocument' {
+  interface RichBlockDocument {
     /**
      * Use this method to send text messages. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -47360,7 +49230,7 @@ declare module './types/richBlockPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47481,12 +49351,228 @@ declare module './types/richBlockPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for RichBlockPhoto class
+ * @namespace RichBlockPhotoExtensions
+ */
+declare module './types/richBlockPhoto' {
+  interface RichBlockPhoto {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
+     * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram Bot API}
+     */
+    sendChatJoinRequestWebApp(chatJoinRequestQueryId: string, webAppUrl: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessage Telegram Bot API}
+     */
+    sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -47576,7 +49662,7 @@ declare module './types/richBlockVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47697,12 +49783,228 @@ declare module './types/richBlockVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendInvoice Telegram Bot API}
+     */
+    sendInvoice(params: Interfaces.SendInvoiceParams): Promise<any>;
+    /**
+     * Use this method to send a game. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGame Telegram Bot API}
+     */
+    sendGame(params: Interfaces.SendGameParams): Promise<any>;
+  }
+}
+/**
+ * Declaration merging for InputRichBlockDocument class
+ * @namespace InputRichBlockDocumentExtensions
+ */
+declare module './types/inputRichBlockDocument' {
+  interface InputRichBlockDocument {
+    /**
+     * Use this method to send text messages. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessage Telegram Bot API}
+     */
+    sendMessage(params: Interfaces.SendMessageParams): Promise<any>;
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPhoto Telegram Bot API}
+     */
+    sendPhoto(params: Interfaces.SendPhotoParams): Promise<any>;
+    /**
+     * Use this method to send live photos. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLivePhoto Telegram Bot API}
+     */
+    sendLivePhoto(params: Interfaces.SendLivePhotoParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAudio Telegram Bot API}
+     */
+    sendAudio(params: Interfaces.SendAudioParams): Promise<any>;
+    /**
+     * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDocument Telegram Bot API}
+     */
+    sendDocument(params: Interfaces.SendDocumentParams): Promise<any>;
+    /**
+     * Use this method to send video files, Telegram clients support MPEG4 videos \(other formats may be sent as Document\). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideo Telegram Bot API}
+     */
+    sendVideo(params: Interfaces.SendVideoParams): Promise<any>;
+    /**
+     * Use this method to send animation files \(GIF or H.264/MPEG-4 AVC video without sound\). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendAnimation Telegram Bot API}
+     */
+    sendAnimation(params: Interfaces.SendAnimationParams): Promise<any>;
+    /**
+     * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format \(other formats may be sent as Audio or Document\). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVoice Telegram Bot API}
+     */
+    sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
+    /**
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram Bot API}
+     */
+    sendVideoNote(params: Interfaces.SendVideoNoteParams): Promise<any>;
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPaidMedia Telegram Bot API}
+     */
+    sendPaidMedia(params: Interfaces.SendPaidMediaParams): Promise<any>;
+    /**
+     * Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMediaGroup Telegram Bot API}
+     */
+    sendMediaGroup(params: Interfaces.SendMediaGroupParams): Promise<any>;
+    /**
+     * Use this method to send point on the map. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram Bot API}
+     */
+    sendLocation(params: Interfaces.SendLocationParams): Promise<any>;
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendVenue Telegram Bot API}
+     */
+    sendVenue(params: Interfaces.SendVenueParams): Promise<any>;
+    /**
+     * Use this method to send phone contacts. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendContact Telegram Bot API}
+     */
+    sendContact(params: Interfaces.SendContactParams): Promise<any>;
+    /**
+     * Use this method to send a native poll. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendPoll Telegram Bot API}
+     */
+    sendPoll(params: Interfaces.SendPollParams): Promise<any>;
+    /**
+     * Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChecklist Telegram Bot API}
+     */
+    sendChecklist(params: Interfaces.SendChecklistParams): Promise<any>;
+    /**
+     * Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendDice Telegram Bot API}
+     */
+    sendDice(params: Interfaces.SendDiceParams): Promise<any>;
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendMessageDraft Telegram Bot API}
+     */
+    sendMessageDraft(params: Interfaces.SendMessageDraftParams): Promise<any>;
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot&#39;s side. The status is set for 5 seconds or less \(when a message arrives from your bot, Telegram clients clear its typing status\). Returns True on success.
+     * @param chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatAction Telegram Bot API}
+     */
+    sendChatAction(chatId: number | string, action: string, businessConnectionId?: string, messageThreadId?: number): Promise<any>;
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.
+     * @param chatJoinRequestQueryId: string, webAppUrl: string - Method parameters
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendChatJoinRequestWebApp Telegram Bot API}
+     */
+    sendChatJoinRequestWebApp(chatJoinRequestQueryId: string, webAppUrl: string): Promise<any>;
+    /**
+     * Sends a gift to the given user or channel chat. The gift can&#39;t be converted to Telegram Stars by the receiver. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendGift Telegram Bot API}
+     */
+    sendGift(params: Interfaces.SendGiftParams): Promise<any>;
+    /**
+     * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendSticker Telegram Bot API}
+     */
+    sendSticker(params: Interfaces.SendStickerParams): Promise<any>;
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessage Telegram Bot API}
+     */
+    sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
+     * @param params - Method parameters object
+     * @returns {Promise<any>} Promise resolving to method result
+     * @throws {Error} If API call fails or returns error
+     * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
+     */
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -47792,7 +50094,7 @@ declare module './types/inputRichBlockPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -47913,12 +50215,12 @@ declare module './types/inputRichBlockPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -48008,7 +50310,7 @@ declare module './types/inputRichBlockVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48129,12 +50431,12 @@ declare module './types/inputRichBlockVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -48299,7 +50601,7 @@ declare module './types/inlineQueryResultPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48420,12 +50722,12 @@ declare module './types/inlineQueryResultPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -48515,7 +50817,7 @@ declare module './types/inlineQueryResultVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48636,12 +50938,12 @@ declare module './types/inlineQueryResultVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -48731,7 +51033,7 @@ declare module './types/inlineQueryResultDocument' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -48852,12 +51154,12 @@ declare module './types/inlineQueryResultDocument' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -48947,7 +51249,7 @@ declare module './types/inlineQueryResultCachedPhoto' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -49068,12 +51370,12 @@ declare module './types/inlineQueryResultCachedPhoto' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -49163,7 +51465,7 @@ declare module './types/inlineQueryResultCachedDocument' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -49284,12 +51586,12 @@ declare module './types/inlineQueryResultCachedDocument' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -49379,7 +51681,7 @@ declare module './types/inlineQueryResultCachedVideo' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -49500,12 +51802,12 @@ declare module './types/inlineQueryResultCachedVideo' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -49612,7 +51914,7 @@ declare module './types/inputMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -49810,7 +52112,7 @@ declare module './types/inputMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -49859,12 +52161,12 @@ declare module './types/inputMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -49979,7 +52281,7 @@ declare module './types/inputTextMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50177,7 +52479,7 @@ declare module './types/inputTextMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50226,12 +52528,12 @@ declare module './types/inputTextMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -50346,7 +52648,7 @@ declare module './types/inputRichMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50544,7 +52846,7 @@ declare module './types/inputRichMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50593,12 +52895,12 @@ declare module './types/inputRichMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -50713,7 +53015,7 @@ declare module './types/inputLocationMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50911,7 +53213,7 @@ declare module './types/inputLocationMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -50960,12 +53262,12 @@ declare module './types/inputLocationMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -51080,7 +53382,7 @@ declare module './types/inputVenueMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -51279,7 +53581,7 @@ declare module './types/inputVenueMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -51328,12 +53630,12 @@ declare module './types/inputVenueMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -51448,7 +53750,7 @@ declare module './types/inputContactMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -51646,7 +53948,7 @@ declare module './types/inputContactMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -51695,12 +53997,12 @@ declare module './types/inputContactMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object
@@ -51815,7 +54117,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     sendVoice(params: Interfaces.SendVoiceParams): Promise<any>;
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -52013,7 +54315,7 @@ declare module './types/inputInvoiceMessageContent' {
      */
     editMessageReplyMarkup(params: Omit<Interfaces.EditMessageReplyMarkupParams, 'messageId'>): Promise<any>;
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
@@ -52062,12 +54364,12 @@ declare module './types/inputInvoiceMessageContent' {
     sendRichMessage(params: Interfaces.SendRichMessageParams): Promise<any>;
     /**
      * Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user&#39;s chat. Returns True on success.
-     * @param chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number - Method parameters
+     * @param params - Method parameters object
      * @returns {Promise<any>} Promise resolving to method result
      * @throws {Error} If API call fails or returns error
      * @see {@link https://core.telegram.org/bots/api#sendRichMessageDraft Telegram Bot API}
      */
-    sendRichMessageDraft(chatId: number, draftId: number, richMessage: InputRichMessage, messageThreadId?: number): Promise<any>;
+    sendRichMessageDraft(params: Interfaces.SendRichMessageDraftParams): Promise<any>;
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      * @param params - Method parameters object

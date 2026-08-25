@@ -33,6 +33,7 @@ This object represents an incoming update.At most one of the optional fields can
 | removedChatBoost | `ChatBoostRemoved` | No | Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates. |
 | managedBot | `ManagedBotUpdated` | No | Optional. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed |
 | subscription | `BotSubscriptionUpdated` | No | Optional. User payment subscription has changed |
+| stoppedMessageGeneration | `MessageGenerationStopped` | No | Optional. A user asked the bot to stop the generation of a message |
 
 ## Fluent Methods
 

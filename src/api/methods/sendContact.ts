@@ -8,6 +8,7 @@
 import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { SendContactParams } from '../interfaces/sendContactParams';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';

@@ -217,7 +217,7 @@ import * as methods from '../methods';
 };
 
 /**
- * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
  * @memberof Bot.prototype
  * @instance
  * @function sendVideoNote
@@ -1581,7 +1581,7 @@ import * as methods from '../methods';
 };
 
 /**
- * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
  * @memberof Bot.prototype
  * @instance
  * @function editEphemeralMessageText

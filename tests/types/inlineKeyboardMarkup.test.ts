@@ -7,6 +7,7 @@ describe('InlineKeyboardMarkup', () => {
   it('should correctly instantiate from raw data', () => {
     const raw = {
       inline_keyboard: [[{} as any]],
+      force_reply: true,
     };
 
     const instance = new InlineKeyboardMarkup(raw, mockBot);
@@ -15,5 +16,6 @@ describe('InlineKeyboardMarkup', () => {
     expect(instance.bot).toBe(mockBot);
     
     expect(instance.inlineKeyboard ?? instance.raw?.inline_keyboard).toEqual([[{} as any]]);
+    expect(instance.forceReply ?? instance.raw?.force_reply).toEqual(true);
   });
 });

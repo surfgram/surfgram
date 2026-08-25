@@ -6,6 +6,7 @@
  */
 
 import { InputFile } from '../types/inputFile';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -55,20 +56,12 @@ export interface SendStickerParams {
   directMessagesTopicId?: number;
 
   /**
-   * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
-   * @type { number }
-   * @originalType Integer
+   * A JSON-serialized object containing the parameters of the ephemeral message to send
+   * @type { EphemeralMessageParameters }
+   * @originalType EphemeralMessageParameters
    * @required No
    */
-  receiverUserId?: number;
-
-  /**
-   * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  callbackQueryId?: string;
+  ephemeralMessageParameters?: EphemeralMessageParameters;
 
   /**
    * Emoji associated with the sticker; only for just uploaded stickers

@@ -1,7 +1,7 @@
 /**
  * VideoNote class for Surfgram Telegram Bot SDK
  * @module types/videoNote
- * @description This object represents a video message \(available in Telegram apps as of v.4.0\).
+ * @description This object represents a video message.
  * @see {@link https://core.telegram.org/bots/api#videonote Telegram API Documentation}
  * @class VideoNote
  * @extends TelegramObject

@@ -1,7 +1,7 @@
 /**
  * sendVideoNote method implementation for Surfgram Telegram Bot SDK
  * @module methods/sendVideoNote
- * @description As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * @description Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
  * @see {@link https://core.telegram.org/bots/api#sendVideoNote Telegram API Documentation}
  */
 
@@ -9,6 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { SendVideoNoteParams } from '../interfaces/sendVideoNoteParams';
 import { InputFile } from '../types/inputFile';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -17,7 +18,7 @@ import { ReplyKeyboardRemove } from '../types/replyKeyboardRemove';
 import { ForceReply } from '../types/forceReply';
 
 /**
- * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+ * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
  * @memberof methods
  * @async
  * @function sendVideoNote

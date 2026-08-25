@@ -10,6 +10,7 @@ describe('InputRichBlockTable', () => {
       cells: [[{} as any]],
       is_bordered: true,
       is_striped: true,
+      is_compact: true,
       caption: {} as any,
     };
 
@@ -22,6 +23,7 @@ describe('InputRichBlockTable', () => {
     expect(instance.cells ?? instance.raw?.cells).toEqual([[{} as any]]);
     expect(instance.isBordered ?? instance.raw?.is_bordered).toEqual(true);
     expect(instance.isStriped ?? instance.raw?.is_striped).toEqual(true);
+    expect(instance.isCompact ?? instance.raw?.is_compact).toEqual(true);
     expect(instance.caption ?? instance.raw?.caption).toEqual({} as any);
   });
 });

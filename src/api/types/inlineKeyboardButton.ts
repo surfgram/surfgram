@@ -15,6 +15,7 @@ import { LoginUrl } from './loginUrl';
 import { SwitchInlineQueryChosenChat } from './switchInlineQueryChosenChat';
 import { CopyTextButton } from './copyTextButton';
 import { CallbackGame } from './callbackGame';
+import { DisabledButton } from './disabledButton';
 
 /**
  * Represents a InlineKeyboardButton object from the Telegram Bot API
@@ -76,7 +77,7 @@ export class InlineKeyboardButton {
   webApp?: WebAppInfo;
 
   /**
-   * Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget.
+   * Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget. Not supported for ephemeral messages.
    * @type { LoginUrl }
    * @memberof InlineKeyboardButton
    * @instance
@@ -137,6 +138,15 @@ export class InlineKeyboardButton {
    * @public
    */
   pay?: boolean;
+
+  /**
+   * Optional. If set, then the button is disabled and does nothing
+   * @type { DisabledButton }
+   * @memberof InlineKeyboardButton
+   * @instance
+   * @public
+   */
+  disabled?: DisabledButton;
 
   /**
    * Raw data from Telegram API in snake_case format

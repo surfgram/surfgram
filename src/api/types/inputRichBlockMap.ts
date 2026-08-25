@@ -37,31 +37,31 @@ export class InputRichBlockMap {
   location!: Location;
 
   /**
-   * Map zoom level; 0-24
+   * Optional. Map zoom level; 0-24
    * @type { number }
    * @memberof InputRichBlockMap
    * @instance
    * @public
    */
-  zoom!: number;
+  zoom?: number;
 
   /**
-   * Map width; 0-10000
+   * Optional. Map width; 0-10000
    * @type { number }
    * @memberof InputRichBlockMap
    * @instance
    * @public
    */
-  width!: number;
+  width?: number;
 
   /**
-   * Map height; 0-10000
+   * Optional. Map height; 0-10000
    * @type { number }
    * @memberof InputRichBlockMap
    * @instance
    * @public
    */
-  height!: number;
+  height?: number;
 
   /**
    * Optional. Caption of the block

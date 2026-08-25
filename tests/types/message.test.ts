@@ -98,6 +98,7 @@ describe('Message', () => {
       checklist_tasks_done: {} as any,
       checklist_tasks_added: {} as any,
       community_chat_added: {} as any,
+      community_chat_joined: {} as any,
       community_chat_removed: {} as any,
       direct_message_price_changed: {} as any,
       forum_topic_created: {} as any,
@@ -224,6 +225,7 @@ describe('Message', () => {
     expect(instance.checklistTasksDone ?? instance.raw?.checklist_tasks_done).toEqual({} as any);
     expect(instance.checklistTasksAdded ?? instance.raw?.checklist_tasks_added).toEqual({} as any);
     expect(instance.communityChatAdded ?? instance.raw?.community_chat_added).toEqual({} as any);
+    expect(instance.communityChatJoined ?? instance.raw?.community_chat_joined).toEqual({} as any);
     expect(instance.communityChatRemoved ?? instance.raw?.community_chat_removed).toEqual({} as any);
     expect(instance.directMessagePriceChanged ?? instance.raw?.direct_message_price_changed).toEqual({} as any);
     expect(instance.forumTopicCreated ?? instance.raw?.forum_topic_created).toEqual({} as any);

@@ -9,6 +9,7 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { SendRichMessageParams } from '../interfaces/sendRichMessageParams';
 import { InputRichMessage } from '../types/inputRichMessage';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';

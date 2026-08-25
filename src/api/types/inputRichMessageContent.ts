@@ -18,7 +18,7 @@ import { InputRichMessage } from './inputRichMessage';
  */
 export class InputRichMessageContent {
   /**
-   * The message to be sent
+   * The message to be sent. Only previously uploaded files may be used in the message.
    * @type { InputRichMessage }
    * @memberof InputRichMessageContent
    * @instance

@@ -25,6 +25,7 @@ describe('promoteChatMember', () => {
       canManageTopics: true,
       canManageDirectMessages: true,
       canManageTags: true,
+      canSendWelcomeMessages: true,
     };
 
     await promoteChatMember.call(mockBot, params);
@@ -49,6 +50,7 @@ describe('promoteChatMember', () => {
       can_manage_topics: true,
       can_manage_direct_messages: true,
       can_manage_tags: true,
+      can_send_welcome_messages: true,
     });
   });
 });

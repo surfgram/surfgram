@@ -1,7 +1,7 @@
 /**
  * LoginUrl class for Surfgram Telegram Bot SDK
  * @module types/loginUrl
- * @description This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
+ * @description This object represents a parameter of the inline keyboard button used to automatically authorize a user. It serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
  * @see {@link https://core.telegram.org/bots/api#loginurl Telegram API Documentation}
  * @class LoginUrl
  * @extends TelegramObject
@@ -35,7 +35,7 @@ export class LoginUrl {
   forwardText?: string;
 
   /**
-   * Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
+   * Optional. Username of a bot, which will be used for user authorization; not supported in RichMessageButton. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
    * @type { string }
    * @memberof LoginUrl
    * @instance

@@ -55,6 +55,15 @@ export class InputRichBlockTable {
   isStriped?: boolean;
 
   /**
+   * Optional. Pass True if table cells must have smaller indents
+   * @type { boolean }
+   * @memberof InputRichBlockTable
+   * @instance
+   * @public
+   */
+  isCompact?: boolean;
+
+  /**
    * Optional. Caption of the table
    * @type { RichText }
    * @memberof InputRichBlockTable

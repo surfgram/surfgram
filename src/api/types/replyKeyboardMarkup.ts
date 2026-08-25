@@ -72,6 +72,15 @@ export class ReplyKeyboardMarkup {
   selective?: boolean;
 
   /**
+   * Optional. Pass True if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'
+   * @type { boolean }
+   * @memberof ReplyKeyboardMarkup
+   * @instance
+   * @public
+   */
+  forceReply?: boolean;
+
+  /**
    * Raw data from Telegram API in snake_case format
    * @type {TelegramObject}
    * @memberof ReplyKeyboardMarkup

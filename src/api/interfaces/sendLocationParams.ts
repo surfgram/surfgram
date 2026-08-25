@@ -5,6 +5,7 @@
  * @see {@link https://core.telegram.org/bots/api#sendLocation Telegram API Documentation}
  */
 
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -62,20 +63,12 @@ export interface SendLocationParams {
   directMessagesTopicId?: number;
 
   /**
-   * For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.
-   * @type { number }
-   * @originalType Integer
+   * A JSON-serialized object containing the parameters of the ephemeral message to send
+   * @type { EphemeralMessageParameters }
+   * @originalType EphemeralMessageParameters
    * @required No
    */
-  receiverUserId?: number;
-
-  /**
-   * For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
-   * @type { string }
-   * @originalType String
-   * @required No
-   */
-  callbackQueryId?: string;
+  ephemeralMessageParameters?: EphemeralMessageParameters;
 
   /**
    * The radius of uncertainty for the location, measured in meters; 0-1500

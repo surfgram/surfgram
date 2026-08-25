@@ -8,6 +8,7 @@
 import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { LogOutParams } from '../interfaces/logOutParams';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { MessageEntity } from '../types/messageEntity';
 import { LinkPreviewOptions } from '../types/linkPreviewOptions';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';

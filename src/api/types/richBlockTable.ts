@@ -55,6 +55,15 @@ export class RichBlockTable {
   isStriped?: boolean;
 
   /**
+   * Optional. True, if table cells have smaller indents
+   * @type { boolean }
+   * @memberof RichBlockTable
+   * @instance
+   * @public
+   */
+  isCompact?: boolean;
+
+  /**
    * Optional. Caption of the table
    * @type { RichText }
    * @memberof RichBlockTable

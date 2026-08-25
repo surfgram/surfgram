@@ -1,7 +1,7 @@
 /**
  * CommunityChatRemoved class for Surfgram Telegram Bot SDK
  * @module types/communityChatRemoved
- * @description Describes a service message about a chat being removed from a community. Currently holds no information.
+ * @description Describes a service message about a chat or a bot being removed from a community. Currently holds no information.
  * @see {@link https://core.telegram.org/bots/api#communitychatremoved Telegram API Documentation}
  * @class CommunityChatRemoved
  * @extends TelegramObject

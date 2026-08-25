@@ -33,6 +33,7 @@ describe('Update', () => {
       removed_chat_boost: {} as any,
       managed_bot: {} as any,
       subscription: {} as any,
+      stopped_message_generation: {} as any,
     };
 
     const instance = new Update(raw, mockBot);
@@ -67,5 +68,6 @@ describe('Update', () => {
     expect(instance.removedChatBoost ?? instance.raw?.removed_chat_boost).toEqual({} as any);
     expect(instance.managedBot ?? instance.raw?.managed_bot).toEqual({} as any);
     expect(instance.subscription ?? instance.raw?.subscription).toEqual({} as any);
+    expect(instance.stoppedMessageGeneration ?? instance.raw?.stopped_message_generation).toEqual({} as any);
   });
 });

@@ -6,6 +6,7 @@
  */
 
 import { InputRichMessage } from '../types/inputRichMessage';
+import { EphemeralMessageParameters } from '../types/ephemeralMessageParameters';
 import { SuggestedPostParameters } from '../types/suggestedPostParameters';
 import { ReplyParameters } from '../types/replyParameters';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
@@ -53,6 +54,14 @@ export interface SendRichMessageParams {
    * @required No
    */
   directMessagesTopicId?: number;
+
+  /**
+   * A JSON-serialized object containing the parameters of the ephemeral message to send
+   * @type { EphemeralMessageParameters }
+   * @originalType EphemeralMessageParameters
+   * @required No
+   */
+  ephemeralMessageParameters?: EphemeralMessageParameters;
 
   /**
    * Sends the message silently. Users will receive a notification with no sound.

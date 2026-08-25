@@ -12,6 +12,8 @@ describe('sendMessageDraft', () => {
       text: "example text",
       parseMode: "example text",
       entities: [{} as any],
+      canStop: true,
+      keepOnStop: true,
     };
 
     await sendMessageDraft.call(mockBot, params);
@@ -23,6 +25,8 @@ describe('sendMessageDraft', () => {
       text: "example text",
       parse_mode: "example text",
       entities: [{} as any],
+      can_stop: true,
+      keep_on_stop: true,
     });
   });
 });

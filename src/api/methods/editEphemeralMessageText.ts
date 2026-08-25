@@ -1,7 +1,7 @@
 /**
  * editEphemeralMessageText method implementation for Surfgram Telegram Bot SDK
  * @module methods/editEphemeralMessageText
- * @description Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * @description Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
  * @see {@link https://core.telegram.org/bots/api#editEphemeralMessageText Telegram API Documentation}
  */
 
@@ -9,11 +9,12 @@ import { Bot } from '../../core/bot';
 import { camelToSnake } from '../../core/utils';
 import { EditEphemeralMessageTextParams } from '../interfaces/editEphemeralMessageTextParams';
 import { MessageEntity } from '../types/messageEntity';
+import { InputRichMessage } from '../types/inputRichMessage';
 import { LinkPreviewOptions } from '../types/linkPreviewOptions';
 import { InlineKeyboardMarkup } from '../types/inlineKeyboardMarkup';
 
 /**
- * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+ * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
  * @memberof methods
  * @async
  * @function editEphemeralMessageText

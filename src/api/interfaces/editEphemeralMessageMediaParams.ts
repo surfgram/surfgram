@@ -34,7 +34,7 @@ export interface EditEphemeralMessageMediaParams {
   ephemeralMessageId: number;
 
   /**
-   * A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file\_id or specify a URL.
+   * A JSON-serialized object for the new media content of the message
    * @type { InputMedia }
    * @originalType InputMedia
    * @required Yes

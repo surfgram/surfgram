@@ -8,9 +8,9 @@ A block with a map, corresponding to the custom HTML tag &lt;tg-map&gt;. The map
 | :--- | :--- | :---: | :--- |
 | type | `string` | Yes | Type of the block, always “map” |
 | location | `Location` | Yes | Location of the center of the map |
-| zoom | `number` | Yes | Map zoom level; 0-24 |
-| width | `number` | Yes | Map width; 0-10000 |
-| height | `number` | Yes | Map height; 0-10000 |
+| zoom | `number` | No | Optional. Map zoom level; 0-24 |
+| width | `number` | No | Optional. Map width; 0-10000 |
+| height | `number` | No | Optional. Map height; 0-10000 |
 | caption | `RichBlockCaption` | No | Optional. Caption of the block |
 
 

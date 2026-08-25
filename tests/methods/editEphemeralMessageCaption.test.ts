@@ -12,6 +12,7 @@ describe('editEphemeralMessageCaption', () => {
       caption: "example text",
       parseMode: "example text",
       captionEntities: [{} as any],
+      showCaptionAboveMedia: true,
       replyMarkup: {} as any,
     };
 
@@ -24,6 +25,7 @@ describe('editEphemeralMessageCaption', () => {
       caption: "example text",
       parse_mode: "example text",
       caption_entities: [{} as any],
+      show_caption_above_media: true,
       reply_markup: {} as any,
     });
   });

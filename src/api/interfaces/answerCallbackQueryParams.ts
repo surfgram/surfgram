@@ -40,7 +40,7 @@ export interface AnswerCallbackQueryParams {
   url?: string;
 
   /**
-   * The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
+   * The maximum amount of time in seconds that the result of the callback query may be cached client-side. Defaults to 0.
    * @type { number }
    * @originalType Integer
    * @required No

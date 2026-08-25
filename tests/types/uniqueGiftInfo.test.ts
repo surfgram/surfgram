@@ -8,6 +8,9 @@ describe('UniqueGiftInfo', () => {
     const raw = {
       gift: {} as any,
       origin: "example text",
+      text: "example text",
+      entities: [{} as any],
+      is_private: true,
       last_resale_currency: "example text",
       last_resale_amount: 123,
       owned_gift_id: "example text",
@@ -22,6 +25,9 @@ describe('UniqueGiftInfo', () => {
     
     expect(instance.gift ?? instance.raw?.gift).toEqual({} as any);
     expect(instance.origin ?? instance.raw?.origin).toEqual("example text");
+    expect(instance.text ?? instance.raw?.text).toEqual("example text");
+    expect(instance.entities ?? instance.raw?.entities).toEqual([{} as any]);
+    expect(instance.isPrivate ?? instance.raw?.is_private).toEqual(true);
     expect(instance.lastResaleCurrency ?? instance.raw?.last_resale_currency).toEqual("example text");
     expect(instance.lastResaleAmount ?? instance.raw?.last_resale_amount).toEqual(123);
     expect(instance.ownedGiftId ?? instance.raw?.owned_gift_id).toEqual("example text");

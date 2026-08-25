@@ -12,6 +12,7 @@ describe('ReplyKeyboardMarkup', () => {
       one_time_keyboard: true,
       input_field_placeholder: "example text",
       selective: true,
+      force_reply: true,
     };
 
     const instance = new ReplyKeyboardMarkup(raw, mockBot);
@@ -25,5 +26,6 @@ describe('ReplyKeyboardMarkup', () => {
     expect(instance.oneTimeKeyboard ?? instance.raw?.one_time_keyboard).toEqual(true);
     expect(instance.inputFieldPlaceholder ?? instance.raw?.input_field_placeholder).toEqual("example text");
     expect(instance.selective ?? instance.raw?.selective).toEqual(true);
+    expect(instance.forceReply ?? instance.raw?.force_reply).toEqual(true);
   });
 });
