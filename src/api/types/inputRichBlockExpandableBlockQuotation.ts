@@ -1,7 +1,7 @@
 /**
  * InputRichBlockExpandableBlockQuotation class for Surfgram Telegram Bot SDK
  * @module types/inputRichBlockExpandableBlockQuotation
- * @description A block quotation, corresponding to the HTML tag &lt;blockquote&gt; with custom attribute &quot;collapsed&quot;.
+ * @description A block quotation, corresponding to the HTML tag &lt;blockquote&gt; with custom attribute &quot;expandable&quot;.
  * @see {@link https://core.telegram.org/bots/api#inputrichblockexpandableblockquotation Telegram API Documentation}
  * @class InputRichBlockExpandableBlockQuotation
  * @extends TelegramObject

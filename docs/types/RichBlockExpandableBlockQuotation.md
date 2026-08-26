@@ -1,6 +1,6 @@
 # RichBlockExpandableBlockQuotation
 
-A block quotation, corresponding to the HTML tag &lt;blockquote&gt; with custom attribute &quot;collapsed&quot;.
+A block quotation, corresponding to the HTML tag &lt;blockquote&gt; with custom attribute &quot;expandable&quot;.
 
 ## Fields
 

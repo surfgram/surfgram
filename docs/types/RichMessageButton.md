@@ -7,7 +7,7 @@ This object represents a button in a RichMessage. Exactly one of the fields othe
 | Name | Type | Required | Description |
 | :--- | :--- | :---: | :--- |
 | text | `RichText` | Yes | Text of the button. May contain only plain text, RichTextCustomEmoji and RichTextDateTime entities. |
-| style | `string` | No | Optional. Style of the button. Must be one of “danger” \(red\), “success” \(green\), “primary” \(blue\) or “link” \(the button is shown as a regular link without borders\). If omitted, then an app-specific style is used. The style “link” is allowed only for callback buttons. |
+| style | `string` | No | Optional. Style of the button. Must be one of “danger”, “success”, “primary”, or “link” \(the button is shown as a regular link without borders\). Apps may use theme-specific colors for the button background and text based on the style. The style “link” is allowed only for callback buttons. |
 | url | `string` | No | Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=&lt;user\_id&gt; can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings. |
 | callbackData | `string` | No | Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes |
 | webApp | `WebAppInfo` | No | Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a business account. |
