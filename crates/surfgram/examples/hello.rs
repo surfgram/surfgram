@@ -7,10 +7,11 @@ async fn start_cmd(message: Message) -> Result<(), surfgram::Error> {
 }
 
 #[surfgram::bot]
-async fn main() {
+async fn main() -> Result<(), surfgram::Error> {
     let token = std::env::var("BOT_TOKEN").expect("BOT_TOKEN is not set");
 
     Bot::new(token)
         .start_polling()
         .await?;
+    Ok(())
 }

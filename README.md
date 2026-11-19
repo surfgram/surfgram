@@ -20,9 +20,10 @@ async fn start_cmd(message: Message) -> Result<(), surfgram::Error> {
 }
 
 #[surfgram::bot]
-async fn main() {
+async fn main() -> Result<(), surfgram::Error> {
     Bot::new("TOKEN")
         .start_polling()
         .await?;
+    Ok(())
 }
 ```
