@@ -39,7 +39,7 @@ fn gen_impl(s: &IrStruct, is_fixed: &dyn Fn(&IrField) -> bool) -> TokenStream {
     let args: Vec<TokenStream> = s
         .fields
         .iter()
-        .filter(|f| is_arg(*f))
+        .filter(|f| is_arg(f))
         .map(|f| {
             let id = make_ident_with_rename(&f.name).0;
             let ty = parse_type(&f.rust_type);

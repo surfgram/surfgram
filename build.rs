@@ -63,13 +63,14 @@ fn sync(url: &str, path: &Path) -> Result<(), Box<dyn Error>> {
 
     lock.lock()?;
 
-    let body = ureq::get(url)
-        .set(
-            "User-Agent",
-            concat!("surfgram-build/", env!("CARGO_PKG_VERSION")),
-        )
-        .call()?
-        .into_string()?;
+    let body = match fetch_schema(url) {
+        Ok(body) => body,
+        Err(error) if path.exists() => {
+            println!("cargo:warning=failed to update schema ({error}), using existing copy");
+            return Ok(());
+        }
+        Err(error) => return Err(error),
+    };
 
     if is_unchanged(path, body.as_bytes())? {
         return Ok(());
@@ -78,6 +79,18 @@ fn sync(url: &str, path: &Path) -> Result<(), Box<dyn Error>> {
     write_atomic(path, body.as_bytes())?;
 
     Ok(())
+}
+
+fn fetch_schema(url: &str) -> Result<String, Box<dyn Error>> {
+    let body = ureq::get(url)
+        .set(
+            "User-Agent",
+            concat!("surfgram-build/", env!("CARGO_PKG_VERSION")),
+        )
+        .call()?
+        .into_string()?;
+
+    Ok(body)
 }
 
 fn is_unchanged(path: &Path, body: &[u8]) -> io::Result<bool> {
