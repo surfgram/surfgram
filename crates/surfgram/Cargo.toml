@@ -1,0 +1,19 @@
+[package]
+name = "surfgram"
+version = "0.1.0"
+edition = "2021"
+description = "A Telegram Bot API framework"
+build = "../../build.rs"
+
+[dependencies]
+surfgram-macros = { path = "../surfgram-macros" }
+inventory = "0.3"
+reqwest = { version = "0.12", default-features = false, features = ["json", "multipart", "rustls-tls", "socks"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "signal", "fs"] }
+axum = "0.8"
+
+[build-dependencies]
+surfgram-codegen = { path = "../surfgram-codegen" }
+ureq = { version = "2.10", default-features = false, features = ["tls", "proxy-from-env", "socks-proxy"] }

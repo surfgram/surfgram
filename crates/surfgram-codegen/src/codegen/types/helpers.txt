@@ -1,0 +1,9 @@
+#[inline]
+fn _bool_is_false(v: &bool) -> bool { !*v }
+
+#[inline]
+fn _bool_is_true(v: &bool) -> bool { *v }
+
+#[inline]
+fn _bool_default_true() -> bool { true }
+

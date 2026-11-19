@@ -1,5 +1,0 @@
-/**
- * Parameter interfaces module for Surfgram Telegram Bot SDK
- * @module interfaces
- */
-

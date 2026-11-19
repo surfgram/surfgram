@@ -1,52 +1,28 @@
 # Surfgram
 
-![Surfgram Logo](assets/logo.svg)
-
 ## Overview
 
-Surfgram is a no-nonsense SDK for Telegram Bot API designed for developers who want:
+Surfgram is SDK for Telegram Bot API with:
 
-- **Strict typing**
-- **Fluent interface**
-- **Full auto-complete support**
-
----
-
-## Quick Start
-
-### Install
-
-```bash
-npm install surfgram
-# or
-yarn add surfgram
-# or
-pnpm add surfgram
-```
+- Strict typing
+- Proc-macro based API
+- Fluent interface
 
 ### Write your first bot
 
-```typescript
-import { Bot, Message } from 'surfgram';
+```rust
+use surfgram::{Bot, Message};
 
-const bot = new Bot('TOKEN');
+#[surfgram::on_message("/start")]
+async fn start_cmd(message: Message) -> Result<(), surfgram::Error> {
+    message.send_message("Hello world!").await?;
+    Ok(())
+}
 
-bot.onMessage('/start', (message: Message) => {
-  message.sendMessage({ text: 'hi there' });
-});
-
-bot.startPolling();
+#[surfgram::bot]
+async fn main() {
+    Bot::new("TOKEN")
+        .start_polling()
+        .await?;
+}
 ```
-
----
-
-## Community
-
-We welcome contributions! Please read our:
-
-- [Contributor Guidelines](CONTRIBUTING.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-
-## License
-
-Surfgram is distributed under the [MIT License](LICENSE).

@@ -1,0 +1,11 @@
+[package]
+name = "surfgram-codegen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde_json = "1"
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full"] }
+prettyplease = "0.2"

@@ -1,5 +1,0 @@
-packages:
-  - "."
-  - "codegen"
-allowBuilds:
-  '@biomejs/biome': true
